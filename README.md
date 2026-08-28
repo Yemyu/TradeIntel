@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 0: project environment and basic CSV reading.
+Learning and development stage 0: system map, AI–human responsibilities, and verifiable AI-assisted implementation.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -24,4 +24,3 @@ python --version
 ```
 
 No third-party Python packages are required in stage 0.
-
