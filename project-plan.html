@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeIntel — 项目规划与介绍</title>
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#ffffff; --ink:#1e293b; --muted:#64748b;
+    --blue:#185FA5; --blue-soft:#E6F1FB; --teal:#0F6E56; --teal-soft:#E1F5EE;
+    --amber:#854F0B; --amber-soft:#FAEEDA; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;
+    line-height:1.7;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 24px 64px}
+  header.hero{background:linear-gradient(135deg,#185FA5,#0C447C);color:#fff;
+    border-radius:16px;padding:32px 36px;margin-bottom:24px}
+  header.hero h1{margin:0 0 6px;font-size:28px;font-weight:600;letter-spacing:.5px}
+  header.hero .tag{opacity:.92;font-size:16px}
+  header.hero .meta{margin-top:14px;font-size:13px;opacity:.85;display:flex;gap:18px;flex-wrap:wrap}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px 24px;margin-bottom:24px;font-size:14px}
+  .toc b{color:var(--blue)}
+  .toc a{color:var(--blue);text-decoration:none;margin-right:14px;display:inline-block}
+  .toc a:hover{text-decoration:underline}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:24px 28px;margin-bottom:20px}
+  h2{font-size:19px;margin:0 0 14px;color:var(--blue);padding-left:12px;
+    border-left:4px solid var(--blue)}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--teal)}
+  p{margin:8px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--blue-soft);color:var(--blue);font-weight:600}
+  tr:nth-child(even) td{background:#fbfcfe}
+  .pill{display:inline-block;background:var(--blue-soft);color:var(--blue);
+    border-radius:20px;padding:2px 10px;font-size:12px;margin:2px 4px 2px 0}
+  .star{color:var(--amber);font-weight:700}
+  .note{background:var(--amber-soft);border-left:4px solid var(--amber);
+    padding:12px 16px;border-radius:8px;margin:12px 0;font-size:14px}
+  .tip{background:var(--teal-soft);border-left:4px solid var(--teal);
+    padding:12px 16px;border-radius:8px;margin:12px 0;font-size:14px}
+  .svg-box{display:flex;justify-content:center;margin:16px 0}
+  .svg-box svg{max-width:100%;height:auto}
+  ul{margin:8px 0 8px 4px} li{margin:4px 0}
+  .you{color:var(--blue);font-weight:600}
+  .me{color:var(--teal);font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:32px}
+  code{background:#eef2f7;padding:1px 6px;border-radius:4px;font-size:13px;color:#b91c1c}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>TradeIntel · 跨境贸易情报 AI 平台</h1>
+  <div class="tag">一个"懂贸易数据的 AI 分析师"——背后是你亲手搭的贸易数据仓库，能回答贸易问题、每周自动发现异常（如贸易路线断崖）并出简报。</div>
+  <div class="meta">
+    <span>主题：2025–2026 热点的关税 / 贸易</span>
+    <span>方向：数据开发 + AI 工程师（双对口）</span>
+    <span>建立日期：2026-07-10</span>
+    <span>状态：规划中</span>
+  </div>
+</header>
+
+<div class="note"><b>规划已升级：</b>本页保留为最初的技术草案。最新执行版本是 <a href="./PROJECT_PLAN.md">PROJECT_PLAN.md</a>，并以“零基础边学边做、先理解后使用框架、可信 AI 评估”为原则。学习背景与协作规则见 <a href="./LEARNING_PROFILE.md">LEARNING_PROFILE.md</a>。</div>
+
+<div class="toc">
+  <b>目录 ·</b>
+  <a href="#why">1 为什么做</a>
+  <a href="#goal">2 目标</a>
+  <a href="#stack">3 技术栈</a>
+  <a href="#data">4 数据源</a>
+  <a href="#arch">5 架构</a>
+  <a href="#dwh">6 数仓分层</a>
+  <a href="#agent">7 AI Agent</a>
+  <a href="#collab">8 协作方式</a>
+  <a href="#mile">9 里程碑</a>
+  <a href="#conv">10 约定</a>
+</div>
+
+<section class="card" id="why">
+  <h2>1 · 为什么做这个 / 对我的价值</h2>
+  <table>
+    <tr><th>维度</th><th>说明</th></tr>
+    <tr><td>数据开发方向</td><td>多源采集 + 数仓分层 + HS编码对齐 + 自动化流水线，全是真功夫，换行业也值钱</td></tr>
+    <tr><td>AI 工程师方向</td><td>Agent 工具调用 + 多步推理 + 评估，是 Agent 的核心</td></tr>
+    <tr><td>不烂大街</td><td>贸易 + Agent 几乎没人做；主题（关税）热门好讲</td></tr>
+    <tr><td>脱离汽车</td><td>补作品集领域多样性（已有 3 个汽车项目）</td></tr>
+    <tr><td>可复现</td><td>全公开数据 + 本地模型，clone 即跑</td></tr>
+    <tr><td>技术可迁移</td><td>实体对齐 / 异常检测 / 数仓分层，换行业也通用</td></tr>
+  </table>
+</section>
+
+<section class="card" id="goal">
+  <h2>2 · 目标</h2>
+  <h3>学习目标（这是重点）</h3>
+  <ul>
+    <li>掌握企业级数据工程方法：数仓分层、ETL、调度、数据质量</li>
+    <li>掌握 AI Agent 工程：工具契约、多步推理、评估</li>
+    <li>建立可迁移技术栈：Python / SQL / MySQL / dbt / Airflow / LangGraph</li>
+  </ul>
+  <h3>作品集目标</h3>
+  <ul>
+    <li>一个公开 GitHub 仓库，证明"数据开发 + AI 工程"双能力</li>
+    <li>支撑跨申请 AI / 数据科学硕士的技术背书</li>
+  </ul>
+</section>
+
+<section class="card" id="stack">
+  <h2>3 · 技术栈</h2>
+  <table>
+    <tr><th>层</th><th>工具</th><th>用途</th><th>何时引入</th></tr>
+    <tr><td>主语言</td><td>Python 3</td><td>主开发语言</td><td>M1</td></tr>
+    <tr><td>数据库</td><td>MySQL</td><td>数仓存储</td><td>M1</td></tr>
+    <tr><td>采集</td><td>requests + pandas</td><td>调 API / 解析 / 落库</td><td>M1</td></tr>
+    <tr><td>建模</td><td>dbt</td><td>SQL 分层 / 测试 / 文档</td><td>M5（核心版完成后）</td></tr>
+    <tr><td>Agent</td><td>LangGraph</td><td>工具调用 / 多步推理</td><td>M3</td></tr>
+    <tr><td>LLM</td><td>Ollama + Qwen2.5</td><td>本地模型（免费可复现），可选接 API</td><td>M3</td></tr>
+    <tr><td>看板</td><td>Streamlit</td><td>网页看板 + Agent 对话</td><td>M4</td></tr>
+    <tr><td>调度</td><td>Airflow</td><td>定时自动化 / 失败重试 / 监控</td><td>M5（核心版完成后）</td></tr>
+  </table>
+  <div class="tip"><b>dbt vs Airflow 的区别：</b>Airflow 是"指挥整条流水线"的调度器（几点跑 / 谁先谁后 / 失败重试 / 监控）；dbt 是"只管用 SQL 转换数据"的专家。两者配合：Airflow 跑到转换那步时，调用 dbt 干活。</div>
+</section>
+
+<section class="card" id="data">
+  <h2>4 · 数据源（全免费公开）</h2>
+  <table>
+    <tr><th>数据源</th><th>提供什么</th><th>用来干嘛</th></tr>
+    <tr><td>联合国 Comtrade</td><td>两国之间按品类（HS编码）的进出口额</td><td>核心"贸易流水"</td></tr>
+    <tr><td>世界银行 WITS</td><td>各国关税税率</td><td>关税变化</td></tr>
+    <tr><td>FRED（美联储）</td><td>汇率</td><td>不同币种换算成可比</td></tr>
+    <tr><td>HS 编码对照表</td><td>不同年份 HS 版本互转</td><td>数据对齐（见第 6 节）</td></tr>
+  </table>
+  <div class="tip">数据快照会打包进仓库，保证别人 clone 下来就能跑，<b>可复现</b>。</div>
+</section>
+
+<section class="card" id="arch">
+  <h2>5 · 架构（数据流）</h2>
+  <p>从数据源一路到 AI Agent 和看板，整条流水线长这样：</p>
+  <div class="svg-box">
+    <svg viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img">
+      <title>TradeIntel 数据流</title>
+      <desc>数据源到采集到数仓四层到Agent到输出的垂直流水线</desc>
+      <defs><marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="150" y="46" width="380" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+      <text x="340" y="76" text-anchor="middle" font-size="13" fill="#0C447C">数据源：Comtrade · WITS · FRED · HS 编码表</text>
+      <line x1="340" y1="96" x2="340" y2="114" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a3)"/>
+      <rect x="150" y="114" width="380" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+      <text x="340" y="144" text-anchor="middle" font-size="13" fill="#0C447C">采集：Python 调 API + 定时抓取</text>
+      <line x1="340" y1="164" x2="340" y2="182" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a3)"/>
+      <rect x="150" y="182" width="380" height="130" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="204" text-anchor="middle" font-size="14" font-weight="500" fill="#085041">MySQL 数据仓库（分层）</text>
+      <text x="180" y="228" font-size="12.5" fill="#085041">ODS</text><text x="240" y="228" font-size="12.5" fill="#5F5E5A">原始层（源数据原样存）</text>
+      <text x="180" y="250" font-size="12.5" fill="#854F0B" font-weight="600">DWD</text><text x="240" y="250" font-size="12.5" fill="#854F0B" font-weight="600">明细层（清洗 + HS 编码对齐）★ 亮点</text>
+      <text x="180" y="272" font-size="12.5" fill="#085041">DWS</text><text x="240" y="272" font-size="12.5" fill="#5F5E5A">汇总层（国家×品类×月 预聚合）</text>
+      <text x="180" y="294" font-size="12.5" fill="#085041">ADS</text><text x="240" y="294" font-size="12.5" fill="#5F5E5A">应用层（成品指标，给 Agent / 看板）</text>
+      <line x1="340" y1="312" x2="340" y2="330" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a3)"/>
+      <rect x="150" y="330" width="380" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+      <text x="340" y="360" text-anchor="middle" font-size="13" fill="#0C447C">AI Agent：LangGraph + Qwen 本地模型</text>
+      <line x1="340" y1="380" x2="340" y2="398" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a3)"/>
+      <rect x="150" y="398" width="380" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+      <text x="340" y="428" text-anchor="middle" font-size="13" fill="#0C447C">输出：Streamlit 看板 + 每周自动简报</text>
+      <text x="340" y="478" text-anchor="middle" font-size="12" fill="#444441">数据从源 → 采集 → 分层清洗 → Agent 分析 → 输出，全流程一条龙</text>
+    </svg>
+  </div>
+</section>
+
+<section class="card" id="dwh">
+  <h2>6 · 数仓分层（数据工程核心）</h2>
+  <p>贸易数据的真实痛点：同一个商品在不同年份、不同国家，HS 编码会变（HS2012/2017/2022 三个版本），国家代码、币种、统计口径都不统一。把"乱数据"整理成"干净能分析的表"，就是数据工程。</p>
+  <table>
+    <tr><th>层</th><th>作用</th><th>说明</th></tr>
+    <tr><td>ODS 原始层</td><td>源数据原样存</td><td>一个字不改</td></tr>
+    <tr><td>DWD 明细层</td><td>清洗 + 统一</td><td><span class="star">★ HS 编码对齐 = 实体对齐真功夫</span>，统一国家代码 / 币种 / 去重</td></tr>
+    <tr><td>DWS 汇总层</td><td>预聚合</td><td>按 国家×品类×月份 预先算好，查询快</td></tr>
+    <tr><td>ADS 应用层</td><td>成品指标</td><td>同比 / 占比 / 贸易转移指标，给 Agent 和看板</td></tr>
+  </table>
+  <div class="note"><b>为什么 DWD 的 HS 对齐是亮点：</b>"实体对齐 / 数据一致性"是数据开发岗最核心、最通用的功夫。把不同来源、不同版本的同一商品对齐到一起，招聘方一眼就知道你懂真数据工程。</div>
+</section>
+
+<section class="card" id="agent">
+  <h2>7 · AI Agent（AI 工程核心）</h2>
+  <p>Agent 不是只会聊天的机器人，而是<b>会自己调工具、分多步干活</b>的程序。它有一组工具（每个工具就是一个 Python 函数）：</p>
+  <div>
+    <span class="pill">查数仓</span>
+    <span class="pill">算指标</span>
+    <span class="pill">异常检测</span>
+    <span class="pill">画图</span>
+    <span class="pill">写报告</span>
+  </div>
+  <h3>多步推理示例</h3>
+  <p>你问："2025 年中美关税调整对半导体贸易流向有什么影响？哪些国家受益？"</p>
+  <ul>
+    <li>① 查数仓 → 拿中美半导体品类近 3 年月度贸易额</li>
+    <li>② 算指标 → 算同比、找突变点</li>
+    <li>③ 异常检测 → 定位关税调整后哪个月开始断崖</li>
+    <li>④ 再查 → 看其它国家同期对美半导体出口是否上升（贸易转移）</li>
+    <li>⑤ 画图 + 写报告 → 给你一份带图的分析</li>
+  </ul>
+  <div class="tip">每周自动扫全库 → 发现异常 → 生成简报存档；也能在界面里直接问。LLM 默认本地 Ollama + Qwen2.5（免费可复现）。</div>
+</section>
+
+<section class="card" id="collab">
+  <h2>8 · 协作方式：师徒共建</h2>
+  <p>每个环节走五步循环：<span class="you">你</span> 学 / <span class="me">我</span> 讲 / <span class="me">我</span> 搭骨架 / <span class="you">你</span> 写核心 / <span class="me">我们</span> 审改。最学头的部分永远是你亲手写的。</p>
+  <div class="svg-box">
+    <svg viewBox="0 0 680 410" xmlns="http://www.w3.org/2000/svg" role="img">
+      <title>师徒共建五步循环</title>
+      <desc>前置学习 环节说明 我搭骨架 你写核心 我审改</desc>
+      <defs><marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <text x="340" y="30" text-anchor="middle" font-size="15" font-weight="500" fill="#0C447C">每环节五步协作循环（师徒共建）</text>
+      <rect x="180" y="50" width="320" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+      <text x="340" y="74" text-anchor="middle" font-size="13" fill="#0C447C">【你】前置学习：看 B站/文档，备好知识</text>
+      <line x1="340" y1="98" x2="340" y2="116" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
+      <rect x="180" y="120" width="320" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="144" text-anchor="middle" font-size="13" fill="#085041">【我】环节说明：讲清做什么 / 产什么 / 知识清单</text>
+      <line x1="340" y1="168" x2="340" y2="186" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
+      <rect x="180" y="190" width="320" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="214" text-anchor="middle" font-size="13" fill="#085041">【我】搭骨架：建结构/环境/配置（你读 + 我讲）</text>
+      <line x1="340" y1="238" x2="340" y2="256" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
+      <rect x="180" y="260" width="320" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+      <text x="340" y="284" text-anchor="middle" font-size="13" fill="#0C447C">【你】写核心：写本环节最学头的逻辑（带清单）</text>
+      <line x1="340" y1="308" x2="340" y2="326" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
+      <rect x="180" y="330" width="320" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+      <text x="340" y="354" text-anchor="middle" font-size="13" fill="#085041">【我们】我审 + 一起改：review 你的代码，迭代到扎实</text>
+      <text x="340" y="400" text-anchor="middle" font-size="12.5" fill="#444441">每个环节都走这一圈，最学头的部分永远是你亲手写的</text>
+    </svg>
+  </div>
+</section>
+
+<section class="card" id="mile">
+  <h2>9 · 里程碑（M1 → M4）</h2>
+  <table>
+    <tr><th>环节</th><th>做什么</th><th>你要学的</th><th>你亲手写的核心</th><th>我搭的骨架</th></tr>
+    <tr><td><b>M1</b><br>环境+采集</td><td>跑通小切片采集（2国1品类）</td><td>conda / requests / pandas / Python连MySQL</td><td>Comtrade 采集主逻辑</td><td>项目结构 / 环境 / 配置 / 连接模块</td></tr>
+    <tr><td><b>M2</b><br>数仓+建模</td><td>四层数仓 + dbt</td><td>SQL 分层 / dbt / HS 编码对齐</td><td>DWD 清洗 SQL（HS 对齐）</td><td>dbt 项目 / 层结构 / 测试模板</td></tr>
+    <tr><td><b>M3</b><br>AI Agent</td><td>工具 + 多步推理</td><td>LangGraph / Agent 设计 / prompt</td><td>一个 Agent 工具 + 多步流程</td><td>LangGraph 骨架 / 工具契约</td></tr>
+    <tr><td><b>M4</b><br>看板+基础自动化</td><td>Streamlit + 简单定时流程</td><td>Streamlit / 完整流程串联</td><td>一个看板页 + 一条可运行流程</td><td>应用骨架 / 演示配置</td></tr>
+    <tr><td><b>M5</b><br>工程增强</td><td>dbt + Airflow + 扩大数据范围 + 部署</td><td>SQL 工程化 / DAG / 重试监控 / 可复现部署</td><td>dbt 模型 + Airflow DAG + 增量更新</td><td>增强阶段模板 / 部署骨架</td></tr>
+  </table>
+  <div class="tip">每环节开始前，我会给你「前置学习清单 + 环节说明」（具体到看哪几个 B站视频、学完达到什么程度）。</div>
+</section>
+
+<section class="card" id="conv">
+  <h2>10 · 约定（铁律）</h2>
+  <table>
+    <tr><th>项</th><th>约定</th></tr>
+    <tr><td>环境</td><td>新建 conda 环境 <code>tradeintel</code>；<b>绝不碰全局 Python，不用 evdata</b></td></tr>
+    <tr><td>数据库</td><td>MySQL</td></tr>
+    <tr><td>模型</td><td>默认本地 Ollama + Qwen2.5（免费可复现），可选接 API</td></tr>
+    <tr><td>仓库</td><td>公开 GitHub；英文 README + 中文注释</td></tr>
+    <tr><td>去标签</td><td>不提凯捷 / 客户名；车系品牌等公开信息可保留</td></tr>
+    <tr><td>可复现</td><td>数据快照打包进仓库，clone 即跑</td></tr>
+    <tr><td>协作</td><td>师徒共建五步循环（见第 8 节）</td></tr>
+  </table>
+</section>
+
+<footer>
+  TradeIntel · 项目规划文档 · 2026-07-10 · 随项目进展持续更新
+</footer>
+
+</div>
+</body>
+</html>
