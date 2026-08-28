@@ -1,0 +1,2 @@
+policy_id,policy_name,importer,target_origin,announcement_date,effective_date,additional_rate,source_url
+us_301_list1_2018,U.S. Section 301 List 1,United States,China,2018-06-15,2018-07-06,0.25,https://ustr.gov/sites/default/files/2018-13248.pdf
