@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.DS_Store
+.ipynb_checkpoints/
+
+# Raw data may be large or have redistribution restrictions.
+data/raw/*
+!data/raw/.gitkeep
+
