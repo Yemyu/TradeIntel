@@ -24,3 +24,17 @@ python --version
 ```
 
 No third-party Python packages are required in stage 0.
+
+## First validated policy source
+
+The initial historical case is the U.S. Section 301 List 1 action effective 6 July 2018. Reproduce the official tariff-code extraction with:
+
+```bash
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python scripts/download_policy_sources.py
+python -m src.policy.extract_ustr_list1
+python -m unittest discover -s tests -v
+```
+
+The extraction retains the original `9033.00` entry and applies the later official correction to `9033.00.90` with source-page provenance.

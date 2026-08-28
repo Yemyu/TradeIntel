@@ -55,9 +55,12 @@ The initial implementation should prefer official public bulk files so the proje
 | Field | Meaning |
 |---|---|
 | `policy_id` | Link to policy event |
-| `hts8` | Eight-digit HTSUS subheading from Annex A |
+| `raw_hts` | Code exactly as printed in the initial Annex A |
+| `canonical_hts8` | Audited eight-digit code used for matching |
 | `source_annex` | Annex A |
 | `source_page` | PDF page containing the code |
+| `amended` | Whether a later official notice corrected the printed code |
+| `amendment_source_url` | Official correction source when applicable |
 | `exclusion_status` | Initially `not_yet_modelled` |
 
 ### `trade_import_monthly`
@@ -90,18 +93,21 @@ The initial implementation should prefer official public bulk files so the proje
 ## 4. Rules
 
 1. Preserve tariff codes as text so leading zeroes cannot disappear.
-2. Derive `hts8` from the first eight characters of a valid 10-digit import code.
-3. Store money as a numeric value in U.S. dollars and reject negative values.
-4. Preserve raw source files unchanged and record download date plus checksum.
-5. Do not silently drop malformed policy codes, unknown countries, missing values, or duplicate keys.
-6. Keep revised source releases distinguishable from earlier downloads.
-7. Do not mix general-import value and imports-for-consumption value under one field name.
-8. Do not call a product a clean control until it has been checked against later tariff lists.
-9. Do not make causal claims until exclusions, anticipation, comparison groups, and pre-trends have been examined.
+2. Preserve `raw_hts` exactly as printed and keep any official correction as a separate canonical field.
+3. The initial Annex A entry `9033.00` must be corrected to `9033.00.90` using the official 16 August 2018 amendment; it must never be silently padded or guessed.
+4. Derive `hts8` from the first eight characters of a valid 10-digit import code.
+5. Store money as a numeric value in U.S. dollars and reject negative values.
+6. Preserve raw source files unchanged and record download date plus checksum.
+7. Do not silently drop malformed policy codes, unknown countries, missing values, or duplicate keys.
+8. Keep revised source releases distinguishable from earlier downloads.
+9. Do not mix general-import value and imports-for-consumption value under one field name.
+10. Do not call a product a clean control until it has been checked against later tariff lists.
+11. Do not make causal claims until exclusions, anticipation, comparison groups, and pre-trends have been examined.
 
 ## 5. Failure behaviour
 
-- If the official policy list does not yield exactly 818 unique HTS8 codes, stop and produce an extraction audit.
+- If the initial Annex A does not yield exactly 818 unique listed codes after excluding the implementation heading `9903.88.01`, stop and produce an extraction audit.
+- If the only non-eight-digit entry is not `9033.00`, or the official amendment does not explicitly replace it with `9033.00.90`, stop rather than guessing a correction.
 - If an HTS code has the wrong length or contains non-digits, retain the raw text in an error report and exclude it from joins.
 - If a monthly source file is missing, mark that month incomplete rather than treating it as zero trade.
 - If value fields fail numeric conversion, report the source file and row identifier.
@@ -112,16 +118,17 @@ The initial implementation should prefer official public bulk files so the proje
 
 The first implementation is accepted only when:
 
-1. Annex A produces exactly 818 unique eight-digit tariff subheadings.
-2. Policy rate and effective date match the official notice.
-3. All 48 months from January 2016 through December 2019 are represented or explicitly marked missing.
-4. Monetary values are numeric and non-negative.
-5. Every processed row points back to an exact source file and retrieval record.
-6. Product-country-month keys are unique at the declared aggregation level.
-7. At least one independent aggregate total is reconciled against the official source within a documented tolerance.
-8. Automated tests cover policy-code parsing, date boundaries, code matching, duplicate detection, and missing-month behaviour.
-9. The data-quality report distinguishes zero trade, missing data, invalid data, and suppressed data where applicable.
-10. No secret or API key appears in Git or generated output.
+1. Initial Annex A produces 818 unique listed codes: 817 eight-digit entries plus the documented `9033.00` exception.
+2. The official amendment is verified and produces a canonical list of 818 unique eight-digit codes by replacing `9033.00` with `9033.00.90`.
+3. Policy rate and effective date match the official notice.
+4. All 48 months from January 2016 through December 2019 are represented or explicitly marked missing.
+5. Monetary values are numeric and non-negative.
+6. Every processed row points back to an exact source file and retrieval record.
+7. Product-country-month keys are unique at the declared aggregation level.
+8. At least one independent aggregate total is reconciled against the official source within a documented tolerance.
+9. Automated tests cover policy-code parsing, date boundaries, code matching, duplicate detection, and missing-month behaviour.
+10. The data-quality report distinguishes zero trade, missing data, invalid data, and suppressed data where applicable.
+11. No secret or API key appears in Git or generated output.
 
 ## 7. AI implementation instruction
 
@@ -137,4 +144,3 @@ AI should implement the pipeline in small auditable steps:
 8. Run automated acceptance checks before loading curated tables into MySQL.
 
 Each step must write a machine-readable manifest and must be runnable without an LLM.
-

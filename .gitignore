@@ -4,6 +4,7 @@ __pycache__/
 .env
 .DS_Store
 .ipynb_checkpoints/
+tmp/
 
 # Raw data may be large or have redistribution restrictions.
 data/raw/*

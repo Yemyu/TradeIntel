@@ -1,0 +1,40 @@
+{
+  "checks": {
+    "raw_count_is_818": true,
+    "raw_codes_are_unique": true,
+    "only_expected_raw_exception": true,
+    "canonical_count_is_818": true,
+    "canonical_codes_are_unique": true,
+    "canonical_codes_are_all_hts8": true,
+    "amendment_applied_once": true
+  },
+  "raw_count": 818,
+  "canonical_count": 818,
+  "raw_format_exceptions": [
+    "9033.00"
+  ],
+  "canonical_correction": {
+    "from": "9033.00",
+    "to": "9033.00.90",
+    "source_url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+    "source_page": 16
+  },
+  "sources": {
+    "initial_notice": {
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "pages_used": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "amendment_notice": {
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "page_used": 16
+    }
+  }
+}
