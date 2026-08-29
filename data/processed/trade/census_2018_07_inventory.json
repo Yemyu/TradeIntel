@@ -1,9 +1,11 @@
 {
   "source": {
     "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1807.ZIP",
-    "archive_path": "data/raw/trade/IMDB1807.ZIP",
-    "archive_bytes": 177359302,
-    "archive_sha256": "38207013d1681671b0f046f25cfdeb93f78a1fd05ccc42fcf9ca812b9147b74b",
+    "source_file_name": "IMDB1807.ZIP",
+    "source_retrieved_at_utc": "2026-08-29T15:43:46+00:00",
+    "source_archive_bytes": 177359302,
+    "source_sha256": "38207013d1681671b0f046f25cfdeb93f78a1fd05ccc42fcf9ca812b9147b74b",
+    "local_archive_required_after_processing": false,
     "required_members": [
       "COUNTRY.TXT",
       "IMP_DETL.TXT"
