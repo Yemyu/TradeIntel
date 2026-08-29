@@ -56,3 +56,13 @@ python scripts/inventory_census_import.py
 The script streams the fixed-width detail member, filters to the audited List 1 codes, and writes a compact origin summary, a product-origin-month aggregate, and an inventory report. It does not estimate a policy effect.
 
 The processed outputs record the official source URL, filename, byte size, retrieval time, and SHA-256 checksum. The raw ZIP is not required to remain in the project after successful processing; see [`data/README.md`](./data/README.md).
+
+## Multi-month panel
+
+The resumable pipeline processes one month at a time and removes each raw ZIP after successful processing:
+
+```bash
+python scripts/build_trade_panel.py --start 2016-01 --end 2019-12
+```
+
+It writes one generated CSV per month under `data/processed/trade/monthly/`, a 48-month source manifest, and a combined `trade_import_monthly.csv`. The full generated panel is intentionally ignored by Git; the one-month sample remains as the readable example.
