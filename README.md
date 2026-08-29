@@ -14,6 +14,11 @@ This repository is currently local-only. It will not be published until its scop
 - [Learning profile and collaboration rules](./LEARNING_PROFILE.md)
 - [Stage 0 learning guide](./docs/learning/phase-00-foundations.md)
 
+### 中文学习版
+
+- [首个政策案例：为什么选 Section 301 List 1](./docs/decisions/0001-initial-policy-case.zh-CN.md)
+- [数据契约：数据从哪里来、怎样才算正确](./docs/contracts/0001-section301-list1-data-contract.zh-CN.md)
+
 ## Local environment
 
 The project uses Python 3.12 in a project-local virtual environment:

@@ -1,5 +1,7 @@
 # Decision 0001: Initial Policy Case
 
+中文学习版：[`0001-initial-policy-case.zh-CN.md`](0001-initial-policy-case.zh-CN.md)
+
 - Status: Accepted
 - Date: 2026-08-28
 - Decision owner: Project team
@@ -90,4 +92,3 @@ These are not reasons to abandon the case. They define what the policy-event tab
 AI can retrieve official documents, parse tariff lists, write collection code, build candidate comparison groups, run robustness checks, and generate reports.
 
 Human judgement remains responsible for whether the comparison group is economically credible, whether policy assumptions are defensible, and whether the final language is descriptive or causal.
-
