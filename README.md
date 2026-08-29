@@ -53,4 +53,4 @@ After placing the official July 2018 Census archive at `data/raw/trade/IMDB1807.
 python scripts/inventory_census_import.py
 ```
 
-The script streams the fixed-width detail member, filters to the audited List 1 codes, and writes a compact origin summary plus an inventory report. It does not estimate a policy effect.
+The script streams the fixed-width detail member, filters to the audited List 1 codes, and writes a compact origin summary, a product-origin-month aggregate, and an inventory report. It does not estimate a policy effect.
