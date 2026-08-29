@@ -13,6 +13,7 @@ This repository is currently local-only. It will not be published until its scop
 - [Learning-first project plan](./PROJECT_PLAN.md)
 - [Learning profile and collaboration rules](./LEARNING_PROFILE.md)
 - [Stage 0 learning guide](./docs/learning/phase-00-foundations.md)
+- [Phase 1 Chinese learning guide: trade-data inventory](./docs/learning/phase-01-trade-inventory.zh-CN.md)
 
 ### 中文学习版
 
@@ -43,3 +44,13 @@ python -m unittest discover -s tests -v
 ```
 
 The extraction retains the original `9033.00` entry and applies the later official correction to `9033.00.90` with source-page provenance.
+
+## First trade-data inventory
+
+After placing the official July 2018 Census archive at `data/raw/trade/IMDB1807.ZIP`, run:
+
+```bash
+python scripts/inventory_census_import.py
+```
+
+The script streams the fixed-width detail member, filters to the audited List 1 codes, and writes a compact origin summary plus an inventory report. It does not estimate a policy effect.

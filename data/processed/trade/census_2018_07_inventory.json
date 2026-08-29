@@ -1,0 +1,104 @@
+{
+  "source": {
+    "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1807.ZIP",
+    "archive_path": "data/raw/trade/IMDB1807.ZIP",
+    "archive_bytes": 177359302,
+    "archive_sha256": "38207013d1681671b0f046f25cfdeb93f78a1fd05ccc42fcf9ca812b9147b74b",
+    "required_members": [
+      "COUNTRY.TXT",
+      "IMP_DETL.TXT"
+    ],
+    "detail_layout": "fixed-width",
+    "detail_record_width": 688
+  },
+  "coverage": {
+    "year": 2018,
+    "month": 7,
+    "observed_months": 1
+  },
+  "policy_scope": {
+    "policy_id": "us_301_list1_2018",
+    "audited_policy_hts8_count": 818,
+    "policy_hts8_with_trade_rows": 812,
+    "policy_hts8_without_trade_rows": 6
+  },
+  "detail_inventory": {
+    "raw_detail_rows": 1716983,
+    "matched_detail_rows": 305647,
+    "unique_product_origin_groups": 36531,
+    "unique_hts10_count": 1630,
+    "unique_origin_count": 211,
+    "total_consumption_value_usd": 39561780343,
+    "blank_or_invalid_consumption_values": 0,
+    "negative_consumption_values": 0
+  },
+  "china": {
+    "origin_code": "5700",
+    "origin_name": "CHINA",
+    "import_value_consumption_usd": 2574071705,
+    "detail_row_count": 48151
+  },
+  "top_origins_by_consumption_value": [
+    {
+      "origin_code": "2010",
+      "origin_name": "MEXICO",
+      "import_value_consumption_usd": 7874920063,
+      "detail_row_count": 7584
+    },
+    {
+      "origin_code": "5880",
+      "origin_name": "JAPAN",
+      "import_value_consumption_usd": 6451750376,
+      "detail_row_count": 22072
+    },
+    {
+      "origin_code": "1220",
+      "origin_name": "CANADA",
+      "import_value_consumption_usd": 4777540033,
+      "detail_row_count": 12931
+    },
+    {
+      "origin_code": "4280",
+      "origin_name": "GERMANY",
+      "import_value_consumption_usd": 4389732405,
+      "detail_row_count": 32269
+    },
+    {
+      "origin_code": "5700",
+      "origin_name": "CHINA",
+      "import_value_consumption_usd": 2574071705,
+      "detail_row_count": 48151
+    },
+    {
+      "origin_code": "5800",
+      "origin_name": "KOREA, SOUTH",
+      "import_value_consumption_usd": 1881389012,
+      "detail_row_count": 9233
+    },
+    {
+      "origin_code": "4120",
+      "origin_name": "UNITED KINGDOM",
+      "import_value_consumption_usd": 1748847887,
+      "detail_row_count": 16897
+    },
+    {
+      "origin_code": "4279",
+      "origin_name": "FRANCE",
+      "import_value_consumption_usd": 1503705216,
+      "detail_row_count": 13038
+    },
+    {
+      "origin_code": "4759",
+      "origin_name": "ITALY",
+      "import_value_consumption_usd": 1203164995,
+      "detail_row_count": 16588
+    },
+    {
+      "origin_code": "5490",
+      "origin_name": "THAILAND",
+      "import_value_consumption_usd": 666852353,
+      "detail_row_count": 3394
+    }
+  ],
+  "interpretation_boundary": "This is a source and coverage inventory. It is not a before-after estimate and does not establish a causal policy effect."
+}
