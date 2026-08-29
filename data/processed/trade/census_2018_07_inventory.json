@@ -38,6 +38,10 @@
     "import_value_consumption_usd": 2574071705,
     "detail_row_count": 48151
   },
+  "outputs": {
+    "origin_summary_csv": "data/processed/trade/section301_list1_2018_07_by_origin.csv",
+    "product_origin_groups_csv": "data/processed/trade/section301_list1_2018_07_by_product_origin.csv"
+  },
   "top_origins_by_consumption_value": [
     {
       "origin_code": "2010",

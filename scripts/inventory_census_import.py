@@ -156,6 +156,7 @@ def inventory_archive(
     archive_path: Path,
     policy_path: Path,
     summary_path: Path,
+    groups_path: Path,
     report_path: Path,
 ) -> dict[str, object]:
     policy_hts8 = load_policy_hts8(policy_path)
@@ -246,6 +247,38 @@ def inventory_archive(
                 }
             )
 
+    groups_path.parent.mkdir(parents=True, exist_ok=True)
+    with groups_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "year",
+                "month",
+                "origin_code",
+                "origin_name",
+                "hts10",
+                "hts8",
+                "import_value_consumption_usd",
+                "detail_row_count",
+                "source_file",
+            ],
+        )
+        writer.writeheader()
+        for (country_code, hts10), value in sorted(aggregate_values.items()):
+            writer.writerow(
+                {
+                    "year": year,
+                    "month": month,
+                    "origin_code": country_code,
+                    "origin_name": country_names.get(country_code, "<unknown>"),
+                    "hts10": hts10,
+                    "hts8": hts10[:8],
+                    "import_value_consumption_usd": value,
+                    "detail_row_count": aggregate_rows[(country_code, hts10)],
+                    "source_file": str(archive_path),
+                }
+            )
+
     top_countries = [
         {
             "origin_code": code,
@@ -292,6 +325,10 @@ def inventory_archive(
             "import_value_consumption_usd": country_values.get(china_code, 0),
             "detail_row_count": country_rows.get(china_code, 0),
         },
+        "outputs": {
+            "origin_summary_csv": str(summary_path),
+            "product_origin_groups_csv": str(groups_path),
+        },
         "top_origins_by_consumption_value": top_countries,
         "interpretation_boundary": (
             "This is a source and coverage inventory. It is not a before-after "
@@ -331,6 +368,14 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("data/processed/trade/census_2018_07_inventory.json"),
         help="Machine-readable inventory report",
     )
+    parser.add_argument(
+        "--matched-groups",
+        type=Path,
+        default=Path(
+            "data/processed/trade/section301_list1_2018_07_by_product_origin.csv"
+        ),
+        help="Product-origin-month aggregate CSV",
+    )
     return parser
 
 
@@ -341,6 +386,7 @@ def main(argv: list[str] | None = None) -> int:
             archive_path=args.archive,
             policy_path=args.policy_products,
             summary_path=args.summary,
+            groups_path=args.matched_groups,
             report_path=args.report,
         )
     except (FileNotFoundError, InventoryError) as exc:
@@ -363,6 +409,7 @@ def main(argv: list[str] | None = None) -> int:
         f"${china['import_value_consumption_usd']:,}"
     )
     print(f"Wrote {args.summary}")
+    print(f"Wrote {args.matched_groups}")
     print(f"Wrote {args.report}")
     return 0
 
