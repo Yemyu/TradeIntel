@@ -10,3 +10,6 @@ tmp/
 data/raw/*
 !data/raw/.gitkeep
 
+# Full multi-month panel outputs are reproducible generated artifacts.
+data/processed/trade/monthly/
+data/processed/trade/trade_import_monthly.csv
