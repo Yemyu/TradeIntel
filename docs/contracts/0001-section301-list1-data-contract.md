@@ -76,7 +76,10 @@ The initial implementation should prefer official public bulk files so the proje
 | `import_value_consumption_usd` | Monthly import value entering consumption |
 | `quantity_1` / `quantity_unit_1` | First quantity measure where available |
 | `source_last_update` | Revision date supplied by the source |
-| `source_file` | Exact downloaded source file |
+| `source_url` | Official URL used to obtain the source file |
+| `source_file_name` | Exact source filename, such as `IMDB1807.ZIP` |
+| `source_sha256` | SHA-256 fingerprint of the downloaded archive |
+| `source_retrieved_at` | UTC time when this source version was downloaded |
 
 ### `analysis_panel`
 
@@ -99,7 +102,10 @@ The initial implementation should prefer official public bulk files so the proje
 3. The initial Annex A entry `9033.00` must be corrected to `9033.00.90` using the official 16 August 2018 amendment; it must never be silently padded or guessed.
 4. Derive `hts8` from the first eight characters of a valid 10-digit import code.
 5. Store money as a numeric value in U.S. dollars and reject negative values.
-6. Preserve raw source files unchanged and record download date plus checksum.
+6. Keep raw files unchanged while they are being processed, but do not require
+   long-term local storage. Record the official URL, filename, retrieval time,
+   byte size, and checksum so the exact source version can be re-downloaded and
+   verified later.
 7. Do not silently drop malformed policy codes, unknown countries, missing values, or duplicate keys.
 8. Keep revised source releases distinguishable from earlier downloads.
 9. Do not mix general-import value and imports-for-consumption value under one field name.
@@ -125,7 +131,8 @@ The first implementation is accepted only when:
 3. Policy rate and effective date match the official notice.
 4. All 48 months from January 2016 through December 2019 are represented or explicitly marked missing.
 5. Monetary values are numeric and non-negative.
-6. Every processed row points back to an exact source file and retrieval record.
+6. Every processed row points back to an official source URL, filename, and
+   checksum; the source manifest records the retrieval time and byte size.
 7. Product-country-month keys are unique at the declared aggregation level.
 8. At least one independent aggregate total is reconciled against the official source within a documented tolerance.
 9. Automated tests cover policy-code parsing, date boundaries, code matching, duplicate detection, and missing-month behaviour.

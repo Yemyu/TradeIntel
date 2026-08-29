@@ -14,6 +14,7 @@ import csv
 import hashlib
 import json
 import sys
+from datetime import datetime, timezone
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -23,6 +24,9 @@ from zipfile import BadZipFile, ZipFile
 DETAIL_MEMBER = "IMP_DETL.TXT"
 COUNTRY_MEMBER = "COUNTRY.TXT"
 EXPECTED_DETAIL_WIDTH = 688
+CENSUS_JULY_2018_URL = (
+    "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1807.ZIP"
+)
 
 
 class InventoryError(RuntimeError):
@@ -158,9 +162,11 @@ def inventory_archive(
     summary_path: Path,
     groups_path: Path,
     report_path: Path,
+    source_url: str = CENSUS_JULY_2018_URL,
 ) -> dict[str, object]:
     policy_hts8 = load_policy_hts8(policy_path)
     archive_hash = sha256_file(archive_path)
+    retrieved_at_utc = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
     aggregate_values: defaultdict[tuple[str, str], int] = defaultdict(int)
     aggregate_rows: Counter[tuple[str, str]] = Counter()
@@ -224,8 +230,11 @@ def inventory_archive(
                 "import_value_consumption_usd",
                 "detail_row_count",
                 "unique_hts10_count",
-                "source_file",
+                "source_url",
+                "source_file_name",
+                "source_sha256",
             ],
+            lineterminator="\n",
         )
         writer.writeheader()
         for country_code, value in sorted(
@@ -243,7 +252,9 @@ def inventory_archive(
                     "import_value_consumption_usd": value,
                     "detail_row_count": country_rows[country_code],
                     "unique_hts10_count": unique_hts10_count,
-                    "source_file": str(archive_path),
+                    "source_url": source_url,
+                    "source_file_name": archive_path.name,
+                    "source_sha256": archive_hash,
                 }
             )
 
@@ -260,8 +271,11 @@ def inventory_archive(
                 "hts8",
                 "import_value_consumption_usd",
                 "detail_row_count",
-                "source_file",
+                "source_url",
+                "source_file_name",
+                "source_sha256",
             ],
+            lineterminator="\n",
         )
         writer.writeheader()
         for (country_code, hts10), value in sorted(aggregate_values.items()):
@@ -275,7 +289,9 @@ def inventory_archive(
                     "hts8": hts10[:8],
                     "import_value_consumption_usd": value,
                     "detail_row_count": aggregate_rows[(country_code, hts10)],
-                    "source_file": str(archive_path),
+                    "source_url": source_url,
+                    "source_file_name": archive_path.name,
+                    "source_sha256": archive_hash,
                 }
             )
 
@@ -292,12 +308,12 @@ def inventory_archive(
     ]
     report: dict[str, object] = {
         "source": {
-            "source_url": (
-                "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1807.ZIP"
-            ),
-            "archive_path": str(archive_path),
-            "archive_bytes": archive_path.stat().st_size,
-            "archive_sha256": archive_hash,
+            "source_url": source_url,
+            "source_file_name": archive_path.name,
+            "source_retrieved_at_utc": retrieved_at_utc,
+            "source_archive_bytes": archive_path.stat().st_size,
+            "source_sha256": archive_hash,
+            "local_archive_required_after_processing": False,
             "required_members": [COUNTRY_MEMBER, DETAIL_MEMBER],
             "detail_layout": "fixed-width",
             "detail_record_width": EXPECTED_DETAIL_WIDTH,
@@ -376,6 +392,11 @@ def build_parser() -> argparse.ArgumentParser:
         ),
         help="Product-origin-month aggregate CSV",
     )
+    parser.add_argument(
+        "--source-url",
+        default=CENSUS_JULY_2018_URL,
+        help="Official URL for the archive; stored in outputs for provenance",
+    )
     return parser
 
 
@@ -388,6 +409,7 @@ def main(argv: list[str] | None = None) -> int:
             summary_path=args.summary,
             groups_path=args.matched_groups,
             report_path=args.report,
+            source_url=args.source_url,
         )
     except (FileNotFoundError, InventoryError) as exc:
         print(f"Inventory failed: {exc}", file=sys.stderr)

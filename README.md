@@ -47,10 +47,12 @@ The extraction retains the original `9033.00` entry and applies the later offici
 
 ## First trade-data inventory
 
-After placing the official July 2018 Census archive at `data/raw/trade/IMDB1807.ZIP`, run:
+Place the official July 2018 Census archive temporarily at `data/raw/trade/IMDB1807.ZIP`, then run:
 
 ```bash
 python scripts/inventory_census_import.py
 ```
 
 The script streams the fixed-width detail member, filters to the audited List 1 codes, and writes a compact origin summary, a product-origin-month aggregate, and an inventory report. It does not estimate a policy effect.
+
+The processed outputs record the official source URL, filename, byte size, retrieval time, and SHA-256 checksum. The raw ZIP is not required to remain in the project after successful processing; see [`data/README.md`](./data/README.md).
