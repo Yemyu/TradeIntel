@@ -13,9 +13,11 @@ import argparse
 import csv
 import json
 import sys
+import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from http.client import IncompleteRead
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -45,6 +47,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CENSUS_URL_TEMPLATE = (
     "https://www.census.gov/trade/downloads/{year}/Merch/im_m/IMDB{yy:02d}{month:02d}.ZIP"
 )
+# Census's archive host occasionally closes a long-lived connection before the
+# final bytes arrive.  Keep retries here so a multi-year run can recover on its
+# own instead of requiring manual restarts.
+DOWNLOAD_ATTEMPTS = 4
+DOWNLOAD_TIMEOUT_SECONDS = 180
+DOWNLOAD_RETRY_BACKOFF_SECONDS = 5
 MANIFEST_FIELDS = [
     "year",
     "month",
@@ -133,15 +141,45 @@ def download_archive(
         raise InventoryError(f"Missing archive and downloads are disabled: {destination}")
 
     temporary = archive_dir / f"{source.filename}.part"
-    temporary.unlink(missing_ok=True)
-    request = Request(source.url, headers={"User-Agent": "TradeShockAI/0.1"})
-    try:
-        with urlopen(request, timeout=120) as response, temporary.open("wb") as handle:
-            while chunk := response.read(1024 * 1024):
-                handle.write(chunk)
-    except (HTTPError, URLError, OSError) as exc:
+    last_error: Exception | None = None
+    for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
         temporary.unlink(missing_ok=True)
-        raise InventoryError(f"Could not download {source.url}: {exc}") from exc
+        request = Request(source.url, headers={"User-Agent": "TradeShockAI/0.1"})
+        try:
+            with urlopen(
+                request, timeout=DOWNLOAD_TIMEOUT_SECONDS
+            ) as response, temporary.open("wb") as handle:
+                while chunk := response.read(1024 * 1024):
+                    handle.write(chunk)
+            # A successful HTTP response can still be an error page or a
+            # truncated ZIP.  Validate the central directory and required
+            # member before treating the download as complete.
+            with ZipFile(temporary) as archive:
+                archive.getinfo(DETAIL_MEMBER)
+            break
+        except (
+            HTTPError,
+            URLError,
+            OSError,
+            IncompleteRead,
+            BadZipFile,
+            KeyError,
+        ) as exc:
+            last_error = exc
+            temporary.unlink(missing_ok=True)
+            if attempt == DOWNLOAD_ATTEMPTS:
+                raise InventoryError(
+                    f"Could not download {source.url} after "
+                    f"{DOWNLOAD_ATTEMPTS} attempts: {exc}"
+                ) from exc
+            print(
+                f"{source.year}-{source.month:02d}: download attempt "
+                f"{attempt}/{DOWNLOAD_ATTEMPTS} failed; retrying"
+            )
+            time.sleep(DOWNLOAD_RETRY_BACKOFF_SECONDS)
+
+    if last_error is not None and not temporary.exists():
+        raise InventoryError(f"Could not download {source.url}: {last_error}")
 
     if not temporary.exists() or temporary.stat().st_size == 0:
         temporary.unlink(missing_ok=True)
