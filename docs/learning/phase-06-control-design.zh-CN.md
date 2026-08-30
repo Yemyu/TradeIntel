@@ -165,7 +165,7 @@ ITT 研究最初被列入政策后的综合结果；实际关税效应要求知�
 
 - `trade_action_exposure.csv`：List 1/2/3 的官方代码和同期政策范围；
 - `list1_exclusion_timeline.csv`：9 个 List 1 排除批次的日期和来源；
-- `hts_history_mapping.csv`：76,304 条 2016–2019 年度 HTS10 → `HS6_2017` 映射；
+- `hts_history_mapping.csv`：76,691 条 2016–2019 年度 HTS10 → `HS6_2017` 映射（其中 386 条来自历史文件确认有效、但年度 concordance 快照未列出的代码）；
 - `mapping_report.json/.md`、`mapping_source_manifest.json`：映射规则、计数、URL 和 SHA-256；
 - `control_build_report.json/.md`：明确记录“映射完成，但完整控制组仍在等待 all-origin 贸易面板”。
 

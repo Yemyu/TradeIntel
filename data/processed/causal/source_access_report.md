@@ -1,6 +1,6 @@
 # 官方政策来源取得报告
 
-生成时间（UTC）：2026-08-30T18:17:56+00:00
+生成时间（UTC）：2026-08-30T20:51:24+00:00
 
 ## 已取得的来源
 
@@ -16,7 +16,7 @@
 
 ## 已完成的跨年代码映射
 
-Census 历史 HS 文件、2016–2019 年度 concordance 和 WCO HS 2012→2017 Table II 已通过官方参考页取得并核验。映射表包含 76,304 条年度 HTS10 记录；其中歧义或 `ex` 部分映射保留候选代码但不强行填入统一 HS6。详细来源和哈希见 `mapping_source_manifest.json` 与 `mapping_report.json`。
+Census 历史 HS 文件、2016–2019 年度 concordance 和 WCO HS 2012→2017 Table II 已通过官方参考页取得并核验。映射表包含 76,691 条年度 HTS10 记录；其中歧义或 `ex` 部分映射保留候选代码但不强行填入统一 HS6。详细来源和哈希见 `mapping_source_manifest.json` 与 `mapping_report.json`。
 
 ## 尚未完成的边界
 
