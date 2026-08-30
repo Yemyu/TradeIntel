@@ -37,6 +37,7 @@ def run_mysql(sql: str, *, login_path: str, database: str | None = None) -> str:
         "--local-infile=1",
         "--batch",
         "--raw",
+        "--skip-column-names",
     ]
     if database:
         command.append(database)
