@@ -1,7 +1,9 @@
 # 数据契约 0002：贸易数据质量与代码映射（中文版）
 
-> 状态：已实现并验证  
-> 日期：2026-08-30  
+> 状态：已实现并验证
+>
+> 日期：2026-08-30
+>
 > 上游契约：[`0001-section301-list1-data-contract.zh-CN.md`](./0001-section301-list1-data-contract.zh-CN.md)
 
 ## 1. 目标
@@ -108,4 +110,3 @@
 
 - Census Schedule C 国家代码：<https://www.census.gov/foreign-trade/schedules/c/countrycode.html>
 - USITC 历史 HTS 版本：<https://hts.usitc.gov/download/archive>
-
