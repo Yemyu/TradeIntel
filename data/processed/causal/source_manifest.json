@@ -1,0 +1,192 @@
+{
+  "generated_at_utc": "2026-08-30T17:40:18+00:00",
+  "status": "policy_exposure_built_mapping_blocked_source_access",
+  "policy_sources": [
+    {
+      "source_id": "list1_initial",
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "filename": "ustr-section301-list1-2018.pdf",
+      "expected_sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "bytes": 2440810,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "list2_notice",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "filename": "ustr-section301-list1-amendment-2018-08-16.pdf",
+      "expected_sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "local_path": "data/raw/policy/ustr-section301-list1-amendment-2018-08-16.pdf",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "bytes": 1008314,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "list3_notice",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2018-09-21/pdf/FR-2018-09-21.pdf",
+      "filename": "ustr-section301-list3-2018-09-21.pdf",
+      "fallback": "tmp/FR-2018-09-21.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list3-2018-09-21.pdf",
+      "sha256": "a4bcc42de5f1554f29b431a7d83b02c513f199206416dd9fcb698c8518c43f9e",
+      "bytes": 17329839,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "section232_aluminum_proclamation",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2018-03-15/pdf/2018-05477.pdf",
+      "filename": "section232-aluminum-proclamation-9704.pdf",
+      "fallback": "tmp/FR-2018-03-15-9704.pdf",
+      "local_path": "data/raw/policy/section232-aluminum-proclamation-9704.pdf",
+      "sha256": "10da4a9d9f96bb7effa80ad270723a065bb0b1bb4b1d7bf0d3ec42e8b3985e22",
+      "bytes": 365390,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "section232_steel_proclamation",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2018-03-15/pdf/2018-05478.pdf",
+      "filename": "section232-steel-proclamation-9705.pdf",
+      "fallback": "tmp/FR-2018-03-15-9705.pdf",
+      "local_path": "data/raw/policy/section232-steel-proclamation-9705.pdf",
+      "sha256": "d1e1fb136e7bf0dc20923db6f5d8cb4718c9da099aece501cba653151ecd6c10",
+      "bytes": 377714,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "section201_solar_proclamation",
+      "url": "https://www.govinfo.gov/content/pkg/DCPD-201800044/pdf/DCPD-201800044.pdf",
+      "filename": "section201-solar-proclamation-9693.pdf",
+      "fallback": "tmp/DCPD-201800044.pdf",
+      "local_path": "data/raw/policy/section201-solar-proclamation-9693.pdf",
+      "sha256": "e7e04977ead3695bcb20c851a2e46651e608ecd1e39652bcc37a2d5b1aaa66f6",
+      "bytes": 143050,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "section201_washers_proclamation",
+      "url": "https://www.govinfo.gov/content/pkg/DCPD-201800045/pdf/DCPD-201800045.pdf",
+      "filename": "section201-washers-proclamation-9694.pdf",
+      "fallback": "tmp/DCPD-201800045.pdf",
+      "local_path": "data/raw/policy/section201-washers-proclamation-9694.pdf",
+      "sha256": "76285fe8eafda45e6a1300030a578330963645fb41f9e1f5529dfe97e700e5b3",
+      "bytes": 140966,
+      "status": "already_present_verified"
+    },
+    {
+      "source_id": "section232_steel_dcpd",
+      "url": "https://www.govinfo.gov/content/pkg/DCPD-201800148/pdf/DCPD-201800148.pdf",
+      "filename": "section232-steel-dcpd-9705.pdf",
+      "fallback": "tmp/DCPD-201800148.pdf",
+      "local_path": "data/raw/policy/section232-steel-dcpd-9705.pdf",
+      "sha256": "de575273a4c4a6fc83525779ea06aa138a42a2d51ca43b67f1f22eb089bde26b",
+      "bytes": 140080,
+      "status": "already_present_verified"
+    }
+  ],
+  "exclusion_sources": [
+    {
+      "batch_id": "list1_exclusion_2018_12_28",
+      "notice_date": "2018-12-28",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-28277.pdf",
+      "filename": "ustr-list1-exclusions-2018-12-28.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2018-12-28.pdf",
+      "sha256": "dc62b8b93ab3b74f25b794c9917d364721a34e1864507009aad7cc9c8021dd70",
+      "bytes": 397071,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_03_25",
+      "notice_date": "2019-03-25",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_11152.pdf",
+      "filename": "ustr-list1-exclusions-2019-03-25.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-03-25.pdf",
+      "sha256": "5d92523e5a35b6579af40958da74ddb0f489dd89b84c9bdbf53a414f116dd9b0",
+      "bytes": 448770,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_04_18",
+      "notice_date": "2019-04-18",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_16310.pdf",
+      "filename": "ustr-list1-exclusions-2019-04-18.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-04-18.pdf",
+      "sha256": "f553069188e4feeb8b7573d87a5eb7169cc5e016dc51d80072c7f0cac7551543",
+      "bytes": 460811,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_05_14",
+      "notice_date": "2019-05-14",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_21389.pdf",
+      "filename": "ustr-list1-exclusions-2019-05-14.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-05-14.pdf",
+      "sha256": "e560e2013df7ec907952b7a47156076eb866af954457415e15d202eec7c7537e",
+      "bytes": 294865,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_06_04",
+      "notice_date": "2019-06-04",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/84_FR_25895.pdf",
+      "filename": "ustr-list1-exclusions-2019-06-04.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-06-04.pdf",
+      "sha256": "76c9c79ae4657da68728551b2cd8e3a2ff7a58d4dad636066b52dbdfc0020642",
+      "bytes": 200002,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_07_09",
+      "notice_date": "2019-07-09",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/Notice_of_Product_Exclusions.pdf",
+      "filename": "ustr-list1-exclusions-2019-07-09.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-07-09.pdf",
+      "sha256": "75a215a8cc1e306419b5cfafe48d301bf7df30351e55451a4ef2d4f819ddbc74",
+      "bytes": 328608,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_09_20",
+      "notice_date": "2019-09-20",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/%2434_Billion_Exclusions_Granted_September.pdf",
+      "filename": "ustr-list1-exclusions-2019-09-20.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-09-20.pdf",
+      "sha256": "edb9e2b4c7dae2aa1d9b0f6ea293c39cbcc96fff0584c3537e45baa46ba928d6",
+      "bytes": 1703130,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_10_02",
+      "notice_date": "2019-10-02",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/%2434_Billion_Exclusions_Granted_October_2019.pdf",
+      "filename": "ustr-list1-exclusions-2019-10-02.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-10-02.pdf",
+      "sha256": "1a9722ed33a85e85b566387498af76e60ba9d47b79ed8eb8c87219cd947e5610",
+      "bytes": 1050313,
+      "status": "already_present_verified"
+    },
+    {
+      "batch_id": "list1_exclusion_2019_12_17",
+      "notice_date": "2019-12-17",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/%2434_Billion_Notice_of_Product_Exclusion_and_Amendments.pdf",
+      "filename": "ustr-list1-exclusions-2019-12-17.pdf",
+      "local_path": "data/raw/policy/ustr-list1-exclusions-2019-12-17.pdf",
+      "sha256": "becfae9ebbf2328b02aa10cc95633c68b04deef95a8aaee3d9e5554e4d40a1b6",
+      "bytes": 278462,
+      "status": "already_present_verified"
+    }
+  ],
+  "counts": {
+    "list1_hts8": 818,
+    "list2_hts8": 279,
+    "list3_hts8": 5745,
+    "exposure_rows": 6850,
+    "exclusion_batches": 9
+  },
+  "census_mapping": {
+    "status": "blocked_source_access",
+    "probe_date": "2026-08-31",
+    "official_reference_url": "https://www.census.gov/foreign-trade/reference/index.html",
+    "concordance_reference_url": "https://www.census.gov/foreign-trade/data/dataproducts/concordance",
+    "observed_issue": "Official static historical files returned HTTP 403 to controlled requests; no third-party mirror used."
+  }
+}

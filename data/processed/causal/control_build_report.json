@@ -1,0 +1,27 @@
+{
+  "status": "blocked_source_access",
+  "stage": "phase_06_policy_contamination_execution",
+  "policy_exposure_status": "complete_for_official_notice_scope",
+  "mapping_status": "blocked_source_access",
+  "blocked_outputs": [
+    "hts_history_mapping.csv",
+    "control_candidate_features.csv",
+    "matched_control_pairs.csv",
+    "causal_candidate_panel.csv"
+  ],
+  "completed_outputs": [
+    "trade_action_exposure.csv",
+    "list1_exclusion_timeline.csv",
+    "source_manifest.json",
+    "source_access_report.md"
+  ],
+  "counts": {
+    "list1_hts8": 818,
+    "list2_hts8": 279,
+    "list3_hts8": 5745,
+    "exposure_rows": 6850,
+    "exclusion_batches": 9
+  },
+  "reason": "Census historical HS/concordance official static endpoints returned HTTP 403; a third-party mirror was not substituted.",
+  "adoption_rule": "Do not run or publish the causal event study until the frozen mapping, contamination, matching, and pre-trend gates pass."
+}
