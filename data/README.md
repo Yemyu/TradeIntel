@@ -55,9 +55,21 @@ python scripts/build_trade_panel.py --start 2016-01 --end 2019-12
 
 它逐月下载和处理，成功后删除本地 ZIP，保留每个月的来源清单和汇总结果。脚本可以重复运行：已经完成且来源未变化的月份会跳过，不会重复追加记录。
 
-## 6. 描述性政策基线
+## 6. 数据质量层
 
-贸易面板生成后，可以运行：
+完整面板生成并导入 MySQL 后，运行：
+
+```bash
+python scripts/audit_data_quality.py --mysql-login-path tradeintel
+```
+
+质量层会生成一份机器可读报告、一份中文报告、稳定国家代码维表、政策目标国映射和 818 个政策 HTS8 的覆盖表。`pass_with_review` 表示核心结构通过，但存在必须披露或限制使用的复核项；它不是无条件通过。
+
+当前发现两个历史国家名称变化，并把 `86011000` 标记为“未观察、待复核”。后续国家分析必须按 `origin_code`，不能按历史名称拆分。
+
+## 7. 描述性政策基线
+
+质量审计通过后，可以运行：
 
 ```bash
 python scripts/analyze_policy_case.py

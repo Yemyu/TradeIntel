@@ -1,0 +1,2 @@
+policy_id,policy_target_origin_name,origin_code,canonical_origin_name,mapping_method,quality_status,reference_url
+us_301_list1_2018,China,5700,CHINA,exact_observed_name_to_stable_census_code,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html

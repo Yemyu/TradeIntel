@@ -1,0 +1,231 @@
+origin_code,canonical_origin_name,observed_origin_names,first_observed_month,last_observed_month,name_variant_count,canonical_name_method,quality_status,reference_url
+1010,GREENLAND,GREENLAND,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+1220,CANADA,CANADA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+1610,ST PIERRE AND MIQUELON,ST PIERRE AND MIQUELON,2016-05,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2010,MEXICO,MEXICO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2050,GUATEMALA,GUATEMALA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2080,BELIZE,BELIZE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2110,EL SALVADOR,EL SALVADOR,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2150,HONDURAS,HONDURAS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2190,NICARAGUA,NICARAGUA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2230,COSTA RICA,COSTA RICA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2250,PANAMA,PANAMA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2320,BERMUDA,BERMUDA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2360,BAHAMAS,BAHAMAS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2410,JAMAICA,JAMAICA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2430,TURKS AND CAICOS ISLANDS,TURKS AND CAICOS ISLANDS,2016-05,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2440,CAYMAN ISLANDS,CAYMAN ISLANDS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2450,HAITI,HAITI,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2470,DOMINICAN REPUBLIC,DOMINICAN REPUBLIC,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2481,ANGUILLA,ANGUILLA,2016-09,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2482,BRITISH VIRGIN ISLANDS,BRITISH VIRGIN ISLANDS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2483,ST KITTS AND NEVIS,ST KITTS AND NEVIS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2484,ANTIGUA AND BARBUDA,ANTIGUA AND BARBUDA,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2485,MONTSERRAT,MONTSERRAT,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2486,DOMINICA,DOMINICA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2487,ST LUCIA,ST LUCIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2488,ST VINCENT AND THE GRENADINES,ST VINCENT AND THE GRENADINES,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2489,GRENADA,GRENADA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2720,BARBADOS,BARBADOS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2740,TRINIDAD AND TOBAGO,TRINIDAD AND TOBAGO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2774,SINT MAARTEN,SINT MAARTEN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2777,CURACAO,CURACAO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2779,ARUBA,ARUBA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2831,GUADELOUPE,GUADELOUPE,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+2839,MARTINIQUE,MARTINIQUE,2016-02,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3010,COLOMBIA,COLOMBIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3070,VENEZUELA,VENEZUELA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3120,GUYANA,GUYANA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3150,SURINAME,SURINAME,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3170,FRENCH GUIANA,FRENCH GUIANA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3310,ECUADOR,ECUADOR,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3330,PERU,PERU,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3350,BOLIVIA,BOLIVIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3370,CHILE,CHILE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3510,BRAZIL,BRAZIL,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3530,PARAGUAY,PARAGUAY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3550,URUGUAY,URUGUAY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3570,ARGENTINA,ARGENTINA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+3720,FALKLAND ISLANDS (ISLAS MALVINAS),FALKLAND ISLANDS (ISLAS MALVINAS),2016-09,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4000,ICELAND,ICELAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4010,SWEDEN,SWEDEN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4031,"SVALBARD, JAN MAYEN ISLAND","SVALBARD, JAN MAYEN ISLAND",2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4039,NORWAY,NORWAY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4050,FINLAND,FINLAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4091,FAROE ISLANDS,FAROE ISLANDS,2016-12,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4099,DENMARK,DENMARK,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4120,UNITED KINGDOM,UNITED KINGDOM,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4190,IRELAND,IRELAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4210,NETHERLANDS,NETHERLANDS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4231,BELGIUM,BELGIUM,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4239,LUXEMBOURG,LUXEMBOURG,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4271,ANDORRA,ANDORRA,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4272,MONACO,MONACO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4279,FRANCE,FRANCE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4280,GERMANY,GERMANY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4330,AUSTRIA,AUSTRIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4351,CZECH REPUBLIC,CZECH REPUBLIC,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4359,SLOVAKIA,SLOVAKIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4370,HUNGARY,HUNGARY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4411,LIECHTENSTEIN,LIECHTENSTEIN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4419,SWITZERLAND,SWITZERLAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4470,ESTONIA,ESTONIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4490,LATVIA,LATVIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4510,LITHUANIA,LITHUANIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4550,POLAND,POLAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4621,RUSSIA,RUSSIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4622,BELARUS,BELARUS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4623,UKRAINE,UKRAINE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4631,ARMENIA,ARMENIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4632,AZERBAIJAN,AZERBAIJAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4633,GEORGIA,GEORGIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4634,KAZAKHSTAN,KAZAKHSTAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4635,KYRGYZSTAN,KYRGYZSTAN,2017-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4641,MOLDOVA,MOLDOVA,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4642,TAJIKISTAN,TAJIKISTAN,2016-09,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4643,TURKMENISTAN,TURKMENISTAN,2016-06,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4644,UZBEKISTAN,UZBEKISTAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4700,SPAIN,SPAIN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4710,PORTUGAL,PORTUGAL,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4720,GIBRALTAR,GIBRALTAR,2016-08,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4730,MALTA,MALTA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4751,SAN MARINO,SAN MARINO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4752,VATICAN CITY,VATICAN CITY,2016-04,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4759,ITALY,ITALY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4791,CROATIA,CROATIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4792,SLOVENIA,SLOVENIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4793,BOSNIA AND HERZEGOVINA,BOSNIA AND HERZEGOVINA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4794,NORTH MACEDONIA,MACEDONIA | NORTH MACEDONIA,2016-01,2019-12,2,latest_observed_name,review_name_change,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4801,SERBIA,SERBIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4803,KOSOVO,KOSOVO,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4804,MONTENEGRO,MONTENEGRO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4810,ALBANIA,ALBANIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4840,GREECE,GREECE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4850,ROMANIA,ROMANIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4870,BULGARIA,BULGARIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4890,TURKEY,TURKEY,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+4910,CYPRUS,CYPRUS,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5020,SYRIA,SYRIA,2017-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5040,LEBANON,LEBANON,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5050,IRAQ,IRAQ,2016-06,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5070,IRAN,IRAN,2018-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5081,ISRAEL,ISRAEL,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5083,WEST BANK ADMINISTERED BY ISRAEL,WEST BANK ADMINISTERED BY ISRAEL,2017-01,2017-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5110,JORDAN,JORDAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5130,KUWAIT,KUWAIT,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5170,SAUDI ARABIA,SAUDI ARABIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5180,QATAR,QATAR,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5200,UNITED ARAB EMIRATES,UNITED ARAB EMIRATES,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5210,YEMEN,YEMEN,2016-05,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5230,OMAN,OMAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5250,BAHRAIN,BAHRAIN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5310,AFGHANISTAN,AFGHANISTAN,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5330,INDIA,INDIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5350,PAKISTAN,PAKISTAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5360,NEPAL,NEPAL,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5380,BANGLADESH,BANGLADESH,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5420,SRI LANKA,SRI LANKA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5460,BURMA,BURMA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5490,THAILAND,THAILAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5520,VIETNAM,VIETNAM,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5530,LAOS,LAOS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5550,CAMBODIA,CAMBODIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5570,MALAYSIA,MALAYSIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5590,SINGAPORE,SINGAPORE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5600,INDONESIA,INDONESIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5601,TIMOR-LESTE,TIMOR-LESTE,2016-06,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5610,BRUNEI,BRUNEI,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5650,PHILIPPINES,PHILIPPINES,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5660,MACAU,MACAU,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5682,BHUTAN,BHUTAN,2016-05,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5683,MALDIVES,MALDIVES,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5700,CHINA,CHINA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5740,MONGOLIA,MONGOLIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5800,"KOREA, SOUTH","KOREA, SOUTH",2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5820,HONG KONG,HONG KONG,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5830,TAIWAN,TAIWAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+5880,JAPAN,JAPAN,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6021,AUSTRALIA,AUSTRALIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6022,NORFOLK ISLAND,NORFOLK ISLAND,2016-06,2016-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6023,COCOS (KEELING) ISLANDS,COCOS (KEELING) ISLANDS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6024,CHRISTMAS ISLAND,CHRISTMAS ISLAND,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6029,HEARD AND MCDONALD ISLANDS,HEARD AND MCDONALD ISLANDS,2016-10,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6040,PAPUA NEW GUINEA,PAPUA NEW GUINEA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6141,NEW ZEALAND,NEW ZEALAND,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6142,COOK ISLANDS,COOK ISLANDS,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6143,TOKELAU,TOKELAU,2017-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6144,NIUE,NIUE,2016-08,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6150,SAMOA,SAMOA,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6223,SOLOMON ISLANDS,SOLOMON ISLANDS,2017-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6224,VANUATU,VANUATU,2016-04,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6225,PITCAIRN ISLANDS,PITCAIRN ISLANDS,2017-09,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6226,KIRIBATI,KIRIBATI,2016-03,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6227,TUVALU,TUVALU,2017-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6412,NEW CALEDONIA,NEW CALEDONIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6413,WALLIS AND FUTUNA,WALLIS AND FUTUNA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6414,FRENCH POLYNESIA,FRENCH POLYNESIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6810,MARSHALL ISLANDS,MARSHALL ISLANDS,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6820,MICRONESIA,MICRONESIA,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6830,PALAU,PALAU,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6862,NAURU,NAURU,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6863,FIJI,FIJI,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+6864,TONGA,TONGA,2017-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7140,MOROCCO,MOROCCO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7210,ALGERIA,ALGERIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7230,TUNISIA,TUNISIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7250,LIBYA,LIBYA,2016-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7290,EGYPT,EGYPT,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7323,SOUTH SUDAN,SOUTH SUDAN,2016-01,2017-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7370,WESTERN SAHARA,WESTERN SAHARA,2016-02,2017-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7380,EQUATORIAL GUINEA,EQUATORIAL GUINEA,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7410,MAURITANIA,MAURITANIA,2016-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7420,CAMEROON,CAMEROON,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7440,SENEGAL,SENEGAL,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7450,MALI,MALI,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7460,GUINEA,GUINEA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7470,SIERRA LEONE,SIERRA LEONE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7480,COTE D'IVOIRE,COTE D'IVOIRE,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7490,GHANA,GHANA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7500,GAMBIA,GAMBIA,2016-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7510,NIGER,NIGER,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7520,TOGO,TOGO,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7530,NIGERIA,NIGERIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7540,CENTRAL AFRICAN REPUBLIC,CENTRAL AFRICAN REPUBLIC,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7550,GABON,GABON,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7560,CHAD,CHAD,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7580,ST HELENA,ST HELENA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7600,BURKINA FASO,BURKINA FASO,2017-10,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7610,BENIN,BENIN,2016-05,2017-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7620,ANGOLA,ANGOLA,2017-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7630,CONGO (BRAZZAVILLE),CONGO (BRAZZAVILLE),2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7642,GUINEA-BISSAU,GUINEA-BISSAU,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7643,CABO VERDE,CABO VERDE,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7644,SAO TOME AND PRINCIPE,SAO TOME AND PRINCIPE,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7650,LIBERIA,LIBERIA,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7660,CONGO (KINSHASA),CONGO (KINSHASA),2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7670,BURUNDI,BURUNDI,2016-05,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7690,RWANDA,RWANDA,2016-12,2018-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7700,SOMALIA,SOMALIA,2016-11,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7741,ERITREA,ERITREA,2016-05,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7749,ETHIOPIA,ETHIOPIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7770,DJIBOUTI,DJIBOUTI,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7780,UGANDA,UGANDA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7790,KENYA,KENYA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7800,SEYCHELLES,SEYCHELLES,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7810,BRITISH INDIAN OCEAN TERRITORIES,BRITISH INDIAN OCEAN TERRITORIES,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7830,TANZANIA,TANZANIA,2016-03,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7850,MAURITIUS,MAURITIUS,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7870,MOZAMBIQUE,MOZAMBIQUE,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7880,MADAGASCAR,MADAGASCAR,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7881,MAYOTTE,MAYOTTE,2017-12,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7890,COMOROS,COMOROS,2016-02,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7904,REUNION,REUNION,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7905,FRENCH SOUTHERN AND ANTARCTIC LANDS,FRENCH SOUTHERN AND ANTARCTIC LANDS,2019-06,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7910,SOUTH AFRICA,SOUTH AFRICA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7920,NAMIBIA,NAMIBIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7930,BOTSWANA,BOTSWANA,2016-06,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7940,ZAMBIA,ZAMBIA,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7950,ESWATINI,ESWATINI | SWAZILAND,2016-01,2019-12,2,latest_observed_name,review_name_change,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7960,ZIMBABWE,ZIMBABWE,2016-04,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7970,MALAWI,MALAWI,2016-07,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html
+7990,LESOTHO,LESOTHO,2016-01,2019-12,1,latest_observed_name,pass,https://www.census.gov/foreign-trade/schedules/c/countrycode.html

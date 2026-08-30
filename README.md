@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 2: the first 48-month policy-linked trade panel has been validated, loaded into a local MySQL database, and reconciled against the source CSV.
+Learning and development stage 3: the 48-month policy-linked panel now has an executable data-quality gate, stable origin identities, explicit policy-origin mapping, and HTS coverage decisions.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -16,11 +16,13 @@ This repository is currently local-only. It will not be published until its scop
 - [Phase 1 Chinese learning guide: trade-data inventory](./docs/learning/phase-01-trade-inventory.zh-CN.md)
 - [Phase 2 Chinese learning guide: policy and trade join](./docs/learning/phase-02-policy-join.zh-CN.md)
 - [Phase 3 Chinese learning guide: MySQL data layer](./docs/learning/phase-03-mysql.zh-CN.md)
+- [Phase 4 Chinese learning guide: data quality layer](./docs/learning/phase-04-data-quality.zh-CN.md)
 
 ### 中文学习版
 
 - [首个政策案例：为什么选 Section 301 List 1](./docs/decisions/0001-initial-policy-case.zh-CN.md)
 - [数据契约：数据从哪里来、怎样才算正确](./docs/contracts/0001-section301-list1-data-contract.zh-CN.md)
+- [数据质量契约：哪些数据允许进入分析](./docs/contracts/0002-trade-data-quality-contract.zh-CN.md)
 
 ## Local environment
 
@@ -71,7 +73,13 @@ It writes one generated CSV per month under `data/processed/trade/monthly/`, a 4
 
 ## Descriptive policy baseline
 
-Join the verified Section 301 event and product list to the local 48-month panel:
+Audit the policy, lineage, codes, and 48-month panel before analysis:
+
+```bash
+python scripts/audit_data_quality.py --mysql-login-path tradeintel
+```
+
+Then join the verified Section 301 event and product list to the local panel:
 
 ```bash
 python scripts/analyze_policy_case.py

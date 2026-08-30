@@ -23,9 +23,14 @@
     "rows_read": 1600952,
     "policy_matched_rows": 1600952,
     "months": 48,
-    "origins": 232,
+    "origins": 230,
     "first_month": "2016-01",
     "last_month": "2019-12"
+  },
+  "quality_inputs": {
+    "origin_dimension": "data/processed/quality/origin_dimension.csv",
+    "policy_origin_mapping": "data/processed/quality/policy_origin_mapping.csv",
+    "country_grouping_key": "origin_code"
   },
   "windows": {
     "pre": {

@@ -3,7 +3,7 @@
 > 这是给项目学习使用的中文版本。英文原文保留给以后 GitHub 展示和申请材料使用。  
 > “数据契约”不是某种编程语法，而是团队在写代码前约定：**数据从哪里来、每个字段是什么意思、什么情况算错误、怎样才算完成。**
 
-- 状态：实现前草案
+- 状态：已实现；后续质量采纳规则见 `0002-trade-data-quality-contract.zh-CN.md`
 - 日期：2026-08-28
 - 相关决策：[`0001-initial-policy-case.zh-CN.md`](../decisions/0001-initial-policy-case.zh-CN.md)
 

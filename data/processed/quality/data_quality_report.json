@@ -1,0 +1,241 @@
+{
+  "audit_version": 1,
+  "overall_status": "pass_with_review",
+  "summary": {
+    "failed_rule_count": 0,
+    "review_rule_count": 2,
+    "failed_rules": [],
+    "review_rules": [
+      "ORIGIN-002",
+      "COVERAGE-001"
+    ],
+    "policy_event_rows": 1,
+    "policy_product_rows": 818,
+    "trade_rows": 1600952,
+    "trade_value_usd": 1716137643878,
+    "month_count": 48,
+    "origin_count": 230,
+    "policy_codes_without_trade": [
+      "86011000"
+    ],
+    "origin_codes_with_name_changes": [
+      "4794",
+      "7950"
+    ]
+  },
+  "input_fingerprints": {
+    "policy_event_sha256": "86d1c255ac8c3d139143b50175cbc0b05cd03bd875a0e7994006429382b8fdba",
+    "policy_products_sha256": "fe2fc56d873be51111b2c537208832008b01cc60566fdf1f813741226498d82a",
+    "source_manifest_sha256": "a5d460a326196df542db2b564312a8d0b35e39a801cd8bb62df107c2e434cec7",
+    "trade_panel_sha256": "2c127cc1e954a1da182a636ba87960f1b0a2d26fcf0352042077447253c28e6f"
+  },
+  "rules": [
+    {
+      "rule_id": "POLICY-001",
+      "dimension": "政策事件",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "政策事件的身份、日期、税率和来源有效。",
+      "metrics": {
+        "row_count": 1,
+        "errors": []
+      }
+    },
+    {
+      "rule_id": "HTS-001",
+      "dimension": "政策商品身份",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "政策商品数量符合预期，8 位 HTS 身份合法且唯一。",
+      "metrics": {
+        "row_count": 818,
+        "expected_row_count": 818,
+        "unique_code_count": 818,
+        "invalid_codes": [],
+        "duplicate_code_count": 0
+      }
+    },
+    {
+      "rule_id": "HTS-002",
+      "dimension": "官方修正",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "9033.00 的官方修正已经明确记录并且可以追溯。",
+      "metrics": {
+        "raw_exception_count": 1,
+        "expected_canonical_hts8": "9033.00.90"
+      }
+    },
+    {
+      "rule_id": "TIME-001",
+      "dimension": "月份覆盖",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "贸易面板和来源清单覆盖声明的连续月份。",
+      "metrics": {
+        "expected_month_count": 48,
+        "panel_month_count": 48,
+        "manifest_month_count": 48,
+        "missing_panel_months": [],
+        "unexpected_panel_months": [],
+        "invalid_month_rows": 0
+      }
+    },
+    {
+      "rule_id": "KEY-001",
+      "dimension": "贸易数据粒度",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "月份 × 原产国代码 × HTS10 业务键唯一。",
+      "metrics": {
+        "row_count": 1600952,
+        "unique_key_count": 1600952,
+        "duplicate_row_count": 0
+      }
+    },
+    {
+      "rule_id": "CODE-001",
+      "dimension": "贸易商品代码",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "贸易 HTS10/HTS8 格式合法、前缀一致，并且属于政策范围。",
+      "metrics": {
+        "invalid_hts10_rows": 0,
+        "invalid_hts8_rows": 0,
+        "hts10_hts8_prefix_mismatches": 0,
+        "trade_codes_not_in_policy": []
+      }
+    },
+    {
+      "rule_id": "VALUE-001",
+      "dimension": "贸易金额",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "贸易金额是非负整数，并且存在对应的明细记录。",
+      "metrics": {
+        "invalid_numeric_rows": 0,
+        "negative_value_rows": 0,
+        "zero_value_rows": 586406,
+        "nonpositive_detail_row_count_rows": 0,
+        "total_value_usd": 1716137643878
+      }
+    },
+    {
+      "rule_id": "ORIGIN-001",
+      "dimension": "原产国身份",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "每条贸易记录都有合法的 4 位 Census 原产国代码和名称。",
+      "metrics": {
+        "invalid_origin_code_rows": 0,
+        "empty_origin_name_rows": 0,
+        "unknown_origin_name_rows": 0
+      }
+    },
+    {
+      "rule_id": "ORIGIN-002",
+      "dimension": "原产国名称历史",
+      "severity": "review",
+      "status": "review",
+      "summary": "稳定国家代码存在历史名称变化；分析必须按代码聚合。",
+      "metrics": {
+        "variant_code_count": 2,
+        "variant_codes": [
+          {
+            "origin_code": "4794",
+            "canonical_origin_name": "NORTH MACEDONIA",
+            "observed_origin_names": [
+              "MACEDONIA",
+              "NORTH MACEDONIA"
+            ]
+          },
+          {
+            "origin_code": "7950",
+            "canonical_origin_name": "ESWATINI",
+            "observed_origin_names": [
+              "ESWATINI",
+              "SWAZILAND"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "POLICY-ORIGIN-001",
+      "dimension": "政策—原产国映射",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "政策目标国唯一映射到一个稳定的 Census 原产国代码。",
+      "metrics": {
+        "policy_target_origin_name": "China",
+        "matching_origin_codes": [
+          "5700"
+        ]
+      }
+    },
+    {
+      "rule_id": "SOURCE-001",
+      "dimension": "来源追溯",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "每个月只有一个合法来源指纹，并且与来源清单一致。",
+      "metrics": {
+        "manifest_errors": [],
+        "panel_invalid_hash_rows": 0,
+        "source_mismatches": []
+      }
+    },
+    {
+      "rule_id": "COVERAGE-001",
+      "dimension": "政策商品覆盖",
+      "severity": "review",
+      "status": "review",
+      "summary": "没有贸易记录的政策 HTS8 需要复核，不能静默补零。",
+      "metrics": {
+        "policy_code_count": 818,
+        "observed_policy_code_count": 817,
+        "not_observed_policy_codes": [
+          "86011000"
+        ]
+      }
+    },
+    {
+      "rule_id": "DB-001",
+      "dimension": "CSV 与 MySQL 对账",
+      "severity": "critical",
+      "status": "pass",
+      "summary": "MySQL 的行数、金额总额和月份覆盖与 CSV 一致。",
+      "metrics": {
+        "csv": {
+          "policy_event_rows": 1,
+          "policy_product_rows": 818,
+          "trade_rows": 1600952,
+          "trade_value_usd": 1716137643878,
+          "first_yyyymm": 201601,
+          "last_yyyymm": 201912,
+          "month_count": 48
+        },
+        "mysql": {
+          "policy_event_rows": 1,
+          "policy_product_rows": 818,
+          "trade_rows": 1600952,
+          "trade_value_usd": 1716137643878,
+          "first_yyyymm": 201601,
+          "last_yyyymm": 201912,
+          "month_count": 48
+        },
+        "error": null
+      }
+    }
+  ],
+  "adoption_decisions": {
+    "aggregate_descriptive_analysis": "allowed_with_coverage_disclosure",
+    "origin_level_analysis": "allowed_only_when_grouped_by_origin_code",
+    "unobserved_hts8_product_analysis": "blocked_pending_review",
+    "causal_policy_claims": "blocked_pending_exclusions_crosswalks_and_design_checks"
+  },
+  "official_references": {
+    "census_schedule_c_country_codes": "https://www.census.gov/foreign-trade/schedules/c/countrycode.html",
+    "usitc_hts_archive": "https://hts.usitc.gov/download/archive"
+  }
+}

@@ -9,7 +9,7 @@ from scripts.analyze_policy_case import analyse_policy_case, classify_month
 
 
 class PolicyAnalysisTests(unittest.TestCase):
-    def _write_fixture(self, root: Path) -> tuple[Path, Path, Path]:
+    def _write_fixture(self, root: Path) -> tuple[Path, Path, Path, Path, Path]:
         event = root / "event.csv"
         with event.open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(
@@ -92,7 +92,45 @@ class PolicyAnalysisTests(unittest.TestCase):
                             "import_value_consumption_usd": mexico,
                         }
                     )
-        return event, products, panel
+
+        origins = root / "origin_dimension.csv"
+        with origins.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=[
+                    "origin_code",
+                    "canonical_origin_name",
+                    "observed_origin_names",
+                    "quality_status",
+                ],
+            )
+            writer.writeheader()
+            writer.writerows(
+                [
+                    {
+                        "origin_code": "5700",
+                        "canonical_origin_name": "CHINA",
+                        "observed_origin_names": "CHINA",
+                        "quality_status": "pass",
+                    },
+                    {
+                        "origin_code": "2010",
+                        "canonical_origin_name": "MEXICO",
+                        "observed_origin_names": "MEXICO",
+                        "quality_status": "pass",
+                    },
+                ]
+            )
+
+        policy_origins = root / "policy_origin_mapping.csv"
+        with policy_origins.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=["policy_id", "origin_code"],
+            )
+            writer.writeheader()
+            writer.writerow({"policy_id": "fixture", "origin_code": "5700"})
+        return event, products, panel, origins, policy_origins
 
     def test_month_classification_marks_effective_month_as_transition(self):
         effective = date(2018, 7, 6)
@@ -103,11 +141,13 @@ class PolicyAnalysisTests(unittest.TestCase):
     def test_analysis_joins_codes_and_computes_descriptive_change(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            event, products, panel = self._write_fixture(root)
+            event, products, panel, origins, policy_origins = self._write_fixture(root)
             summary = analyse_policy_case(
                 event_path=event,
                 products_path=products,
                 panel_path=panel,
+                origin_dimension_path=origins,
+                policy_origin_mapping_path=policy_origins,
                 output_dir=root / "analysis",
             )
 
@@ -130,6 +170,63 @@ class PolicyAnalysisTests(unittest.TestCase):
             ) as handle:
                 written_summary = json.load(handle)
             self.assertFalse(written_summary["causal_claim"])
+
+    def test_analysis_groups_historical_origin_names_by_stable_code(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            event, products, panel, origins, policy_origins = self._write_fixture(root)
+            with origins.open("a", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(
+                    handle,
+                    fieldnames=[
+                        "origin_code",
+                        "canonical_origin_name",
+                        "observed_origin_names",
+                        "quality_status",
+                    ],
+                )
+                writer.writerow(
+                    {
+                        "origin_code": "9999",
+                        "canonical_origin_name": "NEWLAND",
+                        "observed_origin_names": "OLDLAND | NEWLAND",
+                        "quality_status": "review_name_change",
+                    }
+                )
+            with panel.open(newline="", encoding="utf-8") as handle:
+                existing = list(csv.DictReader(handle))
+                fieldnames = list(existing[0])
+            with panel.open("a", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, fieldnames=fieldnames)
+                for year in range(2016, 2020):
+                    for month in range(1, 13):
+                        writer.writerow(
+                            {
+                                "year": year,
+                                "month": month,
+                                "origin_code": "9999",
+                                "origin_name": "OLDLAND" if year < 2019 else "NEWLAND",
+                                "hts8": "11111111",
+                                "import_value_consumption_usd": 10,
+                            }
+                        )
+
+            summary = analyse_policy_case(
+                event_path=event,
+                products_path=products,
+                panel_path=panel,
+                origin_dimension_path=origins,
+                policy_origin_mapping_path=policy_origins,
+                output_dir=root / "analysis",
+            )
+            self.assertEqual(summary["trade_panel"]["origins"], 3)
+            with (root / "analysis/policy_case_country_change.csv").open(
+                newline="", encoding="utf-8"
+            ) as handle:
+                rows = list(csv.DictReader(handle))
+            matching = [row for row in rows if row["origin_code"] == "9999"]
+            self.assertEqual(len(matching), 1)
+            self.assertEqual(matching[0]["origin_name"], "NEWLAND")
 
 
 if __name__ == "__main__":
