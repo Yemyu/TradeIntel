@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-30T17:40:18+00:00",
-  "status": "policy_exposure_built_mapping_blocked_source_access",
+  "generated_at_utc": "2026-08-30T18:17:56+00:00",
+  "status": "policy_exposure_and_hs_mapping_built_trade_panel_pending",
   "policy_sources": [
     {
       "source_id": "list1_initial",
@@ -183,10 +183,19 @@
     "exclusion_batches": 9
   },
   "census_mapping": {
-    "status": "blocked_source_access",
+    "status": "official_history_and_concordance_retrieved",
     "probe_date": "2026-08-31",
     "official_reference_url": "https://www.census.gov/foreign-trade/reference/index.html",
     "concordance_reference_url": "https://www.census.gov/foreign-trade/data/dataproducts/concordance",
-    "observed_issue": "Official static historical files returned HTTP 403 to controlled requests; no third-party mirror used."
+    "observed_issue": "Direct command-line static requests returned HTTP 403; the official Census reference page and browser download path provided the same files, with SHA-256 recorded in mapping_source_manifest.json.",
+    "mapping_report": {
+      "status": "mapping_built_with_conservative_ambiguity_flags",
+      "row_count": 76304,
+      "mapping_status_counts": {
+        "same_hs6_prefix": 74862,
+        "wco_exact_single": 10,
+        "wco_partial_or_ambiguous": 1432
+      }
+    }
   }
 }

@@ -1,0 +1,42 @@
+{
+  "generated_at_utc": "2026-08-30T18:14:24+00:00",
+  "status": "mapping_built_with_conservative_ambiguity_flags",
+  "sources": [
+    {
+      "name": "Census historical HS numbers",
+      "url": "https://www.census.gov/foreign-trade/reference/codes/Import_Historical_HS_Numbers.xlsx",
+      "sha256": "d13be8bd5755a9237f8c1d1f0cf49d29e9141413d845dc39728f98ab534bade6",
+      "local_path": "data/raw/policy/census-import-historical-hs-numbers.xlsx"
+    },
+    {
+      "name": "WCO HS 2012 to HS 2017 Table II",
+      "url": "https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2017/2016/table_ii_trp1217_en_rev1.pdf?db=web",
+      "sha256": "00e04d7c307ec9211e3c994ad54cb8326365af830009d462a73ce5c1fdb98fa4",
+      "local_path": "data/raw/policy/wco-hs2012-to-2017-table-ii.pdf"
+    },
+    {
+      "name": "Census 2016 import concordance",
+      "url": "https://www.census.gov/foreign-trade/reference/codes/concordance/impconcord16.xls",
+      "sha256": "233300ca5e5bb56e552e424d8b7a271ba8ba3a435ed1d44f88f1ec15f4f7c0ba",
+      "local_path": "data/raw/policy/census-import-concordance-2016.xls"
+    },
+    {
+      "name": "Census 2017 import concordance",
+      "url": "https://www.census.gov/foreign-trade/reference/codes/concordance/impconcord17.xls",
+      "sha256": "2f0e9a17c8ec5a4e58c1fb02cb838ef404f5d18cf511767b2c84bd7000abcca4",
+      "local_path": "data/raw/policy/census-import-concordance-2017.xls"
+    },
+    {
+      "name": "Census 2018 import concordance",
+      "url": "https://www.census.gov/foreign-trade/reference/codes/concordance/impconcord18.xls",
+      "sha256": "4822688ec94fc187ca6d8ce253bd472fc89712aea6736739ec3d2c04c0fc6ac0",
+      "local_path": "data/raw/policy/census-import-concordance-2018.xls"
+    },
+    {
+      "name": "Census 2019 import concordance",
+      "url": "https://www.census.gov/foreign-trade/reference/codes/concordance/impconcord19.xls",
+      "sha256": "0aff914c721ed67525e8503c006dd13709f87265b45a0a5370d70abd045f06c3",
+      "local_path": "data/raw/policy/census-import-concordance-2019.xls"
+    }
+  ]
+}

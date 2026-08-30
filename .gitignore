@@ -13,3 +13,7 @@ data/raw/*
 # Full multi-month panel outputs are reproducible generated artifacts.
 data/processed/trade/monthly/
 data/processed/trade/trade_import_monthly.csv
+
+# Causal extension rebuilds all origins but stores only compact local artifacts.
+data/processed/causal/monthly/
+data/processed/causal/causal_trade_hs6_monthly.csv
