@@ -1,0 +1,93 @@
+{
+  "analysis_type": "descriptive_policy_case_baseline",
+  "causal_claim": false,
+  "interpretation_limit": "This output describes before/transition/after patterns. It does not identify a causal tariff effect without a defensible control design.",
+  "policy_event": {
+    "policy_id": "us_301_list1_2018",
+    "policy_name": "U.S. Section 301 List 1",
+    "importer": "United States",
+    "target_origin": "China",
+    "announcement_date": "2018-06-15",
+    "effective_date": "2018-07-06",
+    "additional_rate": "0.25",
+    "source_url": "https://ustr.gov/sites/default/files/2018-13248.pdf"
+  },
+  "policy_hts8_count": 818,
+  "target_origin": {
+    "event_name": "China",
+    "trade_origin_name": "CHINA",
+    "trade_origin_code": "5700"
+  },
+  "trade_panel": {
+    "path": "data/processed/trade/trade_import_monthly.csv",
+    "rows_read": 1600952,
+    "policy_matched_rows": 1600952,
+    "months": 48,
+    "origins": 232,
+    "first_month": "2016-01",
+    "last_month": "2019-12"
+  },
+  "windows": {
+    "pre": {
+      "first_month": "2016-01",
+      "last_month": "2018-06",
+      "months": 30
+    },
+    "transition": {
+      "months": [
+        "2018-07"
+      ],
+      "reason": "The policy took effect on a day within the monthly data interval."
+    },
+    "post": {
+      "first_month": "2018-08",
+      "last_month": "2019-12",
+      "months": 17
+    }
+  },
+  "target_origin_summary": {
+    "pre": {
+      "months": 30,
+      "total_usd": 76397425780,
+      "average_monthly_usd": 2546580859.3333335
+    },
+    "post": {
+      "months": 17,
+      "total_usd": 32375964205,
+      "average_monthly_usd": 1904468482.6470587
+    },
+    "average_monthly_change_usd": -642112376.6862748,
+    "average_monthly_change_pct": -0.25214686363988953
+  },
+  "other_origins_summary": {
+    "pre": {
+      "months": 30,
+      "total_usd": 895949114525,
+      "average_monthly_usd": 29864970484.166668
+    },
+    "post": {
+      "months": 17,
+      "total_usd": 671853359025,
+      "average_monthly_usd": 39520785825.0
+    },
+    "average_monthly_change_usd": 9655815340.833332,
+    "average_monthly_change_pct": 0.32331575033541377
+  },
+  "all_origins_summary": {
+    "pre": {
+      "months": 30,
+      "total_usd": 972346540305,
+      "average_monthly_usd": 32411551343.5
+    },
+    "post": {
+      "months": 17,
+      "total_usd": 704229323230,
+      "average_monthly_usd": 41425254307.64706
+    }
+  },
+  "outputs": {
+    "monthly": "data/processed/analysis/policy_case_monthly.csv",
+    "country_change": "data/processed/analysis/policy_case_country_change.csv",
+    "summary": "data/processed/analysis/policy_case_summary.json"
+  }
+}

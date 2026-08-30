@@ -14,6 +14,7 @@ This repository is currently local-only. It will not be published until its scop
 - [Learning profile and collaboration rules](./LEARNING_PROFILE.md)
 - [Stage 0 learning guide](./docs/learning/phase-00-foundations.md)
 - [Phase 1 Chinese learning guide: trade-data inventory](./docs/learning/phase-01-trade-inventory.zh-CN.md)
+- [Phase 2 Chinese learning guide: policy and trade join](./docs/learning/phase-02-policy-join.zh-CN.md)
 
 ### 中文学习版
 
@@ -66,3 +67,13 @@ python scripts/build_trade_panel.py --start 2016-01 --end 2019-12
 ```
 
 It writes one generated CSV per month under `data/processed/trade/monthly/`, a 48-month source manifest, and a combined `trade_import_monthly.csv`. The full generated panel is intentionally ignored by Git; the one-month sample remains as the readable example.
+
+## Descriptive policy baseline
+
+Join the verified Section 301 event and product list to the local 48-month panel:
+
+```bash
+python scripts/analyze_policy_case.py
+```
+
+This writes a monthly before/transition/after table, an origin-level change table, and a JSON summary under `data/processed/analysis/`. It is explicitly descriptive and does not claim a causal tariff effect.

@@ -54,3 +54,19 @@ python scripts/build_trade_panel.py --start 2016-01 --end 2019-12
 ```
 
 它逐月下载和处理，成功后删除本地 ZIP，保留每个月的来源清单和汇总结果。脚本可以重复运行：已经完成且来源未变化的月份会跳过，不会重复追加记录。
+
+## 6. 描述性政策基线
+
+贸易面板生成后，可以运行：
+
+```bash
+python scripts/analyze_policy_case.py
+```
+
+程序把政策 HTS8 清单、目标原产国和 2018-07-06 生效日期连接到贸易面板，输出：
+
+- `processed/analysis/policy_case_monthly.csv`：按月的中国、其他国家和全部国家金额；
+- `processed/analysis/policy_case_country_change.csv`：各原产国的生效前后平均变化；
+- `processed/analysis/policy_case_summary.json`：窗口定义、统计结果和限制。
+
+这些是描述性结果，不是因果估计；2018 年 7 月被单独标为过渡月。
