@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 1: the system map is documented, and the first 48-month policy-linked trade panel has been downloaded, validated, and generated locally.
+Learning and development stage 2: the first 48-month policy-linked trade panel has been validated, loaded into a local MySQL database, and reconciled against the source CSV.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
