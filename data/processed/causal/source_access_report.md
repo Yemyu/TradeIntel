@@ -1,6 +1,6 @@
 # 官方政策来源取得报告
 
-生成时间（UTC）：2026-08-30T17:40:18+00:00
+生成时间（UTC）：2026-08-30T18:17:56+00:00
 
 ## 已取得的来源
 
@@ -14,8 +14,12 @@
 - Section 232/201：保留官方范围规则或官方代码集合，但标记为需要 HTS 历史展开，不能直接当作完整 HS6 暴露表；
 - List 1 排除：保存 2018-12 至 2019-12 的官方批次时间线；排除追溯生效日记录为 2018-07-06，文字描述没有擅自转换成“整条 HTS8 未处理”。
 
+## 已完成的跨年代码映射
+
+Census 历史 HS 文件、2016–2019 年度 concordance 和 WCO HS 2012→2017 Table II 已通过官方参考页取得并核验。映射表包含 76,304 条年度 HTS10 记录；其中歧义或 `ex` 部分映射保留候选代码但不强行填入统一 HS6。详细来源和哈希见 `mapping_source_manifest.json` 与 `mapping_report.json`。
+
 ## 尚未完成的边界
 
-Census 历史 HS 和年度/月度 concordance 仍未取得：2026-08-31 对官方静态入口的受控请求返回 HTTP 403。因而本阶段没有生成 `hts_history_mapping.csv`、`control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`，也没有把现有 List 1-only 面板伪装成对照数据。
+即使代码映射已经完成，完整候选控制组仍需要所有原产国的 48 个月贸易面板。当前可追溯面板是 List 1-only，不能直接充当未处理组；还必须完成金额覆盖、污染排除、政策前匹配平衡和前趋势门槛。因此暂不生成 `control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`。
 
-下一阶段需要在 Sol 高模型审查下选择可复核的 Census 官方支持入口，完成跨年 HTS10 → HS6_2017 映射后，才允许进入候选控制组和事件研究。
+下一阶段先重建 all-origin 贸易面板，再由 Sol 高审查控制组资格和事件研究门槛。

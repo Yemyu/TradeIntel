@@ -68,19 +68,23 @@ class CausalPolicySourceTests(unittest.TestCase):
         self.assertTrue(all(row["source_url"].startswith("https://ustr.gov/") for row in rows))
         self.assertTrue(all(row["scope_status"] != "fully_parsed" for row in rows))
 
-    def test_manifest_records_mapping_block(self) -> None:
+    def test_manifest_records_mapping_and_panel_boundary(self) -> None:
         self.assertTrue(CAUSAL_DIR.exists())
         with SOURCE_MANIFEST.open(encoding="utf-8") as handle:
             manifest = json.load(handle)
         self.assertEqual(
-            manifest["status"], "policy_exposure_built_mapping_blocked_source_access"
+            manifest["status"], "policy_exposure_and_hs_mapping_built_trade_panel_pending"
         )
-        self.assertEqual(manifest["census_mapping"]["status"], "blocked_source_access")
+        self.assertEqual(
+            manifest["census_mapping"]["status"],
+            "official_history_and_concordance_retrieved",
+        )
         self.assertEqual(manifest["counts"]["list3_hts8"], 5745)
 
         with CONTROL_REPORT_JSON.open(encoding="utf-8") as handle:
             report = json.load(handle)
-        self.assertEqual(report["status"], "blocked_source_access")
+        self.assertEqual(report["status"], "mapping_built_trade_panel_pending")
+        self.assertIn("hts_history_mapping.csv", report["completed_outputs"])
         self.assertIn("causal_candidate_panel.csv", report["blocked_outputs"])
 
 

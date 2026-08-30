@@ -1,0 +1,31 @@
+{
+  "status": "mapping_built_with_conservative_ambiguity_flags",
+  "generated_at_utc": "2026-08-30T18:14:24+00:00",
+  "row_count": 76304,
+  "target_hs6_universe_count": 5405,
+  "mapping_status_counts": {
+    "same_hs6_prefix": 74862,
+    "wco_exact_single": 10,
+    "wco_partial_or_ambiguous": 1432
+  },
+  "historical_validity_counts": {
+    "not_in_historical_file": 22,
+    "not_valid_in_year": 30,
+    "valid": 76252
+  },
+  "wco_correlation_source_count": 291,
+  "rules": {
+    "2016_to_2017": "Use WCO Table II only for changed HS6; any ex/one-to-many mapping remains blank and flagged.",
+    "2017_to_2019": "Use the 2017 HS6 prefix as the canonical key; annual Census concordances validate code presence and NAICS.",
+    "no_fuzzy_names": true,
+    "policy_post_results_used": false
+  },
+  "source_hashes": {
+    "historical_xlsx": "d13be8bd5755a9237f8c1d1f0cf49d29e9141413d845dc39728f98ab534bade6",
+    "wco_table_ii": "00e04d7c307ec9211e3c994ad54cb8326365af830009d462a73ce5c1fdb98fa4",
+    "concordance_2016": "233300ca5e5bb56e552e424d8b7a271ba8ba3a435ed1d44f88f1ec15f4f7c0ba",
+    "concordance_2017": "2f0e9a17c8ec5a4e58c1fb02cb838ef404f5d18cf511767b2c84bd7000abcca4",
+    "concordance_2018": "4822688ec94fc187ca6d8ce253bd472fc89712aea6736739ec3d2c04c0fc6ac0",
+    "concordance_2019": "0aff914c721ed67525e8503c006dd13709f87265b45a0a5370d70abd045f06c3"
+  }
+}

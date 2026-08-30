@@ -1,9 +1,9 @@
-# 控制组构建报告：当前阻断
+# 控制组构建报告：等待完整贸易面板
 
-> 状态：`blocked_source_access`
+> 状态：`mapping_built_trade_panel_pending`
 
-政策清单和排除时间线已经从官方 USTR/GovInfo 文件取得并通过代码数量核验。跨年 HTS10 → `HS6_2017` 映射仍被 Census 官方静态入口的 HTTP 403 阻断，因此没有生成空的或猜测出来的控制组。
+官方政策暴露表、List 1 排除时间线和跨年 HTS10 → `HS6_2017` 映射已经完成。映射对 WCO `ex`、一对多和歧义关系保留标记，不强行猜测。
 
-暂时不能进入事件研究。必须先取得可复核的官方历史 HS/concordance，完成覆盖率、歧义率、纯处理/纯对照数量、匹配平衡和政策前趋势检查。
+下一道硬门槛是重建所有原产国的 48 个月贸易面板。当前面板是 List 1-only，只能支撑已完成的描述性分析，不能直接充当控制组。面板完成后还必须通过金额覆盖、污染排除、匹配平衡和政策前趋势检查，才允许运行事件研究。
 
-机器可读详情见 `control_build_report.json`；来源详情见 `source_manifest.json` 和 `source_access_report.md`。
+机器可读详情见 `control_build_report.json`；映射来源见 `mapping_source_manifest.json`。

@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 6: the causal-control design is frozen, and the official policy-exposure and List 1 exclusion evidence tables are built. Cross-year HTS10 → 2017 HS6 mapping and candidate controls remain blocked because Census historical static files returned HTTP 403; causal modelling remains blocked until the frozen data gates pass.
+Learning and development stage 6: the causal-control design is frozen, the official policy-exposure and List 1 exclusion evidence tables are built, and the conservative cross-year HTS10 → 2017 HS6 mapping is complete. Candidate controls remain pending because the full all-origin trade panel still has to be rebuilt; causal modelling remains blocked until the frozen data gates pass.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -23,7 +23,9 @@ This repository is currently local-only. It will not be published until its scop
 - [Data contract 0003: causal control-data extension](./docs/contracts/0003-causal-control-data-contract.zh-CN.md)
 - [Policy exposure evidence table](./data/processed/causal/trade_action_exposure.csv)
 - [List 1 exclusion timeline](./data/processed/causal/list1_exclusion_timeline.csv)
-- [Control-build block report](./data/processed/causal/control_build_report.md)
+- [HTS history mapping](./data/processed/causal/hts_history_mapping.csv)
+- [Mapping report](./data/processed/causal/mapping_report.md)
+- [Control-build status report](./data/processed/causal/control_build_report.md)
 
 ### 中文学习版
 
@@ -108,4 +110,18 @@ Build the official policy-contamination evidence layer with:
 python scripts/build_policy_contamination.py
 ```
 
-This parses and checks the official List 1/2/3 notices, records Section 232/201 scope rules, downloads the List 1 exclusion notices, and writes source hashes. It intentionally stops before cross-year HS mapping when the official Census source is unavailable; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
+This parses and checks the official List 1/2/3 notices, records Section 232/201 scope rules, downloads the List 1 exclusion notices, and writes source hashes. The cross-year mapping is built separately from official Census history/concordance files and the WCO 2012→2017 table:
+
+```bash
+python scripts/build_hts6_mapping.py
+```
+
+The mapping is deliberately conservative: `ex` and one-to-many relationships remain flagged instead of being guessed. The full all-origin trade panel and causal control gates are still pending; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
+
+After the mapping is verified, rebuild the compact all-origin HS6 panel with:
+
+```bash
+python scripts/build_causal_trade_panel.py --start 2016-01 --end 2019-12
+```
+
+This reads every origin from the official monthly detail files, retains only China and all-origin totals after mapping, removes each raw ZIP after successful processing, and records checksums in `causal_trade_panel_manifest.json`. The panel does not choose controls or estimate a causal effect by itself.

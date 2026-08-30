@@ -1,10 +1,10 @@
-"""Build the official policy-exposure and List 1 exclusion evidence tables.
+"""Build official policy-exposure evidence and record causal-panel status.
 
-This stage deliberately stops before the cross-year HTS10 -> HS6 mapping.  The
-policy notices are independently auditable, while the Census historical
-concordance remains blocked by the source host's HTTP 403 response.  Keeping
-these two jobs separate prevents a partial policy table from being presented as
-a completed causal panel.
+Policy notices and cross-year HTS10 -> HS6 mapping are built by separate
+programs, but this script keeps their shared status report consistent.  A
+completed mapping is still not a completed causal panel: the full all-origin
+monthly trade panel, contamination gates, matching, and pre-trend checks must
+come afterwards.
 """
 
 from __future__ import annotations
@@ -35,6 +35,8 @@ SOURCE_MANIFEST = CAUSAL_DIR / "source_manifest.json"
 SOURCE_REPORT = CAUSAL_DIR / "source_access_report.md"
 CONTROL_REPORT_JSON = CAUSAL_DIR / "control_build_report.json"
 CONTROL_REPORT_MD = CAUSAL_DIR / "control_build_report.md"
+MAPPING_CSV = CAUSAL_DIR / "hts_history_mapping.csv"
+MAPPING_REPORT_JSON = CAUSAL_DIR / "mapping_report.json"
 
 CODE8_PATTERN = re.compile(r"(?<!\d)(\d{4}\.\d{2}\.\s*\d{2})(?!\d)")
 CODE10_PATTERN = re.compile(r"(?<!\d)(\d{4}\.\d{2}\.\d{4})(?!\d)")
@@ -512,7 +514,24 @@ def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) 
     temporary.replace(path)
 
 
-def write_source_report(manifest: dict[str, object]) -> None:
+def _load_mapping_report() -> dict[str, object] | None:
+    """Return the verified mapping summary when the mapping stage exists."""
+
+    if not MAPPING_CSV.exists() or not MAPPING_REPORT_JSON.exists():
+        return None
+    try:
+        with MAPPING_REPORT_JSON.open(encoding="utf-8") as handle:
+            report = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return None
+    if report.get("status") != "mapping_built_with_conservative_ambiguity_flags":
+        return None
+    return report
+
+
+def write_source_report(
+    manifest: dict[str, object], mapping_report: dict[str, object] | None = None
+) -> None:
     available = sum(1 for row in manifest["policy_sources"] + manifest["exclusion_sources"] if row["status"] != "unavailable")
     total = len(manifest["policy_sources"]) + len(manifest["exclusion_sources"])
     content = f"""# 官方政策来源取得报告
@@ -531,44 +550,83 @@ def write_source_report(manifest: dict[str, object]) -> None:
 - Section 232/201：保留官方范围规则或官方代码集合，但标记为需要 HTS 历史展开，不能直接当作完整 HS6 暴露表；
 - List 1 排除：保存 2018-12 至 2019-12 的官方批次时间线；排除追溯生效日记录为 2018-07-06，文字描述没有擅自转换成“整条 HTS8 未处理”。
 
+## 已完成的跨年代码映射
+
+{("Census 历史 HS 文件、2016–2019 年度 concordance 和 WCO HS 2012→2017 Table II 已通过官方参考页取得并核验。映射表包含 " + f"{mapping_report['row_count']:,}" + " 条年度 HTS10 记录；其中歧义或 `ex` 部分映射保留候选代码但不强行填入统一 HS6。详细来源和哈希见 `mapping_source_manifest.json` 与 `mapping_report.json`。" if mapping_report else "本次运行未发现已核验的跨年映射，因此仍需先取得 Census 官方历史文件。")}
+
 ## 尚未完成的边界
 
-Census 历史 HS 和年度/月度 concordance 仍未取得：2026-08-31 对官方静态入口的受控请求返回 HTTP 403。因而本阶段没有生成 `hts_history_mapping.csv`、`control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`，也没有把现有 List 1-only 面板伪装成对照数据。
+即使代码映射已经完成，完整候选控制组仍需要所有原产国的 48 个月贸易面板。当前可追溯面板是 List 1-only，不能直接充当未处理组；还必须完成金额覆盖、污染排除、政策前匹配平衡和前趋势门槛。因此暂不生成 `control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`。
 
-下一阶段需要在 Sol 高模型审查下选择可复核的 Census 官方支持入口，完成跨年 HTS10 → HS6_2017 映射后，才允许进入候选控制组和事件研究。
+{("下一阶段先重建 all-origin 贸易面板，再由 Sol 高审查控制组资格和事件研究门槛。" if mapping_report else "下一阶段需要在 Sol 高模型审查下选择可复核的 Census 官方支持入口，完成跨年映射后再进入候选控制组。")}
 """
     SOURCE_REPORT.write_text(content, encoding="utf-8")
 
 
-def write_blocked_control_report(manifest: dict[str, object]) -> None:
-    """Record a machine-readable stop rather than creating a partial panel."""
+def write_control_report(
+    manifest: dict[str, object], mapping_report: dict[str, object] | None = None
+) -> None:
+    """Record the next hard gate rather than creating a partial causal panel."""
 
-    report = {
-        "status": "blocked_source_access",
-        "stage": "phase_06_policy_contamination_execution",
-        "policy_exposure_status": "complete_for_official_notice_scope",
-        "mapping_status": "blocked_source_access",
-        "blocked_outputs": [
-            "hts_history_mapping.csv",
-            "control_candidate_features.csv",
-            "matched_control_pairs.csv",
-            "causal_candidate_panel.csv",
-        ],
-        "completed_outputs": [
-            "trade_action_exposure.csv",
-            "list1_exclusion_timeline.csv",
-            "source_manifest.json",
-            "source_access_report.md",
-        ],
-        "counts": manifest["counts"],
-        "reason": "Census historical HS/concordance official static endpoints returned HTTP 403; a third-party mirror was not substituted.",
-        "adoption_rule": "Do not run or publish the causal event study until the frozen mapping, contamination, matching, and pre-trend gates pass.",
-    }
-    with CONTROL_REPORT_JSON.open("w", encoding="utf-8") as handle:
-        json.dump(report, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
-    CONTROL_REPORT_MD.write_text(
-        """# 控制组构建报告：当前阻断
+    mapping_ready = mapping_report is not None
+    counts = dict(manifest["counts"])
+    blocked_outputs = [
+        "control_candidate_features.csv",
+        "matched_control_pairs.csv",
+        "causal_candidate_panel.csv",
+    ]
+    completed_outputs = [
+        "trade_action_exposure.csv",
+        "list1_exclusion_timeline.csv",
+        "source_manifest.json",
+        "source_access_report.md",
+    ]
+    if mapping_ready:
+        counts.update(
+            {
+                "mapping_rows": mapping_report["row_count"],
+                "mapping_ambiguous_rows": mapping_report["mapping_status_counts"].get(
+                    "wco_partial_or_ambiguous", 0
+                ),
+            }
+        )
+        completed_outputs.extend(
+            ["hts_history_mapping.csv", "mapping_report.json", "mapping_source_manifest.json"]
+        )
+        report = {
+            "status": "mapping_built_trade_panel_pending",
+            "stage": "phase_06_hs_mapping_execution",
+            "policy_exposure_status": "complete_for_official_notice_scope",
+            "mapping_status": mapping_report["status"],
+            "blocked_outputs": blocked_outputs,
+            "completed_outputs": completed_outputs,
+            "counts": counts,
+            "reason": "Official Census history/concordance and WCO crosswalk are mapped conservatively. The remaining source boundary is the full all-origin 48-month trade panel; the existing List 1-only panel cannot be used as the control group.",
+            "adoption_rule": "Do not run or publish the causal event study until contamination, matching, and pre-trend gates pass.",
+        }
+        markdown = """# 控制组构建报告：等待完整贸易面板
+
+> 状态：`mapping_built_trade_panel_pending`
+
+官方政策暴露表、List 1 排除时间线和跨年 HTS10 → `HS6_2017` 映射已经完成。映射对 WCO `ex`、一对多和歧义关系保留标记，不强行猜测。
+
+下一道硬门槛是重建所有原产国的 48 个月贸易面板。当前面板是 List 1-only，只能支撑已完成的描述性分析，不能直接充当控制组。面板完成后还必须通过金额覆盖、污染排除、匹配平衡和政策前趋势检查，才允许运行事件研究。
+
+机器可读详情见 `control_build_report.json`；映射来源见 `mapping_source_manifest.json`。
+"""
+    else:
+        report = {
+            "status": "blocked_source_access",
+            "stage": "phase_06_policy_contamination_execution",
+            "policy_exposure_status": "complete_for_official_notice_scope",
+            "mapping_status": "blocked_source_access",
+            "blocked_outputs": ["hts_history_mapping.csv", *blocked_outputs],
+            "completed_outputs": completed_outputs,
+            "counts": counts,
+            "reason": "Census historical HS/concordance official static endpoints returned HTTP 403; a third-party mirror was not substituted.",
+            "adoption_rule": "Do not run or publish the causal event study until the frozen mapping, contamination, matching, and pre-trend gates pass.",
+        }
+        markdown = """# 控制组构建报告：当前阻断
 
 > 状态：`blocked_source_access`
 
@@ -577,9 +635,11 @@ def write_blocked_control_report(manifest: dict[str, object]) -> None:
 暂时不能进入事件研究。必须先取得可复核的官方历史 HS/concordance，完成覆盖率、歧义率、纯处理/纯对照数量、匹配平衡和政策前趋势检查。
 
 机器可读详情见 `control_build_report.json`；来源详情见 `source_manifest.json` 和 `source_access_report.md`。
-""",
-        encoding="utf-8",
-    )
+"""
+    with CONTROL_REPORT_JSON.open("w", encoding="utf-8") as handle:
+        json.dump(report, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+    CONTROL_REPORT_MD.write_text(markdown, encoding="utf-8")
 
 
 def build_outputs() -> dict[str, object]:
@@ -605,9 +665,33 @@ def build_outputs() -> dict[str, object]:
     ]
     write_csv(EXCLUSION_CSV, list(exclusion_rows[0]), exclusion_rows)
 
+    mapping_report = _load_mapping_report()
+    census_mapping = {
+        "status": "blocked_source_access",
+        "probe_date": "2026-08-31",
+        "official_reference_url": "https://www.census.gov/foreign-trade/reference/index.html",
+        "concordance_reference_url": "https://www.census.gov/foreign-trade/data/dataproducts/concordance",
+        "observed_issue": "Official static historical files returned HTTP 403 to controlled requests; no third-party mirror used.",
+    }
+    manifest_status = "policy_exposure_built_mapping_blocked_source_access"
+    if mapping_report is not None:
+        manifest_status = "policy_exposure_and_hs_mapping_built_trade_panel_pending"
+        census_mapping = {
+            "status": "official_history_and_concordance_retrieved",
+            "probe_date": "2026-08-31",
+            "official_reference_url": "https://www.census.gov/foreign-trade/reference/index.html",
+            "concordance_reference_url": "https://www.census.gov/foreign-trade/data/dataproducts/concordance",
+            "observed_issue": "Direct command-line static requests returned HTTP 403; the official Census reference page and browser download path provided the same files, with SHA-256 recorded in mapping_source_manifest.json.",
+            "mapping_report": {
+                "status": mapping_report["status"],
+                "row_count": mapping_report["row_count"],
+                "mapping_status_counts": mapping_report["mapping_status_counts"],
+            },
+        }
+
     manifest = {
         "generated_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-        "status": "policy_exposure_built_mapping_blocked_source_access",
+        "status": manifest_status,
         "policy_sources": policy_records,
         "exclusion_sources": exclusion_records,
         "counts": {
@@ -617,19 +701,13 @@ def build_outputs() -> dict[str, object]:
             "exposure_rows": len(exposure_rows),
             "exclusion_batches": len(exclusion_rows),
         },
-        "census_mapping": {
-            "status": "blocked_source_access",
-            "probe_date": "2026-08-31",
-            "official_reference_url": "https://www.census.gov/foreign-trade/reference/index.html",
-            "concordance_reference_url": "https://www.census.gov/foreign-trade/data/dataproducts/concordance",
-            "observed_issue": "Official static historical files returned HTTP 403 to controlled requests; no third-party mirror used.",
-        },
+        "census_mapping": census_mapping,
     }
     with SOURCE_MANIFEST.open("w", encoding="utf-8") as handle:
         json.dump(manifest, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
-    write_source_report(manifest)
-    write_blocked_control_report(manifest)
+    write_source_report(manifest, mapping_report)
+    write_control_report(manifest, mapping_report)
     return manifest
 
 
