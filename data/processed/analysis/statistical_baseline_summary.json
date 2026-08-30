@@ -1,0 +1,179 @@
+{
+  "analysis_type": "same_calendar_month_descriptive_baseline",
+  "causal_claim": false,
+  "decision": "descriptive_only_causal_model_blocked",
+  "decision_reason": "The panel contains treated products only, other origins may be affected through trade diversion, and product exclusions are not yet modelled.",
+  "policy_effective_month": "2018-07",
+  "announcement_anticipation_month": "2018-06",
+  "transition_rule": "Exclude June and July 2018 from the primary clean comparison.",
+  "coverage_screen": {
+    "policy_hts8_count": 818,
+    "maximum_window_average_count_gap_ratio": 0.01,
+    "limit": "A count screen cannot replace an official cross-version HTS mapping."
+  },
+  "input": "data/processed/analysis/policy_case_monthly.csv",
+  "months": 48,
+  "target_origin": "CHINA",
+  "target_origin_code": "5700",
+  "comparisons": {
+    "recent_clean_pre_same_months": {
+      "comparison_id": "recent_clean_pre_same_months",
+      "interpretation": "Recent pre-policy diagnostic; not a treatment estimate.",
+      "current_months": [
+        "2018-01",
+        "2018-02",
+        "2018-03",
+        "2018-04",
+        "2018-05"
+      ],
+      "reference_months": [
+        "2017-01",
+        "2017-02",
+        "2017-03",
+        "2017-04",
+        "2017-05"
+      ],
+      "months_per_window": 5,
+      "target_total_current_usd": 14093891671,
+      "target_total_reference_usd": 12636958250,
+      "target_change_pct": 0.11529146430471114,
+      "other_origins_total_current_usd": 185365199029,
+      "other_origins_total_reference_usd": 176512924602,
+      "other_origins_change_pct": 0.050150856924273624,
+      "all_origins_total_current_usd": 199459090700,
+      "all_origins_total_reference_usd": 189149882852,
+      "all_origins_change_pct": 0.05450285082157001,
+      "target_share_current": 0.0706605631337113,
+      "target_share_reference": 0.0668092311740302,
+      "target_share_change_percentage_points": 0.3851331959681098,
+      "observed_hts8_average_current": 802.8,
+      "observed_hts8_average_reference": 802.8,
+      "observed_hts8_count_gap_ratio": 0.0,
+      "coverage_comparability_status": "pass_count_gap_le_1pct",
+      "coverage_limit": "Count similarity is only a screening check; it does not prove identical HTS composition or resolve classification revisions."
+    },
+    "pre_policy_placebo_same_months": {
+      "comparison_id": "pre_policy_placebo_same_months",
+      "interpretation": "Placebo comparison before treatment; reveals existing movement.",
+      "current_months": [
+        "2017-08",
+        "2017-09",
+        "2017-10",
+        "2017-11",
+        "2017-12"
+      ],
+      "reference_months": [
+        "2016-08",
+        "2016-09",
+        "2016-10",
+        "2016-11",
+        "2016-12"
+      ],
+      "months_per_window": 5,
+      "target_total_current_usd": 13623956741,
+      "target_total_reference_usd": 11867751671,
+      "target_change_pct": 0.147981278904871,
+      "other_origins_total_current_usd": 187045710816,
+      "other_origins_total_reference_usd": 100260617951,
+      "other_origins_change_pct": 0.8655950326120487,
+      "all_origins_total_current_usd": 200669667557,
+      "all_origins_total_reference_usd": 112128369622,
+      "all_origins_change_pct": 0.7896422487322768,
+      "target_share_current": 0.06789245682649138,
+      "target_share_reference": 0.10584075832911695,
+      "target_share_change_percentage_points": -3.794830150262557,
+      "observed_hts8_average_current": 814.2,
+      "observed_hts8_average_reference": 771.0,
+      "observed_hts8_count_gap_ratio": 0.05281173594132035,
+      "coverage_comparability_status": "review_count_gap_gt_1pct",
+      "coverage_limit": "Count similarity is only a screening check; it does not prove identical HTS composition or resolve classification revisions."
+    },
+    "immediate_post_same_months": {
+      "comparison_id": "immediate_post_same_months",
+      "interpretation": "Primary descriptive rollout window; not a causal estimate.",
+      "current_months": [
+        "2018-08",
+        "2018-09",
+        "2018-10",
+        "2018-11",
+        "2018-12"
+      ],
+      "reference_months": [
+        "2017-08",
+        "2017-09",
+        "2017-10",
+        "2017-11",
+        "2017-12"
+      ],
+      "months_per_window": 5,
+      "target_total_current_usd": 10393832954,
+      "target_total_reference_usd": 13623956741,
+      "target_change_pct": -0.23709145943478008,
+      "other_origins_total_current_usd": 197386588390,
+      "other_origins_total_reference_usd": 187045710816,
+      "other_origins_change_pct": 0.055285296459818285,
+      "all_origins_total_current_usd": 207780421344,
+      "all_origins_total_reference_usd": 200669667557,
+      "all_origins_change_pct": 0.03543512018317466,
+      "target_share_current": 0.05002315851882903,
+      "target_share_reference": 0.06789245682649138,
+      "target_share_change_percentage_points": -1.7869298307662347,
+      "observed_hts8_average_current": 812.2,
+      "observed_hts8_average_reference": 814.2,
+      "observed_hts8_count_gap_ratio": 0.0024449877750611247,
+      "coverage_comparability_status": "pass_count_gap_le_1pct",
+      "coverage_limit": "Count similarity is only a screening check; it does not prove identical HTS composition or resolve classification revisions."
+    },
+    "persistence_monitoring_same_months": {
+      "comparison_id": "persistence_monitoring_same_months",
+      "interpretation": "Both windows are post-policy; monitoring only.",
+      "current_months": [
+        "2019-08",
+        "2019-09",
+        "2019-10",
+        "2019-11",
+        "2019-12"
+      ],
+      "reference_months": [
+        "2018-08",
+        "2018-09",
+        "2018-10",
+        "2018-11",
+        "2018-12"
+      ],
+      "months_per_window": 5,
+      "target_total_current_usd": 8754577483,
+      "target_total_reference_usd": 10393832954,
+      "target_change_pct": -0.15771424057466144,
+      "other_origins_total_current_usd": 195754257078,
+      "other_origins_total_reference_usd": 197386588390,
+      "other_origins_change_pct": -0.008269717437817053,
+      "all_origins_total_current_usd": 204508834561,
+      "all_origins_total_reference_usd": 207780421344,
+      "all_origins_change_pct": -0.01574540450846223,
+      "target_share_current": 0.04280782051197266,
+      "target_share_reference": 0.05002315851882903,
+      "target_share_change_percentage_points": -0.7215338006856371,
+      "observed_hts8_average_current": 814.0,
+      "observed_hts8_average_reference": 812.2,
+      "observed_hts8_count_gap_ratio": 0.0022004889975549566,
+      "coverage_comparability_status": "pass_count_gap_le_1pct",
+      "coverage_limit": "Count similarity is only a screening check; it does not prove identical HTS composition or resolve classification revisions."
+    }
+  },
+  "adoption": {
+    "descriptive_baseline": "accepted",
+    "causal_event_study": "blocked",
+    "requirements_to_unblock": [
+      "Add comparable non-List-1 product data selected without post-policy outcomes.",
+      "Complete an official cross-version HTS mapping for the study window.",
+      "Model List 1 exclusion timing and product coverage changes.",
+      "Assess pre-trends, overlap, spillovers, and sensitivity specifications."
+    ]
+  },
+  "outputs": {
+    "monthly": "data/processed/analysis/statistical_baseline_monthly.csv",
+    "summary": "data/processed/analysis/statistical_baseline_summary.json",
+    "report": "data/processed/analysis/statistical_baseline_report.md"
+  }
+}

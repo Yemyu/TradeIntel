@@ -82,3 +82,19 @@ python scripts/analyze_policy_case.py
 - `processed/analysis/policy_case_summary.json`：窗口定义、统计结果和限制。
 
 这些是描述性结果，不是因果估计；2018 年 7 月被单独标为过渡月。
+
+## 8. 相同月份统计基线
+
+运行：
+
+```bash
+python scripts/build_statistical_baseline.py
+```
+
+程序将 2018 年 8–12 月与 2017 年相同月份比较，并同时检查中国进口金额、中国份额、其他原产地金额和 HTS8 数量可比性。它输出：
+
+- `processed/analysis/statistical_baseline_monthly.csv`：每月同比、事件时间和阶段标签；
+- `processed/analysis/statistical_baseline_summary.json`：未来 AI 工具读取的结构化证据与采纳状态；
+- `processed/analysis/statistical_baseline_report.md`：中文版人类可读结果。
+
+当前只采纳描述性基线。因缺少未处理的相似商品、完整 HTS 跨版本映射和产品排除时间线，因果事件研究保持阻断状态。
