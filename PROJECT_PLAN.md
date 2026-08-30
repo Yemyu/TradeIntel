@@ -133,6 +133,8 @@ Agent 可以暂时理解为“会安排步骤的 AI”。普通聊天模型直�
 
 ### 第 2 阶段：用 MySQL 管好数据
 
+配套中文学习讲义：[`phase-03-mysql.zh-CN.md`](./docs/learning/phase-03-mysql.zh-CN.md)
+
 学习：
 
 - 数据库、表、行、列、主键和外键；

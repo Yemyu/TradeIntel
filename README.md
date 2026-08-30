@@ -15,6 +15,7 @@ This repository is currently local-only. It will not be published until its scop
 - [Stage 0 learning guide](./docs/learning/phase-00-foundations.md)
 - [Phase 1 Chinese learning guide: trade-data inventory](./docs/learning/phase-01-trade-inventory.zh-CN.md)
 - [Phase 2 Chinese learning guide: policy and trade join](./docs/learning/phase-02-policy-join.zh-CN.md)
+- [Phase 3 Chinese learning guide: MySQL data layer](./docs/learning/phase-03-mysql.zh-CN.md)
 
 ### 中文学习版
 
