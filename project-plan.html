@@ -61,11 +61,11 @@
     <span>主题：2025–2026 热点的关税 / 贸易</span>
     <span>方向：数据开发 + AI 工程师（双对口）</span>
     <span>建立日期：2026-07-10</span>
-    <span>状态：阶段 3 数据质量层已完成，统计方法设计待开始</span>
+    <span>状态：阶段 4 描述性统计基线已完成，因果模型待补对照数据</span>
   </div>
 </header>
 
-<div class="note"><b>规划已升级：</b>本页保留为最初的技术草案；48 个月贸易面板、MySQL 全量对账和数据质量层已经完成。最新执行版本和实时进度以 <a href="./PROJECT_PLAN.md">PROJECT_PLAN.md</a> 为准，并以“边学边做、先理解后使用框架、可信 AI 评估”为原则。学习背景与协作规则见 <a href="./LEARNING_PROFILE.md">LEARNING_PROFILE.md</a>。</div>
+<div class="note"><b>规划已升级：</b>本页保留为最初的技术草案；48 个月贸易面板、MySQL 全量对账、数据质量层和第一版描述性统计基线已经完成。因果模型因缺少可信对照商品、HTS 跨版本映射和产品排除时间线而暂缓。最新执行版本和实时进度以 <a href="./PROJECT_PLAN.md">PROJECT_PLAN.md</a> 为准，并以“边学边做、先理解后使用框架、可信 AI 评估”为原则。学习背景与协作规则见 <a href="./LEARNING_PROFILE.md">LEARNING_PROFILE.md</a>。</div>
 
 <div class="toc">
   <b>目录 ·</b>
@@ -204,29 +204,29 @@
 </section>
 
 <section class="card" id="collab">
-  <h2>8 · 协作方式：师徒共建</h2>
-  <p>每个环节走五步循环：<span class="you">你</span> 学 / <span class="me">我</span> 讲 / <span class="me">我</span> 搭骨架 / <span class="you">你</span> 写核心 / <span class="me">我们</span> 审改。最学头的部分永远是你亲手写的。</p>
+  <h2>8 · 协作方式：AI 原生共建</h2>
+  <p>每个环节走五步循环：<span class="you">你</span> 定义问题和判断边界 / <span class="me">AI</span> 解释概念 / <span class="me">AI</span> 实现并测试 / <span class="you">你</span> 检查证据 / <span class="me">我们</span> 决定是否采纳。重点不是背代码，而是能指挥、质疑和验收 AI 的工作。</p>
   <div class="svg-box">
     <svg viewBox="0 0 680 410" xmlns="http://www.w3.org/2000/svg" role="img">
-      <title>师徒共建五步循环</title>
-      <desc>前置学习 环节说明 我搭骨架 你写核心 我审改</desc>
+      <title>AI 原生共建五步循环</title>
+      <desc>定义问题 概念说明 AI实现 检查证据 共同验收</desc>
       <defs><marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-      <text x="340" y="30" text-anchor="middle" font-size="15" font-weight="500" fill="#0C447C">每环节五步协作循环（师徒共建）</text>
+      <text x="340" y="30" text-anchor="middle" font-size="15" font-weight="500" fill="#0C447C">每环节五步协作循环（AI 原生共建）</text>
       <rect x="180" y="50" width="320" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
-      <text x="340" y="74" text-anchor="middle" font-size="13" fill="#0C447C">【你】前置学习：看 B站/文档，备好知识</text>
+      <text x="340" y="74" text-anchor="middle" font-size="13" fill="#0C447C">【你】定义问题：目标 / 边界 / 验收标准</text>
       <line x1="340" y1="98" x2="340" y2="116" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
       <rect x="180" y="120" width="320" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-      <text x="340" y="144" text-anchor="middle" font-size="13" fill="#085041">【我】环节说明：讲清做什么 / 产什么 / 知识清单</text>
+      <text x="340" y="144" text-anchor="middle" font-size="13" fill="#085041">【AI】概念说明：背景 / 方案 / 取舍 / 风险</text>
       <line x1="340" y1="168" x2="340" y2="186" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
       <rect x="180" y="190" width="320" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-      <text x="340" y="214" text-anchor="middle" font-size="13" fill="#085041">【我】搭骨架：建结构/环境/配置（你读 + 我讲）</text>
+      <text x="340" y="214" text-anchor="middle" font-size="13" fill="#085041">【AI】实现：代码 / 数据处理 / 测试 / 文档</text>
       <line x1="340" y1="238" x2="340" y2="256" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
       <rect x="180" y="260" width="320" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
-      <text x="340" y="284" text-anchor="middle" font-size="13" fill="#0C447C">【你】写核心：写本环节最学头的逻辑（带清单）</text>
+      <text x="340" y="284" text-anchor="middle" font-size="13" fill="#0C447C">【你】检查证据：输入 / 输出 / 限制是否合理</text>
       <line x1="340" y1="308" x2="340" y2="326" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a4)"/>
       <rect x="180" y="330" width="320" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-      <text x="340" y="354" text-anchor="middle" font-size="13" fill="#085041">【我们】我审 + 一起改：review 你的代码，迭代到扎实</text>
-      <text x="340" y="400" text-anchor="middle" font-size="12.5" fill="#444441">每个环节都走这一圈，最学头的部分永远是你亲手写的</text>
+      <text x="340" y="354" text-anchor="middle" font-size="13" fill="#085041">【共同】验收：接受 / 修改 / 阻断，并记录原因</text>
+      <text x="340" y="400" text-anchor="middle" font-size="12.5" fill="#444441">学习重点是理解系统决策，不要求从记忆手写常规代码</text>
     </svg>
   </div>
 </section>
@@ -234,14 +234,14 @@
 <section class="card" id="mile">
   <h2>9 · 里程碑（M1 → M4）</h2>
   <table>
-    <tr><th>环节</th><th>做什么</th><th>你要学的</th><th>你亲手写的核心</th><th>我搭的骨架</th></tr>
-    <tr><td><b>M1</b><br>环境+采集</td><td>跑通小切片采集（2国1品类）</td><td>conda / requests / pandas / Python连MySQL</td><td>Comtrade 采集主逻辑</td><td>项目结构 / 环境 / 配置 / 连接模块</td></tr>
-    <tr><td><b>M2</b><br>数仓+建模</td><td>四层数仓 + dbt</td><td>SQL 分层 / dbt / HS 编码对齐</td><td>DWD 清洗 SQL（HS 对齐）</td><td>dbt 项目 / 层结构 / 测试模板</td></tr>
-    <tr><td><b>M3</b><br>AI Agent</td><td>工具 + 多步推理</td><td>LangGraph / Agent 设计 / prompt</td><td>一个 Agent 工具 + 多步流程</td><td>LangGraph 骨架 / 工具契约</td></tr>
-    <tr><td><b>M4</b><br>看板+基础自动化</td><td>Streamlit + 简单定时流程</td><td>Streamlit / 完整流程串联</td><td>一个看板页 + 一条可运行流程</td><td>应用骨架 / 演示配置</td></tr>
-    <tr><td><b>M5</b><br>工程增强</td><td>dbt + Airflow + 扩大数据范围 + 部署</td><td>SQL 工程化 / DAG / 重试监控 / 可复现部署</td><td>dbt 模型 + Airflow DAG + 增量更新</td><td>增强阶段模板 / 部署骨架</td></tr>
+    <tr><th>环节</th><th>做什么</th><th>你要理解的</th><th>你负责的判断</th><th>AI 负责的实现</th></tr>
+    <tr><td><b>M1</b><br>环境+采集</td><td>跑通官方数据采集</td><td>来源 / 输入输出 / 追溯</td><td>范围与验收条件</td><td>采集 / 重试 / 保存 / 测试</td></tr>
+    <tr><td><b>M2</b><br>数据层+统计</td><td>MySQL + 质量门 + 统计设计</td><td>表关系 / HS 对齐 / 因果边界</td><td>质量等级与结论范围</td><td>导入 / 审计 / 计算 / 测试</td></tr>
+    <tr><td><b>M3</b><br>AI Agent</td><td>工具 + 多步推理</td><td>工具契约 / Agent / 幻觉</td><td>允许调用与拒答规则</td><td>工具接口 / Agent 流程 / 日志</td></tr>
+    <tr><td><b>M4</b><br>评估+看板</td><td>评估集 + Streamlit</td><td>标准答案 / 指标 / 完整流程</td><td>成功标准与失败案例</td><td>评估执行 / 页面 / 自动化</td></tr>
+    <tr><td><b>M5</b><br>工程增强</td><td>dbt + Airflow + 扩展 + 部署</td><td>SQL 工程化 / DAG / 可复现部署</td><td>是否值得增加复杂度</td><td>模型 / 调度 / 监控 / 部署</td></tr>
   </table>
-  <div class="tip">每环节开始前，我会给你「前置学习清单 + 环节说明」（具体到看哪几个 B站视频、学完达到什么程度）。</div>
+  <div class="tip">每个阶段都会提供中文版学习讲义、参考答案、实际输出和下一步任务澄清。常规代码由 AI 完成，你负责理解与验收关键决策。</div>
 </section>
 
 <section class="card" id="conv">
@@ -254,7 +254,7 @@
     <tr><td>仓库</td><td>公开 GitHub；英文 README + 中文注释</td></tr>
     <tr><td>去标签</td><td>不提凯捷 / 客户名；车系品牌等公开信息可保留</td></tr>
     <tr><td>可复现</td><td>数据快照打包进仓库，clone 即跑</td></tr>
-    <tr><td>协作</td><td>师徒共建五步循环（见第 8 节）</td></tr>
+    <tr><td>协作</td><td>AI 原生五步循环（见第 8 节）：人负责问题和判断，AI 负责实现和验证</td></tr>
   </table>
 </section>
 

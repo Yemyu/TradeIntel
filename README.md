@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 3: the 48-month policy-linked panel now has an executable data-quality gate, stable origin identities, explicit policy-origin mapping, and HTS coverage decisions.
+Learning and development stage 4: the project now has a pre-registered statistical protocol and a reproducible same-calendar-month descriptive baseline. Causal modelling remains explicitly blocked until comparable untreated products, cross-version HTS mappings, and product-exclusion timing are available.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -17,6 +17,8 @@ This repository is currently local-only. It will not be published until its scop
 - [Phase 2 Chinese learning guide: policy and trade join](./docs/learning/phase-02-policy-join.zh-CN.md)
 - [Phase 3 Chinese learning guide: MySQL data layer](./docs/learning/phase-03-mysql.zh-CN.md)
 - [Phase 4 Chinese learning guide: data quality layer](./docs/learning/phase-04-data-quality.zh-CN.md)
+- [Phase 5 Chinese learning guide: statistical design](./docs/learning/phase-05-statistical-design.zh-CN.md)
+- [Experiment protocol 0001: Section 301 List 1 statistical design](./docs/experiments/0001-section301-list1-statistical-design.zh-CN.md)
 
 ### 中文学习版
 
@@ -86,3 +88,11 @@ python scripts/analyze_policy_case.py
 ```
 
 This writes a monthly before/transition/after table, an origin-level change table, and a JSON summary under `data/processed/analysis/`. It is explicitly descriptive and does not claim a causal tariff effect.
+
+Build the frozen same-calendar-month statistical baseline with:
+
+```bash
+python scripts/build_statistical_baseline.py
+```
+
+The primary descriptive window compares August–December 2018 with the same months in 2017 and always carries `causal_claim=false`. The experiment protocol documents the hypotheses, leakage controls, adoption thresholds, and stopping rules before a causal model is attempted.
