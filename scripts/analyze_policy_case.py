@@ -22,6 +22,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_EVENT_PATH = Path("data/processed/policy/section301_list1_event.csv")
 DEFAULT_PRODUCTS_PATH = Path("data/processed/policy/section301_list1_products.csv")
 DEFAULT_PANEL_PATH = Path("data/processed/trade/trade_import_monthly.csv")
+DEFAULT_ORIGIN_DIMENSION_PATH = Path("data/processed/quality/origin_dimension.csv")
+DEFAULT_POLICY_ORIGIN_MAPPING_PATH = Path(
+    "data/processed/quality/policy_origin_mapping.csv"
+)
 DEFAULT_OUTPUT_DIR = Path("data/processed/analysis")
 
 
@@ -72,6 +76,56 @@ def load_policy_codes(path: Path) -> set[str]:
     if not codes:
         raise PolicyAnalysisError("Policy product file contains no HTS8 codes")
     return codes
+
+
+def load_origin_dimension(path: Path) -> dict[str, dict[str, object]]:
+    """Load stable Census origin codes and their audited name aliases."""
+
+    origins: dict[str, dict[str, object]] = {}
+    with path.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            origin_code = row["origin_code"].strip()
+            canonical_name = row["canonical_origin_name"].strip()
+            aliases = {
+                name.strip()
+                for name in row["observed_origin_names"].split("|")
+                if name.strip()
+            }
+            if (
+                len(origin_code) != 4
+                or not origin_code.isdigit()
+                or not canonical_name
+                or canonical_name not in aliases
+                or origin_code in origins
+            ):
+                raise PolicyAnalysisError(f"Invalid origin dimension row: {row}")
+            origins[origin_code] = {
+                "canonical_name": canonical_name,
+                "aliases": aliases,
+                "quality_status": row["quality_status"],
+            }
+    if not origins:
+        raise PolicyAnalysisError("Origin dimension contains no rows")
+    return origins
+
+
+def load_policy_origin_code(path: Path, policy_id: str) -> str:
+    """Return the explicit, audited Census origin code for one policy target."""
+
+    with path.open(newline="", encoding="utf-8") as handle:
+        matches = [
+            row
+            for row in csv.DictReader(handle)
+            if row["policy_id"].strip() == policy_id
+        ]
+    if len(matches) != 1:
+        raise PolicyAnalysisError(
+            f"Expected one origin mapping for {policy_id!r}, found {len(matches)}"
+        )
+    origin_code = matches[0]["origin_code"].strip()
+    if len(origin_code) != 4 or not origin_code.isdigit():
+        raise PolicyAnalysisError(f"Invalid policy target origin code: {origin_code!r}")
+    return origin_code
 
 
 def month_label(year: int, month: int) -> str:
@@ -157,15 +211,26 @@ def analyse_policy_case(
     event_path: Path = DEFAULT_EVENT_PATH,
     products_path: Path = DEFAULT_PRODUCTS_PATH,
     panel_path: Path = DEFAULT_PANEL_PATH,
+    origin_dimension_path: Path = DEFAULT_ORIGIN_DIMENSION_PATH,
+    policy_origin_mapping_path: Path = DEFAULT_POLICY_ORIGIN_MAPPING_PATH,
     output_dir: Path = DEFAULT_OUTPUT_DIR,
 ) -> dict[str, object]:
     """Create descriptive policy-case outputs and return the JSON summary."""
 
     event = load_policy_event(event_path)
     policy_codes = load_policy_codes(products_path)
+    origin_dimension = load_origin_dimension(origin_dimension_path)
+    target_code = load_policy_origin_code(
+        policy_origin_mapping_path, event["policy_id"]
+    )
+    if target_code not in origin_dimension:
+        raise PolicyAnalysisError(
+            f"Policy target origin code {target_code!r} is absent from the origin dimension"
+        )
+    target_display_name = str(origin_dimension[target_code]["canonical_name"])
     effective_date = date.fromisoformat(event["effective_date"])
 
-    monthly_origin_values: defaultdict[tuple[int, int, str, str], int] = defaultdict(int)
+    monthly_origin_values: defaultdict[tuple[int, int, str], int] = defaultdict(int)
     monthly_codes: defaultdict[tuple[int, int], set[str]] = defaultdict(set)
     monthly_matched_rows: defaultdict[tuple[int, int], int] = defaultdict(int)
     panel_rows_read = 0
@@ -175,9 +240,20 @@ def analyse_policy_case(
         for raw_row in csv.DictReader(handle):
             panel_rows_read += 1
             year, month, origin_code, origin_name, hts8, value = _parse_trade_row(raw_row)
+            dimension_row = origin_dimension.get(origin_code)
+            if dimension_row is None:
+                raise PolicyAnalysisError(
+                    f"Trade origin code {origin_code!r} is absent from the origin dimension"
+                )
+            aliases = dimension_row["aliases"]
+            if origin_name not in aliases:
+                raise PolicyAnalysisError(
+                    f"Trade origin name {origin_name!r} is not an audited alias for "
+                    f"origin code {origin_code!r}"
+                )
             if hts8 not in policy_codes:
                 continue
-            key = (year, month, origin_code, origin_name)
+            key = (year, month, origin_code)
             monthly_origin_values[key] += value
             monthly_codes[(year, month)].add(hts8)
             monthly_matched_rows[(year, month)] += 1
@@ -186,22 +262,16 @@ def analyse_policy_case(
     if not monthly_origin_values:
         raise PolicyAnalysisError("No trade rows matched the policy HTS8 codes")
 
-    observed_months = sorted({(year, month) for year, month, _, _ in monthly_origin_values})
+    observed_months = sorted({(year, month) for year, month, _ in monthly_origin_values})
     if len(observed_months) != 48:
         raise PolicyAnalysisError(
             f"Expected 48 monthly observations in the trade panel, found {len(observed_months)}"
         )
-    target_name = event["target_origin"].strip().upper()
-    target_origins = {
-        (origin_code, origin_name)
-        for _, _, origin_code, origin_name in monthly_origin_values
-        if origin_name.upper() == target_name
-    }
-    if len(target_origins) != 1:
+    observed_origin_codes = {origin_code for _, _, origin_code in monthly_origin_values}
+    if target_code not in observed_origin_codes:
         raise PolicyAnalysisError(
-            f"Expected one trade origin for {event['target_origin']!r}, found {sorted(target_origins)}"
+            f"Policy target origin code {target_code!r} has no trade observations"
         )
-    target_code, target_display_name = next(iter(target_origins))
 
     monthly_rows: list[dict[str, object]] = []
     target_values: dict[tuple[int, int], int] = {}
@@ -260,14 +330,18 @@ def analyse_policy_case(
     other_post_average = float(other_summary_post["average_monthly_usd"])
 
     origins = sorted(
-        {(origin_code, origin_name) for _, _, origin_code, origin_name in monthly_origin_values},
-        key=lambda item: (item[1], item[0]),
+        observed_origin_codes,
+        key=lambda origin_code: (
+            str(origin_dimension[origin_code]["canonical_name"]),
+            origin_code,
+        ),
     )
     country_rows: list[dict[str, object]] = []
-    for origin_code, origin_name in origins:
+    for origin_code in origins:
+        origin_name = str(origin_dimension[origin_code]["canonical_name"])
         values = {
             (year, month): monthly_origin_values.get(
-                (year, month, origin_code, origin_name), 0
+                (year, month, origin_code), 0
             )
             for year, month in observed_months
         }
@@ -358,6 +432,11 @@ def analyse_policy_case(
             "first_month": month_label(*observed_months[0]),
             "last_month": month_label(*observed_months[-1]),
         },
+        "quality_inputs": {
+            "origin_dimension": str(origin_dimension_path),
+            "policy_origin_mapping": str(policy_origin_mapping_path),
+            "country_grouping_key": "origin_code",
+        },
         "windows": {
             "pre": {
                 "first_month": month_label(*pre_months[0]),
@@ -415,6 +494,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--event", type=Path, default=DEFAULT_EVENT_PATH)
     parser.add_argument("--products", type=Path, default=DEFAULT_PRODUCTS_PATH)
     parser.add_argument("--panel", type=Path, default=DEFAULT_PANEL_PATH)
+    parser.add_argument(
+        "--origin-dimension", type=Path, default=DEFAULT_ORIGIN_DIMENSION_PATH
+    )
+    parser.add_argument(
+        "--policy-origin-mapping",
+        type=Path,
+        default=DEFAULT_POLICY_ORIGIN_MAPPING_PATH,
+    )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     return parser
 
@@ -426,6 +513,8 @@ def main(argv: list[str] | None = None) -> int:
             event_path=args.event,
             products_path=args.products,
             panel_path=args.panel,
+            origin_dimension_path=args.origin_dimension,
+            policy_origin_mapping_path=args.policy_origin_mapping,
             output_dir=args.output_dir,
         )
     except (FileNotFoundError, PolicyAnalysisError, ValueError) as exc:

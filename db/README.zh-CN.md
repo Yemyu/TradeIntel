@@ -30,6 +30,12 @@ mysql --login-path=tradeintel < db/schema.sql
 - `policy_product`：一行一项政策中的一个 HTS8 商品；
 - `trade_monthly`：一行一个“月份 × 原产国 × HTS10 商品”观察值。
 
+质量参考表是：
+
+- `origin_dimension`：稳定国家代码、当前显示名和历史别名；
+- `policy_origin_mapping`：政策目标国到 Census 国家代码的显式映射；
+- `hts8_coverage`：818 个政策商品各自的贸易覆盖状态。
+
 贸易表的组合主键是 `(year, month, origin_code, hts10)`。它把项目已经确定的数据粒度变成数据库约束。
 
 ## 验证
@@ -43,3 +49,14 @@ mysql --login-path=tradeintel tradeintel < db/verification_queries.sql
 ## 导入原则
 
 先用一个小的月度文件验证字段和关联，再导入完整面板。重复运行前先检查表是否为空；本项目不默认执行 `DROP` 或 `TRUNCATE`，避免误删已有数据。
+
+## 加载并验证质量参考表
+
+质量审计完成后运行：
+
+```bash
+python scripts/load_quality_mysql.py --login-path tradeintel
+mysql --login-path=tradeintel tradeintel < db/quality_verification_queries.sql
+```
+
+这个过程只写入三张小型质量参考表，不重新导入或清空 `trade_monthly`。重复加载前，脚本会检查目标表是否为空；只有确认内容可以替换时才使用 `--replace`。

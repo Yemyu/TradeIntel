@@ -59,3 +59,56 @@ CREATE TABLE IF NOT EXISTS trade_monthly (
     CONSTRAINT chk_trade_detail_rows_nonnegative CHECK (detail_row_count >= 0),
     CONSTRAINT chk_trade_hts8 CHECK (hts8 REGEXP '^[0-9]{8}$')
 ) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS origin_dimension (
+    origin_code CHAR(4) NOT NULL,
+    canonical_origin_name VARCHAR(128) NOT NULL,
+    observed_origin_names VARCHAR(512) NOT NULL,
+    first_observed_month CHAR(7) NOT NULL,
+    last_observed_month CHAR(7) NOT NULL,
+    name_variant_count SMALLINT UNSIGNED NOT NULL,
+    canonical_name_method VARCHAR(64) NOT NULL,
+    quality_status VARCHAR(64) NOT NULL,
+    reference_url VARCHAR(2048) NOT NULL,
+    PRIMARY KEY (origin_code),
+    CONSTRAINT chk_origin_code CHECK (origin_code REGEXP '^[0-9]{4}$'),
+    CONSTRAINT chk_origin_months CHECK (
+        first_observed_month REGEXP '^[0-9]{4}-[0-9]{2}$'
+        AND last_observed_month REGEXP '^[0-9]{4}-[0-9]{2}$'
+    ),
+    CONSTRAINT chk_origin_name_variants CHECK (name_variant_count >= 1)
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS policy_origin_mapping (
+    policy_id VARCHAR(64) NOT NULL,
+    policy_target_origin_name VARCHAR(128) NOT NULL,
+    origin_code CHAR(4) NOT NULL,
+    canonical_origin_name VARCHAR(128) NOT NULL,
+    mapping_method VARCHAR(128) NOT NULL,
+    quality_status VARCHAR(64) NOT NULL,
+    reference_url VARCHAR(2048) NOT NULL,
+    PRIMARY KEY (policy_id),
+    CONSTRAINT fk_policy_origin_policy
+        FOREIGN KEY (policy_id) REFERENCES policy_event (policy_id),
+    CONSTRAINT fk_policy_origin_code
+        FOREIGN KEY (origin_code) REFERENCES origin_dimension (origin_code)
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS hts8_coverage (
+    policy_id VARCHAR(64) NOT NULL,
+    canonical_hts8 CHAR(8) NOT NULL,
+    observed_trade_row_count BIGINT UNSIGNED NOT NULL,
+    observed_month_count TINYINT UNSIGNED NOT NULL,
+    first_observed_month CHAR(7) NULL,
+    last_observed_month CHAR(7) NULL,
+    total_import_value_consumption_usd DECIMAL(20, 0) NOT NULL,
+    coverage_status VARCHAR(64) NOT NULL,
+    policy_source_url VARCHAR(2048) NOT NULL,
+    classification_reference_url VARCHAR(2048) NOT NULL,
+    PRIMARY KEY (policy_id, canonical_hts8),
+    CONSTRAINT fk_coverage_policy_product
+        FOREIGN KEY (policy_id, canonical_hts8)
+        REFERENCES policy_product (policy_id, canonical_hts8),
+    CONSTRAINT chk_coverage_hts8 CHECK (canonical_hts8 REGEXP '^[0-9]{8}$'),
+    CONSTRAINT chk_coverage_month_count CHECK (observed_month_count <= 48)
+) ENGINE = InnoDB;
