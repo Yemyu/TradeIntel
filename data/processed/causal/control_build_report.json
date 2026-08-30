@@ -23,7 +23,7 @@
     "list3_hts8": 5745,
     "exposure_rows": 6850,
     "exclusion_batches": 9,
-    "mapping_rows": 76304,
+    "mapping_rows": 76691,
     "mapping_ambiguous_rows": 1432
   },
   "reason": "Official Census history/concordance and WCO crosswalk are mapped conservatively. The remaining source boundary is the full all-origin 48-month trade panel; the existing List 1-only panel cannot be used as the control group.",

@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-30T18:17:56+00:00",
+  "generated_at_utc": "2026-08-30T20:51:24+00:00",
   "status": "policy_exposure_and_hs_mapping_built_trade_panel_pending",
   "policy_sources": [
     {
@@ -190,8 +190,10 @@
     "observed_issue": "Direct command-line static requests returned HTTP 403; the official Census reference page and browser download path provided the same files, with SHA-256 recorded in mapping_source_manifest.json.",
     "mapping_report": {
       "status": "mapping_built_with_conservative_ambiguity_flags",
-      "row_count": 76304,
+      "row_count": 76691,
       "mapping_status_counts": {
+        "history_only_same_hs6_prefix": 386,
+        "no_target_hs6": 1,
         "same_hs6_prefix": 74862,
         "wco_exact_single": 10,
         "wco_partial_or_ambiguous": 1432

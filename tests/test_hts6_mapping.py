@@ -23,7 +23,7 @@ class Hts6MappingTests(unittest.TestCase):
         counts = Counter(int(row["source_year"]) for row in self.rows)
         self.assertEqual(
             counts,
-            {2016: 19193, 2017: 18982, 2018: 19011, 2019: 19118},
+            {2016: 19193, 2017: 19050, 2018: 19277, 2019: 19171},
         )
         keys = {(row["source_year"], row["source_hts10"]) for row in self.rows}
         self.assertEqual(len(keys), len(self.rows))
@@ -63,6 +63,18 @@ class Hts6MappingTests(unittest.TestCase):
         self.assertEqual(row["mapping_status"], "same_hs6_prefix")
         self.assertEqual(row["source_hs6"], "840140")
         self.assertEqual(row["hs6_2017"], "840140")
+
+    def test_valid_historical_only_code_uses_existing_anchor_prefix(self) -> None:
+        row = next(
+            item
+            for item in self.rows
+            if item["source_year"] == "2018"
+            and item["source_hts10"] == "8517620090"
+        )
+        self.assertEqual(row["mapping_status"], "history_only_same_hs6_prefix")
+        self.assertEqual(row["hs6_2017"], "851762")
+        self.assertEqual(row["annual_concordance_present"], "0")
+        self.assertEqual(row["historical_validity_status"], "valid")
 
     def test_report_and_manifest_record_official_sources(self) -> None:
         with MAPPING_REPORT_JSON.open(encoding="utf-8") as handle:

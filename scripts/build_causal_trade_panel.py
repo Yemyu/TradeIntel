@@ -19,19 +19,34 @@ from datetime import datetime, timezone
 from pathlib import Path
 from zipfile import BadZipFile, ZipFile
 
-from scripts.build_trade_panel import (
-    MonthSource,
-    download_archive,
-    month_range,
-)
-from scripts.inventory_census_import import (
-    COUNTRY_MEMBER,
-    DETAIL_MEMBER,
-    InventoryError,
-    load_country_names,
-    parse_detail_line,
-    sha256_file,
-)
+try:
+    from scripts.build_trade_panel import (
+        MonthSource,
+        download_archive,
+        month_range,
+    )
+    from scripts.inventory_census_import import (
+        COUNTRY_MEMBER,
+        DETAIL_MEMBER,
+        InventoryError,
+        load_country_names,
+        parse_detail_line,
+        sha256_file,
+    )
+except ModuleNotFoundError:  # pragma: no cover - supports direct script execution
+    from build_trade_panel import (  # type: ignore[no-redef]
+        MonthSource,
+        download_archive,
+        month_range,
+    )
+    from inventory_census_import import (  # type: ignore[no-redef]
+        COUNTRY_MEMBER,
+        DETAIL_MEMBER,
+        InventoryError,
+        load_country_names,
+        parse_detail_line,
+        sha256_file,
+    )
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
