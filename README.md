@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 4: the project now has a pre-registered statistical protocol and a reproducible same-calendar-month descriptive baseline. Causal modelling remains explicitly blocked until comparable untreated products, cross-version HTS mappings, and product-exclusion timing are available.
+Learning and development stage 5: the project now has a frozen causal-control design that maps products to 2017 HS6, selects controls using pre-policy data only, and excludes concurrent tariff contamination. Bulk construction of the mapping, exposure, exclusion, and candidate-control datasets is the next execution step; causal modelling remains blocked until those gates pass.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -19,6 +19,8 @@ This repository is currently local-only. It will not be published until its scop
 - [Phase 4 Chinese learning guide: data quality layer](./docs/learning/phase-04-data-quality.zh-CN.md)
 - [Phase 5 Chinese learning guide: statistical design](./docs/learning/phase-05-statistical-design.zh-CN.md)
 - [Experiment protocol 0001: Section 301 List 1 statistical design](./docs/experiments/0001-section301-list1-statistical-design.zh-CN.md)
+- [Phase 6 Chinese learning guide: control-group design](./docs/learning/phase-06-control-design.zh-CN.md)
+- [Data contract 0003: causal control-data extension](./docs/contracts/0003-causal-control-data-contract.zh-CN.md)
 
 ### 中文学习版
 

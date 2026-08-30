@@ -1,0 +1,93 @@
+{
+  "protocol_id": "section301_list1_control_v1",
+  "status": "design_frozen_pending_data",
+  "frozen_at": "2026-08-31",
+  "estimand": {
+    "primary": "intent_to_treat_effect_of_original_list1_assignment",
+    "unit": "china_import_value_by_canonical_2017_hs6_and_month",
+    "outcome": "log1p_monthly_import_value_consumption_usd",
+    "interpretation": "Effect associated with original List 1 assignment under the stated design assumptions, not the mechanical effect of a continuously active 25 percent duty."
+  },
+  "time_windows": {
+    "clean_pre": ["2016-01", "2018-05"],
+    "announcement_anticipation": ["2018-06"],
+    "effective_month_transition": ["2018-07"],
+    "primary_post": ["2018-08", "2019-07"],
+    "immediate_post_sensitivity": ["2018-08", "2018-12"],
+    "event_reference_month": "2018-05"
+  },
+  "product_mapping": {
+    "canonical_unit": "HS6_2017",
+    "primary_source": "https://www.census.gov/foreign-trade/reference/codes/Import_Historical_HS_Numbers.xlsx",
+    "supporting_source": "https://www.census.gov/foreign-trade/reference/index.html",
+    "rule": "Map HTS10 observations to a 2017 HS6 family using official Census history; never use fuzzy description matching.",
+    "mapping_adoption_thresholds": {
+      "treated_pre_value_coverage_min": 0.95,
+      "treated_hts10_code_coverage_min": 0.9,
+      "ambiguous_value_share_max": 0.01
+    }
+  },
+  "treatment_assignment": {
+    "treated": "Canonical HS6 families whose pre-policy China import value is entirely linked to original List 1 HTS8 assignments.",
+    "control": "Canonical HS6 families with zero direct exposure to the listed concurrent trade actions during the analysis window.",
+    "mixed": "Exclude families with treatment exposure strictly between zero and one from the primary binary design.",
+    "exclusions": "Keep original List 1 assignment for the primary intention-to-treat design; attach product exclusions as metadata and remove ever-excluded families in a sensitivity analysis."
+  },
+  "control_contamination_exclusions": [
+    "Section 301 List 1 effective 2018-07-06",
+    "Section 301 List 2 effective 2018-08-23",
+    "Section 301 List 3 effective 2018-09-24",
+    "Section 232 steel and aluminum actions affecting China in 2018",
+    "Section 201 washer and solar safeguard actions effective 2018-02-07"
+  ],
+  "pre_policy_eligibility": {
+    "minimum_positive_months_out_of_29": 24,
+    "post_policy_activity_used_for_selection": false,
+    "features": [
+      "log_mean_monthly_china_import_value",
+      "pretrend_slope",
+      "monthly_volatility",
+      "china_share_of_all_origin_imports",
+      "naics3"
+    ]
+  },
+  "matching": {
+    "method": "three_nearest_controls_with_replacement_within_naics3",
+    "feature_period": ["2016-01", "2018-05"],
+    "post_outcomes_allowed": false,
+    "balance_threshold": "absolute_standardized_mean_difference_below_0.10_for_each_feature",
+    "coverage_threshold": "at_least_two_eligible_controls_for_80_percent_of_treated_families"
+  },
+  "event_study": {
+    "fixed_effects": ["canonical_hs6", "calendar_month"],
+    "cluster_standard_errors_by": "canonical_hs6",
+    "pretrend_joint_test_p_min": 0.1,
+    "last_six_pre_coefficients_absolute_log_point_max": 0.1,
+    "result_labels": {
+      "meaningful_negative_evidence": "95_percent_confidence_interval_entirely_below_minus_0.05_log_points",
+      "inconclusive": "confidence_interval_crosses_zero",
+      "small_or_uncertain": "all_other_cases"
+    }
+  },
+  "minimum_sample": {
+    "treated_canonical_hs6": 100,
+    "control_canonical_hs6": 200
+  },
+  "stop_conditions": [
+    "Official mapping cannot meet coverage or ambiguity thresholds.",
+    "The clean control pool does not meet minimum sample or matching coverage.",
+    "Pre-policy balance or pretrend thresholds fail.",
+    "Results reverse sign under the frozen immediate-window, unweighted, and ever-excluded-family sensitivity checks.",
+    "A result can only be produced by changing controls after observing post-policy outcomes."
+  ],
+  "official_sources": {
+    "census_trade_archives": "https://www.census.gov/foreign-trade/data/dataproducts.html",
+    "census_reference": "https://www.census.gov/foreign-trade/reference/index.html",
+    "usitc_hts_archive": "https://hts.usitc.gov/download/archive",
+    "ustr_list1": "https://www.ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/34-billion-trade-action",
+    "ustr_list2": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/16-billion-trade-action",
+    "ustr_list3": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/200-billion-trade-action",
+    "usitc_2018_trade_actions": "https://www.usitc.gov/research_and_analysis/trade_shifts_2018/special_topic.htm"
+  },
+  "source_access_note": "Direct command-line requests to the Census reference workbook returned HTTP 403 on 2026-08-31. The execution phase must use a supported official download route and verify hashes; it must not substitute an unofficial mirror without review."
+}
