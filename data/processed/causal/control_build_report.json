@@ -1,8 +1,9 @@
 {
-  "status": "mapping_built_trade_panel_pending",
-  "stage": "phase_06_hs_mapping_execution",
+  "status": "all_origin_panel_built_controls_pending",
+  "stage": "phase_06_all_origin_panel_execution",
   "policy_exposure_status": "complete_for_official_notice_scope",
   "mapping_status": "mapping_built_with_conservative_ambiguity_flags",
+  "trade_panel_status": "all_origin_hs6_panel_built",
   "blocked_outputs": [
     "control_candidate_features.csv",
     "matched_control_pairs.csv",
@@ -15,7 +16,9 @@
     "source_access_report.md",
     "hts_history_mapping.csv",
     "mapping_report.json",
-    "mapping_source_manifest.json"
+    "mapping_source_manifest.json",
+    "causal_trade_panel_manifest.json",
+    "causal_trade_panel_report.json"
   ],
   "counts": {
     "list1_hts8": 818,
@@ -24,8 +27,12 @@
     "exposure_rows": 6850,
     "exclusion_batches": 9,
     "mapping_rows": 76691,
-    "mapping_ambiguous_rows": 1432
+    "mapping_ambiguous_rows": 1432,
+    "all_origin_trade_months": 48,
+    "all_origin_hs6_month_rows": 245388,
+    "all_origin_mapping_coverage": 0.9577797346274334,
+    "china_mapping_coverage": 0.9802335580856852
   },
-  "reason": "Official Census history/concordance and WCO crosswalk are mapped conservatively. The remaining source boundary is the full all-origin 48-month trade panel; the existing List 1-only panel cannot be used as the control group.",
+  "reason": "The full all-origin HS6 panel is built and source-hashed, but it is not a matched control group. Treated pre-policy coverage, contamination exclusions, pre-policy matching, balance, and pre-trend gates remain unevaluated.",
   "adoption_rule": "Do not run or publish the causal event study until contamination, matching, and pre-trend gates pass."
 }

@@ -1,0 +1,31 @@
+{
+  "status": "all_origin_hs6_panel_built",
+  "generated_at_utc": "2026-08-31T01:32:33+00:00",
+  "source_scope": {
+    "start": "2016-01",
+    "end": "2019-12",
+    "month_count": 48,
+    "all_origins_read": true,
+    "china_origin_code": "5700"
+  },
+  "mapping": {
+    "path": "data/processed/causal/hts_history_mapping.csv",
+    "sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+    "invalid_or_ambiguous_codes_excluded": true
+  },
+  "coverage": {
+    "raw_all_origin_value_usd": 9542809370966,
+    "mapped_all_origin_value_usd": 9139909426924,
+    "all_origin_mapping_coverage": 0.9577797346274334,
+    "raw_china_value_usd": 1960929808259,
+    "mapped_china_value_usd": 1922169203106,
+    "china_mapping_coverage": 0.9802335580856852
+  },
+  "outputs": {
+    "combined_panel": "data/processed/causal/causal_trade_hs6_monthly.csv",
+    "combined_rows": 245388,
+    "manifest": "data/processed/causal/causal_trade_panel_manifest.json"
+  },
+  "causal_adoption_status": "not_evaluated_until_control_selection",
+  "interpretation_boundary": "This is an all-origin data and mapping-coverage build. It does not select controls or estimate a policy effect."
+}

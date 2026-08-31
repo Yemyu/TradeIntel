@@ -1,0 +1,1837 @@
+{
+  "generated_at_utc": "2026-08-31T01:32:33+00:00",
+  "status": "all_origin_hs6_panel_built",
+  "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+  "months": [
+    {
+      "year": 2016,
+      "month": 1,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1601.ZIP",
+      "source_file_name": "IMDB1601.ZIP",
+      "source_sha256": "39c30a31f917cae6b35331acfb0ea3efd8a4410f0c7b9d2b67564609ac9c93de",
+      "source_archive_bytes": 106360589,
+      "source_retrieved_at_utc": "2026-08-30T20:54:19+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 571722,
+      "china_detail_rows": 121644,
+      "unique_hts10_count": 15385,
+      "china_unique_hts10_count": 10562,
+      "output_hs6_rows": 4683,
+      "raw_all_origin_value_usd": 164779238464,
+      "raw_china_value_usd": 37120341155,
+      "mapped_all_origin_value_usd": 136693079875,
+      "mapped_china_value_usd": 34163396164,
+      "all_origin_mapping_coverage": 0.8295528074361377,
+      "china_mapping_coverage": 0.9203416536865069,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 3,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1177
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 665677,
+        "not_valid_in_year": 307421560,
+        "wco_partial_or_ambiguous": 27778071352
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 112858,
+        "not_valid_in_year": 3182478,
+        "wco_partial_or_ambiguous": 2953649655
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_01.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1602.ZIP",
+      "source_file_name": "IMDB1602.ZIP",
+      "source_sha256": "471fa733705c82104b6bf1b8df2a838a43969bd17a4345ece50e3375cee63406",
+      "source_archive_bytes": 128238812,
+      "source_retrieved_at_utc": "2026-08-30T20:56:52+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 819135,
+      "china_detail_rows": 161302,
+      "unique_hts10_count": 16030,
+      "china_unique_hts10_count": 11575,
+      "output_hs6_rows": 4735,
+      "raw_all_origin_value_usd": 167165851238,
+      "raw_china_value_usd": 35934755840,
+      "mapped_all_origin_value_usd": 137925588077,
+      "mapped_china_value_usd": 33145110530,
+      "all_origin_mapping_coverage": 0.8250823182818027,
+      "china_mapping_coverage": 0.9223691591944875,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 3,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1234
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1345614,
+        "not_valid_in_year": 134504134,
+        "wco_partial_or_ambiguous": 29104413413
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 377311,
+        "not_valid_in_year": 307437,
+        "wco_partial_or_ambiguous": 2788960562
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_02.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1603.ZIP",
+      "source_file_name": "IMDB1603.ZIP",
+      "source_sha256": "dd4e744d74df50ac1a7c7dd0bc14d77e77f130bd4163baf907a3e240286621b8",
+      "source_archive_bytes": 139934097,
+      "source_retrieved_at_utc": "2026-08-30T20:59:55+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1015222,
+      "china_detail_rows": 189153,
+      "unique_hts10_count": 16357,
+      "china_unique_hts10_count": 12060,
+      "output_hs6_rows": 4772,
+      "raw_all_origin_value_usd": 177639635667,
+      "raw_china_value_usd": 29856154522,
+      "mapped_all_origin_value_usd": 143739734825,
+      "mapped_china_value_usd": 27360680511,
+      "all_origin_mapping_coverage": 0.8091647693674168,
+      "china_mapping_coverage": 0.9164167639485798,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1260
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 494047,
+        "not_valid_in_year": 382087744,
+        "wco_partial_or_ambiguous": 33517319051
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 67308,
+        "not_valid_in_year": 210550,
+        "wco_partial_or_ambiguous": 2495196153
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_03.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1604.ZIP",
+      "source_file_name": "IMDB1604.ZIP",
+      "source_sha256": "71496f5d33b29126d2921d70c1da772af40cc9f89045641a84cca59f043ebfd3",
+      "source_archive_bytes": 147577601,
+      "source_retrieved_at_utc": "2026-08-30T21:02:21+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1169353,
+      "china_detail_rows": 211438,
+      "unique_hts10_count": 16582,
+      "china_unique_hts10_count": 12414,
+      "output_hs6_rows": 4795,
+      "raw_all_origin_value_usd": 172852372351,
+      "raw_china_value_usd": 33122255944,
+      "mapped_all_origin_value_usd": 142068789828,
+      "mapped_china_value_usd": 30426384760,
+      "all_origin_mapping_coverage": 0.8219082439870146,
+      "china_mapping_coverage": 0.9186084671117232,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1276
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1784962,
+        "not_valid_in_year": 453274593,
+        "wco_partial_or_ambiguous": 30328522968
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 200093,
+        "not_valid_in_year": 2208929,
+        "wco_partial_or_ambiguous": 2693462162
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_04.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1605.ZIP",
+      "source_file_name": "IMDB1605.ZIP",
+      "source_sha256": "db94a3c3fce2db72b668e31735101ebfe54a22bc399bff7da639f2f238e106bb",
+      "source_archive_bytes": 155116230,
+      "source_retrieved_at_utc": "2026-08-30T21:04:54+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1306496,
+      "china_detail_rows": 232893,
+      "unique_hts10_count": 16737,
+      "china_unique_hts10_count": 12683,
+      "output_hs6_rows": 4805,
+      "raw_all_origin_value_usd": 182096372177,
+      "raw_china_value_usd": 37177665214,
+      "mapped_all_origin_value_usd": 150162114134,
+      "mapped_china_value_usd": 34056103986,
+      "all_origin_mapping_coverage": 0.8246299052462204,
+      "china_mapping_coverage": 0.9160366523816963,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1285
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1335070,
+        "not_valid_in_year": 231882704,
+        "wco_partial_or_ambiguous": 31701040269
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 418809,
+        "not_valid_in_year": 890313,
+        "wco_partial_or_ambiguous": 3120252106
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_05.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1606.ZIP",
+      "source_file_name": "IMDB1606.ZIP",
+      "source_sha256": "662f139e1332c4e88e8da7499dc62525012d12da4c0694def62ca54a0a86f736",
+      "source_archive_bytes": 161965274,
+      "source_retrieved_at_utc": "2026-08-30T21:07:34+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1434565,
+      "china_detail_rows": 253058,
+      "unique_hts10_count": 16868,
+      "china_unique_hts10_count": 12950,
+      "output_hs6_rows": 4820,
+      "raw_all_origin_value_usd": 186606536663,
+      "raw_china_value_usd": 38387000068,
+      "mapped_all_origin_value_usd": 154251519222,
+      "mapped_china_value_usd": 35269223676,
+      "all_origin_mapping_coverage": 0.8266136973570696,
+      "china_mapping_coverage": 0.9187804103869261,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1300
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1583815,
+        "not_valid_in_year": 207746109,
+        "wco_partial_or_ambiguous": 32145687517
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 142738,
+        "not_valid_in_year": 641110,
+        "wco_partial_or_ambiguous": 3116992544
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_06.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1607.ZIP",
+      "source_file_name": "IMDB1607.ZIP",
+      "source_sha256": "fc96262c80d4838f8ffe9e867f57dbb2a175da186b8c10accc5fe25255bcfbcf",
+      "source_archive_bytes": 168706170,
+      "source_retrieved_at_utc": "2026-08-30T21:10:39+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1576333,
+      "china_detail_rows": 276350,
+      "unique_hts10_count": 17197,
+      "china_unique_hts10_count": 13376,
+      "output_hs6_rows": 4830,
+      "raw_all_origin_value_usd": 180052050307,
+      "raw_china_value_usd": 39424245495,
+      "mapped_all_origin_value_usd": 149644454980,
+      "mapped_china_value_usd": 36355556918,
+      "all_origin_mapping_coverage": 0.8311177502552559,
+      "china_mapping_coverage": 0.9221624018806095,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1341
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1716321,
+        "not_valid_in_year": 127479906,
+        "wco_partial_or_ambiguous": 30278399100
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 197148,
+        "not_valid_in_year": 587027,
+        "wco_partial_or_ambiguous": 3067904402
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_07.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1608.ZIP",
+      "source_file_name": "IMDB1608.ZIP",
+      "source_sha256": "e7b7b2d34f6284f5709c1f259870b4dc6e289cf9fafc0cae17330523c4af750d",
+      "source_archive_bytes": 175940688,
+      "source_retrieved_at_utc": "2026-08-30T21:13:43+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1702059,
+      "china_detail_rows": 296611,
+      "unique_hts10_count": 17273,
+      "china_unique_hts10_count": 13577,
+      "output_hs6_rows": 4836,
+      "raw_all_origin_value_usd": 191470143427,
+      "raw_china_value_usd": 42835796835,
+      "mapped_all_origin_value_usd": 158778112788,
+      "mapped_china_value_usd": 39514528937,
+      "all_origin_mapping_coverage": 0.8292578150626174,
+      "china_mapping_coverage": 0.9224651309559326,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1350
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1790713,
+        "not_valid_in_year": 138151796,
+        "wco_partial_or_ambiguous": 32552088130
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 465748,
+        "not_valid_in_year": 517036,
+        "wco_partial_or_ambiguous": 3320285114
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_08.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1609.ZIP",
+      "source_file_name": "IMDB1609.ZIP",
+      "source_sha256": "5ad129485c7a696180eb3ba41330f2b109b419bb9bb2e4a956b15d1c74016f6d",
+      "source_archive_bytes": 181411197,
+      "source_retrieved_at_utc": "2026-08-30T21:17:44+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1824380,
+      "china_detail_rows": 316759,
+      "unique_hts10_count": 17849,
+      "china_unique_hts10_count": 14132,
+      "output_hs6_rows": 4843,
+      "raw_all_origin_value_usd": 185903562750,
+      "raw_china_value_usd": 41957176445,
+      "mapped_all_origin_value_usd": 154603550605,
+      "mapped_china_value_usd": 38806302807,
+      "all_origin_mapping_coverage": 0.8316330699530932,
+      "china_mapping_coverage": 0.9249026291811997,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1358
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 371308,
+        "not_valid_in_year": 155345717,
+        "wco_partial_or_ambiguous": 31144295120
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 57746,
+        "not_valid_in_year": 725400,
+        "wco_partial_or_ambiguous": 3150090492
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_09.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1610.ZIP",
+      "source_file_name": "IMDB1610.ZIP",
+      "source_sha256": "cdd6bfbbddeb405d558d89c44b39d24efc43847a11b8b4599b29f72f7628b1ca",
+      "source_archive_bytes": 187466777,
+      "source_retrieved_at_utc": "2026-08-30T21:22:08+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1932525,
+      "china_detail_rows": 332726,
+      "unique_hts10_count": 17952,
+      "china_unique_hts10_count": 14297,
+      "output_hs6_rows": 4847,
+      "raw_all_origin_value_usd": 191870010941,
+      "raw_china_value_usd": 44397929857,
+      "mapped_all_origin_value_usd": 159953013341,
+      "mapped_china_value_usd": 41042028801,
+      "all_origin_mapping_coverage": 0.8336530162089036,
+      "china_mapping_coverage": 0.9244131186564571,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1362
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 601327,
+        "not_valid_in_year": 474283945,
+        "wco_partial_or_ambiguous": 31442112328
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 205315,
+        "not_valid_in_year": 978788,
+        "wco_partial_or_ambiguous": 3354716953
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_10.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1611.ZIP",
+      "source_file_name": "IMDB1611.ZIP",
+      "source_sha256": "b237695e98d7623b14613ea26c688406377f9beed5c757381d604725ca0a8d0d",
+      "source_archive_bytes": 192389917,
+      "source_retrieved_at_utc": "2026-08-30T21:25:45+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2032924,
+      "china_detail_rows": 347187,
+      "unique_hts10_count": 18030,
+      "china_unique_hts10_count": 14448,
+      "output_hs6_rows": 4850,
+      "raw_all_origin_value_usd": 188985257042,
+      "raw_china_value_usd": 42126130754,
+      "mapped_all_origin_value_usd": 156300393183,
+      "mapped_china_value_usd": 38802860191,
+      "all_origin_mapping_coverage": 0.8270507214658753,
+      "china_mapping_coverage": 0.9211114217347283,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1368
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 2025839,
+        "not_valid_in_year": 165538653,
+        "wco_partial_or_ambiguous": 32517299367
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 197987,
+        "not_valid_in_year": 1899867,
+        "wco_partial_or_ambiguous": 3321172709
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_11.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "source_url": "https://www.census.gov/trade/downloads/2016/Merch/im_m/IMDB1612.ZIP",
+      "source_file_name": "IMDB1612.ZIP",
+      "source_sha256": "716707a9beaa2deb2b5a75915c71fb2179f2a50bea831307565268630a895f22",
+      "source_archive_bytes": 196981202,
+      "source_retrieved_at_utc": "2026-08-30T21:30:18+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2127267,
+      "china_detail_rows": 360342,
+      "unique_hts10_count": 18085,
+      "china_unique_hts10_count": 14570,
+      "output_hs6_rows": 4852,
+      "raw_all_origin_value_usd": 182761592668,
+      "raw_china_value_usd": 39003690915,
+      "mapped_all_origin_value_usd": 148673797727,
+      "mapped_china_value_usd": 35546832925,
+      "all_origin_mapping_coverage": 0.8134849098031062,
+      "china_mapping_coverage": 0.9113710033870008,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2,
+        "wco_partial_or_ambiguous": 1372
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1323798,
+        "not_valid_in_year": 278554857,
+        "wco_partial_or_ambiguous": 33807916286
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 429679,
+        "not_valid_in_year": 3123445,
+        "wco_partial_or_ambiguous": 3453304866
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_12.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1701.ZIP",
+      "source_file_name": "IMDB1701.ZIP",
+      "source_sha256": "d445b85af8546e84999158a0fdd617c34cbf811f041cef3c0a811e881cb9d45f",
+      "source_archive_bytes": 108666579,
+      "source_retrieved_at_utc": "2026-08-30T21:32:07+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 612416,
+      "china_detail_rows": 131450,
+      "unique_hts10_count": 15903,
+      "china_unique_hts10_count": 11017,
+      "output_hs6_rows": 5051,
+      "raw_all_origin_value_usd": 183368260693,
+      "raw_china_value_usd": 41263244137,
+      "mapped_all_origin_value_usd": 182992165811,
+      "mapped_china_value_usd": 41261684051,
+      "all_origin_mapping_coverage": 0.997948964119643,
+      "china_mapping_coverage": 0.9999621918723884,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 337301,
+        "not_valid_in_year": 375757581
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 102835,
+        "not_valid_in_year": 1457251
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_01.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1702.ZIP",
+      "source_file_name": "IMDB1702.ZIP",
+      "source_sha256": "0d3214bd97e8d630740a37b97fd6473da1c78d44647bc33deabeb396739ef7e8",
+      "source_archive_bytes": 130348167,
+      "source_retrieved_at_utc": "2026-08-30T21:34:14+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 853330,
+      "china_detail_rows": 168935,
+      "unique_hts10_count": 16536,
+      "china_unique_hts10_count": 11933,
+      "output_hs6_rows": 5129,
+      "raw_all_origin_value_usd": 168540394285,
+      "raw_china_value_usd": 32764585792,
+      "mapped_all_origin_value_usd": 168319672428,
+      "mapped_china_value_usd": 32762673512,
+      "all_origin_mapping_coverage": 0.9986903919506278,
+      "china_mapping_coverage": 0.9999416357645373,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1556536,
+        "not_valid_in_year": 219165321
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 503630,
+        "not_valid_in_year": 1408650
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_02.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1703.ZIP",
+      "source_file_name": "IMDB1703.ZIP",
+      "source_sha256": "006836562bb6f5dbe5799f732da02b2eafc6ff2a61699ca6a64bf363b0da1f36",
+      "source_archive_bytes": 142105802,
+      "source_retrieved_at_utc": "2026-08-30T21:36:47+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1061973,
+      "china_detail_rows": 199524,
+      "unique_hts10_count": 16904,
+      "china_unique_hts10_count": 12458,
+      "output_hs6_rows": 5168,
+      "raw_all_origin_value_usd": 192796836710,
+      "raw_china_value_usd": 34080185405,
+      "mapped_all_origin_value_usd": 192602195968,
+      "mapped_china_value_usd": 34079391884,
+      "all_origin_mapping_coverage": 0.9989904360189645,
+      "china_mapping_coverage": 0.9999767160597699,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1394048,
+        "not_valid_in_year": 193246694
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 158222,
+        "not_valid_in_year": 635299
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_03.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1704.ZIP",
+      "source_file_name": "IMDB1704.ZIP",
+      "source_sha256": "00ecc96ed86ee237dbed8ef242a8fd292fbf120e8de99db7d5b90919be71f1df",
+      "source_archive_bytes": 150808282,
+      "source_retrieved_at_utc": "2026-08-30T21:39:18+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1222953,
+      "china_detail_rows": 224201,
+      "unique_hts10_count": 17118,
+      "china_unique_hts10_count": 12852,
+      "output_hs6_rows": 5198,
+      "raw_all_origin_value_usd": 185578989722,
+      "raw_china_value_usd": 37568192396,
+      "mapped_all_origin_value_usd": 185216963234,
+      "mapped_china_value_usd": 37567499545,
+      "all_origin_mapping_coverage": 0.9980492054162903,
+      "china_mapping_coverage": 0.9999815575103349,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1019677,
+        "not_valid_in_year": 361006811
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 133662,
+        "not_valid_in_year": 559189
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_04.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1705.ZIP",
+      "source_file_name": "IMDB1705.ZIP",
+      "source_sha256": "bbc9a15fa121afcb497ac4e76f2b80e46a4d9414b6ecb6a07488249e1a3780ae",
+      "source_archive_bytes": 159348317,
+      "source_retrieved_at_utc": "2026-08-30T21:42:06+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1375682,
+      "china_detail_rows": 248009,
+      "unique_hts10_count": 17272,
+      "china_unique_hts10_count": 13186,
+      "output_hs6_rows": 5216,
+      "raw_all_origin_value_usd": 198874252969,
+      "raw_china_value_usd": 41254549784,
+      "mapped_all_origin_value_usd": 198584881707,
+      "mapped_china_value_usd": 41253580106,
+      "all_origin_mapping_coverage": 0.9985449536192847,
+      "china_mapping_coverage": 0.9999764952470679,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 825615,
+        "not_valid_in_year": 288545647
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 413492,
+        "not_valid_in_year": 556186
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_05.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1706.ZIP",
+      "source_file_name": "IMDB1706.ZIP",
+      "source_sha256": "864286206543b88868898cf3925c709e6cf9af0723e6ecfda1fb7426f46dc2ca",
+      "source_archive_bytes": 166613403,
+      "source_retrieved_at_utc": "2026-08-30T21:44:58+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1513270,
+      "china_detail_rows": 270116,
+      "unique_hts10_count": 17399,
+      "china_unique_hts10_count": 13459,
+      "output_hs6_rows": 5232,
+      "raw_all_origin_value_usd": 196962271062,
+      "raw_china_value_usd": 42282892338,
+      "mapped_all_origin_value_usd": 196629960583,
+      "mapped_china_value_usd": 42282154712,
+      "all_origin_mapping_coverage": 0.998312821652552,
+      "china_mapping_coverage": 0.999982554977694,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1713006,
+        "not_valid_in_year": 330597473
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 396643,
+        "not_valid_in_year": 340983
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_06.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1707.ZIP",
+      "source_file_name": "IMDB1707.ZIP",
+      "source_sha256": "e72b59303bc4ebc5baa5b1795a48b9d7801e8a69518a83ee774a2d59de924d80",
+      "source_archive_bytes": 173242511,
+      "source_retrieved_at_utc": "2026-08-30T21:47:48+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1642670,
+      "china_detail_rows": 290390,
+      "unique_hts10_count": 17590,
+      "china_unique_hts10_count": 13709,
+      "output_hs6_rows": 5244,
+      "raw_all_origin_value_usd": 190581032702,
+      "raw_china_value_usd": 43673205927,
+      "mapped_all_origin_value_usd": 189964021099,
+      "mapped_china_value_usd": 43615989052,
+      "all_origin_mapping_coverage": 0.9967624710903693,
+      "china_mapping_coverage": 0.9986898860803661,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_in_mapping": 11,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1221868,
+        "not_in_mapping": 299866058,
+        "not_valid_in_year": 315923677
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 121621,
+        "not_in_mapping": 56676701,
+        "not_valid_in_year": 418553
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_07.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1708.ZIP",
+      "source_file_name": "IMDB1708.ZIP",
+      "source_sha256": "124e4b83decc207c031263e7c2cb19bd93c75c8f46631b3073e18347f5a1cdbd",
+      "source_archive_bytes": 179828584,
+      "source_retrieved_at_utc": "2026-08-30T21:50:51+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1766303,
+      "china_detail_rows": 309375,
+      "unique_hts10_count": 17674,
+      "china_unique_hts10_count": 13908,
+      "output_hs6_rows": 5255,
+      "raw_all_origin_value_usd": 199192674554,
+      "raw_china_value_usd": 45168418616,
+      "mapped_all_origin_value_usd": 198752623806,
+      "mapped_china_value_usd": 45109701392,
+      "all_origin_mapping_coverage": 0.9977908286588084,
+      "china_mapping_coverage": 0.9987000380841493,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_in_mapping": 11,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1175167,
+        "not_in_mapping": 268051882,
+        "not_valid_in_year": 170823699
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 214393,
+        "not_in_mapping": 57467383,
+        "not_valid_in_year": 1035448
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_08.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1709.ZIP",
+      "source_file_name": "IMDB1709.ZIP",
+      "source_sha256": "6d0636cd905a430f96fbfbb68d719af007c5c87001f960112e9c5594a33ecbf3",
+      "source_archive_bytes": 185105614,
+      "source_retrieved_at_utc": "2026-08-30T21:54:26+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1876260,
+      "china_detail_rows": 325951,
+      "unique_hts10_count": 17734,
+      "china_unique_hts10_count": 14059,
+      "output_hs6_rows": 5263,
+      "raw_all_origin_value_usd": 193891697103,
+      "raw_china_value_usd": 45255736688,
+      "mapped_all_origin_value_usd": 193301981823,
+      "mapped_china_value_usd": 45181057137,
+      "all_origin_mapping_coverage": 0.9969585325786966,
+      "china_mapping_coverage": 0.9983498323866684,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_in_mapping": 11,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 2350867,
+        "not_in_mapping": 355660235,
+        "not_valid_in_year": 231704178
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 1391979,
+        "not_in_mapping": 72208483,
+        "not_valid_in_year": 1079089
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_09.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1710.ZIP",
+      "source_file_name": "IMDB1710.ZIP",
+      "source_sha256": "6937a272ccd646415e733c78fc9573e5575ca3703866dd647e8ff9f59709c827",
+      "source_archive_bytes": 191062589,
+      "source_retrieved_at_utc": "2026-08-30T21:57:35+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1987300,
+      "china_detail_rows": 341910,
+      "unique_hts10_count": 17785,
+      "china_unique_hts10_count": 14174,
+      "output_hs6_rows": 5267,
+      "raw_all_origin_value_usd": 209367747186,
+      "raw_china_value_usd": 47925514463,
+      "mapped_all_origin_value_usd": 208188960808,
+      "mapped_china_value_usd": 47844757733,
+      "all_origin_mapping_coverage": 0.9943697804755344,
+      "china_mapping_coverage": 0.9983149532998264,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_in_mapping": 11,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1158669,
+        "not_in_mapping": 443482437,
+        "not_valid_in_year": 734145272
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 236124,
+        "not_in_mapping": 80054527,
+        "not_valid_in_year": 466079
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_10.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1711.ZIP",
+      "source_file_name": "IMDB1711.ZIP",
+      "source_sha256": "afe95ce80de24036307fd37d9f3fe58639e98a37dc051978afee301ea8a93a67",
+      "source_archive_bytes": 195815856,
+      "source_retrieved_at_utc": "2026-08-30T22:00:46+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2088787,
+      "china_detail_rows": 355573,
+      "unique_hts10_count": 17847,
+      "china_unique_hts10_count": 14287,
+      "output_hs6_rows": 5269,
+      "raw_all_origin_value_usd": 207049717065,
+      "raw_china_value_usd": 48015543691,
+      "mapped_all_origin_value_usd": 206118079132,
+      "mapped_china_value_usd": 47943961551,
+      "all_origin_mapping_coverage": 0.9955004143632443,
+      "china_mapping_coverage": 0.99850918818163,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_in_mapping": 11,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1353508,
+        "not_in_mapping": 366917834,
+        "not_valid_in_year": 563366591
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 156315,
+        "not_in_mapping": 67476703,
+        "not_valid_in_year": 3949122
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_11.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1712.ZIP",
+      "source_file_name": "IMDB1712.ZIP",
+      "source_sha256": "a596fa1670629badc7fd5a1fcc1a46bdafe814842d1c6de86794355985f2379c",
+      "source_archive_bytes": 200191179,
+      "source_retrieved_at_utc": "2026-08-30T22:04:35+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2180760,
+      "china_detail_rows": 367563,
+      "unique_hts10_count": 17891,
+      "china_unique_hts10_count": 14411,
+      "output_hs6_rows": 5278,
+      "raw_all_origin_value_usd": 200948928500,
+      "raw_china_value_usd": 44399510809,
+      "mapped_all_origin_value_usd": 200151903749,
+      "mapped_china_value_usd": 44338272942,
+      "all_origin_mapping_coverage": 0.9960336949445341,
+      "china_mapping_coverage": 0.9986207535649788,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_in_mapping": 11,
+        "not_valid_in_year": 2
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1535890,
+        "not_in_mapping": 352620956,
+        "not_valid_in_year": 442867905
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 306675,
+        "not_in_mapping": 52761106,
+        "not_valid_in_year": 8170086
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_12.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1801.ZIP",
+      "source_file_name": "IMDB1801.ZIP",
+      "source_sha256": "28c1aa587ae5d0251d1cca035d0923d3f2cc039e22babf74f1372bac2481cfee",
+      "source_archive_bytes": 109996725,
+      "source_retrieved_at_utc": "2026-08-30T22:06:26+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 636777,
+      "china_detail_rows": 132333,
+      "unique_hts10_count": 15933,
+      "china_unique_hts10_count": 10971,
+      "output_hs6_rows": 5034,
+      "raw_all_origin_value_usd": 201363447994,
+      "raw_china_value_usd": 44491373543,
+      "mapped_all_origin_value_usd": 200530679015,
+      "mapped_china_value_usd": 44424694720,
+      "all_origin_mapping_coverage": 0.9958643488314483,
+      "china_mapping_coverage": 0.9985013089574419,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1546012,
+        "not_valid_in_year": 831222967
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 353481,
+        "not_valid_in_year": 66325342
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_01.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1802.ZIP",
+      "source_file_name": "IMDB1802.ZIP",
+      "source_sha256": "cb85287ec009c333e3d67e25fcd9040f9baef4014994879521916e4479657cd6",
+      "source_archive_bytes": 132977834,
+      "source_retrieved_at_utc": "2026-08-30T22:08:39+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 892682,
+      "china_detail_rows": 173455,
+      "unique_hts10_count": 16646,
+      "china_unique_hts10_count": 12022,
+      "output_hs6_rows": 5128,
+      "raw_all_origin_value_usd": 188997006603,
+      "raw_china_value_usd": 39311406022,
+      "mapped_all_origin_value_usd": 188373350376,
+      "mapped_china_value_usd": 39259529689,
+      "all_origin_mapping_coverage": 0.9967001793403532,
+      "china_mapping_coverage": 0.9986803745210495,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1295967,
+        "not_valid_in_year": 622360260
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 405365,
+        "not_valid_in_year": 51470968
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_02.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1803.ZIP",
+      "source_file_name": "IMDB1803.ZIP",
+      "source_sha256": "52b75fec87311b092e657f85714e4debf2397a34c9dc2f971d5387e49d10e887",
+      "source_archive_bytes": 144712581,
+      "source_retrieved_at_utc": "2026-08-30T22:11:07+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1102685,
+      "china_detail_rows": 203798,
+      "unique_hts10_count": 17004,
+      "china_unique_hts10_count": 12623,
+      "output_hs6_rows": 5166,
+      "raw_all_origin_value_usd": 209020543141,
+      "raw_china_value_usd": 39157487055,
+      "mapped_all_origin_value_usd": 208500681465,
+      "mapped_china_value_usd": 39104277021,
+      "all_origin_mapping_coverage": 0.9975128680263293,
+      "china_mapping_coverage": 0.9986411274573044,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1940614,
+        "not_valid_in_year": 517921062
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 154823,
+        "not_valid_in_year": 53055211
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_03.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1804.ZIP",
+      "source_file_name": "IMDB1804.ZIP",
+      "source_sha256": "cc21d1433d9e88af68d98f33ace6de992abfa2e4c137201f2c24f25988874f75",
+      "source_archive_bytes": 153729156,
+      "source_retrieved_at_utc": "2026-08-30T22:13:40+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1272894,
+      "china_detail_rows": 227659,
+      "unique_hts10_count": 17184,
+      "china_unique_hts10_count": 12932,
+      "output_hs6_rows": 5179,
+      "raw_all_origin_value_usd": 203815782180,
+      "raw_china_value_usd": 38448466574,
+      "mapped_all_origin_value_usd": 202901701194,
+      "mapped_china_value_usd": 38387546006,
+      "all_origin_mapping_coverage": 0.9955151609152979,
+      "china_mapping_coverage": 0.9984155267185298,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1182715,
+        "not_valid_in_year": 912898271
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 192328,
+        "not_valid_in_year": 60728240
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_04.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1805.ZIP",
+      "source_file_name": "IMDB1805.ZIP",
+      "source_sha256": "2999f7db4b47e86075466b862cb1207c12e6284123f8f54f25cf2e1d13c697d0",
+      "source_archive_bytes": 162392992,
+      "source_retrieved_at_utc": "2026-08-30T22:16:21+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1427839,
+      "china_detail_rows": 251653,
+      "unique_hts10_count": 17361,
+      "china_unique_hts10_count": 13267,
+      "output_hs6_rows": 5206,
+      "raw_all_origin_value_usd": 218836897427,
+      "raw_china_value_usd": 44787879410,
+      "mapped_all_origin_value_usd": 218132655104,
+      "mapped_china_value_usd": 44730820917,
+      "all_origin_mapping_coverage": 0.9967818849047843,
+      "china_mapping_coverage": 0.9987260282524727,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1607283,
+        "not_valid_in_year": 702635040
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 210584,
+        "not_valid_in_year": 56847909
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_05.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1806.ZIP",
+      "source_file_name": "IMDB1806.ZIP",
+      "source_sha256": "eaad9530e209a84b5496c9d76169796df78f70dfabd876a3b943cddadaf7b516",
+      "source_archive_bytes": 169526946,
+      "source_retrieved_at_utc": "2026-08-30T22:19:07+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1567557,
+      "china_detail_rows": 273543,
+      "unique_hts10_count": 17473,
+      "china_unique_hts10_count": 13497,
+      "output_hs6_rows": 5213,
+      "raw_all_origin_value_usd": 211217992231,
+      "raw_china_value_usd": 44729411113,
+      "mapped_all_origin_value_usd": 210726846962,
+      "mapped_china_value_usd": 44681889147,
+      "all_origin_mapping_coverage": 0.9976746996607048,
+      "china_mapping_coverage": 0.9989375678146099,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 808010,
+        "not_valid_in_year": 490337259
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 114120,
+        "not_valid_in_year": 47407846
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_06.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1807.ZIP",
+      "source_file_name": "IMDB1807.ZIP",
+      "source_sha256": "38207013d1681671b0f046f25cfdeb93f78a1fd05ccc42fcf9ca812b9147b74b",
+      "source_archive_bytes": 177359302,
+      "source_retrieved_at_utc": "2026-08-30T22:21:59+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1716983,
+      "china_detail_rows": 306087,
+      "unique_hts10_count": 17611,
+      "china_unique_hts10_count": 13748,
+      "output_hs6_rows": 5229,
+      "raw_all_origin_value_usd": 217695894192,
+      "raw_china_value_usd": 47704989606,
+      "mapped_all_origin_value_usd": 216829666561,
+      "mapped_china_value_usd": 47643069466,
+      "all_origin_mapping_coverage": 0.9960209280279948,
+      "china_mapping_coverage": 0.9987020196312503,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 2145381,
+        "not_valid_in_year": 864082250
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 138599,
+        "not_valid_in_year": 61781541
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_07.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 8,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1808.ZIP",
+      "source_file_name": "IMDB1808.ZIP",
+      "source_sha256": "b410124b8ef41d31e1d88795c75327e801b52685160e2b87c659a1aa877d09a6",
+      "source_archive_bytes": 184487106,
+      "source_retrieved_at_utc": "2026-08-30T22:25:01+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1850384,
+      "china_detail_rows": 330346,
+      "unique_hts10_count": 17679,
+      "china_unique_hts10_count": 13932,
+      "output_hs6_rows": 5240,
+      "raw_all_origin_value_usd": 224841152896,
+      "raw_china_value_usd": 49035778583,
+      "mapped_all_origin_value_usd": 224059690148,
+      "mapped_china_value_usd": 48966225128,
+      "all_origin_mapping_coverage": 0.9965243784870581,
+      "china_mapping_coverage": 0.9985815774316243,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1123195,
+        "not_valid_in_year": 780339553
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 343685,
+        "not_valid_in_year": 69209770
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_08.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1809.ZIP",
+      "source_file_name": "IMDB1809.ZIP",
+      "source_sha256": "dc5c1617a6481aa66c966766f8d93ad9ef76289ee02e4d6c620651bebe13cd9e",
+      "source_archive_bytes": 189654179,
+      "source_retrieved_at_utc": "2026-08-30T22:28:14+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1962885,
+      "china_detail_rows": 350095,
+      "unique_hts10_count": 17748,
+      "china_unique_hts10_count": 14101,
+      "output_hs6_rows": 5249,
+      "raw_all_origin_value_usd": 212002479908,
+      "raw_china_value_usd": 50830456251,
+      "mapped_all_origin_value_usd": 211336422709,
+      "mapped_china_value_usd": 50757387006,
+      "all_origin_mapping_coverage": 0.9968582575105299,
+      "china_mapping_coverage": 0.9985624908688763,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 949026,
+        "not_valid_in_year": 665108173
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 256503,
+        "not_valid_in_year": 72812742
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_09.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 10,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1810.ZIP",
+      "source_file_name": "IMDB1810.ZIP",
+      "source_sha256": "d08670b3212e20e3ecd41888b732edec9c5970e83612a83430a699b028d196dc",
+      "source_archive_bytes": 198115483,
+      "source_retrieved_at_utc": "2026-08-30T22:31:58+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2137857,
+      "china_detail_rows": 423251,
+      "unique_hts10_count": 17947,
+      "china_unique_hts10_count": 14274,
+      "output_hs6_rows": 5280,
+      "raw_all_origin_value_usd": 236557510025,
+      "raw_china_value_usd": 52435493082,
+      "mapped_all_origin_value_usd": 235507356418,
+      "mapped_china_value_usd": 52342722956,
+      "all_origin_mapping_coverage": 0.9955606837132797,
+      "china_mapping_coverage": 0.9982307761299217,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 375724,
+        "not_valid_in_year": 1049777883
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 57764,
+        "not_valid_in_year": 92712362
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_10.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1811.ZIP",
+      "source_file_name": "IMDB1811.ZIP",
+      "source_sha256": "a57f836b239a7b45d1dc53c84beb4e15de006ef516eaaf78c94ae36da2885c33",
+      "source_archive_bytes": 204671040,
+      "source_retrieved_at_utc": "2026-08-30T22:35:35+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2261890,
+      "china_detail_rows": 457277,
+      "unique_hts10_count": 18012,
+      "china_unique_hts10_count": 14391,
+      "output_hs6_rows": 5290,
+      "raw_all_origin_value_usd": 215840332619,
+      "raw_china_value_usd": 46814654353,
+      "mapped_all_origin_value_usd": 215159717075,
+      "mapped_china_value_usd": 46736400493,
+      "all_origin_mapping_coverage": 0.996846671167796,
+      "china_mapping_coverage": 0.9983284323876465,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 523414,
+        "not_valid_in_year": 680092130
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 152459,
+        "not_valid_in_year": 78101401
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_11.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2018,
+      "month": 12,
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1812.ZIP",
+      "source_file_name": "IMDB1812.ZIP",
+      "source_sha256": "d9312abcc26b093235e7af3c9f6e2a83db0f43ab29baeb42522def414117818a",
+      "source_archive_bytes": 209852339,
+      "source_retrieved_at_utc": "2026-08-30T22:39:06+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2367643,
+      "china_detail_rows": 483563,
+      "unique_hts10_count": 18071,
+      "china_unique_hts10_count": 14502,
+      "output_hs6_rows": 5292,
+      "raw_all_origin_value_usd": 207597663946,
+      "raw_china_value_usd": 45539765111,
+      "mapped_all_origin_value_usd": 207108996210,
+      "mapped_china_value_usd": 45479221394,
+      "all_origin_mapping_coverage": 0.9976460826836322,
+      "china_mapping_coverage": 0.9986705307580654,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 2262809,
+        "not_valid_in_year": 486404927
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 80060,
+        "not_valid_in_year": 60463657
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_12.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1901.ZIP",
+      "source_file_name": "IMDB1901.ZIP",
+      "source_sha256": "67969c89fcf907ed38ef0a4a497784f8f505b8ba357aff80a7f712d8e454e3a4",
+      "source_archive_bytes": 111349318,
+      "source_retrieved_at_utc": "2026-08-30T22:40:59+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 653311,
+      "china_detail_rows": 142551,
+      "unique_hts10_count": 15996,
+      "china_unique_hts10_count": 10905,
+      "output_hs6_rows": 5065,
+      "raw_all_origin_value_usd": 206290514519,
+      "raw_china_value_usd": 42533361671,
+      "mapped_all_origin_value_usd": 205662541096,
+      "mapped_china_value_usd": 42464549549,
+      "all_origin_mapping_coverage": 0.9969558783424229,
+      "china_mapping_coverage": 0.9983821612189446,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 2391811,
+        "not_valid_in_year": 625581612
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 117575,
+        "not_valid_in_year": 68694547
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_01.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1902.ZIP",
+      "source_file_name": "IMDB1902.ZIP",
+      "source_sha256": "46d384f6f8788c59de002c6608010e2619b42f6919a6ec618bec4320afa9606f",
+      "source_archive_bytes": 134742447,
+      "source_retrieved_at_utc": "2026-08-30T22:43:13+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 911659,
+      "china_detail_rows": 184099,
+      "unique_hts10_count": 16662,
+      "china_unique_hts10_count": 11820,
+      "output_hs6_rows": 5140,
+      "raw_all_origin_value_usd": 184386614151,
+      "raw_china_value_usd": 33258853911,
+      "mapped_all_origin_value_usd": 183799377644,
+      "mapped_china_value_usd": 33217714912,
+      "all_origin_mapping_coverage": 0.9968151890542385,
+      "china_mapping_coverage": 0.9987630662466576,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 501297,
+        "not_valid_in_year": 586735210
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 102973,
+        "not_valid_in_year": 41036026
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_02.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1903.ZIP",
+      "source_file_name": "IMDB1903.ZIP",
+      "source_sha256": "cc9d4dc1425a442939e5203cf2f4da634b7d6897b53b026e21e77684741c1b6c",
+      "source_archive_bytes": 146988605,
+      "source_retrieved_at_utc": "2026-08-30T22:45:40+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1127718,
+      "china_detail_rows": 216970,
+      "unique_hts10_count": 17021,
+      "china_unique_hts10_count": 12338,
+      "output_hs6_rows": 5191,
+      "raw_all_origin_value_usd": 207818523457,
+      "raw_china_value_usd": 31528682567,
+      "mapped_all_origin_value_usd": 207152245280,
+      "mapped_china_value_usd": 31472037566,
+      "all_origin_mapping_coverage": 0.9967939423015972,
+      "china_mapping_coverage": 0.9982033819243913,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 959473,
+        "not_valid_in_year": 665318704
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 34920,
+        "not_valid_in_year": 56610081
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_03.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1904.ZIP",
+      "source_file_name": "IMDB1904.ZIP",
+      "source_sha256": "d75f7f544e7c60653ea3b24abf8bfcb765d5a26fea3bf35c2710013f2227d357",
+      "source_archive_bytes": 156988077,
+      "source_retrieved_at_utc": "2026-08-30T22:49:35+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1307893,
+      "china_detail_rows": 244384,
+      "unique_hts10_count": 17252,
+      "china_unique_hts10_count": 12735,
+      "output_hs6_rows": 5215,
+      "raw_all_origin_value_usd": 208201346492,
+      "raw_china_value_usd": 34470441692,
+      "mapped_all_origin_value_usd": 207312261378,
+      "mapped_china_value_usd": 34405499116,
+      "all_origin_mapping_coverage": 0.9957296860516022,
+      "china_mapping_coverage": 0.99811599234555,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1261216,
+        "not_valid_in_year": 887823898
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 117907,
+        "not_valid_in_year": 64824669
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_04.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1905.ZIP",
+      "source_file_name": "IMDB1905.ZIP",
+      "source_sha256": "bcbe34f6aab1dabd611771e5a9c1656859a379dfa332e5a88bf58cdbe491d065",
+      "source_archive_bytes": 165672293,
+      "source_retrieved_at_utc": "2026-08-30T22:52:44+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1465706,
+      "china_detail_rows": 270313,
+      "unique_hts10_count": 17422,
+      "china_unique_hts10_count": 13057,
+      "output_hs6_rows": 5229,
+      "raw_all_origin_value_usd": 220454844296,
+      "raw_china_value_usd": 39164033152,
+      "mapped_all_origin_value_usd": 219826393177,
+      "mapped_china_value_usd": 39109638463,
+      "all_origin_mapping_coverage": 0.9971492977575208,
+      "china_mapping_coverage": 0.9986111060424016,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 942491,
+        "not_valid_in_year": 627508628
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 98649,
+        "not_valid_in_year": 54296040
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_05.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1906.ZIP",
+      "source_file_name": "IMDB1906.ZIP",
+      "source_sha256": "83c0c0f4c9d6ddeaa95a68ca97f1f211c62dda0c6d86e237fb98c73036c0e0dc",
+      "source_archive_bytes": 172291503,
+      "source_retrieved_at_utc": "2026-08-30T22:58:23+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1601263,
+      "china_detail_rows": 292527,
+      "unique_hts10_count": 17529,
+      "china_unique_hts10_count": 13284,
+      "output_hs6_rows": 5236,
+      "raw_all_origin_value_usd": 205534137214,
+      "raw_china_value_usd": 37991216273,
+      "mapped_all_origin_value_usd": 204664027693,
+      "mapped_china_value_usd": 37935763170,
+      "all_origin_mapping_coverage": 0.9957665936530337,
+      "china_mapping_coverage": 0.9985403704213752,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 992567,
+        "not_valid_in_year": 869116954
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 95481,
+        "not_valid_in_year": 55357622
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_06.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1907.ZIP",
+      "source_file_name": "IMDB1907.ZIP",
+      "source_sha256": "93244b26049f38021995de8aac812000cdebcc1a7d3c809379209835c8fb70b5",
+      "source_archive_bytes": 180471130,
+      "source_retrieved_at_utc": "2026-08-30T23:16:53+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1744012,
+      "china_detail_rows": 316272,
+      "unique_hts10_count": 17688,
+      "china_unique_hts10_count": 13524,
+      "output_hs6_rows": 5242,
+      "raw_all_origin_value_usd": 219636895970,
+      "raw_china_value_usd": 42270391996,
+      "mapped_all_origin_value_usd": 219061584312,
+      "mapped_china_value_usd": 42214183689,
+      "all_origin_mapping_coverage": 0.9973806237997528,
+      "china_mapping_coverage": 0.9986702676661877,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 4,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 387431,
+        "not_valid_in_year": 574924227
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 100581,
+        "not_valid_in_year": 56107726
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_07.csv",
+      "download_status": "already_present",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1908.ZIP",
+      "source_file_name": "IMDB1908.ZIP",
+      "source_sha256": "d6072b18fc65d854bfba99f4646cb700a48a6df86cc9c552847b8602229a245e",
+      "source_archive_bytes": 186733037,
+      "source_retrieved_at_utc": "2026-08-30T23:21:24+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 1868531,
+      "china_detail_rows": 336824,
+      "unique_hts10_count": 17759,
+      "china_unique_hts10_count": 13717,
+      "output_hs6_rows": 5250,
+      "raw_all_origin_value_usd": 214647027906,
+      "raw_china_value_usd": 40969663793,
+      "mapped_all_origin_value_usd": 214110161893,
+      "mapped_china_value_usd": 40891098175,
+      "all_origin_mapping_coverage": 0.9974988425498483,
+      "china_mapping_coverage": 0.9980823465284715,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 5,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 950531,
+        "not_valid_in_year": 535915482
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 99461,
+        "not_valid_in_year": 78466157
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_08.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1909.ZIP",
+      "source_file_name": "IMDB1909.ZIP",
+      "source_sha256": "82eaae2e5b94ad9fbdcd4f40de9332c1d0c664c5273ba7c7e11c9f0f5cfaba04",
+      "source_archive_bytes": 193106614,
+      "source_retrieved_at_utc": "2026-08-30T23:25:42+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2006395,
+      "china_detail_rows": 379795,
+      "unique_hts10_count": 17808,
+      "china_unique_hts10_count": 13867,
+      "output_hs6_rows": 5258,
+      "raw_all_origin_value_usd": 206315628808,
+      "raw_china_value_usd": 40171488262,
+      "mapped_all_origin_value_usd": 205661224157,
+      "mapped_china_value_usd": 40112075699,
+      "all_origin_mapping_coverage": 0.9968281382521487,
+      "china_mapping_coverage": 0.9985210265894928,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 5,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 686024,
+        "not_valid_in_year": 653718627
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 198218,
+        "not_valid_in_year": 59214345
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_09.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1910.ZIP",
+      "source_file_name": "IMDB1910.ZIP",
+      "source_sha256": "cdc40faa02e99b1ca4232fb78e8cbd05ae5e7bf5475fa3f4c7f8acd1d6be4143",
+      "source_archive_bytes": 200058549,
+      "source_retrieved_at_utc": "2026-08-30T23:29:24+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2131020,
+      "china_detail_rows": 408300,
+      "unique_hts10_count": 17870,
+      "china_unique_hts10_count": 13985,
+      "output_hs6_rows": 5266,
+      "raw_all_origin_value_usd": 221354465537,
+      "raw_china_value_usd": 40777912509,
+      "mapped_all_origin_value_usd": 220022882648,
+      "mapped_china_value_usd": 40708322897,
+      "all_origin_mapping_coverage": 0.9939843866001545,
+      "china_mapping_coverage": 0.9982934483960001,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 5,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1213940,
+        "not_valid_in_year": 1330368949
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 59854,
+        "not_valid_in_year": 69529758
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_10.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1911.ZIP",
+      "source_file_name": "IMDB1911.ZIP",
+      "source_sha256": "8440b24ccd44692c5e2002a050f68a85452a4433100821a2e8fb90f2fbd1809a",
+      "source_archive_bytes": 204975888,
+      "source_retrieved_at_utc": "2026-08-31T01:27:02+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2246765,
+      "china_detail_rows": 428953,
+      "unique_hts10_count": 17921,
+      "china_unique_hts10_count": 14079,
+      "output_hs6_rows": 5273,
+      "raw_all_origin_value_usd": 199167527511,
+      "raw_china_value_usd": 35493475749,
+      "mapped_all_origin_value_usd": 198512398978,
+      "mapped_china_value_usd": 35432007027,
+      "all_origin_mapping_coverage": 0.9967106659344164,
+      "china_mapping_coverage": 0.9982681684252427,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 5,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1341602,
+        "not_valid_in_year": 653786931
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 185903,
+        "not_valid_in_year": 61282819
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_11.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "source_url": "https://www.census.gov/trade/downloads/2019/Merch/im_m/IMDB1912.ZIP",
+      "source_file_name": "IMDB1912.ZIP",
+      "source_sha256": "df47fbfb524281787717990015645f83c5c01cdcc18a7272ded9a1f098cab3ca",
+      "source_archive_bytes": 210415614,
+      "source_retrieved_at_utc": "2026-08-31T01:31:09+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": false,
+      "raw_detail_rows": 2349971,
+      "china_detail_rows": 447181,
+      "unique_hts10_count": 17965,
+      "china_unique_hts10_count": 14177,
+      "output_hs6_rows": 5279,
+      "raw_all_origin_value_usd": 201879715697,
+      "raw_china_value_usd": 34018402891,
+      "mapped_all_origin_value_usd": 201339006698,
+      "mapped_china_value_usd": 33962795077,
+      "all_origin_mapping_coverage": 0.9973216278954368,
+      "china_mapping_coverage": 0.9983653608260747,
+      "excluded_hts10_count_by_reason": {
+        "not_in_historical_file": 5,
+        "not_valid_in_year": 13
+      },
+      "excluded_all_origin_value_by_reason": {
+        "not_in_historical_file": 1069210,
+        "not_valid_in_year": 539639789
+      },
+      "excluded_china_value_by_reason": {
+        "not_in_historical_file": 107387,
+        "not_valid_in_year": 55500427
+      },
+      "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_12.csv",
+      "download_status": "downloaded",
+      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+    }
+  ]
+}

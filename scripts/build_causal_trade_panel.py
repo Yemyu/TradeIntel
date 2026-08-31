@@ -422,7 +422,7 @@ def build_panel(
             "china_origin_code": "5700",
         },
         "mapping": {
-            "path": str(mapping_path.relative_to(PROJECT_ROOT)),
+            "path": display_path(mapping_path),
             "sha256": mapping_sha256,
             "invalid_or_ambiguous_codes_excluded": True,
         },
@@ -435,9 +435,9 @@ def build_panel(
             "china_mapping_coverage": mapped_china / raw_china if raw_china else 0.0,
         },
         "outputs": {
-            "combined_panel": str(combined_path.relative_to(PROJECT_ROOT)),
+            "combined_panel": display_path(combined_path),
             "combined_rows": combined_rows,
-            "manifest": str(manifest_path.relative_to(PROJECT_ROOT)),
+            "manifest": display_path(manifest_path),
         },
         "causal_adoption_status": "not_evaluated_until_control_selection",
         "interpretation_boundary": "This is an all-origin data and mapping-coverage build. It does not select controls or estimate a policy effect.",
