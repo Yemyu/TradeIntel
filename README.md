@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 6: the causal-control design is frozen, official policy-exposure and List 1 exclusion evidence tables are built, and the conservative cross-year HTS10 → 2017 HS6 mapping is complete. The full 48-month all-origin HS6 panel is now built (245,388 HS6-by-month rows, with source hashes). Candidate-control eligibility, contamination exclusions, matching, balance, and pre-trend checks remain pending; causal modelling remains blocked until those frozen gates pass.
+Learning and development stage 7: candidate eligibility and concurrent-policy contamination checks have been executed using only the frozen pre-policy window. Five of six gates pass, yielding 309 treated and 882 clean-control candidates, but the ambiguous mapping value share is 1.0822% versus the precommitted 1.00% maximum. Matching and causal modelling are therefore blocked while the 87 year-by-HTS10 mapping exceptions are audited.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -20,6 +20,7 @@ This repository is currently local-only. It will not be published until its scop
 - [Phase 5 Chinese learning guide: statistical design](./docs/learning/phase-05-statistical-design.zh-CN.md)
 - [Experiment protocol 0001: Section 301 List 1 statistical design](./docs/experiments/0001-section301-list1-statistical-design.zh-CN.md)
 - [Phase 6 Chinese learning guide: control-group design](./docs/learning/phase-06-control-design.zh-CN.md)
+- [Phase 7 Chinese learning guide: control eligibility](./docs/learning/phase-07-control-eligibility.zh-CN.md)
 - [Data contract 0003: causal control-data extension](./docs/contracts/0003-causal-control-data-contract.zh-CN.md)
 - [Policy exposure evidence table](./data/processed/causal/trade_action_exposure.csv)
 - [List 1 exclusion timeline](./data/processed/causal/list1_exclusion_timeline.csv)
@@ -28,6 +29,8 @@ This repository is currently local-only. It will not be published until its scop
 - [All-origin trade-panel report](./data/processed/causal/causal_trade_panel_report.json)
 - [All-origin trade-panel source manifest](./data/processed/causal/causal_trade_panel_manifest.json)
 - [Control-build status report](./data/processed/causal/control_build_report.md)
+- [Control-eligibility report](./data/processed/causal/control_eligibility_report.md)
+- [Treated mapping exceptions](./data/processed/causal/treated_mapping_exceptions.csv)
 
 ### 中文学习版
 
@@ -118,7 +121,7 @@ This parses and checks the official List 1/2/3 notices, records Section 232/201 
 python scripts/build_hts6_mapping.py
 ```
 
-The mapping is deliberately conservative: `ex` and one-to-many relationships remain flagged instead of being guessed. The full all-origin trade panel is built, but it is not itself a control group. The remaining causal gates are treated-unit pre-policy coverage, policy-contamination exclusions, matching balance, and pre-trends; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
+The mapping is deliberately conservative: `ex` and one-to-many relationships remain flagged instead of being guessed. The full all-origin trade panel is built, and the eligibility layer has now classified every canonical HS6 using pre-policy data only. Matching remains blocked because one frozen ambiguity gate fails; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
 
 After the mapping is verified, rebuild the compact all-origin HS6 panel with:
 
@@ -127,3 +130,11 @@ python scripts/build_causal_trade_panel.py --start 2016-01 --end 2019-12
 ```
 
 This reads every origin from the official monthly detail files, retains only China and all-origin totals after mapping, removes each raw ZIP after successful processing, and records checksums in `causal_trade_panel_manifest.json`. The completed frozen scope is January 2016–December 2019 (48 months; 245,388 HS6-by-month rows). Its all-sample mapping coverage is 95.78% by all-origin value and 98.02% by China value; these are source-quality summaries, not proof that the treated pre-policy sample passes the causal coverage threshold. The panel does not choose controls or estimate a causal effect by itself.
+
+Run the frozen pre-policy eligibility and policy-contamination gates with:
+
+```bash
+python scripts/build_control_eligibility.py
+```
+
+This produces auditable treated/control/excluded labels and a value-ranked mapping-exception table. The current run passes value coverage, code coverage, sample-size, and official-scope gates, but stops before matching because ambiguous treated value is 1.0822%, above the frozen 1.00% maximum. No post-policy outcome is used for selection.

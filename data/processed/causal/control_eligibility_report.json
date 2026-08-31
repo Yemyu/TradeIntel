@@ -1,0 +1,108 @@
+{
+  "status": "blocked_before_matching",
+  "generated_at_utc": "2026-08-31T03:25:10+00:00",
+  "protocol_id": "section301_list1_control_v1",
+  "selection_window": {
+    "start": "2016-01",
+    "end": "2018-05",
+    "month_count": 29,
+    "post_policy_outcomes_used": false
+  },
+  "mapping_audit": {
+    "raw_china_value_usd": 73141864233,
+    "mapped_china_value_usd": 72341983080,
+    "mapped_value_coverage": 0.98906397640547,
+    "ambiguous_china_value_usd": 791559606,
+    "ambiguous_value_share": 0.01082225089968196,
+    "invalid_or_unmapped_china_value_usd": 8321547,
+    "observed_positive_year_hts10_count": 4195,
+    "mapped_positive_year_hts10_count": 4108,
+    "mapped_hts10_code_coverage": 0.9792610250297974,
+    "ambiguous_positive_year_hts10_count": 84,
+    "invalid_or_unmapped_positive_year_hts10_count": 3,
+    "observed_unique_hts10_count": 1511
+  },
+  "policy_scope_hs6_counts": {
+    "us_201_solar_2018": 4,
+    "us_201_washers_2018": 3,
+    "us_232_aluminum_2018": 20,
+    "us_232_steel_2018": 168,
+    "us_301_list1_2018": 560,
+    "us_301_list2_2018": 199,
+    "us_301_list3_2018": 3050
+  },
+  "unmatched_official_policy_scope_components": [],
+  "list1_exclusion_audit": {
+    "explicit_hts10_count": 182,
+    "mapped_hs6_count": 122,
+    "unmapped_explicit_hts10": [
+      "8404404000",
+      "8504400000"
+    ],
+    "narrative_product_descriptions_present": true,
+    "sensitivity_scope_complete": false
+  },
+  "classification_counts": {
+    "assignment_non_list1": 4770,
+    "primary_role_excluded": 4118,
+    "reason_insufficient_positive_pre_months": 2067,
+    "primary_role_control_candidate": 882,
+    "reason_direct_policy_scope_overlap": 3322,
+    "assignment_pure_list1": 437,
+    "primary_role_treated_candidate": 309,
+    "assignment_mixed_list1": 102,
+    "reason_mixed_list1_pre_value_share": 102
+  },
+  "eligibility_gates": {
+    "treated_pre_value_coverage": {
+      "observed": 0.98906397640547,
+      "threshold": 0.95,
+      "direction": "minimum",
+      "passed": true
+    },
+    "treated_hts10_code_coverage": {
+      "observed": 0.9792610250297974,
+      "threshold": 0.9,
+      "direction": "minimum",
+      "passed": true
+    },
+    "ambiguous_value_share": {
+      "observed": 0.01082225089968196,
+      "threshold": 0.01,
+      "direction": "maximum",
+      "passed": false
+    },
+    "pure_treated_hs6": {
+      "observed": 309,
+      "threshold": 100,
+      "direction": "minimum",
+      "passed": true
+    },
+    "clean_control_hs6": {
+      "observed": 882,
+      "threshold": 200,
+      "direction": "minimum",
+      "passed": true
+    },
+    "official_policy_scope_expansion": {
+      "observed": 0,
+      "threshold": 0,
+      "direction": "maximum",
+      "passed": true
+    }
+  },
+  "outputs": {
+    "control_eligibility": "data/processed/causal/control_eligibility.csv",
+    "policy_exposure_hs6": "data/processed/causal/policy_exposure_hs6.csv",
+    "treated_mapping_exceptions": "data/processed/causal/treated_mapping_exceptions.csv"
+  },
+  "input_sha256": {
+    "design": "a4a01f2c52b34a2e7711f61c107a6e47c9e8a6c31a89ad593e53d2b794c1f803",
+    "mapping": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+    "list1_trade_panel": "2c127cc1e954a1da182a636ba87960f1b0a2d26fcf0352042077447253c28e6f",
+    "all_origin_panel": "b01b207ee646b527f685687774574e09c9040b7f59b0e46afb8049d6719c36e1",
+    "policy_exposure": "53937091bbfd3b954e601de9c71576f8ad7c568eeca2803b13315c8f9d1dea3c",
+    "list1_exclusions": "4da2c98db7cace332b6224361d31712b6d0e727b2fed33fc112a8224e7e60f9e"
+  },
+  "interpretation_boundary": "Eligibility only. No matching, post-policy selection, event-study estimation, or causal claim was produced."
+}

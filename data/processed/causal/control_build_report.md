@@ -1,11 +1,18 @@
-# 控制组构建报告：贸易面板已完成，等待资格审查
+# 控制组构建报告：资格层已执行
 
-> 状态：`all_origin_panel_built_controls_pending`
+> 状态：`blocked_before_matching`
 
-官方政策暴露表、List 1 排除时间线、跨年 HTS10 → `HS6_2017` 映射，以及 all-origin 贸易面板已经完成。面板覆盖 2016-01 至 2019-12 的 48 个月，共 245,388 条 HS6×月份记录；全来源金额映射覆盖率为 95.78%，中国金额映射覆盖率为 98.02%。
+资格审查严格只使用 2016-01 至 2018-05 的政策前数据，没有看政策后涨跌来选样本。政策范围展开、处理组金额覆盖、HTS10 覆盖、样本数量均已实际计算。
 
-这不等于“已经有了控制组”，更不等于“已经得到关税效应”。覆盖率是全样本汇总值；冻结协议要求对 **处理组、政策前期间** 单独核验金额覆盖和 HTS10 覆盖。随后还必须排除 List 2/3、Section 232/201 等污染商品，只用政策前特征匹配，检查平衡和前趋势。
+| 冻结门槛 | 实际值 | 规则 | 结果 |
+|---|---:|---:|---|
+| `treated_pre_value_coverage` | 98.91% | minimum 95.00% | 通过 |
+| `treated_hts10_code_coverage` | 97.93% | minimum 90.00% | 通过 |
+| `ambiguous_value_share` | 1.08% | maximum 1.00% | 失败 |
+| `pure_treated_hs6` | 309 | minimum 100 | 通过 |
+| `clean_control_hs6` | 882 | minimum 200 | 通过 |
+| `official_policy_scope_expansion` | 0 | maximum 0 | 通过 |
 
-因此暂不生成 `control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`，也不运行事件研究。
+目前有 309 个处理候选和 882 个干净对照候选；但歧义映射金额占比为 1.0822%，高于事先冻结的 1.00% 上限。因此系统停在匹配之前，没有为了得到结果而放宽标准。
 
-机器可读详情见 `control_build_report.json`；面板来源和逐月哈希见 `causal_trade_panel_manifest.json`。
+`treated_mapping_exceptions.csv` 已按政策前进口金额列出需要官方资料查证的年份 × HTS10。详细资格结果见 `control_eligibility_report.md`；在该门槛解决前不生成匹配对，也不运行事件研究。

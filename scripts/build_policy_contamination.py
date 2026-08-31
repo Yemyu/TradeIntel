@@ -39,6 +39,10 @@ MAPPING_CSV = CAUSAL_DIR / "hts_history_mapping.csv"
 MAPPING_REPORT_JSON = CAUSAL_DIR / "mapping_report.json"
 PANEL_REPORT_JSON = CAUSAL_DIR / "causal_trade_panel_report.json"
 PANEL_MANIFEST_JSON = CAUSAL_DIR / "causal_trade_panel_manifest.json"
+ELIGIBILITY_REPORT_JSON = CAUSAL_DIR / "control_eligibility_report.json"
+ELIGIBILITY_CSV = CAUSAL_DIR / "control_eligibility.csv"
+POLICY_HS6_CSV = CAUSAL_DIR / "policy_exposure_hs6.csv"
+MAPPING_EXCEPTIONS_CSV = CAUSAL_DIR / "treated_mapping_exceptions.csv"
 
 CODE8_PATTERN = re.compile(r"(?<!\d)(\d{4}\.\d{2}\.\s*\d{2})(?!\d)")
 CODE10_PATTERN = re.compile(r"(?<!\d)(\d{4}\.\d{2}\.\d{4})(?!\d)")
@@ -562,10 +566,40 @@ def _load_trade_panel_report() -> dict[str, object] | None:
     return report
 
 
+def _load_eligibility_report() -> dict[str, object] | None:
+    """Return Phase 07 only when its report and all audit tables exist."""
+
+    required = (
+        ELIGIBILITY_REPORT_JSON,
+        ELIGIBILITY_CSV,
+        POLICY_HS6_CSV,
+        MAPPING_EXCEPTIONS_CSV,
+    )
+    if not all(path.exists() for path in required):
+        return None
+    try:
+        with ELIGIBILITY_REPORT_JSON.open(encoding="utf-8") as handle:
+            report = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return None
+    if (
+        report.get("status")
+        not in {
+            "blocked_before_matching",
+            "eligibility_gates_passed_matching_pending",
+        }
+        or report.get("selection_window", {}).get("post_policy_outcomes_used")
+        is not False
+    ):
+        return None
+    return report
+
+
 def write_source_report(
     manifest: dict[str, object],
     mapping_report: dict[str, object] | None = None,
     panel_report: dict[str, object] | None = None,
+    eligibility_report: dict[str, object] | None = None,
 ) -> None:
     available = sum(1 for row in manifest["policy_sources"] + manifest["exclusion_sources"] if row["status"] != "unavailable")
     total = len(manifest["policy_sources"]) + len(manifest["exclusion_sources"])
@@ -586,6 +620,23 @@ def write_source_report(
         next_stage = (
             "下一阶段由 Sol 高审查处理组政策前金额覆盖、污染排除、匹配平衡和前趋势；"
             "这些门槛通过前仍不运行事件研究。"
+        )
+    if eligibility_report is not None:
+        audit = eligibility_report["mapping_audit"]
+        failed = [
+            name
+            for name, gate in eligibility_report["eligibility_gates"].items()
+            if not gate["passed"]
+        ]
+        panel_summary += (
+            " Phase 07 已另外完成政策前资格审查：处理组金额覆盖率为 "
+            f"{audit['mapped_value_coverage']:.2%}，映射歧义金额占比为 "
+            f"{audit['ambiguous_value_share']:.2%}。"
+        )
+        next_stage = (
+            "资格审查当前失败门槛为 "
+            + "、".join(f"`{name}`" for name in failed)
+            + "；先解决这些已记录异常，再决定是否进入匹配。"
         )
 
     content = f"""# 官方政策来源取得报告
@@ -621,6 +672,7 @@ def write_control_report(
     manifest: dict[str, object],
     mapping_report: dict[str, object] | None = None,
     panel_report: dict[str, object] | None = None,
+    eligibility_report: dict[str, object] | None = None,
 ) -> None:
     """Record the next hard gate rather than creating a partial causal panel."""
 
@@ -637,7 +689,95 @@ def write_control_report(
         "source_manifest.json",
         "source_access_report.md",
     ]
-    if mapping_ready and panel_report is not None:
+    if mapping_ready and panel_report is not None and eligibility_report is not None:
+        scope = panel_report["source_scope"]
+        coverage = panel_report["coverage"]
+        outputs = panel_report["outputs"]
+        eligibility_counts = eligibility_report["classification_counts"]
+        audit = eligibility_report["mapping_audit"]
+        gates = eligibility_report["eligibility_gates"]
+        failed_gates = [name for name, gate in gates.items() if not gate["passed"]]
+        counts.update(
+            {
+                "mapping_rows": mapping_report["row_count"],
+                "mapping_ambiguous_rows": mapping_report["mapping_status_counts"].get(
+                    "wco_partial_or_ambiguous", 0
+                ),
+                "all_origin_trade_months": scope["month_count"],
+                "all_origin_hs6_month_rows": outputs["combined_rows"],
+                "all_origin_mapping_coverage": coverage["all_origin_mapping_coverage"],
+                "china_mapping_coverage": coverage["china_mapping_coverage"],
+                "treated_pre_mapping_coverage": audit["mapped_value_coverage"],
+                "treated_pre_ambiguity_share": audit["ambiguous_value_share"],
+                "treated_candidates": eligibility_counts.get(
+                    "primary_role_treated_candidate", 0
+                ),
+                "control_candidates": eligibility_counts.get(
+                    "primary_role_control_candidate", 0
+                ),
+            }
+        )
+        completed_outputs.extend(
+            [
+                "hts_history_mapping.csv",
+                "mapping_report.json",
+                "mapping_source_manifest.json",
+                "causal_trade_panel_manifest.json",
+                "causal_trade_panel_report.json",
+                "control_eligibility.csv",
+                "policy_exposure_hs6.csv",
+                "treated_mapping_exceptions.csv",
+                "control_eligibility_report.json",
+                "control_eligibility_report.md",
+            ]
+        )
+        report = {
+            "status": eligibility_report["status"],
+            "stage": "phase_07_control_eligibility_execution",
+            "policy_exposure_status": "expanded_to_hs6_complete",
+            "mapping_status": mapping_report["status"],
+            "trade_panel_status": panel_report["status"],
+            "failed_eligibility_gates": failed_gates,
+            "blocked_outputs": blocked_outputs,
+            "completed_outputs": completed_outputs,
+            "counts": counts,
+            "reason": (
+                "Frozen pre-policy eligibility was executed without post-policy selection. "
+                "Matching remains blocked because: " + ", ".join(failed_gates)
+                if failed_gates
+                else "All frozen eligibility gates passed; matching and balance checks remain pending."
+            ),
+            "adoption_rule": "Do not match or publish the causal event study until all eligibility, balance, and pre-trend gates pass.",
+        }
+        gate_lines = []
+        for name, gate in gates.items():
+            observed = gate["observed"]
+            threshold = gate["threshold"]
+            if isinstance(observed, float):
+                observed_text = f"{observed:.2%}"
+                threshold_text = f"{threshold:.2%}"
+            else:
+                observed_text = f"{observed:,}"
+                threshold_text = f"{threshold:,}"
+            gate_lines.append(
+                f"| `{name}` | {observed_text} | {gate['direction']} "
+                f"{threshold_text} | {'通过' if gate['passed'] else '失败'} |"
+            )
+        markdown = f"""# 控制组构建报告：资格层已执行
+
+> 状态：`{eligibility_report['status']}`
+
+资格审查严格只使用 2016-01 至 2018-05 的政策前数据，没有看政策后涨跌来选样本。政策范围展开、处理组金额覆盖、HTS10 覆盖、样本数量均已实际计算。
+
+| 冻结门槛 | 实际值 | 规则 | 结果 |
+|---|---:|---:|---|
+{chr(10).join(gate_lines)}
+
+目前有 {eligibility_counts.get('primary_role_treated_candidate', 0):,} 个处理候选和 {eligibility_counts.get('primary_role_control_candidate', 0):,} 个干净对照候选；但歧义映射金额占比为 {audit['ambiguous_value_share']:.4%}，高于事先冻结的 1.00% 上限。因此系统停在匹配之前，没有为了得到结果而放宽标准。
+
+`treated_mapping_exceptions.csv` 已按政策前进口金额列出需要官方资料查证的年份 × HTS10。详细资格结果见 `control_eligibility_report.md`；在该门槛解决前不生成匹配对，也不运行事件研究。
+"""
+    elif mapping_ready and panel_report is not None:
         scope = panel_report["source_scope"]
         coverage = panel_report["coverage"]
         outputs = panel_report["outputs"]
@@ -772,6 +912,7 @@ def build_outputs() -> dict[str, object]:
 
     mapping_report = _load_mapping_report()
     panel_report = _load_trade_panel_report()
+    eligibility_report = _load_eligibility_report()
     census_mapping = {
         "status": "blocked_source_access",
         "probe_date": "2026-08-31",
@@ -802,6 +943,16 @@ def build_outputs() -> dict[str, object]:
                 "coverage": panel_report["coverage"],
                 "combined_rows": panel_report["outputs"]["combined_rows"],
             }
+            if eligibility_report is not None:
+                manifest_status = (
+                    "policy_exposure_mapping_panel_"
+                    + eligibility_report["status"]
+                )
+                census_mapping["control_eligibility"] = {
+                    "status": eligibility_report["status"],
+                    "selection_window": eligibility_report["selection_window"],
+                    "eligibility_gates": eligibility_report["eligibility_gates"],
+                }
 
     manifest = {
         "generated_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
@@ -820,8 +971,8 @@ def build_outputs() -> dict[str, object]:
     with SOURCE_MANIFEST.open("w", encoding="utf-8") as handle:
         json.dump(manifest, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
-    write_source_report(manifest, mapping_report, panel_report)
-    write_control_report(manifest, mapping_report, panel_report)
+    write_source_report(manifest, mapping_report, panel_report, eligibility_report)
+    write_control_report(manifest, mapping_report, panel_report, eligibility_report)
     return manifest
 
 

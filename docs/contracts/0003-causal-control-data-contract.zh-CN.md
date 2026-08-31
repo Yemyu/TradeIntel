@@ -1,6 +1,6 @@
 # 数据契约 0003：因果对照商品扩展
 
-> 状态：设计已冻结，等待批量执行
+> 状态：资格层已执行；歧义金额门槛失败，停止在匹配之前
 >
 > 日期：2026-08-31
 
@@ -35,6 +35,8 @@
 ### 处理组
 
 政策前中国进口金额全部能够连接到原始 List 1 HTS8 的稳定 HS6 商品家族。主问题估计的是“被原始 List 1 列入”的意向处理效应（ITT），不是每个月都准确承受 25% 税率的机械效应。
+
+实施澄清（在运行资格结果前冻结）：如果一个 HS6 的政策前中国进口全部来自 List 1，但同一 HS6 代码范围还覆盖 List 2、List 3、Section 232 或 Section 201，该家族仍会单独标记并退出主处理组。原因是结果变量按整个 HS6 汇总，不能把同一家族内另一项政策造成的变化冒充 List 1 效应。
 
 ### 对照组
 
@@ -86,6 +88,9 @@ USTR 的第一轮 List 1 排除在 2018 年 12 月公布，而且排除追溯到
 - `hts_history_mapping.csv`：原始年月 HTS10 到 `HS6_2017` 的官方映射；
 - `trade_action_exposure.csv`：每个代码受到哪些同期贸易行动影响；
 - `list1_exclusion_timeline.csv`：List 1 排除时间线和适用范围；
+- `control_eligibility.csv`：每个稳定 HS6 的处理/对照资格与排除原因；
+- `policy_exposure_hs6.csv`：官方同期政策范围展开到统一 HS6 的审计表；
+- `treated_mapping_exceptions.csv`：按政策前金额排序的映射异常明细；
 - `control_candidate_features.csv`：只用政策前数据计算的候选特征；
 - `matched_control_pairs.csv`：冻结的处理—对照配对和距离；
 - `causal_candidate_panel.csv`：稳定 HS6 × 月份面板；
@@ -114,4 +119,4 @@ USTR 的第一轮 List 1 排除在 2018 年 12 月公布，而且排除追溯到
 - USTR [List 1](https://www.ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/34-billion-trade-action)、[List 2](https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/16-billion-trade-action)、[List 3](https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/200-billion-trade-action)
 - USITC 2018 年其他贸易行动：[Section 232 and 301 Trade Actions](https://www.usitc.gov/research_and_analysis/trade_shifts_2018/special_topic.htm)
 
-直接命令行请求 Census 历史 Excel 在 2026-08-31 返回 HTTP 403。执行阶段必须找到官方支持的下载路径并核验哈希；在未经方法审查前，不得使用第三方镜像替代。
+直接命令行请求 Census 历史 Excel 在 2026-08-31 返回 HTTP 403；随后已通过官方参考页支持的浏览器下载路径取得文件并核验 SHA-256，没有使用第三方镜像。资格层已严格只读政策前数据执行：6 道门槛通过 5 道，唯一失败项是歧义映射金额占比 1.0822% 高于 1.00% 上限，因此未生成匹配结果。

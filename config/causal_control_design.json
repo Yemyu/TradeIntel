@@ -1,6 +1,6 @@
 {
   "protocol_id": "section301_list1_control_v1",
-  "status": "design_frozen_pending_data",
+  "status": "eligibility_audit_blocked_before_matching",
   "frozen_at": "2026-08-31",
   "estimand": {
     "primary": "intent_to_treat_effect_of_original_list1_assignment",
@@ -31,6 +31,7 @@
     "treated": "Canonical HS6 families whose pre-policy China import value is entirely linked to original List 1 HTS8 assignments.",
     "control": "Canonical HS6 families with zero direct exposure to the listed concurrent trade actions during the analysis window.",
     "mixed": "Exclude families with treatment exposure strictly between zero and one from the primary binary design.",
+    "treated_concurrent_action_overlap": "A family that is pure List 1 by pre-policy China value but also contains scope from List 2, List 3, Section 232, or Section 201 is flagged and excluded from the primary treated sample because the outcome is measured at the whole HS6 family level.",
     "exclusions": "Keep original List 1 assignment for the primary intention-to-treat design; attach product exclusions as metadata and remove ever-excluded families in a sensitivity analysis."
   },
   "control_contamination_exclusions": [
@@ -89,5 +90,5 @@
     "ustr_list3": "https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/200-billion-trade-action",
     "usitc_2018_trade_actions": "https://www.usitc.gov/research_and_analysis/trade_shifts_2018/special_topic.htm"
   },
-  "source_access_note": "Direct command-line requests to the Census reference workbook returned HTTP 403 on 2026-08-31. The execution phase must use a supported official download route and verify hashes; it must not substitute an unofficial mirror without review."
+  "source_access_note": "Direct command-line requests to the Census reference workbook returned HTTP 403 on 2026-08-31. The official browser-supported download route was then used and all source hashes were verified; no unofficial mirror was substituted."
 }
