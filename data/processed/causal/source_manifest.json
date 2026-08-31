@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-31T01:36:46+00:00",
-  "status": "policy_exposure_mapping_all_origin_panel_built_controls_pending",
+  "generated_at_utc": "2026-08-31T03:25:15+00:00",
+  "status": "policy_exposure_mapping_panel_blocked_before_matching",
   "policy_sources": [
     {
       "source_id": "list1_initial",
@@ -217,6 +217,53 @@
         "china_mapping_coverage": 0.9802335580856852
       },
       "combined_rows": 245388
+    },
+    "control_eligibility": {
+      "status": "blocked_before_matching",
+      "selection_window": {
+        "start": "2016-01",
+        "end": "2018-05",
+        "month_count": 29,
+        "post_policy_outcomes_used": false
+      },
+      "eligibility_gates": {
+        "treated_pre_value_coverage": {
+          "observed": 0.98906397640547,
+          "threshold": 0.95,
+          "direction": "minimum",
+          "passed": true
+        },
+        "treated_hts10_code_coverage": {
+          "observed": 0.9792610250297974,
+          "threshold": 0.9,
+          "direction": "minimum",
+          "passed": true
+        },
+        "ambiguous_value_share": {
+          "observed": 0.01082225089968196,
+          "threshold": 0.01,
+          "direction": "maximum",
+          "passed": false
+        },
+        "pure_treated_hs6": {
+          "observed": 309,
+          "threshold": 100,
+          "direction": "minimum",
+          "passed": true
+        },
+        "clean_control_hs6": {
+          "observed": 882,
+          "threshold": 200,
+          "direction": "minimum",
+          "passed": true
+        },
+        "official_policy_scope_expansion": {
+          "observed": 0,
+          "threshold": 0,
+          "direction": "maximum",
+          "passed": true
+        }
+      }
     }
   }
 }
