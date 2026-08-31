@@ -2,9 +2,10 @@
 
 The Census historical workbook provides validity intervals, while the annual
 import concordances provide the official code universe and NAICS metadata. The
-WCO Table II is used only for HS 2012 -> HS 2017 six-digit changes. Any
-one-to-many or ``ex`` (partial-scope) relationship is retained as ambiguous
-and is not forced into a single causal key.
+WCO Table II is used only for HS 2012 -> HS 2017 six-digit changes. A
+one-to-many or ``ex`` (partial-scope) relationship stays ambiguous unless the
+same official Census HTS10, exact normalized description, units, validity,
+and WCO candidate prove deterministic continuity into the 2017 prefix.
 """
 
 from __future__ import annotations
@@ -114,6 +115,9 @@ def read_annual_concordance(year: int) -> dict[str, dict[str, str]]:
         if len(code) != 10 or not code.isdigit():
             continue
         rows[code] = {
+            "description": str(sheet.cell_value(index, 1)).strip(),
+            "unit_qy1": str(sheet.cell_value(index, 3)).strip(),
+            "unit_qy2": str(sheet.cell_value(index, 4)).strip(),
             "naics6": str(sheet.cell_value(index, 7)).strip(),
         }
     if not rows:
@@ -210,6 +214,47 @@ def resolve_mapping(
     return "", "no_target_hs6", "", "0"
 
 
+def _normalized_exact_field(value: str) -> str:
+    """Normalize presentation only; this is not fuzzy or semantic matching."""
+
+    return " ".join(value.upper().split())
+
+
+def exact_hts10_continuity_target(
+    *,
+    source_year: int,
+    source_hts10: str,
+    source_metadata: dict[str, str],
+    anchor_2017: dict[str, dict[str, str]],
+    wco: dict[str, list[dict[str, object]]],
+    validity: dict[str, list[dict[str, str]]],
+) -> str:
+    """Return an exact 2017 prefix only when all frozen official checks pass."""
+
+    if source_year != 2016 or source_hts10 not in anchor_2017:
+        return ""
+    source_hs6 = source_hts10[:6]
+    candidates = wco.get(source_hs6, [])
+    candidate_targets = {str(item["target"]) for item in candidates}
+    if source_hs6 not in candidate_targets:
+        return ""
+    if validity_for_year(validity.get(source_hts10, []), 2016)[0] != "valid":
+        return ""
+    if validity_for_year(validity.get(source_hts10, []), 2017)[0] != "valid":
+        return ""
+    anchor_metadata = anchor_2017[source_hts10]
+    fields = ("description", "unit_qy1", "unit_qy2")
+    if not _normalized_exact_field(source_metadata.get("description", "")):
+        return ""
+    if all(
+        _normalized_exact_field(source_metadata.get(field, ""))
+        == _normalized_exact_field(anchor_metadata.get(field, ""))
+        for field in fields
+    ):
+        return source_hs6
+    return ""
+
+
 def build_mapping_rows() -> tuple[list[dict[str, object]], dict[str, object]]:
     if not HISTORY_XLSX.exists() or not WCO_TABLE_II.exists():
         raise FileNotFoundError("Official historical HS or WCO correlation source is missing")
@@ -244,6 +289,18 @@ def build_mapping_rows() -> tuple[list[dict[str, object]], dict[str, object]]:
                 target_universe=target_universe,
                 wco=wco,
             )
+            if status == "wco_partial_or_ambiguous":
+                continuity_target = exact_hts10_continuity_target(
+                    source_year=year,
+                    source_hts10=code,
+                    source_metadata=metadata,
+                    anchor_2017=concordances[2017],
+                    wco=wco,
+                    validity=validity,
+                )
+                if continuity_target:
+                    target = continuity_target
+                    status = "census_exact_hts10_continuity"
             validity_status, intervals = validity_for_year(validity.get(code, []), year)
             status_counts[status] += 1
             validity_counts[validity_status] += 1
@@ -262,8 +319,20 @@ def build_mapping_rows() -> tuple[list[dict[str, object]], dict[str, object]]:
                     "annual_concordance_present": "1",
                     "source_url": CONCORDANCE_URL.format(yy=year % 100),
                     "source_sha256": source_hashes[f"concordance_{year}"],
-                    "mapping_source_url": WCO_URL if year == 2016 and source_hs6 in wco else HISTORY_URL,
-                    "mapping_source_sha256": source_hashes["wco_table_ii"] if year == 2016 and source_hs6 in wco else source_hashes["historical_xlsx"],
+                    "mapping_source_url": (
+                        CONCORDANCE_URL.format(yy=17)
+                        if status == "census_exact_hts10_continuity"
+                        else WCO_URL
+                        if year == 2016 and source_hs6 in wco
+                        else HISTORY_URL
+                    ),
+                    "mapping_source_sha256": (
+                        source_hashes["concordance_2017"]
+                        if status == "census_exact_hts10_continuity"
+                        else source_hashes["wco_table_ii"]
+                        if year == 2016 and source_hs6 in wco
+                        else source_hashes["historical_xlsx"]
+                    ),
                 }
             )
         # Annual concordances are useful code snapshots, but the historical
@@ -317,7 +386,8 @@ def build_mapping_rows() -> tuple[list[dict[str, object]], dict[str, object]]:
         "historical_validity_counts": dict(sorted(validity_counts.items())),
         "wco_correlation_source_count": len(wco),
         "rules": {
-            "2016_to_2017": "Use WCO Table II only for changed HS6; any ex/one-to-many mapping remains blank and flagged.",
+            "2016_to_2017": "Use WCO Table II only for changed HS6; ex/one-to-many mappings remain blank unless the frozen exact Census HTS10 continuity rule passes.",
+            "exact_hts10_continuity": "For a partial/one-to-many WCO relation, use the unchanged 2017 prefix only when the identical Census HTS10, normalized full description, quantity units, two-year historical validity, and explicit WCO candidate all agree exactly.",
             "2017_to_2019": "Use the 2017 HS6 prefix as the canonical key; annual Census concordances validate code presence and NAICS, while valid historical-only HTS10 lines may use the same prefix when the 2017 HS6 exists.",
             "no_fuzzy_names": True,
             "policy_post_results_used": False,
@@ -343,7 +413,7 @@ def write_outputs(rows: list[dict[str, object]], report: dict[str, object]) -> N
 
 状态：`{report['status']}`
 
-本次生成 {report['row_count']:,} 条年度 HTS10 映射记录。2016 年跨 HS 版本变化使用 WCO Table II；WCO 标有 `ex` 或一对多关系的记录保留候选代码但不强行填入单个 `HS6_2017`。2017–2019 年优先使用 Census 年度 concordance；对历史文件确认当年有效、但不在年度快照中的代码，只有在其六位前缀已存在于 2017 锚点时才标记为 `history_only_same_hs6_prefix`。新出现的六位 HS6 仍保持空映射。
+本次生成 {report['row_count']:,} 条年度 HTS10 映射记录。2016 年跨 HS 版本变化使用 WCO Table II；WCO 标有 `ex` 或一对多关系时，只有同一个 Census HTS10 在 2016/2017 年度文件中同时存在、完整描述和计量单位精确一致、两年历史有效且原六位前缀属于 WCO 明示候选，才标记为 `census_exact_hts10_continuity`；其余仍留空。2017–2019 年优先使用 Census 年度 concordance；对历史文件确认当年有效、但不在年度快照中的代码，只有在其六位前缀已存在于 2017 锚点时才标记为 `history_only_same_hs6_prefix`。新出现的六位 HS6 仍保持空映射。
 
 映射状态计数：
 

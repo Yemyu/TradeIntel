@@ -1,6 +1,6 @@
 # 数据契约 0003：因果对照商品扩展
 
-> 状态：资格层已执行；歧义金额门槛失败，停止在匹配之前
+> 状态：资格门槛全部通过；等待政策前特征与匹配
 >
 > 日期：2026-08-31
 
@@ -119,4 +119,4 @@ USTR 的第一轮 List 1 排除在 2018 年 12 月公布，而且排除追溯到
 - USTR [List 1](https://www.ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/34-billion-trade-action)、[List 2](https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/16-billion-trade-action)、[List 3](https://ustr.gov/issue-areas/enforcement/section-301-investigations/section-301-china/200-billion-trade-action)
 - USITC 2018 年其他贸易行动：[Section 232 and 301 Trade Actions](https://www.usitc.gov/research_and_analysis/trade_shifts_2018/special_topic.htm)
 
-直接命令行请求 Census 历史 Excel 在 2026-08-31 返回 HTTP 403；随后已通过官方参考页支持的浏览器下载路径取得文件并核验 SHA-256，没有使用第三方镜像。资格层已严格只读政策前数据执行：6 道门槛通过 5 道，唯一失败项是歧义映射金额占比 1.0822% 高于 1.00% 上限，因此未生成匹配结果。
+直接命令行请求 Census 历史 Excel 在 2026-08-31 返回 HTTP 403；随后已通过官方参考页支持的浏览器下载路径取得文件并核验 SHA-256，没有使用第三方镜像。资格层首次运行因歧义金额 1.0822% 主动停止；随后按运行前冻结的 Census HTS10 精确连续性规则重建受影响面板，歧义金额降至 0.0109%，6 道资格门槛全部通过。此状态只允许进入匹配，不代表平衡、前趋势或因果结果已经通过。

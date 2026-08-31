@@ -1,6 +1,6 @@
 # Phase 07：处理组与对照组资格审查
 
-> 状态：`blocked_before_matching`
+> 状态：`eligibility_gates_passed_matching_pending`
 
 ## 本阶段回答了什么
 
@@ -10,27 +10,27 @@
 
 | 门槛 | 实际值 | 规则 | 结果 |
 |---|---:|---:|---|
-| `treated_pre_value_coverage` | 98.91% | minimum 95.00% | 通过 |
-| `treated_hts10_code_coverage` | 97.93% | minimum 90.00% | 通过 |
-| `ambiguous_value_share` | 1.08% | maximum 1.00% | 失败 |
-| `pure_treated_hs6` | 309 | minimum 100 | 通过 |
-| `clean_control_hs6` | 882 | minimum 200 | 通过 |
+| `treated_pre_value_coverage` | 99.98% | minimum 95.00% | 通过 |
+| `treated_hts10_code_coverage` | 99.86% | minimum 90.00% | 通过 |
+| `ambiguous_value_share` | 0.01% | maximum 1.00% | 通过 |
+| `pure_treated_hs6` | 315 | minimum 100 | 通过 |
+| `clean_control_hs6` | 893 | minimum 200 | 通过 |
 | `official_policy_scope_expansion` | 0 | maximum 0 | 通过 |
 
-至少一道冻结门槛失败，停止在资格层，不进入匹配。
+资格门槛通过，可以进入匹配设计；仍然没有因果结果。
 
 ## 样本分类
 
 - 纯 List 1 家族：437；
 - 混合 List 1 家族：102；
-- 非 List 1 家族：4,770；
-- 通过政策前活跃度与污染规则的处理候选：309；
-- 通过政策前活跃度与污染规则的对照候选：882；
-- 必须排除：4,118。
+- 非 List 1 家族：4,771；
+- 通过政策前活跃度与污染规则的处理候选：315；
+- 通过政策前活跃度与污染规则的对照候选：893；
+- 必须排除：4,102。
 
 ## 覆盖率怎样理解
 
-原始 List 1 政策前中国进口金额为 73,141,864,233 美元，其中 72,341,983,080 美元成功映射到 `HS6_2017`。金额覆盖率和 HTS10 覆盖率是“处理组原始细项能否可靠放入统一商品家族”的检查，不是模型准确率，也不是关税效果。
+原始 List 1 政策前中国进口金额为 73,141,864,233 美元，其中 73,125,539,850 美元成功映射到 `HS6_2017`。金额覆盖率和 HTS10 覆盖率是“处理组原始细项能否可靠放入统一商品家族”的检查，不是模型准确率，也不是关税效果。
 
 ## 尚未完成
 

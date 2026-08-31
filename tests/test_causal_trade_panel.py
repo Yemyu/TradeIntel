@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
-from scripts.build_causal_trade_panel import process_archive
+from scripts.build_causal_trade_panel import compatible_mapping_years, process_archive
 from scripts.build_trade_panel import month_source
 from scripts.inventory_census_import import EXPECTED_DETAIL_WIDTH
 
@@ -26,6 +26,26 @@ def detail_line(*, hts10: str, country_code: str, value: int) -> bytes:
 
 
 class CausalTradePanelTests(unittest.TestCase):
+    def test_mapping_compatibility_requires_exact_year_dictionary_equality(self):
+        base = {
+            "1000000000": {
+                "hs6_2017": "100000",
+                "mapping_status": "same_hs6_prefix",
+                "historical_validity_status": "valid",
+            }
+        }
+        current = {2016: base, 2017: base}
+        previous = {
+            2016: {
+                "1000000000": {
+                    **base["1000000000"],
+                    "hs6_2017": "999999",
+                }
+            },
+            2017: base,
+        }
+        self.assertEqual(compatible_mapping_years(current, previous), {2017})
+
     def test_process_archive_aggregates_all_origins_and_excludes_ambiguous_codes(self):
         source = month_source(2018, 7)
         mapping = {
@@ -115,7 +135,7 @@ class CausalTradePanelTests(unittest.TestCase):
                 "china_origin_code": "5700",
             },
         )
-        self.assertEqual(report["outputs"]["combined_rows"], 245388)
+        self.assertEqual(report["outputs"]["combined_rows"], 247124)
         self.assertEqual(len(manifest["months"]), 48)
         self.assertEqual(
             len({(row["year"], row["month"]) for row in manifest["months"]}), 48
@@ -123,6 +143,23 @@ class CausalTradePanelTests(unittest.TestCase):
         self.assertTrue(all(row["source_sha256"] for row in manifest["months"]))
         self.assertTrue(
             all(row["status"] == "processed" for row in manifest["months"])
+        )
+        compatibility_counts = {
+            status: sum(
+                row["mapping_compatibility_status"] == status
+                for row in manifest["months"]
+            )
+            for status in {
+                "processed_with_current_mapping",
+                "reused_after_exact_year_mapping_comparison",
+            }
+        }
+        self.assertEqual(
+            compatibility_counts,
+            {
+                "processed_with_current_mapping": 12,
+                "reused_after_exact_year_mapping_comparison": 36,
+            },
         )
 
 

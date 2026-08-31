@@ -1,14 +1,15 @@
 {
   "status": "mapping_built_with_conservative_ambiguity_flags",
-  "generated_at_utc": "2026-08-30T20:50:10+00:00",
+  "generated_at_utc": "2026-08-31T15:27:29+00:00",
   "row_count": 76691,
   "target_hs6_universe_count": 5405,
   "mapping_status_counts": {
+    "census_exact_hts10_continuity": 753,
     "history_only_same_hs6_prefix": 386,
     "no_target_hs6": 1,
     "same_hs6_prefix": 74862,
     "wco_exact_single": 10,
-    "wco_partial_or_ambiguous": 1432
+    "wco_partial_or_ambiguous": 679
   },
   "historical_validity_counts": {
     "not_in_historical_file": 22,
@@ -17,7 +18,8 @@
   },
   "wco_correlation_source_count": 291,
   "rules": {
-    "2016_to_2017": "Use WCO Table II only for changed HS6; any ex/one-to-many mapping remains blank and flagged.",
+    "2016_to_2017": "Use WCO Table II only for changed HS6; ex/one-to-many mappings remain blank unless the frozen exact Census HTS10 continuity rule passes.",
+    "exact_hts10_continuity": "For a partial/one-to-many WCO relation, use the unchanged 2017 prefix only when the identical Census HTS10, normalized full description, quantity units, two-year historical validity, and explicit WCO candidate all agree exactly.",
     "2017_to_2019": "Use the 2017 HS6 prefix as the canonical key; annual Census concordances validate code presence and NAICS, while valid historical-only HTS10 lines may use the same prefix when the 2017 HS6 exists.",
     "no_fuzzy_names": true,
     "policy_post_results_used": false

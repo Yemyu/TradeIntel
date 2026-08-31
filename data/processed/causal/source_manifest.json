@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-31T03:25:15+00:00",
-  "status": "policy_exposure_mapping_panel_blocked_before_matching",
+  "generated_at_utc": "2026-08-31T16:43:33+00:00",
+  "status": "policy_exposure_mapping_panel_eligibility_gates_passed_matching_pending",
   "policy_sources": [
     {
       "source_id": "list1_initial",
@@ -192,11 +192,12 @@
       "status": "mapping_built_with_conservative_ambiguity_flags",
       "row_count": 76691,
       "mapping_status_counts": {
+        "census_exact_hts10_continuity": 753,
         "history_only_same_hs6_prefix": 386,
         "no_target_hs6": 1,
         "same_hs6_prefix": 74862,
         "wco_exact_single": 10,
-        "wco_partial_or_ambiguous": 1432
+        "wco_partial_or_ambiguous": 679
       }
     },
     "trade_panel": {
@@ -210,16 +211,16 @@
       },
       "coverage": {
         "raw_all_origin_value_usd": 9542809370966,
-        "mapped_all_origin_value_usd": 9139909426924,
-        "all_origin_mapping_coverage": 0.9577797346274334,
+        "mapped_all_origin_value_usd": 9183507217722,
+        "all_origin_mapping_coverage": 0.9623483882705258,
         "raw_china_value_usd": 1960929808259,
-        "mapped_china_value_usd": 1922169203106,
-        "china_mapping_coverage": 0.9802335580856852
+        "mapped_china_value_usd": 1938672138090,
+        "china_mapping_coverage": 0.988649430451179
       },
-      "combined_rows": 245388
+      "combined_rows": 247124
     },
     "control_eligibility": {
-      "status": "blocked_before_matching",
+      "status": "eligibility_gates_passed_matching_pending",
       "selection_window": {
         "start": "2016-01",
         "end": "2018-05",
@@ -228,31 +229,31 @@
       },
       "eligibility_gates": {
         "treated_pre_value_coverage": {
-          "observed": 0.98906397640547,
+          "observed": 0.9997768120464089,
           "threshold": 0.95,
           "direction": "minimum",
           "passed": true
         },
         "treated_hts10_code_coverage": {
-          "observed": 0.9792610250297974,
+          "observed": 0.998569725864124,
           "threshold": 0.9,
           "direction": "minimum",
           "passed": true
         },
         "ambiguous_value_share": {
-          "observed": 0.01082225089968196,
+          "observed": 0.00010941525874301269,
           "threshold": 0.01,
           "direction": "maximum",
-          "passed": false
+          "passed": true
         },
         "pure_treated_hs6": {
-          "observed": 309,
+          "observed": 315,
           "threshold": 100,
           "direction": "minimum",
           "passed": true
         },
         "clean_control_hs6": {
-          "observed": 882,
+          "observed": 893,
           "threshold": 200,
           "direction": "minimum",
           "passed": true

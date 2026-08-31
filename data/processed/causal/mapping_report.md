@@ -2,17 +2,18 @@
 
 状态：`mapping_built_with_conservative_ambiguity_flags`
 
-本次生成 76,691 条年度 HTS10 映射记录。2016 年跨 HS 版本变化使用 WCO Table II；WCO 标有 `ex` 或一对多关系的记录保留候选代码但不强行填入单个 `HS6_2017`。2017–2019 年优先使用 Census 年度 concordance；对历史文件确认当年有效、但不在年度快照中的代码，只有在其六位前缀已存在于 2017 锚点时才标记为 `history_only_same_hs6_prefix`。新出现的六位 HS6 仍保持空映射。
+本次生成 76,691 条年度 HTS10 映射记录。2016 年跨 HS 版本变化使用 WCO Table II；WCO 标有 `ex` 或一对多关系时，只有同一个 Census HTS10 在 2016/2017 年度文件中同时存在、完整描述和计量单位精确一致、两年历史有效且原六位前缀属于 WCO 明示候选，才标记为 `census_exact_hts10_continuity`；其余仍留空。2017–2019 年优先使用 Census 年度 concordance；对历史文件确认当年有效、但不在年度快照中的代码，只有在其六位前缀已存在于 2017 锚点时才标记为 `history_only_same_hs6_prefix`。新出现的六位 HS6 仍保持空映射。
 
 映射状态计数：
 
 ```text
 {
+  "census_exact_hts10_continuity": 753,
   "history_only_same_hs6_prefix": 386,
   "no_target_hs6": 1,
   "same_hs6_prefix": 74862,
   "wco_exact_single": 10,
-  "wco_partial_or_ambiguous": 1432
+  "wco_partial_or_ambiguous": 679
 }
 ```
 

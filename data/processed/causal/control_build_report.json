@@ -1,12 +1,10 @@
 {
-  "status": "blocked_before_matching",
-  "stage": "phase_07_control_eligibility_execution",
+  "status": "eligibility_gates_passed_matching_pending",
+  "stage": "phase_08_exact_mapping_resolution",
   "policy_exposure_status": "expanded_to_hs6_complete",
   "mapping_status": "mapping_built_with_conservative_ambiguity_flags",
   "trade_panel_status": "all_origin_hs6_panel_built",
-  "failed_eligibility_gates": [
-    "ambiguous_value_share"
-  ],
+  "failed_eligibility_gates": [],
   "blocked_outputs": [
     "control_candidate_features.csv",
     "matched_control_pairs.csv",
@@ -35,16 +33,16 @@
     "exposure_rows": 6850,
     "exclusion_batches": 9,
     "mapping_rows": 76691,
-    "mapping_ambiguous_rows": 1432,
+    "mapping_ambiguous_rows": 679,
     "all_origin_trade_months": 48,
-    "all_origin_hs6_month_rows": 245388,
-    "all_origin_mapping_coverage": 0.9577797346274334,
-    "china_mapping_coverage": 0.9802335580856852,
-    "treated_pre_mapping_coverage": 0.98906397640547,
-    "treated_pre_ambiguity_share": 0.01082225089968196,
-    "treated_candidates": 309,
-    "control_candidates": 882
+    "all_origin_hs6_month_rows": 247124,
+    "all_origin_mapping_coverage": 0.9623483882705258,
+    "china_mapping_coverage": 0.988649430451179,
+    "treated_pre_mapping_coverage": 0.9997768120464089,
+    "treated_pre_ambiguity_share": 0.00010941525874301269,
+    "treated_candidates": 315,
+    "control_candidates": 893
   },
-  "reason": "Frozen pre-policy eligibility was executed without post-policy selection. Matching remains blocked because: ambiguous_value_share",
-  "adoption_rule": "Do not match or publish the causal event study until all eligibility, balance, and pre-trend gates pass."
+  "reason": "All frozen eligibility gates passed; matching and balance checks remain pending.",
+  "adoption_rule": "Matching may begin only after eligibility passes. Do not publish the causal event study until matching balance and pre-trend gates also pass."
 }
