@@ -73,18 +73,22 @@ class CausalPolicySourceTests(unittest.TestCase):
         with SOURCE_MANIFEST.open(encoding="utf-8") as handle:
             manifest = json.load(handle)
         self.assertEqual(
-            manifest["status"], "policy_exposure_and_hs_mapping_built_trade_panel_pending"
+            manifest["status"],
+            "policy_exposure_mapping_all_origin_panel_built_controls_pending",
         )
         self.assertEqual(
             manifest["census_mapping"]["status"],
             "official_history_and_concordance_retrieved",
         )
         self.assertEqual(manifest["counts"]["list3_hts8"], 5745)
+        self.assertEqual(manifest["census_mapping"]["trade_panel"]["source_scope"]["month_count"], 48)
+        self.assertGreater(manifest["census_mapping"]["trade_panel"]["combined_rows"], 0)
 
         with CONTROL_REPORT_JSON.open(encoding="utf-8") as handle:
             report = json.load(handle)
-        self.assertEqual(report["status"], "mapping_built_trade_panel_pending")
+        self.assertEqual(report["status"], "all_origin_panel_built_controls_pending")
         self.assertIn("hts_history_mapping.csv", report["completed_outputs"])
+        self.assertIn("causal_trade_panel_report.json", report["completed_outputs"])
         self.assertIn("causal_candidate_panel.csv", report["blocked_outputs"])
 
 

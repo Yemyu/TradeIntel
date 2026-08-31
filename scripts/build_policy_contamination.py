@@ -37,6 +37,8 @@ CONTROL_REPORT_JSON = CAUSAL_DIR / "control_build_report.json"
 CONTROL_REPORT_MD = CAUSAL_DIR / "control_build_report.md"
 MAPPING_CSV = CAUSAL_DIR / "hts_history_mapping.csv"
 MAPPING_REPORT_JSON = CAUSAL_DIR / "mapping_report.json"
+PANEL_REPORT_JSON = CAUSAL_DIR / "causal_trade_panel_report.json"
+PANEL_MANIFEST_JSON = CAUSAL_DIR / "causal_trade_panel_manifest.json"
 
 CODE8_PATTERN = re.compile(r"(?<!\d)(\d{4}\.\d{2}\.\s*\d{2})(?!\d)")
 CODE10_PATTERN = re.compile(r"(?<!\d)(\d{4}\.\d{2}\.\d{4})(?!\d)")
@@ -529,11 +531,63 @@ def _load_mapping_report() -> dict[str, object] | None:
     return report
 
 
+def _load_trade_panel_report() -> dict[str, object] | None:
+    """Return the all-origin panel summary only when its full frozen scope exists."""
+
+    if not PANEL_REPORT_JSON.exists() or not PANEL_MANIFEST_JSON.exists():
+        return None
+    try:
+        with PANEL_REPORT_JSON.open(encoding="utf-8") as handle:
+            report = json.load(handle)
+        with PANEL_MANIFEST_JSON.open(encoding="utf-8") as handle:
+            manifest = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return None
+
+    scope = report.get("source_scope", {})
+    outputs = report.get("outputs", {})
+    months = manifest.get("months", [])
+    if (
+        report.get("status") != "all_origin_hs6_panel_built"
+        or manifest.get("status") != "all_origin_hs6_panel_built"
+        or scope.get("start") != "2016-01"
+        or scope.get("end") != "2019-12"
+        or scope.get("month_count") != 48
+        or scope.get("all_origins_read") is not True
+        or len(months) != 48
+        or not isinstance(outputs.get("combined_rows"), int)
+        or outputs["combined_rows"] <= 0
+    ):
+        return None
+    return report
+
+
 def write_source_report(
-    manifest: dict[str, object], mapping_report: dict[str, object] | None = None
+    manifest: dict[str, object],
+    mapping_report: dict[str, object] | None = None,
+    panel_report: dict[str, object] | None = None,
 ) -> None:
     available = sum(1 for row in manifest["policy_sources"] + manifest["exclusion_sources"] if row["status"] != "unavailable")
     total = len(manifest["policy_sources"]) + len(manifest["exclusion_sources"])
+    panel_summary = "本次运行未发现完整的 all-origin 贸易面板，因此控制组仍缺少未处理候选。"
+    next_stage = "下一阶段先重建 all-origin 贸易面板，再由 Sol 高审查控制组资格和事件研究门槛。"
+    if panel_report is not None:
+        scope = panel_report["source_scope"]
+        coverage = panel_report["coverage"]
+        rows = panel_report["outputs"]["combined_rows"]
+        panel_summary = (
+            "已完成所有原产国的官方月度贸易面板："
+            f"{scope['start']} 至 {scope['end']}，共 {scope['month_count']} 个月、"
+            f"{rows:,} 条 HS6×月份记录。全来源金额映射覆盖率为 "
+            f"{coverage['all_origin_mapping_coverage']:.2%}，中国金额映射覆盖率为 "
+            f"{coverage['china_mapping_coverage']:.2%}。这些是全样本的来源/映射覆盖率，"
+            "不是处理组政策前覆盖率门槛的通过结论。"
+        )
+        next_stage = (
+            "下一阶段由 Sol 高审查处理组政策前金额覆盖、污染排除、匹配平衡和前趋势；"
+            "这些门槛通过前仍不运行事件研究。"
+        )
+
     content = f"""# 官方政策来源取得报告
 
 生成时间（UTC）：{manifest['generated_at_utc']}
@@ -556,15 +610,17 @@ def write_source_report(
 
 ## 尚未完成的边界
 
-即使代码映射已经完成，完整候选控制组仍需要所有原产国的 48 个月贸易面板。当前可追溯面板是 List 1-only，不能直接充当未处理组；还必须完成金额覆盖、污染排除、政策前匹配平衡和前趋势门槛。因此暂不生成 `control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`。
+{panel_summary}
 
-{("下一阶段先重建 all-origin 贸易面板，再由 Sol 高审查控制组资格和事件研究门槛。" if mapping_report else "下一阶段需要在 Sol 高模型审查下选择可复核的 Census 官方支持入口，完成跨年映射后再进入候选控制组。")}
+{(next_stage if mapping_report else "下一阶段需要在 Sol 高模型审查下选择可复核的 Census 官方支持入口，完成跨年映射后再进入候选控制组。")}
 """
     SOURCE_REPORT.write_text(content, encoding="utf-8")
 
 
 def write_control_report(
-    manifest: dict[str, object], mapping_report: dict[str, object] | None = None
+    manifest: dict[str, object],
+    mapping_report: dict[str, object] | None = None,
+    panel_report: dict[str, object] | None = None,
 ) -> None:
     """Record the next hard gate rather than creating a partial causal panel."""
 
@@ -581,7 +637,56 @@ def write_control_report(
         "source_manifest.json",
         "source_access_report.md",
     ]
-    if mapping_ready:
+    if mapping_ready and panel_report is not None:
+        scope = panel_report["source_scope"]
+        coverage = panel_report["coverage"]
+        outputs = panel_report["outputs"]
+        counts.update(
+            {
+                "mapping_rows": mapping_report["row_count"],
+                "mapping_ambiguous_rows": mapping_report["mapping_status_counts"].get(
+                    "wco_partial_or_ambiguous", 0
+                ),
+                "all_origin_trade_months": scope["month_count"],
+                "all_origin_hs6_month_rows": outputs["combined_rows"],
+                "all_origin_mapping_coverage": coverage["all_origin_mapping_coverage"],
+                "china_mapping_coverage": coverage["china_mapping_coverage"],
+            }
+        )
+        completed_outputs.extend(
+            [
+                "hts_history_mapping.csv",
+                "mapping_report.json",
+                "mapping_source_manifest.json",
+                "causal_trade_panel_manifest.json",
+                "causal_trade_panel_report.json",
+            ]
+        )
+        report = {
+            "status": "all_origin_panel_built_controls_pending",
+            "stage": "phase_06_all_origin_panel_execution",
+            "policy_exposure_status": "complete_for_official_notice_scope",
+            "mapping_status": mapping_report["status"],
+            "trade_panel_status": panel_report["status"],
+            "blocked_outputs": blocked_outputs,
+            "completed_outputs": completed_outputs,
+            "counts": counts,
+            "reason": "The full all-origin HS6 panel is built and source-hashed, but it is not a matched control group. Treated pre-policy coverage, contamination exclusions, pre-policy matching, balance, and pre-trend gates remain unevaluated.",
+            "adoption_rule": "Do not run or publish the causal event study until contamination, matching, and pre-trend gates pass.",
+        }
+        markdown = f"""# 控制组构建报告：贸易面板已完成，等待资格审查
+
+> 状态：`all_origin_panel_built_controls_pending`
+
+官方政策暴露表、List 1 排除时间线、跨年 HTS10 → `HS6_2017` 映射，以及 all-origin 贸易面板已经完成。面板覆盖 {scope['start']} 至 {scope['end']} 的 {scope['month_count']} 个月，共 {outputs['combined_rows']:,} 条 HS6×月份记录；全来源金额映射覆盖率为 {coverage['all_origin_mapping_coverage']:.2%}，中国金额映射覆盖率为 {coverage['china_mapping_coverage']:.2%}。
+
+这不等于“已经有了控制组”，更不等于“已经得到关税效应”。覆盖率是全样本汇总值；冻结协议要求对 **处理组、政策前期间** 单独核验金额覆盖和 HTS10 覆盖。随后还必须排除 List 2/3、Section 232/201 等污染商品，只用政策前特征匹配，检查平衡和前趋势。
+
+因此暂不生成 `control_candidate_features.csv`、`matched_control_pairs.csv` 或 `causal_candidate_panel.csv`，也不运行事件研究。
+
+机器可读详情见 `control_build_report.json`；面板来源和逐月哈希见 `causal_trade_panel_manifest.json`。
+"""
+    elif mapping_ready:
         counts.update(
             {
                 "mapping_rows": mapping_report["row_count"],
@@ -666,6 +771,7 @@ def build_outputs() -> dict[str, object]:
     write_csv(EXCLUSION_CSV, list(exclusion_rows[0]), exclusion_rows)
 
     mapping_report = _load_mapping_report()
+    panel_report = _load_trade_panel_report()
     census_mapping = {
         "status": "blocked_source_access",
         "probe_date": "2026-08-31",
@@ -688,6 +794,14 @@ def build_outputs() -> dict[str, object]:
                 "mapping_status_counts": mapping_report["mapping_status_counts"],
             },
         }
+        if panel_report is not None:
+            manifest_status = "policy_exposure_mapping_all_origin_panel_built_controls_pending"
+            census_mapping["trade_panel"] = {
+                "status": panel_report["status"],
+                "source_scope": panel_report["source_scope"],
+                "coverage": panel_report["coverage"],
+                "combined_rows": panel_report["outputs"]["combined_rows"],
+            }
 
     manifest = {
         "generated_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
@@ -706,8 +820,8 @@ def build_outputs() -> dict[str, object]:
     with SOURCE_MANIFEST.open("w", encoding="utf-8") as handle:
         json.dump(manifest, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
-    write_source_report(manifest, mapping_report)
-    write_control_report(manifest, mapping_report)
+    write_source_report(manifest, mapping_report, panel_report)
+    write_control_report(manifest, mapping_report, panel_report)
     return manifest
 
 

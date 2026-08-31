@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 6: the causal-control design is frozen, the official policy-exposure and List 1 exclusion evidence tables are built, and the conservative cross-year HTS10 → 2017 HS6 mapping is complete. Candidate controls remain pending because the full all-origin trade panel still has to be rebuilt; causal modelling remains blocked until the frozen data gates pass.
+Learning and development stage 6: the causal-control design is frozen, official policy-exposure and List 1 exclusion evidence tables are built, and the conservative cross-year HTS10 → 2017 HS6 mapping is complete. The full 48-month all-origin HS6 panel is now built (245,388 HS6-by-month rows, with source hashes). Candidate-control eligibility, contamination exclusions, matching, balance, and pre-trend checks remain pending; causal modelling remains blocked until those frozen gates pass.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -25,6 +25,8 @@ This repository is currently local-only. It will not be published until its scop
 - [List 1 exclusion timeline](./data/processed/causal/list1_exclusion_timeline.csv)
 - [HTS history mapping](./data/processed/causal/hts_history_mapping.csv)
 - [Mapping report](./data/processed/causal/mapping_report.md)
+- [All-origin trade-panel report](./data/processed/causal/causal_trade_panel_report.json)
+- [All-origin trade-panel source manifest](./data/processed/causal/causal_trade_panel_manifest.json)
 - [Control-build status report](./data/processed/causal/control_build_report.md)
 
 ### 中文学习版
@@ -116,7 +118,7 @@ This parses and checks the official List 1/2/3 notices, records Section 232/201 
 python scripts/build_hts6_mapping.py
 ```
 
-The mapping is deliberately conservative: `ex` and one-to-many relationships remain flagged instead of being guessed. The full all-origin trade panel and causal control gates are still pending; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
+The mapping is deliberately conservative: `ex` and one-to-many relationships remain flagged instead of being guessed. The full all-origin trade panel is built, but it is not itself a control group. The remaining causal gates are treated-unit pre-policy coverage, policy-contamination exclusions, matching balance, and pre-trends; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
 
 After the mapping is verified, rebuild the compact all-origin HS6 panel with:
 
@@ -124,4 +126,4 @@ After the mapping is verified, rebuild the compact all-origin HS6 panel with:
 python scripts/build_causal_trade_panel.py --start 2016-01 --end 2019-12
 ```
 
-This reads every origin from the official monthly detail files, retains only China and all-origin totals after mapping, removes each raw ZIP after successful processing, and records checksums in `causal_trade_panel_manifest.json`. The panel does not choose controls or estimate a causal effect by itself.
+This reads every origin from the official monthly detail files, retains only China and all-origin totals after mapping, removes each raw ZIP after successful processing, and records checksums in `causal_trade_panel_manifest.json`. The completed frozen scope is January 2016–December 2019 (48 months; 245,388 HS6-by-month rows). Its all-sample mapping coverage is 95.78% by all-origin value and 98.02% by China value; these are source-quality summaries, not proof that the treated pre-policy sample passes the causal coverage threshold. The panel does not choose controls or estimate a causal effect by itself.

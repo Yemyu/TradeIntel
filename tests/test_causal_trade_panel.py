@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -93,6 +94,36 @@ class CausalTradePanelTests(unittest.TestCase):
             self.assertEqual(rows[0]["china_import_value_consumption_usd"], "150")
             self.assertEqual(rows[0]["all_origin_import_value_consumption_usd"], "200")
             self.assertEqual(rows[0]["china_share"], "0.750000000000")
+
+    def test_full_panel_manifest_and_report_cover_the_frozen_48_month_scope(self):
+        root = Path(__file__).resolve().parents[1]
+        report_path = root / "data/processed/causal/causal_trade_panel_report.json"
+        manifest_path = root / "data/processed/causal/causal_trade_panel_manifest.json"
+        self.assertTrue(report_path.exists())
+        self.assertTrue(manifest_path.exists())
+
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(report["status"], "all_origin_hs6_panel_built")
+        self.assertEqual(
+            report["source_scope"],
+            {
+                "start": "2016-01",
+                "end": "2019-12",
+                "month_count": 48,
+                "all_origins_read": True,
+                "china_origin_code": "5700",
+            },
+        )
+        self.assertEqual(report["outputs"]["combined_rows"], 245388)
+        self.assertEqual(len(manifest["months"]), 48)
+        self.assertEqual(
+            len({(row["year"], row["month"]) for row in manifest["months"]}), 48
+        )
+        self.assertTrue(all(row["source_sha256"] for row in manifest["months"]))
+        self.assertTrue(
+            all(row["status"] == "processed" for row in manifest["months"])
+        )
 
 
 if __name__ == "__main__":

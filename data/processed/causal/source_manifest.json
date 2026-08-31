@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-30T20:51:24+00:00",
-  "status": "policy_exposure_and_hs_mapping_built_trade_panel_pending",
+  "generated_at_utc": "2026-08-31T01:36:46+00:00",
+  "status": "policy_exposure_mapping_all_origin_panel_built_controls_pending",
   "policy_sources": [
     {
       "source_id": "list1_initial",
@@ -198,6 +198,25 @@
         "wco_exact_single": 10,
         "wco_partial_or_ambiguous": 1432
       }
+    },
+    "trade_panel": {
+      "status": "all_origin_hs6_panel_built",
+      "source_scope": {
+        "start": "2016-01",
+        "end": "2019-12",
+        "month_count": 48,
+        "all_origins_read": true,
+        "china_origin_code": "5700"
+      },
+      "coverage": {
+        "raw_all_origin_value_usd": 9542809370966,
+        "mapped_all_origin_value_usd": 9139909426924,
+        "all_origin_mapping_coverage": 0.9577797346274334,
+        "raw_china_value_usd": 1960929808259,
+        "mapped_china_value_usd": 1922169203106,
+        "china_mapping_coverage": 0.9802335580856852
+      },
+      "combined_rows": 245388
     }
   }
 }
