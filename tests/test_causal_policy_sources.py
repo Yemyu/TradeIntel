@@ -74,7 +74,7 @@ class CausalPolicySourceTests(unittest.TestCase):
             manifest = json.load(handle)
         self.assertEqual(
             manifest["status"],
-            "policy_exposure_mapping_panel_blocked_before_matching",
+            "policy_exposure_mapping_panel_eligibility_gates_passed_matching_pending",
         )
         self.assertEqual(
             manifest["census_mapping"]["status"],
@@ -85,13 +85,13 @@ class CausalPolicySourceTests(unittest.TestCase):
         self.assertGreater(manifest["census_mapping"]["trade_panel"]["combined_rows"], 0)
         self.assertEqual(
             manifest["census_mapping"]["control_eligibility"]["status"],
-            "blocked_before_matching",
+            "eligibility_gates_passed_matching_pending",
         )
 
         with CONTROL_REPORT_JSON.open(encoding="utf-8") as handle:
             report = json.load(handle)
-        self.assertEqual(report["status"], "blocked_before_matching")
-        self.assertEqual(report["failed_eligibility_gates"], ["ambiguous_value_share"])
+        self.assertEqual(report["status"], "eligibility_gates_passed_matching_pending")
+        self.assertEqual(report["failed_eligibility_gates"], [])
         self.assertIn("hts_history_mapping.csv", report["completed_outputs"])
         self.assertIn("causal_trade_panel_report.json", report["completed_outputs"])
         self.assertIn("treated_mapping_exceptions.csv", report["completed_outputs"])

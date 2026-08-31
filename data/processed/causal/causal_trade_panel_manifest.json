@@ -1,7 +1,13 @@
 {
-  "generated_at_utc": "2026-08-31T01:32:33+00:00",
+  "generated_at_utc": "2026-08-31T16:43:30+00:00",
   "status": "all_origin_hs6_panel_built",
-  "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+  "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+  "mapping_year_sha256": {
+    "2016": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+    "2017": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+    "2018": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+    "2019": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb"
+  },
   "months": [
     {
       "year": 2016,
@@ -10,38 +16,40 @@
       "source_file_name": "IMDB1601.ZIP",
       "source_sha256": "39c30a31f917cae6b35331acfb0ea3efd8a4410f0c7b9d2b67564609ac9c93de",
       "source_archive_bytes": 106360589,
-      "source_retrieved_at_utc": "2026-08-30T20:54:19+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:30:22+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 571722,
       "china_detail_rows": 121644,
       "unique_hts10_count": 15385,
       "china_unique_hts10_count": 10562,
-      "output_hs6_rows": 4683,
+      "output_hs6_rows": 4817,
       "raw_all_origin_value_usd": 164779238464,
       "raw_china_value_usd": 37120341155,
-      "mapped_all_origin_value_usd": 136693079875,
-      "mapped_china_value_usd": 34163396164,
-      "all_origin_mapping_coverage": 0.8295528074361377,
-      "china_mapping_coverage": 0.9203416536865069,
+      "mapped_all_origin_value_usd": 139759554129,
+      "mapped_china_value_usd": 35443579356,
+      "all_origin_mapping_coverage": 0.8481623985629345,
+      "china_mapping_coverage": 0.9548290304768887,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 3,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1177
+        "wco_partial_or_ambiguous": 592
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 665677,
         "not_valid_in_year": 307421560,
-        "wco_partial_or_ambiguous": 27778071352
+        "wco_partial_or_ambiguous": 24711597098
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 112858,
         "not_valid_in_year": 3182478,
-        "wco_partial_or_ambiguous": 2953649655
+        "wco_partial_or_ambiguous": 1673466463
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_01.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -50,38 +58,40 @@
       "source_file_name": "IMDB1602.ZIP",
       "source_sha256": "471fa733705c82104b6bf1b8df2a838a43969bd17a4345ece50e3375cee63406",
       "source_archive_bytes": 128238812,
-      "source_retrieved_at_utc": "2026-08-30T20:56:52+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:32:45+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 819135,
       "china_detail_rows": 161302,
       "unique_hts10_count": 16030,
       "china_unique_hts10_count": 11575,
-      "output_hs6_rows": 4735,
+      "output_hs6_rows": 4871,
       "raw_all_origin_value_usd": 167165851238,
       "raw_china_value_usd": 35934755840,
-      "mapped_all_origin_value_usd": 137925588077,
-      "mapped_china_value_usd": 33145110530,
-      "all_origin_mapping_coverage": 0.8250823182818027,
-      "china_mapping_coverage": 0.9223691591944875,
+      "mapped_all_origin_value_usd": 141177521019,
+      "mapped_china_value_usd": 34349475483,
+      "all_origin_mapping_coverage": 0.8445356511121432,
+      "china_mapping_coverage": 0.9558844823084792,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 3,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1234
+        "wco_partial_or_ambiguous": 615
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1345614,
         "not_valid_in_year": 134504134,
-        "wco_partial_or_ambiguous": 29104413413
+        "wco_partial_or_ambiguous": 25852480471
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 377311,
         "not_valid_in_year": 307437,
-        "wco_partial_or_ambiguous": 2788960562
+        "wco_partial_or_ambiguous": 1584595609
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_02.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -90,38 +100,40 @@
       "source_file_name": "IMDB1603.ZIP",
       "source_sha256": "dd4e744d74df50ac1a7c7dd0bc14d77e77f130bd4163baf907a3e240286621b8",
       "source_archive_bytes": 139934097,
-      "source_retrieved_at_utc": "2026-08-30T20:59:55+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:40:30+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1015222,
       "china_detail_rows": 189153,
       "unique_hts10_count": 16357,
       "china_unique_hts10_count": 12060,
-      "output_hs6_rows": 4772,
+      "output_hs6_rows": 4911,
       "raw_all_origin_value_usd": 177639635667,
       "raw_china_value_usd": 29856154522,
-      "mapped_all_origin_value_usd": 143739734825,
-      "mapped_china_value_usd": 27360680511,
-      "all_origin_mapping_coverage": 0.8091647693674168,
-      "china_mapping_coverage": 0.9164167639485798,
+      "mapped_all_origin_value_usd": 147058236509,
+      "mapped_china_value_usd": 28485515557,
+      "all_origin_mapping_coverage": 0.8278458574677144,
+      "china_mapping_coverage": 0.9540919121385836,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1260
+        "wco_partial_or_ambiguous": 626
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 494047,
         "not_valid_in_year": 382087744,
-        "wco_partial_or_ambiguous": 33517319051
+        "wco_partial_or_ambiguous": 30198817367
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 67308,
         "not_valid_in_year": 210550,
-        "wco_partial_or_ambiguous": 2495196153
+        "wco_partial_or_ambiguous": 1370361107
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_03.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -130,38 +142,40 @@
       "source_file_name": "IMDB1604.ZIP",
       "source_sha256": "71496f5d33b29126d2921d70c1da772af40cc9f89045641a84cca59f043ebfd3",
       "source_archive_bytes": 147577601,
-      "source_retrieved_at_utc": "2026-08-30T21:02:21+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:43:47+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1169353,
       "china_detail_rows": 211438,
       "unique_hts10_count": 16582,
       "china_unique_hts10_count": 12414,
-      "output_hs6_rows": 4795,
+      "output_hs6_rows": 4937,
       "raw_all_origin_value_usd": 172852372351,
       "raw_china_value_usd": 33122255944,
-      "mapped_all_origin_value_usd": 142068789828,
-      "mapped_china_value_usd": 30426384760,
-      "all_origin_mapping_coverage": 0.8219082439870146,
-      "china_mapping_coverage": 0.9186084671117232,
+      "mapped_all_origin_value_usd": 145568611007,
+      "mapped_china_value_usd": 31580115987,
+      "all_origin_mapping_coverage": 0.8421557021583906,
+      "china_mapping_coverage": 0.9534409745638309,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1276
+        "wco_partial_or_ambiguous": 633
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1784962,
         "not_valid_in_year": 453274593,
-        "wco_partial_or_ambiguous": 30328522968
+        "wco_partial_or_ambiguous": 26828701789
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 200093,
         "not_valid_in_year": 2208929,
-        "wco_partial_or_ambiguous": 2693462162
+        "wco_partial_or_ambiguous": 1539730935
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_04.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -170,38 +184,40 @@
       "source_file_name": "IMDB1605.ZIP",
       "source_sha256": "db94a3c3fce2db72b668e31735101ebfe54a22bc399bff7da639f2f238e106bb",
       "source_archive_bytes": 155116230,
-      "source_retrieved_at_utc": "2026-08-30T21:04:54+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:47:22+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1306496,
       "china_detail_rows": 232893,
       "unique_hts10_count": 16737,
       "china_unique_hts10_count": 12683,
-      "output_hs6_rows": 4805,
+      "output_hs6_rows": 4948,
       "raw_all_origin_value_usd": 182096372177,
       "raw_china_value_usd": 37177665214,
-      "mapped_all_origin_value_usd": 150162114134,
-      "mapped_china_value_usd": 34056103986,
-      "all_origin_mapping_coverage": 0.8246299052462204,
-      "china_mapping_coverage": 0.9160366523816963,
+      "mapped_all_origin_value_usd": 153515048488,
+      "mapped_china_value_usd": 35369540780,
+      "all_origin_mapping_coverage": 0.843042871489946,
+      "china_mapping_coverage": 0.9513653043139698,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1285
+        "wco_partial_or_ambiguous": 634
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1335070,
         "not_valid_in_year": 231882704,
-        "wco_partial_or_ambiguous": 31701040269
+        "wco_partial_or_ambiguous": 28348105915
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 418809,
         "not_valid_in_year": 890313,
-        "wco_partial_or_ambiguous": 3120252106
+        "wco_partial_or_ambiguous": 1806815312
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_05.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -210,38 +226,40 @@
       "source_file_name": "IMDB1606.ZIP",
       "source_sha256": "662f139e1332c4e88e8da7499dc62525012d12da4c0694def62ca54a0a86f736",
       "source_archive_bytes": 161965274,
-      "source_retrieved_at_utc": "2026-08-30T21:07:34+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:50:49+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1434565,
       "china_detail_rows": 253058,
       "unique_hts10_count": 16868,
       "china_unique_hts10_count": 12950,
-      "output_hs6_rows": 4820,
+      "output_hs6_rows": 4966,
       "raw_all_origin_value_usd": 186606536663,
       "raw_china_value_usd": 38387000068,
-      "mapped_all_origin_value_usd": 154251519222,
-      "mapped_china_value_usd": 35269223676,
-      "all_origin_mapping_coverage": 0.8266136973570696,
-      "china_mapping_coverage": 0.9187804103869261,
+      "mapped_all_origin_value_usd": 157595975300,
+      "mapped_china_value_usd": 36600845467,
+      "all_origin_mapping_coverage": 0.844536199632753,
+      "china_mapping_coverage": 0.9534698049382356,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1300
+        "wco_partial_or_ambiguous": 639
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1583815,
         "not_valid_in_year": 207746109,
-        "wco_partial_or_ambiguous": 32145687517
+        "wco_partial_or_ambiguous": 28801231439
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 142738,
         "not_valid_in_year": 641110,
-        "wco_partial_or_ambiguous": 3116992544
+        "wco_partial_or_ambiguous": 1785370753
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_06.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -250,38 +268,40 @@
       "source_file_name": "IMDB1607.ZIP",
       "source_sha256": "fc96262c80d4838f8ffe9e867f57dbb2a175da186b8c10accc5fe25255bcfbcf",
       "source_archive_bytes": 168706170,
-      "source_retrieved_at_utc": "2026-08-30T21:10:39+00:00",
+      "source_retrieved_at_utc": "2026-08-31T15:54:06+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1576333,
       "china_detail_rows": 276350,
       "unique_hts10_count": 17197,
       "china_unique_hts10_count": 13376,
-      "output_hs6_rows": 4830,
+      "output_hs6_rows": 4977,
       "raw_all_origin_value_usd": 180052050307,
       "raw_china_value_usd": 39424245495,
-      "mapped_all_origin_value_usd": 149644454980,
-      "mapped_china_value_usd": 36355556918,
-      "all_origin_mapping_coverage": 0.8311177502552559,
-      "china_mapping_coverage": 0.9221624018806095,
+      "mapped_all_origin_value_usd": 153619695467,
+      "mapped_china_value_usd": 37732119095,
+      "all_origin_mapping_coverage": 0.8531960352857344,
+      "china_mapping_coverage": 0.9570790416213646,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1341
+        "wco_partial_or_ambiguous": 649
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1716321,
         "not_valid_in_year": 127479906,
-        "wco_partial_or_ambiguous": 30278399100
+        "wco_partial_or_ambiguous": 26303158613
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 197148,
         "not_valid_in_year": 587027,
-        "wco_partial_or_ambiguous": 3067904402
+        "wco_partial_or_ambiguous": 1691342225
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_07.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -290,38 +310,40 @@
       "source_file_name": "IMDB1608.ZIP",
       "source_sha256": "e7b7b2d34f6284f5709c1f259870b4dc6e289cf9fafc0cae17330523c4af750d",
       "source_archive_bytes": 175940688,
-      "source_retrieved_at_utc": "2026-08-30T21:13:43+00:00",
+      "source_retrieved_at_utc": "2026-08-31T16:00:17+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1702059,
       "china_detail_rows": 296611,
       "unique_hts10_count": 17273,
       "china_unique_hts10_count": 13577,
-      "output_hs6_rows": 4836,
+      "output_hs6_rows": 4984,
       "raw_all_origin_value_usd": 191470143427,
       "raw_china_value_usd": 42835796835,
-      "mapped_all_origin_value_usd": 158778112788,
-      "mapped_china_value_usd": 39514528937,
-      "all_origin_mapping_coverage": 0.8292578150626174,
-      "china_mapping_coverage": 0.9224651309559326,
+      "mapped_all_origin_value_usd": 162642324479,
+      "mapped_china_value_usd": 41010676332,
+      "all_origin_mapping_coverage": 0.8494396127143922,
+      "china_mapping_coverage": 0.9573926333148367,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1350
+        "wco_partial_or_ambiguous": 652
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1790713,
         "not_valid_in_year": 138151796,
-        "wco_partial_or_ambiguous": 32552088130
+        "wco_partial_or_ambiguous": 28687876439
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 465748,
         "not_valid_in_year": 517036,
-        "wco_partial_or_ambiguous": 3320285114
+        "wco_partial_or_ambiguous": 1824137719
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_08.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -330,38 +352,40 @@
       "source_file_name": "IMDB1609.ZIP",
       "source_sha256": "5ad129485c7a696180eb3ba41330f2b109b419bb9bb2e4a956b15d1c74016f6d",
       "source_archive_bytes": 181411197,
-      "source_retrieved_at_utc": "2026-08-30T21:17:44+00:00",
+      "source_retrieved_at_utc": "2026-08-31T16:04:32+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1824380,
       "china_detail_rows": 316759,
       "unique_hts10_count": 17849,
       "china_unique_hts10_count": 14132,
-      "output_hs6_rows": 4843,
+      "output_hs6_rows": 4993,
       "raw_all_origin_value_usd": 185903562750,
       "raw_china_value_usd": 41957176445,
-      "mapped_all_origin_value_usd": 154603550605,
-      "mapped_china_value_usd": 38806302807,
-      "all_origin_mapping_coverage": 0.8316330699530932,
-      "china_mapping_coverage": 0.9249026291811997,
+      "mapped_all_origin_value_usd": 158366438940,
+      "mapped_china_value_usd": 40272210622,
+      "all_origin_mapping_coverage": 0.851874146989687,
+      "china_mapping_coverage": 0.9598408194791479,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1358
+        "wco_partial_or_ambiguous": 653
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 371308,
         "not_valid_in_year": 155345717,
-        "wco_partial_or_ambiguous": 31144295120
+        "wco_partial_or_ambiguous": 27381406785
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 57746,
         "not_valid_in_year": 725400,
-        "wco_partial_or_ambiguous": 3150090492
+        "wco_partial_or_ambiguous": 1684182677
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_09.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -370,38 +394,40 @@
       "source_file_name": "IMDB1610.ZIP",
       "source_sha256": "cdd6bfbbddeb405d558d89c44b39d24efc43847a11b8b4599b29f72f7628b1ca",
       "source_archive_bytes": 187466777,
-      "source_retrieved_at_utc": "2026-08-30T21:22:08+00:00",
+      "source_retrieved_at_utc": "2026-08-31T16:14:06+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 1932525,
       "china_detail_rows": 332726,
       "unique_hts10_count": 17952,
       "china_unique_hts10_count": 14297,
-      "output_hs6_rows": 4847,
+      "output_hs6_rows": 4997,
       "raw_all_origin_value_usd": 191870010941,
       "raw_china_value_usd": 44397929857,
-      "mapped_all_origin_value_usd": 159953013341,
-      "mapped_china_value_usd": 41042028801,
-      "all_origin_mapping_coverage": 0.8336530162089036,
-      "china_mapping_coverage": 0.9244131186564571,
+      "mapped_all_origin_value_usd": 163750128018,
+      "mapped_china_value_usd": 42667650611,
+      "all_origin_mapping_coverage": 0.8534430535283242,
+      "china_mapping_coverage": 0.9610279296450757,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1362
+        "wco_partial_or_ambiguous": 654
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 601327,
         "not_valid_in_year": 474283945,
-        "wco_partial_or_ambiguous": 31442112328
+        "wco_partial_or_ambiguous": 27644997651
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 205315,
         "not_valid_in_year": 978788,
-        "wco_partial_or_ambiguous": 3354716953
+        "wco_partial_or_ambiguous": 1729095143
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_10.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -410,38 +436,40 @@
       "source_file_name": "IMDB1611.ZIP",
       "source_sha256": "b237695e98d7623b14613ea26c688406377f9beed5c757381d604725ca0a8d0d",
       "source_archive_bytes": 192389917,
-      "source_retrieved_at_utc": "2026-08-30T21:25:45+00:00",
+      "source_retrieved_at_utc": "2026-08-31T16:22:30+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 2032924,
       "china_detail_rows": 347187,
       "unique_hts10_count": 18030,
       "china_unique_hts10_count": 14448,
-      "output_hs6_rows": 4850,
+      "output_hs6_rows": 5000,
       "raw_all_origin_value_usd": 188985257042,
       "raw_china_value_usd": 42126130754,
-      "mapped_all_origin_value_usd": 156300393183,
-      "mapped_china_value_usd": 38802860191,
-      "all_origin_mapping_coverage": 0.8270507214658753,
-      "china_mapping_coverage": 0.9211114217347283,
+      "mapped_all_origin_value_usd": 160467420869,
+      "mapped_china_value_usd": 40386175721,
+      "all_origin_mapping_coverage": 0.8491002069719004,
+      "china_mapping_coverage": 0.9586965381852739,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1368
+        "wco_partial_or_ambiguous": 654
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 2025839,
         "not_valid_in_year": 165538653,
-        "wco_partial_or_ambiguous": 32517299367
+        "wco_partial_or_ambiguous": 28350271681
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 197987,
         "not_valid_in_year": 1899867,
-        "wco_partial_or_ambiguous": 3321172709
+        "wco_partial_or_ambiguous": 1737857179
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_11.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2016,
@@ -450,38 +478,40 @@
       "source_file_name": "IMDB1612.ZIP",
       "source_sha256": "716707a9beaa2deb2b5a75915c71fb2179f2a50bea831307565268630a895f22",
       "source_archive_bytes": 196981202,
-      "source_retrieved_at_utc": "2026-08-30T21:30:18+00:00",
+      "source_retrieved_at_utc": "2026-08-31T16:32:26+00:00",
       "status": "processed",
       "raw_archive_retained_after_processing": false,
       "raw_detail_rows": 2127267,
       "china_detail_rows": 360342,
       "unique_hts10_count": 18085,
       "china_unique_hts10_count": 14570,
-      "output_hs6_rows": 4852,
+      "output_hs6_rows": 5003,
       "raw_all_origin_value_usd": 182761592668,
       "raw_china_value_usd": 39003690915,
-      "mapped_all_origin_value_usd": 148673797727,
-      "mapped_china_value_usd": 35546832925,
-      "all_origin_mapping_coverage": 0.8134849098031062,
-      "china_mapping_coverage": 0.9113710033870008,
+      "mapped_all_origin_value_usd": 152870985158,
+      "mapped_china_value_usd": 37094040179,
+      "all_origin_mapping_coverage": 0.8364502788925762,
+      "china_mapping_coverage": 0.9510392301035903,
       "excluded_hts10_count_by_reason": {
         "not_in_historical_file": 4,
         "not_valid_in_year": 2,
-        "wco_partial_or_ambiguous": 1372
+        "wco_partial_or_ambiguous": 655
       },
       "excluded_all_origin_value_by_reason": {
         "not_in_historical_file": 1323798,
         "not_valid_in_year": 278554857,
-        "wco_partial_or_ambiguous": 33807916286
+        "wco_partial_or_ambiguous": 29610728855
       },
       "excluded_china_value_by_reason": {
         "not_in_historical_file": 429679,
         "not_valid_in_year": 3123445,
-        "wco_partial_or_ambiguous": 3453304866
+        "wco_partial_or_ambiguous": 1906097612
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2016_12.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "mapping_year_sha256": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "mapping_compatibility_status": "processed_with_current_mapping"
     },
     {
       "year": 2017,
@@ -518,7 +548,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_01.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -555,7 +588,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_02.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -592,7 +628,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_03.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -629,7 +668,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_04.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -666,7 +708,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_05.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -703,7 +748,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_06.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -743,7 +791,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_07.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -783,7 +834,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_08.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -823,7 +877,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_09.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -863,7 +920,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_10.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -903,7 +963,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_11.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2017,
@@ -943,7 +1006,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2017_12.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -980,7 +1046,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_01.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1017,7 +1086,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_02.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1054,7 +1126,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_03.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1091,7 +1166,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_04.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1128,7 +1206,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_05.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1165,7 +1246,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_06.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1202,7 +1286,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_07.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1239,7 +1326,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_08.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1276,7 +1366,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_09.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1313,7 +1406,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_10.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1350,7 +1446,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_11.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2018,
@@ -1387,7 +1486,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2018_12.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1424,7 +1526,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_01.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1461,7 +1566,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_02.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1498,7 +1606,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_03.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1535,7 +1646,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_04.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1572,7 +1686,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_05.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1609,7 +1726,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_06.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1646,7 +1766,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_07.csv",
       "download_status": "already_present",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1683,7 +1806,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_08.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1720,7 +1846,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_09.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1757,7 +1886,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_10.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1794,7 +1926,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_11.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     },
     {
       "year": 2019,
@@ -1831,7 +1966,10 @@
       },
       "monthly_output": "data/processed/causal/monthly/causal_trade_hs6_2019_12.csv",
       "download_status": "downloaded",
-      "mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7"
+      "mapping_sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+      "previous_mapping_sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
+      "mapping_year_sha256": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb",
+      "mapping_compatibility_status": "reused_after_exact_year_mapping_comparison"
     }
   ]
 }

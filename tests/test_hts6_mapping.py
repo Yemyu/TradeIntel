@@ -9,7 +9,51 @@ from scripts.build_hts6_mapping import (
     MAPPING_CSV,
     MAPPING_REPORT_JSON,
     MAPPING_SOURCE_MANIFEST,
+    exact_hts10_continuity_target,
 )
+
+
+class ExactContinuityRuleTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.code = "8529909900"
+        self.metadata = {
+            "description": "Parts of headings 8525 to 8528, NESOI",
+            "unit_qy1": "X",
+            "unit_qy2": "",
+        }
+        self.anchor = {self.code: dict(self.metadata)}
+        self.wco = {
+            "852990": [
+                {"target": "852990", "partial": False},
+                {"target": "962000", "partial": True},
+            ]
+        }
+        self.validity = {
+            self.code: [{"begin": "01/2012", "end": "Current"}]
+        }
+
+    def test_exact_official_code_description_units_and_validity_are_accepted(self):
+        target = exact_hts10_continuity_target(
+            source_year=2016,
+            source_hts10=self.code,
+            source_metadata=self.metadata,
+            anchor_2017=self.anchor,
+            wco=self.wco,
+            validity=self.validity,
+        )
+        self.assertEqual(target, "852990")
+
+    def test_changed_official_description_is_not_accepted(self):
+        self.anchor[self.code]["description"] = "A different statistical scope"
+        target = exact_hts10_continuity_target(
+            source_year=2016,
+            source_hts10=self.code,
+            source_metadata=self.metadata,
+            anchor_2017=self.anchor,
+            wco=self.wco,
+            validity=self.validity,
+        )
+        self.assertEqual(target, "")
 
 
 @unittest.skipUnless(MAPPING_CSV.exists(), "HTS history mapping output is not present")
@@ -33,13 +77,27 @@ class Hts6MappingTests(unittest.TestCase):
             item
             for item in self.rows
             if item["source_year"] == "2016"
-            and item["source_hts10"] == "0302895064"
+            and item["source_hts10"] == "0302895076"
         )
         self.assertEqual(row["mapping_status"], "wco_partial_or_ambiguous")
         self.assertEqual(row["hs6_2017"], "")
         self.assertEqual(row["wco_partial_or_ex"], "1")
         self.assertEqual(
             row["wco_candidate_hs6"], "030249|030273|030289|030299"
+        )
+
+    def test_exact_census_hts10_continuity_is_explicit(self) -> None:
+        row = next(
+            item
+            for item in self.rows
+            if item["source_year"] == "2016"
+            and item["source_hts10"] == "8529909900"
+        )
+        self.assertEqual(row["mapping_status"], "census_exact_hts10_continuity")
+        self.assertEqual(row["hs6_2017"], "852990")
+        self.assertEqual(
+            row["mapping_source_url"],
+            "https://www.census.gov/foreign-trade/reference/codes/concordance/impconcord17.xls",
         )
 
     def test_wco_exact_mapping_is_explicit(self) -> None:

@@ -1,6 +1,6 @@
 {
   "protocol_id": "section301_list1_control_v1",
-  "status": "eligibility_audit_blocked_before_matching",
+  "status": "eligibility_gates_passed_matching_pending",
   "frozen_at": "2026-08-31",
   "estimand": {
     "primary": "intent_to_treat_effect_of_original_list1_assignment",
@@ -21,6 +21,7 @@
     "primary_source": "https://www.census.gov/foreign-trade/reference/codes/Import_Historical_HS_Numbers.xlsx",
     "supporting_source": "https://www.census.gov/foreign-trade/reference/index.html",
     "rule": "Map HTS10 observations to a 2017 HS6 family using official Census history; never use fuzzy description matching.",
+    "exact_2016_to_2017_continuity_rule": "When a 2016 WCO HS6 relation is partial or one-to-many, adopt the 2017 six-digit prefix only if the identical official Census HTS10 exists in both annual concordances, its full description and both quantity units match exactly after whitespace/case normalization, the code is historically valid in both years, and that prefix is an explicit WCO candidate. Otherwise retain ambiguity.",
     "mapping_adoption_thresholds": {
       "treated_pre_value_coverage_min": 0.95,
       "treated_hts10_code_coverage_min": 0.9,

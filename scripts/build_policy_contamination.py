@@ -637,6 +637,8 @@ def write_source_report(
             "资格审查当前失败门槛为 "
             + "、".join(f"`{name}`" for name in failed)
             + "；先解决这些已记录异常，再决定是否进入匹配。"
+            if failed
+            else "资格审查的冻结门槛已经全部通过；下一阶段只用政策前特征执行匹配与平衡检查。"
         )
 
     content = f"""# 官方政策来源取得报告
@@ -657,7 +659,7 @@ def write_source_report(
 
 ## 已完成的跨年代码映射
 
-{("Census 历史 HS 文件、2016–2019 年度 concordance 和 WCO HS 2012→2017 Table II 已通过官方参考页取得并核验。映射表包含 " + f"{mapping_report['row_count']:,}" + " 条年度 HTS10 记录；其中歧义或 `ex` 部分映射保留候选代码但不强行填入统一 HS6。详细来源和哈希见 `mapping_source_manifest.json` 与 `mapping_report.json`。" if mapping_report else "本次运行未发现已核验的跨年映射，因此仍需先取得 Census 官方历史文件。")}
+{("Census 历史 HS 文件、2016–2019 年度 concordance 和 WCO HS 2012→2017 Table II 已通过官方参考页取得并核验。映射表包含 " + f"{mapping_report['row_count']:,}" + " 条年度 HTS10 记录；WCO 歧义关系只有在 Census 精确 HTS10 连续性规则全部通过时才采纳，其余继续留空并保留候选。详细来源和哈希见 `mapping_source_manifest.json` 与 `mapping_report.json`。" if mapping_report else "本次运行未发现已核验的跨年映射，因此仍需先取得 Census 官方历史文件。")}
 
 ## 尚未完成的边界
 
@@ -733,7 +735,11 @@ def write_control_report(
         )
         report = {
             "status": eligibility_report["status"],
-            "stage": "phase_07_control_eligibility_execution",
+            "stage": (
+                "phase_07_control_eligibility_execution"
+                if failed_gates
+                else "phase_08_exact_mapping_resolution"
+            ),
             "policy_exposure_status": "expanded_to_hs6_complete",
             "mapping_status": mapping_report["status"],
             "trade_panel_status": panel_report["status"],
@@ -747,7 +753,7 @@ def write_control_report(
                 if failed_gates
                 else "All frozen eligibility gates passed; matching and balance checks remain pending."
             ),
-            "adoption_rule": "Do not match or publish the causal event study until all eligibility, balance, and pre-trend gates pass.",
+            "adoption_rule": "Matching may begin only after eligibility passes. Do not publish the causal event study until matching balance and pre-trend gates also pass.",
         }
         gate_lines = []
         for name, gate in gates.items():
@@ -763,6 +769,23 @@ def write_control_report(
                 f"| `{name}` | {observed_text} | {gate['direction']} "
                 f"{threshold_text} | {'通过' if gate['passed'] else '失败'} |"
             )
+        result_summary = (
+            f"目前有 {eligibility_counts.get('primary_role_treated_candidate', 0):,} 个处理候选和 "
+            f"{eligibility_counts.get('primary_role_control_candidate', 0):,} 个干净对照候选；"
+            f"歧义映射金额占比为 {audit['ambiguous_value_share']:.4%}，高于事先冻结的 "
+            "1.00% 上限。因此系统停在匹配之前，没有为了得到结果而放宽标准。"
+            if failed_gates
+            else f"全部资格门槛已经通过：目前有 "
+            f"{eligibility_counts.get('primary_role_treated_candidate', 0):,} 个处理候选和 "
+            f"{eligibility_counts.get('primary_role_control_candidate', 0):,} 个干净对照候选；"
+            f"歧义映射金额占比降至 {audit['ambiguous_value_share']:.4%}。现在允许进入政策前特征与匹配阶段，"
+            "但这仍然不是因果结果；匹配平衡和前趋势通过前不运行或发布事件研究。"
+        )
+        next_summary = (
+            "在该门槛解决前不生成匹配对，也不运行事件研究。"
+            if failed_gates
+            else "剩余异常继续保留供审计，不影响本轮资格采纳。下一步生成政策前特征并执行冻结匹配。"
+        )
         markdown = f"""# 控制组构建报告：资格层已执行
 
 > 状态：`{eligibility_report['status']}`
@@ -773,9 +796,9 @@ def write_control_report(
 |---|---:|---:|---|
 {chr(10).join(gate_lines)}
 
-目前有 {eligibility_counts.get('primary_role_treated_candidate', 0):,} 个处理候选和 {eligibility_counts.get('primary_role_control_candidate', 0):,} 个干净对照候选；但歧义映射金额占比为 {audit['ambiguous_value_share']:.4%}，高于事先冻结的 1.00% 上限。因此系统停在匹配之前，没有为了得到结果而放宽标准。
+{result_summary}
 
-`treated_mapping_exceptions.csv` 已按政策前进口金额列出需要官方资料查证的年份 × HTS10。详细资格结果见 `control_eligibility_report.md`；在该门槛解决前不生成匹配对，也不运行事件研究。
+`treated_mapping_exceptions.csv` 已按政策前进口金额列出仍需查证的年份 × HTS10。详细资格结果见 `control_eligibility_report.md`；{next_summary}
 """
     elif mapping_ready and panel_report is not None:
         scope = panel_report["source_scope"]

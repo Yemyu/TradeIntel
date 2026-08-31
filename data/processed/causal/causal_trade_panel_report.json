@@ -1,6 +1,6 @@
 {
   "status": "all_origin_hs6_panel_built",
-  "generated_at_utc": "2026-08-31T01:32:33+00:00",
+  "generated_at_utc": "2026-08-31T16:43:30+00:00",
   "source_scope": {
     "start": "2016-01",
     "end": "2019-12",
@@ -10,22 +10,33 @@
   },
   "mapping": {
     "path": "data/processed/causal/hts_history_mapping.csv",
-    "sha256": "280b5543c291db6057d4a0adef3605571357060a4cbf01dd0370ef12612187f7",
-    "invalid_or_ambiguous_codes_excluded": true
+    "sha256": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+    "invalid_or_ambiguous_codes_excluded": true,
+    "year_sha256": {
+      "2016": "e52b2fc67fdd17d1007086b8e82f3e2045891c0d68c80cf3bc498aa96695b942",
+      "2017": "6a918542d3ed7df6a5bea252d2e206bb679e21ad0bc5defeeba8570885dd26d3",
+      "2018": "26f22f30c56dda0ce3180fcb67cd6d79f7d476320cbcd697a43953066ac7ede9",
+      "2019": "e897a9db2b5455f169b52ac2573e01f24051b331fd8cdea3527286d4ef3612fb"
+    },
+    "reused_years_after_exact_mapping_comparison": [
+      2017,
+      2018,
+      2019
+    ]
   },
   "coverage": {
     "raw_all_origin_value_usd": 9542809370966,
-    "mapped_all_origin_value_usd": 9139909426924,
-    "all_origin_mapping_coverage": 0.9577797346274334,
+    "mapped_all_origin_value_usd": 9183507217722,
+    "all_origin_mapping_coverage": 0.9623483882705258,
     "raw_china_value_usd": 1960929808259,
-    "mapped_china_value_usd": 1922169203106,
-    "china_mapping_coverage": 0.9802335580856852
+    "mapped_china_value_usd": 1938672138090,
+    "china_mapping_coverage": 0.988649430451179
   },
   "outputs": {
     "combined_panel": "data/processed/causal/causal_trade_hs6_monthly.csv",
-    "combined_rows": 245388,
+    "combined_rows": 247124,
     "manifest": "data/processed/causal/causal_trade_panel_manifest.json"
   },
-  "causal_adoption_status": "not_evaluated_until_control_selection",
+  "causal_adoption_status": "not_evaluated_in_this_panel_build_see_control_eligibility_report",
   "interpretation_boundary": "This is an all-origin data and mapping-coverage build. It does not select controls or estimate a policy effect."
 }

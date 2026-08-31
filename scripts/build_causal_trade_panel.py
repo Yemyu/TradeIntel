@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
+import io
 import json
 import sys
 from collections import Counter, defaultdict
@@ -82,24 +84,50 @@ def display_path(path: Path) -> str:
         return str(path)
 
 
+def _parse_hts_mapping(
+    reader: csv.DictReader,
+) -> dict[int, dict[str, dict[str, str]]]:
+    by_year: dict[int, dict[str, dict[str, str]]] = defaultdict(dict)
+    for row in reader:
+        year = int(row["source_year"])
+        code = row["source_hts10"]
+        if code in by_year[year]:
+            raise InventoryError(f"Duplicate mapping key: {year}/{code}")
+        by_year[year][code] = {
+            "hs6_2017": row["hs6_2017"],
+            "mapping_status": row["mapping_status"],
+            "historical_validity_status": row["historical_validity_status"],
+        }
+    if not by_year:
+        raise InventoryError("No HTS mapping rows found")
+    return dict(by_year)
+
+
 def load_hts_mapping(path: Path) -> dict[int, dict[str, dict[str, str]]]:
     """Load one deterministic HTS10 mapping row for each year and code."""
 
-    by_year: dict[int, dict[str, dict[str, str]]] = defaultdict(dict)
     with path.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
-            year = int(row["source_year"])
-            code = row["source_hts10"]
-            if code in by_year[year]:
-                raise InventoryError(f"Duplicate mapping key: {year}/{code}")
-            by_year[year][code] = {
-                "hs6_2017": row["hs6_2017"],
-                "mapping_status": row["mapping_status"],
-                "historical_validity_status": row["historical_validity_status"],
-            }
-    if not by_year:
-        raise InventoryError(f"No HTS mapping rows found in {path}")
-    return dict(by_year)
+        return _parse_hts_mapping(csv.DictReader(handle))
+
+
+def mapping_year_sha256(mapping: dict[str, dict[str, str]]) -> str:
+    """Hash only the mapping fields that can change a monthly panel."""
+
+    payload = json.dumps(
+        mapping, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def compatible_mapping_years(
+    current: dict[int, dict[str, dict[str, str]]],
+    previous: dict[int, dict[str, dict[str, str]]],
+) -> set[int]:
+    """Return only years whose panel-affecting mapping dictionaries match."""
+
+    return {
+        year for year, rows in current.items() if rows == previous.get(year)
+    }
 
 
 def load_expected_source_hashes(path: Path) -> dict[tuple[int, int], str]:
@@ -302,12 +330,21 @@ def _load_existing_manifest(path: Path) -> dict[tuple[int, int], dict[str, objec
     }
 
 
-def _write_manifest(path: Path, *, mapping_sha256: str, records: dict[tuple[int, int], dict[str, object]]) -> None:
+def _write_manifest(
+    path: Path,
+    *,
+    mapping_sha256: str,
+    mapping_year_hashes: dict[int, str],
+    records: dict[tuple[int, int], dict[str, object]],
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "generated_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "status": "all_origin_hs6_panel_built",
         "mapping_sha256": mapping_sha256,
+        "mapping_year_sha256": {
+            str(year): value for year, value in sorted(mapping_year_hashes.items())
+        },
         "months": [records[key] for key in sorted(records)],
     }
     temporary = path.with_suffix(path.suffix + ".part")
@@ -356,24 +393,70 @@ def build_panel(
     combined_path: Path,
     report_path: Path,
     expected_manifest_path: Path,
+    compatible_previous_mapping_path: Path | None,
     allow_download: bool,
     keep_raw: bool,
 ) -> dict[str, object]:
     mapping_by_year = load_hts_mapping(mapping_path)
     mapping_sha256 = sha256_file(mapping_path)
+    mapping_year_hashes = {
+        year: mapping_year_sha256(rows) for year, rows in mapping_by_year.items()
+    }
+    compatible_years: set[int] = set()
+    previous_mapping_sha256 = ""
+    if compatible_previous_mapping_path is not None:
+        previous_payload = compatible_previous_mapping_path.read_bytes()
+        previous_mapping_sha256 = hashlib.sha256(previous_payload).hexdigest()
+        previous_mapping = _parse_hts_mapping(
+            csv.DictReader(io.StringIO(previous_payload.decode("utf-8")))
+        )
+        compatible_years = compatible_mapping_years(
+            mapping_by_year, previous_mapping
+        )
     expected_hashes = load_expected_source_hashes(expected_manifest_path)
     records = _load_existing_manifest(manifest_path)
     for source in sources:
         key = (source.year, source.month)
         output_path = monthly_dir / f"causal_trade_hs6_{source.year}_{source.month:02d}.csv"
         existing = records.get(key)
-        if (
+        reusable = (
             existing
             and output_path.exists()
-            and existing.get("mapping_sha256") == mapping_sha256
             and existing.get("source_url") == source.url
-        ):
-            print(f"{source.year}-{source.month:02d}: already_processed")
+            and (
+                existing.get("mapping_sha256") == mapping_sha256
+                or source.year in compatible_years
+            )
+        )
+        if reusable:
+            if existing.get("mapping_sha256") != mapping_sha256:
+                existing = dict(existing)
+                existing["previous_mapping_sha256"] = existing.get(
+                    "mapping_sha256", previous_mapping_sha256
+                )
+                existing["mapping_sha256"] = mapping_sha256
+                existing["mapping_year_sha256"] = mapping_year_hashes[source.year]
+                existing["mapping_compatibility_status"] = (
+                    "reused_after_exact_year_mapping_comparison"
+                )
+                records[key] = existing
+                print(
+                    f"{source.year}-{source.month:02d}: reused_year_mapping_unchanged"
+                )
+            else:
+                if (
+                    "mapping_year_sha256" not in existing
+                    or "mapping_compatibility_status" not in existing
+                ):
+                    existing = dict(existing)
+                    existing["mapping_year_sha256"] = mapping_year_hashes[
+                        source.year
+                    ]
+                    existing["mapping_compatibility_status"] = (
+                        "processed_with_current_mapping"
+                    )
+                    records[key] = existing
+                print(f"{source.year}-{source.month:02d}: already_processed")
             continue
 
         if source.year not in mapping_by_year:
@@ -393,8 +476,15 @@ def build_panel(
             result["download_status"] = download_status
             result["raw_archive_retained_after_processing"] = keep_raw
             result["mapping_sha256"] = mapping_sha256
+            result["mapping_year_sha256"] = mapping_year_hashes[source.year]
+            result["mapping_compatibility_status"] = "processed_with_current_mapping"
             records[key] = result
-            _write_manifest(manifest_path, mapping_sha256=mapping_sha256, records=records)
+            _write_manifest(
+                manifest_path,
+                mapping_sha256=mapping_sha256,
+                mapping_year_hashes=mapping_year_hashes,
+                records=records,
+            )
             print(
                 f"{source.year}-{source.month:02d}: {download_status}, "
                 f"raw_hts10={result['unique_hts10_count']}, "
@@ -425,6 +515,13 @@ def build_panel(
             "path": display_path(mapping_path),
             "sha256": mapping_sha256,
             "invalid_or_ambiguous_codes_excluded": True,
+            "year_sha256": {
+                str(year): value
+                for year, value in sorted(mapping_year_hashes.items())
+            },
+            "reused_years_after_exact_mapping_comparison": sorted(
+                compatible_years
+            ),
         },
         "coverage": {
             "raw_all_origin_value_usd": raw_all,
@@ -439,12 +536,17 @@ def build_panel(
             "combined_rows": combined_rows,
             "manifest": display_path(manifest_path),
         },
-        "causal_adoption_status": "not_evaluated_until_control_selection",
+        "causal_adoption_status": "not_evaluated_in_this_panel_build_see_control_eligibility_report",
         "interpretation_boundary": "This is an all-origin data and mapping-coverage build. It does not select controls or estimate a policy effect.",
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    _write_manifest(manifest_path, mapping_sha256=mapping_sha256, records=records)
+    _write_manifest(
+        manifest_path,
+        mapping_sha256=mapping_sha256,
+        mapping_year_hashes=mapping_year_hashes,
+        records=records,
+    )
     return report
 
 
@@ -459,6 +561,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--combined-output", type=Path, default=DEFAULT_COMBINED)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--expected-manifest", type=Path, default=DEFAULT_EXPECTED_MANIFEST)
+    parser.add_argument(
+        "--compatible-previous-mapping",
+        type=Path,
+        help="Reuse a month's output only when its entire year mapping is identical.",
+    )
     parser.add_argument("--no-download", action="store_true")
     parser.add_argument("--keep-raw", action="store_true")
     return parser
@@ -488,6 +595,7 @@ def main(argv: list[str] | None = None) -> int:
             combined_path=args.combined_output,
             report_path=args.report,
             expected_manifest_path=args.expected_manifest,
+            compatible_previous_mapping_path=args.compatible_previous_mapping,
             allow_download=not args.no_download,
             keep_raw=args.keep_raw,
         )
