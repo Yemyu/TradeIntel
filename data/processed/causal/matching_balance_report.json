@@ -1,0 +1,125 @@
+{
+  "status": "blocked_before_pretrend",
+  "stage": "phase_09_prepolicy_matching_execution",
+  "protocol_id": "section301_list1_control_v1",
+  "feature_period": [
+    "2016-01",
+    "2018-05"
+  ],
+  "post_policy_activity_used_for_matching": false,
+  "counts": {
+    "eligibility_treated": 315,
+    "eligibility_control": 893,
+    "match_eligible_treated": 284,
+    "match_eligible_control": 829,
+    "treated_excluded_for_naics3": 31,
+    "control_excluded_for_naics3": 64,
+    "treated_industries_with_candidates": 8,
+    "matched_treated": 284,
+    "matched_pairs": 852,
+    "unique_controls_used": 115
+  },
+  "coverage": {
+    "coverage_denominator": 315,
+    "treated_with_at_least_two_controls": 284,
+    "coverage_rate": 0.9015873015873016,
+    "coverage_threshold": 0.8,
+    "passed": true,
+    "treated_with_three_controls": 284
+  },
+  "balance": {
+    "threshold": 0.1,
+    "features": {
+      "log_mean_monthly_china_import_value": {
+        "pre_match_treated_mean": 14.034903889275508,
+        "pre_match_control_mean": 14.51767489194516,
+        "matched_treated_mean": 14.034903889275508,
+        "matched_control_weighted_mean": 14.03177667090152,
+        "pooled_sd": 2.030043050295081,
+        "pre_match_smd": -0.23781318460191198,
+        "matched_smd": 0.0015404689932727112,
+        "absolute_matched_smd": 0.0015404689932727112,
+        "passed": true
+      },
+      "pretrend_slope": {
+        "pre_match_treated_mean": 0.016367376595449467,
+        "pre_match_control_mean": 0.005509931042613017,
+        "matched_treated_mean": 0.016367376595449467,
+        "matched_control_weighted_mean": 0.009939333655178986,
+        "pooled_sd": 0.03845166513000021,
+        "pre_match_smd": 0.28236606961307925,
+        "matched_smd": 0.16717203061396907,
+        "absolute_matched_smd": 0.16717203061396907,
+        "passed": false
+      },
+      "monthly_volatility": {
+        "pre_match_treated_mean": 0.7869323504484877,
+        "pre_match_control_mean": 0.7411170649464681,
+        "matched_treated_mean": 0.7869323504484877,
+        "matched_control_weighted_mean": 0.7395790756555504,
+        "pooled_sd": 0.8886660814651476,
+        "pre_match_smd": 0.05155511891090045,
+        "matched_smd": 0.05328579067051353,
+        "absolute_matched_smd": 0.05328579067051353,
+        "passed": true
+      },
+      "china_share_of_all_origin_imports": {
+        "pre_match_treated_mean": 0.13322040926258116,
+        "pre_match_control_mean": 0.4209313581259411,
+        "matched_treated_mean": 0.13322040926258116,
+        "matched_control_weighted_mean": 0.17249569844489715,
+        "pooled_sd": 0.24723042071978119,
+        "pre_match_smd": -1.163736032263848,
+        "matched_smd": -0.15886107004134353,
+        "absolute_matched_smd": 0.15886107004134353,
+        "passed": false
+      }
+    },
+    "all_features_passed": false,
+    "matched_treated_count": 284,
+    "matched_control_edge_count": 852,
+    "matched_control_weight": 284.0
+  },
+  "zero_sd_by_naics": {
+    "112": [
+      "log_mean_monthly_china_import_value",
+      "pretrend_slope",
+      "monthly_volatility",
+      "china_share_of_all_origin_imports"
+    ],
+    "312": [
+      "log_mean_monthly_china_import_value",
+      "pretrend_slope",
+      "monthly_volatility",
+      "china_share_of_all_origin_imports"
+    ],
+    "324": [
+      "log_mean_monthly_china_import_value",
+      "pretrend_slope",
+      "monthly_volatility",
+      "china_share_of_all_origin_imports"
+    ],
+    "980": [
+      "log_mean_monthly_china_import_value",
+      "pretrend_slope",
+      "monthly_volatility",
+      "china_share_of_all_origin_imports"
+    ]
+  },
+  "outputs": {
+    "control_candidate_features.csv": "data/processed/causal/control_candidate_features.csv",
+    "matched_control_pairs.csv": "data/processed/causal/matched_control_pairs.csv",
+    "matching_balance_report.json": "data/processed/causal/matching_balance_report.json",
+    "matching_balance_report.md": "data/processed/causal/matching_balance_report.md"
+  },
+  "blocked_outputs": [
+    "causal_candidate_panel.csv",
+    "event_study_results.csv"
+  ],
+  "assumptions": {
+    "hypothesis": "Most treated families have at least two similar clean controls within the same NAICS3.",
+    "baseline": "All Phase 07 treated/control candidates with exactly one NAICS3, before matching.",
+    "adoption_rule": "Coverage >= 80% of all Phase 07 treated candidates and every matched continuous-feature absolute SMD < 0.10.",
+    "stop_rule": "If either gate fails, do not inspect post-policy outcomes to retune the design."
+  }
+}
