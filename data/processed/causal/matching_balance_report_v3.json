@@ -1,0 +1,116 @@
+{
+  "status": "blocked_before_pretrend_v3",
+  "stage": "phase_09c_maximum_cardinality_matching_execution",
+  "protocol_id": "section301_list1_control_v1",
+  "matching_experiment_id": "maximum_cardinality_balanced_overlap_matching_v3",
+  "feature_period": [
+    "2016-01",
+    "2018-05"
+  ],
+  "post_policy_activity_used_for_matching": false,
+  "solver": {
+    "stage_one": {
+      "status_code": 2,
+      "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+      "success": false,
+      "objective": null,
+      "edge_count": 14671,
+      "variable_count": 14955,
+      "constraint_count": 711,
+      "time_limit_seconds": 300.0,
+      "stage": "maximize_cardinality"
+    }
+  },
+  "metrics": {
+    "eligible_treated": 284,
+    "eligible_control": 829,
+    "coverage_denominator": 315,
+    "selected_treated": 0,
+    "selected_edges": 0,
+    "coverage_rate": 0.0,
+    "unique_controls_used": 0,
+    "control_effective_sample_size": 0.0,
+    "maximum_control_reuse": 0,
+    "maximum_control_reuse_max": 10,
+    "mean_distance": null,
+    "p95_distance": null,
+    "mean_distance_max": 1.035914661537001,
+    "p95_distance_max": 2.749124742215
+  },
+  "gates": {
+    "coverage": false,
+    "effective_sample_size": false,
+    "maximum_reuse": true,
+    "mean_distance": false,
+    "p95_distance": false,
+    "balance": false,
+    "all_passed": false
+  },
+  "balance": {
+    "threshold": 0.1,
+    "features": {
+      "log_mean_monthly_china_import_value": {
+        "pre_match_treated_mean": 14.034903889275508,
+        "pre_match_control_mean": 14.517674891945164,
+        "matched_treated_mean": 0.0,
+        "matched_control_weighted_mean": 0.0,
+        "pooled_sd": 2.030043050295081,
+        "pre_match_smd": -0.23781318460191372,
+        "matched_smd": 0.0,
+        "absolute_matched_smd": 0.0,
+        "passed": false
+      },
+      "pretrend_slope": {
+        "pre_match_treated_mean": 0.016367376595450702,
+        "pre_match_control_mean": 0.0055099310426103745,
+        "matched_treated_mean": 0.0,
+        "matched_control_weighted_mean": 0.0,
+        "pooled_sd": 0.038451665129983444,
+        "pre_match_smd": 0.2823660696133032,
+        "matched_smd": 0.0,
+        "absolute_matched_smd": 0.0,
+        "passed": false
+      },
+      "monthly_volatility": {
+        "pre_match_treated_mean": 0.7869323504484824,
+        "pre_match_control_mean": 0.7411170649464898,
+        "matched_treated_mean": 0.0,
+        "matched_control_weighted_mean": 0.0,
+        "pooled_sd": 0.8886660814651417,
+        "pre_match_smd": 0.05155511891087043,
+        "matched_smd": 0.0,
+        "absolute_matched_smd": 0.0,
+        "passed": false
+      },
+      "china_share_of_all_origin_imports": {
+        "pre_match_treated_mean": 0.13322040926259507,
+        "pre_match_control_mean": 0.4209313581259433,
+        "matched_treated_mean": 0.0,
+        "matched_control_weighted_mean": 0.0,
+        "pooled_sd": 0.24723042071978146,
+        "pre_match_smd": -1.1637360322637993,
+        "matched_smd": 0.0,
+        "absolute_matched_smd": 0.0,
+        "passed": false
+      }
+    },
+    "all_features_passed": false,
+    "matched_treated_count": 0,
+    "matched_control_edge_count": 0,
+    "matched_control_weight": 0
+  },
+  "excluded_treated_count": 284,
+  "outputs": {
+    "matched_control_pairs_v3.csv": "data/processed/causal/matched_control_pairs_v3.csv",
+    "matching_excluded_treated_v3.csv": "data/processed/causal/matching_excluded_treated_v3.csv",
+    "matching_balance_report_v3.json": "data/processed/causal/matching_balance_report_v3.json",
+    "matching_balance_report_v3.md": "data/processed/causal/matching_balance_report_v3.md"
+  },
+  "blocked_outputs": [
+    "causal_candidate_panel_v3.csv",
+    "event_study_results.csv"
+  ],
+  "estimand_boundary": "If adopted, the effect would apply only to the maximum policy-pre overlap subpopulation, not all original List 1 treated families.",
+  "adoption_rule": "At least 252/315 treated, all absolute SMD < 0.10, control ESS >= 100, maximum reuse <= 10, and both distance caps pass.",
+  "stop_rule": "If v3 is infeasible or any gate fails, do not design a fourth matching experiment or inspect post-policy outcomes."
+}

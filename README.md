@@ -4,7 +4,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
-Learning and development stage 8: the initial eligibility run correctly stopped at a 1.0822% ambiguous-value share. A precommitted exact Census HTS10 continuity rule then resolved only codes whose official 2016/2017 code, full description, units, validity, and WCO candidate all agree. After rebuilding the affected 2016 panel, all six eligibility gates pass: ambiguity is 0.0109%, with 315 treated and 893 clean-control candidates. Matching, balance, and pre-trend checks remain pending; no causal result exists yet.
+Learning and development stage 9c: the initial eligibility run correctly stopped at a 1.0822% ambiguous-value share. A precommitted exact Census HTS10 continuity rule then resolved only codes whose official 2016/2017 code, full description, units, validity, and WCO candidate all agree. After rebuilding the affected 2016 panel, all six eligibility gates passed: ambiguity is 0.0109%, with 315 treated and 893 clean-control candidates. Three pre-registered policy-pre matching experiments were then audited: the first failed balance, the global-balance refinement was infeasible for all 284 treated families, and the final maximum-cardinality design was also infeasible at the original 252/315 coverage floor. No causal result exists; the project now transfers to the evidence-grounded AI layer, which will make this limitation explicit rather than inventing a causal estimate.
 
 This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
 
@@ -22,7 +22,17 @@ This repository is currently local-only. It will not be published until its scop
 - [Phase 6 Chinese learning guide: control-group design](./docs/learning/phase-06-control-design.zh-CN.md)
 - [Phase 7 Chinese learning guide: control eligibility](./docs/learning/phase-07-control-eligibility.zh-CN.md)
 - [Phase 8 Chinese learning guide: exact mapping resolution](./docs/learning/phase-08-exact-mapping-resolution.zh-CN.md)
+- [Phase 9 Chinese learning guide: pre-policy matching and the blocked balance gates](./docs/learning/phase-09-prepolicy-matching.zh-CN.md)
+- [Phase 9c Chinese learning guide: maximum-cardinality matching and the final block](./docs/learning/phase-09c-cardinality-matching.zh-CN.md)
 - [Decision 0002: exact HTS10 continuity rule](./docs/decisions/0002-exact-hts10-continuity.zh-CN.md)
+- [Decision 0003: pre-policy matching design](./docs/decisions/0003-prepolicy-matching-design.zh-CN.md)
+- [Decision 0004: globally balanced optimal matching experiment](./docs/decisions/0004-globally-balanced-optimal-matching.zh-CN.md)
+- [Phase 10 Chinese learning guide: evidence-grounded AI application design](./docs/learning/phase-10-ai-application-design.zh-CN.md)
+- [Phase 10a Chinese learning guide: evidence tools and deterministic baseline](./docs/learning/phase-10a-evidence-tools.zh-CN.md)
+- [AI 60-question contract evaluation report](./data/processed/ai/ai_evaluation_report.md)
+- [Phase 10b Chinese learning guide: model—tool loop and safety guard](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)
+- [Decision 0005: evidence-grounded AI application layer](./docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md)
+- [Decision 0006: maximum-cardinality overlap matching v3](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)
 - [Data contract 0003: causal control-data extension](./docs/contracts/0003-causal-control-data-contract.zh-CN.md)
 - [Policy exposure evidence table](./data/processed/causal/trade_action_exposure.csv)
 - [List 1 exclusion timeline](./data/processed/causal/list1_exclusion_timeline.csv)
@@ -50,6 +60,17 @@ python --version
 ```
 
 No third-party Python packages are required in stage 0.
+
+Run the local evidence-tool and model-loop demos (no API key required):
+
+```bash
+source .venv/bin/activate
+python scripts/run_tradeintel_ai.py "2018年关税后中国进口下降多少？能证明关税导致下降吗？"
+python scripts/run_tradeintel_ai.py --mock-agent "关税导致中国进口下降了吗？"
+python scripts/evaluate_tradeintel_ai.py
+```
+
+The first command uses the deterministic routing baseline; `--mock-agent` demonstrates a provider-neutral model/tool loop and the causal safety guard. The 60-question report measures the local tool contract, not an external LLM.
 
 ## First validated policy source
 
@@ -123,7 +144,7 @@ This parses and checks the official List 1/2/3 notices, records Section 232/201 
 python scripts/build_hts6_mapping.py
 ```
 
-The mapping is deliberately conservative: `ex` and one-to-many relationships remain ambiguous unless the frozen exact Census HTS10 continuity rule passes every official-field check. The rebuilt all-origin panel and eligibility layer now pass all six qualification gates. This permits matching to begin, but it does not satisfy balance or pre-trend gates; see [`control_build_report.md`](./data/processed/causal/control_build_report.md).
+The mapping is deliberately conservative: `ex` and one-to-many relationships remain ambiguous unless the frozen exact Census HTS10 continuity rule passes every official-field check. The rebuilt all-origin panel and eligibility layer passed all six qualification gates. The first frozen matching run then passed coverage (90.16%) but failed balance for the pre-policy trend slope and China share. A pre-registered globally balanced refinement was infeasible, and the final maximum-cardinality experiment could not retain the required 252/315 treated candidates while preserving the frozen balance and reuse limits; see [`matching_balance_report_v3.md`](./data/processed/causal/matching_balance_report_v3.md). The project intentionally stops before pre-trend estimation and does not publish a causal result.
 
 After the mapping is verified, rebuild the compact all-origin HS6 panel with:
 
@@ -139,4 +160,4 @@ Run the frozen pre-policy eligibility and policy-contamination gates with:
 python scripts/build_control_eligibility.py
 ```
 
-This produces auditable treated/control/excluded labels and a value-ranked mapping-exception table. The current run passes all six frozen gates: treated pre-policy value coverage is 99.98%, year-by-HTS10 coverage is 99.86%, ambiguous value is 0.0109%, and the eligible pools contain 315 treated and 893 controls. No post-policy outcome is used for selection. Matching has not yet been run.
+This produces auditable treated/control/excluded labels and a value-ranked mapping-exception table. The current run passes all six eligibility gates: treated pre-policy value coverage is 99.98%, year-by-HTS10 coverage is 99.86%, ambiguous value is 0.0109%, and the eligible pools contain 315 treated and 893 controls. Matching uses only the clean pre-policy window and no post-policy outcome. The first method failed balance, the global method was infeasible, and the maximum-cardinality method could not meet the 252/315 coverage floor under the frozen balance and reuse limits. No candidate panel or event study is generated. Phase 10 now implements the read-only evidence tools and evaluation contract for the AI assistant, with causal refusal enforced by the blocked status.

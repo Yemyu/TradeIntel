@@ -1,0 +1,1577 @@
+{
+  "evaluation_version": "1.0",
+  "question_count": 60,
+  "categories": {
+    "causal_claim_or_refusal": 12,
+    "data_quality_and_boundary": 8,
+    "numeric_descriptive_lookup": 18,
+    "policy_metadata": 10,
+    "source_and_lineage": 12
+  },
+  "adoption_thresholds": {
+    "numeric_accuracy_min": 0.9,
+    "source_citation_accuracy_min": 0.95,
+    "correct_refusal_min": 0.9,
+    "unsupported_causal_claim_max": 0.0,
+    "tool_selection_accuracy_min": 0.9
+  },
+  "systems": {
+    "direct_uninstrumented_baseline": {
+      "tool_selection_accuracy": 0.0,
+      "numeric_accuracy": 0.0,
+      "numeric_assertion_count": 21,
+      "source_citation_accuracy": 0.0,
+      "source_question_count": 60,
+      "correct_refusal": 0.0,
+      "refusal_question_count": 13,
+      "unsupported_causal_claims": 13,
+      "description": "No declared tools, no evidence bundle, and no deterministic numeric contract."
+    },
+    "deterministic_tool_baseline": {
+      "tool_selection_accuracy": 1.0,
+      "numeric_accuracy": 1.0,
+      "numeric_assertion_count": 21,
+      "source_citation_accuracy": 1.0,
+      "source_question_count": 60,
+      "correct_refusal": 1.0,
+      "refusal_question_count": 13,
+      "unsupported_causal_claims": 0
+    }
+  },
+  "adoption": {
+    "numeric_accuracy": true,
+    "source_citation_accuracy": true,
+    "correct_refusal": true,
+    "unsupported_causal_claims": true,
+    "tool_selection_accuracy": true
+  },
+  "decision": "tool_contracts_passed_ready_for_llm_adapter",
+  "question_file": "evals/questions.jsonl",
+  "gold_file": "evals/gold_answers.json",
+  "scores": [
+    {
+      "id": "P01",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P02",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_policy_event",
+          "path": "data.announcement_date",
+          "expected": "2018-06-15",
+          "actual": "2018-06-15",
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P03",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_policy_event",
+          "path": "data.effective_date",
+          "expected": "2018-07-06",
+          "actual": "2018-07-06",
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P04",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_policy_event",
+          "path": "data.additional_rate_percent",
+          "expected": 25.0,
+          "actual": 25.0,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P05",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_policy_event",
+          "path": "data.target_origin",
+          "expected": "China",
+          "actual": "China",
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P06",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_policy_event",
+          "path": "data.policy_hts8_count",
+          "expected": 818,
+          "actual": 818,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_products.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P07",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P08",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P09",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "https://ustr.gov/sites/default/files/2018-13248.pdf"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "P10",
+      "category": "policy_metadata",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D01",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": -0.23709145943478008,
+          "actual": -0.23709145943478008,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D02",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.other_origins_change_pct",
+          "expected": 0.055285296459818285,
+          "actual": 0.055285296459818285,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D03",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.all_origins_change_pct",
+          "expected": 0.03543512018317466,
+          "actual": 0.03543512018317466,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D04",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_share_change_percentage_points",
+          "expected": -1.7869298307662347,
+          "actual": -1.7869298307662347,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D05",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": 0.11529146430471114,
+          "actual": 0.11529146430471114,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D06",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": 0.147981278904871,
+          "actual": 0.147981278904871,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D07",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": -0.15771424057466144,
+          "actual": -0.15771424057466144,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D08",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D09",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": -0.23709145943478008,
+          "actual": -0.23709145943478008,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D10",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.other_origins_change_pct",
+          "expected": 0.055285296459818285,
+          "actual": 0.055285296459818285,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D11",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_share_change_percentage_points",
+          "expected": -3.794830150262557,
+          "actual": -3.794830150262557,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D12",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": -0.15771424057466144,
+          "actual": -0.15771424057466144,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D13",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": 0.11529146430471114,
+          "actual": 0.11529146430471114,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D14",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D15",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D16",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D17",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": -0.15771424057466144,
+          "actual": -0.15771424057466144,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "D18",
+      "category": "numeric_descriptive_lookup",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_descriptive_change",
+          "path": "data.target_change_pct",
+          "expected": 0.11529146430471114,
+          "actual": 0.11529146430471114,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S01",
+      "category": "source_and_lineage",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "https://ustr.gov/sites/default/files/2018-13248.pdf"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S02",
+      "category": "source_and_lineage",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_event.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S03",
+      "category": "source_and_lineage",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json",
+        "data/processed/analysis/statistical_baseline_monthly.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S04",
+      "category": "source_and_lineage",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_monthly.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S05",
+      "category": "source_and_lineage",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S06",
+      "category": "source_and_lineage",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S07",
+      "category": "source_and_lineage",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S08",
+      "category": "source_and_lineage",
+      "intent": "descriptive_change",
+      "expected_intent": "descriptive_change",
+      "selected_tools": [
+        "get_descriptive_change"
+      ],
+      "expected_tools": [
+        "get_descriptive_change"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/analysis/statistical_baseline_summary.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S09",
+      "category": "source_and_lineage",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S10",
+      "category": "source_and_lineage",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S11",
+      "category": "source_and_lineage",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_products.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "S12",
+      "category": "source_and_lineage",
+      "intent": "policy_event",
+      "expected_intent": "policy_event",
+      "selected_tools": [
+        "get_policy_event"
+      ],
+      "expected_tools": [
+        "get_policy_event"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/policy/section301_list1_products.csv"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C01",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C02",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "config/causal_control_design.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C03",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C04",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C05",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "config/causal_control_design.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C06",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "config/causal_control_design.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C07",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C08",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "config/causal_control_design.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C09",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C10",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "config/causal_control_design.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C11",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "C12",
+      "category": "causal_claim_or_refusal",
+      "intent": "causal_readiness",
+      "expected_intent": "causal_readiness",
+      "selected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "expected_tools": [
+        "get_descriptive_change",
+        "get_causal_readiness"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/causal/matching_balance_report_v3.json"
+      ],
+      "refusal_required": true,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q01",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_data_quality_status",
+          "path": "data.overall_status",
+          "expected": "pass_with_review",
+          "actual": "pass_with_review",
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q02",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q03",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q04",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q05",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q06",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q07",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [
+        {
+          "tool": "get_data_quality_status",
+          "path": "data.summary.review_rule_count",
+          "expected": 2,
+          "actual": 2,
+          "passed": true
+        }
+      ],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    },
+    {
+      "id": "Q08",
+      "category": "data_quality_and_boundary",
+      "intent": "data_quality",
+      "expected_intent": "data_quality",
+      "selected_tools": [
+        "get_data_quality_status"
+      ],
+      "expected_tools": [
+        "get_data_quality_status"
+      ],
+      "tool_selection_passed": true,
+      "assertions": [],
+      "numeric_passed": true,
+      "source_passed": true,
+      "expected_sources": [
+        "data/processed/quality/data_quality_report.json"
+      ],
+      "refusal_required": false,
+      "refusal_passed": true,
+      "unsupported_causal_claim": false
+    }
+  ],
+  "leakage_controls": {
+    "gold_labels_sent_to_router": false,
+    "post_policy_activity_used_for_matching": false,
+    "arbitrary_sql_allowed": false
+  },
+  "outputs": {
+    "json": "data/processed/ai/ai_evaluation_report.json",
+    "markdown": "data/processed/ai/ai_evaluation_report.md"
+  }
+}

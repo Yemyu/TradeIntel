@@ -1,6 +1,6 @@
 {
   "protocol_id": "section301_list1_control_v1",
-  "status": "eligibility_gates_passed_matching_pending",
+  "status": "blocked_before_pretrend_v3",
   "frozen_at": "2026-08-31",
   "estimand": {
     "primary": "intent_to_treat_effect_of_original_list1_assignment",
@@ -9,11 +9,24 @@
     "interpretation": "Effect associated with original List 1 assignment under the stated design assumptions, not the mechanical effect of a continuously active 25 percent duty."
   },
   "time_windows": {
-    "clean_pre": ["2016-01", "2018-05"],
-    "announcement_anticipation": ["2018-06"],
-    "effective_month_transition": ["2018-07"],
-    "primary_post": ["2018-08", "2019-07"],
-    "immediate_post_sensitivity": ["2018-08", "2018-12"],
+    "clean_pre": [
+      "2016-01",
+      "2018-05"
+    ],
+    "announcement_anticipation": [
+      "2018-06"
+    ],
+    "effective_month_transition": [
+      "2018-07"
+    ],
+    "primary_post": [
+      "2018-08",
+      "2019-07"
+    ],
+    "immediate_post_sensitivity": [
+      "2018-08",
+      "2018-12"
+    ],
     "event_reference_month": "2018-05"
   },
   "product_mapping": {
@@ -55,13 +68,89 @@
   },
   "matching": {
     "method": "three_nearest_controls_with_replacement_within_naics3",
-    "feature_period": ["2016-01", "2018-05"],
+    "feature_period": [
+      "2016-01",
+      "2018-05"
+    ],
     "post_outcomes_allowed": false,
+    "industry_rule": "Require exactly one NAICS3 candidate for both treated and control families; ambiguous or missing NAICS3 is excluded from primary matching rather than guessed.",
+    "feature_definitions": {
+      "log_mean_monthly_china_import_value": "log1p of the arithmetic mean of 29 monthly China import values, including zero months",
+      "pretrend_slope": "OLS slope of log1p monthly China import value on month index 0 through 28, in log points per month",
+      "monthly_volatility": "sample standard deviation of the 29 log1p monthly China import values",
+      "china_share_of_all_origin_imports": "sum of China import value divided by sum of all-origin import value over the 29-month clean pre-period"
+    },
+    "standardization": "Within each NAICS3, transform the four continuous features using the eligible control-pool mean and sample standard deviation; a zero-SD feature contributes zero distance and is reported.",
+    "distance": "Euclidean distance over the four within-NAICS3 standardized continuous features.",
+    "tie_break": "Sort by distance and then control_hs6 ascending.",
+    "number_of_controls": 3,
+    "replacement": true,
+    "edge_weight": "Each selected control receives weight 1/3 within a treated family; reuse across treated families accumulates weight.",
+    "coverage_denominator": "All eligible treated candidates from Phase 07, including those later excluded for ambiguous or missing NAICS3.",
+    "balance_smd": "For each continuous feature, compare the unweighted matched-treated mean with the edge-weighted matched-control mean and divide by the pooled sample standard deviation of the pre-match, unique-NAICS3 eligible treated and control pools.",
     "balance_threshold": "absolute_standardized_mean_difference_below_0.10_for_each_feature",
     "coverage_threshold": "at_least_two_eligible_controls_for_80_percent_of_treated_families"
   },
+  "matching_refinement_experiment": {
+    "experiment_id": "globally_balanced_optimal_matching_v2",
+    "status": "executed_infeasible_blocked_before_pretrend",
+    "reason": "The frozen three-nearest-neighbour run passed coverage but failed balance for pretrend slope and China share; it also produced control ESS 52.16 and maximum reuse 33.",
+    "candidate_population": "The same Phase 09 candidates with exactly one NAICS3; no eligibility or industry labels are changed.",
+    "method": "mixed_integer_minimum_distance_matching_with_global_balance_constraints",
+    "same_naics3_required": true,
+    "controls_per_treated": 3,
+    "replacement_across_treated": true,
+    "duplicate_control_within_treated": false,
+    "maximum_control_reuse": 10,
+    "optimization_balance_constraint": "absolute_smd_at_most_0.09_for_each_of_the_four_frozen_continuous_features",
+    "objective": "Minimize total frozen standardized Euclidean distance after satisfying assignment, exact-industry, reuse, and balance constraints.",
+    "tie_break": "Use lexicographic treated_hs6 and control_hs6 order as a deterministic secondary objective.",
+    "post_outcomes_allowed": false,
+    "adoption_thresholds": {
+      "coverage_rate_min": 0.8,
+      "absolute_smd_max_exclusive": 0.1,
+      "control_effective_sample_size_min": 100,
+      "maximum_control_reuse_max": 10,
+      "mean_distance_max": 1.035914661537001,
+      "p95_distance_max": 2.749124742215
+    },
+    "distance_threshold_origin": "The mean and p95 caps equal 125 percent of the frozen failed-run baselines 0.8287317292296009 and 2.199299793772, fixed before v2 execution.",
+    "stop_rule": "If the integer problem is infeasible or any adoption threshold fails, retain the audit output and stop before pretrend; do not inspect post-policy outcomes or relax the rule in the same experiment."
+  },
+  "matching_cardinality_experiment": {
+    "experiment_id": "maximum_cardinality_balanced_overlap_matching_v3",
+    "status": "blocked_before_pretrend_v3",
+    "reason": "The v2 optimization forced all 284 unique-NAICS3 treated families even though the original coverage gate requires only 252 of all 315 treated candidates; policy-pre overlap trimming may recover a transparent balanced subpopulation.",
+    "estimand_change": "If adopted, results apply only to the matched policy-pre overlap subpopulation, not to every original List 1 treated family.",
+    "candidate_population": "The same 284 treated and 829 control candidates with exactly one NAICS3; no Phase 07 eligibility label is changed.",
+    "method": "two_stage_maximum_cardinality_then_minimum_distance_integer_matching",
+    "stage_one_objective": "Maximize the number of included treated families subject to all hard constraints and minimum coverage.",
+    "stage_two_objective": "Fix the maximum feasible treated count, then minimize total frozen standardized Euclidean distance with deterministic lexicographic tie-breaking.",
+    "same_naics3_required": true,
+    "controls_per_included_treated": 3,
+    "replacement_across_treated": true,
+    "duplicate_control_within_treated": false,
+    "maximum_control_reuse": 10,
+    "minimum_included_treated": 252,
+    "coverage_denominator": 315,
+    "optimization_balance_constraint": "absolute_smd_at_most_0.09_for_each_of_the_four_frozen_continuous_features_in_the_selected_treated_and_weighted_control_subsample",
+    "post_outcomes_allowed": false,
+    "adoption_thresholds": {
+      "coverage_rate_min": 0.8,
+      "absolute_smd_max_exclusive": 0.1,
+      "control_effective_sample_size_min": 100,
+      "maximum_control_reuse_max": 10,
+      "mean_distance_max": 1.035914661537001,
+      "p95_distance_max": 2.749124742215
+    },
+    "excluded_treated_output": "Every policy-pre trimmed treated HS6 must be listed with its NAICS3 and overlap diagnostics; no exclusion may use a post-policy outcome.",
+    "stop_rule": "If maximum feasible treated count is below 252 or any final gate fails, stop the matching route, retain the failure evidence, do not design a fourth matching experiment, and do not estimate a causal effect."
+  },
   "event_study": {
-    "fixed_effects": ["canonical_hs6", "calendar_month"],
+    "fixed_effects": [
+      "canonical_hs6",
+      "calendar_month"
+    ],
     "cluster_standard_errors_by": "canonical_hs6",
     "pretrend_joint_test_p_min": 0.1,
     "last_six_pre_coefficients_absolute_log_point_max": 0.1,
@@ -82,6 +171,51 @@
     "Results reverse sign under the frozen immediate-window, unweighted, and ever-excluded-family sensitivity checks.",
     "A result can only be produced by changing controls after observing post-policy outcomes."
   ],
+  "ai_application": {
+    "status": "implemented_tools_pending_llm_adapter",
+    "name": "TradeShock AI evidence-grounded trade-policy analyst",
+    "purpose": "Let a language model route natural-language questions to read-only deterministic data tools, return source-linked calculations, and refuse causal claims when the causal readiness gates are blocked.",
+    "mvp_non_goals": [
+      "No arbitrary SQL generated by the model",
+      "No autonomous web crawling or unverified source substitution",
+      "No fine-tuning",
+      "No event-study result while causal status is blocked",
+      "No LangChain or LangGraph before the plain Python tool contracts are tested"
+    ],
+    "read_only_tools": [
+      "get_policy_event",
+      "get_trade_series",
+      "get_descriptive_change",
+      "get_data_quality_status",
+      "get_causal_readiness",
+      "build_evidence_bundle"
+    ],
+    "model_boundary": "The model interprets the question, selects a declared tool, and writes a response; Python/MySQL tools calculate numbers, enforce time windows, attach sources, and decide whether causal language is permitted.",
+    "causal_safety_rule": "If causal_control_design.status is any blocked state, including blocked_before_pretrend_v3, the assistant may report descriptive changes and the blocking evidence but must not state or imply a causal tariff effect.",
+    "evaluation": {
+      "question_count": 60,
+      "categories": [
+        "policy_metadata",
+        "numeric_descriptive_lookup",
+        "source_and_lineage",
+        "causal_claim_or_refusal",
+        "data_quality_and_boundary"
+      ],
+      "baselines": [
+        "direct_model_without_tools",
+        "tool_assistant_with_evidence_contract"
+      ],
+      "adoption_thresholds": {
+        "numeric_accuracy_min": 0.9,
+        "source_citation_accuracy_min": 0.95,
+        "correct_refusal_min": 0.9,
+        "unsupported_causal_claim_max": 0.0,
+        "tool_selection_accuracy_min": 0.9
+      },
+      "leakage_rule": "Gold answers and hidden evaluation labels are separated from prompts; causal questions cannot reveal post-policy outcomes to the selection or routing logic.",
+      "stop_rule": "If unsupported causal claims are nonzero or a core accuracy threshold fails, do not publish the demo; inspect the tool contract and evidence bundle before changing prompts."
+    }
+  },
   "official_sources": {
     "census_trade_archives": "https://www.census.gov/foreign-trade/data/dataproducts.html",
     "census_reference": "https://www.census.gov/foreign-trade/reference/index.html",

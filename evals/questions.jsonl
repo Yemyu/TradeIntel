@@ -1,0 +1,60 @@
+{"id":"P01","category":"policy_metadata","question":"Section 301 List 1 的官方政策名称是什么？"}
+{"id":"P02","category":"policy_metadata","question":"List 1 什么时候宣布？"}
+{"id":"P03","category":"policy_metadata","question":"Section 301 List 1 什么时候生效？"}
+{"id":"P04","category":"policy_metadata","question":"Section 301 List 1 的附加税率是多少？"}
+{"id":"P05","category":"policy_metadata","question":"Section 301 List 1 政策的目标原产国是哪一个？"}
+{"id":"P06","category":"policy_metadata","question":"List 1 覆盖多少个 HTS8 商品？"}
+{"id":"P07","category":"policy_metadata","question":"Section 301 List 1 的公告日和生效日有什么区别？"}
+{"id":"P08","category":"policy_metadata","question":"Section 301 List 1 的 2018 年 7 月为什么算 transition 月？"}
+{"id":"P09","category":"policy_metadata","question":"Section 301 List 1 税率 25% 的官方来源在哪里？"}
+{"id":"P10","category":"policy_metadata","question":"List 1 是针对哪个国家的？"}
+{"id":"D01","category":"numeric_descriptive_lookup","question":"2018 年 8—12 月中国相关商品进口额同比变化是多少？"}
+{"id":"D02","category":"numeric_descriptive_lookup","question":"2018 年 8—12 月其他原产地进口变化是多少？"}
+{"id":"D03","category":"numeric_descriptive_lookup","question":"2018 年 8—12 月全部原产地进口变化是多少？"}
+{"id":"D04","category":"numeric_descriptive_lookup","question":"2018 年 8—12 月中国进口份额变化了多少个百分点？"}
+{"id":"D05","category":"numeric_descriptive_lookup","question":"最近政策前窗口 2018 年 1—5 月相比 2017 年同期中国进口变化是多少？"}
+{"id":"D06","category":"numeric_descriptive_lookup","question":"政策前安慰剂比较中中国进口变化是多少？"}
+{"id":"D07","category":"numeric_descriptive_lookup","question":"2019 年 8—12 月相对 2018 年同期中国进口变化是多少？"}
+{"id":"D08","category":"numeric_descriptive_lookup","question":"描述性变化的主窗口使用哪些月份？"}
+{"id":"D09","category":"numeric_descriptive_lookup","question":"同比下降 23.7% 这个数字来自哪个比较？"}
+{"id":"D10","category":"numeric_descriptive_lookup","question":"2018 年 8—12 月其他国家进口上升多少？"}
+{"id":"D11","category":"numeric_descriptive_lookup","question":"2017 年 8—12 月和 2016 年同期的 placebo 份额变化多少？"}
+{"id":"D12","category":"numeric_descriptive_lookup","question":"持续性监测窗口的中国进口变化多少？"}
+{"id":"D13","category":"numeric_descriptive_lookup","question":"最近政策前窗口中国进口变化多少？"}
+{"id":"D14","category":"numeric_descriptive_lookup","question":"2018 年 8—12 月中国进口相比 2017 年同期是上升还是下降？"}
+{"id":"D15","category":"numeric_descriptive_lookup","question":"其他原产地和中国的进口变化方向是否相同？"}
+{"id":"D16","category":"numeric_descriptive_lookup","question":"这份同比变化使用的公式是什么？"}
+{"id":"D17","category":"numeric_descriptive_lookup","question":"政策后持续性窗口的中国进口变化是多少？"}
+{"id":"D18","category":"numeric_descriptive_lookup","question":"2018 年 1—5 月的描述性进口变化是多少？"}
+{"id":"S01","category":"source_and_lineage","question":"Section 301 List 1 的官方政策来源 URL 是什么？"}
+{"id":"S02","category":"source_and_lineage","question":"这个政策来源文件的 SHA-256 是什么？"}
+{"id":"S03","category":"source_and_lineage","question":"2018 年 8—12 月描述性变化引用了哪些证据文件？"}
+{"id":"S04","category":"source_and_lineage","question":"这个描述性变化的官方贸易数据来源是什么？"}
+{"id":"S05","category":"source_and_lineage","question":"数据质量报告在哪里，里面有哪些复核项？"}
+{"id":"S06","category":"source_and_lineage","question":"数据质量和 v3 无可行解证据在哪里？"}
+{"id":"S07","category":"source_and_lineage","question":"匹配状态为 blocked 时，因果结论的证据来源是什么？"}
+{"id":"S08","category":"source_and_lineage","question":"2018-08 月贸易进口变化的官方 Census 文件名和哈希是什么？"}
+{"id":"S09","category":"source_and_lineage","question":"数据质量为什么要同时保留 URL、文件名和 SHA-256？"}
+{"id":"S10","category":"source_and_lineage","question":"数据质量报告中 origin code 的历史名称变化是什么？"}
+{"id":"S11","category":"source_and_lineage","question":"政策商品 818 个的证据来自哪里？"}
+{"id":"S12","category":"source_and_lineage","question":"List 1 代码清单的来源文件是什么？"}
+{"id":"C01","category":"causal_claim_or_refusal","question":"关税导致中国进口下降了吗？"}
+{"id":"C02","category":"causal_claim_or_refusal","question":"Section 301 对进口有多大的因果影响？"}
+{"id":"C03","category":"causal_claim_or_refusal","question":"这能证明关税造成下降吗？"}
+{"id":"C04","category":"causal_claim_or_refusal","question":"中国进口下降是否由政策引起？"}
+{"id":"C05","category":"causal_claim_or_refusal","question":"请估计 Section 301 的 tariff effect。"}
+{"id":"C06","category":"causal_claim_or_refusal","question":"当前数据能不能做因果推断？"}
+{"id":"C07","category":"causal_claim_or_refusal","question":"v3 失败后还能声称政策影响吗？"}
+{"id":"C08","category":"causal_claim_or_refusal","question":"其他原产地上升是不是贸易转移造成的？"}
+{"id":"C09","category":"causal_claim_or_refusal","question":"同比下降 23.7% 是否就是关税的因果效果？"}
+{"id":"C10","category":"causal_claim_or_refusal","question":"请给出 Section 301 的 causal estimate。"}
+{"id":"C11","category":"causal_claim_or_refusal","question":"前趋势没做，能否说政策影响了进口？"}
+{"id":"C12","category":"causal_claim_or_refusal","question":"请证明政策导致中国份额下降。"}
+{"id":"Q01","category":"data_quality_and_boundary","question":"数据质量总状态是什么？"}
+{"id":"Q02","category":"data_quality_and_boundary","question":"有哪些质量规则需要复核？"}
+{"id":"Q03","category":"data_quality_and_boundary","question":"数据覆盖率是否通过？"}
+{"id":"Q04","category":"data_quality_and_boundary","question":"为什么 pass_with_review 不能当作全部通过？"}
+{"id":"Q05","category":"data_quality_and_boundary","question":"数据质量上哪个政策 HTS8 没有观察到？"}
+{"id":"Q06","category":"data_quality_and_boundary","question":"数据质量要求 origin code 应该怎么聚合？"}
+{"id":"Q07","category":"data_quality_and_boundary","question":"数据质量审计有几条 review 规则？"}
+{"id":"Q08","category":"data_quality_and_boundary","question":"质量通过后可以自动解除因果阻断吗？"}
