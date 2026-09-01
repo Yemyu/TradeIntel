@@ -27,7 +27,8 @@
 - [x] 实现供应商无关的模型—工具循环、离线 Mock 模型和因果安全后卫；
 - [x] 根据用户要求由 Sol 高重新审查 v2，发现“强制保留全部284个”严于原始“至少覆盖252个”的门槛，并冻结最大基数平衡子样本匹配 v3；
 - [x] 执行 v3 最大基数平衡子样本匹配：在至少保留252/315、四项政策前平衡和对照复用上限同时成立时无可行解；按停止规则结束匹配路线；
-- [ ] 当前下一步：选择并接入一个真实的大语言模型，再做网页 Demo；必须复用六个工具、证据包和 60 道评分器，不运行前趋势或事件研究。
+- [x] 已将当前 checkpoint 推送到私有 GitHub 远端并核验 `main` 与本地一致；仓库仍为 Private，未公开发布；
+- [ ] 当前下一步：完成真实模型适配器的离线契约验收，再选择一个 provider 做一次真实冒烟测试，最后接入网页 Demo；必须复用六个工具、证据包和 60 道评分器，不运行前趋势或事件研究。
 
 ## 1. 用最简单的话解释这个项目
 
@@ -264,7 +265,7 @@ LangGraph 只在普通 Python 流程已经理解后引入。
 4. 当状态为 `blocked_before_pretrend_v3`（或任何未来 `blocked` 状态）时，系统可以回答描述性变化，但必须拒绝“关税导致变化”的表述；
 5. 用 60 道标准答案题比较直接问模型与工具型 AI 的数值、来源、工具选择和正确拒答。
 
-Phase 10 的详细学习版见 [`phase-10-ai-application-design.zh-CN.md`](./docs/learning/phase-10-ai-application-design.zh-CN.md)，六个工具的学习版见 [`phase-10a-evidence-tools.zh-CN.md`](./docs/learning/phase-10a-evidence-tools.zh-CN.md)，模型—工具循环的学习版见 [`phase-10b-model-tool-loop.zh-CN.md`](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)，设计决策见 [`0005-evidence-grounded-ai-application.zh-CN.md`](./docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md)。当前六个只读工具、确定性路由基线、60 道本地契约评估和供应商无关的 Mock 模型循环已实现并通过；还没有接入外部大模型或网页 Demo。评估报告见 [`ai_evaluation_report.md`](./data/processed/ai/ai_evaluation_report.md)；v3 的执行结果和停止理由见 [`phase-09c-cardinality-matching.zh-CN.md`](./docs/learning/phase-09c-cardinality-matching.zh-CN.md) 与 [`0006-maximum-cardinality-overlap-matching.zh-CN.md`](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)。
+Phase 10 的详细学习版见 [`phase-10-ai-application-design.zh-CN.md`](./docs/learning/phase-10-ai-application-design.zh-CN.md)，六个工具的学习版见 [`phase-10a-evidence-tools.zh-CN.md`](./docs/learning/phase-10a-evidence-tools.zh-CN.md)，模型—工具循环的学习版见 [`phase-10b-model-tool-loop.zh-CN.md`](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)，真实模型适配器学习版见 [`phase-10c-real-model-adapter.zh-CN.md`](./docs/learning/phase-10c-real-model-adapter.zh-CN.md)，设计决策见 [`0005-evidence-grounded-ai-application.zh-CN.md`](./docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md) 和 [`0007-real-model-adapter.zh-CN.md`](./docs/decisions/0007-real-model-adapter.zh-CN.md)。当前六个只读工具、确定性路由基线、60 道本地契约评估、供应商无关的 Mock 模型循环和真实模型适配器离线测试已实现；尚未用外部大模型跑真实评估或接入网页 Demo。评估报告见 [`ai_evaluation_report.md`](./data/processed/ai/ai_evaluation_report.md)；v3 的执行结果和停止理由见 [`phase-09c-cardinality-matching.zh-CN.md`](./docs/learning/phase-09c-cardinality-matching.zh-CN.md) 与 [`0006-maximum-cardinality-overlap-matching.zh-CN.md`](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)。
 
 ### 第 8 阶段：网页、基础自动化和申请展示
 

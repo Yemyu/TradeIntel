@@ -6,7 +6,7 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 Learning and development stage 9c: the initial eligibility run correctly stopped at a 1.0822% ambiguous-value share. A precommitted exact Census HTS10 continuity rule then resolved only codes whose official 2016/2017 code, full description, units, validity, and WCO candidate all agree. After rebuilding the affected 2016 panel, all six eligibility gates passed: ambiguity is 0.0109%, with 315 treated and 893 clean-control candidates. Three pre-registered policy-pre matching experiments were then audited: the first failed balance, the global-balance refinement was infeasible for all 284 treated families, and the final maximum-cardinality design was also infeasible at the original 252/315 coverage floor. No causal result exists; the project now transfers to the evidence-grounded AI layer, which will make this limitation explicit rather than inventing a causal estimate.
 
-This repository is currently local-only. It will not be published until its scope, documentation, and privacy have been reviewed.
+The repository has been pushed to a private GitHub remote as a development checkpoint. It is not a public release; no causal effect estimate is claimed.
 
 ## Project documents
 
@@ -31,8 +31,10 @@ This repository is currently local-only. It will not be published until its scop
 - [Phase 10a Chinese learning guide: evidence tools and deterministic baseline](./docs/learning/phase-10a-evidence-tools.zh-CN.md)
 - [AI 60-question contract evaluation report](./data/processed/ai/ai_evaluation_report.md)
 - [Phase 10b Chinese learning guide: model—tool loop and safety guard](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)
+- [Phase 10c Chinese learning guide: real-model adapter](./docs/learning/phase-10c-real-model-adapter.zh-CN.md)
 - [Decision 0005: evidence-grounded AI application layer](./docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md)
 - [Decision 0006: maximum-cardinality overlap matching v3](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)
+- [Decision 0007: real-model adapter](./docs/decisions/0007-real-model-adapter.zh-CN.md)
 - [Data contract 0003: causal control-data extension](./docs/contracts/0003-causal-control-data-contract.zh-CN.md)
 - [Policy exposure evidence table](./data/processed/causal/trade_action_exposure.csv)
 - [List 1 exclusion timeline](./data/processed/causal/list1_exclusion_timeline.csv)
@@ -71,6 +73,14 @@ python scripts/evaluate_tradeintel_ai.py
 ```
 
 The first command uses the deterministic routing baseline; `--mock-agent` demonstrates a provider-neutral model/tool loop and the causal safety guard. The 60-question report measures the local tool contract, not an external LLM.
+
+After configuring `TRADEINTEL_MODEL_BASE_URL`, `TRADEINTEL_MODEL_NAME`, and (when required) `TRADEINTEL_MODEL_API_KEY` in the current shell, the same CLI can run one real-model smoke test:
+
+```bash
+python scripts/run_tradeintel_ai.py --live-agent "2018 年 Section 301 List 1 后中国相关商品进口变化是多少？"
+```
+
+The key is read only from the environment and must never be committed. The live adapter is documented in [`phase-10c-real-model-adapter.zh-CN.md`](./docs/learning/phase-10c-real-model-adapter.zh-CN.md); without a key, use the offline modes above.
 
 ## First validated policy source
 

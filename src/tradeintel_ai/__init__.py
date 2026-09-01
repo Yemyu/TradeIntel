@@ -1,6 +1,13 @@
 """Evidence-grounded TradeShock AI MVP."""
 
 from .agent import ChatModel, MockModel, ModelResponse, ModelToolCall, ToolCallingAgent, enforce_causal_safety
+from .model_adapter import (
+    DEFAULT_BASE_URL,
+    DEFAULT_SYSTEM_PROMPT,
+    ModelAdapterError,
+    OpenAICompatibleConfig,
+    OpenAICompatibleModel,
+)
 from .repository import DataPaths, EvidenceRepository, RepositoryError
 from .router import answer_question, classify_question
 from .tools import (
@@ -36,4 +43,9 @@ __all__ = [
     "get_policy_event",
     "get_trade_series",
     "enforce_causal_safety",
+    "DEFAULT_BASE_URL",
+    "DEFAULT_SYSTEM_PROMPT",
+    "ModelAdapterError",
+    "OpenAICompatibleConfig",
+    "OpenAICompatibleModel",
 ]
