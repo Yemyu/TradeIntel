@@ -220,7 +220,7 @@ def get_trade_series(
         row = by_key.get(key)
         if row is None:
             missing_months.append(_month_label(key))
-            value = 0
+            value = None
             observed_count = 0
             source_hts10_count = 0
             source_hts10_mapped_count = 0
@@ -253,7 +253,9 @@ def get_trade_series(
                 "end": end,
                 "months": len(series),
                 "series": series,
-                "total_usd": sum(int(item["value_usd"]) for item in series),
+                "total_usd": None if missing_months else sum(int(item["value_usd"]) for item in series),
+                "observed_total_usd": sum(int(item["value_usd"]) for item in series if item["value_usd"] is not None),
+                "coverage_complete": not missing_months,
                 "missing_months": missing_months,
             },
             "evidence": {
@@ -273,7 +275,7 @@ def get_trade_series(
             "limitations": [
                 "金额是描述性贸易指标，工具不会把时间变化解释成关税因果效应。",
                 "政策生效月 2018-07 是 transition；需要干净窗口时应使用 get_descriptive_change 的已登记比较。",
-                "出现 missing_months 时不能把补零当成真实零值，应先复核数据覆盖。",
+                "缺失月份保留 null，完整窗口 total_usd 也为 null；observed_total_usd 只是已观测月份合计。",
             ],
         }
     )
@@ -434,7 +436,9 @@ def get_causal_readiness(
                     "v3_solver_status_code": v3.get("solver", {}).get("stage_one", {}).get(
                         "status_code"
                     ),
-                    "v3_selected_treated": v3.get("metrics", {}).get("selected_treated"),
+                    "v3_selected_treated": (v3.get("metrics", {}).get("selected_treated")
+                                            if v3.get("solver", {}).get("stage_one", {}).get("success") is True else None),
+                    "v3_selection_observed": v3.get("solver", {}).get("stage_one", {}).get("success") is True,
                 },
                 "pretrend": "not_run",
                 "event_study": "not_run",
@@ -456,7 +460,7 @@ def get_causal_readiness(
             },
             "limitations": [
                 "当前因果门槛为 blocked；本工具不会自行放宽匹配规则或生成事件研究。",
-                "v3 的‘selected_treated=0’表示完整联合门槛没有可行解，不表示每个商品都没有单独近邻。",
+                "v3 原报告的 selected_treated=0 是无可行解时的占位；本工具返回 null，不能解释为真实最大匹配数量为零。",
             ],
         }
     )

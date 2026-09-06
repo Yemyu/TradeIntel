@@ -60,25 +60,26 @@
   <div class="meta">
     <span>主题：2025–2026 热点的关税 / 贸易</span>
     <span>方向：数据开发 + AI 工程师（双对口）</span>
-    <span>建立日期：2026-07-10</span>
-    <span>状态：阶段 8 资格门槛全部通过，等待政策前匹配</span>
+    <span>更新日期：2026-09-06</span>
+    <span>状态：Phase 10e 真实模型评估协议已冻结，等待 GLM 正式运行</span>
   </div>
 </header>
 
-<div class="note"><b>规划已升级：</b>本页保留为最初的技术草案；48 个月贸易面板、MySQL 全量对账、数据质量层、描述性统计基线、因果对照设计、官方政策暴露表、跨年 HTS 映射、all-origin 面板和政策前资格审查已经完成。首次歧义门槛失败后，项目用重跑前冻结的官方 HTS10 精确连续性规则解决阻断；当前 6 道资格门槛全部通过，315 个处理候选和 893 个对照候选获准进入匹配，但尚无因果结果。最新执行版本和实时进度以 <a href="./PROJECT_PLAN.md">PROJECT_PLAN.md</a> 为准。Phase 08 中文学习讲义见 <a href="./docs/learning/phase-08-exact-mapping-resolution.zh-CN.md">phase-08-exact-mapping-resolution.zh-CN.md</a>。</div>
+<div class="note"><b>当前真实进度：</b>48 个月贸易面板、MySQL 对账、数据质量层、描述性统计、因果对照设计与政策前匹配均已完成；因果结果仍未获准对外宣称。AI 应用已实现受限工具调用、证据链、失败拒答和真实模型适配器，并冻结了 40 道同领域候选测试题、三组公平对照与人工评分规则；下一步是在 GLM 上先做小规模冒烟，再进行正式重复评估。最新清单见 <a href="./PROJECT_PLAN.md">PROJECT_PLAN.md</a>，本阶段中文讲义见 <a href="./docs/learning/phase-10e-live-evaluation.zh-CN.md">Phase 10e</a>，评估协议见 <a href="./docs/decisions/0009-live-evaluation-protocol.zh-CN.md">决策 0009</a>。</div>
 
 <div class="toc">
   <b>目录 ·</b>
   <a href="#why">1 为什么做</a>
   <a href="#goal">2 目标</a>
-  <a href="#stack">3 技术栈</a>
-  <a href="#data">4 数据源</a>
-  <a href="#arch">5 架构</a>
-  <a href="#dwh">6 数仓分层</a>
-  <a href="#agent">7 AI Agent</a>
-  <a href="#collab">8 协作方式</a>
-  <a href="#mile">9 里程碑</a>
-  <a href="#conv">10 约定</a>
+  <a href="#ai-overview">3 AI 全景路线</a>
+  <a href="#stack">4 技术栈</a>
+  <a href="#data">5 数据源</a>
+  <a href="#arch">6 架构</a>
+  <a href="#dwh">7 数仓分层</a>
+  <a href="#agent">8 AI Agent</a>
+  <a href="#collab">9 协作方式</a>
+  <a href="#mile">10 里程碑</a>
+  <a href="#conv">11 约定</a>
 </div>
 
 <section class="card" id="why">
@@ -89,7 +90,7 @@
     <tr><td>AI 工程师方向</td><td>Agent 工具调用 + 多步推理 + 评估，是 Agent 的核心</td></tr>
     <tr><td>不烂大街</td><td>贸易 + Agent 几乎没人做；主题（关税）热门好讲</td></tr>
     <tr><td>脱离汽车</td><td>补作品集领域多样性（已有 3 个汽车项目）</td></tr>
-    <tr><td>可复现</td><td>全公开数据 + 本地模型，clone 即跑</td></tr>
+    <tr><td>可复现</td><td>公开来源 + 来源链接 / 文件哈希 + 可替换模型接口；大体积原始数据不直接塞进仓库</td></tr>
     <tr><td>技术可迁移</td><td>实体对齐 / 异常检测 / 数仓分层，换行业也通用</td></tr>
   </table>
 </section>
@@ -104,13 +105,73 @@
   </ul>
   <h3>作品集目标</h3>
   <ul>
-    <li>一个公开 GitHub 仓库，证明"数据开发 + AI 工程"双能力</li>
+    <li>一个建设期保持私有、完成后再决定是否公开的 GitHub 仓库，证明“数据开发 + AI 工程”双能力</li>
     <li>支撑跨申请 AI / 数据科学硕士的技术背书</li>
   </ul>
 </section>
 
+<section class="card" id="ai-overview">
+  <h2>3 · AI 全景学习路线（先建立整体认知）</h2>
+  <p>这是一条约 2 小时的中文第一遍路线。目标是先理解“大模型应用是怎样工作的”，不是现在就学习代码。建议按顺序观看；看不懂的代码、公式和硬件配置先跳过。</p>
+  <div class="tip"><b>完成标准：</b>看完后，你能用自己的话解释大模型、Prompt、RAG、Agent、微调、部署之间的关系，并说明它们在 TradeIntel 中可能负责什么。</div>
+  <table>
+    <tr><th>顺序</th><th>视频</th><th>时长</th><th>这一段要理解</th><th>可以先跳过</th></tr>
+    <tr>
+      <td>1</td>
+      <td><a href="https://www.bilibili.com/video/BV18m421V7ZW/" target="_blank" rel="noopener">GPT 是什么原理？一个比喻通俗解释</a></td>
+      <td>5:54</td>
+      <td>大模型如何根据上下文生成内容</td>
+      <td>公式和底层实现细节</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><a href="https://www.bilibili.com/video/BV14x4y1x7bP/" target="_blank" rel="noopener">Datawhale：进击的 AI——大模型技术全景</a></td>
+      <td>29:55</td>
+      <td>训练、模型、应用开发之间的整体关系</td>
+      <td>具体代码</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><a href="https://www.bilibili.com/video/BV1BJ4m1T7Sx/" target="_blank" rel="noopener">Datawhale：大模型应用开发范式</a></td>
+      <td>29:55</td>
+      <td>Prompt、知识库、工具调用和 Agent 分别解决什么问题</td>
+      <td>框架 API 写法</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><a href="https://www.bilibili.com/video/BV1Sb421E74u/" target="_blank" rel="noopener">Datawhale：RAG 检索增强生成</a></td>
+      <td>15:58</td>
+      <td>文档切分、向量化、检索、回答的业务流程</td>
+      <td>向量计算公式</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><a href="https://www.bilibili.com/video/BV17i421Y7L6/" target="_blank" rel="noopener">Datawhale：Agent 大模型智能体</a></td>
+      <td>10:54</td>
+      <td>规划任务、调用工具、观察结果、继续行动</td>
+      <td>多 Agent 代码</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><a href="https://www.bilibili.com/video/BV1Hf421z7gv/" target="_blank" rel="noopener">Datawhale：大模型部署与微调</a></td>
+      <td>19:02</td>
+      <td>什么时候需要微调，部署又是在解决什么问题</td>
+      <td>显卡、量化和训练命令</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><a href="https://www.bilibili.com/video/BV1RC4y1A7ZU/" target="_blank" rel="noopener">梗直哥：动画科普 AI Agent</a></td>
+      <td>6:33</td>
+      <td>用直观动画复习大模型与 Agent 的关系</td>
+      <td>实现细节</td>
+    </tr>
+  </table>
+  <p><b>看完后的六个检查问题：</b>大模型和 AI 产品有什么区别？Prompt、RAG、微调分别解决什么问题？为什么向量数据库不能简单等同于 MySQL？Agent 为什么不只是聊天？LangChain/LangGraph 属于模型还是框架？怎样判断一个 AI Demo 已经成为可靠项目？</p>
+  <div class="note"><b>和本项目的关系：</b>这条路线只负责建立 AI 认知地图；看完后再回到 TradeIntel，逐个对应工具调用、证据检索、模型回答和评估。现在不要求购买课程，也不要求开始新的项目阶段。</div>
+</section>
+
 <section class="card" id="stack">
-  <h2>3 · 技术栈</h2>
+  <h2>4 · 技术栈</h2>
   <table>
     <tr><th>层</th><th>工具</th><th>用途</th><th>何时引入</th></tr>
     <tr><td>主语言</td><td>Python 3</td><td>主开发语言</td><td>M1</td></tr>
@@ -118,7 +179,7 @@
     <tr><td>采集</td><td>requests + pandas</td><td>调 API / 解析 / 落库</td><td>M1</td></tr>
     <tr><td>建模</td><td>dbt</td><td>SQL 分层 / 测试 / 文档</td><td>M5（核心版完成后）</td></tr>
     <tr><td>Agent</td><td>LangGraph</td><td>工具调用 / 多步推理</td><td>M3</td></tr>
-    <tr><td>LLM</td><td>Ollama + Qwen2.5</td><td>本地模型（免费可复现），可选接 API</td><td>M3</td></tr>
+    <tr><td>LLM</td><td>OpenAI-compatible API + GLM</td><td>当前接入 GLM；适配层允许以后更换模型提供商</td><td>M3</td></tr>
     <tr><td>看板</td><td>Streamlit</td><td>网页看板 + Agent 对话</td><td>M4</td></tr>
     <tr><td>调度</td><td>Airflow</td><td>定时自动化 / 失败重试 / 监控</td><td>M5（核心版完成后）</td></tr>
   </table>
@@ -126,7 +187,7 @@
 </section>
 
 <section class="card" id="data">
-  <h2>4 · 数据源（全免费公开）</h2>
+  <h2>5 · 数据源（全免费公开）</h2>
   <table>
     <tr><th>数据源</th><th>提供什么</th><th>用来干嘛</th></tr>
     <tr><td>联合国 Comtrade</td><td>两国之间按品类（HS编码）的进出口额</td><td>核心"贸易流水"</td></tr>
@@ -134,11 +195,11 @@
     <tr><td>FRED（美联储）</td><td>汇率</td><td>不同币种换算成可比</td></tr>
     <tr><td>HS 编码对照表</td><td>不同年份 HS 版本互转</td><td>数据对齐（见第 6 节）</td></tr>
   </table>
-  <div class="tip">数据快照会打包进仓库，保证别人 clone 下来就能跑，<b>可复现</b>。</div>
+  <div class="tip">可复现不等于把所有原始数据塞进 Git：仓库保存必要的小型验证产物，并记录官方下载地址、文件哈希和处理步骤；大型或可重新下载的原始文件不提交。</div>
 </section>
 
 <section class="card" id="arch">
-  <h2>5 · 架构（数据流）</h2>
+  <h2>6 · 架构（数据流）</h2>
   <p>从数据源一路到 AI Agent 和看板，整条流水线长这样：</p>
   <div class="svg-box">
     <svg viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img">
@@ -159,7 +220,7 @@
       <text x="180" y="294" font-size="12.5" fill="#085041">ADS</text><text x="240" y="294" font-size="12.5" fill="#5F5E5A">应用层（成品指标，给 Agent / 看板）</text>
       <line x1="340" y1="312" x2="340" y2="330" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a3)"/>
       <rect x="150" y="330" width="380" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
-      <text x="340" y="360" text-anchor="middle" font-size="13" fill="#0C447C">AI Agent：LangGraph + Qwen 本地模型</text>
+      <text x="340" y="360" text-anchor="middle" font-size="13" fill="#0C447C">AI Agent：证据工具 + 可替换模型适配层（当前 GLM）</text>
       <line x1="340" y1="380" x2="340" y2="398" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a3)"/>
       <rect x="150" y="398" width="380" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
       <text x="340" y="428" text-anchor="middle" font-size="13" fill="#0C447C">输出：Streamlit 看板 + 每周自动简报</text>
@@ -169,7 +230,7 @@
 </section>
 
 <section class="card" id="dwh">
-  <h2>6 · 数仓分层（数据工程核心）</h2>
+  <h2>7 · 数仓分层（数据工程核心）</h2>
   <p>贸易数据的真实痛点：同一个商品在不同年份、不同国家，HS 编码会变（HS2012/2017/2022 三个版本），国家代码、币种、统计口径都不统一。把"乱数据"整理成"干净能分析的表"，就是数据工程。</p>
   <table>
     <tr><th>层</th><th>作用</th><th>说明</th></tr>
@@ -182,7 +243,7 @@
 </section>
 
 <section class="card" id="agent">
-  <h2>7 · AI Agent（AI 工程核心）</h2>
+  <h2>8 · AI Agent（AI 工程核心）</h2>
   <p>Agent 不是只会聊天的机器人，而是<b>会自己调工具、分多步干活</b>的程序。它有一组工具（每个工具就是一个 Python 函数）：</p>
   <div>
     <span class="pill">查数仓</span>
@@ -200,11 +261,11 @@
     <li>④ 再查 → 看其它国家同期对美半导体出口是否上升（贸易转移）</li>
     <li>⑤ 画图 + 写报告 → 给你一份带图的分析</li>
   </ul>
-  <div class="tip">每周自动扫全库 → 发现异常 → 生成简报存档；也能在界面里直接问。LLM 默认本地 Ollama + Qwen2.5（免费可复现）。</div>
+  <div class="tip">当前已完成可审计的证据工具、模型工具循环和 GLM 适配；模型不能任意执行 SQL，也不能把描述性变化冒充因果结论。定时简报与交互界面属于后续扩展。</div>
 </section>
 
 <section class="card" id="collab">
-  <h2>8 · 协作方式：AI 原生共建</h2>
+  <h2>9 · 协作方式：AI 原生共建</h2>
   <p>每个环节走五步循环：<span class="you">你</span> 定义问题和判断边界 / <span class="me">AI</span> 解释概念 / <span class="me">AI</span> 实现并测试 / <span class="you">你</span> 检查证据 / <span class="me">我们</span> 决定是否采纳。重点不是背代码，而是能指挥、质疑和验收 AI 的工作。</p>
   <div class="svg-box">
     <svg viewBox="0 0 680 410" xmlns="http://www.w3.org/2000/svg" role="img">
@@ -232,7 +293,7 @@
 </section>
 
 <section class="card" id="mile">
-  <h2>9 · 里程碑（M1 → M4）</h2>
+  <h2>10 · 里程碑（M1 → M4）</h2>
   <table>
     <tr><th>环节</th><th>做什么</th><th>你要理解的</th><th>你负责的判断</th><th>AI 负责的实现</th></tr>
     <tr><td><b>M1</b><br>环境+采集</td><td>跑通官方数据采集</td><td>来源 / 输入输出 / 追溯</td><td>范围与验收条件</td><td>采集 / 重试 / 保存 / 测试</td></tr>
@@ -245,21 +306,21 @@
 </section>
 
 <section class="card" id="conv">
-  <h2>10 · 约定（铁律）</h2>
+  <h2>11 · 约定（铁律）</h2>
   <table>
     <tr><th>项</th><th>约定</th></tr>
-    <tr><td>环境</td><td>新建 conda 环境 <code>tradeintel</code>；<b>绝不碰全局 Python，不用 evdata</b></td></tr>
+    <tr><td>环境</td><td>使用项目内 <code>.venv</code>；开发依赖只装在虚拟环境，不污染系统 Python</td></tr>
     <tr><td>数据库</td><td>MySQL</td></tr>
-    <tr><td>模型</td><td>默认本地 Ollama + Qwen2.5（免费可复现），可选接 API</td></tr>
-    <tr><td>仓库</td><td>公开 GitHub；英文 README + 中文注释</td></tr>
+    <tr><td>模型</td><td>OpenAI-compatible API；当前使用 GLM，模型与业务工具解耦</td></tr>
+    <tr><td>仓库</td><td>建设期保持 GitHub 私有；完成后由本人决定是否公开</td></tr>
     <tr><td>去标签</td><td>不提凯捷 / 客户名；车系品牌等公开信息可保留</td></tr>
-    <tr><td>可复现</td><td>数据快照打包进仓库，clone 即跑</td></tr>
+    <tr><td>可复现</td><td>保存必要验证产物、来源链接、哈希和重建步骤；大型原始数据不提交</td></tr>
     <tr><td>协作</td><td>AI 原生五步循环（见第 8 节）：人负责问题和判断，AI 负责实现和验证</td></tr>
   </table>
 </section>
 
 <footer>
-  TradeIntel · 项目规划文档 · 2026-07-10 · 随项目进展持续更新
+  TradeIntel · 项目规划文档 · 更新于 2026-09-06 · 随项目进展持续更新
 </footer>
 
 </div>

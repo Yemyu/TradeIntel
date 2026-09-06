@@ -9,7 +9,7 @@ key or network access.
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Protocol
 from collections.abc import Mapping, Sequence
 
@@ -36,17 +36,12 @@ CAUSAL_ASSERTION_TERMS = (
     "causal effect is",
     "the effect of the tariff is",
 )
-REFUSAL_TERMS = (
-    "不能",
-    "无法",
-    "不足",
-    "不支持",
-    "不能证明",
-    "cannot",
-    "can't",
-    "not causal",
-    "not prove",
-)
+
+# Only the host may aggregate evidence from its own execution records.
+MODEL_TOOL_NAMES = frozenset({
+    "get_policy_event", "get_trade_series", "get_descriptive_change",
+    "get_data_quality_status", "get_causal_readiness",
+})
 
 
 @dataclass(frozen=True)
@@ -64,6 +59,7 @@ class ModelResponse:
 
     text: str = ""
     tool_calls: tuple[ModelToolCall, ...] = ()
+    metadata: dict[str, object] = field(default_factory=dict)
 
 
 class ChatModel(Protocol):
@@ -100,7 +96,33 @@ def _normalise_response(value: ModelResponse | Mapping[str, object]) -> ModelRes
                 arguments=dict(arguments),
             )
         )
-    return ModelResponse(text=str(value.get("text", "")), tool_calls=tuple(calls))
+    metadata = value.get("metadata", {})
+    return ModelResponse(
+        text=str(value.get("text", "")),
+        tool_calls=tuple(calls),
+        metadata=dict(metadata) if isinstance(metadata, Mapping) else {},
+    )
+
+
+def _summarise_model_run(turns: Sequence[Mapping[str, object]]) -> dict[str, object]:
+    """Keep provider metadata without exposing request headers or secrets."""
+
+    names = sorted({str(turn["model"]) for turn in turns if turn.get("model")})
+    usage_totals: dict[str, int] = {}
+    for turn in turns:
+        usage = turn.get("usage", {})
+        if not isinstance(usage, Mapping):
+            continue
+        for key in ("prompt_tokens", "completion_tokens", "total_tokens", "input_tokens", "output_tokens"):
+            value = usage.get(key)
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                usage_totals[key] = usage_totals.get(key, 0) + int(value)
+    return {
+        "turn_count": len(turns),
+        "model_names": names,
+        "usage_totals": usage_totals,
+        "turns": [dict(turn) for turn in turns],
+    }
 
 
 def _looks_causal(question: str) -> bool:
@@ -108,19 +130,15 @@ def _looks_causal(question: str) -> bool:
     return any(term in question or term in lowered for term in CAUSAL_QUESTION_TERMS)
 
 
-def _has_causal_readiness(results: Sequence[dict[str, object]]) -> bool:
-    return any(item.get("tool_name") == "get_causal_readiness" for item in results)
-
-
 def _readiness_is_blocked(results: Sequence[dict[str, object]]) -> tuple[bool, str]:
     for item in results:
-        if item.get("tool_name") != "get_causal_readiness":
+        if item.get("tool_name") != "get_causal_readiness" or item.get("status") != "ok":
             continue
         data = item.get("data", {})
         if isinstance(data, Mapping):
             status = str(data.get("status", "unknown"))
-            return (not bool(data.get("causal_allowed", False))), status
-    return False, "unknown"
+            return data.get("causal_allowed") is not True, status
+    return True, "unknown"
 
 
 def enforce_causal_safety(
@@ -128,13 +146,16 @@ def enforce_causal_safety(
     draft: str,
     tool_results: Sequence[dict[str, object]],
 ) -> tuple[str, bool]:
-    """Replace an unsupported causal assertion when the readiness gate is blocked."""
+    """Conservative lexical screen, NOT a semantic correctness verifier.
+
+    A disclaimer elsewhere in the draft cannot waive a detected assertion.
+    Unflagged drafts still require final-answer review.
+    """
 
     blocked, status = _readiness_is_blocked(tool_results)
     lowered_draft = draft.lower()
     assertion_present = any(term in draft or term in lowered_draft for term in CAUSAL_ASSERTION_TERMS)
-    refusal_present = any(term in draft or term in lowered_draft for term in REFUSAL_TERMS)
-    if blocked and _looks_causal(question) and assertion_present and not refusal_present:
+    if blocked and assertion_present:
         return (
             f"安全后卫已拦截越界因果表述：当前因果状态为 {status}，"
             "只能报告描述性变化，不能说关税导致了变化。",
@@ -146,27 +167,43 @@ def enforce_causal_safety(
 class ToolCallingAgent:
     """Run a bounded model/tool loop and always attach the safety signal."""
 
-    def __init__(self, model: ChatModel, registry: ToolRegistry | None = None, *, max_rounds: int = 4) -> None:
-        if max_rounds < 1:
-            raise ValueError("max_rounds must be positive")
+    def __init__(self, model: ChatModel, registry: ToolRegistry | None = None, *, max_rounds: int = 4, max_tool_calls: int = 16) -> None:
+        if max_rounds < 1 or max_tool_calls < 1:
+            raise ValueError("max_rounds and max_tool_calls must be positive")
         self.model = model
         self.registry = registry or ToolRegistry()
         self.max_rounds = max_rounds
+        self.max_tool_calls = max_tool_calls
 
     def answer(self, question: str) -> dict[str, object]:
         if not isinstance(question, str) or not question.strip():
             return {"status": "error", "error": "question 不能为空", "causal_claim": False}
         messages: list[dict[str, object]] = [{"role": "user", "content": question}]
         tool_results: list[dict[str, object]] = []
+        model_selected_tools: list[str] = []
+        seen_call_ids: set[str] = set()
+        model_turns: list[dict[str, object]] = []
         draft = ""
         rounds = 0
         for rounds in range(1, self.max_rounds + 1):
             response = _normalise_response(
-                self.model.complete(messages=messages, tools=self.registry.schemas())
+                self.model.complete(messages=messages, tools=[
+                    schema for schema in self.registry.schemas()
+                    if schema["name"] in MODEL_TOOL_NAMES
+                ])
             )
+            model_turns.append(dict(response.metadata))
             if not response.tool_calls:
                 draft = response.text.strip()
                 break
+            if len(model_selected_tools) + len(response.tool_calls) > self.max_tool_calls:
+                return {"status": "error", "error": "模型请求超过工具调用次数上限",
+                        "tool_results": tool_results, "causal_claim": False}
+            call_ids = [call.call_id for call in response.tool_calls]
+            if any(not call_id or call_id in seen_call_ids for call_id in call_ids) or len(set(call_ids)) != len(call_ids):
+                return {"status": "error", "error": "工具调用ID为空或重复",
+                        "tool_results": tool_results, "causal_claim": False}
+            seen_call_ids.update(call_ids)
             messages.append(
                 {
                     "role": "assistant",
@@ -181,7 +218,12 @@ class ToolCallingAgent:
                 }
             )
             for call in response.tool_calls:
-                result = self.registry.call(call.name, call.arguments)
+                model_selected_tools.append(call.name)
+                if call.name not in MODEL_TOOL_NAMES:
+                    result = {"tool_name": call.name, "status": "error",
+                              "error": "模型无权调用该工具；证据包只能由程序生成"}
+                else:
+                    result = self.registry.call(call.name, call.arguments)
                 tool_results.append(result)
                 messages.append(
                     {
@@ -200,34 +242,60 @@ class ToolCallingAgent:
                 "error": "模型在最大轮数内没有生成最终文本",
                 "rounds": rounds,
                 "tool_results": tool_results,
+                "model_run": _summarise_model_run(model_turns),
                 "causal_claim": False,
             }
 
-        # If a causal question skipped the readiness tool, perform a read-only
-        # preflight before allowing any final wording to leave the agent.
-        if _looks_causal(question) and not _has_causal_readiness(tool_results):
-            tool_results.append(self.registry.call("get_causal_readiness", {}))
-        if not tool_results:
+        successful_results = [item for item in tool_results
+                              if item.get("status") == "ok" and item.get("tool_name") in MODEL_TOOL_NAMES]
+        if not successful_results:
             return {
                 "status": "error",
-                "error": "模型没有调用任何已登记工具，不能生成无证据回答",
+                "error": "模型没有调用任何已登记工具并取得成功结果，不能生成无证据回答",
                 "rounds": rounds,
+                "tool_results": tool_results,
+                "model_run": _summarise_model_run(model_turns),
                 "causal_claim": False,
             }
-        safe_text, guard_triggered = enforce_causal_safety(question, draft, tool_results)
+        # Check authoritative readiness on every answer, regardless of the
+        # user's wording. Do not count this host call as a model selection.
+        readiness = self.registry.call("get_causal_readiness", {})
+        readiness_data = readiness.get("data")
+        if (
+            readiness.get("status") != "ok"
+            or not isinstance(readiness_data, Mapping)
+            or not isinstance(readiness_data.get("causal_allowed"), bool)
+            or readiness_data.get("status") in (None, "", "unknown")
+        ):
+            return {"status": "error", "error": "无法核验因果状态，停止输出模型答案",
+                    "tool_results": tool_results, "model_run": _summarise_model_run(model_turns),
+                    "causal_claim": False}
+        successful_results = [item for item in successful_results if item["tool_name"] != "get_causal_readiness"] + [readiness]
+        safe_text, guard_triggered = enforce_causal_safety(question, draft, successful_results)
         bundle = self.registry.call(
             "build_evidence_bundle",
-            {"question": question, "tool_results": tool_results},
+            {"question": question, "tool_results": successful_results},
         )
+        if bundle.get("status") == "error":
+            return {"status": "error", "error": "证据打包失败",
+                    "model_run": _summarise_model_run(model_turns), "causal_claim": False}
         return {
-            "status": "ok",
+            "status": "ok" if guard_triggered else "needs_review",
+            "answer_kind": "fixed_safety_refusal" if guard_triggered else "unverified_model_draft",
+            "final_answer_verified": guard_triggered,
+            "task_success_verified": False,
+            "review_required": not guard_triggered,
             "response": safe_text,
             "original_model_response": draft if guard_triggered else None,
             "safety_guard_triggered": guard_triggered,
             "rounds": rounds,
-            "tool_results": tool_results,
+            "tool_results": successful_results,
+            "model_tool_results": tool_results,
+            "model_selected_tools": model_selected_tools,
+            "host_selected_tools": ["get_causal_readiness", "build_evidence_bundle"],
+            "model_run": _summarise_model_run(model_turns),
             "evidence_bundle": bundle,
-            "causal_claim": False,
+            "causal_claim": False if guard_triggered else None,
         }
 
 

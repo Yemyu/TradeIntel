@@ -4,6 +4,8 @@ An evidence-grounded AI assistant for analysing trade-policy shocks and trade di
 
 ## Current status
 
+2026-09-06 audit: fabricated scores for the unrun direct-model baseline have been withdrawn. The 60-question report measures development tool contracts, not final-answer correctness. Models may call five query tools; evidence assembly is host-only. Unverified drafts return `needs_review` (CLI exit code 3). Missing months remain null. No live-model evaluation or causal estimate has been established. See the [Chinese audit guide](docs/learning/phase-10d-quality-audit.zh-CN.md) and [evaluation protocol](docs/decisions/0008-evaluation-and-trust-boundary-audit.zh-CN.md).
+
 Learning and development stage 9c: the initial eligibility run correctly stopped at a 1.0822% ambiguous-value share. A precommitted exact Census HTS10 continuity rule then resolved only codes whose official 2016/2017 code, full description, units, validity, and WCO candidate all agree. After rebuilding the affected 2016 panel, all six eligibility gates passed: ambiguity is 0.0109%, with 315 treated and 893 clean-control candidates. Three pre-registered policy-pre matching experiments were then audited: the first failed balance, the global-balance refinement was infeasible for all 284 treated families, and the final maximum-cardinality design was also infeasible at the original 252/315 coverage floor. No causal result exists; the project now transfers to the evidence-grounded AI layer, which will make this limitation explicit rather than inventing a causal estimate.
 
 The repository has been pushed to a private GitHub remote as a development checkpoint. It is not a public release; no causal effect estimate is claimed.
@@ -32,9 +34,13 @@ The repository has been pushed to a private GitHub remote as a development check
 - [AI 60-question contract evaluation report](./data/processed/ai/ai_evaluation_report.md)
 - [Phase 10b Chinese learning guide: model—tool loop and safety guard](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)
 - [Phase 10c Chinese learning guide: real-model adapter](./docs/learning/phase-10c-real-model-adapter.zh-CN.md)
+- [Phase 10e Chinese learning guide: final-model evaluation](./docs/learning/phase-10e-live-evaluation.zh-CN.md)
 - [Decision 0005: evidence-grounded AI application layer](./docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md)
 - [Decision 0006: maximum-cardinality overlap matching v3](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)
 - [Decision 0007: real-model adapter](./docs/decisions/0007-real-model-adapter.zh-CN.md)
+- [Decision 0008: evaluation and trust-boundary audit](./docs/decisions/0008-evaluation-and-trust-boundary-audit.zh-CN.md)
+- [Decision 0009: frozen live-evaluation protocol](./docs/decisions/0009-live-evaluation-protocol.zh-CN.md)
+- [Final evaluation question-set guide](./evals/README.zh-CN.md)
 - [Data contract 0003: causal control-data extension](./docs/contracts/0003-causal-control-data-contract.zh-CN.md)
 - [Policy exposure evidence table](./data/processed/causal/trade_action_exposure.csv)
 - [List 1 exclusion timeline](./data/processed/causal/list1_exclusion_timeline.csv)

@@ -3,7 +3,9 @@
 > 中文项目名：可信贸易政策 AI 分析师  
 > 项目目标：以 AI 原生协作方式学习数据与 AI 工程的概念、设计、选择和验证，同时完成可用于 NTU Applied AI 申请的主项目。日常实现代码主要由 AI 完成。
 
-## 当前进度（2026-09-01）
+## 当前进度（2026-09-06）
+
+**Phase 10e更新：** 旧60题仅作工具契约开发回归；正式评估协议、三组运行器、复核器、40道候选题、151个必答事实槽和冻结清单已经完成并通过离线预检。尚未运行GLM正式批次，也没有模型分数。详见[中文学习与参考答案](docs/learning/phase-10e-live-evaluation.zh-CN.md)和[执行协议](docs/decisions/0009-live-evaluation-protocol.zh-CN.md)。
 
 - [x] 完成 Section 301 List 1 政策事件和 818 个政策 HTS8 商品清单的核验；
 - [x] 完成 2016 年 1 月至 2019 年 12 月的 48 个月官方贸易面板；
@@ -23,12 +25,17 @@
 - [x] 冻结并执行政策前三近邻匹配：覆盖率达到 90.16%，但趋势斜率和中国进口份额的平衡性未达到 `|SMD| < 0.10`，按停止规则阻断于前趋势检验之前；
 - [x] 执行第二个预注册的全局平衡最优匹配实验：在同产业、每个处理3个对照、复用上限10次、总体 SMD≤0.09 的同时约束下无可行解，按停止规则不放宽约束；
 - [x] 冻结证据约束的 AI 应用层设计：六个只读工具、因果阻断信号、来源证据包和 60 道评估题；
-- [x] 实现六个只读工具、证据包和确定性路由基线，并通过 60 道本地契约评估（数字、来源、工具选择、正确拒答均达到 100%）；
+- [x] 工具字段、来源记录、固定路由和拒答状态在60道开发回归题上通过；不代表最终文字或真实模型通过；
 - [x] 实现供应商无关的模型—工具循环、离线 Mock 模型和因果安全后卫；
 - [x] 根据用户要求由 Sol 高重新审查 v2，发现“强制保留全部284个”严于原始“至少覆盖252个”的门槛，并冻结最大基数平衡子样本匹配 v3；
 - [x] 执行 v3 最大基数平衡子样本匹配：在至少保留252/315、四项政策前平衡和对照复用上限同时成立时无可行解；按停止规则结束匹配路线；
 - [x] 已将当前 checkpoint 推送到私有 GitHub 远端并核验 `main` 与本地一致；仓库仍为 Private，未公开发布；
-- [ ] 当前下一步：完成真实模型适配器的离线契约验收，再选择一个 provider 做一次真实冒烟测试，最后接入网页 Demo；必须复用六个工具、证据包和 60 道评分器，不运行前趋势或事件研究。
+- [x] 完成适配器离线契约测试及Phase 10d评估/证据边界修复；
+- [x] 使用用户配置的智谱 GLM 兼容接口完成一次真实冒烟：工具调用、来源和安全状态均能返回；结果按 `needs_review` 标记，未把一次流畅回答当作通过评估；
+- [x] 实现三臂真实模型评估运行器：直接回答、证据上下文直接回答、工具型 Agent；运行器拒绝 gold 泄漏并阻止开发集误当最终测试集；
+- [x] 由高推理模型审查并冻结正式评估 v1：修复同证据对照、无工具请求、增量日志、终止条件和评分分母；建立40题、10模板、151事实槽（70个数值槽、10道因果拒答题）及标准答案指纹；
+- [x] 离线预检通过：正式配置固定为3组×40题×3轮=360份答案，API请求理论上限720、默认预算800；当前模型采纳状态仍为 false；
+- [ ] 当前下一步：重新配置 provider 后，用3道旧开发题运行三组冒烟；确认模型名、结束原因、token和日志结构正常后再运行正式批次并逐项复核。达到0009协议门槛后接网页Demo；不运行前趋势或事件研究。
 
 ## 1. 用最简单的话解释这个项目
 
@@ -263,9 +270,9 @@ LangGraph 只在普通 Python 流程已经理解后引入。
 2. Python/MySQL 工具负责固定查询、计算、日期边界、来源和质量状态；
 3. AI 只能根据结构化证据写回答；
 4. 当状态为 `blocked_before_pretrend_v3`（或任何未来 `blocked` 状态）时，系统可以回答描述性变化，但必须拒绝“关税导致变化”的表述；
-5. 用 60 道标准答案题比较直接问模型与工具型 AI 的数值、来源、工具选择和正确拒答。
+5. 保留60道旧题作工具回归；用冻结的40道复合任务、三组对照和三轮真实运行评估最终文字、来源、工具选择、任务完成与正确拒答。
 
-Phase 10 的详细学习版见 [`phase-10-ai-application-design.zh-CN.md`](./docs/learning/phase-10-ai-application-design.zh-CN.md)，六个工具的学习版见 [`phase-10a-evidence-tools.zh-CN.md`](./docs/learning/phase-10a-evidence-tools.zh-CN.md)，模型—工具循环的学习版见 [`phase-10b-model-tool-loop.zh-CN.md`](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)，真实模型适配器学习版见 [`phase-10c-real-model-adapter.zh-CN.md`](./docs/learning/phase-10c-real-model-adapter.zh-CN.md)，设计决策见 [`0005-evidence-grounded-ai-application.zh-CN.md`](./docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md) 和 [`0007-real-model-adapter.zh-CN.md`](./docs/decisions/0007-real-model-adapter.zh-CN.md)。当前六个只读工具、确定性路由基线、60 道本地契约评估、供应商无关的 Mock 模型循环和真实模型适配器离线测试已实现；尚未用外部大模型跑真实评估或接入网页 Demo。评估报告见 [`ai_evaluation_report.md`](./data/processed/ai/ai_evaluation_report.md)；v3 的执行结果和停止理由见 [`phase-09c-cardinality-matching.zh-CN.md`](./docs/learning/phase-09c-cardinality-matching.zh-CN.md) 与 [`0006-maximum-cardinality-overlap-matching.zh-CN.md`](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)。
+Phase 10 的详细学习版见 [`phase-10-ai-application-design.zh-CN.md`](./docs/learning/phase-10-ai-application-design.zh-CN.md)，六个注册工具的学习版见 [`phase-10a-evidence-tools.zh-CN.md`](./docs/learning/phase-10a-evidence-tools.zh-CN.md)，模型—工具循环的学习版见 [`phase-10b-model-tool-loop.zh-CN.md`](./docs/learning/phase-10b-model-tool-loop.zh-CN.md)，真实模型适配器学习版见 [`phase-10c-real-model-adapter.zh-CN.md`](./docs/learning/phase-10c-real-model-adapter.zh-CN.md)，最终模型评估学习版见 [`phase-10e-live-evaluation.zh-CN.md`](./docs/learning/phase-10e-live-evaluation.zh-CN.md)，评估边界见 [`0008`](./docs/decisions/0008-evaluation-and-trust-boundary-audit.zh-CN.md) 与 [`0009`](./docs/decisions/0009-live-evaluation-protocol.zh-CN.md)。当前六个注册工具（五个模型查询工具 + 一个程序内部证据打包器）、确定性路由基线、60 道本地契约回归、供应商无关的 Mock 模型循环、真实模型适配器离线测试、一次 GLM 真实冒烟，以及冻结的三组正式评估流程均已实现；尚未运行外部大模型正式批次或接入网页 Demo。开发回归报告见 [`ai_evaluation_report.md`](./data/processed/ai/ai_evaluation_report.md)；v3 的执行结果和停止理由见 [`phase-09c-cardinality-matching.zh-CN.md`](./docs/learning/phase-09c-cardinality-matching.zh-CN.md) 与 [`0006-maximum-cardinality-overlap-matching.zh-CN.md`](./docs/decisions/0006-maximum-cardinality-overlap-matching.zh-CN.md)。
 
 ### 第 8 阶段：网页、基础自动化和申请展示
 
