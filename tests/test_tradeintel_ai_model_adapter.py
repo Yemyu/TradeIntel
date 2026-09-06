@@ -99,8 +99,13 @@ class TradeIntelAiModelAdapterTests(unittest.TestCase):
             captured["payload"] = json.loads(request.data.decode("utf-8"))
             return FakeResponse(
                 {
+                    "id": "chatcmpl-test",
+                    "model": "test-model",
+                    "created": 123,
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 4, "total_tokens": 14},
                     "choices": [
                         {
+                            "finish_reason": "tool_calls",
                             "message": {
                                 "content": None,
                                 "tool_calls": [
@@ -125,6 +130,9 @@ class TradeIntelAiModelAdapterTests(unittest.TestCase):
         self.assertEqual(response.text, "")
         self.assertEqual(response.tool_calls[0].name, "get_policy_event")
         self.assertEqual(response.tool_calls[0].arguments, {})
+        self.assertEqual(response.metadata["model"], "test-model")
+        self.assertEqual(response.metadata["requested_model"], "test-model")
+        self.assertEqual(response.metadata["usage"]["total_tokens"], 14)
         self.assertEqual(captured["url"], "http://localhost:8000/v1/chat/completions")
         self.assertEqual(captured["timeout"], 60.0)
         self.assertEqual(captured["headers"]["Authorization"], "Bearer test-secret")
@@ -135,6 +143,11 @@ class TradeIntelAiModelAdapterTests(unittest.TestCase):
     def test_from_env_requires_model_name_but_does_not_print_key(self):
         with self.assertRaisesRegex(ModelAdapterError, "TRADEINTEL_MODEL_NAME"):
             OpenAICompatibleConfig.from_env({"TRADEINTEL_MODEL_API_KEY": "secret"})
+
+    def test_no_tool_control_omits_tool_fields_entirely(self):
+        payload = OpenAICompatibleModel(self.config)._payload(messages=[{"role": "user", "content": "查政策"}], tools=[])
+        self.assertNotIn("tools", payload)
+        self.assertNotIn("tool_choice", payload)
 
     def test_invalid_tool_arguments_are_rejected(self):
         def opener(request, timeout):

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TradeIntel final evaluation question record",
+  "type": "object",
+  "required": ["id", "category", "question", "template_id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "category": {"type": "string", "minLength": 1},
+    "template_id": {"type": "string", "minLength": 1},
+    "question": {"type": "string", "minLength": 1}
+  },
+  "description": "只放问题本身；不要加入 gold、answer、assertions、must_cite 或 must_refuse。"
+}

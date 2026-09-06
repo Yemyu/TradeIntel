@@ -239,7 +239,19 @@ def _parse_response(payload: Mapping[str, object]) -> ModelResponse:
                 arguments=_parse_arguments(function.get("arguments", "{}")),
             )
         )
-    return ModelResponse(text=_string_content(message.get("content", "")), tool_calls=tuple(calls))
+    usage = payload.get("usage", {})
+    metadata = {
+        "response_id": payload.get("id"),
+        "model": payload.get("model"),
+        "created": payload.get("created"),
+        "finish_reason": first.get("finish_reason"),
+        "usage": dict(usage) if isinstance(usage, Mapping) else {},
+    }
+    return ModelResponse(
+        text=_string_content(message.get("content", "")),
+        tool_calls=tuple(calls),
+        metadata=metadata,
+    )
 
 
 class OpenAICompatibleModel:
@@ -273,13 +285,15 @@ class OpenAICompatibleModel:
         normalised_messages = _normalise_messages(messages)
         if self.system_prompt and not any(item.get("role") == "system" for item in normalised_messages):
             normalised_messages.insert(0, {"role": "system", "content": self.system_prompt})
-        return {
+        payload = {
             "model": self.config.model,
             "messages": normalised_messages,
-            "tools": _normalise_tools(tools),
-            "tool_choice": "auto",
             "temperature": self.config.temperature,
         }
+        if tools:
+            payload["tools"] = _normalise_tools(tools)
+            payload["tool_choice"] = "auto"
+        return payload
 
     def complete(
         self,
@@ -314,7 +328,16 @@ class OpenAICompatibleModel:
             raise ModelAdapterError("模型服务返回的不是合法 JSON") from exc
         if not isinstance(decoded, Mapping):
             raise ModelAdapterError("模型服务返回的 JSON 不是对象")
-        return _parse_response(decoded)
+        parsed = _parse_response(decoded)
+        # Preserve the requested model even when a compatible provider omits
+        # its model field. Do not record endpoints, headers, or API keys.
+        metadata = dict(parsed.metadata)
+        metadata.setdefault("requested_model", self.config.model)
+        return ModelResponse(
+            text=parsed.text,
+            tool_calls=parsed.tool_calls,
+            metadata=metadata,
+        )
 
 
 __all__ = [

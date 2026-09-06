@@ -1,9 +1,7 @@
 """Evaluate the declared TradeShock AI tools against 60 gold questions.
 
-The evaluator is intentionally local and deterministic.  It does not send the
-questions or gold labels to an external model.  The "direct model" row is an
-uninstrumented baseline that has no tool, source, or numeric contract; a future
-LLM adapter can be added without changing this scoring interface.
+This development regression checks tool fields and permission signals only.
+It does not evaluate natural-language answers or run any language model.
 """
 
 from __future__ import annotations
@@ -90,7 +88,8 @@ def score_question(
 ) -> dict[str, object]:
     expected_tools = list(gold.get("tools", []))
     actual_tools = list(answer.get("selected_tools", []))
-    tool_ok = actual_tools == expected_tools
+    successful = answer.get("status") == "ok"
+    tool_ok = successful and actual_tools == expected_tools
 
     assertion_results: list[dict[str, object]] = []
     for assertion in gold.get("assertions", []):
@@ -101,7 +100,7 @@ def score_question(
             actual = nested_get(result or {}, str(assertion["path"]))
             expected = assertion["value"]
             tolerance = float(assertion.get("tolerance", 1e-9))
-            passed = close_enough(actual, expected, tolerance)
+            passed = successful and result.get("status") == "ok" and close_enough(actual, expected, tolerance)
         except (KeyError, TypeError, ValueError):
             actual = None
             expected = assertion.get("value")
@@ -119,7 +118,7 @@ def score_question(
 
     expected_sources = [str(item) for item in gold.get("must_cite", [])]
     actual_sources = source_strings(answer)
-    source_ok = all(any(expected in actual for actual in actual_sources) for expected in expected_sources)
+    source_ok = successful and all(any(expected in actual for actual in actual_sources) for expected in expected_sources)
 
     must_refuse = bool(gold.get("must_refuse", False))
     bundle = answer.get("evidence_bundle")
@@ -127,7 +126,8 @@ def score_question(
     refusal_ok = (
         not must_refuse
         or (
-            isinstance(safety, dict)
+            successful
+            and isinstance(safety, dict)
             and safety.get("causal_claim") is False
             and safety.get("causal_language_allowed") is False
             and safety.get("causal_blocked") is True
@@ -156,8 +156,8 @@ def score_question(
     }
 
 
-def ratio(passed: int, total: int) -> float:
-    return passed / total if total else 1.0
+def ratio(passed: int, total: int) -> float | None:
+    return passed / total if total else None
 
 
 def summarise(scores: list[dict[str, object]]) -> dict[str, object]:
@@ -169,19 +169,19 @@ def summarise(scores: list[dict[str, object]]) -> dict[str, object]:
     unsupported = sum(bool(score["unsupported_causal_claim"]) for score in scores)
     return {
         "tool_selection_accuracy": ratio(tool_passed, tool_total),
-        "numeric_accuracy": ratio(
+        "tool_data_assertion_accuracy": ratio(
             sum(bool(item["passed"]) for item in assertion_items), len(assertion_items)
         ),
-        "numeric_assertion_count": len(assertion_items),
-        "source_citation_accuracy": ratio(
+        "tool_data_assertion_count": len(assertion_items),
+        "source_presence_rate": ratio(
             sum(bool(score["source_passed"]) for score in source_scores), len(source_scores)
         ),
         "source_question_count": len(source_scores),
-        "correct_refusal": ratio(
+        "refusal_signal_accuracy": ratio(
             sum(bool(score["refusal_passed"]) for score in refusal_scores), len(refusal_scores)
         ),
         "refusal_question_count": len(refusal_scores),
-        "unsupported_causal_claims": unsupported,
+        "unsafe_permission_signal_count": unsupported,
     }
 
 
@@ -189,61 +189,41 @@ def direct_baseline_scores(
     questions: list[dict[str, object]],
     gold: dict[str, dict[str, object]],
 ) -> dict[str, object]:
-    """Represent an uninstrumented direct-answer baseline without pretending it used tools."""
-
-    scores = []
-    for question in questions:
-        expected = gold[question["id"]]
-        must_refuse = bool(expected.get("must_refuse", False))
-        scores.append(
-            {
-                "id": question["id"],
-                "tool_selection_passed": False,
-                "assertions": [
-                    {"passed": False}
-                    for _assertion in expected.get("assertions", [])
-                ],
-                "source_passed": False,
-                "expected_sources": expected.get("must_cite", []),
-                "refusal_required": must_refuse,
-                "refusal_passed": False,
-                "unsupported_causal_claim": must_refuse,
-            }
-        )
-    summary = summarise(scores)
-    summary["description"] = "No declared tools, no evidence bundle, and no deterministic numeric contract."
-    return summary
+    """No run means no score, not an assumed failure."""
+    return {"status": "not_run", "metrics": None,
+            "description": "没有真实模型调用记录；旧版预设失败分数已撤回。"}
 
 
 def build_markdown(report: dict[str, object]) -> str:
     thresholds = report["adoption_thresholds"]
     tool = report["systems"]["deterministic_tool_baseline"]
-    direct = report["systems"]["direct_uninstrumented_baseline"]
     lines = [
         "# TradeShock AI 60 道评估报告",
         "",
         f"> 评估状态：`{report['decision']}`",
         "",
-        "本报告比较一个没有工具和证据契约的直接回答基线，与当前固定六工具的确定性路由基线。这里还没有接入外部大语言模型；先验证工具边界本身是否可测量。",
+        "本报告仅检查60道已用于开发的工具契约回归题。没有运行真实模型，也没有评价最终自然语言答案。",
+        "旧版直接回答对照的0%和13次越界是程序预设，不是实验观测；现已撤回，改为未运行。",
         "",
         "## 指标",
         "",
-        "| 系统 | 工具选择 | 数字正确 | 来源引用 | 正确拒答 | 越界因果断言 |",
+        "| 系统 | 工具选择 | 工具字段断言 | 来源记录存在 | 拒答状态信号 | 不安全权限信号数 |",
         "|---|---:|---:|---:|---:|---:|",
-        f"| 直接回答基线 | {direct['tool_selection_accuracy']:.1%} | {direct['numeric_accuracy']:.1%} | {direct['source_citation_accuracy']:.1%} | {direct['correct_refusal']:.1%} | {direct['unsupported_causal_claims']} |",
-        f"| 确定性工具基线 | {tool['tool_selection_accuracy']:.1%} | {tool['numeric_accuracy']:.1%} | {tool['source_citation_accuracy']:.1%} | {tool['correct_refusal']:.1%} | {tool['unsupported_causal_claims']} |",
+        "| 真实模型直接回答 | 未运行 | 未测 | 未测 | 未测 | 未测 |",
+        f"| 确定性工具回归 | {tool['tool_selection_accuracy']:.1%} | {tool['tool_data_assertion_accuracy']:.1%} | {tool['source_presence_rate']:.1%} | {tool['refusal_signal_accuracy']:.1%} | {tool['unsafe_permission_signal_count']} |",
         "",
-        "## 采纳门槛",
+        "## 工具层门槛（不代表模型采纳）",
         "",
-        f"- 数字正确率 ≥ {float(thresholds['numeric_accuracy_min']):.0%}：`{tool['numeric_accuracy'] >= float(thresholds['numeric_accuracy_min'])}`",
-        f"- 来源引用正确率 ≥ {float(thresholds['source_citation_accuracy_min']):.0%}：`{tool['source_citation_accuracy'] >= float(thresholds['source_citation_accuracy_min'])}`",
-        f"- 正确拒答率 ≥ {float(thresholds['correct_refusal_min']):.0%}：`{tool['correct_refusal'] >= float(thresholds['correct_refusal_min'])}`",
-        f"- 不支持的因果断言 = 0：`{tool['unsupported_causal_claims'] == 0}`",
+        f"- 工具字段断言（含数值、日期和状态） ≥ {float(thresholds['numeric_accuracy_min']):.0%}：`{report['adoption']['numeric_accuracy']}`",
+        f"- 来源记录存在率 ≥ {float(thresholds['source_citation_accuracy_min']):.0%}：`{report['adoption']['source_citation_accuracy']}`",
+        f"- 拒答状态信号符合率 ≥ {float(thresholds['correct_refusal_min']):.0%}：`{report['adoption']['correct_refusal']}`",
+        f"- 不安全权限信号 = 0：`{tool['unsafe_permission_signal_count'] == 0}`",
         f"- 工具选择正确率 ≥ {float(thresholds['tool_selection_accuracy_min']):.0%}：`{tool['tool_selection_accuracy'] >= float(thresholds['tool_selection_accuracy_min'])}`",
         "",
         "## 解释边界",
         "",
-        "通过这些门槛只说明当前工具契约和确定性路由可重复、可测试；它不等于外部 LLM 已经通过评估。下一阶段接入模型时，必须使用同一套工具注册表和评分器。",
+        "通过只说明开发题上的工具字段符合断言。最终文字的数字、引用支持关系、拒答语义均未测，不能用本评分器直接宣称真实模型通过。",
+        f"分母：工具选择{report['question_count']}题；字段断言{tool['tool_data_assertion_count']}项；来源{tool['source_question_count']}题；需拒因果{tool['refusal_question_count']}题。",
         "",
         "详细逐题结果见同目录的 `ai_evaluation_report.json`；问题和 gold 标签分别保存在 `evals/questions.jsonl` 与 `evals/gold_answers.json`，路由过程不会读取 gold 标签。",
     ]
@@ -271,14 +251,17 @@ def evaluate(
         config = json.load(handle)
     thresholds = config["ai_application"]["evaluation"]["adoption_thresholds"]
     adoption = {
-        "numeric_accuracy": tool_summary["numeric_accuracy"] >= float(thresholds["numeric_accuracy_min"]),
-        "source_citation_accuracy": tool_summary["source_citation_accuracy"] >= float(thresholds["source_citation_accuracy_min"]),
-        "correct_refusal": tool_summary["correct_refusal"] >= float(thresholds["correct_refusal_min"]),
-        "unsupported_causal_claims": tool_summary["unsupported_causal_claims"] <= float(thresholds["unsupported_causal_claim_max"]),
+        "numeric_accuracy": tool_summary["tool_data_assertion_accuracy"] is not None and tool_summary["tool_data_assertion_accuracy"] >= float(thresholds["numeric_accuracy_min"]),
+        "source_citation_accuracy": tool_summary["source_presence_rate"] is not None and tool_summary["source_presence_rate"] >= float(thresholds["source_citation_accuracy_min"]),
+        "correct_refusal": tool_summary["refusal_signal_accuracy"] is not None and tool_summary["refusal_signal_accuracy"] >= float(thresholds["correct_refusal_min"]),
+        "unsupported_causal_claims": tool_summary["unsafe_permission_signal_count"] <= float(thresholds["unsupported_causal_claim_max"]),
         "tool_selection_accuracy": tool_summary["tool_selection_accuracy"] >= float(thresholds["tool_selection_accuracy_min"]),
     }
     report: dict[str, object] = {
-        "evaluation_version": "1.0",
+        "evaluation_version": "2.0",
+        "evaluation_scope": "development_tool_contracts_only",
+        "final_answer_evaluation": {"status": "not_run", "metrics": None},
+        "model_adopted": False,
         "question_count": len(questions),
         "categories": {
             category: sum(item["category"] == category for item in questions)
@@ -304,8 +287,8 @@ def evaluate(
     json_path = output_dir / "ai_evaluation_report.json"
     md_path = output_dir / "ai_evaluation_report.md"
     report["outputs"] = {
-        "json": str(json_path.relative_to(PROJECT_ROOT)),
-        "markdown": str(md_path.relative_to(PROJECT_ROOT)),
+        "json": str(json_path.relative_to(PROJECT_ROOT)) if json_path.is_relative_to(PROJECT_ROOT) else str(json_path),
+        "markdown": str(md_path.relative_to(PROJECT_ROOT)) if md_path.is_relative_to(PROJECT_ROOT) else str(md_path),
     }
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     md_path.write_text(build_markdown(report), encoding="utf-8")
