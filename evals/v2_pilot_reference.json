@@ -1,0 +1,44 @@
+{
+  "purpose": "Developer-authored diagnostic reference, never passed to the model; not a formal independent test",
+  "V201": {
+    "calls": [["get_trade_series", {"origin":"China","start":"2016-04","end":"2016-06"}]],
+    "trade_scope": [["China","2016-04"],["China","2016-05"],["China","2016-06"]],
+    "facts": [["2016-04 / China 进口额",2128433726,"policy_case_monthly.csv"],["2016-05 / China 进口额",2234237100,"policy_case_monthly.csv"],["2016-06 / China 进口额",2319514014,"policy_case_monthly.csv"],["上述已查询月份去重合计（须核对是否符合所问月份）",6682184840,"policy_case_monthly.csv"]]
+  },
+  "V202": {
+    "calls": [["get_trade_series",{"origin":"other_origins","start":"2019-02","end":"2019-02"}],["get_trade_series",{"origin":"other_origins","start":"2019-05","end":"2019-05"}],["get_trade_series",{"origin":"other_origins","start":"2019-11","end":"2019-11"}]],
+    "trade_scope": [["other_origins","2019-02"],["other_origins","2019-05"],["other_origins","2019-11"]],
+    "facts": [["2019-02 / other_origins 进口额",36709082925,"policy_case_monthly.csv"],["2019-05 / other_origins 进口额",42043502966,"policy_case_monthly.csv"],["2019-11 / other_origins 进口额",38041685235,"policy_case_monthly.csv"],["上述已查询月份去重合计（须核对是否符合所问月份）",116794271126,"policy_case_monthly.csv"]]
+  },
+  "V203": {
+    "calls": [["get_trade_series",{"origin":"China","start":"2017-09","end":"2017-09"}],["get_trade_series",{"origin":"other_origins","start":"2017-09","end":"2017-09"}],["get_trade_series",{"origin":"all_origins","start":"2017-09","end":"2017-09"}]],
+    "trade_scope": [["China","2017-09"],["other_origins","2017-09"],["all_origins","2017-09"]],
+    "facts": [["2017-09 / China 进口额",2608833909,"policy_case_monthly.csv"],["2017-09 / other_origins 进口额",35143819211,"policy_case_monthly.csv"],["2017-09 / all_origins 进口额",37752653120,"policy_case_monthly.csv"]]
+  },
+  "V204": {
+    "calls": [["get_descriptive_change",{"comparison_id":"recent_clean_pre_same_months"}]],
+    "trade_scope": [],
+    "facts": [["已登记比较","recent_clean_pre_same_months","statistical_baseline_summary.json"],["中国原产基期进口额",12636958250,"statistical_baseline_summary.json"],["中国原产当期进口额",14093891671,"statistical_baseline_summary.json"],["中国原产描述性变化","11.5291","statistical_baseline_summary.json"]]
+  },
+  "V205": {
+    "calls": [["get_policy_event",{}],["get_causal_readiness",{}]],
+    "trade_scope": [],
+    "facts": [["政策清单商品数量",818,"section301_list1_products.csv"],["合格处理商品分母",315,"matching_balance_report.json"],["至少有两个对照的处理商品数",284,"matching_balance_report.json"]]
+  },
+  "V206": {
+    "calls": [["get_trade_series",{"origin":"China","start":"2018-11","end":"2018-11"}]],
+    "trade_scope": [["China","2018-11"]],
+    "facts": [["2018-11 / China 进口额",1948740426,"policy_case_monthly.csv"]],
+    "manual_focus": "Does the visible report explicitly explain unavailable 2015 data? Generic missing-data language is insufficient."
+  },
+  "V207": {
+    "calls": [["get_policy_event",{}]],
+    "trade_scope": [],
+    "facts": [["生效日期","2018-07-06","section301_list1_event.csv"],["额外税率",25.0,"section301_list1_event.csv"]]
+  },
+  "V208": {
+    "calls": [["get_trade_series",{"origin":"all_origins","start":"2019-07","end":"2019-07"}],["get_data_quality_status",{}]],
+    "trade_scope": [["all_origins","2019-07"]],
+    "facts": [["2019-07 / all_origins 进口额",41727965040,"policy_case_monthly.csv"],["数据质量状态（需复核不等于无条件通过）","pass_with_review","data_quality_report.json"],["复核规则数",2,"data_quality_report.json"],["失败规则数",0,"data_quality_report.json"]]
+  }
+}

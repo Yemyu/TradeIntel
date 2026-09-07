@@ -1,5 +1,13 @@
 # 最终模型评估题集
 
+2026-09-07续跑入口：原批次因连接错误停止，151项记录已保留，还有209项未执行。以下命令只需在提示出现时粘贴一次Key；地址和模型自动恢复，每项完成都会显示进度。原失败项保留，收齐后再评分。执行修订见 `docs/decisions/0010-collection-continuation.zh-CN.md`。
+
+```bash
+/Users/ye/dev/projects/TradeIntel/.venv/bin/python /Users/ye/dev/projects/TradeIntel/scripts/continue_live_evaluation.py --execute
+```
+
+再次中断时，用 `--parent 新生成的continued.json路径` 接着补尚未执行项。默认不加 `--execute` 只做离线预检。
+
 这里有三套职责不同的文件：
 
 - `questions.jsonl` 与 `gold_answers.json`：旧60题，只用于工具契约开发回归；
