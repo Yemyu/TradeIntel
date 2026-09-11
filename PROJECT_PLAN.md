@@ -3,9 +3,167 @@
 > 中文项目名：可信贸易政策 AI 分析师  
 > 项目目标：以 AI 原生协作方式学习数据与 AI 工程的概念、设计、选择和验证，同时完成可用于 NTU Applied AI 申请的主项目。日常实现代码主要由 AI 完成。
 
-## 当前进度（2026-09-07）
+> **方向锚点：** 新阶段开始前先阅读[项目总参考文件](docs/PROJECT_CONTEXT_REFERENCE.zh-CN.md)。阶段日志记录发生了什么；总参考文件规定项目要做成什么。
 
-**Phase 10h更新：** v2八题开发试验方案、人工参考工具路线、冻结指纹和运行入口已完成，离线模拟通过；最多32次GLM调用，尚未开始真实运行。它检查模型是否选对工具与范围，不替代最终独立验收。当前需用户在本地终端隐藏输入Key启动，详见[Phase 10h学习说明](docs/learning/phase-10h-v2-pilot.zh-CN.md)和[决策0012](docs/decisions/0012-v2-pilot-protocol.zh-CN.md)。
+## 当前进度（2026-09-11）
+
+**0095唯一当前：真实首题已生成有引用的两项答案，但被输出格式门槛拒收。** 新清单计划审查通过；GLM在JSON前附普通文字，现严格解析器拒收，首错停止。实际2调用/4085tokens，其余3题未运行。事后只读核对日期和税率有原文支持，不将其改判为成功交付。下一阶段Luna最高只明确最终JSON输出指令并做离线格式回归，不扩建、不续跑、不静默截掉正文。[结果与局部修正规范](docs/decisions/0095-live-answer-format-failure.zh-CN.md)。下方为历史安排。
+
+**0094唯一当前：真实运行前审查结束，工程准备就绪。** 修复manifest/审查材料变化未阻止后续调用、验证函数修改原提交及无效审查参数问题；4项新增测试先复现再修复，全套495项通过。新预检0API，完整性修订0094，配置与4题/6调用预算未变。下一阶段Astra中直接进行新真实批次，不再重复设计准备；当前缺可用本地密钥。[审查与固定条件](docs/decisions/0094-prelive-checklist-review.zh-CN.md) [中文说明](docs/learning/phase-37-prelive-review.zh-CN.md)。下方为历史安排。
+
+**0093唯一当前：独立必答点审查已接入CLI。** 新development-smoke-0093按清单逐项记录计划/答案审查，校验引用、摘录、冻结贸易参考及文件哈希；不再只收approve，不把记录完整等同语义正确。允许同政策多问原文合并，旧批次不改。新增12项离线测试，全套491项通过；新预检0API。下一阶段Astra中复核清单/提示/语义记录，再冻结新4题/6调用批次。[实现说明](docs/decisions/0093-independent-checklist-implementation.zh-CN.md) [中文学习](docs/learning/phase-36-checklist-implemented.zh-CN.md)。下方为历史记录。
+
+**0092唯一当前：离线粒度审查完成，决定把分段格式与逐事实验收分开。** 两个policy片段实际共享执行状态，拆行不能证明答全；新增5项刻画测试，与相关回归合计26项通过、0API。新规范改用首次调用前冻结的独立必答点清单，最终逐项核对回答和证据；尚未实现，不追改0091失败。下一阶段Luna最高实现[0092规范](docs/decisions/0092-semantic-checklist-design.zh-CN.md)，再由Astra中审查。[中文解释](docs/learning/phase-35-answer-checklist.zh-CN.md)。下方为历史状态。
+
+**0091唯一当前：真实检查已启动，D89-1在计划审查被拒，批次停止。** glm-4.7正常返回，1次调用/1415tokens；把生效日与税率两问合为一个需求项，不符合冻结的独立列项要求。两问原文仍完整，不能说已经答错；没有调用回答模型，其余3题未运行。不重试、不降低门槛。下一阶段Astra中先离线审查通用需求粒度约束，再决定新协议；不直接再跑4题。[真实审查记录](docs/decisions/0091-first-live-development-review.zh-CN.md)。下方是历史安排，最新以0091和总参考文件第十一节为准。
+
+**0090唯一当前：4题开发运行器与零调用预检完成。** 固定最多6次尝试、调用前记账、首错停止、不续跑；计划/答案均需显式审查，不能把文件齐全当语义正确。新增12项离线测试，全套474项通过；真实CLI预检0次API，本进程无本地密钥。下一阶段Astra中做4题真实内容审查，不再增加题目、不启动旧24题正式批次。因果未变、ZIP保留、不推送。[中文学习](docs/learning/phase-34-bounded-development-smoke.zh-CN.md) [实现与限制](docs/decisions/0090-bounded-development-runner.zh-CN.md)。下方为历史记录，当前安排以0090及总参考文件第十一节为准。
+
+**0089当前：模型改为顺序引用原话，由程序计算位置。** 完整性校验保持；当前CLI生成上限明确为规划1536/回答768，实际生成参数进入快照，旧实验适配器不改。5项新测试、全套462项通过，零在线API；JSON字符减少不代表准确率。下一阶段Luna最高按[0089协议](docs/decisions/0089-quote-alignment-and-generation-profile.zh-CN.md)准备4题最多6次尝试的开发检查，真实内容由Astra中审查，尚未开始正式验收。[中文学习](docs/learning/phase-33-quote-alignment.zh-CN.md)。以下为历史状态，最新安排以0089及总参考文件第十一节为准。
+
+**0088当前：逐项需求清单接入统一入口。** 新CLI启用research-plan-4，核对原文位置覆盖、显示需求/背景/限制、关联逐需求执行状态；遇暂不支持要求暂停整份计划，禁止缺清单降级。新增9项测试，全套457项通过；零在线API。分类错误与方向错误仍需语义核对，不能把字符覆盖当准确率。下一阶段Astra中审查提示输出负担、政策多要求及验收配置，见[0088决定](docs/decisions/0088-request-units-implementation.zh-CN.md)、[中文学习](docs/learning/phase-32-request-checklist.zh-CN.md)。下方均为历史快照，最新执行安排以0088和总参考文件第十一节为准。
+
+**0087当前：交付故障审查与需求覆盖设计完成。** 修复重复目录污染、过早完成标记、配置脱敏和政策中断记录；新增无需密钥的只读交付核对入口，验证最终文件哈希。新增7项测试，全套448项通过。已复现追加需求被模型遗漏仍可预览，下一阶段Luna最高按[0087实施契约](docs/decisions/0087-delivery-review-and-request-coverage.zh-CN.md)补需求清单与中文预览；之后Astra中审查语义及验收配置。零在线API，因果仍未采纳。[中文学习](docs/learning/phase-31-delivery-and-request-review.zh-CN.md)。
+
+以下为历史阶段快照，其中“最新/下一步”均指当时；当前安排以上述0087和总参考文件第十一节为准。0086的交付与配置完成表述由0087限定。
+
+**0086最新：运行预算、配置快照和交付状态已接入统一入口。** 441项本地测试通过；每次确认运行明确记录规划最多1次、政策回答最多1次、合计最多2次的预算，保存不含密钥的模型配置，并在旁路 intent 与目录内 `delivery-status.json` 中区分已完成、失败和中断。正常业务结果为 `partial` 不会被伪装成全成功；文件完整时仍可标记为已交付。零在线API、零训练/微调、因果阻断不变。见[0086决定](docs/decisions/0086-budget-config-delivery.zh-CN.md)、[中文学习](docs/learning/phase-30-budget-config-delivery.zh-CN.md)。下一阶段推荐Astra中锁定多子请求完整性和真实验收门槛，再由Luna最高执行常规覆盖测试。
+
+**0085历史快照：历史提问时态及同页证据合并接入当前研究入口。** 438项本地测试通过；真实样例原文定位一致，但合并受2400字符上限限制，该样例仍有1550重复字符，不能宣称token或准确率提升。见[0085决定](docs/decisions/0085-policy-evidence-access.zh-CN.md)、[中文学习](docs/learning/phase-29-policy-evidence-access.zh-CN.md)。
+
+**0084最新：修复模型遗漏用户月份时仍派生窗口的问题，接入明确要求下的截止日复用。** 只覆盖受限时间表达，复杂问法澄清；不声称通用记忆或语义验收完成。0083设置复用及金额隔离表述由[0084审查与交接](docs/decisions/0084-time-source-repair-and-handoff.zh-CN.md)限定。[中文学习](docs/learning/phase-28-time-source-repair.zh-CN.md)。下一单元先由Astra中处理历史范围判断，再由Luna最高实现锁定的同页证据合并、请求覆盖和交付记录。
+
+**0083 当前交付：已确认案例设置与登记窗口元数据已接入。** 宿主现在保存版本化的美国/List 1/指标/只读/非因果设置；独立金额无关的登记窗口文件带统计摘要 SHA-256 指纹；用户明确选择登记窗口且未提供冲突月份时，预览会派生月份并记录来源与规则。确认指纹包含窗口元数据。新增3项测试，全套434项本地测试通过，零在线API、零训练/拟合。历史范围与同页片段合并、完整预算/恢复/交付状态仍未完成，因果阻断不变。见[0083决定](docs/decisions/0083-confirmed-case-and-window-metadata.zh-CN.md)与[Phase 27中文学习](docs/learning/phase-27-confirmed-case-and-window-metadata.zh-CN.md)。下一阶段推荐Astra中先设计历史范围与上下文合并的来源边界，再由Luna最高实现。
+
+**0082 当前审查结论（历史快照）：0081仅部分实现，暂不启动在线验收。** 已恢复被0081修改的旧实验冻结指纹；应用的语料完整性验证与历史实验代码验证分开。规划发送前保存尝试记录，修复超时计0、澄清丢审计、sequence重复任务及政策单任务提示冲突。0083已补上本段列出的“已确认设置、登记日期派生”部分；剩余历史范围与窗口合并、完整预算/交付恢复见[0082审查清单](docs/decisions/0082-integration-audit-and-history-repair.zh-CN.md)。[中文学习说明](docs/learning/phase-26-integration-audit.zh-CN.md)。
+
+**0081 当前状态：请求来源、政策检索桥接和模型调用账本已接入。** 统一入口现在为独立子任务分配稳定 `task_ids`，保留参数来源与政策原问题；短英文 `policy_search_query` 只用于英文公告候选检索，不能替代原问题；确认后的运行目录新增脱敏 `model-call-ledger.json`，区分规划/政策回答阶段、fixture/live 和新 API 次数。新增4项针对测试，全套426项本地测试通过，零在线API、零训练/微调、零因果拟合。桥接和账本仍不是语义准确率；因果阻断不变。见[0081决定](docs/decisions/0081-request-provenance-search-bridge-ledger.zh-CN.md)与[Phase 25中文学习](docs/learning/phase-25-request-provenance-and-ledger.zh-CN.md)。下一阶段推荐Astra中审查一条真实整链案例，再决定是否开展极小规模在线语义验收。以下为历史状态。
+
+**0079 唯一当前状态：比较已成为独立交付任务。** 新版计划现在分别记录贸易序列和贸易比较 obligation，避免“数字拿到”被误报为“用户问题全部完成”；旧计划兼容行为不变。419项本地测试通过，0次在线API、0训练/微调、0因果拟合。下一阶段继续补完整子问题覆盖、上下文来源、调用账本与RAG桥接，再做独立语义验收。见[决定](docs/decisions/0079-comparison-obligation-status.zh-CN.md)和[中文学习](docs/learning/phase-23-comparison-obligation.zh-CN.md)。
+
+**0078 唯一当前状态：显式比较已接入统一研究入口。** 新版计划支持 sequence、endpoint、registered 三类比较，经过预览和确认后再取数并写入报告；旧计划保留为明确标注的兼容模式。全套419项本地测试通过，0次在线API、0训练/微调、0因果拟合。下一阶段继续补完整子问题覆盖、上下文来源、调用账本与RAG桥接，再做独立语义验收；因果阻断不变。见[决定](docs/decisions/0078-comparison-entry-integration.zh-CN.md)和[中文学习](docs/learning/phase-22-comparison-integration.zh-CN.md)。
+
+**0077 唯一当前状态：比较契约及离线候选计算组件完成，尚未接入自然语言入口。** 区分序列、明确基准月比较与登记同期窗口；修正缺数据误标完成和任务记录脱敏。下一阶段Luna最高按锁定规范接线，随后仍需RAG桥接、完整语义覆盖及真实验收；因果阻断不变。见[决定](docs/decisions/0077-explicit-comparison-contract.zh-CN.md)和[中文学习](docs/learning/phase-21-explicit-comparisons.zh-CN.md)。以下为历史快照，“唯一当前”等旧称不覆盖本项。
+
+**0076 唯一当前状态：逐任务状态和执行审计已接入。** 统一入口现在保存 obligations 和 execution-audit.jsonl，明确贸易、政策各自完成或失败；全套405项本地测试通过，零在线API。自然语言比较方式仍未锁定，不能把首末月变化解释成政策效应。下一阶段先用Astra中锁定显式比较契约，再由Luna最高实现。[中文学习](docs/learning/phase-20-execution-journal.zh-CN.md) [决定](docs/decisions/0076-execution-journal-and-obligations.zh-CN.md)。
+
+**0075 唯一当前状态：确认、失败交付及主入口修复完成。** 已修预览任务串改、指纹失败残留确认、政策失败误标草稿、单独报告脱敏；补主入口自然语言模式及允许的默认来源。全套403项本地测试通过，零新API。完整子问题/比较契约、上下文来源、调用账本和RAG查询桥接仍待实施；因果仍未采纳。下一阶段Luna最高按锁定规范继续，语义/实验判断Astra中。[中文学习](docs/learning/phase-19-reliability-review.zh-CN.md) [范围与交接](docs/decisions/0075-confirmation-and-failure-review.zh-CN.md)。以下均为历史记录。
+
+**0074 当前交付：统一入口契约第一段实现完成。** 已支持政策单独、贸易单独和组合任务；确认绑定会话修订、数据/语料/契约指纹；组合中的贸易失败会保留独立政策结果。全套 **392 项本地测试通过**，0 次在线 API；尚未完成默认来源分类、完整错误账本、政策查询桥接、语义验收，也没有改变因果状态。下一阶段推荐 Astra 中做契约审查，之后 Luna 最高继续实现。[中文学习](docs/learning/phase-18-unified-entry-implementation.zh-CN.md) [决定](docs/decisions/0074-unified-entry-contract-implementation.zh-CN.md)。
+
+**0073 唯一当前状态：整合审查未通过，旧24题在线验收已禁用。** 0070–0072“完整入口完成/验收冻结”的表述已撤回，以下仅是历史快照。已修复待确认状态、预览隔离及误报意图验证；完整单任务/组合任务、版本绑定、部分交付和运行审计仍待落实。下一阶段 Luna 最高按0066及0073清单实施，Astra中审查，不刷旧题、不调用API、不改变因果状态。[中文学习](docs/learning/phase-17-integration-review.zh-CN.md) [审查与交接](docs/decisions/0073-integration-review.zh-CN.md)。
+
+**0072唯一最新：24题验收运行器已完成，默认离线预检。** 每题最多一次规划、12道可执行题最多一次回答，批次上限36次；重复、超预算、停止后继续和错误配置都会被拒绝。默认运行0次模型调用；真实API未启动。全套测试下一步继续检查。[中文说明](docs/learning/phase-16-acceptance-runner.zh-CN.md) [决定](docs/decisions/0072-research-plan-acceptance-runner.zh-CN.md)。以下为历史记录。
+
+**0071唯一最新：统一入口24题验收集已冻结，尚未调用在线模型。** 12道可执行、6道澄清、6道越界/安全题，参考范围和SHA-256已离线预检，0次模型调用。下一阶段Luna最高实现/验证验收运行器；开始真实API前用Astra中复核终态和预算，不使用旧v2.1或开发题成绩。[中文说明](docs/learning/phase-15-acceptance-freeze.zh-CN.md) [决定](docs/decisions/0071-research-plan-acceptance-freeze.zh-CN.md)。以下为历史记录。
+
+**0070唯一最新：统一自然语言研究入口已实现，在线AI验收尚未启动。** 新入口用 research-plan-1 把中文问题整理成政策+贸易计划，逐字段校验并让用户确认，再调用已有 ResearchBrief；不读取金额前不执行，不改因果状态。已补5项离线测试和中文学习说明，全套376项测试通过；没有训练/微调、多智能体或新API。下一阶段建议Luna最高做常规契约/CLI验证，在线验收前若需修改规则再用Astra中审查。[中文学习](docs/learning/phase-14-unified-entry.zh-CN.md) [技术决定](docs/decisions/0070-unified-natural-language-entry.zh-CN.md)。下面为历史记录。
+
+**0069唯一最新：经济用途审查完成，停止当前HS6未拟议对照匹配分支，转回AI整合。** 1,204候选按唯一NAICS6×HTS4盘点仅3个双侧组，用途差异不支持采纳；这不是所有设计不可能的证明。不重新拟合、不补采。下一阶段Luna最高执行0066自然语言统一报告契约，方法/最终语义判断Astra中。新增3项针对测试通过。[学习说明](docs/learning/comparison-family-review.zh-CN.md)。下面全部为历史安排。
+
+**0068唯一最新：拟议范围及两项代码更正核对完成。** 1,333拟议代码包含全部818最终List1代码；890对照候选中98个有拟议重叠、792个无该项重叠，未删候选。2个未映射豁免代码均找到官方更正，仍不把描述性豁免扩大为整代码免税。因果未采纳；下一步Astra中结合商品用途锁定有意义的比较与推断规则，不重复旧匹配。新AI统一入口仍待实施。补存2份官方政策PDF，零API/拟合、不推送、29ZIP保留。[中文学习与答案](docs/learning/proposal-scope-audit.zh-CN.md)。以下均为历史记录，其“最新/下一步”不覆盖本项。
+
+**0067最新：宣布前资格和特征准备已完成。** 固定26月窗口/22个活跃月，处理315→314、对照893→890；1,204候选特征完整，独立复算一致。新旧资格/特征对照及指纹保存，旧结果不覆盖。新增6项测试、全套363项通过。因果仍未采纳：下一步Astra中核对拟议名单暴露、2个未映射排除代码及描述范围，不重复准备、不直接拟合。零API、零下载、保留ZIP。[中文问答](docs/learning/preannouncement-preparation.zh-CN.md)。下面0066为方法依据，非待重跑任务。
+
+**唯一最新安排：高推理整合审查完成。** [0066决定](docs/decisions/0066-high-reasoning-integrated-review.zh-CN.md)纠正旧“干净政策前”窗口：3月已宣布、4月有拟议清单；先做原路线时间线与资格修正准备，不原样重跑、不直接以来源相对变化替代原问题。只读审计复核旧矩阵与平衡公式，没有发现足以推翻原无解的计算错误。新增6项测试，全套357项通过。自然语言统一报告契约、RAG证据接入层和有界验收协议已设计，尚未实现/运行新整链。因果仍阻断，零GLM调用、ZIP保留、不推送。[给用户的中文参考答案](docs/learning/high-reasoning-review.zh-CN.md)。以下进度为历史记录，旧“下一步”不覆盖0066。
+
+**2026-09-11 因果路线复审（最新）：** 回应用户追问，因果仍未解决。按0065扩大到全部333主路线243候选，16跨细行业；227个单一分类候选中，34个NAICS6有15个两侧存在，96个NAICS6×HTS4组仅5个两侧存在。用途审查不支持直接启动新匹配，未读政策后结果、未调用GLM、未修改因果状态。5项新测试通过。后续优先论证商品×原产地设计，不先盲目补采；自然语言报告集成仍在AI待办中。[中文说明](docs/learning/causal-status-and-next-route.zh-CN.md)。
+
+**2026-09-11 整合报告大阶段（当前）：** 统一入口完成明确范围确认→贸易工具→描述性计算→政策BM25与扩窗→可选聚焦GLM→中文报告与来源审计。零API与一次真实GLM整链跑通，贸易结果一致；真实生成3条主张，2655tokens/6.142秒。新增12项集成测试通过，不把工程测试当准确率，不改旧冻结实验。仍非自主自然语言研究助手，因果阻断不变。下一大阶段Astra中连接自然语言规划与报告并做整链场景审查。[中文说明](docs/learning/phase-13k-research-brief.zh-CN.md)、[结果](docs/experiments/phase13k-results.zh-CN.md)。下面旧阶段记录为历史。
+
+**2026-09-11 Phase13j（当前）：** 实现可选聚焦输出层与非破坏性表述标记；5项针对测试通过，3份旧真实回答离线检查，零API，不改原文/旧成绩，不宣称新提示有效。下一步Astra中整合扩窗、聚焦层和审查备注至同一实验性报告，不继续逐词刷题；[学习说明](docs/learning/phase-13j-focused-output.zh-CN.md)、[规则边界](docs/decisions/0063-focused-policy-output.zh-CN.md)。
+
+**2026-09-11 Phase13i（当前）：** 扩窗后P03单次真实生成正常stop，回答了其他税费叠加关系且引用支持，附件A范围保留。2481tokens/7.549秒，对照旧1280tokens空回答；仍多写歧义时刻，不能宣布完整草稿通过。无重复请求、未替换默认。下一步Astra中聚焦输出规范及批次/时间表达，不再刷本题；[结果](docs/experiments/phase13i-results.zh-CN.md)、[学习说明](docs/learning/phase-13i-evidence-helped.zh-CN.md)。
+
+**2026-09-11 Phase13h（当前）：** 独立同页上下文扩窗模块离线完成，前后各600字符、最多7200字符，不改原检索排名。P03缺失的叠加税费句已补回，但上下文由3600增至7200字符；记录重复内容代价。4项针对测试和全部实际窗口原文定位检查通过，零API；只保留候选不替换默认，不宣称回答效果改善。下一步Astra中冻结有界生成开发对照，不续跑旧批次。[学习说明](docs/learning/phase-13h-context-window.zh-CN.md)、[结果](docs/experiments/phase13h-context/review.zh-CN.md)。
+
+**2026-09-11 Phase13g（当前）：** 冻结8题批次执行4次请求，3题返回后P04超时，P05–P08未执行。日期事实有正面表现，但批次/时间措辞不清；P03弃答，实际检索遗漏同页“与其他税费叠加”的关键句。已知用量4145tokens，超时用量未知。不采纳、不报总体准确率、不续刷当前题。下一步Astra中先设计上下文完整性改进的独立开发协议；[真实结果](docs/experiments/phase13g-results.zh-CN.md)、[中文说明](docs/learning/phase-13g-what-failed.zh-CN.md)。
+
+**Phase13f（当前）：** 复核并整理长线记忆：当前状态只保留一份，旧状态完整迁至`docs/PROJECT_CONTEXT_HISTORY.zh-CN.md`，纠正“只有模拟、尚无真实生成”的过时描述。政策模块8道新问法与评分标准已冻结，零API预检5题有候选片段/3题边界拒答，2项预检器测试通过；未产生回答成绩。属于开发助手编写的前瞻检查，不称外部盲测，不代表整个研究产品验收。下一阶段Astra中按[0060](docs/decisions/0060-policy-prospective-acceptance.zh-CN.md)执行有界验收，最多5次请求，禁止根据结果改题刷分。[中文说明](docs/learning/phase-13f-prospective-check.zh-CN.md)。
+
+**Phase13e（当前统一政策入口）：** `run_policy_retrieval.py`已接入受限GLM生成、格式规范化、结束原因检查、基础token用量、原始/规范化响应分存和新运行目录。新增`--replay-last`明确重放旧真实响应，零API完成中文报告；无证据不要求密钥或调用。旧实验与检索器指纹不改，不将重放当新成绩。下一阶段Astra中冻结未见问题整链验收，仍未发布最终产品。见[中文说明](docs/learning/phase-13e-unified-policy-workflow.zh-CN.md)与[集成边界](docs/decisions/0059-policy-workflow-integration.zh-CN.md)。
+
+**Phase13c–d（当前）：** 最小glm-4.7请求HTTP200、2.09秒成功；同一政策题关闭思考、最多512tokens后取得真实回答。日期与额外税率受引用支持，但代码框导致旧解析器拒绝；独立格式包装器离线恢复，不改原成绩，且时间中文表述需澄清。共2次API请求，不重试。下一步Astra中统一受限生成、格式兼容和响应审计，再定未见题验收；不是继续换密钥。见[结果](docs/experiments/phase13cd-results.zh-CN.md)和[通俗解释](docs/learning/phase-13cd-real-response.zh-CN.md)。
+
+**Phase13b第二次请求（用户明确授权新凭据）：** 同问题、同模型、同60秒超时边界再执行一次，白名单诊断确认timeout，仍无模型正文。不能断言密钥无效或已鉴权成功；首次原因仍未知。新旧记录分别保留，未自动重试。下一阶段Astra中先做有界最小连接诊断，不继续盲目更换密钥或刷生成。见[第二次记录](docs/experiments/phase13b-second-attempt.zh-CN.md)。
+
+**Phase13b首次请求已执行：** 一次glm-4.7请求返回ModelAdapterError，没有可审查正文，按协议停止。旧日志未保留HTTP状态，不能确定失败原因；已补白名单错误分类并做模拟测试，没有重发。下一阶段Astra中先设计有界连接诊断，不直接重跑生成或将其记作语义失败。见[实际记录](docs/experiments/phase13b-first-attempt.zh-CN.md)。以下“未调用”文字是执行前快照。
+
+**Phase 13b（单次真实生成准备）：** 固定第一批生效日期+额外税率一题，沿用glm-4.7，单次60秒、禁止自动重试、调用前独占登记、原文与程序指纹校验、隐藏密钥输入及结果脱敏已实现。预检及4项针对性测试通过；尚无真实调用，当前缺少可用模型配置。入口为`.venv/bin/python scripts/run_policy_smoke.py --execute`。下一阶段推荐Astra中，审查真实返回是否完整且被引用支持；不把一题成功视作总体准确率。见[单次协议](docs/decisions/0056-policy-single-call.zh-CN.md)。
+
+**当前入口：Phase 13a（政策原文检索）。** 已实现两份官方公告5页正文的页内检索、中文术语扩展、BM25/词项重合对照、出版日期过滤、来源页码与指纹、可选单次模型生成及引用身份校验。开发题目标页Hit@3为6/6，基线5/6；BM25的MRR略低，不能称全面胜出或模型准确率100%。与归档规划的真实金额报告完成零API联合演示；298项回归测试通过。真实生成与独立语义验收未做，默认入口未替换。先读[本轮中文学习与参考答案](docs/learning/phase-13a-policy-retrieval.zh-CN.md)，结果见[逐题审查](docs/experiments/phase13a-policy-retrieval/review.zh-CN.md)。下一阶段Sol高做一题真实生成与逐条证据核对；本进程没有模型配置，不擅自使用历史聊天密钥。
+
+**Phase 12k（因果诊断收束）：** 两个无中国记录月份已回查原ZIP，确认不是提取漏行；金额继续留空。3332候选细分后，造纸11处理/0对照，食品7/5、印刷4/2、其他工业15/17，另1个跨子行业处理候选；同大行业不等于经济可比。不启动全3332第四次匹配，不更改原因果阻断；食品子问题仅保留为待论证方向。见[经济用途审查决定](docs/decisions/0055-hts8-economic-scope-review.zh-CN.md)。29个ZIP全部保留。
+
+以下为历史阶段快照，其“下一步”只代表当时计划；当前执行以上方入口及总参考文件为准。
+
+**Phase 12j（HTS8完整性复核）：** 新版明确用空值区分无记录与观察零金额，资格仍为243个；通过候选子码历史全窗有效性、29月额外子码完整性核对。3332为34处理家族/21对照家族，保留各自候选池98.51%/91.14%已观察金额；有2行无中国记录需解释。下一步Sol高核对缺失含义及具体商品用途，再冻结唯一实验协议。见[复核决定](docs/decisions/0053-hts8-data-readiness.zh-CN.md)与[学习说明](docs/learning/phase-12j-missing-and-zero.zh-CN.md)。
+
+**Phase 12i（HTS8候选月表）：** 692个稳定HTS8候选×29个月生成20,068行政策前派生表；按24/29个中国正金额月筛查后，主路线候选243个（3332为38处理/24对照）。缺月显式标记，未读取政策后金额；未做匹配或因果估计。下一步Sol高冻结共同支持、家族相关性和停止门槛。见[结果决定](docs/decisions/0052-hts8-candidate-panel-results.zh-CN.md)及[中文说明](docs/learning/phase-12i-hts8-candidate-screening.zh-CN.md)。
+
+**Phase 12h（路线确定与复核）：** 确定HTS8统一比较单位，主对照来自现有政策表未覆盖的HS6家族。元数据盘点3332有56处理/56对照候选，尚未检查活跃度或匹配；完整行业计数与边界见[0051](docs/decisions/0051-hts8-inventory-results.zh-CN.md)。补强29月逐行与原包哈希验收通过，修正旧候选记录计数9→10。下一步Luna最高做候选HTS8月表及资格盘点，拟合前另定实验协议；[中文学习说明](docs/learning/phase-12h-research-unit.zh-CN.md)。
+
+**Phase 12g（细分候选筛查）：** 政策前29个月HTS10表完成，共496,126行；29个原始ZIP（约4.31GiB）保留，逐月金额与旧HS6面板完全对账。17个未直接覆盖代码的持续性和规模差异很大，且全部来自含混合List1或同期政策覆盖的HS6家族；不采纳为新控制组。下一步Sol高先冻结家族内细分或纯未覆盖路线的统一研究协议，解决政策污染和分析单位后再决定是否建模。见[结果决定](docs/decisions/0049-hts10-candidate-screening-results.zh-CN.md)和[学习说明](docs/learning/phase-12g-hts10-screening.zh-CN.md)。
+
+**Phase 12f（HTS10细分提取）：** 新增通用政策前HTS10提取层，原始ZIP在数据设计定稿前保留。2016-01真实验收通过，571,722条原始明细、15,385个HTS10及中国/全原产地金额与旧面板完全对账；已启动2016-01至2018-05批量提取，按月写清单，未删除原包。批量完成前不进行新匹配或因果估计。见[保留与验收决定](docs/decisions/0048-hts10-retention-and-extraction.zh-CN.md)和[中文学习说明](docs/learning/phase-12f-hts10-retention.zh-CN.md)。
+
+**Phase 12e（下载记录与跨年核查）：** 确认48月全部处理过、原包均未保留；缺的是新用途细明细而非漏下载。17候选描述跨年一致，1个2016年7月才生效、2个2019年数量单位改变，不直接采纳对照。已锁定政策前29月通用HTS10中国/全原产地合计明细的保留与对账范围；下一阶段Luna最高实现提取器及测试，再单月试提取，无新增下载或效果估计。见[学习说明](docs/learning/phase-12e-why-download-again.zh-CN.md)与[保留决定](docs/decisions/0047-candidate-continuity-and-retention.zh-CN.md)。
+
+**Phase 12d（粒度与补采审查）：** 241个被排除机械家族中，10个活跃家族含17个现有政策表未覆盖的细代码，仅为待核查线索。既有全商品面板只有HS6汇总，17代码不在现有政策前List1明细中；若细分设计成立，需要补提取原窗口的明细，而非立即增加年份。4项资格分类测试及盘点核对通过，旧因果阻断不变。下一步Sol高完成跨年代码与经济用途核查，再锁定是否补采。见[中文学习问答](docs/learning/phase-12d-data-gaps.zh-CN.md)和[具体缺口](docs/decisions/0046-control-granularity-results.zh-CN.md)。
+
+**Phase 12c（政策前走势检查）：** 333行业固定24月拟合/5月检查完成；RMSE0.10555超过预设0.10，其他门槛达到，不进入政策后估计。3项针对性测试通过。下一步Sol高审查商品聚合与政策暴露缺口，明确补采需求；不调参碰运气。见[中文说明](docs/learning/phase-12c-prepolicy-trajectory.zh-CN.md)和[结果决定](docs/decisions/0044-prepolicy-trajectory-results.zh-CN.md)。
+
+**Phase 12b（联合可比性）：** 完成333/334共220个逐商品诊断和2个行业均值诊断；单项范围通过不能保证联合可比性。未采纳精确几何子集；优先冻结333行业政策前留出走势检查，现有数据可用，暂不新增年份。5项针对性测试通过；无政策后效果估计。见[中文说明](docs/learning/phase-12b-joint-comparison.zh-CN.md)和[结果与补采决定](docs/decisions/0042-joint-support-results.zh-CN.md)。
+
+**Phase 12a（研究方向诊断）：** 仅使用政策前特征，确认中国份额越界集中于335行业；333/334行业在候选范围内具有较大经济规模，优先审查联合可比性。242项单维范围通过不等于匹配成功，不改旧因果阻断；其他原产地比较没有被采纳为主因果方案。见[通俗学习说明](docs/learning/phase-12a-research-direction.zh-CN.md)及[完整依据](docs/decisions/0040-research-route-diagnostic.zh-CN.md)。下一阶段Sol高判断新研究协议，AI产品待办仍保留。
+
+**Phase 11j（业务交付集成）：** 固定历史 N01 规划，已接通字段转换、测试确认、真实本地数据读取和双任务证据报告；政策日期/税率、两个月金额与合计分别对账。无 API，未运行模型覆盖复核，不更新原 2/4 成绩。下一轮限制为原四题两轮、最多16次调用，先冻结入口与协议再运行；见[中文学习说明](docs/learning/phase-11j-real-business-delivery.zh-CN.md)和[收尾验收边界](docs/decisions/0039-business-delivery-scope.zh-CN.md)。
+
+**Phase 11i（离线接口修复）：** 新增有界中文字段与年月转换适配器，保留旧实验实现和原始成绩。旧四份规划响应离线重放均与请求参考一致，但未测试复核和取数，不代表新模型准确率；真实 2/4 不变。未调用 API、未训练模型、未替换默认入口。先读[现在到底在做什么（中文问答）](docs/learning/phase-11i-what-we-are-improving.zh-CN.md)。下一步 Sol 高收敛业务场景与端到端收尾验收，避免无限增加开发题。
+
+**Phase 11h真实结果：** v4字段级追问已实现，四题新开发问题的规划+复核共7次调用、4,826 tokens、2/4通过；月份/基准和国家缺失两题具体澄清成功，明确金额请求受省略年份与未规范枚举阻断，日本题虽正确阻断但错误附加能力拒绝。265项全套测试通过，不采纳为默认入口。下一步Sol高系统处理规范值与年月表达，不同题分数不得直接比较。见[Phase 11h说明](docs/learning/phase-11h-specific-clarification.zh-CN.md)。
+
+**Phase 11g改进：** 独立v3加入原文约束同义字段转换与额外覆盖复核。固定v2六份规划、六次新复核调用，5/6通过，2,626 tokens；P02修复，P03错误任务被拦截但未交付具体澄清，仍失败。259项全套测试通过。不是全链新生成或独立验收，不采纳默认入口；下一步Sol高设计具体澄清与新全链验证。见[Phase 11g学习说明](docs/learning/phase-11g-coverage-review.zh-CN.md)。
+
+**Phase 11f真实结果：** 新凭据鉴权成功，v2独立六题运行4/6通过，5,131 tokens；P02中文字段值导致错误拒绝，P03将含糊比较替换为readiness，属实质语义失败。原始重放核对与助手逐题审查完成，不自动执行、不采纳为默认入口。下一步Sol高设计任务覆盖与澄清检查，不以同配置重复运行碰运气。见[Phase 11f结果说明](docs/learning/phase-11f-planner-v2-results.zh-CN.md)。
+
+**Phase 11e阻断：** v2六题真实验证已启动，首次请求HTTP401后停止，其余五题未调用；没有模型返回，不能评价v2提示效果。冻结入口、脱敏日志和离线审计已完成，未覆盖旧成绩。需先确认有效API凭据，之后再安排新的有界运行；见[Phase 11e说明](docs/learning/phase-11e-planner-v2-run.zh-CN.md)。
+
+**Phase 11d：继续TradeShock。** 独立规划器v2已接入整份JSON围栏兼容并重写完整证据契约，CLI显式`--plan-v2`。零API重放旧六响应仍仅恢复P05/P06，未补造其余缺失证据；新提示效果尚未测试，旧成绩不变。下一步Sol高冻结小批v2真实开发调用。见[Phase 11d说明](docs/learning/phase-11d-planner-v2.zh-CN.md)。
+
+**Phase 11c真实结果：** 组合规划六题开发调用全部返回，5,865 tokens，原始0/6通过。新入口遗漏整份JSON围栏适配；离线只去围栏恢复P05/P06，其他四题缺字段证据或澄清层级不合规。请求语义有正面观察，但不能采纳；无自动确认和执行。下一阶段Sol高设计独立v2契约修复，不重复原配置。详见[Phase 11c逐题说明](docs/learning/phase-11c-planner-development.zh-CN.md)。
+
+**Phase 11b：** 独立组合规划原型已实现，支持1–3个任务、逐项校验、整体确认、顺序只读执行和部分失败标记；CLI新增实验性`--plan`。仅模拟模型与本地证据测试，零API；自然语言窗口映射与模型综合解释尚未完成，不能宣称规划效果通过。下一阶段Sol高冻结小批真实开发验证；见[Phase 11b说明](docs/learning/phase-11b-analysis-planner.zh-CN.md)。
+
+**用户目标调整：优先强化AI核心。** 下一步先做受限组合经济任务规划，让自然语言能够覆盖政策、比较和因果边界的组合需求；随后评估证据约束的模型解释，文档RAG待业务需要证明后决定。当前只是设计，不宣称这些功能已完成。具体边界与验收见[AI能力升级方案](docs/decisions/0032-ai-capability-upgrade.zh-CN.md)。界面收尾不再代替AI效果建设。
+
+**Phase 11a最新结果：** 已连接本地单用户“预览→一次性确认→只读证据报告”交互入口，提供明确标注归档响应的零API演示。取消、重新提问、篡改预览、重复确认与拒绝请求有测试；未进行新在线模型会话，未替换冻结实验。下一阶段Sol高设计新题完整流程验收。见[Phase 11a学习与体验说明](docs/learning/phase-11a-confirmed-workflow.zh-CN.md)。
+
+**Phase 10z最新结果：** 新增独立日期适配与中文提示层。零API离线重放35份已返回响应，35份通过开发检查；原34份无退步，H19恢复，D10仍缺失，旧成绩不变。澄清字段中文化、解析错误独立提示、部分越界月份显式提醒已完成。尚未替换正式入口；下一阶段Sol高设计确认后只读执行的完整流程。见[Phase 10z学习问答](docs/learning/phase-10z-date-and-prompts.zh-CN.md)。
+
+**Phase 10y最新结果：** 安全续跑剩余23个未尝试题，23次全部返回、22题通过，27,804 tokens；H19因中文年月格式不满足接口而被拦截。独占声明防重复发送、脱敏异常分类、日志与原始响应离线核对已完成，228项全套测试通过。旧D10通信失败仍保留，跨批开发覆盖34/36不能冒充单次或独立验收。下一步Sol高设计有限日期归一化和更清楚的确认/澄清提示；见[Phase 10y学习问答](docs/learning/phase-10y-continuation.zh-CN.md)。
+
+**Phase 10x最新结果：** 新增独立意图转写与明确拒绝流程，企业粒度、删除和引文三项先导案例均通过。36题开发回归在第13次调用传输异常后停止：12份返回全部结构符合参考，23题未调用，已返回13,970 tokens；离线原始响应审计一致。222项全套测试及随后新增2项运行器测试通过。没有改写旧失败成绩，也未正式采纳模型。下一步Sol高设计脱敏通信诊断与可追溯续跑协议；详见[Phase 10x学习问答](docs/learning/phase-10x-guarded-intent.zh-CN.md)。
+
+**Phase 10w最新结果：** 24题×2轮内部留出未通过。第一轮19/24；第二轮16题已尝试、11题通过，第40次调用传输异常停止，8题未运行。新Key调用完成，返回用量39,254 tokens。已离线修复完整JSON围栏与比较证据路径别名，恢复4份请求（原30→34），不更新原验收成绩。下一步Sol高处理明确拒绝与引文稳定性；详见[Phase 10w结果与学习说明](docs/learning/phase-10w-internal-holdout.zh-CN.md)。
+
+**Phase 10v最新结果：** 已由助手直接完成模型调用与修复。GLM-4.7+业务任务词典真实开发12/12符合参考，助手逐题语义审查通过；只读开发重放8份报告、3次澄清、1次范围拒绝。累计本轮30次调用尝试、已返回22,413 tokens；尚未做内部留出或正式整体验收。后续开发优先使用此配置，用户无需重复输入Key或运行旧入口。详见[Phase 10v中文结果与学习说明](docs/learning/phase-10v-model-repair-results.zh-CN.md)。
+
+**Phase 10u更新：** GLM-4.6V三题诊断入口已实现并冻结，保留HTTP响应正文和标准化响应，调用前计数、最多3次、异常停止。5项模拟HTTP端到端测试通过，尚未真实调用。使用原智谱Key启动新入口，之后由Sol高审查；详见[Phase 10u运行与学习说明](docs/learning/phase-10u-glm46v.zh-CN.md)。
+
+**Phase 10t实际结果：** 12题真实运行已完成、12次调用、10,402 tokens；全部parse_failure，有效输出0/12。模型正文未被旧运行器记录，无法确定具体失败原因，不能据此判定模型理解力。已补独立诊断与响应记录模块，尚待接入新运行器；请勿重复原命令。下一步推荐Sol高完成可追溯的最小诊断入口；详见[Phase 10t结果说明](docs/learning/phase-10t-intent-results.zh-CN.md)。
+
+**Phase 10s更新：** 12题真实语义开发运行器已按冻结指纹实现：GLM-4.5-Air、每题一次调用、最多12次、无数据工具、逐题日志和错误停止；195项本地测试通过。刚才只完成离线预检，尚未调用GLM。若用户在终端启动，结果收集后由Sol高审查；详见[Phase 10s学习说明](docs/learning/phase-10s-intent-runner.zh-CN.md)。
+
+**Phase 10r更新：** 已完成12题语义开发集、离线预检/响应重放评分、解析失败与主动澄清分离，以及24题内部留出验收规则。留出题和真实运行器尚未建立，没有GLM效果成绩。下一步推荐Luna最高按冻结前规则实现小批真实运行器，之后Sol高审查；详见[Phase 10r学习说明](docs/learning/phase-10r-intent-evaluation.zh-CN.md)。
+
+**Phase 10q更新：** 自然语言待确认解析接口与10项模拟测试已完成：一次调用、无数据工具、逐字段原文依据、严格格式验证，生成中文理解预览但不自动执行。尚无真实GLM语义效果数据，也未替换旧AI入口。下一步推荐Sol高设计小批语义测试与留出验收规则；详见[Phase 10q学习说明](docs/learning/phase-10q-intent-proposal.zh-CN.md)。
+
+**Phase 10p更新：** 独立结构化执行流程已接入能力拒绝、固定工具编排、贸易范围与合计核对、全缺失展示修复；本地商品计数示例已跑通，新增11项测试。没有模型调用，尚未接入自然语言理解或替换v2.1，不能更新旧验收成绩。下一步推荐Sol高设计语义解析与澄清接口；详见[Phase 10p学习问答](docs/learning/phase-10p-structured-workflow.zh-CN.md)。
+
+**Phase 10l完成：** v2.1内部验收已运行：24题×2轮，48份计划答案，44份生成可见内容，98次GLM请求。原题、参考、运行器与协议保持冻结；无需重复启动旧运行。
+
+**Phase 10m–10o更新：** 独立评分器与逐题审查已完成，两轮任务通过率均75%，数值事实正确率均98.04%，内部验收未通过。独立展示层及能力约定模块已实现，但尚未接入冻结v2.1，不算上线修复。下一步是设计并接入新版本的能力拒绝、范围与任务完整性检查；详见[Phase 10o中文结果与问答](docs/learning/phase-10o-acceptance-results.zh-CN.md)及[展示层学习说明](docs/learning/phase-10n-report-view.zh-CN.md)。
 
 - [x] 完成 Section 301 List 1 政策事件和 818 个政策 HTS8 商品清单的核验；
 - [x] 完成 2016 年 1 月至 2019 年 12 月的 48 个月官方贸易面板；
@@ -40,7 +198,13 @@
 - [x] 建立480项原稿/可见答案复核表，未完成语义评分项保留null；用已证明失败项推导任务完成率上限，确认未达到采纳门槛。
 - [x] 新增v2独立实现：模型原稿隔离、程序展示证据、匹配计数与比较总额、隔月去重合计、事实来源绑定；完成离线测试和111条旧成功轨迹回放。
 - [x] 完成v2八题开发试验和人工预设工具路线对照；冻结配置并完成离线检查、数值参考核验、异常停止与截断测试。
-- [ ] 当前下一步：本地运行run_v2_pilot.py --execute，收集8题后统一核查结构与语义，决定修复或设计正式验收。原40题仅作修复后开发回归。
+- [x] 完成v2八题真实GLM开发试验：第二次运行8/8正常结束、16次请求；首次HTTP401记录单独保留；自动必要检查6/8，通过事实和来源绑定但发现非连续月份过宽查询、同期比较额外查询等问题。
+- [x] 完成Phase 10i人工审查：v2可见证据报告仍缺少部分解释性任务的确定性表达，未把模型标记为采纳，也未进入正式验收。
+- [x] 实现v2.1显式月份查询、不可查月份说明及登记事实解释，建立独立运行入口、回归参考和冻结指纹；离线模拟通过。
+- [x] v2.1真实开发回归8/8正常完成，核验文件指纹与逐题日志，自动检查8/8通过；独立保存助手语义审查记录及展示改进项。
+- [x] 完成24题×2轮内部验收设计、单独参考、冻结指纹与运行入口；审查表生成器保留所有48个计划项和未评分状态，边界难题保留。
+- [x] 在验收运行期间完成独立评分器：验证原始证据、保留计划分母、逐轮门槛、未评分阻断和来源/因果错误阻断；9项评分测试通过，新增独立后处理指纹及发布边界设计。
+- [ ] 当前下一步：运行run_acceptance_v21.py --execute，收集后逐题审查范围、数值、来源及具体边界回应。原40题和8题不作为独立测试；新24题也不宣称第三方盲测，模型采纳仍为false。
 
 ## 1. 用最简单的话解释这个项目
 

@@ -1,0 +1,12 @@
+{
+  "version": "acceptance-v21-scoring-1",
+  "date": "2026-09-08",
+  "purpose": "Separate post-processing freeze; does not change the running evaluation manifest. Implements decision 0015 thresholds without observing live answers.",
+  "files": {
+    "scripts/score_acceptance_v21.py": "a9ebfabe19150c8462ebb93f53820807f2f655c3fe5c97857b680d0968d54a7b",
+    "tests/test_score_acceptance_v21.py": "e0fbff844f0d6d0b46f918e52030f6034f7f7422dd19f0630fce08dac0c8eb3f",
+    "docs/decisions/0016-acceptance-scoring.zh-CN.md": "8f4e8582a6a76566adda56d243fe0812d5a4c1471d7019d0ce78b7048f041154",
+    "docs/decisions/0017-release-boundary-design.zh-CN.md": "c11e9758991f484116e479b7b1a72fe6199e12ccb674c1080ee19d9f2c3b196c",
+    "evals/acceptance_v21_manifest.json": "3b1ab5b32343c1d13080d22356d6d27158f3c9dc1c1a9f94a765b8eee056b24c"
+  }
+}

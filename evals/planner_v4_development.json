@@ -1,0 +1,74 @@
+[
+  {
+    "id": "N01",
+    "question": "先列出本项目301第一批政策的生效日期和税率，再只读查询301 List 1政策范围整体、美国自除中国外其他原产地合计2018年9月与10月的美元消费进口额。不指定单个HS商品，两项只作描述，不做因果估计。",
+    "expected_status": "needs_confirmation",
+    "expected": [
+      {
+        "task": "policy"
+      },
+      {
+        "task": "trade",
+        "request": {
+          "policy_id": "us_301_list1_2018",
+          "operation": "read",
+          "metric": "import_value_consumption_usd",
+          "origin": "other_origins",
+          "granularity": "policy_aggregate",
+          "months": [
+            "2018-09",
+            "2018-10"
+          ],
+          "hs6": null,
+          "causal_effect": false
+        }
+      }
+    ],
+    "missing": []
+  },
+  {
+    "id": "N02",
+    "question": "请介绍这项301政策，再分析实施后的进口变化。我现在尚未选定比较月份，也没有确定比较基准，请先问清这些。",
+    "expected_status": "needs_clarification",
+    "expected": null,
+    "missing": [
+      "months",
+      "comparison_id"
+    ]
+  },
+  {
+    "id": "N03",
+    "question": "请先看本项目质量报告，然后只读查301 List 1整体2019年4月的美元消费进口额，无单个HS编码，只作描述。原产国家范围暂未选择，请询问。",
+    "expected_status": "needs_clarification",
+    "expected": null,
+    "missing": [
+      "origin"
+    ]
+  },
+  {
+    "id": "N04",
+    "question": "先给本项目数据质量状态，再只读查301 List 1政策整体范围美国自日本2018年12月的美元消费进口额。不指定HS商品，不作因果推断；不能把日本替换成其他原产地合计。",
+    "expected_status": "plan_blocked",
+    "expected": [
+      {
+        "task": "quality"
+      },
+      {
+        "task": "trade",
+        "request": {
+          "policy_id": "us_301_list1_2018",
+          "operation": "read",
+          "metric": "import_value_consumption_usd",
+          "origin": "Japan",
+          "granularity": "policy_aggregate",
+          "months": [
+            "2018-12"
+          ],
+          "hs6": null,
+          "causal_effect": false
+        }
+      }
+    ],
+    "missing": []
+  }
+]

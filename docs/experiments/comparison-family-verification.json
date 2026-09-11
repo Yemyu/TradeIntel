@@ -1,0 +1,34 @@
+{
+  "records": 1204,
+  "missing_description_codes": [
+    "6304910120",
+    "6304910140",
+    "6304910150",
+    "6304910160",
+    "6304910170",
+    "6402914163",
+    "6402914167",
+    "6402993173",
+    "6402993177",
+    "6405203070",
+    "6405203080",
+    "6405209070",
+    "6405209080",
+    "6405909030",
+    "6405909060",
+    "8413919055",
+    "8413919060",
+    "8413919095",
+    "8480490010",
+    "8480490090",
+    "9705000075",
+    "9705000080",
+    "9705000085"
+  ],
+  "reviewed_three_groups_descriptions_complete": true,
+  "sha256": {
+    "docs/experiments/comparison-family-audit.json": "93cfe819f462253e7bfa13f9b079675cd4bc8e04fe574f4f29cfd80048c5dfd6",
+    "data/raw/policy/census-import-concordance-2018.xls": "4822688ec94fc187ca6d8ce253bd472fc89712aea6736739ec3d2c04c0fc6ac0",
+    "scripts/build_hts6_mapping.py": "2625818875b6f795a3e887bb3e8e3bd918628e446808645a7871af864f51400a"
+  }
+}

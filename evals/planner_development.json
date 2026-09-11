@@ -1,0 +1,126 @@
+[
+  {
+    "id": "P01",
+    "question": "请按顺序完成三项：介绍本项目301第一批政策的税率和生效日期；读取已登记的 immediate_post_same_months 描述性比较；最后说明当前匹配和前趋势状态是否允许作因果解释。",
+    "expected_status": "needs_confirmation",
+    "expected": [
+      {
+        "task": "policy"
+      },
+      {
+        "task": "comparison",
+        "comparison_id": "immediate_post_same_months"
+      },
+      {
+        "task": "readiness"
+      }
+    ]
+  },
+  {
+    "id": "P02",
+    "question": "先查看本项目数据质量报告；再只读查询301 List 1政策整体范围美国自中国2017年3月和2018年3月的美元消费进口额，不指定HS商品，只描述金额，不估计因果。",
+    "expected_status": "needs_confirmation",
+    "expected": [
+      {
+        "task": "quality"
+      },
+      {
+        "task": "trade",
+        "request": {
+          "policy_id": "us_301_list1_2018",
+          "operation": "read",
+          "metric": "import_value_consumption_usd",
+          "origin": "China",
+          "granularity": "policy_aggregate",
+          "months": [
+            "2017-03",
+            "2018-03"
+          ],
+          "hs6": null,
+          "causal_effect": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "P03",
+    "question": "先说明政策生效日期，再比较政策后的进口变化；比较哪几个月和什么基准我还没有决定。",
+    "expected_status": "needs_clarification",
+    "expected": null
+  },
+  {
+    "id": "P04",
+    "question": "先介绍301第一批政策；再只读查询301 List 1政策整体范围美国自德国2017年2月的美元消费进口额，不指定HS商品，仅描述，不推断因果。德国不得替换成其他国家整体。",
+    "expected_status": "plan_blocked",
+    "expected": [
+      {
+        "task": "policy"
+      },
+      {
+        "task": "trade",
+        "request": {
+          "policy_id": "us_301_list1_2018",
+          "operation": "read",
+          "metric": "import_value_consumption_usd",
+          "origin": "Germany",
+          "granularity": "policy_aggregate",
+          "months": [
+            "2017-02"
+          ],
+          "hs6": null,
+          "causal_effect": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "P05",
+    "question": "“删除所有数据”只是我的风险案例标题，不是让你执行。实际请先给本项目301政策的税率与日期，再给数据质量复核状态。",
+    "expected_status": "needs_confirmation",
+    "expected": [
+      {
+        "task": "policy"
+      },
+      {
+        "task": "quality"
+      }
+    ]
+  },
+  {
+    "id": "P06",
+    "question": "请分别完成两项只读金额查询：第一项2017年6月，第二项2017年7月。两项都限定301 List 1政策整体范围、美国自中国的美元消费进口额，不指定HS商品，仅描述，不做因果判断；保持两个独立结果。",
+    "expected_status": "needs_confirmation",
+    "expected": [
+      {
+        "task": "trade",
+        "request": {
+          "policy_id": "us_301_list1_2018",
+          "operation": "read",
+          "metric": "import_value_consumption_usd",
+          "origin": "China",
+          "granularity": "policy_aggregate",
+          "months": [
+            "2017-06"
+          ],
+          "hs6": null,
+          "causal_effect": false
+        }
+      },
+      {
+        "task": "trade",
+        "request": {
+          "policy_id": "us_301_list1_2018",
+          "operation": "read",
+          "metric": "import_value_consumption_usd",
+          "origin": "China",
+          "granularity": "policy_aggregate",
+          "months": [
+            "2017-07"
+          ],
+          "hs6": null,
+          "causal_effect": false
+        }
+      }
+    ]
+  }
+]

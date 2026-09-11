@@ -1,0 +1,15 @@
+{
+  "files": {
+    "evals/policy_acceptance_v1.json": "f004869f24b74986801c07953cc9910ac7d5e6eaba683eee8033f1e55002ad8e",
+    "docs/decisions/0060-policy-prospective-acceptance.zh-CN.md": "0fb3be95f680c144604f2dd622757e3212b34e33045a26bf84232810a8aa4de9",
+    "src/tradeintel_ai/policy_workflow.py": "11be9b46d04f571057776658a3bba64c146113eea509e78a3c32699dfb93d2fb",
+    "src/tradeintel_ai/policy_response_format.py": "b79c798e2cc526d4155c0780d62e7c31798ec06d86fd7a6676592dda57efbb36",
+    "src/tradeintel_ai/policy_retrieval.py": "458ed99b5d3f3ff0085c16cc56b263707a044a0e7df0e7df08eb93dbd8b84453",
+    "src/tradeintel_ai/model_adapter.py": "219345bccaa03935ecf78abc2fbe9d59d01c952b4ff744d90622154dc7877ec2",
+    "src/tradeintel_ai/agent.py": "48630f4b38601419ce139f0a7f7220ab220312c8c886b8a169dfc70ec4a45b59",
+    "docs/experiments/phase13a-policy-retrieval/corpus.json": "4a047b3249d0b041946f49861b5435d2477c7ee7cf2d89112bd3c9da5c8d6276",
+    "scripts/preflight_policy_acceptance.py": "fc294a4b1117073f70d53e2885922e8198d6732a6b29734dfe731fd0c017d582"
+  },
+  "max_model_calls": 5,
+  "scope": "policy_module_only"
+}

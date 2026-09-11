@@ -1,0 +1,7621 @@
+{
+  "status": "comparison_support_inventory_not_causal_design",
+  "policy_post_outcomes_read": false,
+  "matching_run": false,
+  "causal_effect_estimated": false,
+  "candidate_count": 243,
+  "mixed_naics6_count": 16,
+  "by_naics6": [
+    {
+      "group": "333111",
+      "treated": {
+        "hts8_count": 10,
+        "hs6_family_count": 10,
+        "codes": [
+          "84321000",
+          "84322100",
+          "84328000",
+          "84332000",
+          "84335100",
+          "84349000",
+          "84361000",
+          "84362100",
+          "84362900",
+          "84369100"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "98170060"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333112",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84331100"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333120",
+      "treated": {
+        "hts8_count": 9,
+        "hs6_family_count": 9,
+        "codes": [
+          "84269900",
+          "84301000",
+          "84306100",
+          "84306901",
+          "84314100",
+          "84314200",
+          "84743100",
+          "84743900",
+          "84791000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333131",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84303900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333132",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84314340"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333241",
+      "treated": {
+        "hts8_count": 7,
+        "hs6_family_count": 7,
+        "codes": [
+          "84371000",
+          "84378000",
+          "84379000",
+          "84386000",
+          "84388000",
+          "84389090",
+          "84792000"
+        ]
+      },
+      "control": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84351000",
+          "84359000",
+          "84381000",
+          "84382000",
+          "84384000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333243",
+      "treated": {
+        "hts8_count": 11,
+        "hs6_family_count": 9,
+        "codes": [
+          "84193250",
+          "84199020",
+          "84399110",
+          "84399190",
+          "84399910",
+          "84399950",
+          "84413000",
+          "84414000",
+          "84418000",
+          "84419000",
+          "84669210"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333244",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 4,
+        "codes": [
+          "84423001",
+          "84424000",
+          "84431930",
+          "84439110"
+        ]
+      },
+      "control": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84401000",
+          "84409000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333249",
+      "treated": {
+        "hts8_count": 15,
+        "hs6_family_count": 13,
+        "codes": [
+          "84209190",
+          "84440000",
+          "84541000",
+          "84642001",
+          "84649001",
+          "84759010",
+          "84759090",
+          "84771090",
+          "84772000",
+          "84773000",
+          "84774001",
+          "84775100",
+          "84778000",
+          "84779025",
+          "84779085"
+        ]
+      },
+      "control": {
+        "hts8_count": 17,
+        "hs6_family_count": 14,
+        "codes": [
+          "84479050",
+          "84479090",
+          "84481900",
+          "84482050",
+          "84483100",
+          "84483910",
+          "84483990",
+          "84484200",
+          "84484920",
+          "84485910",
+          "84485950",
+          "84490050",
+          "84521000",
+          "84522190",
+          "84529020",
+          "84532000",
+          "84781000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333314",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 3,
+        "codes": [
+          "90111040",
+          "90111080",
+          "90119000",
+          "90314100"
+        ]
+      },
+      "control": {
+        "hts8_count": 3,
+        "hs6_family_count": 2,
+        "codes": [
+          "90051000",
+          "90058040",
+          "90058060"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333316",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 1,
+        "codes": [
+          "90314910",
+          "90314990"
+        ]
+      },
+      "control": {
+        "hts8_count": 10,
+        "hs6_family_count": 8,
+        "codes": [
+          "90064040",
+          "90064090",
+          "90065100",
+          "90065291",
+          "90065301",
+          "90065940",
+          "90065991",
+          "90066100",
+          "90069900",
+          "90079140"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333318",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84221900",
+          "88052900"
+        ]
+      },
+      "control": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84198190",
+          "84768900",
+          "85163300",
+          "95081000",
+          "95089000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333414",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84169000"
+        ]
+      },
+      "control": {
+        "hts8_count": 9,
+        "hs6_family_count": 7,
+        "codes": [
+          "73218110",
+          "73218150",
+          "73218210",
+          "73218250",
+          "73218900",
+          "84031000",
+          "84039000",
+          "84162000",
+          "84198150"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333415",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84143040",
+          "84186901"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84159040"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333511",
+      "treated": {
+        "hts8_count": 6,
+        "hs6_family_count": 5,
+        "codes": [
+          "84802000",
+          "84804100",
+          "84804900",
+          "84805000",
+          "84807110",
+          "84807180"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84806000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333515",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84661001"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517",
+      "treated": {
+        "hts8_count": 23,
+        "hs6_family_count": 19,
+        "codes": [
+          "84563010",
+          "84571000",
+          "84581100",
+          "84581900",
+          "84589110",
+          "84589950",
+          "84596100",
+          "84596900",
+          "84597080",
+          "84609080",
+          "84619060",
+          "84621000",
+          "84622100",
+          "84622900",
+          "84623900",
+          "84624900",
+          "84629140",
+          "84629180",
+          "84629980",
+          "84669420",
+          "84669440",
+          "84669465",
+          "84669485"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333519",
+      "treated": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84552200",
+          "84631000",
+          "84633000",
+          "84794000",
+          "84798100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333611",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84109000",
+          "85023100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333618",
+      "treated": {
+        "hts8_count": 5,
+        "hs6_family_count": 4,
+        "codes": [
+          "84072100",
+          "84072900",
+          "84089010",
+          "84089090",
+          "84128090"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333911",
+      "treated": {
+        "hts8_count": 5,
+        "hs6_family_count": 4,
+        "codes": [
+          "84137010",
+          "84137020",
+          "84138100",
+          "84138200",
+          "84139120"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333913",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84131900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333921",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84281000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333922",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84283200",
+          "84283300",
+          "84283900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333923",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84251100",
+          "84253901"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84261900"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333924",
+      "treated": {
+        "hts8_count": 8,
+        "hs6_family_count": 6,
+        "codes": [
+          "84271040",
+          "84271080",
+          "84272040",
+          "84272080",
+          "84312000",
+          "87091100",
+          "87091900",
+          "87099000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333991",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84199085",
+          "84671110"
+        ]
+      },
+      "control": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84672100",
+          "84672200",
+          "84678100",
+          "84678910",
+          "84679101"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333992",
+      "treated": {
+        "hts8_count": 7,
+        "hs6_family_count": 6,
+        "codes": [
+          "85151900",
+          "85152100",
+          "85152900",
+          "85153100",
+          "85153900",
+          "85159020",
+          "85159040"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84681000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333993",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 3,
+        "codes": [
+          "84222000",
+          "84223091",
+          "84224011",
+          "84224091"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333994",
+      "treated": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84171000",
+          "84178000",
+          "84179000",
+          "85141000",
+          "85144000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333995",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84122100",
+          "84123100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333996",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84122980",
+          "84123900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333997",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84233000",
+          "84238200"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84231000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333999",
+      "treated": {
+        "hts8_count": 8,
+        "hs6_family_count": 8,
+        "codes": [
+          "84211900",
+          "84212100",
+          "84212200",
+          "84219160",
+          "84219900",
+          "84795000",
+          "84798200",
+          "90311000"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84538000"
+        ]
+      },
+      "both_sides_present": true
+    }
+  ],
+  "by_naics6_and_hts4": [
+    {
+      "group": "333111/8432",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84321000",
+          "84322100",
+          "84328000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333111/8433",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84332000",
+          "84335100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333111/8434",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84349000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333111/8436",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 4,
+        "codes": [
+          "84361000",
+          "84362100",
+          "84362900",
+          "84369100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333111/9817",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "98170060"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333112/8433",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84331100"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333120/8426",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84269900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333120/8430",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84301000",
+          "84306100",
+          "84306901"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333120/8431",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84314100",
+          "84314200"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333120/8474",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84743100",
+          "84743900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333120/8479",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84791000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333131/8430",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84303900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333132/8431",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84314340"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333241/8435",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84351000",
+          "84359000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333241/8437",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84371000",
+          "84378000",
+          "84379000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333241/8438",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84386000",
+          "84388000",
+          "84389090"
+        ]
+      },
+      "control": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84381000",
+          "84382000",
+          "84384000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333241/8479",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84792000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333243/8419",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84193250",
+          "84199020"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333243/8439",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 2,
+        "codes": [
+          "84399110",
+          "84399190",
+          "84399910",
+          "84399950"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333243/8441",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 4,
+        "codes": [
+          "84413000",
+          "84414000",
+          "84418000",
+          "84419000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333243/8466",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84669210"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333244/8440",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84401000",
+          "84409000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333244/8442",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84423001",
+          "84424000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333244/8443",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84431930",
+          "84439110"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8420",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84209190"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8444",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84440000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8447",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 2,
+        "hs6_family_count": 1,
+        "codes": [
+          "84479050",
+          "84479090"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8448",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 9,
+        "hs6_family_count": 7,
+        "codes": [
+          "84481900",
+          "84482050",
+          "84483100",
+          "84483910",
+          "84483990",
+          "84484200",
+          "84484920",
+          "84485910",
+          "84485950"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8449",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84490050"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8452",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84521000",
+          "84522190",
+          "84529020"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8453",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84532000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8454",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84541000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8464",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84642001",
+          "84649001"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8475",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 1,
+        "codes": [
+          "84759010",
+          "84759090"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8477",
+      "treated": {
+        "hts8_count": 8,
+        "hs6_family_count": 7,
+        "codes": [
+          "84771090",
+          "84772000",
+          "84773000",
+          "84774001",
+          "84775100",
+          "84778000",
+          "84779025",
+          "84779085"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333249/8478",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84781000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333314/9005",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 3,
+        "hs6_family_count": 2,
+        "codes": [
+          "90051000",
+          "90058040",
+          "90058060"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333314/9011",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 2,
+        "codes": [
+          "90111040",
+          "90111080",
+          "90119000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333314/9031",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "90314100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333316/9006",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 9,
+        "hs6_family_count": 7,
+        "codes": [
+          "90064040",
+          "90064090",
+          "90065100",
+          "90065291",
+          "90065301",
+          "90065940",
+          "90065991",
+          "90066100",
+          "90069900"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333316/9007",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "90079140"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333316/9031",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 1,
+        "codes": [
+          "90314910",
+          "90314990"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333318/8419",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84198190"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333318/8422",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84221900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333318/8476",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84768900"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333318/8516",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "85163300"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333318/8805",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "88052900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333318/9508",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "95081000",
+          "95089000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333414/7321",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 5,
+        "hs6_family_count": 3,
+        "codes": [
+          "73218110",
+          "73218150",
+          "73218210",
+          "73218250",
+          "73218900"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333414/8403",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84031000",
+          "84039000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333414/8416",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84169000"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84162000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333414/8419",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84198150"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333415/8414",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84143040"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333415/8415",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84159040"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333415/8418",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84186901"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333511/8480",
+      "treated": {
+        "hts8_count": 6,
+        "hs6_family_count": 5,
+        "codes": [
+          "84802000",
+          "84804100",
+          "84804900",
+          "84805000",
+          "84807110",
+          "84807180"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84806000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333515/8466",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84661001"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8456",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84563010"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8457",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84571000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8458",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 4,
+        "codes": [
+          "84581100",
+          "84581900",
+          "84589110",
+          "84589950"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8459",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84596100",
+          "84596900",
+          "84597080"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8460",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84609080"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8461",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84619060"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8462",
+      "treated": {
+        "hts8_count": 8,
+        "hs6_family_count": 7,
+        "codes": [
+          "84621000",
+          "84622100",
+          "84622900",
+          "84623900",
+          "84624900",
+          "84629140",
+          "84629180",
+          "84629980"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333517/8466",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 1,
+        "codes": [
+          "84669420",
+          "84669440",
+          "84669465",
+          "84669485"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333519/8455",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84552200"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333519/8463",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84631000",
+          "84633000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333519/8479",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84794000",
+          "84798100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333611/8410",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84109000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333611/8502",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "85023100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333618/8407",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84072100",
+          "84072900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333618/8408",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 1,
+        "codes": [
+          "84089010",
+          "84089090"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333618/8412",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84128090"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333911/8413",
+      "treated": {
+        "hts8_count": 5,
+        "hs6_family_count": 4,
+        "codes": [
+          "84137010",
+          "84137020",
+          "84138100",
+          "84138200",
+          "84139120"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333913/8413",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84131900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333921/8428",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84281000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333922/8428",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84283200",
+          "84283300",
+          "84283900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333923/8425",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84251100",
+          "84253901"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333923/8426",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84261900"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333924/8427",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 2,
+        "codes": [
+          "84271040",
+          "84271080",
+          "84272040",
+          "84272080"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333924/8431",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84312000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333924/8709",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "87091100",
+          "87091900",
+          "87099000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333991/8419",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84199085"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333991/8467",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84671110"
+        ]
+      },
+      "control": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84672100",
+          "84672200",
+          "84678100",
+          "84678910",
+          "84679101"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333992/8468",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84681000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333992/8515",
+      "treated": {
+        "hts8_count": 7,
+        "hs6_family_count": 6,
+        "codes": [
+          "85151900",
+          "85152100",
+          "85152900",
+          "85153100",
+          "85153900",
+          "85159020",
+          "85159040"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333993/8422",
+      "treated": {
+        "hts8_count": 4,
+        "hs6_family_count": 3,
+        "codes": [
+          "84222000",
+          "84223091",
+          "84224011",
+          "84224091"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333994/8417",
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "codes": [
+          "84171000",
+          "84178000",
+          "84179000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333994/8514",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "85141000",
+          "85144000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333995/8412",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84122100",
+          "84123100"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333996/8412",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84122980",
+          "84123900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333997/8423",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84233000",
+          "84238200"
+        ]
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84231000"
+        ]
+      },
+      "both_sides_present": true
+    },
+    {
+      "group": "333999/8421",
+      "treated": {
+        "hts8_count": 5,
+        "hs6_family_count": 5,
+        "codes": [
+          "84211900",
+          "84212100",
+          "84212200",
+          "84219160",
+          "84219900"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333999/8453",
+      "treated": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "84538000"
+        ]
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333999/8479",
+      "treated": {
+        "hts8_count": 2,
+        "hs6_family_count": 2,
+        "codes": [
+          "84795000",
+          "84798200"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    },
+    {
+      "group": "333999/9031",
+      "treated": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "codes": [
+          "90311000"
+        ]
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "codes": []
+      },
+      "both_sides_present": false
+    }
+  ],
+  "candidates": [
+    {
+      "hts8": "73218110",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "7321811000",
+          "naics6": "333414",
+          "description": "OTHER PORTABLE DOMESTIC APPLIANCES OF IRON OR STEEL NESOI, FOR GAS FUEL OR FOR BOTH GAS AND OTHER FUELS, NOT COOKING APPLIANCES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "73218150",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "7321815000",
+          "naics6": "333414",
+          "description": "OTHER DOMESTIC APPLIANCES EXCEPT COOKING APPLIANCES OR PLATE WARMERS, NOT PORTABLE, OF IRON OR STEEL, FOR GAS OR BOTH GAS AND OTHER FUELS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "73218210",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "7321821000",
+          "naics6": "333414",
+          "description": "OTHER PORTABLE DOMESTIC APPLIANCES EXCEPT COOKING APPLIANCES OR PLATE WARMERS, OF IRON OR STEEL, FOR LIQUID FUEL"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "73218250",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "7321825000",
+          "naics6": "333414",
+          "description": "OTHER DOMESTIC APPLIANCES, NON-PORTABLE, EXCEPT COOKING APPLIANCES OR PLATE WARMERS, OF IRON OR STEEL, FOR LIQUID FUEL"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "73218900",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "7321890010",
+          "naics6": "333414",
+          "description": "FIREPLACE GRATES OF CAST IRON"
+        },
+        {
+          "hts10": "7321890050",
+          "naics6": "333414",
+          "description": "GRATES, BRAZIERS AND SIMILAR NON-ELECTRIC DOMESTIC APPLIANCES, OF IRON OR STEEL, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84031000",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8403100000",
+          "naics6": "333414",
+          "description": "CENTRAL HEATING BOILERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84039000",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8403900000",
+          "naics6": "333414",
+          "description": "PARTS FOR CENTRAL HEATING BOILERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84072100",
+      "role": "treated",
+      "naics6": [
+        "333618"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8407210040",
+          "naics6": "333618",
+          "description": "SPARK-IGNITION RECIPROCATING OR ROTARY INTERNAL COMBUSTION PISTON ENGINES  FOR MARINE PROPULSION, OUTBOARD MOTORS LESS THAN 22.38 KW"
+        },
+        {
+          "hts10": "8407210080",
+          "naics6": "333618",
+          "description": "SPARK-IGNITION RECIPROCATING OR ROTARY INTERNAL COMBUSTION PISTON ENGINES FOR MARINE PROPULSION, OUTBOARD MOTORS >= 22.38 KW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84072900",
+      "role": "treated",
+      "naics6": [
+        "333618"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8407290010",
+          "naics6": "333618",
+          "description": "SPARK-IGNITION RECIPROCATING OR ROTARY INTERNAL COMBUSTION PISTON ENGINES FOR MARINE PROPULSION, INBOARD ENGINES WITH OUTBOARD DRIVE"
+        },
+        {
+          "hts10": "8407290020",
+          "naics6": "333618",
+          "description": "SPARK-IGNITION RECIPROCATING OR ROTARY INTERNAL COMBUSTION PISTON ENGINES FOR MARINE PROPULSION, INBOARD ENGINES WITH INBOARD DRIVE LESS THAN 746 W"
+        },
+        {
+          "hts10": "8407290030",
+          "naics6": "333618",
+          "description": "SPARK-IGNITION RECIPROCATING OR ROTARY INTERNAL COMBUSTION PISTON ENGINES FOR MARINE PROPULSION, INBOARD ENGINES WITH INBOARD DR,GT/ = 746W LT 18.65KW"
+        },
+        {
+          "hts10": "8407290040",
+          "naics6": "333618",
+          "description": "SPARK-IGNITION RECIPROCATING OR ROTARY INTERNAL COMBUSTION PISTON ENGINES FOR MARINE PROPULSION, INBOARD ENGINES WITH INBOARD DRIVE,EXCEEDING 18.65 KW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84089010",
+      "role": "treated",
+      "naics6": [
+        "333618"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8408901040",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,TO BE INSTALLED IN AGRICULTURAL OR HORTICULTURAL MACH OR EQUIPMENT NOT EXCEEDING 37.3 KW"
+        },
+        {
+          "hts10": "8408901080",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,TO BE INSTALLED IN AGRICULTURAL OR HORTICULTURAL MACH OR EQUIPMENT,EXCEEDING 37.3 KW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84089090",
+      "role": "treated",
+      "naics6": [
+        "333618"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8408909010",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,NOT EXCEEDING 149.2 KW"
+        },
+        {
+          "hts10": "8408909020",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,EXCEEDING 149.2 KW BUT NOT EXCEEDING 373 KW"
+        },
+        {
+          "hts10": "8408909030",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,EXCEEDING 373 KW NOT EXCEEDING 746 KW"
+        },
+        {
+          "hts10": "8408909040",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,EXCEEDING 746 KW BUT NOT EXCEEDING 1,119 KW"
+        },
+        {
+          "hts10": "8408909050",
+          "naics6": "333618",
+          "description": "COMPRESSION-IGNITION INTERNAL COMBUSTION PISTON ENGINES,NESOI,EXCEEDING 1,119 KW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84109000",
+      "role": "treated",
+      "naics6": [
+        "333611"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8410900000",
+          "naics6": "333611",
+          "description": "PARTS, INCLUDING REGULATORS, FOR HYDRAULIC TURBINES AND WATER WHEELS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84122100",
+      "role": "treated",
+      "naics6": [
+        "333995"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8412210015",
+          "naics6": "333995",
+          "description": "LINEAR ACTING HYDRAULIC MOTORS WITH TIE-ROD TYPE CYLINDERS"
+        },
+        {
+          "hts10": "8412210030",
+          "naics6": "333995",
+          "description": "LINEAR ACTING HYDRAULIC MOTORS WITH WELD FUSED TYPE CYLINDERS"
+        },
+        {
+          "hts10": "8412210045",
+          "naics6": "333995",
+          "description": "LINEAR ACTING HYDRAULIC MOTORS WITH TELESCOPING TYPE CYLINDERS"
+        },
+        {
+          "hts10": "8412210060",
+          "naics6": "333995",
+          "description": "LINEAR ACTING HYDRAULIC MOTORS WITH RODLESS TYPE CYLINDERS"
+        },
+        {
+          "hts10": "8412210075",
+          "naics6": "333995",
+          "description": "LINEAR ACTING HYDRAULIC MOTORS (CYLINDERS), NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84122980",
+      "role": "treated",
+      "naics6": [
+        "333996"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8412298015",
+          "naics6": "333996",
+          "description": "HYDRAULIC POWER ENGINES, UNLIMITED ROTARY ACTING, GEAR TYPE"
+        },
+        {
+          "hts10": "8412298030",
+          "naics6": "333996",
+          "description": "HYDRAULIC POWER ENGINES, UNLIMITED ROTARY ACTING, RADIAL PISTON TYPE"
+        },
+        {
+          "hts10": "8412298045",
+          "naics6": "333996",
+          "description": "HYDRAULIC POWER ENGINES, UNLIMITED ROTARY ACTING, AXIAL PISTON TYPE"
+        },
+        {
+          "hts10": "8412298060",
+          "naics6": "333996",
+          "description": "HYDRAULIC POWER ENGINES, UNLIMITED ROTARY ACTING, NESOI"
+        },
+        {
+          "hts10": "8412298075",
+          "naics6": "333996",
+          "description": "HYDRAULIC POWER ENGINES AND MOTORS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84123100",
+      "role": "treated",
+      "naics6": [
+        "333995"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8412310040",
+          "naics6": "333995",
+          "description": "LINEAR ACTING PNEUMATIC MOTORS (CYLINDERS), TIE-ROD TYPE"
+        },
+        {
+          "hts10": "8412310080",
+          "naics6": "333995",
+          "description": "LINEAR ACTING PNEUMATIC MOTORS (CYLINDERS), EXCEPT TIE-ROD TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84123900",
+      "role": "treated",
+      "naics6": [
+        "333996"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8412390040",
+          "naics6": "333996",
+          "description": "PNEUMATIC POWER ENGINES AND MOTORS, UNLIMITED ROTARY ACTING"
+        },
+        {
+          "hts10": "8412390080",
+          "naics6": "333996",
+          "description": "PNEUMATIC POWER ENGINES AND MOTORS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84128090",
+      "role": "treated",
+      "naics6": [
+        "333618"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8412809000",
+          "naics6": "333618",
+          "description": "ENGINES AND MOTORS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84131900",
+      "role": "treated",
+      "naics6": [
+        "333913"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8413190000",
+          "naics6": "333913",
+          "description": "PUMPS FITTED OR DESIGNED TO BE FITTED WITH A MEASURING DEVICE, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84135000",
+      "role": "treated",
+      "naics6": [
+        "333911",
+        "333996"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8413500010",
+          "naics6": "333911",
+          "description": "OIL WELL AND OIL FIELD PUMPS, RECIPROCATING POSITIVE DISPLACEMENT"
+        },
+        {
+          "hts10": "8413500050",
+          "naics6": "333911",
+          "description": "DIAPHRAGM PUMPS, RECIPROCATING POSITIVE DISPLACEMENT"
+        },
+        {
+          "hts10": "8413500070",
+          "naics6": "333996",
+          "description": "HYDRAULIC FLUID POWER PUMPS, RADIAL PISTON TYPE"
+        },
+        {
+          "hts10": "8413500080",
+          "naics6": "333996",
+          "description": "HYDRAULIC FLUID POWER PUMPS, NESOI"
+        },
+        {
+          "hts10": "8413500090",
+          "naics6": "333911",
+          "description": "RECIPROCATING POSITIVE DISPLACEMENT PUMPS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84136000",
+      "role": "treated",
+      "naics6": [
+        "333911",
+        "333996"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8413600020",
+          "naics6": "333996",
+          "description": "HYDRAULIC FLUID POWER PUMPS, ROTARY POSITIVE DISPLACEMENT, VANE TYPE"
+        },
+        {
+          "hts10": "8413600030",
+          "naics6": "333996",
+          "description": "HYDRAULIC FLUID POWER PUMPS, ROTARY POSITIVE DISPLACEMENT, GEAR TYPE"
+        },
+        {
+          "hts10": "8413600040",
+          "naics6": "333996",
+          "description": "HYDRAULIC FLUID POWER PUMPS, ROTARY POSITIVE DISPLACEMENT, NESOI"
+        },
+        {
+          "hts10": "8413600050",
+          "naics6": "333911",
+          "description": "OIL WELL AND OIL FIELD PUMPS, ROTARY POSITIVE DISPLACEMENT"
+        },
+        {
+          "hts10": "8413600070",
+          "naics6": "333911",
+          "description": "ROLLER PUMPS, ROTARY POSITIVE DISPLACEMENT"
+        },
+        {
+          "hts10": "8413600090",
+          "naics6": "333911",
+          "description": "ROTARY POSITIVE DISPLACEMENT PUMPS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84137010",
+      "role": "treated",
+      "naics6": [
+        "333911"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8413701000",
+          "naics6": "333911",
+          "description": "STOCK PUMPS IMPORTED FOR USE WITH MACHINES FOR MAKING CELLULOSIC PULP, PAPER OR PAPERBOARD, CENTRIFUGAL"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84137020",
+      "role": "treated",
+      "naics6": [
+        "333911"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8413702004",
+          "naics6": "333911",
+          "description": "SUBMERSIBLE PUMPS, CENTRIFUGAL"
+        },
+        {
+          "hts10": "8413702005",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, SINGLE-STAGE, SINGLE SUCTION, CLOSED-COUPLED, WITH DISCHARGE OUTLET UNDER 5.08 CM IN DIAMETER"
+        },
+        {
+          "hts10": "8413702015",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, SINGLE-STAGE, SINGLE SUCTION, CLOSED-COUPLED, WITH DISCHARGE OUTLET 5.08 CM OR OVER IN DIAMETER"
+        },
+        {
+          "hts10": "8413702022",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, SINGLE-STAGE, SINGLE-SUCTION, FRAME-MOUNTED, WITH DISCHARGE OUTLET UNDER 7.6 CM IN DIAMETER"
+        },
+        {
+          "hts10": "8413702025",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, SINGLE-STAGE, SINGLE-SUCTION, FRAME-MOUNTED, WITH DISCHARGE OUTLET 7.6 CM OR OVER IN DIAMETER"
+        },
+        {
+          "hts10": "8413702030",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, SINGLE-STAGE, DOUBLE-SUCTION"
+        },
+        {
+          "hts10": "8413702040",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, MULTI-STAGE, SINGLE OR DOUBLE-SUCTION"
+        },
+        {
+          "hts10": "8413702090",
+          "naics6": "333911",
+          "description": "CENTRIFUGAL PUMPS FOR LIQUIDS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84138100",
+      "role": "treated",
+      "naics6": [
+        "333911"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8413810020",
+          "naics6": "333911",
+          "description": "TURBINE PUMPS, NESOI"
+        },
+        {
+          "hts10": "8413810030",
+          "naics6": "333911",
+          "description": "HOUSEHOLD WATER SYSTEMS, SELF-CONTAINED; AND WINDMILL PUMPS"
+        },
+        {
+          "hts10": "8413810040",
+          "naics6": "333911",
+          "description": "PUMPS FOR LIQUIDS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84138200",
+      "role": "treated",
+      "naics6": [
+        "333911"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8413820000",
+          "naics6": "333911",
+          "description": "LIQUID ELEVATORS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84139120",
+      "role": "treated",
+      "naics6": [
+        "333911"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8413912000",
+          "naics6": "333911",
+          "description": "PARTS OF STOCK PUMPS IMPORTED FOR USE WITH MACHINES FOR MAKING CELLULOSIC PULP, PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84143040",
+      "role": "treated",
+      "naics6": [
+        "333415"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8414304000",
+          "naics6": "333415",
+          "description": "COMPRESSORS, REFRIGERATING AND AIR-CONDITIONING, NOT EXCEEDING 1/4 HORSEPOWER"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84159040",
+      "role": "control",
+      "naics6": [
+        "333415"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8415904000",
+          "naics6": "333415",
+          "description": "CHASSIS, CHASSIS BASES AND OUTER CABINETS, PARTS OF AIR CONDITIONING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84162000",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8416200040",
+          "naics6": "333414",
+          "description": "GAS FURNACE BURNERS"
+        },
+        {
+          "hts10": "8416200080",
+          "naics6": "333414",
+          "description": "FURNACE BURNERS, INCLUDING COMBINATION BURNERS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84169000",
+      "role": "treated",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8416900000",
+          "naics6": "333414",
+          "description": "PARTS OF FURNACE BURNERS FOR LIQUID FUEL, FOR PULVERIZED SOLID FUEL OR FOR GAS; MECHANICAL STOKERS, MECH GRATES, MECH ASH DISCHARGE & SIMILAR APPLIANC"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84171000",
+      "role": "treated",
+      "naics6": [
+        "333994"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8417100000",
+          "naics6": "333994",
+          "description": "FURNACES & OVENS FOR ROASTING, MELTING OR OTHER HEAT TREATMENT OF ORES, PYRITES OR OF METALS, INDUSTRIAL OR LABORATORY, NONELECTRIC"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84178000",
+      "role": "treated",
+      "naics6": [
+        "333994"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8417800000",
+          "naics6": "333994",
+          "description": "INDUSTRIAL OR LABORATORY FURNACES AND OVENS, INCLUDING INCINERATORS, NONELECTRIC, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84179000",
+      "role": "treated",
+      "naics6": [
+        "333994"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8417900000",
+          "naics6": "333994",
+          "description": "PARTS OF INDUSTRIAL OR LABORATORY FURNACES AND OVENS, INCLUDING INCINERATORS, NONELECTRIC"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84186901",
+      "role": "treated",
+      "naics6": [
+        "333415"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8418690110",
+          "naics6": "333415",
+          "description": "ICEMAKING MACHINES"
+        },
+        {
+          "hts10": "8418690120",
+          "naics6": "333415",
+          "description": "DRINKING WATER COOLERS, REFRIGERATED, SELF-CONTAINED"
+        },
+        {
+          "hts10": "8418690130",
+          "naics6": "333415",
+          "description": "SODA FOUNTAIN AND BEER DISPENSING EQUIPMENT, REFRIGERATED"
+        },
+        {
+          "hts10": "8418690140",
+          "naics6": "333415",
+          "description": "CENTRIFUGAL LIQUID CHILLING REFRIGERATING UNITS"
+        },
+        {
+          "hts10": "8418690150",
+          "naics6": "333415",
+          "description": "RECIPROCATING LIQUID CHILLING REFRIGERATING UNITS"
+        },
+        {
+          "hts10": "8418690160",
+          "naics6": "333415",
+          "description": "ABSORPTION LIQUID CHILLING UNITS"
+        },
+        {
+          "hts10": "8418690180",
+          "naics6": "333415",
+          "description": "REFRIGERATING OR FREEZING EQUIPMENT, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84193250",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8419325000",
+          "naics6": "333243",
+          "description": "DRYERS FOR PAPER PULP, PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84194000",
+      "role": "treated",
+      "naics6": [
+        "333241",
+        "333249"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8419400040",
+          "naics6": "333241",
+          "description": "DISTILLING OR RECTIFYING PLANT FOR FOOD AND BEVERAGES"
+        },
+        {
+          "hts10": "8419400080",
+          "naics6": "333249",
+          "description": "DISTILLING OR RECTIFYING PLANT, FOR THE TREATMENT OF MATERIALS BY A PROCESS INVOLVING A CHANGE IN TEMPERATURE, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84198150",
+      "role": "control",
+      "naics6": [
+        "333414"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8419815040",
+          "naics6": "333414",
+          "description": "COOKING STOVES, RANGES AND OVENS FOR COOKING OR HEATING FOOD FOR, USE IN CIVIL AIRCRAFT"
+        },
+        {
+          "hts10": "8419815080",
+          "naics6": "333414",
+          "description": "INDUSTRIAL COOKING STOVES, RANGES AND OVENS FOR COOKING OR HEATING FOOD, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84198190",
+      "role": "control",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8419819040",
+          "naics6": "333318",
+          "description": "INDUSTRIAL MACHINERY OR EQUIPMENT OF A TYPE USED IN RESTAURANTS, HOTELS OR SIMILAR LOCATIONS FOR MAKING HOT DRINKS OR FOR COOKING, HEATING FOOD, NESOI"
+        },
+        {
+          "hts10": "8419819080",
+          "naics6": "333318",
+          "description": "INDUSTRIAL MACHINERY OR EQUIPMENT FOR MAKING HOT DRINKS OR FOR COOKING OR HEATING FOOD, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84199020",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8419902000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY AND PLANT FOR MAKING PAPER PULP, PAPER OR PAPERBOARD, INVOLVING A CHANGE IN TEMPERATURE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84199085",
+      "role": "treated",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8419908500",
+          "naics6": "333991",
+          "description": "ELECTROMECHANICAL TOOL PARTS FOR WORKING IN THE HAND WITH SELF-CONTAINED ELECTRIC MOTOR, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84209190",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8420919000",
+          "naics6": "333249",
+          "description": "CYLINDERS, NESOI, FOR ROLLING MACHINES, OTHER THAN FOR METALS OR GLASS"
+        }
+      ],
+      "china_observed_months": 28
+    },
+    {
+      "hts8": "84211900",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8421190000",
+          "naics6": "333999",
+          "description": "CENTRIFUGES, INCLUDING CENTRIFUGAL DRYERS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84212100",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8421210000",
+          "naics6": "333999",
+          "description": "WATER FILTERING OR PURIFYING MACHINERY AND APPARATUS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84212200",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8421220000",
+          "naics6": "333999",
+          "description": "BEVERAGE FILTERING OR PURIFYING MACHINERY AND APPARATUS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84219160",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8421916000",
+          "naics6": "333999",
+          "description": "PARTS OF CENTRIFUGES, INCLUDING CENTRIFUGAL DRYERS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84219900",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8421990040",
+          "naics6": "333999",
+          "description": "PARTS OF MACHINERY AND APPARATUS FOR FILTERING OR PURIFYING WATER"
+        },
+        {
+          "hts10": "8421990080",
+          "naics6": "333999",
+          "description": "PARTS OF MACHINERY AND APPARATUS FOR FILTERING OR PURIFYING LIQUIDS AND GASES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84221900",
+      "role": "treated",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8422190000",
+          "naics6": "333318",
+          "description": "DISHWASHING MACHINES, EXCEPT HOUSEHOLD TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84222000",
+      "role": "treated",
+      "naics6": [
+        "333993"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8422200000",
+          "naics6": "333993",
+          "description": "MACHINERY FOR CLEANING OR DRYING BOTTLES OR OTHER CONTAINERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84223091",
+      "role": "treated",
+      "naics6": [
+        "333993"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8422309110",
+          "naics6": "333993",
+          "description": "MACHINES FOR AERATING BEVERAGES"
+        },
+        {
+          "hts10": "8422309120",
+          "naics6": "333993",
+          "description": "CONTAINER LABELING MACHINES"
+        },
+        {
+          "hts10": "8422309130",
+          "naics6": "333993",
+          "description": "VACUUM OR GAS PACKAGING MACHINES FOR FILLING, WHETHER OR NOT CAPABLE OF PERFORMING OTHER OPERATIONS"
+        },
+        {
+          "hts10": "8422309140",
+          "naics6": "333993",
+          "description": "MACHINES FOR FILLING, WHETHER OR NOT CAPABLE OF PERFORMING OTHER OPERATIONS, NESOI"
+        },
+        {
+          "hts10": "8422309150",
+          "naics6": "333993",
+          "description": "VACUUM OR GAS PACKAGING MACHINES WHICH PERFORM ONLY OPERATIONS OF CAPPING,LIDDING,SEALING OR CLOSING"
+        },
+        {
+          "hts10": "8422309160",
+          "naics6": "333993",
+          "description": "MACHINES WHICH PERFORM ONLY OPERATIONS OF CAPPING,LIDDING,SEALING OR CLOSING,NESOI"
+        },
+        {
+          "hts10": "8422309170",
+          "naics6": "333993",
+          "description": "MACHINES FOR FILLING,CLOSING,SEALING,CAPSULING OR LABELING BOTTLES,CANS OR SIMILAR CONTAINERS, NESOI"
+        },
+        {
+          "hts10": "8422309180",
+          "naics6": "333993",
+          "description": "MACHINES FOR OPENING, FILLING AND CLOSING BAGS"
+        },
+        {
+          "hts10": "8422309185",
+          "naics6": "333993",
+          "description": "MACHINES FOR FORMING, FILLING AND SEALING BAGS/POUCHES"
+        },
+        {
+          "hts10": "8422309186",
+          "naics6": "333993",
+          "description": "MACHINES FOR OPENING, FILLING AND CLOSING BOXES"
+        },
+        {
+          "hts10": "8422309187",
+          "naics6": "333993",
+          "description": "MACHINES FOR SKIN AND BLISTER PACKAGING"
+        },
+        {
+          "hts10": "8422309191",
+          "naics6": "333993",
+          "description": "MACHINERY FOR FILLING, CLOSING, SEALING, CAPSULING OR LABELING BOXES, BAGS OR SIMILAR CONTAINERS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84224011",
+      "role": "treated",
+      "naics6": [
+        "333993"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8422401110",
+          "naics6": "333993",
+          "description": "MACHINES FOR WRAPPING CANDY"
+        },
+        {
+          "hts10": "8422401190",
+          "naics6": "333993",
+          "description": "MACHINES FOR PACKAGING PIPE TOBACCO, WRAPPING CIGARETTE PACKAGES AND COMBINATION CANDY CUTTING AND WRAPPING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84224091",
+      "role": "treated",
+      "naics6": [
+        "333993"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8422409140",
+          "naics6": "333993",
+          "description": "STRAPPING MACHINES"
+        },
+        {
+          "hts10": "8422409150",
+          "naics6": "333993",
+          "description": "MACHINES FOR CASE AND TRAY FORMING, PACKING, UNPACKING, CLOSING AND SEALING"
+        },
+        {
+          "hts10": "8422409160",
+          "naics6": "333993",
+          "description": "MACHINES FOR SHRINK FILM AND HEAT SEALING"
+        },
+        {
+          "hts10": "8422409170",
+          "naics6": "333993",
+          "description": "MACHINES FOR WRAPPING, NESOI"
+        },
+        {
+          "hts10": "8422409181",
+          "naics6": "333993",
+          "description": "PACKING OR WRAPPING MACHINERY, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84231000",
+      "role": "control",
+      "naics6": [
+        "333997"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8423100010",
+          "naics6": "333997",
+          "description": "DIGITAL ELECTRONIC TYPE PERSONAL WEIGHING MACHINES, INCLUDING BABY AND HOUSEHOLD SCALES"
+        },
+        {
+          "hts10": "8423100030",
+          "naics6": "333997",
+          "description": "WEIGHING MACHINES, SUITABLE FOR CARRYING ON THE PERSON"
+        },
+        {
+          "hts10": "8423100060",
+          "naics6": "333997",
+          "description": "PERSONAL WEIGHING MACHINES, INCLUDING BABY AND HOUSEHOLD SCALES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84233000",
+      "role": "treated",
+      "naics6": [
+        "333997"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8423300000",
+          "naics6": "333997",
+          "description": "CONSTANT-WEIGHT SCALES AND SCALES FOR DISCHARGING A PREDETERMINED WEIGHT OF MATERIAL INTO A BAG OR CONTAINER, INCLUDING HOPPER SCALES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84238200",
+      "role": "treated",
+      "naics6": [
+        "333997"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8423820010",
+          "naics6": "333997",
+          "description": "DIGITAL ELECTRONIC TYPE WEIGHING MACHINES, HAVING A MAXIMUM WEIGHING CAPACITY EXCEEDING 30 KG BUT NOT EXCEEDING 5,000 KG"
+        },
+        {
+          "hts10": "8423820050",
+          "naics6": "333997",
+          "description": "WEIGHING MACHINES HAVING A MAXIMUM WEIGHT CAPACITY EXCEEDING 30 KG BUT NOT EXCEEDING 5,000 KG, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84251100",
+      "role": "treated",
+      "naics6": [
+        "333923"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8425110000",
+          "naics6": "333923",
+          "description": "PULLEY TACKLE AND HOISTS, OTHER THAN SKIP HOISTS OR HOISTS OF A KIND USED FOR RAISING VEHICLES, POWERED BY ELECTRIC MOTOR"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84253901",
+      "role": "treated",
+      "naics6": [
+        "333923"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8425390100",
+          "naics6": "333923",
+          "description": "WINCHES AND CAPSTANS NOT POWERED BY ELECTRIC MOTOR"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84261900",
+      "role": "control",
+      "naics6": [
+        "333923"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8426190000",
+          "naics6": "333923",
+          "description": "OVERHEAD TRAVELING CRANES, TRANSPORTER CRANES,GANTRY AND BRIDGE CRANES, MOBILE LIFTING FRAMES AND STRADDLE CARRIES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84269900",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8426990000",
+          "naics6": "333120",
+          "description": "LIFTING MACHINERY, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84271040",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8427104000",
+          "naics6": "333924",
+          "description": "TRUCKS, RIDER-TYPE, COUNTERBALANCED FORK-LIFT, SELF-PROPELLED POWERED BY AN ELECTRIC MOTOR"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84271080",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8427108010",
+          "naics6": "333924",
+          "description": "OPERATOR RIDING SELF-PROPELLED FORK-LIFT TRUCKS AND OTHER WORKS-TRUCKS FITTED WITH LIFTING EQUIPMENT, POWERED BY AN ELECTRIC MOTOR"
+        },
+        {
+          "hts10": "8427108060",
+          "naics6": "333924",
+          "description": "AUTOMATED GUIDED VEHICLES (AGV) FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        },
+        {
+          "hts10": "8427108090",
+          "naics6": "333924",
+          "description": "SELF-PROPELLED FORK-LIFT AND OTHER WORKS TRUCKS FITTED WITH LIFTING EQUIPMENT, POWERED BY AN ELECTRIC MOTOR, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84272040",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8427204000",
+          "naics6": "333924",
+          "description": "RIDER-TYPE,COUNTERBALANCED,SELF-PROPELLED FORK-LIFT TRUCKS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84272080",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8427208000",
+          "naics6": "333924",
+          "description": "OTHER SELF-PROPELLED TRUCKS, OTHER THAN RIDER-TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84281000",
+      "role": "control",
+      "naics6": [
+        "333921"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8428100000",
+          "naics6": "333921",
+          "description": "PASSENGER OR FREIGHT ELEVATORS OTHER THAN CONTINUOUS ACTION; SKIP HOISTS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84282000",
+      "role": "treated",
+      "naics6": [
+        "333921",
+        "333922"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8428200010",
+          "naics6": "333922",
+          "description": "CONVEYORS,PNEUMATIC,NESOI"
+        },
+        {
+          "hts10": "8428200050",
+          "naics6": "333921",
+          "description": "ELEVATORS, PNEUMATIC, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84283200",
+      "role": "treated",
+      "naics6": [
+        "333922"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8428320000",
+          "naics6": "333922",
+          "description": "CONTINUOUS-ACTION ELEVATORS AND CONVEYORS, FOR GOODS OR MATERIALS, BUCKET TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84283300",
+      "role": "treated",
+      "naics6": [
+        "333922"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8428330000",
+          "naics6": "333922",
+          "description": "BELT TYPE CONTINUOUS-ACTION ELEVATORS AND CONVEYORS,FOR GOODS OR MATERIALS,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84283900",
+      "role": "treated",
+      "naics6": [
+        "333922"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8428390000",
+          "naics6": "333922",
+          "description": "CONTINUOUS-ACTION ELEVATORS AND CONVEYORS,FOR GOODS OR MATERIALS,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84301000",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8430100000",
+          "naics6": "333120",
+          "description": "PILE-DRIVERS AND PILE-EXTRACTORS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84302000",
+      "role": "control",
+      "naics6": [
+        "333112",
+        "333120"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8430200030",
+          "naics6": "333120",
+          "description": "SNOWBLOWERS, ATTACHMENT TYPE"
+        },
+        {
+          "hts10": "8430200060",
+          "naics6": "333112",
+          "description": "SNOWBLOWERS, EXCEPT ATTACHMENT TYPE"
+        },
+        {
+          "hts10": "8430200090",
+          "naics6": "333120",
+          "description": "SNOWPLOWS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84303900",
+      "role": "treated",
+      "naics6": [
+        "333131"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8430390040",
+          "naics6": "333131",
+          "description": "ROCK BREAKING MACHINES, EXCEPT SELF-PROPELLED"
+        },
+        {
+          "hts10": "8430390080",
+          "naics6": "333131",
+          "description": "COAL CUTTERS AND TUNNELING MACHINERY, EXCEPT SELF-PROPELLED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84306100",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8430610000",
+          "naics6": "333120",
+          "description": "TAMPING OR COMPACTING MACHINERY, NOT SELF-PROPELLED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84306901",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8430690100",
+          "naics6": "333120",
+          "description": "MOVING,GRADING,LEVELING,SCRAPING,EXCAVATING,EXTRACTING MACHINERY FOR EARTH,MINERALS OR ORES,NOT SELF-PROPELLED,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84312000",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8431200000",
+          "naics6": "333924",
+          "description": "PARTS OF FORK-LIFT TRUCKS AND OTHER WORKS TRUCKS FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84313100",
+      "role": "treated",
+      "naics6": [
+        "333921",
+        "333923"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8431310020",
+          "naics6": "333923",
+          "description": "PARTS OF SKIP HOISTS"
+        },
+        {
+          "hts10": "8431310040",
+          "naics6": "333921",
+          "description": "PARTS OF ESCALATORS OTHER THAN CONTINUOUS ACTION OR SKIP HOISTS"
+        },
+        {
+          "hts10": "8431310060",
+          "naics6": "333921",
+          "description": "PARTS OF MACHINERY OF HEADING 8428,OF PASSENGER OR FREIGHT ELEVATORS OTHER THAN CONTINUOUS ACTION,SKIP HOISTS OR ESCALATORS,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84314100",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8431410020",
+          "naics6": "333120",
+          "description": "SHOVEL ATTACHMENTS"
+        },
+        {
+          "hts10": "8431410040",
+          "naics6": "333120",
+          "description": "CLAMSHELL (GRAPPLER) ATTACHMENTS"
+        },
+        {
+          "hts10": "8431410060",
+          "naics6": "333120",
+          "description": "DRAGLINE BUCKETS"
+        },
+        {
+          "hts10": "8431410080",
+          "naics6": "333120",
+          "description": "BUCKETS, SHOVELS, GRABS AND GRIPS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84314200",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8431420000",
+          "naics6": "333120",
+          "description": "BULLDOZER OR ANGLEDOZER BLADES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84314340",
+      "role": "treated",
+      "naics6": [
+        "333132"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8431434000",
+          "naics6": "333132",
+          "description": "OFFSHORE OIL AND NATURAL GAS DRILLING AND PRODUCTION PLATFORM PARTS, OF SUBHEADING 8430.41 OR 8430.49"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84314380",
+      "role": "treated",
+      "naics6": [
+        "333120",
+        "333132"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8431438020",
+          "naics6": "333132",
+          "description": "PARTS OF OIL AND GAS FIELD MACHINERY FOUND IN 8430.31 AND 8430.49, TOOL JOINTS, WHETHER OR NOT FORGED"
+        },
+        {
+          "hts10": "8431438040",
+          "naics6": "333132",
+          "description": "PARTS OF OIL AND GAS FIELD MACHINERY FOUND IN 8430.31 AND 8430.49, DRILL PIPE FITTED WITH TOOL JOINTS"
+        },
+        {
+          "hts10": "8431438060",
+          "naics6": "333132",
+          "description": "PARTS OF OIL AND GAS FIELD MACHINERY FOUND IN 8430.31 AND 8430.49; NESOI"
+        },
+        {
+          "hts10": "8431438090",
+          "naics6": "333120",
+          "description": "PARTS OF BORING OR SINKING MACHINERY OF SUBHEADING 8430.41 OR 8430.49,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84314990",
+      "role": "treated",
+      "naics6": [
+        "333120",
+        "333131"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8431499005",
+          "naics6": "333120",
+          "description": "BACKHOE ATTACHMENTS FOR MOUNTING ON MACHINERY"
+        },
+        {
+          "hts10": "8431499010",
+          "naics6": "333120",
+          "description": "FRONT-END LOADER ATTACHMENTS FOR MOUNTING ON MACHINERY"
+        },
+        {
+          "hts10": "8431499015",
+          "naics6": "333120",
+          "description": "RIPPERS AND ROOTERS FOR MOUNTING ON MACHINERY"
+        },
+        {
+          "hts10": "8431499020",
+          "naics6": "333120",
+          "description": "ATTACHMENTS FOR MOUNTING ON MACHINERY OF HEADING 8426, 8429 OR 8430, NESOI"
+        },
+        {
+          "hts10": "8431499025",
+          "naics6": "333131",
+          "description": "CAST AXLE HOUSINGS FOR COAL OR ROCK CUTTERS AND TUNNELING MACHINERY"
+        },
+        {
+          "hts10": "8431499030",
+          "naics6": "333131",
+          "description": "PARTS OF COAL OR ROCK CUTTERS AND TUNNELING MACHINERY, EXCEPT CAST AXLE HOUSINGS"
+        },
+        {
+          "hts10": "8431499035",
+          "naics6": "333120",
+          "description": "CAST AXLE HOUSINGS FOR BACKHOES, SHOVELS, CLAMSHELLS AND DRAGLINES"
+        },
+        {
+          "hts10": "8431499036",
+          "naics6": "333120",
+          "description": "ROAD WHEELS  OF BACKHOES, SHOVELS, CLAMSHELLS AND DRAGLINE, EXCEPT CAST AXLE HOUSINGS"
+        },
+        {
+          "hts10": "8431499038",
+          "naics6": "333120",
+          "description": "WHEEL AND TIRE ASSEMBLIES OF BACKHOES, SHOVELS, CLAMSHELLS AND DRAGLINES, EXCEPT CAST AXLE HOUSINGS"
+        },
+        {
+          "hts10": "8431499044",
+          "naics6": "333120",
+          "description": "PARTS OF BACKHOES, SHOVELS, CLAMSHELLS AND DRAGLINES, EXCEPT CAST AXLE HOUSINGS"
+        },
+        {
+          "hts10": "8431499045",
+          "naics6": "333120",
+          "description": "SCRAPER BOWLS FOR SCRAPERS OF SUBHEADINGS 8429.30 & 8430.69"
+        },
+        {
+          "hts10": "8431499050",
+          "naics6": "333120",
+          "description": "TRACK LINKS"
+        },
+        {
+          "hts10": "8431499055",
+          "naics6": "333120",
+          "description": "CAST AXLE HOUSINGS FOR MACHINERY OF HEADING 8426, 8429 OR 8430, NESOI"
+        },
+        {
+          "hts10": "8431499081",
+          "naics6": "333120",
+          "description": "STEEL FORGINGS FOR MACHINERY OF HEADING 8426, 8429 OR 8430"
+        },
+        {
+          "hts10": "8431499084",
+          "naics6": "333120",
+          "description": "ROAD WHEELS OF MACHINES OF HEADING 8426. 8429 OR 8430"
+        },
+        {
+          "hts10": "8431499090",
+          "naics6": "333120",
+          "description": "WHEEL AND TIRE ASSEMBLIES OF MACHINERY OF HEADING 8426, 8429 OR 8430"
+        },
+        {
+          "hts10": "8431499095",
+          "naics6": "333120",
+          "description": "PARTS OF MACHINERY OF HEADING 8426, 8429 OR 8430, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84321000",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8432100020",
+          "naics6": "333111",
+          "description": "MOLDBOARD PLOWS EXCEPT LISTERS"
+        },
+        {
+          "hts10": "8432100040",
+          "naics6": "333111",
+          "description": "DISC PLOWS"
+        },
+        {
+          "hts10": "8432100060",
+          "naics6": "333111",
+          "description": "PLOWS, NESOI"
+        }
+      ],
+      "china_observed_months": 28
+    },
+    {
+      "hts8": "84322100",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8432210000",
+          "naics6": "333111",
+          "description": "DISC HARROWS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84328000",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8432800010",
+          "naics6": "333111",
+          "description": "TOW BEHIND SPREADERS, AERATORS AND DE-THATCHERS"
+        },
+        {
+          "hts10": "8432800080",
+          "naics6": "333111",
+          "description": "AGRICULTURAL, HORTICULTURAL OR FORESTRY MACHINERY FOR SOIL PREPARATION OR CULTIVATION; LAWN OR SPORTS GROUND ROLLERS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84331100",
+      "role": "control",
+      "naics6": [
+        "333112"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8433110010",
+          "naics6": "333112",
+          "description": "ELECTRIC MOWERS, INCLUDING BATTERY OPERATED, POWERED, WITH THE CUTTING DEVICE ROTATING IN A HORIZONTAL PLANE"
+        },
+        {
+          "hts10": "8433110020",
+          "naics6": "333112",
+          "description": "RIDING MOWERS, OTHER THAN ELECTRIC, UNDER 5.2 KW"
+        },
+        {
+          "hts10": "8433110030",
+          "naics6": "333112",
+          "description": "RIDING MOWERS, OTHER THAN ELECTRIC, 5.2 KW AND OVER BUT UNDER 7.46 KW"
+        },
+        {
+          "hts10": "8433110040",
+          "naics6": "333112",
+          "description": "RIDING MOWERS, OTHER THAN ELECTRIC, 7.46 KW AND OVER"
+        },
+        {
+          "hts10": "8433110050",
+          "naics6": "333112",
+          "description": "MOWERS, EXCEPT RIDING, FOR LAWNS, PARKS, SPORTS GROUNDS, UNDER 3.7 KW (5 HP)"
+        },
+        {
+          "hts10": "8433110060",
+          "naics6": "333112",
+          "description": "MOWERS, EXCEPT RIDING, FOR LAWNS, PARKS, SPORTS GROUNDS, 3.7 KW (5 HP) AND OVER"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84331900",
+      "role": "control",
+      "naics6": [
+        "333111",
+        "333112"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8433190010",
+          "naics6": "333111",
+          "description": "GREENS MOWERS"
+        },
+        {
+          "hts10": "8433190020",
+          "naics6": "333111",
+          "description": "MOWERS, GANG CUTTING UNITS"
+        },
+        {
+          "hts10": "8433190030",
+          "naics6": "333112",
+          "description": "MOWERS, RIDING, FOR LAWNS, PARKS OR SPORTS GROUNDS, NESOI"
+        },
+        {
+          "hts10": "8433190040",
+          "naics6": "333112",
+          "description": "MOWERS, NON RIDING, GASOLINE POWERED, FOR LAWNS, PARKS, OR SPORTS GROUNDS, NESOI"
+        },
+        {
+          "hts10": "8433190050",
+          "naics6": "333112",
+          "description": "MOWERS FOR LAWN,PARKS OR SPORTS GROUNDS,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84332000",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8433200020",
+          "naics6": "333111",
+          "description": "MOWERS, ROTARY CUTTER TYPE, TRACTOR DRAWN OR FOR TRACTOR MOUNTING"
+        },
+        {
+          "hts10": "8433200040",
+          "naics6": "333111",
+          "description": "MOWERS, TRACTOR DRAWN OR FOR TRACTOR MOUNTING, EXCEPT ROTARY CUTTER TYPE"
+        },
+        {
+          "hts10": "8433200060",
+          "naics6": "333111",
+          "description": "MOWERS, INCLUDING CUTTER BARS FOR TRACTOR MOUNTING, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84335100",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8433510010",
+          "naics6": "333111",
+          "description": "COMBINE HARVESTER-THRESHERS, SELF-PROPELLED"
+        },
+        {
+          "hts10": "8433510090",
+          "naics6": "333111",
+          "description": "COMBINE HARVESTER-THRESHERS, EXCEPT SELF-PROPELLED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84349000",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8434900000",
+          "naics6": "333111",
+          "description": "PARTS OF MILKING MACHINES AND DAIRY MACHINERY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84351000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8435100000",
+          "naics6": "333241",
+          "description": "PRESSES, CRUSHERS AND SIMILAR MACHINERY USED IN THE MANUFACTURE OF WINES, CIDER, FRUIT JUICES OR SIMILAR BEVERAGES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84359000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8435900000",
+          "naics6": "333241",
+          "description": "PARTS OF PRESSES, CRUSHERS AND SIMILAR MACHINERY, USED IN THE MANUFACTURE OF WINE, CIDER, FRUIT JUICES OR SIMILAR BEVERAGES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84361000",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8436100000",
+          "naics6": "333111",
+          "description": "MACHINERY FOR PREPARING ANIMAL FEEDS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84362100",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8436210000",
+          "naics6": "333111",
+          "description": "POULTRY INCUBATORS AND BROODERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84362900",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8436290000",
+          "naics6": "333111",
+          "description": "POULTRY-KEEPING MACHINERY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84368000",
+      "role": "treated",
+      "naics6": [
+        "333111",
+        "333120"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8436800020",
+          "naics6": "333120",
+          "description": "FORESTRY MACHINERY"
+        },
+        {
+          "hts10": "8436800040",
+          "naics6": "333111",
+          "description": "BARN AND BARNYARD MACHINES"
+        },
+        {
+          "hts10": "8436800060",
+          "naics6": "333111",
+          "description": "MACHINES FOR PREPARING CROPS FOR MARKET OR FOR USE"
+        },
+        {
+          "hts10": "8436800070",
+          "naics6": "333111",
+          "description": "BEE-KEEPING MACHINERY"
+        },
+        {
+          "hts10": "8436800090",
+          "naics6": "333111",
+          "description": "AGRICULTURAL, HORTICULTURAL MACHINERY, INCLUDING GERMINATION PLANT FITTED WITH MECHANICAL OR THERMAL EQUIPMENT, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84369100",
+      "role": "treated",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8436910040",
+          "naics6": "333111",
+          "description": "PARTS OF POULTRY INCUBATORS AND BROODERS"
+        },
+        {
+          "hts10": "8436910080",
+          "naics6": "333111",
+          "description": "PARTS OF POULTRY-KEEPING MACHINERY EXCEPT INCUBATORS AND BROODERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84369900",
+      "role": "treated",
+      "naics6": [
+        "333111",
+        "333120"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8436990020",
+          "naics6": "333120",
+          "description": "PARTS OF FORESTRY MACHINERY"
+        },
+        {
+          "hts10": "8436990030",
+          "naics6": "333111",
+          "description": "PARTS OF BEE-KEEPING MACHINERY"
+        },
+        {
+          "hts10": "8436990035",
+          "naics6": "333111",
+          "description": "PARTS OF MACHINERY FOR PREPARING ANIMAL FEED"
+        },
+        {
+          "hts10": "8436990040",
+          "naics6": "333111",
+          "description": "PARTS OF BARN OR BARNYARD MACHINES"
+        },
+        {
+          "hts10": "8436990070",
+          "naics6": "333111",
+          "description": "PARTS OF MACHINERY FOR PREPARING CROPS FOR MAREKET OR FOR USE"
+        },
+        {
+          "hts10": "8436990090",
+          "naics6": "333111",
+          "description": "PARTS FOR AGRICULTURAL, HORTICULTURAL, MACHINERY INCLUDING GERMINATION PLANT FITTED WITH MECHANICAL OR THERMAL EQUIPMENT"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84371000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8437100000",
+          "naics6": "333241",
+          "description": "MACHINES FOR CLEANING, SORTING OR GRADING SEED, GRAIN OR DRIED LEGUMINOUS VEGETABLES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84378000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8437800010",
+          "naics6": "333241",
+          "description": "FLOUR MILL AND GRAIN MILL MACHINES"
+        },
+        {
+          "hts10": "8437800090",
+          "naics6": "333241",
+          "description": "MACH FOR CLEAN, SORT, GRADE SEED, GRAIN OR DRIED LEGUMINOUS VEG, MAC USED IN MILLING IND OR WORK CEREALS OR DRIED LEGUMINOUS VEG, EXC FARMTYPE MACH"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84379000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8437900010",
+          "naics6": "333241",
+          "description": "PARTS OF FLOUR MILL OR GRAIN MILL MACHINES"
+        },
+        {
+          "hts10": "8437900090",
+          "naics6": "333241",
+          "description": "PTS OF MAC FOR CLEAN, SORT, GRADE SEED, GRAIN OR DRIED LEGUMINOUS VEG, MAC USED IN MILL IND OR WRK CEREALS OR DRIED LEGUM VEG, EXC FARM TYPE MACH"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84381000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8438100010",
+          "naics6": "333241",
+          "description": "BAKERY MACHINERY"
+        },
+        {
+          "hts10": "8438100090",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE MANUFACTURE OF MACARONI OR SIMILAR PRODUCTS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84382000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8438200000",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE MANUFACTURE OF CONFECTIONERY, COCOA OR CHOCOLATE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84384000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8438400000",
+          "naics6": "333241",
+          "description": "BREWERY MACHINERY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84386000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8438600000",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE PREPARATION OF FRUITS, NUTS OR VEGETABLES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84388000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8438800000",
+          "naics6": "333241",
+          "description": "MACH FOR INDUST PREPARATION OR MANUF OF FOOD OR DRINK, OTHER THAN MACH FOR THE EXTRACT OR PREPARAT OF ANIMAL OR FIXED VEG FATS OR OILS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84389090",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8438909015",
+          "naics6": "333241",
+          "description": "PARTS OF BAKERY MACHINERY AND MACHINERY FOR THE MANUFACTURY OF MACARONI, SPAGHETTI OR SIMULAR PRODUCTS"
+        },
+        {
+          "hts10": "8438909030",
+          "naics6": "333241",
+          "description": "PARTS OF MACHINERY FOR MANUFACTURE OF CONFECTIONERY, COCOA OR CHOCOLATE"
+        },
+        {
+          "hts10": "8438909060",
+          "naics6": "333241",
+          "description": "PARTS OF MACHINERY FOR THE PREPARATION OF MEAT OR POULTRY"
+        },
+        {
+          "hts10": "8438909090",
+          "naics6": "333241",
+          "description": "PARTS OF MACH FOR IND PREP OR MANUF OF FOOD OR DRINK, OTHER THAN MACH FOR THE EXTRACT OR PREPARAT OF ANIMAL OR FIXED VEG FATS OR OILS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84399110",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8439911000",
+          "naics6": "333243",
+          "description": "BED PLATE, ROLL BARS AND OTHER STOCK-TREATING PARTS OF MACHINERY FOR MAKING PULP OF FIBROUS CELLULOSIC MATERIALS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84399190",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8439919000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR MAKING PULP OF FIBROUS CELLULOSIC MATERIALS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84399910",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8439991000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR MAKING PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84399950",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8439995000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR FINISHING PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84401000",
+      "role": "control",
+      "naics6": [
+        "333244"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8440100000",
+          "naics6": "333244",
+          "description": "BOOKBINDING MACHINERY, INCLUDING BOOK-SEWING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84409000",
+      "role": "control",
+      "naics6": [
+        "333244"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8440900000",
+          "naics6": "333244",
+          "description": "PARTS FOR BOOKBINDING MACHINERY, INCLUDING BOOK-SEWING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84413000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8441300000",
+          "naics6": "333243",
+          "description": "MACHINES FOR MAKING CARTONS, BOXES, CASES, TUBES, DRUMS OR SIMILAR CONTAINERS, OTHER THAN BY MOLDING"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84414000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8441400000",
+          "naics6": "333243",
+          "description": "MACHINES FOR MOLDING ARTICLES IN PAPER PULP, PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_observed_months": 28
+    },
+    {
+      "hts8": "84418000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8441800000",
+          "naics6": "333243",
+          "description": "MACHINERY FOR MAKING UP PAPER PULP,PAPER OR PAPERBOARD, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84419000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8441900000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR MAKING UP PAPER PULP, PAPER OR PAPERBOARD, INCLUDING CUTTING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84423001",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8442300110",
+          "naics6": "333244",
+          "description": "PHOTOTYPESETTING AND COMPOSING MACHINES"
+        },
+        {
+          "hts10": "8442300150",
+          "naics6": "333244",
+          "description": "MACHINERY, APPARATUS AND EQUIPMENT FOR PREPARING OR MAKING PRINTING PLATES, CYLINDERS OR OTHER PRINTING COMPONENTS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84424000",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8442400000",
+          "naics6": "333244",
+          "description": "PARTS OF MACHINERY, APPARATUS AND EQUIPMENT, NESOI, FOR PREPARING OR MAKING PRINTING BLOCKS, PLATES, CYLINDERS OR OTHER PRINTING COMPONENTS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84431930",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8443193000",
+          "naics6": "333244",
+          "description": "PRINTING MACHINERY, USING PRINTING PLATES, CYLINDERS AND OTHER PRINTING COMPONENTS OF HEADING 8442, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84439110",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8443911000",
+          "naics6": "333244",
+          "description": "MACHINES FOR USES ANCILLARY TO PRINTING"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84440000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8444000010",
+          "naics6": "333249",
+          "description": "TEXTURING MACHINES FOR MAN-MADE TEXTILE MATERIALS"
+        },
+        {
+          "hts10": "8444000090",
+          "naics6": "333249",
+          "description": "MACHINES FOR EXTRUDING, DRAWING OR CUTTING MAN-MADE TEXTILE MATERIALS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84479050",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8447905000",
+          "naics6": "333249",
+          "description": "EMBROIDERY MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84479090",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8447909000",
+          "naics6": "333249",
+          "description": "KNITTING MACHINES, AND MACH FOR MAKING GIMPED YARN, TULLE, LACE,      TRIMMINGS, OR NET AND MACHINES FOR TUFT                             ING, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84481900",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448190000",
+          "naics6": "333249",
+          "description": "AUXILIARY MACHINERY,NESOI, FOR MACHINES OF HEADING 8444, 8445, 8446 OR 8447"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84482050",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448205010",
+          "naics6": "333249",
+          "description": "PARTS OF TEXTURING MACHINES"
+        },
+        {
+          "hts10": "8448205090",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF MACHINES OF HEADING 8444 OR OF THEIR AUXILIARY MACHINERY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84483100",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448310000",
+          "naics6": "333249",
+          "description": "CARD CLOTHING"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84483910",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448391000",
+          "naics6": "333249",
+          "description": "PARTS OF SPINNING, DOUBLING OR TWISTING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84483990",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448399000",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF MACHINES OF HEADING 8445 OR OF THEIR AUXILIARY MACHINERY, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84484200",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448420000",
+          "naics6": "333249",
+          "description": "REEDS FOR LOOMS, HEALDS AND HEALD-FRAMES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84484920",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448492000",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF WEAVING MACHINES (LOOMS) OR OF THEIR AUXILIARY MACHINERY, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84485910",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448591000",
+          "naics6": "333249",
+          "description": "PARTS OF KNITTING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84485950",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8448595000",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF MACHINES OF HEADING 8447 OR OF THEIR AUXILIARY MACHINERY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84490050",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8449005000",
+          "naics6": "333249",
+          "description": "MACHINERY FOR THE MANUFACTURE OF FELT OR NONWOVENS IN THE PIECE       OR IN SHAPES, INC MACH FOR MAKING FELT HATS; BLOCKS FOR HATS;        AND PARTS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84521000",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8452100010",
+          "naics6": "333249",
+          "description": "SEWING MACHINES, HOUSEHOLD TYPE, VALUED NOT OVER $20 EACH"
+        },
+        {
+          "hts10": "8452100090",
+          "naics6": "333249",
+          "description": "SEWING MACHINES, HOUSEHOLD TYPE, VALUED OVER $20 EACH"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84522190",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8452219000",
+          "naics6": "333249",
+          "description": "SEWING MACHINES, AUTOMATIC UNITS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84529020",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8452902010",
+          "naics6": "333249",
+          "description": "PARTS OF HOUSEHOLD SEWING MACHINES, NESOI"
+        },
+        {
+          "hts10": "8452902090",
+          "naics6": "333249",
+          "description": "PARTS OF SEWING MACHINES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84532000",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8453200000",
+          "naics6": "333249",
+          "description": "MACHINERY FOR MAKING OR REPAIRING FOOTWEAR"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84538000",
+      "role": "control",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8453800000",
+          "naics6": "333999",
+          "description": "MACHINERY FOR MAKING OR REPAIRING ARTICLES OF HIDES, SKINS, OR LEATHER, EXCEPT SEWING MACHINES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84541000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8454100000",
+          "naics6": "333249",
+          "description": "CONVERTERS USED IN METALLURGY OR FOUNDRIES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84552200",
+      "role": "treated",
+      "naics6": [
+        "333519"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8455220000",
+          "naics6": "333519",
+          "description": "COLD ROLLING MILLS EXCEPT TUBE ROLLING"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84563010",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8456301020",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS FOR WORKING METAL, BY ELECTRO-DISCHARGE PROCESSES, TRAVELING WIRE (WIRE-CUT) TYPE"
+        },
+        {
+          "hts10": "8456301050",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS FOR WORKING METAL, BY ELECTRO-DISCHARGE PROCESSES, OTHER THAN TRAVELING WIRE TYPE, NUMERICALLY CONTROLLED"
+        },
+        {
+          "hts10": "8456301070",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS FOR WORKING METAL, BY ELECTRO-DISCHARGE PROCESSES, OTHER THAN TRAVELING WIRE TYPE, EXCEPT NUMERICALLY CONTROLLED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84571000",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8457100005",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS, USED OR REBUILT"
+        },
+        {
+          "hts10": "8457100015",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS, WITH AUTOMATIC TOOL CHANGERS, VERTICAL-SPINDLE MACHINES WITH A Y-AXIS TRAVEL OF NOT OVER 660 MM, NEW"
+        },
+        {
+          "hts10": "8457100025",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS, WITH AUTOMATIC TOOL CHANGERS, VERTICAL-SPINDLE MACHINES WITH A Y-AXIS TRAVEL OF OVER 660 MM, NEW"
+        },
+        {
+          "hts10": "8457100055",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS WITH AUTOMATIC TOOL CHANGERS, HORIZONTAL-SPINDLE MACHINES WITH A Y-AXIS TRAVEL OF NOT OVER 685 MM."
+        },
+        {
+          "hts10": "8457100060",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS WITH AUTOMATIC TOOL CHANGERS, HORIZONTAL-SPINDLE MACHINES WITH A Y-AXIS TRAVEL OF OVER 685 MM BUT NOT OVER 1,016 MM."
+        },
+        {
+          "hts10": "8457100065",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS WITH AUTOMATIC TOOL CHANGERS, HORIZONTAL-SPINDLE MACHINES WITH A Y-AXIS TRAVEL OF OVER 1,016 MM."
+        },
+        {
+          "hts10": "8457100070",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS WITH AUTOMATIC TOOL CHANGERS, OTHER THAN HORIZONTAL-SPINDLE AND VERTICAL-SPINDLE"
+        },
+        {
+          "hts10": "8457100075",
+          "naics6": "333517",
+          "description": "MACHINING CENTERS, WITHOUT AUTOMATIC TOOL CHANGERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84581100",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8458110005",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, METAL REMOVING, NUMERICALLY CONTROLLED, USED OR REBULT"
+        },
+        {
+          "hts10": "8458110010",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, MULTIPLE SPINDLE, METAL REMOVING, NUMERICALLY CONTROLLED, NEW"
+        },
+        {
+          "hts10": "8458110030",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES,EXCEPT MULTIPLE SPINDLE,METAL REMOVING,WITH A POWER RATING OF LESS THAN 18.65 KW, NUMERICALLY CONTROLLED, NEW"
+        },
+        {
+          "hts10": "8458110050",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, EXCEPT MULTIPLE SPINDLE, METAL REMOVING, WITH A POWER RATING OF 18.65 KW OR GREATER BUT NOT EXCEEDING 37.3 KW, N/C, NEW"
+        },
+        {
+          "hts10": "8458110090",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, EXCEPT MULTIPLE SPINDLE, METAL REMOVING, WITH A POWER RATING EXCEEDING 37.3 KW, NUMERICALLY CONTROLLED, NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84581900",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8458190010",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8458190020",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, FOR REMOVING METAL, EXCEPT NUMERICALLY CONTROLLED, VALUED UNDER $3025 EACH, NEW"
+        },
+        {
+          "hts10": "8458190030",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES,METAL REMOVING,EXCEPT NUMERICALLY CONTROLLED,ENGINE OR TOOLROOM TYPE,VALUED $3,025 AND OVER EACH,NEW"
+        },
+        {
+          "hts10": "8458190050",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES,METAL REMOVING,EXCEPT NUMERICALLY CONTROLLED,AUTOMATIC BAR AND/OR CHUCKING MACHINES,SINGLE SPINDLE,VALUED $3,025 AND OVER"
+        },
+        {
+          "hts10": "8458190070",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, AUTOMATIC BAR AND/OR CHUCKING MACHINES, MULTIPLE SPINDLE, VALUED OVER $3,025 & OVER"
+        },
+        {
+          "hts10": "8458190090",
+          "naics6": "333517",
+          "description": "HORIZONTAL LATHES, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, VALUED $3,025 AND OVER, NEW, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84589110",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8458911040",
+          "naics6": "333517",
+          "description": "VERTICAL TURRET LATHES, METAL REMOVING, NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8458911060",
+          "naics6": "333517",
+          "description": "VERTICAL TURRET LATHES, METAL REMOVING, NUMERICALLY CONTROLLED, MULTIPLE SPINDLE, NEW"
+        },
+        {
+          "hts10": "8458911080",
+          "naics6": "333517",
+          "description": "VERTICAL TURRET LATHES, METAL REMOVING, NUMERICALLY CONTROLLED, EXCEPT MULTIPLE SPINDLE, NEW"
+        }
+      ],
+      "china_observed_months": 28
+    },
+    {
+      "hts8": "84589950",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8458995030",
+          "naics6": "333517",
+          "description": "LATHES FOR REMOVING METAL, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT, NESOI"
+        },
+        {
+          "hts10": "8458995060",
+          "naics6": "333517",
+          "description": "LATHES FOR REMOVING METAL,EXCEPT NUMERICALLY CONTROLLED,VALUED UNDER $3,025 EACH,NEW,NESOI"
+        },
+        {
+          "hts10": "8458995090",
+          "naics6": "333517",
+          "description": "LATHES FOR REMOVING METAL,EXCEPT NUMERICALLY CONTROLLED,VALUED $3,025 AND OVER EACH,NEW,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84596100",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8459610040",
+          "naics6": "333517",
+          "description": "MILLING MACHINES, EXCEPT KNEE TYPE, METAL REMOVING, NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8459610080",
+          "naics6": "333517",
+          "description": "MILLING MACHINES, EXCEPT KNEE TYPE, METAL REMOVING, NUMERICALLY CONTROLLED, NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84596900",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8459690010",
+          "naics6": "333517",
+          "description": "MILLING MACHINES, EXCEPT KNEE TYPE, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8459690020",
+          "naics6": "333517",
+          "description": "MILLING MACHINES, EXCEPT KNEE TYPE, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, VALUED UNDER $3,025 EACH, NEW"
+        },
+        {
+          "hts10": "8459690050",
+          "naics6": "333517",
+          "description": "MILLING MACHINES,METAL REMOVING,EXCEPT NUMERICALLY CONTROLLED,PROFILE,DUPLICATING OR DIE SINKING,VALUED $3,025 AND OVER EACH,NEW"
+        },
+        {
+          "hts10": "8459690070",
+          "naics6": "333517",
+          "description": "MILLING MACHINES,METAL REMOVING,EXCEPT NUMERICALLY CONTROLLED,BED TYPE,VALUED $3,025 AND OVER, NEW"
+        },
+        {
+          "hts10": "8459690090",
+          "naics6": "333517",
+          "description": "MILLING MACHINES,METAL REMOVING,EXCEPT NUMERICALLY CONTROLLED,VALUED $3,025 AND OVER NEW, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84597080",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8459708040",
+          "naics6": "333517",
+          "description": "THREADING OR TAPPING MACHINES, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8459708060",
+          "naics6": "333517",
+          "description": "THREADING OR TAPPING MACHINES, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, VALUED UNDER $3,025 EACH, NEW"
+        },
+        {
+          "hts10": "8459708080",
+          "naics6": "333517",
+          "description": "THREADING OR TAPPING MACHINES, METAL REMOVING, EXCEPT NUMERICALLY CONTROLLED, VALUED $3,025 AND OVER EACH, NEW, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84609080",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8460908010",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS FOR FINISHING METAL BY REMOVING METAL USING GRINDING STONES, ABRASIVES OR POLISHING PRODUCTS, NESOI,EXCEP NUM CONTRLD, USED OR REBUILT"
+        },
+        {
+          "hts10": "8460908020",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS FOR FINISHING METAL BY REMOVING METAL USING GRINDING STONES, ABRASIVES OR POLISHING PRODUCTS, NESOI, VALUED UNDER $3,025 EACH, NEW"
+        },
+        {
+          "hts10": "8460908080",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS FOR FINISHING METAL BY REMOVING METAL USING GRINDING STONES, ABRASIVES OR POLISHING PRODUCTS, NESOI, EXCEPT N/C, VALUED $3,025 AND OVER"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84619060",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8461906010",
+          "naics6": "333517",
+          "description": "PLANING MACHINES,OTHER THAN NUMERICALLY CONTROLLED,METAL REMOVING,USED OR REBUILT"
+        },
+        {
+          "hts10": "8461906020",
+          "naics6": "333517",
+          "description": "PLANING MACHINES,NOT NUMERICALLY CONTROLLED,METAL REMOVING,VALUED UNDER $3,025 EACH,NEW"
+        },
+        {
+          "hts10": "8461906030",
+          "naics6": "333517",
+          "description": "PLANING MACHINES,METAL REMOVING,EXCEPT NUMERICALLY CONTROLLED,VALUED $3,025 AND OVER EACH,NEW"
+        },
+        {
+          "hts10": "8461906040",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS WORKING BY REMOVING METAL,NOT NUMERICALLY CONTROLLED,USED OR REBUILT,NESOI"
+        },
+        {
+          "hts10": "8461906050",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS WORKING BY REMOVING METAL,NOT NUMERICALLY CONTROLLED,VALUED UNDER $3025 EACH,NEW,NESOI"
+        },
+        {
+          "hts10": "8461906090",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS WORKING BY REMOVING METAL,NESOI,EXCEPT NUMERICALLY CONTROLLED,VALUED $3,025 AND OVER,NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84621000",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462100010",
+          "naics6": "333517",
+          "description": "FORGING OR DIE-STAMPING MACHINES (INCLUDING PRESSES) AND HAMMERS, METAL FORMING, USED OR REBUILT"
+        },
+        {
+          "hts10": "8462100030",
+          "naics6": "333517",
+          "description": "HEADERS AND UPSETTERS, INCLUDING COLD HEADERS, METAL FORMING, NEW"
+        },
+        {
+          "hts10": "8462100035",
+          "naics6": "333517",
+          "description": "MECHANICAL TRANSFER PRESSES, NEW"
+        },
+        {
+          "hts10": "8462100055",
+          "naics6": "333517",
+          "description": "FORGING OR DIE-STAMPING MACHINES (INCLUDING PRESSES) AND HAMMERS, EXCEPT HEADERS AND UPSETTERS, METAL FORMING, NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84622100",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462210000",
+          "naics6": "333517",
+          "description": "BENDING, FOLDING, STRAIGHTENING OR FLATTENING MACHINES (INCLUDING PRESSES), METAL FORMING, NUMERICALLY CONTROLLED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84622900",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462290010",
+          "naics6": "333517",
+          "description": "BENDING, FOLDING, STRAIGHTENING OR FLATTENING MACHINES (INCLUDING PRESSES), METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8462290020",
+          "naics6": "333517",
+          "description": "BENDING, FOLDING, STRAIGHTENING OR FLATTENING MACHINES (INCLUDING PRESSES), METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, VALUED UNDER $3,025 EACH,NEW"
+        },
+        {
+          "hts10": "8462290030",
+          "naics6": "333517",
+          "description": "PRESS BRAKES, METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, VALUED $3,025 AND OVER, NEW"
+        },
+        {
+          "hts10": "8462290040",
+          "naics6": "333517",
+          "description": "BENDING ROLLS, METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, VALUED $3,025 AND OVER, NEW"
+        },
+        {
+          "hts10": "8462290050",
+          "naics6": "333517",
+          "description": "BENDING, FOLDING, STRAIGHTENING OR FLATTENING MACHINES (INC PRESSES) METAL FORMING, EXCEPT PRESS BRAKES & BENDING ROLLS, EXCEPT N/C, $3,025 AND OV,NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84623900",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462390010",
+          "naics6": "333517",
+          "description": "SHEARING MACHINES (INC PRESSES), OTHER THAN COMBINED PUNCHING & SHEARING MACHINES, METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8462390020",
+          "naics6": "333517",
+          "description": "SHEARING MACHINES (INC PRESSES),OTHER THAN COMBINED PUNCHING & SHEARING MACHINES, METAL FORMING,EXCEPT N/C,VALUED UNDER $3,025 EACH,NEW"
+        },
+        {
+          "hts10": "8462390050",
+          "naics6": "333517",
+          "description": "SHEARING MACH (INC PRESSES),OTHER THAN COMBINED PUNCHING & SHEARING MACH,METAL REMOVING,EXCEPT N/C,VALUED $3,025 AND OVER,NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84624900",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462490010",
+          "naics6": "333517",
+          "description": "PUNCHING OR NOTCHING MACHINES (INC PRESSES), INCLUDING COMBINED PUNCHING AND SHEARING MACHINES, METAL FORMING, EXCEPT N/C, USED OR REBUILT"
+        },
+        {
+          "hts10": "8462490020",
+          "naics6": "333517",
+          "description": "PUNCHING OR NOTCHING MACHINES (INC PRESSES), INCLUDING COMBINED PUNCHING AND SHEARING MACHINES, METAL FORMING,EXCEPT N/C,VALUED UNDER $3,025,NEW"
+        },
+        {
+          "hts10": "8462490050",
+          "naics6": "333517",
+          "description": "PUNCHING OR NOTCHING MACHINES (INC PRESSES),INCLUDING COMBINED PUNCHING AND SHEARING MACHINES,METAL FORMNG,EXCEPT N/C,VALUED $3,025 AND OVR, NEW,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84629140",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462914030",
+          "naics6": "333517",
+          "description": "HYDRAULIC PRESSES, METAL FORMING, NUMERICALLY CONTROLLED, USED OR REBUILD"
+        },
+        {
+          "hts10": "8462914060",
+          "naics6": "333517",
+          "description": "HYDRAULIC PRESSES, METAL FORMING, NUMERICALLY CONTROLLED, NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84629180",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462918030",
+          "naics6": "333517",
+          "description": "HYDRAULIC PRESSES, METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8462918090",
+          "naics6": "333517",
+          "description": "HYDRAULIC PRESSES, METAL FORMING, EXCEPT NUMERICALLY CONTROLLED, NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84629980",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8462998010",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS (INCLUDING PRESSES) WORKING BY FORMING METAL, NESOI, NOT HYDRAULIC PRESSES, NOT NUMERICALLY CONTROLLED, USED OR REBUILT"
+        },
+        {
+          "hts10": "8462998020",
+          "naics6": "333517",
+          "description": "MACHINE TOOLS (INC PRESSES) WORKING BY FORMING METAL, NESOI, VALUED UNDER $3,025, NEW"
+        },
+        {
+          "hts10": "8462998045",
+          "naics6": "333517",
+          "description": "MECHANICAL PRESSES,NEW,NOT NUMERICALLY CONTROLLED VALUED $3,025 AND OVER"
+        },
+        {
+          "hts10": "8462998060",
+          "naics6": "333517",
+          "description": "METAL WORKING PRESSES, NESOI, VALUED $3,025 AND OVER"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84631000",
+      "role": "treated",
+      "naics6": [
+        "333519"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8463100040",
+          "naics6": "333519",
+          "description": "DRAW-BENCHES FOR BARS, TUBES, PROFILES, WIRE OR THE LIKE, METAL FORMING, USED OR REBUILT"
+        },
+        {
+          "hts10": "8463100060",
+          "naics6": "333519",
+          "description": "DRAW-BENCHES FOR BARS,TUBES,PROFILES,WIRE OR THE LIKE,METAL FORMING,VALUED UNDER $3,025 EACH,NEW"
+        },
+        {
+          "hts10": "8463100080",
+          "naics6": "333519",
+          "description": "DRAW-BENCHES FOR BARS,TUBES,PROFILES,WIRE OR THE LIKE, METAL FORMING,VALUED $3,025 AND OVER,NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84633000",
+      "role": "treated",
+      "naics6": [
+        "333519"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8463300040",
+          "naics6": "333519",
+          "description": "WIRE WORKING MACHINE, METAL FORMING, USED OR REBUILT"
+        },
+        {
+          "hts10": "8463300060",
+          "naics6": "333519",
+          "description": "WIRE WORKING MACHINE,METAL FORMING,VALUED UNDER $3,025 EACH, NEW"
+        },
+        {
+          "hts10": "8463300080",
+          "naics6": "333519",
+          "description": "MACHINES FOR WORKING WIRE, METAL FORMING, VALUED $3,025 AND OVER, NEW"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84642001",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8464200110",
+          "naics6": "333249",
+          "description": "GLASS-WORKING GRINDING OR POLISHING MACHINES"
+        },
+        {
+          "hts10": "8464200120",
+          "naics6": "333249",
+          "description": "GRINDING OR POLISHING MACHINES FOR WORKING STONE, CERAMICS, CONCRETE, ASBESTOS-CEMENT OR LIKE MINERAL MATERIALS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84649001",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8464900110",
+          "naics6": "333249",
+          "description": "GLASS-WORKING MACHINES FOR COLD WORKING GLASS,EXCEPT GRINDING OR POLISHING"
+        },
+        {
+          "hts10": "8464900120",
+          "naics6": "333249",
+          "description": "MACHINE TOOLS (EXCEPT SAWING,GRINDING OR POLISHING) FOR WORKING STONE,CERAMICS,CONCRETE,COLD GLASS,ASBESTOS-CEMENT OR LIKE MINRL MATERIALS,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84661001",
+      "role": "treated",
+      "naics6": [
+        "333515"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8466100110",
+          "naics6": "333515",
+          "description": "TOOL HOLDERS FOR FORMING-TYPE OR CUTTING TYPE DIES"
+        },
+        {
+          "hts10": "8466100130",
+          "naics6": "333515",
+          "description": "HOLDERS FOR REPLACEABLE CUTTING OR DRILL INSERTS"
+        },
+        {
+          "hts10": "8466100175",
+          "naics6": "333515",
+          "description": "TOOL HOLDERS AND SELF-OPENING DIEHEADS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84662010",
+      "role": "treated",
+      "naics6": [
+        "333514",
+        "333515"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8466201010",
+          "naics6": "333514",
+          "description": "JIGS AND FIXTURES FOR MACHINE TOOLS USED IN CUTTING GEARS"
+        },
+        {
+          "hts10": "8466201090",
+          "naics6": "333515",
+          "description": "WORK HOLDERS FOR MACHINE TOOLS USED IN CUTTING GEARS OTHER THAN JIGS AND FIXTURES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84662080",
+      "role": "treated",
+      "naics6": [
+        "333514",
+        "333515"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8466208020",
+          "naics6": "333514",
+          "description": "JIGS AND FIXTURES FOR METALWORKING MACHINE TOOLS"
+        },
+        {
+          "hts10": "8466208035",
+          "naics6": "333515",
+          "description": "WORK HOLDERS FOR METALWORKING MACHINE TOOLS, OTHER THAN JIGS AND FIXTURES"
+        },
+        {
+          "hts10": "8466208040",
+          "naics6": "333514",
+          "description": "JIGS AND FIXTURES,NESOI,FOR MACHINE TOOLS"
+        },
+        {
+          "hts10": "8466208065",
+          "naics6": "333515",
+          "description": "WORK HOLDERS FOR MACHINE TOOLS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84669210",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8466921000",
+          "naics6": "333243",
+          "description": "CAST-IRON PARTS NOT ADVANCED & MACHINED ONLY FOR THE REMOVAL OF FINS, GATES, ETC, FOR MACH TOOLS FOR WORKING WOOD, CORK, OR SIMILAR HARD MATERIALS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84669420",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8466942000",
+          "naics6": "333517",
+          "description": "CAST-IRON PARTS NOT ADVANCED & MACHINED ONLY FOR REMOVAL OF FINS, GATES, ETC,..BED,BASE,TABLE,COLUMN,CRADLE,FRAME...WELDMENTS, OR FABRICATIONS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84669440",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8466944000",
+          "naics6": "333517",
+          "description": "CAST-IRON PARTS NOT ADVANCED & MACHINED ONLY FOR REMOVAL OF FINS, GATES, ETC, FOR MACHINES OF HEADING 8462 OR 8463, NESOI."
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84669465",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8466946540",
+          "naics6": "333517",
+          "description": "PARTS FOR MECHANICAL TRANSFER PRESSES EXCEPT CAST-IRON PARTS"
+        },
+        {
+          "hts10": "8466946585",
+          "naics6": "333517",
+          "description": "PARTS FOR MACHINES (OTHER THAN MECHANICAL TRANSFER PRESSES) OF HEADING 8462 OR 8463 EXCEPT CAST-IRON PARTS, BED, BASE, TABLE, COLUMN, ETC., NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84669485",
+      "role": "treated",
+      "naics6": [
+        "333517"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8466948540",
+          "naics6": "333517",
+          "description": "PARTS FOR MECHANICAL TRANSFER PRESSES EXCLUDING CAST-IRON PARTS AND BED, BASE, TABLE, COLUMN, CRADLE, FRAME, BOLSTER, CROWN, SLIDE, ROD, ETC."
+        },
+        {
+          "hts10": "8466948585",
+          "naics6": "333517",
+          "description": "PARTS FOR MACHINES (OTHER THAN MECHANICAL TRANSFER PRESSES) OF HEADING 8462 OR 8463 EXCEPT CAST-IRON PARTS, BEDS, BASE, TABLE, COLUMN, ETC., NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84671110",
+      "role": "treated",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8467111040",
+          "naics6": "333991",
+          "description": "GRINDERS, POLISHERS AND SANDERS, SUITABLE FOR METAL WORKING, ROTARY TYPE (INC COMBINED ROTARY-PERCUSSION) PNEUMATIC TOOLS FOR WORKING IN THE HAND"
+        },
+        {
+          "hts10": "8467111080",
+          "naics6": "333991",
+          "description": "ROTARY TYPE PNEUMATIC HAND-DIRECTED TOOLS FOR METALWORKING, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84672100",
+      "role": "control",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8467210010",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND DRILLS, ROTARY, BATTERY POWERED"
+        },
+        {
+          "hts10": "8467210030",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND DRILLS, ROTARY, WITH A CHUCK CAPACITY OF LESS THAN 12.7 MM, OTHER THAN BATTERY POWERED"
+        },
+        {
+          "hts10": "8467210050",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND DRILLS, ROTARY, WITH A CHUCK CAPACITY OF 12.7 MM OR MORE, OTHER THAN BATTERY POWERED"
+        },
+        {
+          "hts10": "8467210070",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND DRILLS OTHER THAN ROTARY, INCLUDING HAMMER DRILLS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84672200",
+      "role": "control",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8467220020",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND SAWS, CIRCULAR TYPE"
+        },
+        {
+          "hts10": "8467220040",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND SAWS, CHAIN TYPE"
+        },
+        {
+          "hts10": "8467220070",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND SAWS, RECIPROCATING AND JIG TYPES"
+        },
+        {
+          "hts10": "8467220090",
+          "naics6": "333991",
+          "description": "ELECTRIC HAND SAWS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84678100",
+      "role": "control",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8467810000",
+          "naics6": "333991",
+          "description": "CHAIN SAWS, SELF-CONTAINED NONELECTRIC MOTOR, HAND-DIRECTED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84678910",
+      "role": "control",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8467891000",
+          "naics6": "333991",
+          "description": "HAND TOOLS WITH SELF-CONTAINED NONELECTRIC MOTORS, SUITABLE FOR METALWORKING, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84679101",
+      "role": "control",
+      "naics6": [
+        "333991"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8467910100",
+          "naics6": "333991",
+          "description": "PARTS NESOI, OF CHAIN SAWS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84679200",
+      "role": "control",
+      "naics6": [
+        "333913",
+        "333991"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8467920050",
+          "naics6": "333913",
+          "description": "PARTS OF PNEUMATIC HAND-HELD FORCE FEED LUBRICATING EQUIPMENT"
+        },
+        {
+          "hts10": "8467920090",
+          "naics6": "333991",
+          "description": "PARTS OF PNEUMATIC HAND-DIRECTED OR CONTROLLED TOOLS NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84681000",
+      "role": "control",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8468100000",
+          "naics6": "333992",
+          "description": "HAND-HELD BLOW TORCHES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84741000",
+      "role": "treated",
+      "naics6": [
+        "333120",
+        "333131"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8474100010",
+          "naics6": "333120",
+          "description": "SORTING, SCREENING, SEPARATING OR WASHING MACHINES FOR EARTH, STONE, ORES, OR OTHER MINERAL SUBSTANCES  IN SOLID FORM, PORTABLE"
+        },
+        {
+          "hts10": "8474100090",
+          "naics6": "333131",
+          "description": "SORTING, SCREENING, SEPARATING OR WASHING MACHINES FOR EARTH, STONE, ORES, OR OTHER MINERAL SUBSTANCES IN SOLID FORM, STATIONARY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84742000",
+      "role": "treated",
+      "naics6": [
+        "333120",
+        "333131"
+      ],
+      "single_naics6": false,
+      "children": [
+        {
+          "hts10": "8474200010",
+          "naics6": "333120",
+          "description": "CRUSHING OR GRINDING MACHINES FOR EARTH, STONE, ORES, OR OTHER MINERAL SUBSTANCES IN SOLID FORM, PORTABLE"
+        },
+        {
+          "hts10": "8474200050",
+          "naics6": "333131",
+          "description": "CRUSHING MACHINES FOR EARTH, STONE, ORES, OR OTHER MINERAL SUBSTANCES IN SOLID FORM, STATIONARY"
+        },
+        {
+          "hts10": "8474200070",
+          "naics6": "333131",
+          "description": "GRINDING MACHINES FOR EARTH, STONE, ORES, OR OTHER MINERAL SUBSTANCES IN SOLID FORM, STATIONARY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84743100",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8474310000",
+          "naics6": "333120",
+          "description": "CONCRETE OR MORTAR MIXERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84743900",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8474390000",
+          "naics6": "333120",
+          "description": "MIXING OR KNEADING MACHINES, NESOI , FOR EARTH, STONE, ORES, OR OTHER MINERAL SUBSTANCES IN SOLID FORM"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84759010",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8475901000",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINES FOR ASSEMBLING ELECTRIC OR ELECTRONIC LAMPS, TUBES OR FLASHBULBS, IN GLASS ENVELOPES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84759090",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8475909000",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINES FOR MANUFACTURING OR HOT WORKING GLASS OR GLASSWARE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84768900",
+      "role": "control",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8476890000",
+          "naics6": "333318",
+          "description": "OTHER VENDING MACHINES NOT INCORPORATING HEATING OR REFRIGERATING DEVICES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84771090",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477109015",
+          "naics6": "333249",
+          "description": "INJECTION-MOLDING MACHINES OF A TYPE USED FOR PROCESSING RUBBER OR OTHER THERMOSETTING MATERIALS; OTHER"
+        },
+        {
+          "hts10": "8477109030",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE LESS THAN 50 TONS"
+        },
+        {
+          "hts10": "8477109040",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE EQUAL TO OR GREATER THAN 50 TONS & LESS THAN 300 TONS"
+        },
+        {
+          "hts10": "8477109050",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE EQUAL TO OR GREATER THAN 300 TONS & LESS THAN 750TONS"
+        },
+        {
+          "hts10": "8477109060",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE EQUAL TO OR GREATER THAN 750 TONS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84772000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477200005",
+          "naics6": "333249",
+          "description": "SINGLE SCREW EXTRUDERS OF A TYPE USED FOR PROCESSING RUBBER OR OTHER THERMOSETTING MATERIALS"
+        },
+        {
+          "hts10": "8477200015",
+          "naics6": "333249",
+          "description": "EXTRUDERS, OTHER THAN SINGLE SCREW, OF A TYPE USED FOR PROCESSING RUBBER OR OTHER THERMOSETTING MATERIALS"
+        },
+        {
+          "hts10": "8477200035",
+          "naics6": "333249",
+          "description": "EXTRUDERS,SINGLE SCREW,WITH A SCREW SIZE LESS THAN 6.4 CM, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        },
+        {
+          "hts10": "8477200045",
+          "naics6": "333249",
+          "description": "EXTRUDERS,SINGLE SCREW,WITH A SCREW SIZE 6.4CM OR GREATER, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        },
+        {
+          "hts10": "8477200055",
+          "naics6": "333249",
+          "description": "EXTRUDERS, EXCEPT SINGLE SCREW, WITH A SCREW SIZE LESS THAN 6.4 CM, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        },
+        {
+          "hts10": "8477200065",
+          "naics6": "333249",
+          "description": "EXTRUDERS, EXCEPT SINGLE SCREW,WITH A SCREW SIZE 6.4CM OR GREATER, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84773000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477300000",
+          "naics6": "333249",
+          "description": "BLOW-MOLDING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84774001",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477400100",
+          "naics6": "333249",
+          "description": "VACUUM-MOLDING MACHINES AND OTHER THERMOFORMING MACHINES; NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84775100",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477510010",
+          "naics6": "333249",
+          "description": "MACHINERY FOR MOLDING OR RETREADING PNEUMATIC TIRES"
+        },
+        {
+          "hts10": "8477510090",
+          "naics6": "333249",
+          "description": "MACHINERY FOR MOLDING OR OTHERWISE FORMING INNER TUBES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84778000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477800000",
+          "naics6": "333249",
+          "description": "MACHINERY FOR WORKING RUBBER OR PLASTICS OR FOR THE MANUFACTURE OF PRODUCTS FROM THESE MATERIALS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84779025",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477902540",
+          "naics6": "333249",
+          "description": "MACHINERY FOR WORKING RUBBER OR PLASTICS, PARTS, BASE, BED, PLATEN ETC FOR MACHINES OF SUBHEADINGS 84771030, 84771040, OR 84771090"
+        },
+        {
+          "hts10": "8477902580",
+          "naics6": "333249",
+          "description": "OTHER PARTS OF MACHINERY FOR WORKING RUBBER OR PLASTICS :BASE,BED,PLATEN,CLAMP CYLINDER,RAM,AND INJECTION CASTINGS,WELDMENTS AND FABRICATION  NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84779085",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8477908501",
+          "naics6": "333249",
+          "description": "PARTS OF INJECTION-MOLDING MACHINES"
+        },
+        {
+          "hts10": "8477908520",
+          "naics6": "333249",
+          "description": "PARTS OF EXTRUDERS"
+        },
+        {
+          "hts10": "8477908530",
+          "naics6": "333249",
+          "description": "PARTS OF BLOW-MOLDING MACHINES"
+        },
+        {
+          "hts10": "8477908540",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINES FOR FORMING PNEUMATIC TIRES"
+        },
+        {
+          "hts10": "8477908595",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINERY FOR WORKING RUBBER OR PLASTICS OR FOR THE MANUFACTURE OF PRODUCTS FROM THESE MATERIALS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84781000",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8478100010",
+          "naics6": "333249",
+          "description": "INDUSTRIAL CIGARETTE-MAKING MACHINES"
+        },
+        {
+          "hts10": "8478100090",
+          "naics6": "333249",
+          "description": "MACHINERY FOR PREPARING OR MAKING UP TOBACCO, NOT SPECIFIED OR INCLUDED ELSEWHERE IN CHAPTER 84"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84791000",
+      "role": "treated",
+      "naics6": [
+        "333120"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8479100040",
+          "naics6": "333120",
+          "description": "PAVERS, FINISHERS AND SPREADERS FOR CONCRETE,FOR PUBLIC WORKS, BUILDING OR SIMILAR USE"
+        },
+        {
+          "hts10": "8479100060",
+          "naics6": "333120",
+          "description": "PAVERS, FINISHERS AND SPREADERS FOR BITUMINOUS MATERIAL,FOR PUBLIC WORKS, BUILDING OR SIMILAR USE"
+        },
+        {
+          "hts10": "8479100080",
+          "naics6": "333120",
+          "description": "MACHINERY FOR PUBLIC WORKS, BUILDING OR THE LIKE, EXCEPT CONCRETE AND BITUMINOUS PAVERS, FINISHERS AND SPREADERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84792000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8479200000",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE EXTRACTION OR PREPARATION OF ANIMAL OR FIXED VEGETABLE FATS OR OILS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84794000",
+      "role": "treated",
+      "naics6": [
+        "333519"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8479400000",
+          "naics6": "333519",
+          "description": "ROPE OR CABLE-MAKING MACHINES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84795000",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8479500000",
+          "naics6": "333999",
+          "description": "INDUSTRIAL ROBOTS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84798100",
+      "role": "treated",
+      "naics6": [
+        "333519"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8479810000",
+          "naics6": "333519",
+          "description": "MACHINES AND MECHANICAL APPLIANCES FOR TREATING METAL, INCLUDING ELECTRIC WIRE COIL-WINDERS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84798200",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8479820040",
+          "naics6": "333999",
+          "description": "MIXING, KNEADING OR STIRRING MACHINES, NESOI"
+        },
+        {
+          "hts10": "8479820080",
+          "naics6": "333999",
+          "description": "CRUSHING, GRINDING, SCREENING, SIFTING, HOMOGENIZING OR EMULSIFYING MACHINES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84802000",
+      "role": "treated",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480200000",
+          "naics6": "333511",
+          "description": "MOLD BASES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84804100",
+      "role": "treated",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480410000",
+          "naics6": "333511",
+          "description": "MOLDS FOR METAL OR METAL CARBIDES, INJECTION OR COMPRESSION TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84804900",
+      "role": "treated",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480490000",
+          "naics6": "333511",
+          "description": "MOLDS FOR METAL OR METAL CARBIDES, OTHER THAN INJECTION OR COMPRESSION TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84805000",
+      "role": "treated",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480500010",
+          "naics6": "333511",
+          "description": "MOLDS FOR GLASS, INJECTION OR COMPRESSION TYPE"
+        },
+        {
+          "hts10": "8480500090",
+          "naics6": "333511",
+          "description": "MOLDS FOR GLASS, OTHER THAN INJECTION OR COMPRESSION TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84806000",
+      "role": "control",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480600010",
+          "naics6": "333511",
+          "description": "MOLDS FOR MINERAL MATERIALS, INJECTION OR COMPRESSION TYPE"
+        },
+        {
+          "hts10": "8480600090",
+          "naics6": "333511",
+          "description": "MOLDS FOR MINERAL MATERIALS, OTHER THAN INJECTION OR COMPRESSION TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84807110",
+      "role": "treated",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480711000",
+          "naics6": "333511",
+          "description": "INJECTION OR COMPRESSION TYPE MOLDS FOR RUBBER OR PLASTICS,FOR SHOE  ACHINERY"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "84807180",
+      "role": "treated",
+      "naics6": [
+        "333511"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8480718045",
+          "naics6": "333511",
+          "description": "INJECTION TYPE MOLDS FOR RUBBER OR PLASTICS, NESOI"
+        },
+        {
+          "hts10": "8480718060",
+          "naics6": "333511",
+          "description": "COMPRESSION TYPE MOLDS FOR RUBBER OR PLASTICS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85023100",
+      "role": "treated",
+      "naics6": [
+        "333611"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8502310000",
+          "naics6": "333611",
+          "description": "WIND-POWERED ELECTRIC GENERATING SETS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85141000",
+      "role": "treated",
+      "naics6": [
+        "333994"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8514100000",
+          "naics6": "333994",
+          "description": "INDUSTRIAL OR LABORATORY FURNACES AND OVENS, RESISTANCE HEATED TYPES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85144000",
+      "role": "treated",
+      "naics6": [
+        "333994"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8514400000",
+          "naics6": "333994",
+          "description": "INDUSTRIAL OR LABORATORY EQUIPMENT FOR THE HEAT TREATMENT OF MATERIALS BY INDUCTION OR DIELECTRIC LOSS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85151900",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515190000",
+          "naics6": "333992",
+          "description": "BRAZING OR SOLDERING MACHINES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85152100",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515210000",
+          "naics6": "333992",
+          "description": "MACHINES AND APPARATUS FOR RESISTANCE WELDING OF METAL, FULLY OR PARTLY AUTOMATIC"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85152900",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515290000",
+          "naics6": "333992",
+          "description": "MACHINES AND APPARATUS FOR RESISTANCE WELDING OF METAL, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85153100",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515310000",
+          "naics6": "333992",
+          "description": "MACHINES AND APPARATUS FOR ARC (INCLUDING PLASMA ARC) WELDING OF METALS, FULLY OR PARTLY AUTOMATIC"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85153900",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515390020",
+          "naics6": "333992",
+          "description": "ARC WELDING MACHINES (METAL), AC TRANSFORMER TYPE, NON-ROTATING TYPE"
+        },
+        {
+          "hts10": "8515390040",
+          "naics6": "333992",
+          "description": "ARC WELDING MACHINES, NON-ROTATING TYPE, NESOI"
+        },
+        {
+          "hts10": "8515390060",
+          "naics6": "333992",
+          "description": "ELECTRIC ARC WELDING MACHINES, ROTATING TYPE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85159020",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515902000",
+          "naics6": "333992",
+          "description": "WELDING MACHINE PARTS AND PARTS OF APPARATUS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85159040",
+      "role": "treated",
+      "naics6": [
+        "333992"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8515904000",
+          "naics6": "333992",
+          "description": "BRAZING AND SOLDERING EQUIPMENT PARTS; PARTS OF HOT SPRAYING EQUIPMENT"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "85163300",
+      "role": "control",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8516330000",
+          "naics6": "333318",
+          "description": "ELECTRIC HAND-DRYING APPARATUS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "87091100",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8709110030",
+          "naics6": "333924",
+          "description": "WORKS TRUCKS FOR USE IN WAREHOUSES, FACTORIES, ETC, ELECTRICAL, OPERATOR RIDING, NOT FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        },
+        {
+          "hts10": "8709110060",
+          "naics6": "333924",
+          "description": "SELF-PROPELLED WORKS TRUCKS WITHOUT LIFTING OR HANDLING EQUIPMENT FOR SHORT DISTANCE TRANSPORT OF GOODS, ELECTRICAL, EXCEPT OPERATOR RIDING"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "87091900",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8709190030",
+          "naics6": "333924",
+          "description": "WORKS TRUCKS FOR USE IN WAREHOUSES, FACTORIES, ETC, OTHER THAN ELECTRICAL, OPERATOR RIDING, NOT FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        },
+        {
+          "hts10": "8709190060",
+          "naics6": "333924",
+          "description": "WORKS TRUCKS FOR USE IN WAREHOUSES, FACTORIES, ETC, OTHER THAN ELECTRICAL, OTHER THAN OPERATOR RIDING, NOT FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "87099000",
+      "role": "treated",
+      "naics6": [
+        "333924"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8709900010",
+          "naics6": "333924",
+          "description": "ROAD WHEELS FOR WORKS TRUCKS FOR USE IN WAREHOUSES, FACTORIES, ETC, NOT FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        },
+        {
+          "hts10": "8709900020",
+          "naics6": "333924",
+          "description": "WHEEL AND TIRE ASSEMBLIES FOR WORKS TRUCKS FOR USE IN WAREHOUSES, FACTORIES, ETC, NOT FITTED WITH LIFTING OR HANDLING EQUIPMENT"
+        },
+        {
+          "hts10": "8709900090",
+          "naics6": "333924",
+          "description": "PARTS FOR WORKS TRUCKS FOR USE IN WAREHOUSES, FACTORIES, ETC, NOT FITTED WITH LIFTING OR HANDLING EQUIPMENT, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "88052900",
+      "role": "treated",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "8805290000",
+          "naics6": "333318",
+          "description": "GROUND FLYING TRAINERS AND PARTS THEREOF, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90051000",
+      "role": "control",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9005100020",
+          "naics6": "333314",
+          "description": "PRISM BINOCULARS FOR USE WITH INFRARED LIGHT"
+        },
+        {
+          "hts10": "9005100040",
+          "naics6": "333314",
+          "description": "PRISM BINOCULARS NESOI"
+        },
+        {
+          "hts10": "9005100080",
+          "naics6": "333314",
+          "description": "BINOCULARS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90058040",
+      "role": "control",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9005804020",
+          "naics6": "333314",
+          "description": "OPTICAL TELESCOPES FOR USE WITH INFRARED LIGHT"
+        },
+        {
+          "hts10": "9005804040",
+          "naics6": "333314",
+          "description": "OPTICAL TELESCOPES EXCEPT FOR USE WITH INFRARED LIGHT"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90058060",
+      "role": "control",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9005806000",
+          "naics6": "333314",
+          "description": "ASTRONOMICAL INSTRUMENTS AND MOUNTINGS THEREFOR, BUT NOT INCLUDING INSTRUMENTS FOR RADIO-ASTRONOMY, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90064040",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006404000",
+          "naics6": "333316",
+          "description": "INSTANT PRINT CAMERAS FIXED FOCUS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90064090",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006409000",
+          "naics6": "333316",
+          "description": "INSTANT PRINT CAMERAS OTHER THAN FIXED FOCUS VALUE OVER $10 EACH"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90065100",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006510040",
+          "naics6": "333316",
+          "description": "OTHER CAMERAS WITH THROUGH-THE-LENS VIEWFINDER (SINGLE LENS REFLEX (SLR) FOR ROLL FILM OF A WIDTH OF 35MM"
+        },
+        {
+          "hts10": "9006510060",
+          "naics6": "333316",
+          "description": "OTHER CAMERAS WITH THROUGH-THE-LENS VIEWFINDER (SINGLE LENS REFLEX (SLR), MAGNETICALLY SENSITIZED ROLL FILM OF A WIDTH OF 24 MM"
+        },
+        {
+          "hts10": "9006510090",
+          "naics6": "333316",
+          "description": "OTHER CAMERAS WITH THROUGH-THE-LENS VIEWFINDER (SINGLE LENS REFLEX (SLR) EXCEPT FOR ROLL FILM OF A WIDTH OF 35MM, NOT MAGNETICALLY SENSITIZED"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90065291",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006529120",
+          "naics6": "333316",
+          "description": "CAMERAS FOR ROLL FILM OF A WIDTH LESS THAN 35MM, EXCEPT FIXED FOCUS, VALUED OVER $10 HAND-HELD, 110 WITH BUILT-IN ELECTRONIC STROBOSCOPIC FLASH"
+        },
+        {
+          "hts10": "9006529140",
+          "naics6": "333316",
+          "description": "CAMERAS FOR ROLL FILM OF A WIDTH LESS THAN 35MM, EXCEPT FIXED FOCUS, OVER $10 HAND-HELD, 110 EXCEPT WITH BUILT-IN ELECTRONIC STROBOSCOPIC FLASH"
+        },
+        {
+          "hts10": "9006529160",
+          "naics6": "333316",
+          "description": "CAMERAS FOR ROLL FILM OF A WIDTH LESS THAN 35MM, EXCEPT FIXED FOCUS, OVER $10 HAND-HELD, EXCEPT 110 CAMERAS"
+        },
+        {
+          "hts10": "9006529180",
+          "naics6": "333316",
+          "description": "CAMERAS FOR ROLL FILM OF A WIDTH LESS THAN 35MM, EXCEPT FIXED FOCUS, VALUED OVER $10 EACH EXCEPT HAND-HELD"
+        }
+      ],
+      "china_observed_months": 28
+    },
+    {
+      "hts8": "90065301",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006530110",
+          "naics6": "333316",
+          "description": "ONE TIME USE CAMERAS FOR ROLL FILM OF A WIDTH OF 35MM WITH BUILT-IN ELECTRONIC STROBOSCOPIC FLASH"
+        },
+        {
+          "hts10": "9006530120",
+          "naics6": "333316",
+          "description": "ONE TIME USE CAMERAS FOR ROLL FILM OF A WIDTH OF 35MM OTHER THAN WITH BUILT-IN ELECTRONIC STROBOSCOPIC FLASH"
+        },
+        {
+          "hts10": "9006530150",
+          "naics6": "333316",
+          "description": "OTHER CAMERAS FOR ROLL FILM OF A WIDTH OF 35MM WITH BUILT-IN ELECTRONIC STROBOSCOPIC FLASH"
+        },
+        {
+          "hts10": "9006530170",
+          "naics6": "333316",
+          "description": "OTHER CAMERAS FOR ROLL FILM OF A WIDTH OF 35MM OTHER THAN WITH BUILT-IN ELECTRONIC STROBOSCOPIC FLASH"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90065940",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006594040",
+          "naics6": "333316",
+          "description": "DISC CAMERAS, FIXED FOCUS"
+        },
+        {
+          "hts10": "9006594060",
+          "naics6": "333316",
+          "description": "CAMERAS, FIXED FOCUS OTHER THAN FOR ROLL FILM, EXCEPT DISC CAMERAS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90065991",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006599100",
+          "naics6": "333316",
+          "description": "CAMERAS OTHER THAN FIXED FOCUS EXCEPT FOR ROLL FILM VALUED OVER $10 EACH"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90066100",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006610020",
+          "naics6": "333316",
+          "description": "DISCHARGE LAMP AND FLASHLIGHT APPARATUS CAPABLE OF CAMERA MOUNTING AND AUTOMATICALLY CONTROLLING FLASH DURATION"
+        },
+        {
+          "hts10": "9006610040",
+          "naics6": "333316",
+          "description": "DISCHARGE LAMP AND FLASHLIGHT APPARATUS CAPABLE OF CAMERA MOUNTING, EXCEPT AUTOMATICALLY CONTROLLING FLASH DURATION"
+        },
+        {
+          "hts10": "9006610060",
+          "naics6": "333316",
+          "description": "DISCHARGE LAMP ( ELECTRONIC ) FLASHLIGHT APPARATUS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90069900",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9006990000",
+          "naics6": "333316",
+          "description": "PART AND ACCESSORIES OF PHOTOGRAPHIC FLASHLIGHT APPARATUS AND FLASHBULBS OTHER THAN DISCHARGE LAMPS OF HEADING 8539,"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90079140",
+      "role": "control",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9007914000",
+          "naics6": "333316",
+          "description": "PARTS FOR CAMERAS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90111040",
+      "role": "treated",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9011104000",
+          "naics6": "333314",
+          "description": "STEREOSCOPIC MICROSCOPES PROVIDED WITH A MEANS FOR PHOTOGRAPHING THE IMAGE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90111080",
+      "role": "treated",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9011108000",
+          "naics6": "333314",
+          "description": "STEREOSCOPIC MICROSCOPES, EXCEPT WITH A MEANS FOR PHOTOGRAPHING THE IMAGE"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90119000",
+      "role": "treated",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9011900000",
+          "naics6": "333314",
+          "description": "PARTS AND ACCESSORIES FOR COMPOUND OPTICAL MICROSCOPES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90311000",
+      "role": "treated",
+      "naics6": [
+        "333999"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9031100000",
+          "naics6": "333999",
+          "description": "MACHINES FOR BALANCING MECHANICAL PARTS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90314100",
+      "role": "treated",
+      "naics6": [
+        "333314"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9031410020",
+          "naics6": "333314",
+          "description": "OPTICAL INSTRUMENTS AND APPLIANCES FOR INSPECTING PHOTOMASKS USED TO MANUFACTURE SEMICONDUCTOR DEVICES"
+        },
+        {
+          "hts10": "9031410040",
+          "naics6": "333314",
+          "description": "OTHER OPTICAL INSTRUMENTS AND APPLIANCES FOR INSPECTING SEMICONDUCTOR WAFERS"
+        },
+        {
+          "hts10": "9031410060",
+          "naics6": "333314",
+          "description": "OPTICAL INSTRUMENTS AND APPLIANCES FOR INSPECTING SEMICONDUCTOR WAFERS DEVICES, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90314910",
+      "role": "treated",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9031491000",
+          "naics6": "333316",
+          "description": "PROFILE PROJECTORS"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "90314990",
+      "role": "treated",
+      "naics6": [
+        "333316"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9031499000",
+          "naics6": "333316",
+          "description": "OTHER OPTICAL INSTRUMENTS AND APPLIANCES,NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "95081000",
+      "role": "control",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9508100000",
+          "naics6": "333318",
+          "description": "TRAVELING CIRCUSES, AND TRAVELING MANAGERIES"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "95089000",
+      "role": "control",
+      "naics6": [
+        "333318"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9508900000",
+          "naics6": "333318",
+          "description": "MERRY-GO-ROUNDS, BOAT-SWINGS, SHOOTING GALLERIES & OTH FAIRGROUND AMUSEMENTS AND TRAVELLING THEATERS, PARTS AND ACCESS, NESOI"
+        }
+      ],
+      "china_observed_months": 29
+    },
+    {
+      "hts8": "98170060",
+      "role": "control",
+      "naics6": [
+        "333111"
+      ],
+      "single_naics6": true,
+      "children": [
+        {
+          "hts10": "9817006000",
+          "naics6": "333111",
+          "description": "PARTS TO BE USED IN ARTICLES PROVIDED FOR IN HEADING 8432, 8433, 8434 AND 8436"
+        }
+      ],
+      "china_observed_months": 29
+    }
+  ],
+  "input_sha256": {
+    "data/processed/causal/hts8_candidate_qualification_v2.csv": "28fa3987aaeda92199bdea33738093e8234c67bdc2c9beffb3369c317f9db837",
+    "data/processed/causal/hts8_stable_inventory.json": "b08d126eb0de2097ecceb1f02b227d5cc2a1341b5b9752f5ec81b89894a83c18"
+  }
+}

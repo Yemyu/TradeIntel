@@ -1,0 +1,95 @@
+{
+  "question": "六月发布的第一批公告，是发布当天开始征收，还是另有生效日？请区分这两个日期。",
+  "status": "candidate_evidence",
+  "hits": [
+    {
+      "id": "initial_notice:p2:w4500-6900",
+      "page_id": "initial_notice:p2",
+      "source": "initial_notice",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 2,
+      "start": 4500,
+      "end": 6900,
+      "text": "he Trade Act of 1974 (19 \nU.S.C. 2411(b), 2411(c), and 2414(a)), \nthe Trade Representative determines \nthat appropriate and feasible action in \nthis investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products of China \ncovered in the tariff subheadings listed \nin Annex A to this notice. Annex B to \nthis notice contains the same list of \ntariff subheadings, with unofficial \ndescriptions of the types of products \ncovered in each subheading. \nIn order to implement this \ndetermination, effective July 6, 2018, \nsubchapter III of chapter 99 of the \nHTSUS is modified by Annex A of this \nnotice. Products of China that are \nprovided for in new HTSUS heading \n9903.88.01, as established by Annex A \nof this notice that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \n12:01 a.m. eastern daylight time on July \n6, 2018, shall be subject to an additional \nduty of 25 percent ad valorem. The rates \nof duty applicable to products of China \nthat are provided for in new HTSUS \nheading 9903.88.01 shall apply in \naddition to all other applicable duties, \nfees, exactions, and charges. \nAny product listed in Annex A, \nexcept any product that is eligible for \nadmission under ‘domestic status’ as \ndefined in 19 CFR 146.43, which is \nsubject to the additional duty imposed \nby this determination, and that is \nadmitted into a U.S. foreign trade zone \non or after 12:01 a.m. eastern daylight \ntime on July 6, 2018, only may be \nadmitted as ‘privileged foreign status’ as \ndefined in 19 CFR 146.41. Such \nproducts will be subject upon entry for \nconsumption to any ad valorem rates of \nduty or quantitative limitations related \nto the classification under the \napplicable HTSUS subheading. \nDuring the notice and comment \nprocess, a number of interested persons \nasserted that specific products within a \nparticular tariff subheading were only \navailable from China, that imposition of \nadditional duties on the specific \nproducts would cause severe economic \nharm to a U.S. interest, and that the \nspecific products were not strategically \nimportant or related to the ‘‘Made in \nChina 2025’’ program. In light of such \nconcerns, and pursuant to sections \n301(b), 301(c), 304(a), and 307(a) of the \nTrade Act of 1974 (19 U.S.C. 2411(b), \n2411(c), 2414(a), and 2417(a)), the Trade \nRepresentative has determined that \nUSTR will esta",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "score": 7.21302895,
+      "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=2",
+      "parent_chunk_id": "initial_notice:p2:c5100"
+    },
+    {
+      "id": "initial_notice:p1:w4068-6468",
+      "page_id": "initial_notice:p1",
+      "source": "initial_notice",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 1,
+      "start": 4068,
+      "end": 6468,
+      "text": "to Technology \nTransfer, Intellectual Property, and \nInnovation \nAGENCY: Office of the United States \nTrade Representative. \nACTION: Notice of action, request for \ncomments, and notice of public hearing. \nSUMMARY: The U.S. Trade \nRepresentative (Trade Representative) \nhas determined that appropriate action \nin this investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products from \nChina classified in the subheadings of \nthe Harmonized Tariff Schedule of the \nUnited States (HTSUS) set out in Annex \nA of this notice. The Trade \nRepresentative has further determined \nto establish a process by which U.S. \nstakeholders may request that particular \nproducts classified within a covered \ntariff subheading in Annex A be \nexcluded from these additional duties. \nFurther, the Office of the U.S. Trade \nRepresentative (USTR) is seeking public \ncomment and will hold a public hearing \nregarding a proposed additional action \nin this investigation. The proposed \nadditional action is the imposition of an \nad valorem duty of 25 percent on \nproducts of China classified in the \nHTSUS subheadings set out in Annex C \nof this notice. \nDATES: \nApplicable date of duties: The \nadditional duties set out in Annex A to \nthis notice are applicable with respect to \nproducts that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \nJuly 6, 2018. \nComment and hearing deadline: To be \nassured of consideration, you must \nsubmit comments and responses with \nrespect to the proposed list of products \nin Annex C to this notice in accordance \nwith the following schedule: \nJune 29, 2018: Due date for filing \nrequests to appear and a summary of \nexpected testimony at the public \nhearing and for filing pre-hearing \nsubmissions. \nJuly 23, 2018: Due date for submission \nof written comments. \nJuly 24, 2018: The Section 301 \nCommittee will convene a public \nhearing in the main hearing room of the \nU.S. International Trade Commission, \n500 E Street SW, Washington, DC 20436 \nbeginning at 9:30 a.m. \nJuly 31, 2018: Due date for submission \nof post-hearing rebuttal comments. \nADDRESSES: USTR strongly prefers \nelectronic submissions made through \nthe Federal eRulemaking Portal: http:// \nwww.regulations.gov. Follow the \ninstructions for submitting comments in \nsections D, E, and F below. The docket \nnumber is USTR–2018–0018. \nFOR FURTHER IN",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "score": 7.09958238,
+      "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=1",
+      "parent_chunk_id": "initial_notice:p1:c4668"
+    },
+    {
+      "id": "initial_notice:p2:w5350-7692",
+      "page_id": "initial_notice:p2",
+      "source": "initial_notice",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 2,
+      "start": 5350,
+      "end": 7692,
+      "text": " a.m. eastern daylight time on July \n6, 2018, shall be subject to an additional \nduty of 25 percent ad valorem. The rates \nof duty applicable to products of China \nthat are provided for in new HTSUS \nheading 9903.88.01 shall apply in \naddition to all other applicable duties, \nfees, exactions, and charges. \nAny product listed in Annex A, \nexcept any product that is eligible for \nadmission under ‘domestic status’ as \ndefined in 19 CFR 146.43, which is \nsubject to the additional duty imposed \nby this determination, and that is \nadmitted into a U.S. foreign trade zone \non or after 12:01 a.m. eastern daylight \ntime on July 6, 2018, only may be \nadmitted as ‘privileged foreign status’ as \ndefined in 19 CFR 146.41. Such \nproducts will be subject upon entry for \nconsumption to any ad valorem rates of \nduty or quantitative limitations related \nto the classification under the \napplicable HTSUS subheading. \nDuring the notice and comment \nprocess, a number of interested persons \nasserted that specific products within a \nparticular tariff subheading were only \navailable from China, that imposition of \nadditional duties on the specific \nproducts would cause severe economic \nharm to a U.S. interest, and that the \nspecific products were not strategically \nimportant or related to the ‘‘Made in \nChina 2025’’ program. In light of such \nconcerns, and pursuant to sections \n301(b), 301(c), 304(a), and 307(a) of the \nTrade Act of 1974 (19 U.S.C. 2411(b), \n2411(c), 2414(a), and 2417(a)), the Trade \nRepresentative has determined that \nUSTR will establish a process by which \nU.S. stakeholders may request that \nparticular products classified within an \nHTSUS subheading listed in Annex A \nbe excluded from these additional \nduties. USTR will publish a separate \nnotice describing the product exclusion \nprocess, including the procedures for \nsubmitting exclusion requests, and an \nopportunity for interested persons to \nsubmit oppositions to a request. \nC. Proposed Determination on \nAdditional Action \nBased on a review of the public \ncomments and the review of tariff \nsubheadings that cover industrially \nsignificant technology, USTR has \nidentified additional tariff subheadings \nthat would be appropriate for action in \nthe form of the imposition of an \nadditional 25 percent ad valorem duty. \nThe list of possible additional products \n",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "score": 4.91159901,
+      "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=2",
+      "parent_chunk_id": "initial_notice:p2:c5950"
+    }
+  ],
+  "method": "bm25",
+  "as_of": "2018-07-06",
+  "limitations": [
+    "仅两份2018年公告正文；不是完整政策库或现行税率查询。",
+    "出版日期筛选不等于法律生效日期或完整历史有效性判断。",
+    "检索命中不等于主张已被证实；引用身份校验不等于语义校验。",
+    "政策原文不能单独证明贸易变化由关税造成。"
+  ],
+  "scope": [
+    {
+      "source": "initial_notice",
+      "indexed_pages": [
+        1,
+        2,
+        3
+      ],
+      "total_pdf_pages": 47,
+      "excluded": "annexes_not_indexed"
+    },
+    {
+      "source": "amendment_notice",
+      "indexed_pages": [
+        1,
+        2
+      ],
+      "total_pdf_pages": 16,
+      "excluded": "annexes_not_indexed"
+    }
+  ],
+  "reason": null,
+  "context_expansion": {
+    "version": 1,
+    "radius_chars": 600,
+    "total_chars": 7142,
+    "unique_chars": 5592,
+    "duplicated_chars": 1550,
+    "original_chars": 3600
+  }
+}

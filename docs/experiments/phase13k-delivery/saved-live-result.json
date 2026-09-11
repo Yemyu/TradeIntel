@@ -1,0 +1,1040 @@
+{
+  "version": "research-brief-1",
+  "request": {
+    "policy_question": "第一批公告的公布日期与关税生效日期相同吗？请区分这两个日期。",
+    "policy_as_of": "2018-07-06",
+    "trade": {
+      "policy_id": "us_301_list1_2018",
+      "operation": "read",
+      "metric": "import_value_consumption_usd",
+      "origin": "other_origins",
+      "granularity": "policy_aggregate",
+      "months": [
+        "2018-09",
+        "2018-10"
+      ],
+      "hs6": null,
+      "causal_effect": false
+    }
+  },
+  "trade": {
+    "version": "structured-development-1",
+    "intent_verified": false,
+    "task_success_verified": false,
+    "model_calls": 0,
+    "model_selected_tools": [],
+    "host_selected_tools": [
+      "get_trade_series",
+      "get_causal_readiness"
+    ],
+    "tool_results": [
+      {
+        "tool_name": "get_trade_series",
+        "tool_version": "2.1",
+        "status": "ok",
+        "causal_claim": false,
+        "post_policy_activity_used_for_matching": false,
+        "data": {
+          "policy_id": "us_301_list1_2018",
+          "scope": "section301_list1",
+          "hs6": null,
+          "origin": "other_origins",
+          "measure": "import_value_consumption_usd",
+          "start": "2018-09",
+          "end": "2018-10",
+          "months": 2,
+          "series": [
+            {
+              "month": "2018-09",
+              "value_usd": 36587820118,
+              "observed_product_count": 812,
+              "observed_product_level": "policy_hts8",
+              "source_hts10_count": 0,
+              "source_hts10_mapped_count": 0
+            },
+            {
+              "month": "2018-10",
+              "value_usd": 41012723839,
+              "observed_product_count": 812,
+              "observed_product_level": "policy_hts8",
+              "source_hts10_count": 0,
+              "source_hts10_mapped_count": 0
+            }
+          ],
+          "total_usd": 77600543957,
+          "observed_total_usd": 77600543957,
+          "coverage_complete": true,
+          "missing_months": [],
+          "requested_months": [
+            "2018-09",
+            "2018-10"
+          ],
+          "unavailable_months": [],
+          "available_window": {
+            "start": "2016-01",
+            "end": "2019-12"
+          }
+        },
+        "evidence": {
+          "sources": [
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/policy/section301_list1_event.csv",
+              "sha256": "86d1c255ac8c3d139143b50175cbc0b05cd03bd875a0e7994006429382b8fdba",
+              "url": "https://ustr.gov/sites/default/files/2018-13248.pdf"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/causal/policy_exposure_hs6.csv",
+              "sha256": "0acdbe2ed73e8ff4204b1b35511a447490cbcc35ebf6b42ab37f16dc1f1bddaa"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/causal/causal_trade_panel_manifest.json",
+              "sha256": "9c338f6e3a1c4698d937bf1a864bf191adf19d4d85d4310d90f5fbb38720ee0d"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/analysis/policy_case_monthly.csv",
+              "sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400"
+            },
+            {
+              "kind": "official_census_archive",
+              "month": "2018-09",
+              "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1809.ZIP",
+              "file_name": "IMDB1809.ZIP",
+              "sha256": "dc5c1617a6481aa66c966766f8d93ad9ef76289ee02e4d6c620651bebe13cd9e"
+            },
+            {
+              "kind": "official_census_archive",
+              "month": "2018-10",
+              "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1810.ZIP",
+              "file_name": "IMDB1810.ZIP",
+              "sha256": "d08670b3212e20e3ecd41888b732edec9c5970e83612a83430a699b028d196dc"
+            }
+          ],
+          "selection_rule": "Section 301 List 1 HS6 exposure universe; aggregate policy_case_monthly"
+        },
+        "limitations": [
+          "金额是描述性贸易指标，工具不会把时间变化解释成关税因果效应。",
+          "政策生效月 2018-07 是 transition；需要干净窗口时应使用 get_descriptive_change 的已登记比较。",
+          "缺失月份保留 null，完整窗口 total_usd 也为 null；observed_total_usd 只是已观测月份合计。"
+        ]
+      },
+      {
+        "tool_name": "get_causal_readiness",
+        "tool_version": "2.0",
+        "status": "ok",
+        "causal_claim": false,
+        "post_policy_activity_used_for_matching": false,
+        "data": {
+          "status": "blocked_before_pretrend_v3",
+          "causal_allowed": false,
+          "causal_language_allowed": false,
+          "eligibility_status": "eligibility_gates_passed_matching_pending",
+          "matching": {
+            "v1_status": "blocked_before_pretrend",
+            "v1_coverage_rate": 0.9015873015873016,
+            "v1_failed_balance_features": [
+              "pretrend_slope",
+              "china_share_of_all_origin_imports"
+            ],
+            "v2_status": "blocked_before_pretrend_v2",
+            "v2_solver_status_code": 2,
+            "v3_status": "blocked_before_pretrend_v3",
+            "v3_solver_status_code": 2,
+            "v3_selected_treated": null,
+            "v3_selection_observed": false,
+            "v1_treated_denominator": 315,
+            "v1_treated_with_at_least_two_controls": 284,
+            "v1_treated_unit": "HS6_2017 eligible treated product"
+          },
+          "pretrend": "not_run",
+          "event_study": "not_run",
+          "blocking_reasons": [
+            "v1 平衡失败：pretrend_slope, china_share_of_all_origin_imports",
+            "v2 求解器：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "v3 求解器：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+          ],
+          "model_instruction": "可以回答描述性问题并引用证据；必须拒绝或改写任何‘关税导致’、‘政策造成’等因果断言。",
+          "post_policy_activity_used_for_matching": false,
+          "blocked_state_detected": true
+        },
+        "evidence": {
+          "sources": [
+            {
+              "kind": "local_evidence_file",
+              "path": "config/causal_control_design.json",
+              "sha256": "6b8aeb74f8d71518d67cd9c5f57db33fa79d85b3955559f170691e5718060375"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/causal/control_eligibility_report.json",
+              "sha256": "f271a8064fc4aa8bdfa1a56786eeb673e2599f142648bc33714727a6420d9854"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/causal/matching_balance_report.json",
+              "sha256": "d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/causal/matching_balance_report_v2.json",
+              "sha256": "f847942edd66041ea2777832157369e710229b26a6b5bd5cf88b259a9f0c2c53"
+            },
+            {
+              "kind": "local_evidence_file",
+              "path": "data/processed/causal/matching_balance_report_v3.json",
+              "sha256": "5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9"
+            }
+          ]
+        },
+        "limitations": [
+          "当前因果门槛为 blocked；本工具不会自行放宽匹配规则或生成事件研究。",
+          "v3 原报告的 selected_treated=0 是无可行解时的占位；本工具返回 null，不能解释为真实最大匹配数量为零。"
+        ]
+      }
+    ],
+    "capability_assessment": {
+      "status": "within_declared_capability",
+      "reasons": [],
+      "requested_months": [
+        "2018-09",
+        "2018-10"
+      ],
+      "months_in_declared_coverage": [
+        "2018-09",
+        "2018-10"
+      ],
+      "months_outside_declared_coverage": [],
+      "operation_allowed": true,
+      "executed": false,
+      "intent_verified": false,
+      "data_observed": false,
+      "task_success_verified": false,
+      "capabilities": {
+        "contract_version": "proposal-1",
+        "backend": "verified_csv_artifacts",
+        "policies": [
+          "us_301_list1_2018"
+        ],
+        "importer": "United States",
+        "available_months": {
+          "start": "2016-01",
+          "end": "2019-12"
+        },
+        "origins": [
+          "China",
+          "other_origins",
+          "all_origins"
+        ],
+        "granularities": [
+          "policy_aggregate",
+          "hs6_2017"
+        ],
+        "metrics": [
+          "import_value_consumption_usd"
+        ],
+        "allowed_operations": [
+          "read"
+        ],
+        "model_tools": [
+          "get_causal_readiness",
+          "get_data_quality_status",
+          "get_descriptive_change",
+          "get_policy_event",
+          "get_trade_series"
+        ],
+        "causal_status": "blocked_before_pretrend_v3",
+        "causal_allowed": false,
+        "causal_status_verified": true,
+        "sources": [
+          {
+            "kind": "implementation_contract",
+            "path": "src/tradeintel_ai/tools.py",
+            "sha256": "2ae534810ed8e12ff1073857a2e410707bfa31365492c3d690f851ec1a0ecb38"
+          },
+          {
+            "kind": "implementation_contract",
+            "path": "src/tradeintel_ai/agent.py",
+            "sha256": "48630f4b38601419ce139f0a7f7220ab220312c8c886b8a169dfc70ec4a45b59"
+          },
+          {
+            "kind": "implementation_contract",
+            "path": "src/tradeintel_ai/evidence_v21.py",
+            "sha256": "fd19e5baaa617e757bfe37b8f7f52c99d03b78f16909dd36cc7696758227e8c9"
+          },
+          {
+            "kind": "implementation_contract",
+            "path": "src/tradeintel_ai/capability_contract.py",
+            "sha256": "657470cba812a6bf67f2124e416e6e0d4675c4ee0982ea27db389d32193d053e"
+          },
+          {
+            "kind": "local_evidence_file",
+            "path": "config/causal_control_design.json",
+            "sha256": "6b8aeb74f8d71518d67cd9c5f57db33fa79d85b3955559f170691e5718060375"
+          },
+          {
+            "kind": "local_evidence_file",
+            "path": "data/processed/causal/control_eligibility_report.json",
+            "sha256": "f271a8064fc4aa8bdfa1a56786eeb673e2599f142648bc33714727a6420d9854"
+          },
+          {
+            "kind": "local_evidence_file",
+            "path": "data/processed/causal/matching_balance_report.json",
+            "sha256": "d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a"
+          },
+          {
+            "kind": "local_evidence_file",
+            "path": "data/processed/causal/matching_balance_report_v2.json",
+            "sha256": "f847942edd66041ea2777832157369e710229b26a6b5bd5cf88b259a9f0c2c53"
+          },
+          {
+            "kind": "local_evidence_file",
+            "path": "data/processed/causal/matching_balance_report_v3.json",
+            "sha256": "5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9"
+          }
+        ],
+        "limitation": "This describes the frozen application tools, not every dataset or the assistant computer permissions."
+      },
+      "limitation": "Months in coverage do not guarantee observed values; no amounts have been queried. Unsupported scope is never automatically substituted."
+    },
+    "status": "evidence_ready",
+    "response": "已查询到的登记事实（问题是否完全回答仍需核对）：\n\n- 本次查询范围：{\"policy_id\": \"us_301_list1_2018\", \"scope\": \"section301_list1\", \"hs6\": null, \"origin\": \"other_origins\", \"months\": [\"2018-09\", \"2018-10\"]}  [Sa8f7845f2f6d]\n- 2018-09 / other_origins 进口额：36,587,820,118 美元 [Sa8f7845f2f6d, Seec1385d4759]\n- 2018-10 / other_origins 进口额：41,012,723,839 美元 [Sa8f7845f2f6d, S64fc9ae90145]\n- 所列请求月份合计：77,600,543,957 美元 [Sa8f7845f2f6d]\n- 本次查询已观测月份合计：77,600,543,957 美元 [Sa8f7845f2f6d]\n- 缺失月份（不得补零）：[]  [Sa8f7845f2f6d]\n- 合格处理商品分母：315 HS6_2017商品 [S0232afa88112]\n- 至少有两个对照的处理商品数：284 HS6_2017商品 [S0232afa88112]\n- v1未通过平衡的特征：[\"pretrend_slope\", \"china_share_of_all_origin_imports\"]  [S0232afa88112]\n- v1覆盖率：90.1587 % [S0232afa88112]\n- v2匹配状态：blocked_before_pretrend_v2  [S00a3612fb4ca]\n- v2求解状态码：2  [S00a3612fb4ca]\n- v3匹配状态：blocked_before_pretrend_v3  [Sd5fdeeb574eb]\n- v3求解状态码：2  [Sd5fdeeb574eb]\n- v3已观测选中处理商品数：未观测/未知，不能视为0  [Sd5fdeeb574eb]\n- v3计数解释：无可行解时原报告的0是占位；未测量无约束最大匹配数量。  [Sd5fdeeb574eb]\n- 当前因果状态：blocked_before_pretrend_v3  [Sd5fdeeb574eb]\n- 当前能力边界：匹配阶段未通过；前趋势检验与事件研究未运行，不能报告关税因果效果。  [Sd5fdeeb574eb]\n- 同范围多次查询去重月份：{\"policy_id\": \"us_301_list1_2018\", \"scope\": \"section301_list1\", \"hs6\": null, \"origin\": \"other_origins\", \"months\": [\"2018-09\", \"2018-10\"]}  [Sa8f7845f2f6d]\n- 上述已查询月份去重合计（须核对是否符合所问月份）：77,600,543,957 美元 [Sa8f7845f2f6d]\n- 实际请求月份（含不可查部分）：[\"2018-09\", \"2018-10\"]  [S975ca9ada16d, Sa8f7845f2f6d]\n\n来源（标识与上述事实对应）：\n- [Sa8f7845f2f6d] path: data/processed/analysis/policy_case_monthly.csv；sha256: 0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400\n- [Seec1385d4759] url: https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1809.ZIP；file_name: IMDB1809.ZIP；sha256: dc5c1617a6481aa66c966766f8d93ad9ef76289ee02e4d6c620651bebe13cd9e\n- [S64fc9ae90145] url: https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1810.ZIP；file_name: IMDB1810.ZIP；sha256: d08670b3212e20e3ecd41888b732edec9c5970e83612a83430a699b028d196dc\n- [S0232afa88112] path: data/processed/causal/matching_balance_report.json；sha256: d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a\n- [S00a3612fb4ca] path: data/processed/causal/matching_balance_report_v2.json；sha256: f847942edd66041ea2777832157369e710229b26a6b5bd5cf88b259a9f0c2c53\n- [Sd5fdeeb574eb] path: data/processed/causal/matching_balance_report_v3.json；sha256: 5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9\n- [S975ca9ada16d] path: data/processed/causal/causal_trade_panel_manifest.json；sha256: 9c338f6e3a1c4698d937bf1a864bf191adf19d4d85d4310d90f5fbb38720ee0d\n\n哈希用于核对文件版本和完整性，不独立证明事实真实性。\n以上贸易金额为美国进口、所列原产地和月份的登记范围；仅作描述性分析。\n当前版本不发布模型自由撰写的解释；缺少的数据和未覆盖的问题仍需复核。",
+    "facts": [
+      {
+        "label": "本次查询范围",
+        "value": {
+          "policy_id": "us_301_list1_2018",
+          "scope": "section301_list1",
+          "hs6": null,
+          "origin": "other_origins",
+          "months": [
+            "2018-09",
+            "2018-10"
+          ]
+        },
+        "unit": "",
+        "source_ids": [
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "2018-09 / other_origins 进口额",
+        "value": 36587820118,
+        "unit": "美元",
+        "source_ids": [
+          "Sa8f7845f2f6d",
+          "Seec1385d4759"
+        ],
+        "evidence_field": "get_trade_series.data.series[2018-09].value_usd"
+      },
+      {
+        "label": "2018-10 / other_origins 进口额",
+        "value": 41012723839,
+        "unit": "美元",
+        "source_ids": [
+          "Sa8f7845f2f6d",
+          "S64fc9ae90145"
+        ],
+        "evidence_field": "get_trade_series.data.series[2018-10].value_usd"
+      },
+      {
+        "label": "所列请求月份合计",
+        "value": 77600543957,
+        "unit": "美元",
+        "source_ids": [
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": "get_trade_series.data.total_usd"
+      },
+      {
+        "label": "本次查询已观测月份合计",
+        "value": 77600543957,
+        "unit": "美元",
+        "source_ids": [
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": "get_trade_series.data.observed_total_usd"
+      },
+      {
+        "label": "缺失月份（不得补零）",
+        "value": [],
+        "unit": "",
+        "source_ids": [
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": "get_trade_series.data.missing_months"
+      },
+      {
+        "label": "合格处理商品分母",
+        "value": 315,
+        "unit": "HS6_2017商品",
+        "source_ids": [
+          "S0232afa88112"
+        ],
+        "evidence_field": "get_causal_readiness.data.matching.v1_treated_denominator"
+      },
+      {
+        "label": "至少有两个对照的处理商品数",
+        "value": 284,
+        "unit": "HS6_2017商品",
+        "source_ids": [
+          "S0232afa88112"
+        ],
+        "evidence_field": "get_causal_readiness.data.matching.v1_treated_with_at_least_two_controls"
+      },
+      {
+        "label": "v1未通过平衡的特征",
+        "value": [
+          "pretrend_slope",
+          "china_share_of_all_origin_imports"
+        ],
+        "unit": "",
+        "source_ids": [
+          "S0232afa88112"
+        ],
+        "evidence_field": "get_causal_readiness.data.matching.v1_failed_balance_features"
+      },
+      {
+        "label": "v1覆盖率",
+        "value": "90.1587",
+        "unit": "%",
+        "source_ids": [
+          "S0232afa88112"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "v2匹配状态",
+        "value": "blocked_before_pretrend_v2",
+        "unit": "",
+        "source_ids": [
+          "S00a3612fb4ca"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "v2求解状态码",
+        "value": 2,
+        "unit": "",
+        "source_ids": [
+          "S00a3612fb4ca"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "v3匹配状态",
+        "value": "blocked_before_pretrend_v3",
+        "unit": "",
+        "source_ids": [
+          "Sd5fdeeb574eb"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "v3求解状态码",
+        "value": 2,
+        "unit": "",
+        "source_ids": [
+          "Sd5fdeeb574eb"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "v3已观测选中处理商品数",
+        "value": null,
+        "unit": "",
+        "source_ids": [
+          "Sd5fdeeb574eb"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "v3计数解释",
+        "value": "无可行解时原报告的0是占位；未测量无约束最大匹配数量。",
+        "unit": "",
+        "source_ids": [
+          "Sd5fdeeb574eb"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "当前因果状态",
+        "value": "blocked_before_pretrend_v3",
+        "unit": "",
+        "source_ids": [
+          "Sd5fdeeb574eb"
+        ],
+        "evidence_field": "get_causal_readiness.data.status"
+      },
+      {
+        "label": "当前能力边界",
+        "value": "匹配阶段未通过；前趋势检验与事件研究未运行，不能报告关税因果效果。",
+        "unit": "",
+        "source_ids": [
+          "Sd5fdeeb574eb"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "同范围多次查询去重月份",
+        "value": {
+          "policy_id": "us_301_list1_2018",
+          "scope": "section301_list1",
+          "hs6": null,
+          "origin": "other_origins",
+          "months": [
+            "2018-09",
+            "2018-10"
+          ]
+        },
+        "unit": "",
+        "source_ids": [
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": ""
+      },
+      {
+        "label": "上述已查询月份去重合计（须核对是否符合所问月份）",
+        "value": 77600543957,
+        "unit": "美元",
+        "source_ids": [
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": "sum(unique month values within identical policy/scope/hs6/origin)"
+      },
+      {
+        "label": "实际请求月份（含不可查部分）",
+        "value": [
+          "2018-09",
+          "2018-10"
+        ],
+        "unit": "",
+        "source_ids": [
+          "S975ca9ada16d",
+          "Sa8f7845f2f6d"
+        ],
+        "evidence_field": ""
+      }
+    ],
+    "sources": {
+      "Sa8f7845f2f6d": {
+        "kind": "local_evidence_file",
+        "path": "data/processed/analysis/policy_case_monthly.csv",
+        "sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400"
+      },
+      "Seec1385d4759": {
+        "kind": "official_census_archive",
+        "month": "2018-09",
+        "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1809.ZIP",
+        "file_name": "IMDB1809.ZIP",
+        "sha256": "dc5c1617a6481aa66c966766f8d93ad9ef76289ee02e4d6c620651bebe13cd9e"
+      },
+      "S64fc9ae90145": {
+        "kind": "official_census_archive",
+        "month": "2018-10",
+        "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1810.ZIP",
+        "file_name": "IMDB1810.ZIP",
+        "sha256": "d08670b3212e20e3ecd41888b732edec9c5970e83612a83430a699b028d196dc"
+      },
+      "S0232afa88112": {
+        "kind": "local_evidence_file",
+        "path": "data/processed/causal/matching_balance_report.json",
+        "sha256": "d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a"
+      },
+      "S00a3612fb4ca": {
+        "kind": "local_evidence_file",
+        "path": "data/processed/causal/matching_balance_report_v2.json",
+        "sha256": "f847942edd66041ea2777832157369e710229b26a6b5bd5cf88b259a9f0c2c53"
+      },
+      "Sd5fdeeb574eb": {
+        "kind": "local_evidence_file",
+        "path": "data/processed/causal/matching_balance_report_v3.json",
+        "sha256": "5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9"
+      },
+      "S975ca9ada16d": {
+        "kind": "local_evidence_file",
+        "path": "data/processed/causal/causal_trade_panel_manifest.json",
+        "sha256": "9c338f6e3a1c4698d937bf1a864bf191adf19d4d85d4310d90f5fbb38720ee0d"
+      }
+    },
+    "audit_ledger": {
+      "facts": [
+        {
+          "label": "本次查询范围",
+          "value": {
+            "policy_id": "us_301_list1_2018",
+            "scope": "section301_list1",
+            "hs6": null,
+            "origin": "other_origins",
+            "start": "2018-09",
+            "end": "2018-10"
+          },
+          "unit": "",
+          "source_ids": [
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "2018-09 / other_origins 进口额",
+          "value": 36587820118,
+          "unit": "美元",
+          "source_ids": [
+            "Sa8f7845f2f6d",
+            "Seec1385d4759"
+          ],
+          "evidence_field": "get_trade_series.data.series[2018-09].value_usd"
+        },
+        {
+          "label": "2018-10 / other_origins 进口额",
+          "value": 41012723839,
+          "unit": "美元",
+          "source_ids": [
+            "Sa8f7845f2f6d",
+            "S64fc9ae90145"
+          ],
+          "evidence_field": "get_trade_series.data.series[2018-10].value_usd"
+        },
+        {
+          "label": "本次查询完整窗口合计",
+          "value": 77600543957,
+          "unit": "美元",
+          "source_ids": [
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": "get_trade_series.data.total_usd"
+        },
+        {
+          "label": "本次查询已观测月份合计",
+          "value": 77600543957,
+          "unit": "美元",
+          "source_ids": [
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": "get_trade_series.data.observed_total_usd"
+        },
+        {
+          "label": "缺失月份（不得补零）",
+          "value": [],
+          "unit": "",
+          "source_ids": [
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": "get_trade_series.data.missing_months"
+        },
+        {
+          "label": "合格处理商品分母",
+          "value": 315,
+          "unit": "HS6_2017商品",
+          "source_ids": [
+            "S0232afa88112"
+          ],
+          "evidence_field": "get_causal_readiness.data.matching.v1_treated_denominator"
+        },
+        {
+          "label": "至少有两个对照的处理商品数",
+          "value": 284,
+          "unit": "HS6_2017商品",
+          "source_ids": [
+            "S0232afa88112"
+          ],
+          "evidence_field": "get_causal_readiness.data.matching.v1_treated_with_at_least_two_controls"
+        },
+        {
+          "label": "v1未通过平衡的特征",
+          "value": [
+            "pretrend_slope",
+            "china_share_of_all_origin_imports"
+          ],
+          "unit": "",
+          "source_ids": [
+            "S0232afa88112"
+          ],
+          "evidence_field": "get_causal_readiness.data.matching.v1_failed_balance_features"
+        },
+        {
+          "label": "v1覆盖率",
+          "value": "90.1587",
+          "unit": "%",
+          "source_ids": [
+            "S0232afa88112"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "v2匹配状态",
+          "value": "blocked_before_pretrend_v2",
+          "unit": "",
+          "source_ids": [
+            "S00a3612fb4ca"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "v2求解状态码",
+          "value": 2,
+          "unit": "",
+          "source_ids": [
+            "S00a3612fb4ca"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "v3匹配状态",
+          "value": "blocked_before_pretrend_v3",
+          "unit": "",
+          "source_ids": [
+            "Sd5fdeeb574eb"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "v3求解状态码",
+          "value": 2,
+          "unit": "",
+          "source_ids": [
+            "Sd5fdeeb574eb"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "v3已观测选中处理商品数",
+          "value": null,
+          "unit": "",
+          "source_ids": [
+            "Sd5fdeeb574eb"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "v3计数解释",
+          "value": "无可行解时原报告的0是占位；未测量无约束最大匹配数量。",
+          "unit": "",
+          "source_ids": [
+            "Sd5fdeeb574eb"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "当前因果状态",
+          "value": "blocked_before_pretrend_v3",
+          "unit": "",
+          "source_ids": [
+            "Sd5fdeeb574eb"
+          ],
+          "evidence_field": "get_causal_readiness.data.status"
+        },
+        {
+          "label": "当前能力边界",
+          "value": "匹配阶段未通过；前趋势检验与事件研究未运行，不能报告关税因果效果。",
+          "unit": "",
+          "source_ids": [
+            "Sd5fdeeb574eb"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "同范围多次查询去重月份",
+          "value": {
+            "policy_id": "us_301_list1_2018",
+            "scope": "section301_list1",
+            "hs6": null,
+            "origin": "other_origins",
+            "months": [
+              "2018-09",
+              "2018-10"
+            ]
+          },
+          "unit": "",
+          "source_ids": [
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": ""
+        },
+        {
+          "label": "上述已查询月份去重合计（须核对是否符合所问月份）",
+          "value": 77600543957,
+          "unit": "美元",
+          "source_ids": [
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": "sum(unique month values within identical policy/scope/hs6/origin)"
+        },
+        {
+          "label": "实际请求月份（含不可查部分）",
+          "value": [
+            "2018-09",
+            "2018-10"
+          ],
+          "unit": "",
+          "source_ids": [
+            "S975ca9ada16d",
+            "Sa8f7845f2f6d"
+          ],
+          "evidence_field": ""
+        }
+      ],
+      "sources": {
+        "Sa8f7845f2f6d": {
+          "kind": "local_evidence_file",
+          "path": "data/processed/analysis/policy_case_monthly.csv",
+          "sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400"
+        },
+        "Seec1385d4759": {
+          "kind": "official_census_archive",
+          "month": "2018-09",
+          "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1809.ZIP",
+          "file_name": "IMDB1809.ZIP",
+          "sha256": "dc5c1617a6481aa66c966766f8d93ad9ef76289ee02e4d6c620651bebe13cd9e"
+        },
+        "S64fc9ae90145": {
+          "kind": "official_census_archive",
+          "month": "2018-10",
+          "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1810.ZIP",
+          "file_name": "IMDB1810.ZIP",
+          "sha256": "d08670b3212e20e3ecd41888b732edec9c5970e83612a83430a699b028d196dc"
+        },
+        "S0232afa88112": {
+          "kind": "local_evidence_file",
+          "path": "data/processed/causal/matching_balance_report.json",
+          "sha256": "d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a"
+        },
+        "S00a3612fb4ca": {
+          "kind": "local_evidence_file",
+          "path": "data/processed/causal/matching_balance_report_v2.json",
+          "sha256": "f847942edd66041ea2777832157369e710229b26a6b5bd5cf88b259a9f0c2c53"
+        },
+        "Sd5fdeeb574eb": {
+          "kind": "local_evidence_file",
+          "path": "data/processed/causal/matching_balance_report_v3.json",
+          "sha256": "5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9"
+        },
+        "S975ca9ada16d": {
+          "kind": "local_evidence_file",
+          "path": "data/processed/causal/causal_trade_panel_manifest.json",
+          "sha256": "9c338f6e3a1c4698d937bf1a864bf191adf19d4d85d4310d90f5fbb38720ee0d"
+        }
+      }
+    },
+    "structured_request_completed": true,
+    "limitation": "Host execution of explicit input only; natural-language intent remains unverified."
+  },
+  "intent_verified": false,
+  "semantic_verified": false,
+  "model_training": false,
+  "new_api_calls": 1,
+  "summary": {
+    "series": [
+      {
+        "month": "2018-09",
+        "value_usd": 36587820118,
+        "observed_product_count": 812,
+        "observed_product_level": "policy_hts8",
+        "source_hts10_count": 0,
+        "source_hts10_mapped_count": 0
+      },
+      {
+        "month": "2018-10",
+        "value_usd": 41012723839,
+        "observed_product_count": 812,
+        "observed_product_level": "policy_hts8",
+        "source_hts10_count": 0,
+        "source_hts10_mapped_count": 0
+      }
+    ],
+    "complete": true,
+    "total_usd": 77600543957,
+    "first_month": "2018-09",
+    "last_month": "2018-10",
+    "endpoint_change_usd": 4424903721,
+    "endpoint_change_percent": "12.09",
+    "comparison_kind": "last_requested_month_vs_first_requested_month",
+    "causal_effect_estimated": false
+  },
+  "causal_readiness": {
+    "status": "blocked_before_pretrend_v3",
+    "causal_allowed": false,
+    "causal_language_allowed": false,
+    "eligibility_status": "eligibility_gates_passed_matching_pending",
+    "matching": {
+      "v1_status": "blocked_before_pretrend",
+      "v1_coverage_rate": 0.9015873015873016,
+      "v1_failed_balance_features": [
+        "pretrend_slope",
+        "china_share_of_all_origin_imports"
+      ],
+      "v2_status": "blocked_before_pretrend_v2",
+      "v2_solver_status_code": 2,
+      "v3_status": "blocked_before_pretrend_v3",
+      "v3_solver_status_code": 2,
+      "v3_selected_treated": null,
+      "v3_selection_observed": false,
+      "v1_treated_denominator": 315,
+      "v1_treated_with_at_least_two_controls": 284,
+      "v1_treated_unit": "HS6_2017 eligible treated product"
+    },
+    "pretrend": "not_run",
+    "event_study": "not_run",
+    "blocking_reasons": [
+      "v1 平衡失败：pretrend_slope, china_share_of_all_origin_imports",
+      "v2 求解器：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+      "v3 求解器：The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+    ],
+    "model_instruction": "可以回答描述性问题并引用证据；必须拒绝或改写任何‘关税导致’、‘政策造成’等因果断言。",
+    "post_policy_activity_used_for_matching": false,
+    "blocked_state_detected": true
+  },
+  "policy_evidence": {
+    "question": "第一批公告的公布日期与关税生效日期相同吗？请区分这两个日期。",
+    "status": "candidate_evidence",
+    "hits": [
+      {
+        "id": "initial_notice:p1:w4068-6468",
+        "page_id": "initial_notice:p1",
+        "source": "initial_notice",
+        "title": "2018年6月初始公告（含后续拟议行动）",
+        "published": "2018-06-20",
+        "page": 1,
+        "start": 4068,
+        "end": 6468,
+        "text": "to Technology \nTransfer, Intellectual Property, and \nInnovation \nAGENCY: Office of the United States \nTrade Representative. \nACTION: Notice of action, request for \ncomments, and notice of public hearing. \nSUMMARY: The U.S. Trade \nRepresentative (Trade Representative) \nhas determined that appropriate action \nin this investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products from \nChina classified in the subheadings of \nthe Harmonized Tariff Schedule of the \nUnited States (HTSUS) set out in Annex \nA of this notice. The Trade \nRepresentative has further determined \nto establish a process by which U.S. \nstakeholders may request that particular \nproducts classified within a covered \ntariff subheading in Annex A be \nexcluded from these additional duties. \nFurther, the Office of the U.S. Trade \nRepresentative (USTR) is seeking public \ncomment and will hold a public hearing \nregarding a proposed additional action \nin this investigation. The proposed \nadditional action is the imposition of an \nad valorem duty of 25 percent on \nproducts of China classified in the \nHTSUS subheadings set out in Annex C \nof this notice. \nDATES: \nApplicable date of duties: The \nadditional duties set out in Annex A to \nthis notice are applicable with respect to \nproducts that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \nJuly 6, 2018. \nComment and hearing deadline: To be \nassured of consideration, you must \nsubmit comments and responses with \nrespect to the proposed list of products \nin Annex C to this notice in accordance \nwith the following schedule: \nJune 29, 2018: Due date for filing \nrequests to appear and a summary of \nexpected testimony at the public \nhearing and for filing pre-hearing \nsubmissions. \nJuly 23, 2018: Due date for submission \nof written comments. \nJuly 24, 2018: The Section 301 \nCommittee will convene a public \nhearing in the main hearing room of the \nU.S. International Trade Commission, \n500 E Street SW, Washington, DC 20436 \nbeginning at 9:30 a.m. \nJuly 31, 2018: Due date for submission \nof post-hearing rebuttal comments. \nADDRESSES: USTR strongly prefers \nelectronic submissions made through \nthe Federal eRulemaking Portal: http:// \nwww.regulations.gov. Follow the \ninstructions for submitting comments in \nsections D, E, and F below. The docket \nnumber is USTR–2018–0018. \nFOR FURTHER IN",
+        "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+        "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+        "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+        "score": 7.91329804,
+        "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=1",
+        "parent_chunk_id": "initial_notice:p1:c4668"
+      },
+      {
+        "id": "initial_notice:p2:w4500-6900",
+        "page_id": "initial_notice:p2",
+        "source": "initial_notice",
+        "title": "2018年6月初始公告（含后续拟议行动）",
+        "published": "2018-06-20",
+        "page": 2,
+        "start": 4500,
+        "end": 6900,
+        "text": "he Trade Act of 1974 (19 \nU.S.C. 2411(b), 2411(c), and 2414(a)), \nthe Trade Representative determines \nthat appropriate and feasible action in \nthis investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products of China \ncovered in the tariff subheadings listed \nin Annex A to this notice. Annex B to \nthis notice contains the same list of \ntariff subheadings, with unofficial \ndescriptions of the types of products \ncovered in each subheading. \nIn order to implement this \ndetermination, effective July 6, 2018, \nsubchapter III of chapter 99 of the \nHTSUS is modified by Annex A of this \nnotice. Products of China that are \nprovided for in new HTSUS heading \n9903.88.01, as established by Annex A \nof this notice that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \n12:01 a.m. eastern daylight time on July \n6, 2018, shall be subject to an additional \nduty of 25 percent ad valorem. The rates \nof duty applicable to products of China \nthat are provided for in new HTSUS \nheading 9903.88.01 shall apply in \naddition to all other applicable duties, \nfees, exactions, and charges. \nAny product listed in Annex A, \nexcept any product that is eligible for \nadmission under ‘domestic status’ as \ndefined in 19 CFR 146.43, which is \nsubject to the additional duty imposed \nby this determination, and that is \nadmitted into a U.S. foreign trade zone \non or after 12:01 a.m. eastern daylight \ntime on July 6, 2018, only may be \nadmitted as ‘privileged foreign status’ as \ndefined in 19 CFR 146.41. Such \nproducts will be subject upon entry for \nconsumption to any ad valorem rates of \nduty or quantitative limitations related \nto the classification under the \napplicable HTSUS subheading. \nDuring the notice and comment \nprocess, a number of interested persons \nasserted that specific products within a \nparticular tariff subheading were only \navailable from China, that imposition of \nadditional duties on the specific \nproducts would cause severe economic \nharm to a U.S. interest, and that the \nspecific products were not strategically \nimportant or related to the ‘‘Made in \nChina 2025’’ program. In light of such \nconcerns, and pursuant to sections \n301(b), 301(c), 304(a), and 307(a) of the \nTrade Act of 1974 (19 U.S.C. 2411(b), \n2411(c), 2414(a), and 2417(a)), the Trade \nRepresentative has determined that \nUSTR will esta",
+        "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+        "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+        "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+        "score": 7.49187569,
+        "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=2",
+        "parent_chunk_id": "initial_notice:p2:c5100"
+      },
+      {
+        "id": "initial_notice:p2:w3650-6050",
+        "page_id": "initial_notice:p2",
+        "source": "initial_notice",
+        "title": "2018年6月初始公告（含后续拟议行动）",
+        "published": "2018-06-20",
+        "page": 2,
+        "start": 3650,
+        "end": 6050,
+        "text": "nology- \nintellectual-property-chinas- \ndiscriminatory-burdensome-trade- \npractices). \nUSTR and the Section 301 Committee \nhave carefully reviewed the public \ncomments and the testimony from the \nthree-day public hearing. In addition, \nand consistent with the Presidential \ndirective, USTR and the interagency \nSection 301 Committee have carefully \nreviewed the extent to which the tariff \nsubheadings in the April 6, 2018 notice \ninclude products containing industrially \nsignificant technology, including \ntechnologies and products related to the \n‘‘Made in China 2025’’ program. Based \non this review process, the Trade \nRepresentative has determined to \nnarrow the proposed list in the April 6, \n2018 notice to 818 tariff subheadings, \nwith an approximate annual trade value \nof $34 billion. \nPursuant to sections 301(b), 301(c), \nand 304(a) of the Trade Act of 1974 (19 \nU.S.C. 2411(b), 2411(c), and 2414(a)), \nthe Trade Representative determines \nthat appropriate and feasible action in \nthis investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products of China \ncovered in the tariff subheadings listed \nin Annex A to this notice. Annex B to \nthis notice contains the same list of \ntariff subheadings, with unofficial \ndescriptions of the types of products \ncovered in each subheading. \nIn order to implement this \ndetermination, effective July 6, 2018, \nsubchapter III of chapter 99 of the \nHTSUS is modified by Annex A of this \nnotice. Products of China that are \nprovided for in new HTSUS heading \n9903.88.01, as established by Annex A \nof this notice that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \n12:01 a.m. eastern daylight time on July \n6, 2018, shall be subject to an additional \nduty of 25 percent ad valorem. The rates \nof duty applicable to products of China \nthat are provided for in new HTSUS \nheading 9903.88.01 shall apply in \naddition to all other applicable duties, \nfees, exactions, and charges. \nAny product listed in Annex A, \nexcept any product that is eligible for \nadmission under ‘domestic status’ as \ndefined in 19 CFR 146.43, which is \nsubject to the additional duty imposed \nby this determination, and that is \nadmitted into a U.S. foreign trade zone \non or after 12:01 a.m. eastern daylight \ntime on July 6, 2018, only may be \nadmitted as ‘privileged foreign status’ as \ndefined ",
+        "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+        "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+        "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+        "score": 6.10976816,
+        "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=2",
+        "parent_chunk_id": "initial_notice:p2:c4250"
+      }
+    ],
+    "method": "bm25",
+    "as_of": "2018-07-06",
+    "limitations": [
+      "仅两份2018年公告正文；不是完整政策库或现行税率查询。",
+      "出版日期筛选不等于法律生效日期或完整历史有效性判断。",
+      "检索命中不等于主张已被证实；引用身份校验不等于语义校验。",
+      "政策原文不能单独证明贸易变化由关税造成。"
+    ],
+    "scope": [
+      {
+        "source": "initial_notice",
+        "indexed_pages": [
+          1,
+          2,
+          3
+        ],
+        "total_pdf_pages": 47,
+        "excluded": "annexes_not_indexed"
+      },
+      {
+        "source": "amendment_notice",
+        "indexed_pages": [
+          1,
+          2
+        ],
+        "total_pdf_pages": 16,
+        "excluded": "annexes_not_indexed"
+      }
+    ],
+    "reason": null,
+    "context_expansion": {
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 7200,
+      "unique_chars": 5650,
+      "duplicated_chars": 1550,
+      "original_chars": 3600
+    }
+  },
+  "policy": {
+    "generation": {
+      "status": "draft_requires_semantic_review",
+      "model_called": true,
+      "claims": [
+        {
+          "text": "第一批公告的公布日期为2018年6月20日。",
+          "citations": [
+            "initial_notice:p1:w4068-6468"
+          ]
+        },
+        {
+          "text": "第一批公告的关税生效日期为2018年7月6日。",
+          "citations": [
+            "initial_notice:p1:w4068-6468",
+            "initial_notice:p2:w4500-6900"
+          ]
+        },
+        {
+          "text": "第一批公告的公布日期与关税生效日期不相同。",
+          "citations": [
+            "initial_notice:p1:w4068-6468",
+            "initial_notice:p2:w4500-6900"
+          ]
+        }
+      ],
+      "semantic_verified": false
+    },
+    "audit": {
+      "source_kind": "live",
+      "model_calls": 1,
+      "new_api_calls": 1,
+      "semantic_verified": false,
+      "provider": {
+        "finish_reason": "stop",
+        "finish_reason_known": true,
+        "usage": {
+          "completion_tokens": 177,
+          "prompt_tokens": 2478,
+          "total_tokens": 2655
+        }
+      },
+      "completion_gate": "stop",
+      "format_changes": [
+        "whole_json_fence_removed"
+      ],
+      "elapsed_seconds": 6.142
+    }
+  },
+  "presentation_review": {
+    "flags": [],
+    "automatic_factuality_verdict": false,
+    "original_claims_unchanged": true
+  },
+  "status": "research_draft"
+}

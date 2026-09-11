@@ -1,0 +1,110 @@
+{
+  "status": "prepared_not_adopted_pending_policy_scope_review",
+  "protocol": "0067",
+  "window": [
+    "2016-01",
+    "2018-02"
+  ],
+  "months": 26,
+  "minimum_positive_months": 22,
+  "model_calls": 0,
+  "optimization_calls": 0,
+  "post_announcement_amounts_used_for_selection": false,
+  "input_sha256": {
+    "data/processed/causal/hts_history_mapping.csv": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+    "data/processed/trade/trade_import_monthly.csv": "2c127cc1e954a1da182a636ba87960f1b0a2d26fcf0352042077447253c28e6f",
+    "data/processed/causal/causal_trade_hs6_monthly.csv": "6c6a6ef1f30d7b391b17f62b2278ca55cfbe5a697098ba3d17605414ddd5a07d",
+    "data/processed/causal/trade_action_exposure.csv": "53937091bbfd3b954e601de9c71576f8ad7c568eeca2803b13315c8f9d1dea3c",
+    "data/processed/causal/list1_exclusion_timeline.csv": "4da2c98db7cace332b6224361d31712b6d0e727b2fed33fc112a8224e7e60f9e",
+    "data/processed/causal/control_eligibility.csv": "15927b547953d0c1f25a1570a8a918930296615dc16aeccc3efa9b549f30c45f",
+    "config/causal_control_design.json": "6b8aeb74f8d71518d67cd9c5f57db33fa79d85b3955559f170691e5718060375",
+    "data/processed/causal/control_candidate_features.csv": "4bca77853b5a2171618fb049859da8a6a79fbcca69309cba718272ba4eff9132",
+    "docs/decisions/0067-preannouncement-preparation.zh-CN.md": "4386b97c1aa0e75fd0c2e559edee2674c5ab2c9f3fcd7629eca03084195ed8c2",
+    "scripts/prepare_preannouncement_candidates.py": "33d351f0771a429819289fdc4493f769482ee34180387bfd1dffee838ed03f13",
+    "scripts/build_control_eligibility.py": "66d631acb792cc2f3f180ec914ed3c6d50c6c8ffdf0df6da729c278c78d23b20",
+    "scripts/build_prepolicy_matching.py": "560f21553073adc84a86df28d398c12234a9cdc49c3358e4ebaef5f8efa84f4c"
+  },
+  "classification_counts": {
+    "assignment_non_list1": 4764,
+    "primary_role_excluded": 4099,
+    "reason_insufficient_positive_pre_months": 2015,
+    "primary_role_control_candidate": 890,
+    "reason_direct_policy_scope_overlap": 3317,
+    "assignment_pure_list1": 438,
+    "primary_role_treated_candidate": 314,
+    "reason_concurrent_policy_scope_overlap": 1,
+    "assignment_mixed_list1": 101,
+    "reason_mixed_list1_pre_value_share": 101
+  },
+  "mapping_audit": {
+    "raw_china_value_usd": 64422846359,
+    "mapped_china_value_usd": 64407079711,
+    "mapped_value_coverage": 0.9997552630954532,
+    "ambiguous_china_value_usd": 8002836,
+    "ambiguous_value_share": 0.0001242235705545163,
+    "invalid_or_unmapped_china_value_usd": 7763812,
+    "observed_positive_year_hts10_count": 4095,
+    "mapped_positive_year_hts10_count": 4089,
+    "mapped_hts10_code_coverage": 0.9985347985347985,
+    "ambiguous_positive_year_hts10_count": 3,
+    "invalid_or_unmapped_positive_year_hts10_count": 3,
+    "observed_unique_hts10_count": 1503
+  },
+  "exclusion_audit": {
+    "explicit_hts10_count": 182,
+    "mapped_hs6_count": 122,
+    "unmapped_explicit_hts10": [
+      "8404404000",
+      "8504400000"
+    ],
+    "narrative_product_descriptions_present": true,
+    "sensitivity_scope_complete": false
+  },
+  "role_transitions": {
+    "control_candidate -> control_candidate": 886,
+    "control_candidate -> excluded": 7,
+    "excluded -> absent": 7,
+    "excluded -> control_candidate": 4,
+    "excluded -> excluded": 4091,
+    "treated_candidate -> excluded": 1,
+    "treated_candidate -> treated_candidate": 314
+  },
+  "role_changed_count": 19,
+  "assignment_changed_count": 8,
+  "assignment_changed_among_present_in_both": 1,
+  "absent_in_new_window": [
+    "030448",
+    "290381",
+    "292218",
+    "292330",
+    "292630",
+    "293951",
+    "811252"
+  ],
+  "feature_status_counts": {
+    "computed": 1204
+  },
+  "candidate_role_value_totals": {
+    "control_candidate": 494272789034,
+    "treated_candidate": 38826912472
+  },
+  "feature_industry_flag_counts": {
+    "unique": 1110,
+    "ambiguous_naics3_candidates": 94
+  },
+  "blockers": [
+    "Proposed April list exposure not mapped; control_candidate is not verified anticipation-free.",
+    "Description-based exclusions are not fully coded; no continuously-active-duty estimand.",
+    "Aggregate source zeros and economic comparability require separate review."
+  ],
+  "old_causal_status": "blocked_before_pretrend_v3",
+  "causal_adopted": false,
+  "output_sha256": {
+    "candidate_eligibility.csv": "204d8eec2f222c46f214b89fa23022eae78841537ef4e777055c169d2ce37895",
+    "candidate_features.csv": "9769de43f51c1654dda44486fa0afcbd918555ba2cff8ab9d3daab59a7e777a5",
+    "mapping_exceptions.csv": "4522e51bbf5ea0c54bbbba79bbd039648158772219b7f3428732236abfc056b4",
+    "old_new_comparison.csv": "4264ee3d62f368b3bef896c9e57d142c62aecb2867e7ab731c24202d7615c99a",
+    "old_new_features.csv": "2ac40069ae9d51abc593c8e79cdd715dc9a8fb2f4bdc32f23c2507c2d6868f98",
+    "policy_scope.csv": "a95ac8dde2775264f4ded5a40cfac2057e1e3adf76e992fff94b3c680d605873"
+  }
+}

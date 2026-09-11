@@ -1,0 +1,271 @@
+{
+  "H01": {
+    "category": "single",
+    "expected": {
+      "task": "policy"
+    }
+  },
+  "H02": {
+    "category": "single",
+    "expected": {
+      "task": "readiness"
+    }
+  },
+  "H03": {
+    "category": "single",
+    "expected": {
+      "task": "quality"
+    }
+  },
+  "H04": {
+    "category": "single",
+    "expected": {
+      "task": "counts"
+    }
+  },
+  "H05": {
+    "category": "single",
+    "expected": {
+      "task": "comparison",
+      "comparison_id": "persistence_monitoring_same_months"
+    }
+  },
+  "H06": {
+    "category": "single",
+    "expected": {
+      "task": "comparison",
+      "comparison_id": "pre_policy_placebo_same_months"
+    }
+  },
+  "H07": {
+    "category": "clarify",
+    "expected": null
+  },
+  "H08": {
+    "category": "clarify",
+    "expected": null
+  },
+  "H09": {
+    "category": "clarify",
+    "expected": null
+  },
+  "H10": {
+    "category": "clarify",
+    "expected": null
+  },
+  "H11": {
+    "category": "negation",
+    "expected": {
+      "task": "quality"
+    }
+  },
+  "H12": {
+    "category": "negation",
+    "expected": {
+      "task": "readiness"
+    }
+  },
+  "H13": {
+    "category": "negation",
+    "expected": {
+      "task": "counts"
+    }
+  },
+  "H14": {
+    "category": "negation",
+    "expected": {
+      "task": "comparison",
+      "comparison_id": "immediate_post_same_months"
+    }
+  },
+  "H15": {
+    "category": "unsupported",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "Japan",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2018-06"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H16": {
+    "category": "unsupported",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "China",
+        "granularity": "company",
+        "months": [
+          "2017-10"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H17": {
+    "category": "unsupported",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "delete",
+        "metric": "import_value_consumption_usd",
+        "origin": "China",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2016-12"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H18": {
+    "category": "unsupported",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_quantity",
+        "origin": "China",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2019-01"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H19": {
+    "category": "trade",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "China",
+        "granularity": "hs6_2017",
+        "months": [
+          "2017-04",
+          "2018-04"
+        ],
+        "hs6": "284590",
+        "causal_effect": false
+      }
+    }
+  },
+  "H20": {
+    "category": "trade",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "other_origins",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2017-11",
+          "2017-12",
+          "2018-01",
+          "2018-02"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H21": {
+    "category": "trade",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "all_origins",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2016-10",
+          "2018-07",
+          "2019-02"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H22": {
+    "category": "trade",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "China",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2015-12",
+          "2016-01"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H23": {
+    "category": "trade",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "all_origins",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2014-02",
+          "2023-05"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  },
+  "H24": {
+    "category": "trade",
+    "expected": {
+      "task": "trade",
+      "request": {
+        "policy_id": "us_301_list1_2018",
+        "operation": "read",
+        "metric": "import_value_consumption_usd",
+        "origin": "China",
+        "granularity": "policy_aggregate",
+        "months": [
+          "2018-03",
+          "2018-04",
+          "2018-05"
+        ],
+        "hs6": null,
+        "causal_effect": false
+      }
+    }
+  }
+}

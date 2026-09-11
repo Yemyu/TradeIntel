@@ -1,0 +1,18 @@
+{
+  "status": "frozen_for_development_run",
+  "protocol": "0020-intent-evaluation",
+  "model": "glm-4.5-air",
+  "base_url": "https://open.bigmodel.cn/api/paas/v4",
+  "temperature": 0.0,
+  "timeout_seconds": 60.0,
+  "maximum_api_requests": 12,
+  "one_call_per_question": true,
+  "tools_exposed": false,
+  "files": {
+    "evals/intent_development_cases.json": "36345dd838fe2185e3890c82ae719114afa5f7dee1a35f1127ca8eba8f5e9f11",
+    "src/tradeintel_ai/intent_proposal.py": "1df504ce354f40b954a953466240224f4ded52ac7bb869e22a602ae6a42b9d54",
+    "src/tradeintel_ai/model_adapter.py": "219345bccaa03935ecf78abc2fbe9d59d01c952b4ff744d90622154dc7877ec2",
+    "docs/decisions/0020-intent-evaluation.zh-CN.md": "d1df3abdcf4aee086c3f7fd131daca934ea59e8713206259f2a413d6f63c4ea3",
+    "scripts/run_intent_development.py": "aa5f89d4b07e4548d478a97ddb645cd313e04a4987b4e9c66efa6d33a0a9f742"
+  }
+}

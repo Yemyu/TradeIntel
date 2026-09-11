@@ -1,0 +1,95 @@
+{
+  "question": "8月的公告提到豁免申请程序，能据此认定企业提交申请就已经免税了吗？",
+  "status": "candidate_evidence",
+  "hits": [
+    {
+      "id": "amendment_notice:p2:w2800-3786",
+      "page_id": "amendment_notice:p2",
+      "source": "amendment_notice",
+      "title": "2018年8月公告（第二批及第一批修订说明）",
+      "published": "2018-08-16",
+      "page": 2,
+      "start": 2800,
+      "end": 3786,
+      "text": "arm to a U.S. interest, and that the \nspecific products were not strategically \nimportant or related to the ‘‘Made in \nChina 2025’’ program. In light of such \nconcerns, and pursuant to sections \n301(b), 301(c), 304(a), and 307(a) of the \nTrade Act of 1974 (19 U.S.C. 2411(b), \n2411(c), 2414(a), and 2417(a)), the Trade \nRepresentative has determined that \nUSTR will establish a process by which \nU.S. stakeholders may request that \nparticular products classified within an \nHTSUS subheading listed in Annex A \nbe excluded from these additional \nduties. The process will be comparable \nto the exclusion process established in \nconnection with the initial, $34 billion \ntrade action. USTR will publish a \nseparate notice describing the product \nexclusion process, including the \nprocedures for submitting exclusion \nrequests, and an opportunity for \ninterested persons to submit oppositions \nto a request. \nRobert Lighthizer, \nUnited States Trade Representative. \nBILLING CODE 3290–F8–P \n",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-amendment-2018-08-16.pdf",
+      "score": 11.22830888,
+      "citation_url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf#page=2",
+      "parent_chunk_id": "amendment_notice:p2:c3400"
+    },
+    {
+      "id": "amendment_notice:p2:w1950-3786",
+      "page_id": "amendment_notice:p2",
+      "source": "amendment_notice",
+      "title": "2018年8月公告（第二批及第一批修订说明）",
+      "published": "2018-08-16",
+      "page": 2,
+      "start": 1950,
+      "end": 3786,
+      "text": "is \nnotice, except any product that is \neligible for admission under ‘domestic \nstatus’ as defined in 19 CFR 146.43, \nwhich is subject to the additional duty \nimposed by this determination, and is \nadmitted into a U.S. foreign trade zone \non or after 12:01 a.m. Eastern daylight \ntime on August 23, 2018, only may be \nadmitted as ‘privileged foreign status’ as \ndefined in 19 CFR 146.41. Such \nproducts will be subject upon entry for \nconsumption to any ad valorem rates of \nduty or quantitative limitations related \nto the classification under the \napplicable HTSUS subheading. \nDuring the notice and comment \nprocess, a number of interested persons \nasserted that specific products within a \nparticular tariff subheading only were \navailable from China, that imposition of \nadditional duties on the specific \nproducts would cause severe economic \nharm to a U.S. interest, and that the \nspecific products were not strategically \nimportant or related to the ‘‘Made in \nChina 2025’’ program. In light of such \nconcerns, and pursuant to sections \n301(b), 301(c), 304(a), and 307(a) of the \nTrade Act of 1974 (19 U.S.C. 2411(b), \n2411(c), 2414(a), and 2417(a)), the Trade \nRepresentative has determined that \nUSTR will establish a process by which \nU.S. stakeholders may request that \nparticular products classified within an \nHTSUS subheading listed in Annex A \nbe excluded from these additional \nduties. The process will be comparable \nto the exclusion process established in \nconnection with the initial, $34 billion \ntrade action. USTR will publish a \nseparate notice describing the product \nexclusion process, including the \nprocedures for submitting exclusion \nrequests, and an opportunity for \ninterested persons to submit oppositions \nto a request. \nRobert Lighthizer, \nUnited States Trade Representative. \nBILLING CODE 3290–F8–P \n",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-amendment-2018-08-16.pdf",
+      "score": 8.21463073,
+      "citation_url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf#page=2",
+      "parent_chunk_id": "amendment_notice:p2:c2550"
+    },
+    {
+      "id": "initial_notice:p2:w6200-7692",
+      "page_id": "initial_notice:p2",
+      "source": "initial_notice",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 2,
+      "start": 6200,
+      "end": 7692,
+      "text": "the classification under the \napplicable HTSUS subheading. \nDuring the notice and comment \nprocess, a number of interested persons \nasserted that specific products within a \nparticular tariff subheading were only \navailable from China, that imposition of \nadditional duties on the specific \nproducts would cause severe economic \nharm to a U.S. interest, and that the \nspecific products were not strategically \nimportant or related to the ‘‘Made in \nChina 2025’’ program. In light of such \nconcerns, and pursuant to sections \n301(b), 301(c), 304(a), and 307(a) of the \nTrade Act of 1974 (19 U.S.C. 2411(b), \n2411(c), 2414(a), and 2417(a)), the Trade \nRepresentative has determined that \nUSTR will establish a process by which \nU.S. stakeholders may request that \nparticular products classified within an \nHTSUS subheading listed in Annex A \nbe excluded from these additional \nduties. USTR will publish a separate \nnotice describing the product exclusion \nprocess, including the procedures for \nsubmitting exclusion requests, and an \nopportunity for interested persons to \nsubmit oppositions to a request. \nC. Proposed Determination on \nAdditional Action \nBased on a review of the public \ncomments and the review of tariff \nsubheadings that cover industrially \nsignificant technology, USTR has \nidentified additional tariff subheadings \nthat would be appropriate for action in \nthe form of the imposition of an \nadditional 25 percent ad valorem duty. \nThe list of possible additional products \n",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "score": 8.20797739,
+      "citation_url": "https://ustr.gov/sites/default/files/2018-13248.pdf#page=2",
+      "parent_chunk_id": "initial_notice:p2:c6800"
+    }
+  ],
+  "method": "bm25",
+  "as_of": "2018-08-23",
+  "limitations": [
+    "仅两份2018年公告正文；不是完整政策库或现行税率查询。",
+    "出版日期筛选不等于法律生效日期或完整历史有效性判断。",
+    "检索命中不等于主张已被证实；引用身份校验不等于语义校验。",
+    "政策原文不能单独证明贸易变化由关税造成。"
+  ],
+  "scope": [
+    {
+      "source": "initial_notice",
+      "indexed_pages": [
+        1,
+        2,
+        3
+      ],
+      "total_pdf_pages": 47,
+      "excluded": "annexes_not_indexed"
+    },
+    {
+      "source": "amendment_notice",
+      "indexed_pages": [
+        1,
+        2
+      ],
+      "total_pdf_pages": 16,
+      "excluded": "annexes_not_indexed"
+    }
+  ],
+  "reason": null,
+  "context_expansion": {
+    "version": 1,
+    "radius_chars": 600,
+    "total_chars": 4314,
+    "unique_chars": 3328,
+    "duplicated_chars": 986,
+    "original_chars": 2478
+  }
+}

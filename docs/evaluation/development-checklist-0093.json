@@ -1,0 +1,180 @@
+{
+  "version": "answer-checklist-0093",
+  "cases": {
+    "D89-1": [
+      {
+        "id": "effective_date",
+        "quote": "第一批关税何时生效，额外税率是多少？",
+        "required_answer": "说明该批政策生效时间",
+        "task": "policy",
+        "expected_disposition": "answer"
+      },
+      {
+        "id": "additional_rate",
+        "quote": "第一批关税何时生效，额外税率是多少？",
+        "required_answer": "说明该批政策额外税率并限定历史口径",
+        "task": "policy",
+        "expected_disposition": "answer"
+      }
+    ],
+    "D89-2": [
+      {
+        "id": "effective_date",
+        "quote": "第一批关税何时生效，额外税率是多少？",
+        "required_answer": "说明该批政策生效时间",
+        "task": "policy",
+        "expected_disposition": "answer"
+      },
+      {
+        "id": "additional_rate",
+        "quote": "第一批关税何时生效，额外税率是多少？",
+        "required_answer": "说明该批政策额外税率并限定历史口径",
+        "task": "policy",
+        "expected_disposition": "answer"
+      },
+      {
+        "id": "monthly_amounts",
+        "quote": "请逐月列出其他原产地整体2018-09和2018-10的美元消费进口额",
+        "required_answer": "逐月列出指定原产地、商品范围的美元消费进口额；不作效果推断",
+        "task": "trade",
+        "expected_disposition": "answer",
+        "checks": [
+          {
+            "path": [
+              "summary",
+              "series",
+              0,
+              "month"
+            ],
+            "expected": "2018-09"
+          },
+          {
+            "path": [
+              "summary",
+              "series",
+              0,
+              "value_usd"
+            ],
+            "expected": 36587820118
+          },
+          {
+            "path": [
+              "summary",
+              "series",
+              1,
+              "month"
+            ],
+            "expected": "2018-10"
+          },
+          {
+            "path": [
+              "summary",
+              "series",
+              1,
+              "value_usd"
+            ],
+            "expected": 41012723839
+          },
+          {
+            "path": [
+              "summary",
+              "comparison_kind"
+            ],
+            "expected": "sequence"
+          }
+        ]
+      }
+    ],
+    "D89-3": [
+      {
+        "id": "direction_and_change",
+        "quote": "请比较其他原产地整体2018-10相对于2018-09的美元消费进口额",
+        "required_answer": "以指定基准月比较当前月，核对两个月金额、差额与百分比；不得倒置或归因",
+        "task": "trade",
+        "expected_disposition": "answer",
+        "checks": [
+          {
+            "path": [
+              "summary",
+              "series",
+              0,
+              "month"
+            ],
+            "expected": "2018-09"
+          },
+          {
+            "path": [
+              "summary",
+              "series",
+              0,
+              "value_usd"
+            ],
+            "expected": 36587820118
+          },
+          {
+            "path": [
+              "summary",
+              "series",
+              1,
+              "month"
+            ],
+            "expected": "2018-10"
+          },
+          {
+            "path": [
+              "summary",
+              "series",
+              1,
+              "value_usd"
+            ],
+            "expected": 41012723839
+          },
+          {
+            "path": [
+              "summary",
+              "first_month"
+            ],
+            "expected": "2018-09"
+          },
+          {
+            "path": [
+              "summary",
+              "last_month"
+            ],
+            "expected": "2018-10"
+          },
+          {
+            "path": [
+              "summary",
+              "endpoint_change_usd"
+            ],
+            "expected": 4424903721
+          },
+          {
+            "path": [
+              "summary",
+              "endpoint_change_percent"
+            ],
+            "expected": "12.09"
+          }
+        ]
+      }
+    ],
+    "D89-4": [
+      {
+        "id": "preserve_amount_request",
+        "quote": "请逐月列出其他原产地整体2018-09和2018-10的美元消费进口额",
+        "required_answer": "保留金额需求，整题范围未确认前不执行",
+        "task": "trade",
+        "expected_disposition": "scope_selection"
+      },
+      {
+        "id": "unsupported_share",
+        "quote": "另列中国进口份额",
+        "required_answer": "明确保留并说明份额暂不支持或具体澄清，不能删去后执行子集",
+        "task": "unsupported",
+        "expected_disposition": "scope_selection"
+      }
+    ]
+  }
+}

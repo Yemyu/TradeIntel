@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "label": "prospective_new_wording_module_check_not_external_blind_holdout",
+  "cases": [
+    {"id":"P01","question":"六月发布的第一批公告，是发布当天开始征收，还是另有生效日？请区分这两个日期。","as_of":"2018-07-06","expected":"answer","required":["公告出版2018-06-20，不与6月15日宣布混同","适用生效日期2018-07-06"],"gold_pages":["initial_notice:p1","initial_notice:p2"]},
+    {"id":"P02","question":"到2018年8月23日已公布的文件里，第二批和第一批的生效日期相同吗？请分别说明。","as_of":"2018-08-23","expected":"answer","required":["第一批2018-07-06","第二批2018-08-23","不能把第二批日期当成第一批修订后的日期"],"gold_pages":["amendment_notice:p1","amendment_notice:p2","initial_notice:p1","initial_notice:p2"]},
+    {"id":"P03","question":"第一批公告里的25%从价税，是否已经包含原来应缴的其他税费？","as_of":"2018-07-06","expected":"answer","required":["属于额外税，不是所有税费合计","仅针对公告规定范围，不能推广到全部商品"],"gold_pages":["initial_notice:p2"]},
+    {"id":"P04","question":"8月的公告提到豁免申请程序，能据此认定企业提交申请就已经免税了吗？","as_of":"2018-08-23","expected":"qualified_or_abstain","required":["不能由申请程序推出已经获批","文件只是宣布将建立程序并另行说明；不足时可以拒绝作判断"],"gold_pages":["amendment_notice:p2"]},
+    {"id":"P05","question":"现在这批商品进口美国适用什么税率？","as_of":"2018-08-23","expected":"no_evidence","required":["历史资料不能回答现行适用性"],"gold_pages":[]},
+    {"id":"P06","question":"请判断84414000这项商品是否已经获得豁免。","as_of":"2018-08-23","expected":"no_evidence","required":["本版未索引附件，不能判断具体商品豁免"],"gold_pages":[]},
+    {"id":"P07","question":"请给出第一批关税的政策原文证据。","as_of":"2018-06-01","expected":"no_evidence","required":["截止日期之前语料库无已出版文件","不得引用未来公告补答"],"gold_pages":[]},
+    {"id":"P08","question":"既然公告实施了第一批关税，能否只凭这份文件证明后来进口额下降就是关税造成的？","as_of":"2018-07-06","expected":"qualified_or_abstain","required":["政策公告本身不足以证明贸易变化的因果关系","不编造进口下降数据或效果值"],"gold_pages":["initial_notice:p1","initial_notice:p2"]}
+  ]
+}

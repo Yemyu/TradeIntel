@@ -1,0 +1,1109 @@
+{
+  "scope": "3332 eligible candidates, pre-policy only",
+  "candidates": [
+    {
+      "hts8": "84193250",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8419325000",
+          "naics6": "333243",
+          "description": "DRYERS FOR PAPER PULP, PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_prepolicy_value_usd": 1348039
+    },
+    {
+      "hts8": "84194000",
+      "role": "treated",
+      "naics6": [
+        "333241",
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8419400040",
+          "naics6": "333241",
+          "description": "DISTILLING OR RECTIFYING PLANT FOR FOOD AND BEVERAGES"
+        },
+        {
+          "hts10": "8419400080",
+          "naics6": "333249",
+          "description": "DISTILLING OR RECTIFYING PLANT, FOR THE TREATMENT OF MATERIALS BY A PROCESS INVOLVING A CHANGE IN TEMPERATURE, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 28451098
+    },
+    {
+      "hts8": "84199020",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8419902000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY AND PLANT FOR MAKING PAPER PULP, PAPER OR PAPERBOARD, INVOLVING A CHANGE IN TEMPERATURE"
+        }
+      ],
+      "china_prepolicy_value_usd": 7162424
+    },
+    {
+      "hts8": "84209190",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8420919000",
+          "naics6": "333249",
+          "description": "CYLINDERS, NESOI, FOR ROLLING MACHINES, OTHER THAN FOR METALS OR GLASS"
+        }
+      ],
+      "china_prepolicy_value_usd": 831269
+    },
+    {
+      "hts8": "84351000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8435100000",
+          "naics6": "333241",
+          "description": "PRESSES, CRUSHERS AND SIMILAR MACHINERY USED IN THE MANUFACTURE OF WINES, CIDER, FRUIT JUICES OR SIMILAR BEVERAGES"
+        }
+      ],
+      "china_prepolicy_value_usd": 6889813
+    },
+    {
+      "hts8": "84359000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8435900000",
+          "naics6": "333241",
+          "description": "PARTS OF PRESSES, CRUSHERS AND SIMILAR MACHINERY, USED IN THE MANUFACTURE OF WINE, CIDER, FRUIT JUICES OR SIMILAR BEVERAGES"
+        }
+      ],
+      "china_prepolicy_value_usd": 3214247
+    },
+    {
+      "hts8": "84371000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8437100000",
+          "naics6": "333241",
+          "description": "MACHINES FOR CLEANING, SORTING OR GRADING SEED, GRAIN OR DRIED LEGUMINOUS VEGETABLES"
+        }
+      ],
+      "china_prepolicy_value_usd": 9860673
+    },
+    {
+      "hts8": "84378000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8437800010",
+          "naics6": "333241",
+          "description": "FLOUR MILL AND GRAIN MILL MACHINES"
+        },
+        {
+          "hts10": "8437800090",
+          "naics6": "333241",
+          "description": "MACH FOR CLEAN, SORT, GRADE SEED, GRAIN OR DRIED LEGUMINOUS VEG, MAC USED IN MILLING IND OR WORK CEREALS OR DRIED LEGUMINOUS VEG, EXC FARMTYPE MACH"
+        }
+      ],
+      "china_prepolicy_value_usd": 6721958
+    },
+    {
+      "hts8": "84379000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8437900010",
+          "naics6": "333241",
+          "description": "PARTS OF FLOUR MILL OR GRAIN MILL MACHINES"
+        },
+        {
+          "hts10": "8437900090",
+          "naics6": "333241",
+          "description": "PTS OF MAC FOR CLEAN, SORT, GRADE SEED, GRAIN OR DRIED LEGUMINOUS VEG, MAC USED IN MILL IND OR WRK CEREALS OR DRIED LEGUM VEG, EXC FARM TYPE MACH"
+        }
+      ],
+      "china_prepolicy_value_usd": 33886561
+    },
+    {
+      "hts8": "84381000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8438100010",
+          "naics6": "333241",
+          "description": "BAKERY MACHINERY"
+        },
+        {
+          "hts10": "8438100090",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE MANUFACTURE OF MACARONI OR SIMILAR PRODUCTS"
+        }
+      ],
+      "china_prepolicy_value_usd": 27974334
+    },
+    {
+      "hts8": "84382000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8438200000",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE MANUFACTURE OF CONFECTIONERY, COCOA OR CHOCOLATE"
+        }
+      ],
+      "china_prepolicy_value_usd": 4234796
+    },
+    {
+      "hts8": "84384000",
+      "role": "control",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8438400000",
+          "naics6": "333241",
+          "description": "BREWERY MACHINERY"
+        }
+      ],
+      "china_prepolicy_value_usd": 51553160
+    },
+    {
+      "hts8": "84386000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8438600000",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE PREPARATION OF FRUITS, NUTS OR VEGETABLES"
+        }
+      ],
+      "china_prepolicy_value_usd": 4742326
+    },
+    {
+      "hts8": "84388000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8438800000",
+          "naics6": "333241",
+          "description": "MACH FOR INDUST PREPARATION OR MANUF OF FOOD OR DRINK, OTHER THAN MACH FOR THE EXTRACT OR PREPARAT OF ANIMAL OR FIXED VEG FATS OR OILS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 80760464
+    },
+    {
+      "hts8": "84389090",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8438909015",
+          "naics6": "333241",
+          "description": "PARTS OF BAKERY MACHINERY AND MACHINERY FOR THE MANUFACTURY OF MACARONI, SPAGHETTI OR SIMULAR PRODUCTS"
+        },
+        {
+          "hts10": "8438909030",
+          "naics6": "333241",
+          "description": "PARTS OF MACHINERY FOR MANUFACTURE OF CONFECTIONERY, COCOA OR CHOCOLATE"
+        },
+        {
+          "hts10": "8438909060",
+          "naics6": "333241",
+          "description": "PARTS OF MACHINERY FOR THE PREPARATION OF MEAT OR POULTRY"
+        },
+        {
+          "hts10": "8438909090",
+          "naics6": "333241",
+          "description": "PARTS OF MACH FOR IND PREP OR MANUF OF FOOD OR DRINK, OTHER THAN MACH FOR THE EXTRACT OR PREPARAT OF ANIMAL OR FIXED VEG FATS OR OILS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 39751227
+    },
+    {
+      "hts8": "84399110",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8439911000",
+          "naics6": "333243",
+          "description": "BED PLATE, ROLL BARS AND OTHER STOCK-TREATING PARTS OF MACHINERY FOR MAKING PULP OF FIBROUS CELLULOSIC MATERIALS"
+        }
+      ],
+      "china_prepolicy_value_usd": 3324773
+    },
+    {
+      "hts8": "84399190",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8439919000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR MAKING PULP OF FIBROUS CELLULOSIC MATERIALS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 18299441
+    },
+    {
+      "hts8": "84399910",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8439991000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR MAKING PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_prepolicy_value_usd": 42012591
+    },
+    {
+      "hts8": "84399950",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8439995000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR FINISHING PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_prepolicy_value_usd": 2512555
+    },
+    {
+      "hts8": "84401000",
+      "role": "control",
+      "naics6": [
+        "333244"
+      ],
+      "children": [
+        {
+          "hts10": "8440100000",
+          "naics6": "333244",
+          "description": "BOOKBINDING MACHINERY, INCLUDING BOOK-SEWING MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 11259423
+    },
+    {
+      "hts8": "84409000",
+      "role": "control",
+      "naics6": [
+        "333244"
+      ],
+      "children": [
+        {
+          "hts10": "8440900000",
+          "naics6": "333244",
+          "description": "PARTS FOR BOOKBINDING MACHINERY, INCLUDING BOOK-SEWING MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 1331552
+    },
+    {
+      "hts8": "84413000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8441300000",
+          "naics6": "333243",
+          "description": "MACHINES FOR MAKING CARTONS, BOXES, CASES, TUBES, DRUMS OR SIMILAR CONTAINERS, OTHER THAN BY MOLDING"
+        }
+      ],
+      "china_prepolicy_value_usd": 50098741
+    },
+    {
+      "hts8": "84414000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8441400000",
+          "naics6": "333243",
+          "description": "MACHINES FOR MOLDING ARTICLES IN PAPER PULP, PAPER OR PAPERBOARD"
+        }
+      ],
+      "china_prepolicy_value_usd": 6398812
+    },
+    {
+      "hts8": "84418000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8441800000",
+          "naics6": "333243",
+          "description": "MACHINERY FOR MAKING UP PAPER PULP,PAPER OR PAPERBOARD, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 23674240
+    },
+    {
+      "hts8": "84419000",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8441900000",
+          "naics6": "333243",
+          "description": "PARTS OF MACHINERY FOR MAKING UP PAPER PULP, PAPER OR PAPERBOARD, INCLUDING CUTTING MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 55793725
+    },
+    {
+      "hts8": "84423001",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "children": [
+        {
+          "hts10": "8442300110",
+          "naics6": "333244",
+          "description": "PHOTOTYPESETTING AND COMPOSING MACHINES"
+        },
+        {
+          "hts10": "8442300150",
+          "naics6": "333244",
+          "description": "MACHINERY, APPARATUS AND EQUIPMENT FOR PREPARING OR MAKING PRINTING PLATES, CYLINDERS OR OTHER PRINTING COMPONENTS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 31859470
+    },
+    {
+      "hts8": "84424000",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "children": [
+        {
+          "hts10": "8442400000",
+          "naics6": "333244",
+          "description": "PARTS OF MACHINERY, APPARATUS AND EQUIPMENT, NESOI, FOR PREPARING OR MAKING PRINTING BLOCKS, PLATES, CYLINDERS OR OTHER PRINTING COMPONENTS"
+        }
+      ],
+      "china_prepolicy_value_usd": 18974813
+    },
+    {
+      "hts8": "84431930",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "children": [
+        {
+          "hts10": "8443193000",
+          "naics6": "333244",
+          "description": "PRINTING MACHINERY, USING PRINTING PLATES, CYLINDERS AND OTHER PRINTING COMPONENTS OF HEADING 8442, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 28178430
+    },
+    {
+      "hts8": "84439110",
+      "role": "treated",
+      "naics6": [
+        "333244"
+      ],
+      "children": [
+        {
+          "hts10": "8443911000",
+          "naics6": "333244",
+          "description": "MACHINES FOR USES ANCILLARY TO PRINTING"
+        }
+      ],
+      "china_prepolicy_value_usd": 1750114
+    },
+    {
+      "hts8": "84440000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8444000010",
+          "naics6": "333249",
+          "description": "TEXTURING MACHINES FOR MAN-MADE TEXTILE MATERIALS"
+        },
+        {
+          "hts10": "8444000090",
+          "naics6": "333249",
+          "description": "MACHINES FOR EXTRUDING, DRAWING OR CUTTING MAN-MADE TEXTILE MATERIALS"
+        }
+      ],
+      "china_prepolicy_value_usd": 6936686
+    },
+    {
+      "hts8": "84479050",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8447905000",
+          "naics6": "333249",
+          "description": "EMBROIDERY MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 36486320
+    },
+    {
+      "hts8": "84479090",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8447909000",
+          "naics6": "333249",
+          "description": "KNITTING MACHINES, AND MACH FOR MAKING GIMPED YARN, TULLE, LACE,      TRIMMINGS, OR NET AND MACHINES FOR TUFT                             ING, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 1519244
+    },
+    {
+      "hts8": "84481900",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448190000",
+          "naics6": "333249",
+          "description": "AUXILIARY MACHINERY,NESOI, FOR MACHINES OF HEADING 8444, 8445, 8446 OR 8447"
+        }
+      ],
+      "china_prepolicy_value_usd": 3634453
+    },
+    {
+      "hts8": "84482050",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448205010",
+          "naics6": "333249",
+          "description": "PARTS OF TEXTURING MACHINES"
+        },
+        {
+          "hts10": "8448205090",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF MACHINES OF HEADING 8444 OR OF THEIR AUXILIARY MACHINERY"
+        }
+      ],
+      "china_prepolicy_value_usd": 880153
+    },
+    {
+      "hts8": "84483100",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448310000",
+          "naics6": "333249",
+          "description": "CARD CLOTHING"
+        }
+      ],
+      "china_prepolicy_value_usd": 694952
+    },
+    {
+      "hts8": "84483910",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448391000",
+          "naics6": "333249",
+          "description": "PARTS OF SPINNING, DOUBLING OR TWISTING MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 16079504
+    },
+    {
+      "hts8": "84483990",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448399000",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF MACHINES OF HEADING 8445 OR OF THEIR AUXILIARY MACHINERY, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 2373565
+    },
+    {
+      "hts8": "84484200",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448420000",
+          "naics6": "333249",
+          "description": "REEDS FOR LOOMS, HEALDS AND HEALD-FRAMES"
+        }
+      ],
+      "china_prepolicy_value_usd": 784929
+    },
+    {
+      "hts8": "84484920",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448492000",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF WEAVING MACHINES (LOOMS) OR OF THEIR AUXILIARY MACHINERY, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 7636111
+    },
+    {
+      "hts8": "84485910",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448591000",
+          "naics6": "333249",
+          "description": "PARTS OF KNITTING MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 3304192
+    },
+    {
+      "hts8": "84485950",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8448595000",
+          "naics6": "333249",
+          "description": "PARTS AND ACCESSORIES OF MACHINES OF HEADING 8447 OR OF THEIR AUXILIARY MACHINERY"
+        }
+      ],
+      "china_prepolicy_value_usd": 1343161
+    },
+    {
+      "hts8": "84490050",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8449005000",
+          "naics6": "333249",
+          "description": "MACHINERY FOR THE MANUFACTURE OF FELT OR NONWOVENS IN THE PIECE       OR IN SHAPES, INC MACH FOR MAKING FELT HATS; BLOCKS FOR HATS;        AND PARTS"
+        }
+      ],
+      "china_prepolicy_value_usd": 7487988
+    },
+    {
+      "hts8": "84521000",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8452100010",
+          "naics6": "333249",
+          "description": "SEWING MACHINES, HOUSEHOLD TYPE, VALUED NOT OVER $20 EACH"
+        },
+        {
+          "hts10": "8452100090",
+          "naics6": "333249",
+          "description": "SEWING MACHINES, HOUSEHOLD TYPE, VALUED OVER $20 EACH"
+        }
+      ],
+      "china_prepolicy_value_usd": 218994087
+    },
+    {
+      "hts8": "84522190",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8452219000",
+          "naics6": "333249",
+          "description": "SEWING MACHINES, AUTOMATIC UNITS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 64664874
+    },
+    {
+      "hts8": "84529020",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8452902010",
+          "naics6": "333249",
+          "description": "PARTS OF HOUSEHOLD SEWING MACHINES, NESOI"
+        },
+        {
+          "hts10": "8452902090",
+          "naics6": "333249",
+          "description": "PARTS OF SEWING MACHINES, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 48794460
+    },
+    {
+      "hts8": "84532000",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8453200000",
+          "naics6": "333249",
+          "description": "MACHINERY FOR MAKING OR REPAIRING FOOTWEAR"
+        }
+      ],
+      "china_prepolicy_value_usd": 1252432
+    },
+    {
+      "hts8": "84541000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8454100000",
+          "naics6": "333249",
+          "description": "CONVERTERS USED IN METALLURGY OR FOUNDRIES"
+        }
+      ],
+      "china_prepolicy_value_usd": 580468
+    },
+    {
+      "hts8": "84642001",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8464200110",
+          "naics6": "333249",
+          "description": "GLASS-WORKING GRINDING OR POLISHING MACHINES"
+        },
+        {
+          "hts10": "8464200120",
+          "naics6": "333249",
+          "description": "GRINDING OR POLISHING MACHINES FOR WORKING STONE, CERAMICS, CONCRETE, ASBESTOS-CEMENT OR LIKE MINERAL MATERIALS"
+        }
+      ],
+      "china_prepolicy_value_usd": 34814017
+    },
+    {
+      "hts8": "84649001",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8464900110",
+          "naics6": "333249",
+          "description": "GLASS-WORKING MACHINES FOR COLD WORKING GLASS,EXCEPT GRINDING OR POLISHING"
+        },
+        {
+          "hts10": "8464900120",
+          "naics6": "333249",
+          "description": "MACHINE TOOLS (EXCEPT SAWING,GRINDING OR POLISHING) FOR WORKING STONE,CERAMICS,CONCRETE,COLD GLASS,ASBESTOS-CEMENT OR LIKE MINRL MATERIALS,NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 41152274
+    },
+    {
+      "hts8": "84669210",
+      "role": "treated",
+      "naics6": [
+        "333243"
+      ],
+      "children": [
+        {
+          "hts10": "8466921000",
+          "naics6": "333243",
+          "description": "CAST-IRON PARTS NOT ADVANCED & MACHINED ONLY FOR THE REMOVAL OF FINS, GATES, ETC, FOR MACH TOOLS FOR WORKING WOOD, CORK, OR SIMILAR HARD MATERIALS"
+        }
+      ],
+      "china_prepolicy_value_usd": 1190538
+    },
+    {
+      "hts8": "84759010",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8475901000",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINES FOR ASSEMBLING ELECTRIC OR ELECTRONIC LAMPS, TUBES OR FLASHBULBS, IN GLASS ENVELOPES"
+        }
+      ],
+      "china_prepolicy_value_usd": 1611409
+    },
+    {
+      "hts8": "84759090",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8475909000",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINES FOR MANUFACTURING OR HOT WORKING GLASS OR GLASSWARE"
+        }
+      ],
+      "china_prepolicy_value_usd": 31674784
+    },
+    {
+      "hts8": "84771090",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477109015",
+          "naics6": "333249",
+          "description": "INJECTION-MOLDING MACHINES OF A TYPE USED FOR PROCESSING RUBBER OR OTHER THERMOSETTING MATERIALS; OTHER"
+        },
+        {
+          "hts10": "8477109030",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE LESS THAN 50 TONS"
+        },
+        {
+          "hts10": "8477109040",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE EQUAL TO OR GREATER THAN 50 TONS & LESS THAN 300 TONS"
+        },
+        {
+          "hts10": "8477109050",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE EQUAL TO OR GREATER THAN 300 TONS & LESS THAN 750TONS"
+        },
+        {
+          "hts10": "8477109060",
+          "naics6": "333249",
+          "description": "OTHER INJECTION MOLDING MACHINES OF A TYPE USED FOR PROCESSING THERMOPLASTICS WITH A CLAMP FORCE EQUAL TO OR GREATER THAN 750 TONS"
+        }
+      ],
+      "china_prepolicy_value_usd": 340103142
+    },
+    {
+      "hts8": "84772000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477200005",
+          "naics6": "333249",
+          "description": "SINGLE SCREW EXTRUDERS OF A TYPE USED FOR PROCESSING RUBBER OR OTHER THERMOSETTING MATERIALS"
+        },
+        {
+          "hts10": "8477200015",
+          "naics6": "333249",
+          "description": "EXTRUDERS, OTHER THAN SINGLE SCREW, OF A TYPE USED FOR PROCESSING RUBBER OR OTHER THERMOSETTING MATERIALS"
+        },
+        {
+          "hts10": "8477200035",
+          "naics6": "333249",
+          "description": "EXTRUDERS,SINGLE SCREW,WITH A SCREW SIZE LESS THAN 6.4 CM, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        },
+        {
+          "hts10": "8477200045",
+          "naics6": "333249",
+          "description": "EXTRUDERS,SINGLE SCREW,WITH A SCREW SIZE 6.4CM OR GREATER, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        },
+        {
+          "hts10": "8477200055",
+          "naics6": "333249",
+          "description": "EXTRUDERS, EXCEPT SINGLE SCREW, WITH A SCREW SIZE LESS THAN 6.4 CM, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        },
+        {
+          "hts10": "8477200065",
+          "naics6": "333249",
+          "description": "EXTRUDERS, EXCEPT SINGLE SCREW,WITH A SCREW SIZE 6.4CM OR GREATER, OF A TYPE USED FOR PROCESSING THERMOPLASTICS"
+        }
+      ],
+      "china_prepolicy_value_usd": 21241685
+    },
+    {
+      "hts8": "84773000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477300000",
+          "naics6": "333249",
+          "description": "BLOW-MOLDING MACHINES"
+        }
+      ],
+      "china_prepolicy_value_usd": 19038728
+    },
+    {
+      "hts8": "84774001",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477400100",
+          "naics6": "333249",
+          "description": "VACUUM-MOLDING MACHINES AND OTHER THERMOFORMING MACHINES; NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 4889396
+    },
+    {
+      "hts8": "84775100",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477510010",
+          "naics6": "333249",
+          "description": "MACHINERY FOR MOLDING OR RETREADING PNEUMATIC TIRES"
+        },
+        {
+          "hts10": "8477510090",
+          "naics6": "333249",
+          "description": "MACHINERY FOR MOLDING OR OTHERWISE FORMING INNER TUBES"
+        }
+      ],
+      "china_prepolicy_value_usd": 51294172
+    },
+    {
+      "hts8": "84778000",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477800000",
+          "naics6": "333249",
+          "description": "MACHINERY FOR WORKING RUBBER OR PLASTICS OR FOR THE MANUFACTURE OF PRODUCTS FROM THESE MATERIALS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 164065578
+    },
+    {
+      "hts8": "84779025",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477902540",
+          "naics6": "333249",
+          "description": "MACHINERY FOR WORKING RUBBER OR PLASTICS, PARTS, BASE, BED, PLATEN ETC FOR MACHINES OF SUBHEADINGS 84771030, 84771040, OR 84771090"
+        },
+        {
+          "hts10": "8477902580",
+          "naics6": "333249",
+          "description": "OTHER PARTS OF MACHINERY FOR WORKING RUBBER OR PLASTICS :BASE,BED,PLATEN,CLAMP CYLINDER,RAM,AND INJECTION CASTINGS,WELDMENTS AND FABRICATION  NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 14724349
+    },
+    {
+      "hts8": "84779085",
+      "role": "treated",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8477908501",
+          "naics6": "333249",
+          "description": "PARTS OF INJECTION-MOLDING MACHINES"
+        },
+        {
+          "hts10": "8477908520",
+          "naics6": "333249",
+          "description": "PARTS OF EXTRUDERS"
+        },
+        {
+          "hts10": "8477908530",
+          "naics6": "333249",
+          "description": "PARTS OF BLOW-MOLDING MACHINES"
+        },
+        {
+          "hts10": "8477908540",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINES FOR FORMING PNEUMATIC TIRES"
+        },
+        {
+          "hts10": "8477908595",
+          "naics6": "333249",
+          "description": "PARTS OF MACHINERY FOR WORKING RUBBER OR PLASTICS OR FOR THE MANUFACTURE OF PRODUCTS FROM THESE MATERIALS, NESOI"
+        }
+      ],
+      "china_prepolicy_value_usd": 310609757
+    },
+    {
+      "hts8": "84781000",
+      "role": "control",
+      "naics6": [
+        "333249"
+      ],
+      "children": [
+        {
+          "hts10": "8478100010",
+          "naics6": "333249",
+          "description": "INDUSTRIAL CIGARETTE-MAKING MACHINES"
+        },
+        {
+          "hts10": "8478100090",
+          "naics6": "333249",
+          "description": "MACHINERY FOR PREPARING OR MAKING UP TOBACCO, NOT SPECIFIED OR INCLUDED ELSEWHERE IN CHAPTER 84"
+        }
+      ],
+      "china_prepolicy_value_usd": 16966641
+    },
+    {
+      "hts8": "84792000",
+      "role": "treated",
+      "naics6": [
+        "333241"
+      ],
+      "children": [
+        {
+          "hts10": "8479200000",
+          "naics6": "333241",
+          "description": "MACHINERY FOR THE EXTRACTION OR PREPARATION OF ANIMAL OR FIXED VEGETABLE FATS OR OILS"
+        }
+      ],
+      "china_prepolicy_value_usd": 14200224
+    }
+  ],
+  "counts_by_exact_naics6_set": {
+    "333243": {
+      "treated": 11
+    },
+    "333241+333249": {
+      "treated": 1
+    },
+    "333249": {
+      "treated": 15,
+      "control": 17
+    },
+    "333241": {
+      "control": 5,
+      "treated": 7
+    },
+    "333244": {
+      "control": 2,
+      "treated": 4
+    }
+  },
+  "qualification_sha256": "28fa3987aaeda92199bdea33738093e8234c67bdc2c9beffb3369c317f9db837",
+  "inventory_sha256": "b08d126eb0de2097ecceb1f02b227d5cc2a1341b5b9752f5ec81b89894a83c18",
+  "conclusion": "Industry membership alone does not establish economic comparability; no matching or causal estimate."
+}

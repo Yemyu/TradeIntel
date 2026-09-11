@@ -1,0 +1,91 @@
+{
+  "new_api_calls": 0,
+  "boundary_preflight_passed": true,
+  "cases": [
+    {
+      "id": "P01",
+      "status": "candidate_evidence",
+      "evidence_ids": [
+        "initial_notice:p2:c5100",
+        "initial_notice:p1:c4668",
+        "initial_notice:p2:c5950"
+      ],
+      "reason": null,
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P02",
+      "status": "candidate_evidence",
+      "evidence_ids": [
+        "amendment_notice:p1:c2095",
+        "amendment_notice:p1:c4645",
+        "amendment_notice:p2:c0"
+      ],
+      "reason": null,
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P03",
+      "status": "candidate_evidence",
+      "evidence_ids": [
+        "initial_notice:p2:c4250",
+        "initial_notice:p1:c4668",
+        "initial_notice:p3:c850"
+      ],
+      "reason": null,
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P04",
+      "status": "candidate_evidence",
+      "evidence_ids": [
+        "amendment_notice:p2:c3400",
+        "amendment_notice:p2:c2550",
+        "initial_notice:p2:c6800"
+      ],
+      "reason": null,
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P05",
+      "status": "no_evidence",
+      "evidence_ids": [],
+      "reason": "这份历史语料不能回答现行政策。",
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P06",
+      "status": "no_evidence",
+      "evidence_ids": [],
+      "reason": "本版没有索引商品附件，不能判断具体税号的政策适用或豁免。",
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P07",
+      "status": "no_evidence",
+      "evidence_ids": [],
+      "reason": "限定语料内没有词法匹配；不调用模型补猜。",
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    },
+    {
+      "id": "P08",
+      "status": "candidate_evidence",
+      "evidence_ids": [
+        "initial_notice:p3:c850",
+        "initial_notice:p1:c4668",
+        "initial_notice:p3:c0"
+      ],
+      "reason": null,
+      "zero_call_boundary_violation": false,
+      "answer_quality": "not_evaluated"
+    }
+  ],
+  "semantic_acceptance": "not_run"
+}

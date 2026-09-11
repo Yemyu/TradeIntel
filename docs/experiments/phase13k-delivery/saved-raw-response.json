@@ -1,0 +1,11 @@
+{
+  "text": "```json\n{\n  \"claims\": [\n    {\n      \"text\": \"第一批公告的公布日期为2018年6月20日。\",\n      \"citations\": [\n        \"initial_notice:p1:w4068-6468\"\n      ]\n    },\n    {\n      \"text\": \"第一批公告的关税生效日期为2018年7月6日。\",\n      \"citations\": [\n        \"initial_notice:p1:w4068-6468\",\n        \"initial_notice:p2:w4500-6900\"\n      ]\n    },\n    {\n      \"text\": \"第一批公告的公布日期与关税生效日期不相同。\",\n      \"citations\": [\n        \"initial_notice:p1:w4068-6468\",\n        \"initial_notice:p2:w4500-6900\"\n      ]\n    }\n  ]\n}\n```",
+  "tool_call_count": 0,
+  "finish_reason": "stop",
+  "finish_reason_known": true,
+  "usage": {
+    "completion_tokens": 177,
+    "prompt_tokens": 2478,
+    "total_tokens": 2655
+  }
+}

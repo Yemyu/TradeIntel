@@ -1,0 +1,216 @@
+{
+  "status": "hts8_candidate_panel_built",
+  "source_scope": {
+    "start": "2016-01",
+    "end": "2018-05",
+    "month_count": 29
+  },
+  "policy_post_data_used": false,
+  "candidate_count": 692,
+  "monthly_rows": 20068,
+  "activity_rule": "positive China amount in at least 24 of 29 policy-pre months",
+  "metadata_inventory": "data/processed/causal/hts8_stable_inventory.json",
+  "outputs": {
+    "monthly": "data/processed/trade_hts8/monthly/hts8_candidates_prepolicy_v2.csv",
+    "qualification": "data/processed/causal/hts8_candidate_qualification_v2.csv"
+  },
+  "sector_summary": {
+    "3331": {
+      "metadata_policy_excluded": 56,
+      "activity_eligible": 79,
+      "main_route_candidates": 31,
+      "metadata_treated": 44,
+      "metadata_control": 6
+    },
+    "3332": {
+      "metadata_control": 56,
+      "activity_eligible": 91,
+      "main_route_candidates": 62,
+      "metadata_treated": 56,
+      "metadata_policy_excluded": 41
+    },
+    "3333": {
+      "metadata_control": 25,
+      "activity_eligible": 88,
+      "main_route_candidates": 26,
+      "metadata_treated": 11,
+      "metadata_policy_excluded": 83
+    },
+    "3334": {
+      "metadata_control": 11,
+      "activity_eligible": 28,
+      "main_route_candidates": 13,
+      "metadata_policy_excluded": 15,
+      "metadata_treated": 3
+    },
+    "3335": {
+      "metadata_policy_excluded": 28,
+      "activity_eligible": 63,
+      "main_route_candidates": 38,
+      "metadata_treated": 65,
+      "metadata_control": 1
+    },
+    "3336": {
+      "metadata_treated": 20,
+      "activity_eligible": 35,
+      "main_route_candidates": 7,
+      "metadata_policy_excluded": 46
+    },
+    "3339": {
+      "metadata_policy_excluded": 50,
+      "activity_eligible": 112,
+      "main_route_candidates": 66,
+      "metadata_treated": 59,
+      "metadata_control": 16
+    }
+  },
+  "family_summary": {
+    "3331": {
+      "treated": {
+        "hts8_count": 27,
+        "hs6_family_count": 26,
+        "observed_china_value_usd": 2427614918,
+        "metadata_pool_observed_china_value_usd": 2458168241,
+        "observed_value_retained_share": 0.9875706949221789
+      },
+      "control": {
+        "hts8_count": 4,
+        "hs6_family_count": 4,
+        "observed_china_value_usd": 824593163,
+        "metadata_pool_observed_china_value_usd": 829552000,
+        "observed_value_retained_share": 0.9940222710571489
+      }
+    },
+    "3332": {
+      "treated": {
+        "hts8_count": 38,
+        "hs6_family_count": 34,
+        "observed_china_value_usd": 1554520951,
+        "metadata_pool_observed_china_value_usd": 1578026138,
+        "observed_value_retained_share": 0.9851046909591811
+      },
+      "control": {
+        "hts8_count": 24,
+        "hs6_family_count": 21,
+        "observed_china_value_usd": 539354391,
+        "metadata_pool_observed_china_value_usd": 591779665,
+        "observed_value_retained_share": 0.911410822134282
+      }
+    },
+    "3333": {
+      "treated": {
+        "hts8_count": 8,
+        "hs6_family_count": 6,
+        "observed_china_value_usd": 358616872,
+        "metadata_pool_observed_china_value_usd": 359215163,
+        "observed_value_retained_share": 0.9983344494842497
+      },
+      "control": {
+        "hts8_count": 18,
+        "hs6_family_count": 15,
+        "observed_china_value_usd": 1227671747,
+        "metadata_pool_observed_china_value_usd": 1228527549,
+        "observed_value_retained_share": 0.9993033920967449
+      }
+    },
+    "3334": {
+      "treated": {
+        "hts8_count": 3,
+        "hs6_family_count": 3,
+        "observed_china_value_usd": 1251218367,
+        "metadata_pool_observed_china_value_usd": 1251218367,
+        "observed_value_retained_share": 1.0
+      },
+      "control": {
+        "hts8_count": 10,
+        "hs6_family_count": 8,
+        "observed_china_value_usd": 820532648,
+        "metadata_pool_observed_china_value_usd": 825359722,
+        "observed_value_retained_share": 0.9941515512917166
+      }
+    },
+    "3335": {
+      "treated": {
+        "hts8_count": 37,
+        "hs6_family_count": 31,
+        "observed_china_value_usd": 2298111734,
+        "metadata_pool_observed_china_value_usd": 2330241754,
+        "observed_value_retained_share": 0.9862117224769289
+      },
+      "control": {
+        "hts8_count": 1,
+        "hs6_family_count": 1,
+        "observed_china_value_usd": 37020604,
+        "metadata_pool_observed_china_value_usd": 37020604,
+        "observed_value_retained_share": 1.0
+      }
+    },
+    "3336": {
+      "treated": {
+        "hts8_count": 7,
+        "hs6_family_count": 6,
+        "observed_china_value_usd": 750352247,
+        "metadata_pool_observed_china_value_usd": 758493521,
+        "observed_value_retained_share": 0.9892665213682161
+      },
+      "control": {
+        "hts8_count": 0,
+        "hs6_family_count": 0,
+        "observed_china_value_usd": 0,
+        "metadata_pool_observed_china_value_usd": 0,
+        "observed_value_retained_share": null
+      }
+    },
+    "3339": {
+      "treated": {
+        "hts8_count": 55,
+        "hs6_family_count": 50,
+        "observed_china_value_usd": 7269008608,
+        "metadata_pool_observed_china_value_usd": 7272609318,
+        "observed_value_retained_share": 0.9995048943449928
+      },
+      "control": {
+        "hts8_count": 11,
+        "hs6_family_count": 11,
+        "observed_china_value_usd": 3671986822,
+        "metadata_pool_observed_china_value_usd": 3806028680,
+        "observed_value_retained_share": 0.9647817004889201
+      }
+    }
+  },
+  "source_sha256": {
+    "data/processed/causal/hts8_stable_inventory.json": "b08d126eb0de2097ecceb1f02b227d5cc2a1341b5b9752f5ec81b89894a83c18",
+    "data/raw/policy/census-import-historical-hs-numbers.xlsx": "d13be8bd5755a9237f8c1d1f0cf49d29e9141413d845dc39728f98ab534bade6",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_01.csv": "d1c23dedeca0f8e6c5fbd3b6f6d5a202fcd49c645115a666c8cb48663422681d",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_02.csv": "a347960747b9856ead5c170612fb1e28d322e62aa448d56b7acd46392900d4f5",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_03.csv": "15bdb0c068a5d458df62d56b6666e6cb806a17515b20c1e240938d9639ad45c9",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_04.csv": "0b998cae63f0f599b54d7d15f0fada321fc0378be71bdb53e925f5078da68995",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_05.csv": "60756cf954c5a1cf3dbe91734bf0698b57182983dfdc7e41a76a04f3f363964a",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_06.csv": "c77402150a579f8a21746064c4e66ab3bc2aa74662fa761ad6ae8e6a56e25d87",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_07.csv": "042ce70240988ae66e6e461bc3dfe871d60e5e60fe1953f91328f1ce98cbd1d8",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_08.csv": "b666fd680e8d0b7c9f959a6dc7f273358322f9ca83269f2e48490b85d553e59d",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_09.csv": "50ecaa6e003853d0b6f7e888fe9d53f43510a559b0dd557cda0bcfb7666703c1",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_10.csv": "822d50b5467ab640358f74dda2bbbf0a2cf0a33468f98ad0070b81679bf03364",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_11.csv": "5d470e35e0390ae46deb974ae5f2c0517bdd4303b0033b58cb19c17cdffaa8ed",
+    "data/processed/trade_hts10/monthly/trade_hts10_2016_12.csv": "ab3255279337e81f5f922ea77fd651b4ad9cf0bb259ad97a8b8bbe5b341cd22a",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_01.csv": "69a44a9ee20109ded08e6db3005e5a6598b8f08baa45cd13ac7143d137c98dad",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_02.csv": "395efb270d10804f8bd0f9090513af4c505d1f97122fc69501ee2cf81f6f860e",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_03.csv": "cc15357fbc614b07ed78bf72a124fdaca98267ff78b8eab5876bdaa42b806b5e",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_04.csv": "94b2344e883a0b4c6bb0cd9bcfb9445ba14c31a6fd0cddfee2eaeb21f906c721",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_05.csv": "a6e23a2922dc18011c695e369099e95643a5154e786c4f2efbdd281246e4a044",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_06.csv": "ea507f3071f31f4f5f3f871bab447862aebfb6fa4496c6f69b956cadcc522861",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_07.csv": "8e3cd1b242fc7d98d913366f0087c18f4c45d7f5bd6f19e475aa4f742c9fd4c3",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_08.csv": "569dbee617c3ce60dc94203c54c5f69798ced012ca7f2703982f7e9688d4123d",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_09.csv": "ffc3900ebe7d7d0ec60dfbcdaffa0be5dbd259d7bb0c061cac483c72ef19f3a4",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_10.csv": "ac143c392bd182ed71c15e8d36b9246f396b624d2a7db918df0976a5e4afb20f",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_11.csv": "542b257f5d579e19acd78b53ccc620a3b48a4a9ffbc8f01b46744bfe4b81dfba",
+    "data/processed/trade_hts10/monthly/trade_hts10_2017_12.csv": "3359b76e100ee9a9fe35e9cdd566014feb83f0733ad3857f70d04496fbbc1857",
+    "data/processed/trade_hts10/monthly/trade_hts10_2018_01.csv": "9af5458c7fb04f5e5059dc1a811b6303bc55fb868bb27495fcbb59dd82a971f8",
+    "data/processed/trade_hts10/monthly/trade_hts10_2018_02.csv": "c0fc0c5c804aba6974b7e2c83e1b52eb9b4eee8f9ed54f7a00433643760bc09e",
+    "data/processed/trade_hts10/monthly/trade_hts10_2018_03.csv": "34df1e128473e37a082eaed31ee22b65cae3212ec98d93b9818517fdbeaa94b9",
+    "data/processed/trade_hts10/monthly/trade_hts10_2018_04.csv": "25105318afd64693a70b2c669928aca5601a9163a9bd48c669485e5954e211de",
+    "data/processed/trade_hts10/monthly/trade_hts10_2018_05.csv": "74a957bfa30d1f8ede375267a8a5a17a5f03918fe7ba4006015154f2dabcaf56"
+  },
+  "missing_amount_encoding": "empty CSV cell when origin not observed; observed-only totals are not imputed full-period totals",
+  "interpretation": "Qualification is a policy-pre activity screen, not a matched control set or causal estimate."
+}

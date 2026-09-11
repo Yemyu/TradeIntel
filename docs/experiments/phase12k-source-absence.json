@@ -1,0 +1,228 @@
+{
+  "cases": [
+    {
+      "year": 2017,
+      "month": 1,
+      "hts8": "84414000",
+      "source_sha256": "d445b85af8546e84999158a0fdd617c34cbf811f041cef3c0a811e881cb9d45f",
+      "source_file": "IMDB1701.ZIP",
+      "source_url": "https://www.census.gov/trade/downloads/2017/Merch/im_m/IMDB1701.ZIP",
+      "scanned_detail_rows": 612416,
+      "china_rows": 0,
+      "all_origin_value_usd": 152753,
+      "matching_source_rows": [
+        {
+          "line": 382206,
+          "hts10": "8441400000",
+          "country": "4351",
+          "consumption_value_usd": 144318
+        },
+        {
+          "line": 382207,
+          "hts10": "8441400000",
+          "country": "4759",
+          "consumption_value_usd": 5939
+        },
+        {
+          "line": 382208,
+          "hts10": "8441400000",
+          "country": "5880",
+          "consumption_value_usd": 2496
+        }
+      ],
+      "conclusion": "absence_confirmed_in_raw_source_not_extractor_loss",
+      "imputed": false
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "hts8": "84209190",
+      "source_sha256": "28c1aa587ae5d0251d1cca035d0923d3f2cc039e22babf74f1372bac2481cfee",
+      "source_file": "IMDB1801.ZIP",
+      "source_url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1801.ZIP",
+      "scanned_detail_rows": 636777,
+      "china_rows": 0,
+      "all_origin_value_usd": 1447175,
+      "matching_source_rows": [
+        {
+          "line": 375273,
+          "hts10": "8420919000",
+          "country": "1220",
+          "consumption_value_usd": 2075
+        },
+        {
+          "line": 375274,
+          "hts10": "8420919000",
+          "country": "4010",
+          "consumption_value_usd": 670000
+        },
+        {
+          "line": 375275,
+          "hts10": "8420919000",
+          "country": "4010",
+          "consumption_value_usd": 3972
+        },
+        {
+          "line": 375276,
+          "hts10": "8420919000",
+          "country": "4010",
+          "consumption_value_usd": 7996
+        },
+        {
+          "line": 375277,
+          "hts10": "8420919000",
+          "country": "4050",
+          "consumption_value_usd": 11373
+        },
+        {
+          "line": 375278,
+          "hts10": "8420919000",
+          "country": "4210",
+          "consumption_value_usd": 3172
+        },
+        {
+          "line": 375279,
+          "hts10": "8420919000",
+          "country": "4279",
+          "consumption_value_usd": 17518
+        },
+        {
+          "line": 375280,
+          "hts10": "8420919000",
+          "country": "4279",
+          "consumption_value_usd": 111663
+        },
+        {
+          "line": 375281,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 127251
+        },
+        {
+          "line": 375282,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 4263
+        },
+        {
+          "line": 375283,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 148338
+        },
+        {
+          "line": 375284,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 74443
+        },
+        {
+          "line": 375285,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 3542
+        },
+        {
+          "line": 375286,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 45112
+        },
+        {
+          "line": 375287,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 6624
+        },
+        {
+          "line": 375288,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 11985
+        },
+        {
+          "line": 375289,
+          "hts10": "8420919000",
+          "country": "4280",
+          "consumption_value_usd": 2514
+        },
+        {
+          "line": 375290,
+          "hts10": "8420919000",
+          "country": "4330",
+          "consumption_value_usd": 0
+        },
+        {
+          "line": 375291,
+          "hts10": "8420919000",
+          "country": "4330",
+          "consumption_value_usd": 2431
+        },
+        {
+          "line": 375292,
+          "hts10": "8420919000",
+          "country": "4759",
+          "consumption_value_usd": 2968
+        },
+        {
+          "line": 375293,
+          "hts10": "8420919000",
+          "country": "4759",
+          "consumption_value_usd": 45805
+        },
+        {
+          "line": 375294,
+          "hts10": "8420919000",
+          "country": "4759",
+          "consumption_value_usd": 4044
+        },
+        {
+          "line": 375295,
+          "hts10": "8420919000",
+          "country": "4759",
+          "consumption_value_usd": 22640
+        },
+        {
+          "line": 375296,
+          "hts10": "8420919000",
+          "country": "4759",
+          "consumption_value_usd": 14000
+        },
+        {
+          "line": 375297,
+          "hts10": "8420919000",
+          "country": "4759",
+          "consumption_value_usd": 54039
+        },
+        {
+          "line": 375298,
+          "hts10": "8420919000",
+          "country": "5830",
+          "consumption_value_usd": 8450
+        },
+        {
+          "line": 375299,
+          "hts10": "8420919000",
+          "country": "5830",
+          "consumption_value_usd": 2854
+        },
+        {
+          "line": 375300,
+          "hts10": "8420919000",
+          "country": "5830",
+          "consumption_value_usd": 30080
+        },
+        {
+          "line": 375301,
+          "hts10": "8420919000",
+          "country": "5880",
+          "consumption_value_usd": 8023
+        }
+      ],
+      "conclusion": "absence_confirmed_in_raw_source_not_extractor_loss",
+      "imputed": false
+    }
+  ],
+  "panel_sha256": "ce4af0746f774b7191535888093f14ef83d5734242c97c772e8270946a8aa1c0",
+  "interpretation": "Raw absence verified; missingness mechanism not established. No zero imputation or causal estimation."
+}

@@ -1,0 +1,11 @@
+{
+  "purpose": "frozen development page retrieval; not independent acceptance",
+  "cases": [
+    {"id":"R01","question":"第一批关税何时生效？","as_of":"2018-07-06","gold_pages":["initial_notice:p1","initial_notice:p2"]},
+    {"id":"R02","question":"第一批额外税率是多少？","as_of":"2018-07-06","gold_pages":["initial_notice:p1","initial_notice:p2"]},
+    {"id":"R03","question":"公众评论和听证怎样提交意见？","as_of":"2018-07-06","gold_pages":["initial_notice:p3"]},
+    {"id":"R04","question":"第二批关税何时生效？","as_of":"2018-08-23","gold_pages":["amendment_notice:p1","amendment_notice:p2"]},
+    {"id":"R05","question":"8月公告对原条款作了什么修订？","as_of":"2018-08-23","gold_pages":["amendment_notice:p2"]},
+    {"id":"R06","question":"第二批是否会有产品豁免申请程序？","as_of":"2018-08-23","gold_pages":["amendment_notice:p2"]}
+  ]
+}

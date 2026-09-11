@@ -1,0 +1,28 @@
+{
+  "label": "offline_format_replay_not_new_live_success",
+  "new_api_calls": 0,
+  "original_sha256": "46b783b9e9f821f3fea79cd2ab557389acfa1590d376355a0af426b202e012f2",
+  "original_status": "rejected_model_output",
+  "finish_reason_available_in_archive": false,
+  "replayed": {
+    "status": "draft_requires_semantic_review",
+    "model_called": true,
+    "claims": [
+      {
+        "text": "第一批关税于2018年7月6日美东时间上午12:01生效。",
+        "citations": [
+          "initial_notice:p2:c5100",
+          "initial_notice:p1:c4668"
+        ]
+      },
+      {
+        "text": "额外税率为25%从价税。",
+        "citations": [
+          "initial_notice:p2:c5100",
+          "initial_notice:p2:c4250"
+        ]
+      }
+    ],
+    "semantic_verified": false
+  }
+}

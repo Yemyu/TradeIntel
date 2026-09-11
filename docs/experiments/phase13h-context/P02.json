@@ -1,0 +1,95 @@
+{
+  "question": "到2018年8月23日已公布的文件里，第二批和第一批的生效日期相同吗？请分别说明。",
+  "status": "candidate_evidence",
+  "hits": [
+    {
+      "id": "amendment_notice:p1:w1495-3895",
+      "page_id": "amendment_notice:p1",
+      "source": "amendment_notice",
+      "title": "2018年8月公告（第二批及第一批修订说明）",
+      "published": "2018-08-16",
+      "page": 1,
+      "start": 1495,
+      "end": 3895,
+      "text": "epresentative. \nACTION: Notice. \nSUMMARY: The U.S. Trade \nRepresentative (Trade Representative) \nhas determined that appropriate action \nin this investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products from \nChina classified in the subheadings of \nthe Harmonized Tariff Schedule of the \nUnited States (HTSUS) set out in Annex \nA of this notice. The Trade \nRepresentative has further determined \nto establish a process by which U.S. \nstakeholders may request that particular \nproducts classified within a covered \ntariff subheading in Annex A be \nexcluded from these additional duties. \nDATES: The additional duties set out in \nAnnex A to this notice are effective with \nrespect to products that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \nAugust 23, 2018. \nFOR FURTHER INFORMATION CONTACT : For \nquestions about this action, contact \nAssistant General Counsel Arthur Tsao \nor Director of Industrial Goods Justin \nHoffmann at (202) 395–5725. For \nquestions on customs classification or \nimplementation of additional duties on \nproducts identified in Annex A to this \nNotice, contact Traderemedy@\ncbp.dhs.gov. \nSUPPLEMENTARY INFORMATION: \nA. Proceedings in the Investigation \nOn August 18, 2017, the Office of the \nU.S. Trade Representative (USTR) \ninitiated an investigation into certain \nacts, policies, and practices of the \nGovernment of China related to \ntechnology transfer, intellectual \nproperty, and innovation (82 FR 40213). \nIn a notice published on April 6, 2018 \n(83 FR 14906), the Trade Representative \nannounced a determination that the \nacts, policies, and practices of the \nGovernment of China covered in the \ninvestigation are unreasonable or \ndiscriminatory and burden or restrict \nU.S. commerce. The April 6 notice also \ninvited public comment on a proposed \naction in the investigation, in the form \nof an additional 25 percent ad valorem \nduty on products from China classified \nin a list of 1,333 tariff subheadings, with \nan annual trade value of approximately \n$50 billion. As explained in that notice, \nthe level was appropriate both in light \nof the estimated harm to the U.S. \neconomy, and to obtain elimination of \nChina’s harmful acts, policies, and \npractices. \nThe public comment process included \ntwo opportunities for the submission of \nwritten comments, and the opportunity \nto pa",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-amendment-2018-08-16.pdf",
+      "score": 12.94884351,
+      "citation_url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf#page=1",
+      "parent_chunk_id": "amendment_notice:p1:c2095"
+    },
+    {
+      "id": "amendment_notice:p1:w4045-6445",
+      "page_id": "amendment_notice:p1",
+      "source": "amendment_notice",
+      "title": "2018年8月公告（第二批及第一批修订说明）",
+      "published": "2018-08-16",
+      "page": 1,
+      "start": 4045,
+      "end": 6445,
+      "text": "sions \nof submissions and a transcript of the \nhearing are available on \nwww.regulations.gov in docket number \nUSTR–2018–0005. \nUSTR and the interagency Section \n301 Committee carefully reviewed the \npublic comments and the testimony \nfrom the public hearing. USTR and the \nSection 301 Committee also carefully \nreviewed the extent to which the tariff \nsubheadings in the April 6 notice \ninclude products containing industrially \nsignificant technology, including \ntechnologies and products related to \nChina’s ‘‘Made in China 2025’’ \nindustrial policy program. \nBased on this review process, the \nTrade Representative determined to take \nan initial action in the investigation, \nand to consider an additional proposed \naction. The Trade Representative \nannounced the determination on June \n15, 2018, and published a notice on \nJune 20, 2018 (83 FR 28710). The Trade \nRepresentative narrowed the proposed \nlist in the April 6 notice to 818 tariff \nsubheadings, with an approximate \nannual trade value of $34 billion. This \ninitial action became effective on July 6, \n2018. The additional proposed action \nwas an additional ad valorem duty of 25 \npercent on products of China classified \nin 284 tariff subheadings, with an \nannual trade value of approximately $16 \nbillion, as set forth in Annex C to the \nJune 20 notice. The June 20 notice \nfurther explained that including these \ntariff subheadings in the Section 301 \naction would maintain the effectiveness \nof a $50 billion trade action. \nThe June 20 notice invited public \ncomment on the additional proposed \naction. USTR requested that \ncommenters address specifically \nwhether imposing increased duties on a \nparticular listed subheading would be \npracticable or effective to obtain the \nelimination of China’s acts, policies, \nand practices, and whether maintaining \nor imposing additional duties on a \nparticular listed product would cause \ndisproportionate economic harm to U.S. \ninterests, including small or medium- \nsized businesses and consumers. \nIn response to the notice of additional \nproposed action, interested persons \nfiled over 700 written submissions. \nUSTR and the Section 301 Committee \nheld a 2-day public hearing on July 24– \n25, 2018. During the hearing, 82 \nwitnesses provided testimony and \nresponded to questions. Interested \nparties also had the opportunity to \nprovide rebuttal submissions. The \npublic submissions a",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-amendment-2018-08-16.pdf",
+      "score": 11.31701088,
+      "citation_url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf#page=1",
+      "parent_chunk_id": "amendment_notice:p1:c4645"
+    },
+    {
+      "id": "amendment_notice:p2:w0-1800",
+      "page_id": "amendment_notice:p2",
+      "source": "amendment_notice",
+      "title": "2018年8月公告（第二批及第一批修订说明）",
+      "published": "2018-08-16",
+      "page": 2,
+      "start": 0,
+      "end": 1800,
+      "text": "40824 Federal Register / Vol. 83, No. 159 / Thursday, August 16, 2018 / Notices \nvalue of the final list remains \napproximately $16 billion. \nPursuant to sections 301(b), 301(c), \nand 304(a) of the Trade Act of 1974 (19 \nU.S.C. 2411(b), 2411(c), and 2414(a)), \nthe Trade Representative determines \nthat appropriate and feasible action in \nthis investigation includes the \nimposition of an additional ad valorem \nduty of 25 percent on products of China \ncovered in the tariff subheadings listed \nin Annex A to this notice. Annex B to \nthis notice contains the same list of \ntariff subheadings, with unofficial \ndescriptions of the types of products \ncovered in each subheading. \nIn order to implement this \ndetermination, effective August 23, \n2018, subchapter III of chapter 99 of the \nHTSUS is modified by Annex A of this \nnotice. Products of China that are \nprovided for in new HTSUS heading \n9903.88.02, as established by Annex A \nof this notice that are entered for \nconsumption, or withdrawn from \nwarehouse for consumption, on or after \n12:01 a.m. Eastern daylight time on \nAugust 23, 2018, will be subject to an \nadditional ad valorem duty of 25 \npercent. The rates of duty applicable to \nproducts of China that are provided for \nin new HTSUS heading 9903.88.02 \napply in addition to all other applicable \nduties, fees, exactions, and charges. \nThe HTSUS note in Annex A, as \ncompared to the HTSUS note in Annex \nA to the June 20 notice, includes \nclarifications on the application of the \nadditional duties to goods entered under \ncertain provisions of Chapter 98 and 99 \nof the HTSUS. Annex C to this notice \nmodifies the HTSUS note in Annex A to \nthe June 20 notice in order to reflect \nthese clarifications. In addition, Annex \nC makes a conforming amendment to \nthe HTSUS heading in Annex",
+      "sha256": "97a1883d0617b038e4b5bd2f6e36400168fcc27d67fe6562149cc85866c08729",
+      "url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf",
+      "local_path": "data/raw/policy/ustr-section301-list1-amendment-2018-08-16.pdf",
+      "score": 10.46041647,
+      "citation_url": "https://ustr.gov/sites/default/files/enforcement/301Investigations/2018-17709.pdf#page=2",
+      "parent_chunk_id": "amendment_notice:p2:c0"
+    }
+  ],
+  "method": "bm25",
+  "as_of": "2018-08-23",
+  "limitations": [
+    "仅两份2018年公告正文；不是完整政策库或现行税率查询。",
+    "出版日期筛选不等于法律生效日期或完整历史有效性判断。",
+    "检索命中不等于主张已被证实；引用身份校验不等于语义校验。",
+    "政策原文不能单独证明贸易变化由关税造成。"
+  ],
+  "scope": [
+    {
+      "source": "initial_notice",
+      "indexed_pages": [
+        1,
+        2,
+        3
+      ],
+      "total_pdf_pages": 47,
+      "excluded": "annexes_not_indexed"
+    },
+    {
+      "source": "amendment_notice",
+      "indexed_pages": [
+        1,
+        2
+      ],
+      "total_pdf_pages": 16,
+      "excluded": "annexes_not_indexed"
+    }
+  ],
+  "reason": null,
+  "context_expansion": {
+    "version": 1,
+    "radius_chars": 600,
+    "total_chars": 6600,
+    "unique_chars": 6600,
+    "duplicated_chars": 0,
+    "original_chars": 3600
+  }
+}

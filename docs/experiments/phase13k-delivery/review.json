@@ -1,0 +1,15 @@
+{
+  "new_api_calls": 0,
+  "operation": "offline_recheck_and_saved_live_render",
+  "trade_matches_independent_csv": true,
+  "trade_matches_fresh_workflow": true,
+  "policy_context_matches": true,
+  "semantic_accuracy_measured": false,
+  "saved_live_result_sha256": "20656a863882cffb7a23e0df48bf14debc0543a0371273cc086a7fb349516439",
+  "csv_sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400",
+  "implementation_sha256": {
+    "src/tradeintel_ai/research_brief.py": "d5437ca79c0b7d7eb43d30b0d94a43874c333e09b7ad0732b717011146dbcb89",
+    "src/tradeintel_ai/policy_focus.py": "8ea4bc27120596453085928ade83a35cd25e53fb71726ca10b30c235b8e88ab5",
+    "src/tradeintel_ai/policy_context_window.py": "8138b9ab786ad6895d9bd1ab351ae2e76b98835d7ce837a8757e0234ba9b577b"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "policy_question": "第一批公告的公布日期与关税生效日期相同吗？请区分这两个日期。",
+  "policy_as_of": "2018-07-06",
+  "trade": {
+    "policy_id": "us_301_list1_2018",
+    "operation": "read",
+    "metric": "import_value_consumption_usd",
+    "origin": "other_origins",
+    "granularity": "policy_aggregate",
+    "months": [
+      "2018-09",
+      "2018-10"
+    ],
+    "hs6": null,
+    "causal_effect": false
+  }
+}

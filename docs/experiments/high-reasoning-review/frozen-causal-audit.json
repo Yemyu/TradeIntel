@@ -1,0 +1,64 @@
+{
+  "audit_id": "frozen-causal-structural-audit-20260911",
+  "optimization_calls": 0,
+  "effect_estimation_calls": 0,
+  "model_calls": 0,
+  "old_results_modified": false,
+  "post_outcomes_used_for_selection": false,
+  "input_sha256": {
+    "data/processed/causal/control_candidate_features.csv": "4bca77853b5a2171618fb049859da8a6a79fbcca69309cba718272ba4eff9132",
+    "data/processed/causal/matched_control_pairs.csv": "7722e2b37fb2d0ff90a472498b78e30fa17deace7597083af149548ea8235172",
+    "config/causal_control_design.json": "6b8aeb74f8d71518d67cd9c5f57db33fa79d85b3955559f170691e5718060375",
+    "data/processed/causal/causal_trade_hs6_monthly.csv": "6c6a6ef1f30d7b391b17f62b2278ca55cfbe5a697098ba3d17605414ddd5a07d",
+    "data/processed/causal/matching_balance_report.json": "d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a",
+    "data/processed/causal/matching_balance_report_v3.json": "5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9",
+    "scripts/build_prepolicy_matching.py": "560f21553073adc84a86df28d398c12234a9cdc49c3358e4ebaef5f8efa84f4c",
+    "scripts/build_globally_balanced_matching.py": "c1ae21d24fc658e665c8611303d97b87b2a584d5e4d50ff41e7525aed74f95e6",
+    "scripts/build_maximum_cardinality_matching.py": "33e8034883a9ec30e7bb28f2dac223fb59f2fb37c565e30a66faa8bda3e98299",
+    "scripts/audit_frozen_causal_design.py": "5322efbc457e6bbc6ac03589d16ebafaa94073f5afec821b9ed9fec420174d1b"
+  },
+  "matrix": {
+    "treated": 284,
+    "controls": 829,
+    "edges": 14671,
+    "matrix_shape": [
+      711,
+      14955
+    ],
+    "tested_vectors": 5,
+    "maximum_absolute_formula_error": 1.0186340659856796e-10,
+    "formula_check_passed": true,
+    "treated_without_edges": [],
+    "minimum_control_degree": 7,
+    "matrix_variable_count": 14955,
+    "solver_cost_variable_count": 14955
+  },
+  "matches_archived_matrix_dimensions": true,
+  "nonfinite_feature_cells": 0,
+  "baseline_smd": {
+    "log_mean_monthly_china_import_value": 0.0015404689932823367,
+    "pretrend_slope": 0.16717203061320407,
+    "monthly_volatility": 0.053285790670450923,
+    "china_share_of_all_origin_imports": -0.15886107004119995
+  },
+  "maximum_smd_difference_from_archive": 7.649991751179641e-13,
+  "prepanel": {
+    "expected_rows": 32277,
+    "present_rows": 32277,
+    "missing_keys": [],
+    "duplicate_keys": [],
+    "blank_value_keys": [],
+    "limitation": "Presence of aggregate rows does not independently prove absent source-country observations are true zeros."
+  },
+  "interpretation": "Structural checks agree; not an independent solver infeasibility proof.",
+  "method_issues_requiring_new_protocol": [
+    "Clean-pre label includes March action and April proposed-list announcement; anticipation must be reassessed.",
+    "Infeasibility applies to internal SMD <= 0.09, not every design permitting SMD < 0.10.",
+    "Three controls, reuse <= 10 and 80 percent coverage are protocol choices, not universal causal identification laws.",
+    "Distance and effective-sample-size gates are post-solution adoption checks, not causes of stage-one infeasibility."
+  ],
+  "latent_code_risks_not_triggered_by_current_inputs": [
+    "v3 sizes cost vector by treated with edges but matrix by all treated; a no-edge treated would cause a dimension mismatch.",
+    "v1 converts missing panel rows/empty amount cells to zero; this scan found none among eligible pre rows but cannot validate source-level structural zeros."
+  ]
+}

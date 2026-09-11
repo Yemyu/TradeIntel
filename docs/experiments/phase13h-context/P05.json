@@ -1,0 +1,43 @@
+{
+  "question": "现在这批商品进口美国适用什么税率？",
+  "status": "no_evidence",
+  "hits": [],
+  "method": "bm25",
+  "as_of": "2018-08-23",
+  "limitations": [
+    "仅两份2018年公告正文；不是完整政策库或现行税率查询。",
+    "出版日期筛选不等于法律生效日期或完整历史有效性判断。",
+    "检索命中不等于主张已被证实；引用身份校验不等于语义校验。",
+    "政策原文不能单独证明贸易变化由关税造成。"
+  ],
+  "scope": [
+    {
+      "source": "initial_notice",
+      "indexed_pages": [
+        1,
+        2,
+        3
+      ],
+      "total_pdf_pages": 47,
+      "excluded": "annexes_not_indexed"
+    },
+    {
+      "source": "amendment_notice",
+      "indexed_pages": [
+        1,
+        2
+      ],
+      "total_pdf_pages": 16,
+      "excluded": "annexes_not_indexed"
+    }
+  ],
+  "reason": "这份历史语料不能回答现行政策。",
+  "context_expansion": {
+    "version": 1,
+    "radius_chars": 600,
+    "total_chars": 0,
+    "unique_chars": 0,
+    "duplicated_chars": 0,
+    "original_chars": 0
+  }
+}

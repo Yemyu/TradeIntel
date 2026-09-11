@@ -1,0 +1,20 @@
+{
+  "run": "tmp/planner-development/20260908T165101969735Z.json",
+  "run_sha256": "815286fe33435963889cc98770a76f0e26ad9c05a93c388f70d84d562889e36f",
+  "reviewer": "assistant",
+  "independent_review": false,
+  "api_calls": 6,
+  "known_tokens": 5865,
+  "original_passed": 0,
+  "planned": 6,
+  "offline_fence_only_passed": 2,
+  "model_adopted": false,
+  "rows": [
+    {"id":"P01","original_passed":false,"fence_only_passed":false,"reason":"顶层JSON围栏；另缺comparison_id证据。原始请求识别了政策、登记比较与因果条件三个任务，尚不满足证据契约。"},
+    {"id":"P02","original_passed":false,"fence_only_passed":false,"reason":"顶层JSON围栏；贸易子任务缺request.operation证据。请求范围与两项任务本身符合参考。"},
+    {"id":"P03","original_passed":false,"fence_only_passed":false,"reason":"顶层JSON围栏；返回plan包含子任务clarify，而契约要求顶层clarify。模型识别了月份与比较窗口缺失，但界面未形成适当澄清。"},
+    {"id":"P04","original_passed":false,"fence_only_passed":false,"reason":"顶层JSON围栏；德国贸易子任务缺task证据，整体被拦在校验，未交付明确能力拒绝。未把德国换成其他国家。"},
+    {"id":"P05","original_passed":false,"fence_only_passed":true,"reason":"仅去掉整份JSON围栏后，政策与质量任务通过；排除的删除指令没有成为实际任务，引用均对应原文。"},
+    {"id":"P06","original_passed":false,"fence_only_passed":true,"reason":"仅去掉整份JSON围栏后，共享中国、指标与政策整体条件正确复制到六月和七月两个独立请求；原文引用保留。"}
+  ]
+}

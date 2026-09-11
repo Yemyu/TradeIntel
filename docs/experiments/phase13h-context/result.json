@@ -1,0 +1,110 @@
+{
+  "label": "exposed_question_offline_context_diagnostic",
+  "new_api_calls": 0,
+  "cases": [
+    {
+      "id": "P01",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 7142,
+      "unique_chars": 5592,
+      "duplicated_chars": 1550,
+      "original_chars": 3600,
+      "old_has_additional_duties_clause": true,
+      "new_has_additional_duties_clause": true,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P02",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 6600,
+      "unique_chars": 6600,
+      "duplicated_chars": 0,
+      "original_chars": 3600,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": true,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P03",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 7200,
+      "unique_chars": 7200,
+      "duplicated_chars": 0,
+      "original_chars": 3600,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": true,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P04",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 4314,
+      "unique_chars": 3328,
+      "duplicated_chars": 986,
+      "original_chars": 2478,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": false,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P05",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 0,
+      "unique_chars": 0,
+      "duplicated_chars": 0,
+      "original_chars": 0,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": false,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P06",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 0,
+      "unique_chars": 0,
+      "duplicated_chars": 0,
+      "original_chars": 0,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": false,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P07",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 0,
+      "unique_chars": 0,
+      "duplicated_chars": 0,
+      "original_chars": 0,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": false,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    },
+    {
+      "id": "P08",
+      "version": 1,
+      "radius_chars": 600,
+      "total_chars": 6600,
+      "unique_chars": 5050,
+      "duplicated_chars": 1550,
+      "original_chars": 3600,
+      "old_has_additional_duties_clause": false,
+      "new_has_additional_duties_clause": false,
+      "same_hit_parents": true,
+      "status_unchanged": true
+    }
+  ]
+}

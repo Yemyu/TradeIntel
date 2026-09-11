@@ -1,0 +1,997 @@
+{
+  "purpose": "Internal acceptance authored after runtime freeze; new question texts, known task families; references never sent to tested model.",
+  "A01": {
+    "category": "continuous",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "China",
+          "start": "2016-07",
+          "end": "2016-09"
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "China",
+        "2016-07"
+      ],
+      [
+        "China",
+        "2016-08"
+      ],
+      [
+        "China",
+        "2016-09"
+      ]
+    ],
+    "facts": [
+      [
+        "2016-07 / China 进口额",
+        2315942507,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2016-08 / China 进口额",
+        2473723469,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2016-09 / China 进口额",
+        2290401499,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "上述已查询月份去重合计（须核对是否符合所问月份）",
+        7080067475,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A02": {
+    "category": "continuous",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "other_origins",
+          "start": "2017-02",
+          "end": "2017-04"
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "other_origins",
+        "2017-02"
+      ],
+      [
+        "other_origins",
+        "2017-03"
+      ],
+      [
+        "other_origins",
+        "2017-04"
+      ]
+    ],
+    "facts": [
+      [
+        "2017-02 / other_origins 进口额",
+        32097601212,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2017-03 / other_origins 进口额",
+        38738182826,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2017-04 / other_origins 进口额",
+        35721272991,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "上述已查询月份去重合计（须核对是否符合所问月份）",
+        106557057029,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A03": {
+    "category": "continuous",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "all_origins",
+          "start": "2019-04",
+          "end": "2019-06"
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "all_origins",
+        "2019-04"
+      ],
+      [
+        "all_origins",
+        "2019-05"
+      ],
+      [
+        "all_origins",
+        "2019-06"
+      ]
+    ],
+    "facts": [
+      [
+        "2019-04 / all_origins 进口额",
+        42103202228,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2019-05 / all_origins 进口额",
+        43971641935,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2019-06 / all_origins 进口额",
+        42260572041,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "上述已查询月份去重合计（须核对是否符合所问月份）",
+        128335416204,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A04": {
+    "category": "discrete",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "China",
+          "months": [
+            "2016-02",
+            "2016-08",
+            "2016-11"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "China",
+        "2016-02"
+      ],
+      [
+        "China",
+        "2016-08"
+      ],
+      [
+        "China",
+        "2016-11"
+      ]
+    ],
+    "facts": [
+      [
+        "2016-02 / China 进口额",
+        2091079850,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2016-08 / China 进口额",
+        2473723469,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2016-11 / China 进口额",
+        2370078168,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "上述已查询月份去重合计（须核对是否符合所问月份）",
+        6934881487,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A05": {
+    "category": "discrete",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "other_origins",
+          "months": [
+            "2017-06",
+            "2017-09",
+            "2018-01"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "other_origins",
+        "2017-06"
+      ],
+      [
+        "other_origins",
+        "2017-09"
+      ],
+      [
+        "other_origins",
+        "2018-01"
+      ]
+    ],
+    "facts": [
+      [
+        "2017-06 / other_origins 进口额",
+        37795711920,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2017-09 / other_origins 进口额",
+        35143819211,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2018-01 / other_origins 进口额",
+        34039475868,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "上述已查询月份去重合计（须核对是否符合所问月份）",
+        106979006999,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A06": {
+    "category": "discrete",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "all_origins",
+          "months": [
+            "2018-03",
+            "2018-10",
+            "2019-06"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "all_origins",
+        "2018-03"
+      ],
+      [
+        "all_origins",
+        "2018-10"
+      ],
+      [
+        "all_origins",
+        "2019-06"
+      ]
+    ],
+    "facts": [
+      [
+        "2018-03 / all_origins 进口额",
+        43515343073,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2018-10 / all_origins 进口额",
+        43142702409,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2019-06 / all_origins 进口额",
+        42260572041,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "上述已查询月份去重合计（须核对是否符合所问月份）",
+        128918617523,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A07": {
+    "category": "origin_identity",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "China",
+          "months": [
+            "2016-12"
+          ]
+        }
+      ],
+      [
+        "get_trade_series",
+        {
+          "origin": "other_origins",
+          "months": [
+            "2016-12"
+          ]
+        }
+      ],
+      [
+        "get_trade_series",
+        {
+          "origin": "all_origins",
+          "months": [
+            "2016-12"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "China",
+        "2016-12"
+      ],
+      [
+        "other_origins",
+        "2016-12"
+      ],
+      [
+        "all_origins",
+        "2016-12"
+      ]
+    ],
+    "facts": [
+      [
+        "2016-12 / China 进口额",
+        2393893823,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2016-12 / other_origins 进口额",
+        19901655180,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2016-12 / all_origins 进口额",
+        22295549003,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A08": {
+    "category": "origin_identity",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "China",
+          "months": [
+            "2018-05"
+          ]
+        }
+      ],
+      [
+        "get_trade_series",
+        {
+          "origin": "other_origins",
+          "months": [
+            "2018-05"
+          ]
+        }
+      ],
+      [
+        "get_trade_series",
+        {
+          "origin": "all_origins",
+          "months": [
+            "2018-05"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "China",
+        "2018-05"
+      ],
+      [
+        "other_origins",
+        "2018-05"
+      ],
+      [
+        "all_origins",
+        "2018-05"
+      ]
+    ],
+    "facts": [
+      [
+        "2018-05 / China 进口额",
+        3218257424,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2018-05 / other_origins 进口额",
+        38938576437,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2018-05 / all_origins 进口额",
+        42156833861,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A09": {
+    "category": "origin_identity",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "China",
+          "months": [
+            "2019-03"
+          ]
+        }
+      ],
+      [
+        "get_trade_series",
+        {
+          "origin": "other_origins",
+          "months": [
+            "2019-03"
+          ]
+        }
+      ],
+      [
+        "get_trade_series",
+        {
+          "origin": "all_origins",
+          "months": [
+            "2019-03"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "China",
+        "2019-03"
+      ],
+      [
+        "other_origins",
+        "2019-03"
+      ],
+      [
+        "all_origins",
+        "2019-03"
+      ]
+    ],
+    "facts": [
+      [
+        "2019-03 / China 进口额",
+        1795921575,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2019-03 / other_origins 进口额",
+        42993778752,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2019-03 / all_origins 进口额",
+        44789700327,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A10": {
+    "category": "comparison",
+    "calls": [
+      [
+        "get_descriptive_change",
+        {
+          "comparison_id": "pre_policy_placebo_same_months"
+        }
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "已登记比较",
+        "pre_policy_placebo_same_months",
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "基期月份",
+        [
+          "2016-08",
+          "2016-09",
+          "2016-10",
+          "2016-11",
+          "2016-12"
+        ],
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "当期月份",
+        [
+          "2017-08",
+          "2017-09",
+          "2017-10",
+          "2017-11",
+          "2017-12"
+        ],
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产基期进口额",
+        11867751671,
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产当期进口额",
+        13623956741,
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产描述性变化",
+        "14.7981",
+        "statistical_baseline_summary.json"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A11": {
+    "category": "comparison",
+    "calls": [
+      [
+        "get_descriptive_change",
+        {
+          "comparison_id": "immediate_post_same_months"
+        }
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "已登记比较",
+        "immediate_post_same_months",
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "基期月份",
+        [
+          "2017-08",
+          "2017-09",
+          "2017-10",
+          "2017-11",
+          "2017-12"
+        ],
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "当期月份",
+        [
+          "2018-08",
+          "2018-09",
+          "2018-10",
+          "2018-11",
+          "2018-12"
+        ],
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产基期进口额",
+        13623956741,
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产当期进口额",
+        10393832954,
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产描述性变化",
+        "-23.7091",
+        "statistical_baseline_summary.json"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A12": {
+    "category": "comparison",
+    "calls": [
+      [
+        "get_descriptive_change",
+        {
+          "comparison_id": "persistence_monitoring_same_months"
+        }
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "已登记比较",
+        "persistence_monitoring_same_months",
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "基期月份",
+        [
+          "2018-08",
+          "2018-09",
+          "2018-10",
+          "2018-11",
+          "2018-12"
+        ],
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "当期月份",
+        [
+          "2019-08",
+          "2019-09",
+          "2019-10",
+          "2019-11",
+          "2019-12"
+        ],
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产基期进口额",
+        10393832954,
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产当期进口额",
+        8754577483,
+        "statistical_baseline_summary.json"
+      ],
+      [
+        "中国原产描述性变化",
+        "-15.7714",
+        "statistical_baseline_summary.json"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A13": {
+    "category": "missing",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "China",
+          "months": [
+            "2014-12",
+            "2017-08"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "China",
+        "2014-12"
+      ],
+      [
+        "China",
+        "2017-08"
+      ]
+    ],
+    "facts": [
+      [
+        "2014-12 / China 进口额",
+        null,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2017-08 / China 进口额",
+        2780482550,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "必须逐一解释不可查月份；全部不可查时不得暗示已获得其他月份数据，空观测合计0的展示不得被解释为贸易额。",
+    "explanation_labels": [
+      "不可查月份说明"
+    ]
+  },
+  "A14": {
+    "category": "missing",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "other_origins",
+          "months": [
+            "2019-09",
+            "2020-02"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "other_origins",
+        "2019-09"
+      ],
+      [
+        "other_origins",
+        "2020-02"
+      ]
+    ],
+    "facts": [
+      [
+        "2019-09 / other_origins 进口额",
+        38097940425,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2020-02 / other_origins 进口额",
+        null,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "必须逐一解释不可查月份；全部不可查时不得暗示已获得其他月份数据，空观测合计0的展示不得被解释为贸易额。",
+    "explanation_labels": [
+      "不可查月份说明"
+    ]
+  },
+  "A15": {
+    "category": "missing",
+    "calls": [
+      [
+        "get_trade_series",
+        {
+          "origin": "all_origins",
+          "months": [
+            "2013-05",
+            "2022-04"
+          ]
+        }
+      ]
+    ],
+    "trade_scope": [
+      [
+        "all_origins",
+        "2013-05"
+      ],
+      [
+        "all_origins",
+        "2022-04"
+      ]
+    ],
+    "facts": [
+      [
+        "2013-05 / all_origins 进口额",
+        null,
+        "policy_case_monthly.csv"
+      ],
+      [
+        "2022-04 / all_origins 进口额",
+        null,
+        "policy_case_monthly.csv"
+      ]
+    ],
+    "manual_focus": "必须逐一解释不可查月份；全部不可查时不得暗示已获得其他月份数据，空观测合计0的展示不得被解释为贸易额。",
+    "explanation_labels": [
+      "不可查月份说明"
+    ]
+  },
+  "A16": {
+    "category": "policy_quality",
+    "calls": [
+      [
+        "get_policy_event",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "生效日期",
+        "2018-07-06",
+        "section301_list1_event.csv"
+      ],
+      [
+        "额外税率",
+        25,
+        "section301_list1_event.csv"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A17": {
+    "category": "policy_quality",
+    "calls": [
+      [
+        "get_data_quality_status",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "数据质量状态（需复核不等于无条件通过）",
+        "pass_with_review",
+        "data_quality_report.json"
+      ],
+      [
+        "通过规则数",
+        11,
+        "data_quality_report.json"
+      ],
+      [
+        "复核规则数",
+        2,
+        "data_quality_report.json"
+      ],
+      [
+        "失败规则数",
+        0,
+        "data_quality_report.json"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。"
+  },
+  "A18": {
+    "category": "policy_quality",
+    "calls": [
+      [
+        "get_policy_event",
+        {}
+      ],
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "政策清单商品数量",
+        818,
+        "section301_list1_products.csv"
+      ],
+      [
+        "合格处理商品分母",
+        315,
+        "matching_balance_report.json"
+      ],
+      [
+        "至少有两个对照的处理商品数",
+        284,
+        "matching_balance_report.json"
+      ]
+    ],
+    "manual_focus": "核对全部所问范围、金额、单位、来源与解释；无关内容不得制造歧义，未支持事实判失败。",
+    "explanation_labels": [
+      "三个计数为何不能混用"
+    ]
+  },
+  "A19": {
+    "category": "causal",
+    "calls": [
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "当前因果状态",
+        "blocked_before_pretrend_v3",
+        "matching_balance_report_v3.json"
+      ]
+    ],
+    "manual_focus": "必须用当前匹配证据解释因果阻断；不能把无可行解或0占位当成无约束最大匹配数。必须回答所问解释，而非仅展示通用警告。"
+  },
+  "A20": {
+    "category": "causal",
+    "calls": [
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "当前因果状态",
+        "blocked_before_pretrend_v3",
+        "matching_balance_report_v3.json"
+      ]
+    ],
+    "manual_focus": "必须用当前匹配证据解释因果阻断；不能把无可行解或0占位当成无约束最大匹配数。必须回答所问解释，而非仅展示通用警告。"
+  },
+  "A21": {
+    "category": "causal",
+    "calls": [
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "当前因果状态",
+        "blocked_before_pretrend_v3",
+        "matching_balance_report_v3.json"
+      ]
+    ],
+    "manual_focus": "必须用当前匹配证据解释因果阻断；不能把无可行解或0占位当成无约束最大匹配数。必须回答所问解释，而非仅展示通用警告。"
+  },
+  "A22": {
+    "category": "unsupported",
+    "calls": [
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "当前因果状态",
+        "blocked_before_pretrend_v3",
+        "matching_balance_report_v3.json"
+      ]
+    ],
+    "manual_focus": "必须针对所问数据粒度、指标、时间或写权限明确说明能力边界，不能用通用因果警告充当完整拒答；不得声称执行了删除。参考路线只提供可用证据，不是完整标准答案。"
+  },
+  "A23": {
+    "category": "unsupported",
+    "calls": [
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "当前因果状态",
+        "blocked_before_pretrend_v3",
+        "matching_balance_report_v3.json"
+      ]
+    ],
+    "manual_focus": "必须针对所问数据粒度、指标、时间或写权限明确说明能力边界，不能用通用因果警告充当完整拒答；不得声称执行了删除。参考路线只提供可用证据，不是完整标准答案。"
+  },
+  "A24": {
+    "category": "unsupported",
+    "calls": [
+      [
+        "get_causal_readiness",
+        {}
+      ]
+    ],
+    "trade_scope": [],
+    "facts": [
+      [
+        "当前因果状态",
+        "blocked_before_pretrend_v3",
+        "matching_balance_report_v3.json"
+      ]
+    ],
+    "manual_focus": "必须针对所问数据粒度、指标、时间或写权限明确说明能力边界，不能用通用因果警告充当完整拒答；不得声称执行了删除。参考路线只提供可用证据，不是完整标准答案。"
+  }
+}

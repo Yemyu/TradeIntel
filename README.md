@@ -2,7 +2,40 @@
 
 An evidence-grounded AI assistant for analysing trade-policy shocks and trade diversion.
 
+### Integrated research brief (experimental)
+
+A confirmed entry now combines exact trade calculations, policy retrieval, optional bounded GLM generation and source-traceable Chinese reporting. Explicit scope selection is required; this is not autonomous planning or a causal estimator. Default mode makes no API calls. [中文使用与学习说明](docs/learning/phase-13k-research-brief.zh-CN.md).
+
+```bash
+.venv/bin/python scripts/run_research_brief.py --question '第一批公告何时生效？' --months 2018-09 2018-10 --origin other_origins --confirm
+```
+
+Add `--generate` for one bounded live request. Reports preserve generated claims separately from calculations and review notes. [Integrated development results](docs/experiments/phase13k-results.zh-CN.md).
+
+### Experimental policy-document retrieval (Phase 13a)
+
+Phase 13e integration: the same CLI now supports bounded GLM-4.7 generation (thinking disabled, 512 output tokens), strict completion checks, format-only normalization, and separate raw/normalized audit records. `--replay-last` demonstrates the archived real answer offline; it is not a new live evaluation. [中文使用说明](docs/learning/phase-13e-unified-policy-workflow.zh-CN.md).
+
+Page-traceable lexical retrieval over five narrative pages from two verified 2018 USTR notices. Includes Chinese query expansion, BM25 versus term-overlap development comparison, publication cutoffs, and an optional single-call generation interface with citation-ID validation. This is not a complete tariff database, fine-tuning, or independently validated live RAG. The archived-plan business integration is offline; existing model scores remain unchanged.
+
+- [中文学习说明与参考答案](docs/learning/phase-13a-policy-retrieval.zh-CN.md)
+- [Development results and limitations](docs/experiments/phase13a-policy-retrieval/review.zh-CN.md)
+
+Using the fingerprint-verified text snapshot included under `docs/experiments/phase13a-policy-retrieval/`:
+
+```bash
+.venv/bin/python scripts/run_policy_retrieval.py
+```
+
+Outputs local evidence previews in `tmp/policy-retrieval/`; no API call by default. `--generate` uses the project-scoped API key or hidden terminal input for GLM-4.7 and writes a new `run-...` audit directory. Generated claims remain unverified drafts pending semantic review. The historical replay requires the local archived response; it never substitutes that answer for a different question.
+
+> 项目方向、已完成内容、未完成原因和后续边界，以[项目总参考文件](docs/PROJECT_CONTEXT_REFERENCE.zh-CN.md)为准。它用于恢复上下文，不能用阶段日志替代。
+
 ## Current status
+
+2026-09-10 HTS8 route update: 692 stable metadata candidates were aggregated to a 29-month pre-policy HTS8 panel (20,068 rows). Applying the frozen 24-positive-China-month screen leaves 243 main-route candidates; in NAICS4 3332 this is 38 treated and 24 control candidates. This is a screening result, not a matched sample or causal estimate. See the [Chinese candidate result](docs/decisions/0052-hts8-candidate-panel-results.zh-CN.md) and [learning guide](docs/learning/phase-12i-hts8-candidate-screening.zh-CN.md).
+
+2026-09-10 data-preparation update: the reusable pre-policy HTS10 detail layer for 2016-01 to 2018-05 is complete (29 months, 496,126 rows). Every month reconciles to the frozen all-origin HS6 panel, and the 29 original Census ZIP archives are retained locally until the data design is settled. The 17 uncovered HTS10 leads are screening candidates only; they have not been adopted as controls and no causal effect is claimed. See the [Chinese extraction decision](docs/decisions/0048-hts10-retention-and-extraction.zh-CN.md), [candidate-screening result](docs/decisions/0049-hts10-candidate-screening-results.zh-CN.md), and [Chinese learning guide](docs/learning/phase-12g-hts10-screening.zh-CN.md).
 
 2026-09-06 audit: fabricated scores for the unrun direct-model baseline have been withdrawn. The 60-question report measures development tool contracts, not final-answer correctness. Models may call five query tools; evidence assembly is host-only. Unverified drafts return `needs_review` (CLI exit code 3). Missing months remain null. No live-model evaluation or causal estimate has been established. See the [Chinese audit guide](docs/learning/phase-10d-quality-audit.zh-CN.md) and [evaluation protocol](docs/decisions/0008-evaluation-and-trust-boundary-audit.zh-CN.md).
 

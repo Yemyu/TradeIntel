@@ -1,0 +1,60 @@
+{
+  "new_api_calls": 0,
+  "label": "heuristic_review_not_accuracy",
+  "cases": [
+    {
+      "source": "tmp/policy-acceptance-13g/P01",
+      "original_sha256": "cadbff10d998d50270b6346f4207549d5e589fed55e548a6d3040e040a61e5c0",
+      "flags": [
+        {
+          "claim": 3,
+          "code": "ambiguous_noon_midnight",
+          "note": "核对原文a.m./p.m.和时区，勿自动替换。"
+        },
+        {
+          "claim": 3,
+          "code": "possibly_unrequested_clock_time",
+          "note": "用户未明确询问精确时刻；检查它是否为必要条件，不自动删除。"
+        }
+      ],
+      "automatic_factuality_verdict": false,
+      "original_claims_unchanged": true
+    },
+    {
+      "source": "tmp/policy-acceptance-13g/P02",
+      "original_sha256": "5b1c0b201b2fdc2a664c8a796d3ddadf41bf6f73d33620b0b76114be454c2316",
+      "flags": [
+        {
+          "claim": 1,
+          "code": "action_amendment_wording",
+          "note": "核对是否将政策批次误称文件修订。"
+        },
+        {
+          "claim": 2,
+          "code": "action_amendment_wording",
+          "note": "核对是否将政策批次误称文件修订。"
+        }
+      ],
+      "automatic_factuality_verdict": false,
+      "original_claims_unchanged": true
+    },
+    {
+      "source": "tmp/policy-context-13i",
+      "original_sha256": "8c098e78a65d33b8f0d117de3598ccddb29adad226caae42358720f5a06eeae7",
+      "flags": [
+        {
+          "claim": 2,
+          "code": "ambiguous_noon_midnight",
+          "note": "核对原文a.m./p.m.和时区，勿自动替换。"
+        },
+        {
+          "claim": 2,
+          "code": "possibly_unrequested_clock_time",
+          "note": "用户未明确询问精确时刻；检查它是否为必要条件，不自动删除。"
+        }
+      ],
+      "automatic_factuality_verdict": false,
+      "original_claims_unchanged": true
+    }
+  ]
+}

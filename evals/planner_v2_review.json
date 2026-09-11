@@ -1,0 +1,43 @@
+{
+  "run": "tmp/planner-v2/20260909T033747120490Z.json",
+  "source_sha256": "5d94c490954ebdc1138329ce6917d6bec2ca8a3c4432314c783843505ed803d3",
+  "reviewer": "assistant",
+  "independent_review": false,
+  "api_requests": 6,
+  "known_tokens": 5131,
+  "passed": 4,
+  "planned": 6,
+  "model_adopted": false,
+  "rows": [
+    {
+      "id": "P01",
+      "passed": true,
+      "reason": "政策、登记比较、因果准备三任务顺序与原文一致，各字段引用完整。"
+    },
+    {
+      "id": "P02",
+      "passed": false,
+      "reason": "国家月份与任务含义基本对应，但政策/操作/指标/粒度返回中文值，能力层按不支持值阻断。日期已转换。错误拒绝，未执行。"
+    },
+    {
+      "id": "P03",
+      "passed": false,
+      "reason": "应澄清比较窗口与基准，却将比较替换为readiness。引用虽出现在原文但不支持任务解释；待确认而非自动执行仍是规划失败。"
+    },
+    {
+      "id": "P04",
+      "passed": true,
+      "reason": "保留德国、月份、只读与描述范围，给出整体阻断，不换成其他国家。"
+    },
+    {
+      "id": "P05",
+      "passed": true,
+      "reason": "政策与质量两项实际请求完整，排除的删除标题未成为操作。"
+    },
+    {
+      "id": "P06",
+      "passed": true,
+      "reason": "分别六月七月，共享范围正确展开，保留两个独立查询，原文依据对应。"
+    }
+  ]
+}

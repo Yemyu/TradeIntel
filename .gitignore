@@ -17,3 +17,8 @@ data/processed/trade/trade_import_monthly.csv
 # Causal extension rebuilds all origins but stores only compact local artifacts.
 data/processed/causal/monthly/
 data/processed/causal/causal_trade_hs6_monthly.csv
+
+# Reusable HTS10 detail is generated locally from retained Census archives;
+# keep the small provenance manifest, not the 90+ MB monthly CSVs, in Git.
+data/processed/trade_hts10/monthly/
+data/processed/trade_hts8/monthly/

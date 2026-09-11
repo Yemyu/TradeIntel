@@ -1,0 +1,44 @@
+{
+  "run": "tmp/planner-v3-component/20260909T043221107009Z.json",
+  "source_sha256": "de2c7a2e6d3f761cf04e981e2dd64054d392cff3bd75057d0b40213bb12ccdc7",
+  "reviewer": "assistant",
+  "mode": "archived_v2_plans_with_live_review",
+  "independent_evaluation": false,
+  "planned": 6,
+  "passed": 5,
+  "api_calls": 6,
+  "known_tokens": 2626,
+  "model_adopted": false,
+  "rows": [
+    {
+      "id": "P01",
+      "passed": true,
+      "reason": "原三项请求保留，复核接受，无额外任务。"
+    },
+    {
+      "id": "P02",
+      "passed": true,
+      "reason": "只规范化有对应原文依据的五个同义字段，金额指标/中国/两月范围不变；复核接受，错误能力拒绝解除。"
+    },
+    {
+      "id": "P03",
+      "passed": false,
+      "reason": "复核quote指出比较任务缺失并reject coverage；错误计划被撤销确认，但未形成所需的具体范围澄清，仍未完成参考任务。"
+    },
+    {
+      "id": "P04",
+      "passed": true,
+      "reason": "复核接受的是对德国需求的忠实理解；能力模块仍阻断整个计划，不允许执行德国查询。"
+    },
+    {
+      "id": "P05",
+      "passed": true,
+      "reason": "仍仅政策与质量任务，无删除操作。"
+    },
+    {
+      "id": "P06",
+      "passed": true,
+      "reason": "共享范围和六月七月两个独立查询保留，复核接受。"
+    }
+  ]
+}

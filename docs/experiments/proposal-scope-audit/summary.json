@@ -1,0 +1,111 @@
+{
+  "status": "scope_audit_complete_not_causal_adoption",
+  "input_sha256": {
+    "data/raw/policy/ustr-section301-proposed-2018-04-03.pdf": "1bd15ffdc1cd464287d9ae87aa0f06cc539bdccf57434b0c27edccf57a1bcda3",
+    "data/raw/policy/ustr-section301-proposed-2018-04-06.pdf": "4b837ba6eb94f74c01caf8650bee6e28c5ec414a86b814922d29bdfeb947d3ba",
+    "data/raw/policy/ustr-list1-exclusions-2019-07-09.pdf": "75a215a8cc1e306419b5cfafe48d301bf7df30351e55451a4ef2d4f819ddbc74",
+    "data/processed/causal/hts_history_mapping.csv": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+    "data/processed/causal/trade_action_exposure.csv": "53937091bbfd3b954e601de9c71576f8ad7c568eeca2803b13315c8f9d1dea3c",
+    "data/processed/causal/list1_exclusion_timeline.csv": "4da2c98db7cace332b6224361d31712b6d0e727b2fed33fc112a8224e7e60f9e",
+    "docs/experiments/preannouncement-preparation/candidate_eligibility.csv": "204d8eec2f222c46f214b89fa23022eae78841537ef4e777055c169d2ce37895",
+    "docs/decisions/0068-proposal-and-correction-audit.zh-CN.md": "416e30e88f112484f6ebad3f95dd70120971798229566c7a1502b66c9cde0257",
+    "scripts/audit_proposal_scope.py": "0a7d0a6d413f85c43ae2efaaf29ef00dec820f6cbd1e325f21fe292cef98f7c1",
+    "scripts/build_control_eligibility.py": "66d631acb792cc2f3f180ec914ed3c6d50c6c8ffdf0df6da729c278c78d23b20"
+  },
+  "sources": {
+    "primary": "https://ustr.gov/sites/default/files/files/Press/Releases/301FRN.pdf",
+    "public_copy": "https://ustr.gov/sites/default/files/enforcement/301Investigations/FRN301.pdf",
+    "correction": "https://www.govinfo.gov/content/pkg/FR-2019-07-09/pdf/2019-14562.pdf"
+  },
+  "proposal_count": 1333,
+  "final_count": 818,
+  "proposal_not_final_list1": 515,
+  "final_missing_from_proposal": [],
+  "same_revision_prefix_fallback": [
+    "84807140"
+  ],
+  "public_copy_strict_extraction_count": 1295,
+  "public_copy_missing_in_machine_text": [
+    "72269901",
+    "84223091",
+    "84224011",
+    "84229021",
+    "84306901",
+    "84423001",
+    "84569031",
+    "84569071",
+    "84601901",
+    "84602901",
+    "85021100",
+    "85049041",
+    "85439068",
+    "87022031",
+    "87022061",
+    "90319091",
+    "90329021",
+    "90329041",
+    "90329061",
+    "93012000",
+    "93019030",
+    "93019060",
+    "93019090",
+    "93040040",
+    "93051020",
+    "93051040",
+    "93051060",
+    "93051080",
+    "93059940",
+    "93059960",
+    "93063041",
+    "93063080",
+    "93069000",
+    "94011040",
+    "94011080",
+    "94019010",
+    "94019015",
+    "94019025"
+  ],
+  "public_copy_extra_in_machine_text": [],
+  "public_copy_comparison_status": "machine_text_disagrees_do_not_use_as_complete_index",
+  "candidate_counts": {
+    "control_candidate|proposal=False": 792,
+    "treated_candidate|proposal=True": 314,
+    "control_candidate|proposal=True": 98
+  },
+  "correction_events": [
+    {
+      "note": "20(m)(53)",
+      "old_code": "8404404000",
+      "new_code": "8504404000",
+      "publication_date": "2019-07-09",
+      "retroactive_effective_date": "2018-07-06",
+      "source_page": 6,
+      "source_url": "https://www.govinfo.gov/content/pkg/FR-2019-07-09/pdf/2019-14562.pdf",
+      "description_conditions_still_required": true
+    },
+    {
+      "note": "20(m)(54)",
+      "old_code": "8504400000",
+      "new_code": "8504404000",
+      "publication_date": "2019-07-09",
+      "retroactive_effective_date": "2018-07-06",
+      "source_page": 6,
+      "source_url": "https://www.govinfo.gov/content/pkg/FR-2019-07-09/pdf/2019-14562.pdf",
+      "description_conditions_still_required": true
+    }
+  ],
+  "legacy_code_string_count": 182,
+  "corrected_distinct_code_string_count": 180,
+  "unresolved_after_two_corrections": [],
+  "whole_hts10_exemption_claim_allowed": false,
+  "description_scope_complete": false,
+  "model_calls": 0,
+  "optimization_calls": 0,
+  "trade_amounts_read": false,
+  "causal_adopted": false,
+  "output_sha256": {
+    "candidate_proposal_risk.csv": "36b3f8c4d2e016ff51d56146c3854fae4fe4a4524dd118e305429624221fa197",
+    "proposal_hts8.csv": "783cf9170223a2bb07a19bffc98c365219699b461ed5146335f0f1fc919c2841",
+    "correction_events.csv": "c21566716abd432602935777d680d4c648b59f318d4b8117fcc93d600a5c4bf6"
+  }
+}
