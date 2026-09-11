@@ -1,0 +1,68 @@
+{
+  "status": "hts8_candidate_panel_built",
+  "source_scope": {
+    "start": "2016-01",
+    "end": "2018-05",
+    "month_count": 29
+  },
+  "policy_post_data_used": false,
+  "candidate_count": 692,
+  "monthly_rows": 20068,
+  "activity_rule": "positive China amount in at least 24 of 29 policy-pre months",
+  "metadata_inventory": "data/processed/causal/hts8_stable_inventory.json",
+  "outputs": {
+    "monthly": "data/processed/trade_hts8/monthly/hts8_candidates_prepolicy.csv",
+    "qualification": "data/processed/causal/hts8_candidate_qualification.csv"
+  },
+  "sector_summary": {
+    "3331": {
+      "metadata_policy_excluded": 56,
+      "activity_eligible": 79,
+      "main_route_candidates": 31,
+      "metadata_treated": 44,
+      "metadata_control": 6
+    },
+    "3332": {
+      "metadata_control": 56,
+      "activity_eligible": 91,
+      "main_route_candidates": 62,
+      "metadata_treated": 56,
+      "metadata_policy_excluded": 41
+    },
+    "3333": {
+      "metadata_control": 25,
+      "activity_eligible": 88,
+      "main_route_candidates": 26,
+      "metadata_treated": 11,
+      "metadata_policy_excluded": 83
+    },
+    "3334": {
+      "metadata_control": 11,
+      "activity_eligible": 28,
+      "main_route_candidates": 13,
+      "metadata_policy_excluded": 15,
+      "metadata_treated": 3
+    },
+    "3335": {
+      "metadata_policy_excluded": 28,
+      "activity_eligible": 63,
+      "main_route_candidates": 38,
+      "metadata_treated": 65,
+      "metadata_control": 1
+    },
+    "3336": {
+      "metadata_treated": 20,
+      "activity_eligible": 35,
+      "main_route_candidates": 7,
+      "metadata_policy_excluded": 46
+    },
+    "3339": {
+      "metadata_policy_excluded": 50,
+      "activity_eligible": 112,
+      "main_route_candidates": 66,
+      "metadata_treated": 59,
+      "metadata_control": 16
+    }
+  },
+  "interpretation": "Qualification is a policy-pre activity screen, not a matched control set or causal estimate."
+}

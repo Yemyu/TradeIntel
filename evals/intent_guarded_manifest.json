@@ -1,0 +1,27 @@
+{
+  "version": "intent-guarded-1",
+  "model": "glm-4.7",
+  "timeout_seconds": 180,
+  "maximum_requests": 36,
+  "files": {
+    "scripts/run_intent_catalog.py": "1396044b95a2b1f7490ba5a2eea3cebc547260fddc5e9cd0220dc7ce313f4a84",
+    "src/tradeintel_ai/intent_catalog.py": "f8cd415ff92f33745cf27b81acfe89a2a8651dc9bada954af0eecb9ba5487fb6",
+    "src/tradeintel_ai/intent_repair.py": "859aac6623723cb2861500d72cc3a1e3c8a2b361f1f47fe407a46c4e6417f522",
+    "src/tradeintel_ai/intent_proposal.py": "1df504ce354f40b954a953466240224f4ded52ac7bb869e22a602ae6a42b9d54",
+    "src/tradeintel_ai/intent_diagnostics.py": "3d0c817749f278ffe81e45d80df440c537d82f5dbde24e2e45ce57004453330a",
+    "src/tradeintel_ai/model_adapter.py": "219345bccaa03935ecf78abc2fbe9d59d01c952b4ff744d90622154dc7877ec2",
+    "src/tradeintel_ai/agent.py": "48630f4b38601419ce139f0a7f7220ab220312c8c886b8a169dfc70ec4a45b59",
+    "src/tradeintel_ai/tools.py": "2ae534810ed8e12ff1073857a2e410707bfa31365492c3d690f851ec1a0ecb38",
+    "src/tradeintel_ai/repository.py": "432cb9b959a719e674439af8cd53501282c68e5f7edfe5ae4aa187601a5156e0",
+    "scripts/check_intent_development.py": "01904684590db0bdc7ea6fb9a209cb87e09478549c3d5dc2e7aaab7d55032b4f",
+    "evals/intent_development_cases.json": "36345dd838fe2185e3890c82ae719114afa5f7dee1a35f1127ca8eba8f5e9f11",
+    "docs/decisions/0025-task-catalog.zh-CN.md": "178aa29d35a4916509b06158647008fc28e1a730530743b7b0d4dbfacaf3796a",
+    "scripts/run_intent_guarded.py": "1818171639f3bcf99c58466d684099c5c743b054189923ff409aa48d060d543a",
+    "src/tradeintel_ai/intent_guarded.py": "0dc5c8791430447098a46bc95e4afa0b23f2ee5d33fa92bf2c8476e804fc5131",
+    "src/tradeintel_ai/intent_format.py": "a2f0b1518fae07c95c665972f4e5c7e59d63b471fb5ab4ea27bc814d5a2da8a8",
+    "src/tradeintel_ai/capability_contract.py": "657470cba812a6bf67f2124e416e6e0d4675c4ee0982ea27db389d32193d053e",
+    "evals/intent_holdout_questions.jsonl": "b8ba729d6ef6b0de2a968ea0538ac364c355535a6744a08863d65badc3b504f9",
+    "evals/intent_holdout_reference.json": "b52c4dc92c047b567c8a07b4c58c91670c403b6ed60374e587553acf6e4e6bf3",
+    "docs/decisions/0028-guarded-intent.zh-CN.md": "33a5609d1809ba80044bb6920b743f36ec1eb6abc1075b1a9d6340887d546eca"
+  }
+}

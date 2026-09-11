@@ -1,0 +1,24 @@
+{
+  "review_type": "assistant_semantic_development_review",
+  "run_sha256": "5489d975a841852dad64ba472caca9d2c1c2f5894fd56225f3c3659368a75a17",
+  "run": "tmp/intent-catalog/20260908T105626275071Z.json",
+  "reviewer": "Codex assistant",
+  "independent_human_review": false,
+  "model_adopted": false,
+  "development_candidate": "glm-4.7 / intent-catalog-1",
+  "rows": [
+    {"id":"D01","correct":true,"reason":"计数口径解释对应counts，原文引文覆盖三个计数，没有要求补商品编码。"},
+    {"id":"D02","correct":true,"reason":"只问匹配与前趋势进展，对应readiness；未被否定的进口查询干扰。"},
+    {"id":"D03","correct":true,"reason":"质量状态、复核项与规则计数被正确视为一个quality报告任务。"},
+    {"id":"D04","correct":true,"reason":"政策登记信息对应policy，引用为用户明确政策范围。"},
+    {"id":"D05","correct":true,"reason":"登记比较ID一致，没有另行请求月度数据。"},
+    {"id":"D06","correct":true,"reason":"最近表现缺具体指标与月份，主动澄清，不默认补日期。"},
+    {"id":"D07","correct":true,"reason":"指代与本月缺上下文，主动澄清。"},
+    {"id":"D08","correct":true,"reason":"计数和质量是两个独立任务，按当前单任务接口主动澄清，未丢掉其中一项。"},
+    {"id":"D09","correct":true,"reason":"选择实际要求的quality，引号内删除操作未成为请求。"},
+    {"id":"D10","correct":true,"reason":"保留否定后的匹配和因果准备问题，对应readiness，没有查询被排除的quality。"},
+    {"id":"D11","correct":true,"reason":"中国、两个离散月份、美元消费进口额、整体和非因果均符合问题；字段引用均为对应原文。"},
+    {"id":"D12","correct":true,"reason":"保留德国和2017-02，没有换成其他整体；引用对应原文，后续能力层明确拒绝。"}
+  ],
+  "limitations": "12题用于开发修改；不代表独立验收、取消用户确认或完整项目准确率。只读执行回归受开发参考检查后放行，不冒充无人监督的新测试。"
+}

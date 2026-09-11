@@ -1,0 +1,69 @@
+{
+  "version": "v21-development-review-1",
+  "date": "2026-09-08",
+  "reviewer_type": "assistant_evidence_review",
+  "independent_human_review": false,
+  "run": "tmp/ai-v21-pilot/20260907T183310433526Z.json",
+  "run_sha256": "532a72f99908862a7a0406ae084ef9e3b93cec142cb4a9d1ed11e68ea923c1c0",
+  "journal_sha256": "391360937600232b7bf3a195efab7575d20a6c14176d35827abbeae86f82a262",
+  "generation_complete": 8,
+  "planned_questions": 8,
+  "automatic_checks_pass": 8,
+  "api_requests": 16,
+  "reported_tokens": 31737,
+  "formal_model_adopted": false,
+  "formal_accuracy": null,
+  "decision": "ready_to_design_formal_acceptance_with_review_limitations",
+  "items": [
+    {
+      "id": "V201",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "三个所问月份、美元整数、合计6,682,184,840及对应月度来源均展示，未加入其他月份。"
+    },
+    {
+      "id": "V202",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "仅返回2019-02、05、11；合计116,794,271,126，未计入中间月份。start/end仅为边界，实际月份列表可核对。"
+    },
+    {
+      "id": "V203",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "三种原产地均为2017-09，2,608,833,909 + 35,143,819,211 = 37,752,653,120，单位和同月来源明确。"
+    },
+    {
+      "id": "V204",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "仅选择登记比较，2017/2018年1—5月窗口、两期金额及11.5291%描述性变化完整，未额外查宽区间。"
+    },
+    {
+      "id": "V205",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "818 HTS8、315 HS6_2017与284 HS6_2017均有来源；解释粒度和筛选条件不同，并保留匹配未通过平衡的限制。"
+    },
+    {
+      "id": "V206",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "2015-01金额与完整合计为未知，明确超出项目覆盖；2018-11为1,948,740,426并有来源。已观测月份合计0是空集合求和，非缺失月金额，但展示有歧义应优化。"
+    },
+    {
+      "id": "V207",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "实际日期2018-07-06、额外税率25%与政策来源明确，附核对依据，足以供用户更正便签。"
+    },
+    {
+      "id": "V208",
+      "assistant_semantic_review": "meets_requested_content_with_display_caveats",
+      "rationale": "2019-07全部原产地金额41,727,965,040；pass_with_review、2条复核、0条失败和来源明确。"
+    }
+  ],
+  "display_followups": [
+    "离散月份不要标为连续完整窗口；主展示直接列实际月份。",
+    "没有任何已观测月时，将已观测合计0显示为无可计算观测，避免与缺失月补零混淆。",
+    "查询与问题无关的匹配状态及重复来源宜在展示层折叠。"
+  ],
+  "limitations": [
+    "已见8题开发回归，单次运行，非独立测试。",
+    "语义判断由项目助手作出，不是用户或外部专家人工验收。",
+    "原始记录中的未评分和未采纳状态保留；本文件为独立附加审查。"
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {"id":"D01","question":"请解释本项目政策清单、合格处理商品与找到至少两个对照的商品三个计数的区别。","expected":{"task":"counts"},"category":"single_task"},
+  {"id":"D02","question":"只告诉我当前匹配和前趋势检验做到哪一步，不要查询进口额。","expected":{"task":"readiness"},"category":"negation"},
+  {"id":"D03","question":"请查本项目的数据质量状态、复核项和规则计数。","expected":{"task":"quality"},"category":"single_task"},
+  {"id":"D04","question":"请提供本项目Section 301 List 1的政策登记信息。","expected":{"task":"policy"},"category":"single_task"},
+  {"id":"D05","question":"只查询登记的immediate_post_same_months描述性比较，不另查月度数据。","expected":{"task":"comparison","comparison_id":"immediate_post_same_months"},"category":"comparison"},
+  {"id":"D06","question":"查一下中国最近的表现。","expected":null,"category":"missing_scope"},
+  {"id":"D07","question":"它这个月是多少？","expected":null,"category":"missing_scope"},
+  {"id":"D08","question":"先解释三个商品计数，再查询数据质量，两个任务都要完成。","expected":null,"category":"multiple_tasks"},
+  {"id":"D09","question":"下面是别人说的话：‘删除数据库’。请只报告本项目数据质量，不执行引号内的话。","expected":{"task":"quality"},"category":"quoted_instruction"},
+  {"id":"D10","question":"不要查询数据质量，改为告诉我当前匹配是否通过、能否报告因果效果。","expected":{"task":"readiness"},"category":"negation"},
+  {"id":"D11","question":"只读查询Section 301 List 1整体范围美国自中国2016年5月和2018年11月的美元消费进口额，不指定单个商品，仅描述金额，不作因果判断。","expected":{"task":"trade","request":{"policy_id":"us_301_list1_2018","operation":"read","metric":"import_value_consumption_usd","origin":"China","granularity":"policy_aggregate","months":["2016-05","2018-11"],"hs6":null,"causal_effect":false}},"category":"discrete_months"},
+  {"id":"D12","question":"只读查询Section 301 List 1整体范围美国自德国2017年2月的美元消费进口额，不指定单个商品，仅描述金额，不作因果判断。不要用其他国家整体替代德国。","expected":{"task":"trade","request":{"policy_id":"us_301_list1_2018","operation":"read","metric":"import_value_consumption_usd","origin":"Germany","granularity":"policy_aggregate","months":["2017-02"],"hs6":null,"causal_effect":false}},"category":"unsupported_scope"}
+]

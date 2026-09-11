@@ -1,0 +1,8711 @@
+{
+  "scope": "metadata candidates only; not adopted controls",
+  "source_sha256": {
+    "data/processed/causal/policy_exposure_hs6.csv": "0acdbe2ed73e8ff4204b1b35511a447490cbcc35ebf6b42ab37f16dc1f1bddaa",
+    "data/processed/policy/section301_list1_products.csv": "fe2fc56d873be51111b2c537208832008b01cc60566fdf1f813741226498d82a",
+    "data/processed/causal/hts_history_mapping.csv": "7dc7823a97d6811f8f0d1997049dd8e3613a0a437ed733c82c176c270c6277a1",
+    "docs/decisions/0050-hts8-research-route.zh-CN.md": "1ab07814c41a9faab85cf5231c7613cbf9504ee8a3091a818a0c6c404561064b",
+    "data/raw/policy/census-import-concordance-2016.xls": "233300ca5e5bb56e552e424d8b7a271ba8ba3a435ed1d44f88f1ec15f4f7c0ba",
+    "data/raw/policy/census-import-concordance-2017.xls": "2f0e9a17c8ec5a4e58c1fb02cb838ef404f5d18cf511767b2c84bd7000abcca4",
+    "data/raw/policy/census-import-concordance-2018.xls": "4822688ec94fc187ca6d8ce253bd472fc89712aea6736739ec3d2c04c0fc6ac0"
+  },
+  "sector_counts": {
+    "3334": {
+      "control": 11,
+      "policy_excluded": 15,
+      "treated": 3
+    },
+    "3339": {
+      "policy_excluded": 50,
+      "treated": 59,
+      "control": 16
+    },
+    "3331": {
+      "policy_excluded": 56,
+      "treated": 44,
+      "control": 6
+    },
+    "3335": {
+      "policy_excluded": 28,
+      "treated": 65,
+      "control": 1
+    },
+    "3336": {
+      "treated": 20,
+      "policy_excluded": 46
+    },
+    "3332": {
+      "control": 56,
+      "treated": 56,
+      "policy_excluded": 41
+    },
+    "3333": {
+      "control": 25,
+      "treated": 11,
+      "policy_excluded": 83
+    }
+  },
+  "exclusion_counts": {
+    "industry_ambiguous": 91,
+    "child_set_change": 61,
+    "history_requires_review": 25,
+    "metadata_change": 2
+  },
+  "records": [
+    {
+      "hts8": "73218110",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "7321811000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "73218150",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "7321815000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "73218210",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "7321821000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "73218250",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "7321825000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "73218900",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "7321890010",
+        "7321890050"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "73221100",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "7322110000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "73221900",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "7322190000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "73229000",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "7322900015",
+        "7322900030",
+        "7322900045"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82055920",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8205592000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82071300",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8207130000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82071930",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8207193030",
+        "8207193060",
+        "8207193090"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82072000",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207200030",
+        "8207200040",
+        "8207200070"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82073030",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207303020",
+        "8207303050"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82074030",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207403000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82074060",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207406000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82075040",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207504030",
+        "8207504060"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82075060",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8207506000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82075080",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8207508000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82076000",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207600030",
+        "8207600035",
+        "8207600061"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82078030",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207803000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82078060",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207806000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82079045",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8207904500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82081000",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8208100030",
+        "8208100060"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "82090000",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8209000030",
+        "8209000060"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "83111000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8311100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "83112000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8311200000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "83119000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8311900000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84012000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8401200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84031000",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "8403100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84039000",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "8403900000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84061010",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8406101000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84061090",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8406109000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84068110",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406811020",
+        "8406811070"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84068190",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406819000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84068210",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406821010",
+        "8406821020",
+        "8406821050",
+        "8406821070"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84068290",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406829000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84069020",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406902000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069030",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406903000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069040",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406904000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069045",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406904540",
+        "8406904580"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069050",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406905000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069060",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406906000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069070",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406907000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84069075",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8406907500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84072100",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8407210040",
+        "8407210080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84072900",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8407290010",
+        "8407290020",
+        "8407290030",
+        "8407290040"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84073100",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407310040",
+        "8407310080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073210",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407321000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073290",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407329040",
+        "8407329080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073310",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407331030",
+        "8407331060",
+        "8407331090"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073330",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407333040",
+        "8407333080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073390",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407339040",
+        "8407339080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073405",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407340530",
+        "8407340560",
+        "8407340590"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073425",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407342500"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073435",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407343530",
+        "8407343560",
+        "8407343590"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84073455",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407345500"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84079010",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407901010",
+        "8407901020",
+        "8407901060",
+        "8407901080"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84079090",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8407909010",
+        "8407909020",
+        "8407909040",
+        "8407909060",
+        "8407909080"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84081000",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8408100005",
+        "8408100015",
+        "8408100020",
+        "8408100030",
+        "8408100040",
+        "8408100050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84082010",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8408201040",
+        "8408201080"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84082020",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8408202000"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84082090",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8408209000"
+      ],
+      "policies": [
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84089010",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8408901040",
+        "8408901080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84089090",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8408909010",
+        "8408909020",
+        "8408909030",
+        "8408909040",
+        "8408909050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84099192",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8409919210",
+        "8409919290"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84099199",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8409919910",
+        "8409919990"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84099910",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8409991040",
+        "8409991060",
+        "8409991080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84099991",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8409999110",
+        "8409999190"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84099992",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8409999210",
+        "8409999290"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84099999",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8409999910",
+        "8409999990"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84101100",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8410110000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84101200",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8410120000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84101300",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8410130000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84109000",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8410900000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84111180",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8411118000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84111280",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8411128000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84112180",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8411218000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84112280",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8411228000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84118180",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8411818000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84118280",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8411828000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84122100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8412210015",
+        "8412210030",
+        "8412210045",
+        "8412210060",
+        "8412210075"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84122940",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8412294000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84122980",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8412298015",
+        "8412298030",
+        "8412298045",
+        "8412298060",
+        "8412298075"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84123100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8412310040",
+        "8412310080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84123900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8412390040",
+        "8412390080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84128090",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8412809000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84129010",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8412901000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84131100",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8413110000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84131900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413190000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84132000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8413200000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84134000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8413400000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84135000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413500010",
+        "8413500050",
+        "8413500070",
+        "8413500080",
+        "8413500090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84136000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413600020",
+        "8413600030",
+        "8413600040",
+        "8413600050",
+        "8413600070",
+        "8413600090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84137010",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413701000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84137020",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413702004",
+        "8413702005",
+        "8413702015",
+        "8413702022",
+        "8413702025",
+        "8413702030",
+        "8413702040",
+        "8413702090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84138100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413810020",
+        "8413810030",
+        "8413810040"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84138200",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413820000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84139120",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8413912000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84139200",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8413920000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84141000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84142000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414200000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84143040",
+      "naics4": "3334",
+      "role": "treated",
+      "children": [
+        "8414304000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84144000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414400000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84145930",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8414593000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84148005",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414800500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84148016",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414801605",
+        "8414801615",
+        "8414801625",
+        "8414801635",
+        "8414801640",
+        "8414801645",
+        "8414801655",
+        "8414801660",
+        "8414801665",
+        "8414801670",
+        "8414801675",
+        "8414801680",
+        "8414801685",
+        "8414801690"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84148020",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414802005",
+        "8414802015",
+        "8414802055",
+        "8414802065",
+        "8414802075"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84148090",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414809000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84149030",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8414903000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84149090",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8414909040",
+        "8414909080"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84151030",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8415103040",
+        "8415103060",
+        "8415103080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84151060",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8415106000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84151090",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8415109000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84158101",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8415810110",
+        "8415810120",
+        "8415810130"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84158201",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8415820105",
+        "8415820110",
+        "8415820115",
+        "8415820120",
+        "8415820130",
+        "8415820135",
+        "8415820140",
+        "8415820155",
+        "8415820160",
+        "8415820170"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84159040",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "8415904000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84161000",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "8416100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84162000",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "8416200040",
+        "8416200080"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84163000",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8416300000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84169000",
+      "naics4": "3334",
+      "role": "treated",
+      "children": [
+        "8416900000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84171000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8417100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84172000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8417200000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84178000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8417800000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84179000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8417900000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84185000",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8418500040",
+        "8418500080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84186101",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8418610100"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84186901",
+      "naics4": "3334",
+      "role": "treated",
+      "children": [
+        "8418690110",
+        "8418690120",
+        "8418690130",
+        "8418690140",
+        "8418690150",
+        "8418690160",
+        "8418690180"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84193100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8419310000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84193210",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8419321000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84193250",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8419325000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84194000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8419400040",
+        "8419400080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84196010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8419601000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84196050",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8419605000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84198150",
+      "naics4": "3334",
+      "role": "control",
+      "children": [
+        "8419815040",
+        "8419815080"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84198190",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "8419819040",
+        "8419819080"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84198910",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8419891000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84198960",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8419896000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84199020",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8419902000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84199085",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8419908500"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84201010",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8420101000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84201020",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8420102000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84209110",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8420911000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84209120",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8420912000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84209190",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8420919000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84209910",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8420991000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84209920",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8420992000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84209990",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8420999000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84211100",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8421110000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84211900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8421190000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84212100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8421210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84212200",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8421220000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84219160",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8421916000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84219900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8421990040",
+        "8421990080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84221900",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "8422190000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84222000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8422200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84223011",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8422301100"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84223091",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8422309110",
+        "8422309120",
+        "8422309130",
+        "8422309140",
+        "8422309150",
+        "8422309160",
+        "8422309170",
+        "8422309180",
+        "8422309185",
+        "8422309186",
+        "8422309187",
+        "8422309191"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84224011",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8422401110",
+        "8422401190"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84224091",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8422409140",
+        "8422409150",
+        "8422409160",
+        "8422409170",
+        "8422409181"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84229011",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8422901100"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84229021",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8422902100"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84229091",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8422909120",
+        "8422909130",
+        "8422909160",
+        "8422909195"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84231000",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8423100010",
+        "8423100030",
+        "8423100060"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84233000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8423300000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84238100",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8423810010",
+        "8423810020",
+        "8423810030",
+        "8423810040",
+        "8423810050"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84238200",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8423820010",
+        "8423820050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84242010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8424201000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84242090",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8424209000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84243010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8424301000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84243090",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8424309000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84249010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8424901000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84249020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8424902000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84251100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8425110000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84251900",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8425190000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84253101",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8425310100"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84253901",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8425390100"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84254100",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8425410000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84254200",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8425420000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84254900",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8425490000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84261100",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8426110000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84261200",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8426120000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84261900",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8426190000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84262000",
+      "naics4": "3331",
+      "role": "control",
+      "children": [
+        "8426200000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84263000",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8426300000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84264100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8426410005",
+        "8426410010",
+        "8426410090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84264900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8426490010",
+        "8426490090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84269100",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8426910000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84269900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8426990000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84271040",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8427104000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84271080",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8427108010",
+        "8427108060",
+        "8427108090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84272040",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8427204000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84272080",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8427208000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84279000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8427900000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84281000",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8428100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84282000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8428200010",
+        "8428200050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84283100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8428310000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84283200",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8428320000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84283300",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8428330000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84283900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8428390000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84284000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8428400000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84286000",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8428600000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84292000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8429200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84301000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8430100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84302000",
+      "naics4": "3331",
+      "role": "control",
+      "children": [
+        "8430200030",
+        "8430200060",
+        "8430200090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84303100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8430310040",
+        "8430310080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84303900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8430390040",
+        "8430390080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84304100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8430410000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84304980",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8430498010",
+        "8430498020",
+        "8430498030",
+        "8430498040",
+        "8430498050"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84305010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8430501000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84305050",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8430505000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84306100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8430610000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84306901",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8430690100"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84312000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8431200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84313100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8431310020",
+        "8431310040",
+        "8431310060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84314100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8431410020",
+        "8431410040",
+        "8431410060",
+        "8431410080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84314200",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8431420000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84314340",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8431434000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84314380",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8431438020",
+        "8431438040",
+        "8431438060",
+        "8431438090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84314990",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8431499005",
+        "8431499010",
+        "8431499015",
+        "8431499020",
+        "8431499025",
+        "8431499030",
+        "8431499035",
+        "8431499036",
+        "8431499038",
+        "8431499044",
+        "8431499045",
+        "8431499050",
+        "8431499055",
+        "8431499081",
+        "8431499084",
+        "8431499090",
+        "8431499095"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84321000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8432100020",
+        "8432100040",
+        "8432100060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84322100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8432210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84322900",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8432290040",
+        "8432290060",
+        "8432290080",
+        "8432290090"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84328000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8432800010",
+        "8432800080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84331100",
+      "naics4": "3331",
+      "role": "control",
+      "children": [
+        "8433110010",
+        "8433110020",
+        "8433110030",
+        "8433110040",
+        "8433110050",
+        "8433110060"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84331900",
+      "naics4": "3331",
+      "role": "control",
+      "children": [
+        "8433190010",
+        "8433190020",
+        "8433190030",
+        "8433190040",
+        "8433190050"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84332000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433200020",
+        "8433200040",
+        "8433200060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84333000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433300000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84334000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433400000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84335100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433510010",
+        "8433510090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84335200",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433520000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84335300",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433530000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84335900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433590010",
+        "8433590090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84336000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8433600010",
+        "8433600090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84339010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8433901010",
+        "8433901090"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84339050",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8433905010",
+        "8433905025",
+        "8433905045",
+        "8433905060",
+        "8433905080"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84341000",
+      "naics4": "3331",
+      "role": "control",
+      "children": [
+        "8434100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84342000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8434200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84349000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8434900000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84351000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8435100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84359000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8435900000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84361000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8436100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84362100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8436210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84362900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8436290000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84368000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8436800020",
+        "8436800040",
+        "8436800060",
+        "8436800070",
+        "8436800090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84369100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8436910040",
+        "8436910080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84369900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8436990020",
+        "8436990030",
+        "8436990035",
+        "8436990040",
+        "8436990070",
+        "8436990090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84371000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8437100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84378000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8437800010",
+        "8437800090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84379000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8437900010",
+        "8437900090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84381000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8438100010",
+        "8438100090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84382000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8438200000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84383000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8438300000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84384000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8438400000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84386000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8438600000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84388000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8438800000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84389010",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8438901000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84389090",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8438909015",
+        "8438909030",
+        "8438909060",
+        "8438909090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84393000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8439300000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84399110",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8439911000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84399190",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8439919000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84399910",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8439991000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84399950",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8439995000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84401000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8440100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84409000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8440900000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84411000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8441100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84412000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8441200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84413000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8441300000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84414000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8441400000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84418000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8441800000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84419000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8441900000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84423001",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8442300110",
+        "8442300150"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84424000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8442400000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431110",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443111000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431150",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443115000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431200",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443120000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431300",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443130000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431400",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443140000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431500",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8443150000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84431600",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8443160000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84431700",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443170000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431920",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8443192000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84431930",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443193000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84433910",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443391000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84433920",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443392000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84433930",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443393000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84433940",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443394000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84433950",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443395000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84433960",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443396000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84439110",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8443911000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84439120",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8443912000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84439130",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8443913000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84439910",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443991000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84439940",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443994000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84439945",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8443994500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84440000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8444000010",
+        "8444000090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84451100",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445110000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84451200",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445120000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84451300",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445130000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84452000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445200000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84453000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445300010",
+        "8445300090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84454000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445400000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84459000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8445900000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84461000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8446100010",
+        "8446100090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84462110",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8446211000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84462150",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8446215000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84462900",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8446290000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84463010",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8446301010",
+        "8446301020",
+        "8446301030"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84463050",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8446305010",
+        "8446305020",
+        "8446305030"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84471110",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447111000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84471190",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447119010",
+        "8447119020",
+        "8447119090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84471210",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447121000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84471290",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447129010",
+        "8447129020",
+        "8447129090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84472020",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447202000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84472030",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447203000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84472040",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447204000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84472060",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447206000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84479010",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447901000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84479050",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447905000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84479090",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8447909000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84481100",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448110000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84481900",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448190000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84482010",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448201000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84482050",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448205010",
+        "8448205090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84483100",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448310000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84483300",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448330000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84483910",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448391000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84483950",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448395000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84483990",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448399000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84484200",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448420000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84484910",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448491000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84484920",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448492000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84485110",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8448511000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84485120",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8448512000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84485130",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8448513000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84485150",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8448515000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84485910",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448591000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84485950",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8448595000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84490010",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8449001000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84490050",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8449005000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84511000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8451100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84513000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8451300000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84514000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8451400000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84515000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8451500000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84518000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8451800000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84521000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8452100010",
+        "8452100090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84522110",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8452211000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84522190",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8452219000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84522910",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8452291000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84522990",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8452299000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84529020",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8452902010",
+        "8452902090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84531000",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8453100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84532000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8453200000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84538000",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8453800000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84539010",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8453901000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84539050",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8453905000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84541000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8454100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84551000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8455100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84552100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8455210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84552200",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8455220000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84559040",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8455904000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84559080",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8455908000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84562010",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8456201010",
+        "8456201050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84563010",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8456301020",
+        "8456301050",
+        "8456301070"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84563050",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8456305000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84571000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8457100005",
+        "8457100015",
+        "8457100025",
+        "8457100055",
+        "8457100060",
+        "8457100065",
+        "8457100070",
+        "8457100075"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84572000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8457200010",
+        "8457200090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84573000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8457300010",
+        "8457300090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84581100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8458110005",
+        "8458110010",
+        "8458110030",
+        "8458110050",
+        "8458110090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84581900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8458190010",
+        "8458190020",
+        "8458190030",
+        "8458190050",
+        "8458190070",
+        "8458190090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84589110",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8458911040",
+        "8458911060",
+        "8458911080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84589150",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8458915040",
+        "8458915050",
+        "8458915070"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84589910",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8458991010",
+        "8458991050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84589950",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8458995030",
+        "8458995060",
+        "8458995090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84591000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84592100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459210040",
+        "8459210080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84592900",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8459290010",
+        "8459290020",
+        "8459290040",
+        "8459290050",
+        "8459290070",
+        "8459290090"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84593100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459310005",
+        "8459310010",
+        "8459310040",
+        "8459310070"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84593900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459390010",
+        "8459390020",
+        "8459390040",
+        "8459390050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84595100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459510040",
+        "8459510080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84595900",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8459590010",
+        "8459590020",
+        "8459590030"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84596100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459610040",
+        "8459610080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84596900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459690010",
+        "8459690020",
+        "8459690050",
+        "8459690070",
+        "8459690090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84597040",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459704000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84597080",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8459708040",
+        "8459708060",
+        "8459708080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84603100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8460310040",
+        "8460310080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84603900",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8460390010",
+        "8460390020",
+        "8460390050"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84604040",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8460404010",
+        "8460404060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84604080",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8460408010",
+        "8460408020",
+        "8460408080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84609040",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8460904010",
+        "8460904060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84609080",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8460908010",
+        "8460908020",
+        "8460908080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84612040",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461204000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84612080",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461208030",
+        "8461208070",
+        "8461208090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84613040",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461304020",
+        "8461304060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84613080",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461308020",
+        "8461308040",
+        "8461308080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84614010",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461401010",
+        "8461401020",
+        "8461401030",
+        "8461401040",
+        "8461401060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84614050",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461405020",
+        "8461405040",
+        "8461405050",
+        "8461405070"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84615040",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8461504010",
+        "8461504050"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84615080",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8461508010",
+        "8461508020",
+        "8461508090"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84619030",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461903020",
+        "8461903040",
+        "8461903060",
+        "8461903080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84619060",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8461906010",
+        "8461906020",
+        "8461906030",
+        "8461906040",
+        "8461906050",
+        "8461906090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84621000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462100010",
+        "8462100030",
+        "8462100035",
+        "8462100055"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84622100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84622900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462290010",
+        "8462290020",
+        "8462290030",
+        "8462290040",
+        "8462290050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84623100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462310040",
+        "8462310080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84623900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462390010",
+        "8462390020",
+        "8462390050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84624100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462410040",
+        "8462410080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84624900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462490010",
+        "8462490020",
+        "8462490050"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84629140",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462914030",
+        "8462914060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84629180",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462918030",
+        "8462918090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84629940",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462994010",
+        "8462994030"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84629980",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8462998010",
+        "8462998020",
+        "8462998045",
+        "8462998060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84631000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8463100040",
+        "8463100060",
+        "8463100080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84632000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8463200040",
+        "8463200060",
+        "8463200080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84633000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8463300040",
+        "8463300060",
+        "8463300080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84641001",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8464100100"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84642001",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8464200110",
+        "8464200120"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84649001",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8464900110",
+        "8464900120"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84661001",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466100110",
+        "8466100130",
+        "8466100175"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84662010",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466201010",
+        "8466201090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84662080",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466208020",
+        "8466208035",
+        "8466208040",
+        "8466208065"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84663010",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466301000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84663080",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466308000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84669110",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8466911000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669150",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8466915000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669210",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8466921000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84669311",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466931100"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669315",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466931530",
+        "8466931560"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669330",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466933000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669353",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466935340",
+        "8466935385"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669360",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466936030",
+        "8466936060"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669375",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8466937500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84669420",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466942000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84669440",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466944000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84669465",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466946540",
+        "8466946585"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84669485",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8466948540",
+        "8466948585"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84671110",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8467111040",
+        "8467111080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84671910",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8467191000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84672100",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8467210010",
+        "8467210030",
+        "8467210050",
+        "8467210070"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84672200",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8467220020",
+        "8467220040",
+        "8467220070",
+        "8467220090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84678100",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8467810000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84678910",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8467891000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84679101",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8467910100"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84679200",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8467920050",
+        "8467920090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84681000",
+      "naics4": "3339",
+      "role": "control",
+      "children": [
+        "8468100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84682010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8468201000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84682050",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8468205000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84688010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8468801000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84688050",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8468805000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84689010",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8468901000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84689050",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8468905000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84701000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8470100040",
+        "8470100060"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84702100",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8470210000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84702900",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8470290000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84703000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8470300000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84709001",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8470900110",
+        "8470900190"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84721000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8472100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84723000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8472300000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84729005",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8472900500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84729060",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8472906000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84729090",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8472909040",
+        "8472909060",
+        "8472909080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84732100",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8473210000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84732900",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8473290000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84733020",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8473302000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84733051",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8473305100"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84733091",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8473309100"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84735060",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8473506000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84735090",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8473509000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84741000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8474100010",
+        "8474100090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84742000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8474200010",
+        "8474200050",
+        "8474200070"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84743100",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8474310000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84743200",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8474320000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84743900",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8474390000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84751000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8475100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84752100",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8475210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84752900",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8475290000"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84759010",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8475901000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84759090",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8475909000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84762100",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8476210000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84762900",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8476290000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84768100",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8476810000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84768900",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "8476890000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84769000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8476900000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84771030",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477103000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84771040",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477104000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84771090",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477109015",
+        "8477109030",
+        "8477109040",
+        "8477109050",
+        "8477109060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84772000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477200005",
+        "8477200015",
+        "8477200035",
+        "8477200045",
+        "8477200055",
+        "8477200065"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84773000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477300000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84774001",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477400100"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84775100",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477510010",
+        "8477510090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84775901",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8477590100"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84778000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477800000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84779025",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477902540",
+        "8477902580"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84779065",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477906500"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84779085",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8477908501",
+        "8477908520",
+        "8477908530",
+        "8477908540",
+        "8477908595"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84781000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8478100010",
+        "8478100090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84789000",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "8478900010",
+        "8478900090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84791000",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8479100040",
+        "8479100060",
+        "8479100080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84792000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8479200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84793000",
+      "naics4": "3332",
+      "role": "treated",
+      "children": [
+        "8479300000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84794000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8479400000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84795000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8479500000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84796000",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8479600000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84798100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8479810000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84798200",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8479820040",
+        "8479820080"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84798910",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8479891000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84798983",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8479898300"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84799041",
+      "naics4": "3334",
+      "role": "policy_excluded",
+      "children": [
+        "8479904100"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84801000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8480100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84802000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8480200000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84804100",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8480410000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84804900",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8480490000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84805000",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8480500010",
+        "8480500090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84806000",
+      "naics4": "3335",
+      "role": "control",
+      "children": [
+        "8480600010",
+        "8480600090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "84807110",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8480711000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84807180",
+      "naics4": "3335",
+      "role": "treated",
+      "children": [
+        "8480718045",
+        "8480718060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "84807910",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8480791000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84807990",
+      "naics4": "3335",
+      "role": "policy_excluded",
+      "children": [
+        "8480799010",
+        "8480799020",
+        "8480799090"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84831050",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483105000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84834030",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483403040",
+        "8483403080"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84834050",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483405010",
+        "8483405050"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84834070",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483407000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84834090",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483409000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84835090",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483509040",
+        "8483509080"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84836040",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483604040",
+        "8483604080"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84836080",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483608000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84839010",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483901010",
+        "8483901050"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84839050",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483905000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84839080",
+      "naics4": "3336",
+      "role": "policy_excluded",
+      "children": [
+        "8483908010",
+        "8483908040",
+        "8483908080"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "84861000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8486100000"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84862000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8486200000"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84863000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8486300000"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84864000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8486400010",
+        "8486400020",
+        "8486400030"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "84869000",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8486900000"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "85023100",
+      "naics4": "3336",
+      "role": "treated",
+      "children": [
+        "8502310000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85102010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8510201000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85109030",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8510903001"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85141000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8514100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85142040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8514204000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85142060",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8514206000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85142080",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8514208000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85144000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8514400000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85149040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8514904000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85149080",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8514908000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85151900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515190000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85152100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85152900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515290000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85153100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515310000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85153900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515390020",
+        "8515390040",
+        "8515390060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85159020",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515902000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85159040",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8515904000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "85163300",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "8516330000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "85169015",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8516901500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85198110",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8519811000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85299078",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "8529907800"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85437020",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8543702000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list2_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "85439085",
+      "naics4": "3332",
+      "role": "policy_excluded",
+      "children": [
+        "8543908500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87041010",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8704101000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "87041050",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8704105020",
+        "8704105030",
+        "8704105040",
+        "8704105050",
+        "8704105060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "87042300",
+      "naics4": "3331",
+      "role": "treated",
+      "children": [
+        "8704230000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "87051000",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "8705100010",
+        "8705100050"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "87052000",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8705200000"
+      ],
+      "policies": [
+        "us_301_list2_2018"
+      ]
+    },
+    {
+      "hts8": "87060030",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8706003000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87060050",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8706005000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87079010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8707901000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87083010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708301010",
+        "8708301090"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87084030",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708403000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87084060",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708406000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87084065",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708406500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87085011",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708501110",
+        "8708501150"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87085031",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708503110",
+        "8708503150"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87085070",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708507000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87085075",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708507500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87087005",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708700500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87087015",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708701500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87087025",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708702500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87087035",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708703500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87088003",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708800300"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87088005",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708800500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87088051",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708805100"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87088055",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708805500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089110",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708911000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089160",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708916000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089165",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708916500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089210",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708921000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089260",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708926000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089265",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708926500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089315",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708931500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089330",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708933000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089410",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708941000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089460",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708946000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089465",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708946500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089510",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708951000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089515",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708951500"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089903",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708990300"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089906",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708990600"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089916",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708991600"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089923",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708992300"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089927",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708992700"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089931",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708993100"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089941",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708994100"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87089948",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8708994810",
+        "8708994850"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87091100",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8709110030",
+        "8709110060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "87091900",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8709190030",
+        "8709190060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "87099000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "8709900010",
+        "8709900020",
+        "8709900090"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "87168010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8716801000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "87169010",
+      "naics4": "3331",
+      "role": "policy_excluded",
+      "children": [
+        "8716901010",
+        "8716901020",
+        "8716901090"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "88052100",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "8805210000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "88052900",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "8805290000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90019040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9001904000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90019050",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9001905000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90019060",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9001906000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90019080",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9001908000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90019090",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9001909000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90021140",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002114000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90021160",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002116000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90021190",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002119000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90021900",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002190000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90022040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002204000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90022080",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002208000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90029020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002902000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90029040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002904000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90029070",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002907000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90029085",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002908500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90029095",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9002909500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90051000",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9005100020",
+        "9005100040",
+        "9005100080"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90058040",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9005804020",
+        "9005804040"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90058060",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9005806000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90059040",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9005904000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90063000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9006300000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90064040",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006404000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90064060",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006406000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90064090",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006409000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065100",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006510040",
+        "9006510060",
+        "9006510090"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065210",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006521020",
+        "9006521040"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065230",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006523000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065250",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006525000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065260",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006526000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065291",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006529120",
+        "9006529140",
+        "9006529160",
+        "9006529180"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065301",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006530110",
+        "9006530120",
+        "9006530150",
+        "9006530170"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065940",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006594040",
+        "9006594060"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065960",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006596000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90065991",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006599100"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90066100",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006610020",
+        "9006610040",
+        "9006610060"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90069900",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9006990000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90072020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9007202000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90072040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9007204000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90072060",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9007206040",
+        "9007206080"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90072080",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9007208000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90079140",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9007914000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "90079200",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9007920000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90085010",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008501000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90085020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008502000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90085030",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008503000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90085040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008504000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90085050",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008505000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90089040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008904000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90089080",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9008908000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90101000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010100000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90105010",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010501000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90105020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010502000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90105030",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010503000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90105040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010504000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90105050",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010505000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90105060",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010506000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90106000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9010600000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90111040",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9011104000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90111080",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9011108000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90112040",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9011204000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90112080",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9011208000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90118000",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9011800000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90119000",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9011900000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90131010",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013101000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90131030",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013103000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90138020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013802000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90138070",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013807000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90138090",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013809000"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90139020",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013902000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90139050",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9013905000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90160020",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "9016002000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90160040",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "9016004000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90160060",
+      "naics4": "3339",
+      "role": "policy_excluded",
+      "children": [
+        "9016006000"
+      ],
+      "policies": [
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "90275010",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9027501000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90311000",
+      "naics4": "3339",
+      "role": "treated",
+      "children": [
+        "9031100000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90314100",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9031410020",
+        "9031410040",
+        "9031410060"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90314910",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9031491000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90314970",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9031497000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90314990",
+      "naics4": "3333",
+      "role": "treated",
+      "children": [
+        "9031499000"
+      ],
+      "policies": [
+        "us_301_list1_2018"
+      ]
+    },
+    {
+      "hts8": "90319045",
+      "naics4": "3333",
+      "role": "policy_excluded",
+      "children": [
+        "9031904500"
+      ],
+      "policies": [
+        "us_301_list1_2018",
+        "us_301_list3_2018"
+      ]
+    },
+    {
+      "hts8": "95081000",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9508100000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "95089000",
+      "naics4": "3333",
+      "role": "control",
+      "children": [
+        "9508900000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "98100050",
+      "naics4": "3332",
+      "role": "control",
+      "children": [
+        "9810005000"
+      ],
+      "policies": []
+    },
+    {
+      "hts8": "98170060",
+      "naics4": "3331",
+      "role": "control",
+      "children": [
+        "9817006000"
+      ],
+      "policies": []
+    }
+  ],
+  "exclusions": [
+    {
+      "hts8": "73219060",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "82071960",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "82073060",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "82075020",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "82077030",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "82077060",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "82079030",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "83023030",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "83024230",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "83024960",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84099110",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84119110",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84119190",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84119910",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84119990",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84129090",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84139190",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84143080",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84145915",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84145965",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84149010",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84149041",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84158300",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84159080",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84189980",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84193901",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84198995",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84199050",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84199095",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84201090",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84212900",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84213980",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84229006",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84232010",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84232090",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84238910",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84238990",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84239010",
+      "reason": "metadata_change"
+    },
+    {
+      "hts8": "84239090",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84244110",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84244190",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84244900",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84248200",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84248910",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84248990",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84249090",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84289002",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84291100",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84291900",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84293000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84294000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84295110",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84295150",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84295210",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84295250",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84295910",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84295950",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84311000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84313900",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84314910",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84323100",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84323900",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84324100",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84324200",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84329000",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84385000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84391000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84392000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84439950",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84451900",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84483200",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84512900",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84519090",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84542000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84543000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84549000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84561110",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84561170",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84561190",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84561210",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84561270",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84561290",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84564010",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84564090",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84565000",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84569031",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84569071",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84594100",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84594900",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84601200",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84601901",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84602200",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84602300",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84602400",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84602901",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84639000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84651000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84652010",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84652050",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84652080",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659100",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659200",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659300",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659400",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659500",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659600",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84659902",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84663060",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84669250",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84669396",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84669398",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84671150",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84671950",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84672900",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84678950",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84679901",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84705000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84729050",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84734041",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "84734086",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84748000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84749000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84798992",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84798994",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84799094",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84807140",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "84818050",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "84879000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85014020",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85014040",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85014050",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85014060",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85015120",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85015140",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85015150",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85015160",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85016400",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85023900",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "85143010",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "85143090",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "85158000",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "85433020",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "85433090",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "85439012",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "87011001",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87013010",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "87013050",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "87019110",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019150",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019210",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019250",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019310",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019350",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019410",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019450",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019510",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87019550",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "87079050",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "87089968",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "87168050",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "90059080",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "90065920",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "90066901",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "90069100",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "90071000",
+      "reason": "metadata_change"
+    },
+    {
+      "hts8": "90079180",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "90109085",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90109095",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90131045",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90131050",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90139070",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90139080",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90279056",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "90319021",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90319059",
+      "reason": "history_requires_review"
+    },
+    {
+      "hts8": "90319091",
+      "reason": "industry_ambiguous"
+    },
+    {
+      "hts8": "96200015",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "96200020",
+      "reason": "child_set_change"
+    },
+    {
+      "hts8": "96200025",
+      "reason": "child_set_change"
+    }
+  ]
+}

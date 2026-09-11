@@ -1,0 +1,169 @@
+{
+  "label": "development_only_page_retrieval_not_answer_accuracy",
+  "results": {
+    "overlap": {
+      "cases": [
+        {
+          "id": "R01",
+          "retrieved_pages": [
+            "initial_notice:p1",
+            "initial_notice:p2",
+            "initial_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R02",
+          "retrieved_pages": [
+            "initial_notice:p1",
+            "initial_notice:p2",
+            "initial_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R03",
+          "retrieved_pages": [
+            "initial_notice:p1",
+            "initial_notice:p2",
+            "initial_notice:p1"
+          ],
+          "first_relevant_rank": null,
+          "hit_at_3": false
+        },
+        {
+          "id": "R04",
+          "retrieved_pages": [
+            "amendment_notice:p1",
+            "amendment_notice:p2",
+            "amendment_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R05",
+          "retrieved_pages": [
+            "amendment_notice:p2",
+            "amendment_notice:p2",
+            "amendment_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R06",
+          "retrieved_pages": [
+            "amendment_notice:p2",
+            "initial_notice:p2",
+            "amendment_notice:p1"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        }
+      ],
+      "hit_count": 5,
+      "page_hit_rate_at_3": 0.8333333333333334,
+      "mrr_at_3": 0.8333333333333334,
+      "development_gate_passed": true
+    },
+    "bm25": {
+      "cases": [
+        {
+          "id": "R01",
+          "retrieved_pages": [
+            "initial_notice:p1",
+            "initial_notice:p2",
+            "initial_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R02",
+          "retrieved_pages": [
+            "initial_notice:p2",
+            "initial_notice:p2",
+            "initial_notice:p1"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R03",
+          "retrieved_pages": [
+            "initial_notice:p1",
+            "initial_notice:p2",
+            "initial_notice:p3"
+          ],
+          "first_relevant_rank": 3,
+          "hit_at_3": true
+        },
+        {
+          "id": "R04",
+          "retrieved_pages": [
+            "amendment_notice:p2",
+            "amendment_notice:p1",
+            "amendment_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R05",
+          "retrieved_pages": [
+            "amendment_notice:p2",
+            "amendment_notice:p2",
+            "amendment_notice:p2"
+          ],
+          "first_relevant_rank": 1,
+          "hit_at_3": true
+        },
+        {
+          "id": "R06",
+          "retrieved_pages": [
+            "initial_notice:p2",
+            "amendment_notice:p2",
+            "amendment_notice:p2"
+          ],
+          "first_relevant_rank": 2,
+          "hit_at_3": true
+        }
+      ],
+      "hit_count": 6,
+      "page_hit_rate_at_3": 1.0,
+      "mrr_at_3": 0.8055555555555555,
+      "development_gate_passed": true
+    }
+  },
+  "fingerprints": {
+    "src/tradeintel_ai/policy_retrieval.py": "458ed99b5d3f3ff0085c16cc56b263707a044a0e7df0e7df08eb93dbd8b84453",
+    "evals/policy_retrieval_development.json": "cb7f069334c8c67f5fc0d2e1c53cf6ad6ffe545f9ed751eba92a99c85af960c1"
+  },
+  "corpus_sha256": "9f17f8aa4474d0044a46c4f130bf8f20882f4f76349daf70a90037a5c0460016",
+  "extractor": "pypdf 6.16.2",
+  "coverage": [
+    {
+      "source": "initial_notice",
+      "indexed_pages": [
+        1,
+        2,
+        3
+      ],
+      "total_pdf_pages": 47,
+      "excluded": "annexes_not_indexed"
+    },
+    {
+      "source": "amendment_notice",
+      "indexed_pages": [
+        1,
+        2
+      ],
+      "total_pdf_pages": 16,
+      "excluded": "annexes_not_indexed"
+    }
+  ],
+  "chunk_count": 34
+}
