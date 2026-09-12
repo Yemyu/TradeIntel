@@ -1,13 +1,29 @@
 # TradeShock AI
 
+Current review (0119): pending or rejected main fact reviews now stop the runner, failed reference arithmetic is rejected, and baseline fact judgments require review evidence. The recorded model settings are not actual HTTP payload captures. The 0118 implementation is partial; online acceptance remains disabled. See the [review and remaining implementation checklist](docs/decisions/0119-controls-integration-review.zh-CN.md). Earlier checkpoints below are historical.
+
 An evidence-grounded AI assistant for analysing trade-policy shocks and trade diversion.
+
+Current design (0118): the runner now saves an independent trade baseline, compares the model-derived scope before execution, checks paired policy settings before either answer, and stores redacted provider-neutral payload captures plus pending human fact-review packets. Human semantic review and full acceptance remain pending; this is synthetic/offline infrastructure, not model accuracy. Online execution stays disabled. See the [implementation handoff](docs/decisions/0118-independent-controls-contract.zh-CN.md) and [Chinese learning guide](docs/learning/phase-50-independent-comparison.zh-CN.md). The checkpoints below are historical.
+
+Current review (0117): repaired acceptance via empty reviews, false fact scores for negated statements, and missing endpoint arithmetic checks. Synthetic protocol completion is separate from acceptance readiness, which remains false. The independent intent baseline, paired semantic review and full dependency freeze are still pending. The 0116 completion claims below are historical and superseded by [0117](docs/decisions/0117-acceptance-reaudit.zh-CN.md).
+
+Current audit (0116): the former hard-coded A/B paths were removed and replaced with real offline controls. A recomputes trade values directly from the declared source table; B asks the same policy question without retrieved evidence and records the actual baseline answer and fact gap. Review, delivery hashes, message capture, dependency freezing and acceptance bindings are covered by 589 local tests with 0 external API calls. `acceptance_ready` is only an offline protocol result, not a model accuracy score; the 0111 online runner remains disabled pending Astra review. See the [0116 decision and implementation boundary](docs/decisions/0116-runner-audit.zh-CN.md).
+
+Audit update (0114): additional synthetic tests exposed premature question completion, truncated-response acceptance, lost usage, and unverified review witnesses in the new acceptance component. These defects were repaired; the integration handoff was then implemented offline. See [review and integration handoff](docs/decisions/0114-acceptance-guard-review.zh-CN.md). The checkpoints below are historical, not acceptance certification.
+
+Audit update (0113): the 0112 prospective acceptance guards are now implemented and covered by synthetic counterexamples (11 new tests; full suite 566 tests; 0 API calls). They block reviewer override of transport/structure failures, freeze-input tampering, unknown usage and the 80,000-token boundary. The 0111 runner remains disabled; this is acceptance infrastructure, not a new model score. See the [implementation decision](docs/decisions/0113-prospective-acceptance-guards-implementation.zh-CN.md) and [Chinese learning guide](docs/learning/phase-45-acceptance-guards.zh-CN.md).
+
+Audit update (0112): the 0111 prospective candidate set and runner did not pass review. Live execution of that runner is disabled pending protocol repairs; its offline checks establish numeric consistency only, not acceptance readiness. The four reviewed development scenarios remain valid. See the [current audit](docs/decisions/0112-prospective-audit.zh-CN.md); the checkpoint below is historical.
+
+Latest development checkpoint (2026-09-12): four known natural-language development scenarios passed explicit host review, and a new 24-question prospective set was frozen and independently checked offline (0 API calls). This is not independent accuracy or unattended-product validation. The everyday natural-language CLI now shares the strict workflow configuration used by the reviewed path; see the [0111 Chinese handoff](docs/decisions/0111-prospective-set-frozen.zh-CN.md) and [learning guide](docs/learning/phase-44-prospective-set.zh-CN.md). Earlier sections below describe historical components.
 
 ### Integrated research brief (experimental)
 
 A confirmed entry now combines exact trade calculations, policy retrieval, optional bounded GLM generation and source-traceable Chinese reporting. Explicit scope selection is required; this is not autonomous planning or a causal estimator. Default mode makes no API calls. [中文使用与学习说明](docs/learning/phase-13k-research-brief.zh-CN.md).
 
 ```bash
-.venv/bin/python scripts/run_research_brief.py --question '第一批公告何时生效？' --months 2018-09 2018-10 --origin other_origins --confirm
+.venv/bin/python scripts/run_research_brief.py --question '第一批公告何时生效？' --policy-as-of 2018-07-06 --months 2018-09 2018-10 --origin other_origins --confirm
 ```
 
 Add `--generate` for one bounded live request. Reports preserve generated claims separately from calculations and review notes. [Integrated development results](docs/experiments/phase13k-results.zh-CN.md).

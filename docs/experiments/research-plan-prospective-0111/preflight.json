@@ -1,0 +1,179 @@
+{
+  "version": "research-plan-prospective-0111-preflight-1",
+  "status": "preflight_passed",
+  "online_run": false,
+  "new_api_calls": 0,
+  "question_count": 24,
+  "counts": {
+    "support": 12,
+    "clarification": 6,
+    "boundary": 6
+  },
+  "support_ids": [
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "C11",
+    "C12",
+    "C13",
+    "C14"
+  ],
+  "clarification_ids": [
+    "X11",
+    "X12",
+    "X13",
+    "X14",
+    "X15",
+    "X16"
+  ],
+  "boundary_ids": [
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15",
+    "B16"
+  ],
+  "validated_references": [
+    {
+      "id": "P11",
+      "kind": "policy",
+      "validated": true
+    },
+    {
+      "id": "P12",
+      "kind": "policy",
+      "validated": true
+    },
+    {
+      "id": "P13",
+      "kind": "policy",
+      "validated": true
+    },
+    {
+      "id": "P14",
+      "kind": "policy",
+      "validated": true
+    },
+    {
+      "id": "T11",
+      "kind": "sequence",
+      "validated": true
+    },
+    {
+      "id": "T12",
+      "kind": "endpoint",
+      "validated": true
+    },
+    {
+      "id": "T13",
+      "kind": "sequence",
+      "validated": true
+    },
+    {
+      "id": "T14",
+      "kind": "registered",
+      "validated": true
+    },
+    {
+      "id": "C11",
+      "kind": "sequence",
+      "validated": true
+    },
+    {
+      "id": "C12",
+      "kind": "endpoint",
+      "validated": true
+    },
+    {
+      "id": "C13",
+      "kind": "sequence",
+      "validated": true
+    },
+    {
+      "id": "C14",
+      "kind": "registered",
+      "validated": true
+    },
+    {
+      "id": "X11",
+      "kind": "clarification",
+      "validated": true
+    },
+    {
+      "id": "X12",
+      "kind": "clarification",
+      "validated": true
+    },
+    {
+      "id": "X13",
+      "kind": "clarification",
+      "validated": true
+    },
+    {
+      "id": "X14",
+      "kind": "clarification",
+      "validated": true
+    },
+    {
+      "id": "X15",
+      "kind": "clarification",
+      "validated": true
+    },
+    {
+      "id": "X16",
+      "kind": "clarification",
+      "validated": true
+    },
+    {
+      "id": "B11",
+      "kind": "boundary",
+      "validated": true
+    },
+    {
+      "id": "B12",
+      "kind": "boundary",
+      "validated": true
+    },
+    {
+      "id": "B13",
+      "kind": "boundary",
+      "validated": true
+    },
+    {
+      "id": "B14",
+      "kind": "boundary",
+      "validated": true
+    },
+    {
+      "id": "B15",
+      "kind": "boundary",
+      "validated": true
+    },
+    {
+      "id": "B16",
+      "kind": "boundary",
+      "validated": true
+    }
+  ],
+  "semantic_scores": null,
+  "purpose": "Freeze the 0111 set and independent references before any model sees a question.",
+  "created_at_utc": "2026-09-12T13:45:01.988168+00:00",
+  "sha256": {
+    "evals/research_plan_prospective_0111_questions.jsonl": "8c3d6654524ebf5aca6bea5b9eb7386f33ca65509448add6fe55b3374e67b516",
+    "evals/research_plan_prospective_0111_reference.json": "33379a87847e8c89fb9b8c11c1b9ac13b6755246de3ce31365c46eab8bc9e192",
+    "data/processed/analysis/policy_case_monthly.csv": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400",
+    "data/processed/causal/causal_trade_hs6_monthly.csv": "6c6a6ef1f30d7b391b17f62b2278ca55cfbe5a697098ba3d17605414ddd5a07d",
+    "data/processed/policy/section301_list1_event.csv": "86d1c255ac8c3d139143b50175cbc0b05cd03bd875a0e7994006429382b8fdba",
+    "data/processed/causal/policy_exposure_hs6.csv": "0acdbe2ed73e8ff4204b1b35511a447490cbcc35ebf6b42ab37f16dc1f1bddaa",
+    "data/processed/analysis/registered_comparison_windows.json": "cfb76ac82c3e8edea51c44919f7439aaef979e25dbdf4220fd7f195e1041728c",
+    "data/processed/analysis/statistical_baseline_summary.json": "4c46b341dc36eb0bb3de917fa4bb2c4a9a68a15377254ac5cb03bfb49d3d6994",
+    "src/tradeintel_ai/unified_research.py": "bf36f91600e57e8225919f8bbb1c58996ebbceb432ead34a1852ea439bbbe5eb",
+    "docs/experiments/phase13a-policy-retrieval/corpus.json": "4a047b3249d0b041946f49861b5435d2477c7ee7cf2d89112bd3c9da5c8d6276"
+  }
+}

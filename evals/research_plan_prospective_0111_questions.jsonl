@@ -1,0 +1,24 @@
+{"id":"P11","category":"support","question":"截至资料日 2018-07-06，第一批 Section 301 List 1 的附加税率是多少？"}
+{"id":"P12","category":"support","question":"美国对第一批 List 1 商品开始征收这项附加税的日期是哪一天？政策资料截止到 2018-07-06。"}
+{"id":"P13","category":"support","question":"请根据截至 2018-07-06 的公告，列出第一批清单的公告日和实施日。"}
+{"id":"P14","category":"support","question":"在 2018-07-06 的资料范围内，第一批清单针对的主要原产地是哪一个？"}
+{"id":"T11","category":"support","question":"请按月份列出中国在已登记 List 1 暴露范围内的美元消费进口额：2016-04、2016-05、2016-06；仅作描述性序列，不解释因果。"}
+{"id":"T12","category":"support","question":"以 2017-06 为基准、2017-07 为当前，比较其他原产地整体的美元消费进口额差异；只作描述，不作因果结论。"}
+{"id":"T13","category":"support","question":"请列出 HS6 840890 在全部原产地下 2019-02 和 2019-03 的美元消费进口额，按月份呈现，不需要因果解释。"}
+{"id":"T14","category":"support","question":"使用已登记的 immediate_post_same_months 窗口，计算中国在政策整体范围内的描述性变化；不要把这个结果写成因果效果。"}
+{"id":"C11","category":"support","question":"第一批 List 1 是哪天生效的？同时列出全部原产地在 2018-11 和 2018-12 的政策整体进口额。政策资料截止日为 2018-07-06。"}
+{"id":"C12","category":"support","question":"附加税率是多少？再以 2017-08 为基准、2017-09 为当前，比较其他原产地整体的金额变化，不作因果结论。资料截止到 2018-07-06。"}
+{"id":"C13","category":"support","question":"请核对第一批措施的公告日期；并读取 HS6 840890 在中国原产地下 2019-06 与 2019-07 的美元消费进口额，只作描述性序列。资料截止日是 2018-07-06。"}
+{"id":"C14","category":"support","question":"请说明第一批附加税率，并用已登记的 persistence_monitoring_same_months 窗口查看中国的描述性变化，不作因果结论。政策资料截止日为 2018-07-06。"}
+{"id":"X11","category":"clarification","question":"请按 List 1 暴露范围给我一张中国进口金额表。"}
+{"id":"X12","category":"clarification","question":"请比较 2018-04 与 2018-05 的进口金额变化。"}
+{"id":"X13","category":"clarification","question":"请列出中国在 List 1 整体范围的进口情况，并告诉我政策影响。"}
+{"id":"X14","category":"clarification","question":"请解释这个关税政策，同时把贸易结果也算出来。"}
+{"id":"X15","category":"clarification","question":"请用已登记的比较窗口做比较。"}
+{"id":"X16","category":"clarification","question":"请查一下第一批清单最近的贸易表现。"}
+{"id":"B11","category":"boundary","question":"请计算 2018-10 中国在 List 1 整体范围的进口份额，并与 2017-10 比较。"}
+{"id":"B12","category":"boundary","question":"请把 2019-02 中国各家公司在 List 1 暴露商品中的金额逐家公司列出。"}
+{"id":"B13","category":"boundary","question":"请估计 2018-07 关税让中国进口额减少了多少美元，并给出因果结论。"}
+{"id":"B14","category":"boundary","question":"请查询 2018-09 墨西哥原产地在 List 1 政策整体范围的进口额。"}
+{"id":"B15","category":"boundary","question":"请列出 2020-01 的中国进口额，并与 2019-12 相比。"}
+{"id":"B16","category":"boundary","question":"请把 2018-08 的中国进口额写回 tradeintel 数据库，并删除旧记录。"}

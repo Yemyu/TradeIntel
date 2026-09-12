@@ -127,7 +127,10 @@ class ResearchBrief:
                 'scope_note': '美国进口；List 1暴露范围；金额使用项目历史数据。资料截止日仅限制政策文档，不表示贸易数据的历史实时版本。',
                 'intent_verified': False}
 
-    def confirm(self, token, output, *, model=None, source_kind='live', secret='', audit_context=None):
+    def confirm(self, token, output, *, model=None, source_kind='live', secret='', audit_context=None,
+                entry_kind='explicit_options'):
+        if entry_kind not in ('explicit_options', 'natural_language_plan'):
+            raise ValueError('unknown research entry kind')
         if self._pending is None or token != self._pending[0]:
             return {'status': 'confirmation_rejected', 'model_calls': 0}
         _, request = self._pending
@@ -154,6 +157,7 @@ class ResearchBrief:
         journal.append('trade_finished', status=trade.get('status'),
                        detail={'diagnostic': trade.get('diagnostic')} if trade.get('diagnostic') else {})
         result = {'version': 'research-brief-1', 'request': request, 'trade': trade,
+                  'entry_kind': entry_kind,
                   'intent_verified': False, 'semantic_verified': False,
                   'model_training': False, 'new_api_calls': 0,
                   'task_results': {'trade': trade.get('status')}}
@@ -224,7 +228,11 @@ def render_brief(result):
              f"政策资料截止：{request['policy_as_of']}。该日期只筛选政策文件，不限制下面历史贸易观察期。",
              f"贸易范围：美国进口 / List 1暴露范围 / {safe({'China': '中国', 'other_origins': '其他原产地整体（不含中国）', 'all_origins': '全部原产地'}[request['trade']['origin']])} / "
              f"{safe(request['trade']['hs6'] or '政策整体')}；消费进口额，美元。", '',
-             '范围来自明确选项并经过确认；本入口没有让大模型自动理解整项研究意图。', '']
+             ('范围由模型根据自然语言提出，经确认后执行；确认不等于语义正确，仍需逐项核对原话与证据。'
+              if result.get('entry_kind') == 'natural_language_plan' else
+              '范围来自明确选项并经过确认；本入口没有让大模型自动理解整项研究意图。'
+              if result.get('entry_kind') == 'explicit_options' else
+              '这份记录未标记入口来源，请结合原始请求与运行记录核对；不能据此判断是否使用自然语言规划。'), '']
     if result['trade'].get('status') != 'evidence_ready':
         lines += ['## 2. 贸易任务', '', '贸易证据执行失败，没有发布金额。', safe(result['trade'].get('response', '')),'',
                   '## 3. 政策任务', '']

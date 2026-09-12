@@ -3,6 +3,7 @@ from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
+from .quote_gap_audit import digest_audit, validate_gap_review
 
 CHECKLIST_PATH = Path(__file__).resolve().parents[2] / 'docs/evaluation/development-checklist-0093.json'
 
@@ -45,9 +46,18 @@ def load_checklists(cases):
 
 
 def template(packet):
-    return {'packet_sha256': digest(packet), 'overall': {'status': 'unreviewed', 'reason': ''},
+    result = {'packet_sha256': digest(packet), 'overall': {'status': 'unreviewed', 'reason': ''},
             'items': [{'id': r['id'], 'status': 'unreviewed', 'reason': '', 'witnesses': []}
                       for r in packet['checklist']]}
+    audit = packet['artifact'].get('gap_audit')
+    if packet['stage'] == 'plan' and audit is not None:
+        result['gap_review'] = {
+            'audit_sha256': digest_audit(audit),
+            'overall': {'status': 'unreviewed', 'reason': ''},
+            'gaps': [{k: g[k] for k in ('start', 'end', 'quote')} |
+                     {'status': 'unreviewed', 'reason': ''}
+                     for g in audit['segments'] if g['source'] == 'host_gap' and g['quote'].strip()]}
+    return result
 
 
 def validate_review(packet, submission, reviewer):
@@ -124,7 +134,11 @@ def validate_review(packet, submission, reviewer):
                     raise ValueError('trade result differs from frozen reference')
         else:
             raise ValueError('unsupported task cannot have supported answer')
-    return {'version': 'checklist-review-0093', 'reviewer': reviewer,
+    gap_review = None
+    if packet['stage'] == 'plan' and artifact.get('gap_audit') is not None:
+        gap_review = validate_gap_review(artifact['gap_audit'], submission.get('gap_review'), reviewer)
+        approved = approved and gap_review['approved']
+    result = {'version': 'checklist-review-0093', 'reviewer': reviewer,
             'packet_sha256': digest(packet), 'question_sha256': digest(packet['case']['question']),
             'checklist_sha256': digest(checklist), 'artifact_sha256': digest(artifact),
             'files': deepcopy(packet['files']), 'stage': packet['stage'],
@@ -132,6 +146,9 @@ def validate_review(packet, submission, reviewer):
             'conclusion': ('reviewer_supported' if packet['stage'] == 'answer' else 'reviewer_plan_covered') if approved else 'not_approved',
             'judgment_basis': 'external_reviewer_not_automatic_semantic_proof',
             'overall': deepcopy(overall), 'items': deepcopy(entries)}
+    if gap_review is not None:
+        result['gap_review'] = gap_review
+    return result
 
 
 def file_hashes(directory):

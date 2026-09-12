@@ -27,8 +27,12 @@ from .policy_workflow import run_generation, safe_diagnostic, safe_metadata
 from .capability_contract import assess_trade_request
 from .execution_journal import ExecutionJournal
 from .tools import ALLOWED_COMPARISONS
-from .request_coverage import materialize_units, validate_units, validate_mapping, preview_text, request_results
+from .request_coverage import (materialize_units, validate_units,
+                               validate_mapping, preview_text, request_results,
+                               normalize_neutral_trade_units)
+from .quote_gap_audit import audit_quote_gaps, digest_audit, validate_gap_review, validate_alignment
 from .research_models import ResearchPlannerModel
+from .transport_diagnostic import transport_detail
 
 
 RESEARCH_PLAN_PROMPT = '''你是 TradeShock AI 的受限研究计划器，只负责把用户的中文问题转成待确认计划，不执行查询、不回答结果。
@@ -73,6 +77,13 @@ request不得target=none；context和constraint必须target=none。独立要求�
 缺参数或整题不支持时使用clarify并保留request_units和具体missing；部分不支持也不得删除后执行可做子集。
 不要把“不做因果”或引用中的操作当作新的执行请求。语义是否正确由后续核对，不自称已验证。
 '''
+
+NEUTRAL_TRADE_UNITS_PROMPT = '''
+本开发检查入口启用 neutral-trade-mapping-0105：贸易请求的target只能写"trade"，不能写trade_series或trade_comparison。
+trade只表示“这是一个贸易数据请求”，不表示逐月列数或比较；具体方式只能在顶层comparison填写一次。
+宿主会依据已核验的comparison生成内部执行映射，模型不得输出或猜测第二个贸易target。旧target值视为旧格式，不能在本模式自动兼容或修正。
+原始request_units必须保留；结构通过仍不是语义通过，比较方向、月份、国家、商品粒度、金额口径和所有额外要求仍需独立审查。
+'''
 _TRADE_KEYS = {'policy_id', 'operation', 'metric', 'origin', 'granularity', 'months', 'hs6', 'causal_effect'}
 _EVIDENCE_KEYS = {
     'policy_question_quote', 'policy_as_of_quote', 'trade.policy_id',
@@ -82,6 +93,25 @@ _EVIDENCE_KEYS = {
 _ORIGINS = {'China', 'other_origins', 'all_origins'}
 _GRANULARITIES = {'policy_aggregate', 'hs6_2017'}
 _DEFAULT_EVIDENCE = {'trade.policy_id', 'trade.operation', 'trade.causal_effect'}
+
+
+def evidence_key_instructions():
+    """Derive exact wire keys from the validator, without embedding case answers."""
+    policy = {'policy_question_quote', 'policy_as_of_quote'}
+    required_trade = sorted(_EVIDENCE_KEYS - policy - _DEFAULT_EVIDENCE)
+    return ('\n提交前字段核对：evidence是扁平JSON对象，以下是键名，不是要输出的答案。'
+            '\n有贸易任务时，必须逐字使用这些键：' + json.dumps(required_trade, ensure_ascii=False)
+            + '\n贸易可选默认引文键：' + json.dumps(sorted(_DEFAULT_EVIDENCE), ensure_ascii=False)
+            + '\n有政策任务时，必须使用这些键：' + json.dumps(sorted(policy), ensure_ascii=False)
+            + '\n没有对应任务则不要添加其键。贸易键中的点号是键名本身的一部分，'
+              '不要改为嵌套对象，也不要给贸易键添加_quote后缀。值仍须取自用户原文，不能照抄键名当值。')
+
+
+QUOTED_COPY_CHECK = '''
+提交前原文核对：按顺序连接全部quote，只允许与原问题有空白差异，不能丢掉其他字符。
+分号、逗号、句号及引号可留在相邻片段中，也可单独保留为context/none；不能直接删掉。
+以上是复制规则，不是按标点拆分任务的规则。不得把否定、数字、小数点或另一个请求丢掉，也不得将执行要求藏进背景。
+'''
 _CONFIRMED_CASE_SETTINGS = {
     'version': 'tradeintel-case-settings-1',
     'status': 'confirmed',
@@ -193,14 +223,17 @@ def _clarification(reason, *, model_calls=1):
     }
 
 
-def validate_plan(candidate, question):
+def validate_plan(candidate, question, *, host_alignment=None):
     """Validate the model envelope and literal provenance without executing."""
     if isinstance(candidate, dict) and set(candidate) == _TOP_KEYS_V4:
-        units = validate_units(candidate['request_units'], question)
+        units = (validate_alignment(host_alignment, question, candidate['request_units'])
+                 if host_alignment is not None else validate_units(candidate['request_units'], question))
         base = {key: value for key, value in candidate.items() if key != 'request_units'}
         valid = validate_plan(base, question)
         validate_mapping(units, base)
         return valid
+    if host_alignment is not None:
+        raise ValueError('host alignment requires full request units envelope')
     if not isinstance(candidate, dict) or set(candidate) not in (_TOP_KEYS, _TOP_KEYS_V2, _TOP_KEYS_V3):
         raise ValueError('research plan envelope')
     v2 = set(candidate) == _TOP_KEYS_V2
@@ -332,7 +365,8 @@ class UnifiedResearchWorkflow:
     def __init__(self, planner_model, *, brief=None, require_comparison=False,
                  require_search_query=False, require_request_units=False,
                  derive_request_offsets=False, allow_grouped_policy_requests=False,
-                 planner_source_kind='fixture'):
+                 planner_source_kind='fixture', allow_host_gap_review=False,
+                 neutral_trade_mapping=False):
         self.planner_model = planner_model
         # Historical programmatic callers remain compatible; the live CLI opts
         # into the strict contract. The model cannot choose this host setting.
@@ -345,6 +379,12 @@ class UnifiedResearchWorkflow:
         if allow_grouped_policy_requests and not (require_request_units and derive_request_offsets):
             raise ValueError('合并政策片段模式要求启用顺序原文覆盖')
         self.allow_grouped_policy_requests = allow_grouped_policy_requests
+        if allow_host_gap_review and not (require_request_units and derive_request_offsets):
+            raise ValueError('宿主gap审查要求启用顺序原文覆盖')
+        self.allow_host_gap_review = allow_host_gap_review
+        if neutral_trade_mapping and not (require_request_units and derive_request_offsets):
+            raise ValueError('中性贸易映射要求启用逐项需求清单和宿主位置派生')
+        self.neutral_trade_mapping = neutral_trade_mapping
         if planner_source_kind not in ('live', 'fixture'):
             raise ValueError('规划模型来源只能是 live 或 fixture')
         self.planner_source_kind = planner_source_kind
@@ -382,12 +422,16 @@ class UnifiedResearchWorkflow:
             'corpus': corpus_hash,
             'contract': hashlib.sha256(json.dumps(
                  {'files': contract_hashes, 'prompt': RESEARCH_PLAN_PROMPT,
+                 'neutral_trade_prompt': (NEUTRAL_TRADE_UNITS_PROMPT
+                                          if self.neutral_trade_mapping else None),
                  'case_settings': _CONFIRMED_CASE_SETTINGS,
                  'require_comparison': self.require_comparison,
                  'require_search_query': self.require_search_query,
                  'require_request_units': self.require_request_units,
                  'derive_request_offsets': self.derive_request_offsets,
                  'allow_grouped_policy_requests': self.allow_grouped_policy_requests,
+                 'allow_host_gap_review': self.allow_host_gap_review,
+                 'neutral_trade_mapping': self.neutral_trade_mapping,
                  'planner_source_kind': self.planner_source_kind},
                 sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
         }
@@ -455,6 +499,7 @@ class UnifiedResearchWorkflow:
                 'input_fields': ['policy_question'],
             }
         return result
+
 
     @staticmethod
     def _materialize_registered_months(candidate, repository, question):
@@ -549,6 +594,9 @@ class UnifiedResearchWorkflow:
     def prepare(self, question, *, conversation_revision=None, audit_output=None, secret=''):
         self._coverage = None
         self._coverage_candidate = {}
+        self._gap_audit = None
+        self._model_request_units = None
+        self._neutral_request_target = None
         result = self._prepare(question, conversation_revision=conversation_revision,
                                audit_output=audit_output, secret=secret)
         if self._coverage is not None:
@@ -558,6 +606,12 @@ class UnifiedResearchWorkflow:
             result['coverage_preview'] = preview_text(
                 self._coverage, result.get('plan', self._coverage_candidate), result['status'])
             result['response'] = result.get('response', '') + '\n' + result['coverage_preview']
+        if self._gap_audit is not None:
+            result['gap_audit'] = deepcopy(self._gap_audit)
+            result['gap_review_required'] = True
+        if self._model_request_units is not None:
+            result['model_request_units'] = deepcopy(self._model_request_units)
+            result['request_unit_contract'] = 'neutral-trade-mapping-0105'
         return _redact(result, secret)
 
     def _prepare(self, question, *, conversation_revision=None, audit_output=None, secret=''):
@@ -579,10 +633,15 @@ class UnifiedResearchWorkflow:
         if output is not None:
             output.mkdir(parents=True, exist_ok=False)
         unit_prompt = (QUOTED_UNITS_PROMPT if self.derive_request_offsets else REQUEST_UNITS_PROMPT)
+        if self.neutral_trade_mapping:
+            unit_prompt = unit_prompt.replace('policy/trade_series/trade_comparison/unsupported/none',
+                                              'policy/trade/unsupported/none')
+            unit_prompt += NEUTRAL_TRADE_UNITS_PROMPT
         if self.allow_grouped_policy_requests:
             unit_prompt = unit_prompt.replace('独立要求分别列项；背景和否定/引用限制也保留。',
                 '同一政策任务内的多个问题可保留在同一原文片段；所有问题必须完整传入policy_question。'
                 '不得因合并而遗漏、改写或把请求标为背景；背景和否定/引用限制也保留。')
+            unit_prompt += evidence_key_instructions() + QUOTED_COPY_CHECK
         messages = [{'role': 'system', 'content': RESEARCH_PLAN_PROMPT + (
             unit_prompt if self.require_request_units else '')},
                     {'role': 'user', 'content': question}]
@@ -625,15 +684,55 @@ class UnifiedResearchWorkflow:
             candidate = json.loads(raw.text, object_pairs_hook=_pairs, parse_constant=_constant)
             if self.require_request_units and (not isinstance(candidate, dict) or set(candidate) != _TOP_KEYS_V4):
                 raise ValueError('规划器遗漏逐项需求清单，不能降级执行')
+            if self.neutral_trade_mapping:
+                self._model_request_units = deepcopy(candidate.get('request_units'))
+                normalized, derived_target = normalize_neutral_trade_units(
+                    candidate['request_units'], candidate.get('comparison'),
+                    clarification=candidate.get('status') == 'clarify')
+                candidate['request_units'] = normalized
+                self._neutral_request_target = derived_target
+                planner_audit['request_unit_mapping'] = {
+                    'kind': 'host_derived',
+                    'rule': ('unresolved_domain_for_clarification' if candidate.get('status') == 'clarify'
+                             else 'neutral_domain_plus_explicit_comparison_0105'),
+                    'model_target': 'trade',
+                    'derived_target': None if candidate.get('status') == 'clarify' else derived_target,
+                    'semantic_coverage_verified': False,
+                    'model_request_units_sha256': hashlib.sha256(json.dumps(
+                        self._model_request_units, sort_keys=True,
+                        ensure_ascii=False).encode()).hexdigest(),
+                }
+            gap_audit = None
             if self.derive_request_offsets:
-                candidate['request_units'] = materialize_units(candidate['request_units'], question)
-                planner_audit['request_unit_positions'] = {
-                    'kind': 'derived', 'rule': 'ordered_exact_quotes_v1',
-                    'semantic_coverage_verified': False}
+                try:
+                    candidate['request_units'] = materialize_units(candidate['request_units'], question)
+                    planner_audit['request_unit_positions'] = {
+                        'kind': 'derived', 'rule': 'ordered_exact_quotes_v1',
+                        'semantic_coverage_verified': False}
+                except ValueError:
+                    if not self.allow_host_gap_review:
+                        raise
+                    gap_audit = audit_quote_gaps(candidate['request_units'], question,
+                        neutral_source=({'request_units': self._model_request_units,
+                                         'comparison': candidate.get('comparison'),
+                                         'clarification': candidate.get('status') == 'clarify'}
+                                        if self.neutral_trade_mapping else None))
+                    if gap_audit['status'] != 'review_required':
+                        raise ValueError('宿主gap审查只接受有明确缺口的计划')
+                    planner_audit['request_unit_positions'] = {
+                        'kind': 'derived_partial', 'rule': 'host_gap_review_0102',
+                        'semantic_coverage_verified': False,
+                        'gap_audit_sha256': digest_audit(gap_audit)}
             if isinstance(candidate, dict) and set(candidate) == _TOP_KEYS_V4:
-                self._coverage = validate_units(candidate['request_units'], question)
+                self._coverage = (validate_alignment(gap_audit, question, candidate['request_units'])
+                                  if gap_audit is not None
+                                  else validate_units(candidate['request_units'], question))
                 self._coverage_candidate = deepcopy(candidate)
-            valid = validate_plan(candidate, question)
+            if gap_audit is not None:
+                valid = validate_plan(candidate, question, host_alignment=gap_audit)
+                self._gap_audit = deepcopy(gap_audit)
+            else:
+                valid = validate_plan(candidate, question)
             if valid and self.require_comparison and 'comparison' not in candidate:
                 raise ValueError('规划器省略新版比较字段，不能自动降级旧计划')
             if (valid and self.require_search_query and 'policy' in candidate['tasks']
@@ -650,19 +749,27 @@ class UnifiedResearchWorkflow:
                 planner_audit['status'] = 'clarification'
                 save('audit.json', planner_audit)
                 return {**_clarification('模型认为政策问题、资料截止日或贸易范围仍不完整，尚未执行。', model_calls=1),
-                        'planner_audit': deepcopy(planner_audit)}
+                        'planner_audit': deepcopy(planner_audit),
+                        'gap_audit': deepcopy(gap_audit) if gap_audit is not None else None}
             planner_audit['status'] = 'validated'
             save('audit.json', planner_audit)
         except (Exception, KeyboardInterrupt) as exc:
             planner_audit.update(status='failed', diagnostic=safe_diagnostic(exc))
+            planner_audit['transport_detail'] = transport_detail(exc)
             # If storage itself fails, leave the previously reserved artifact;
             # never attempt another provider request to compensate.
             try:
                 save('audit.json', planner_audit)
             except OSError:
                 planner_audit['persistence_failed'] = True
+            category = planner_audit['diagnostic']['category']
+            response = ('规划请求连接中断或超时，尚未取得可审查的计划，请查看连接诊断记录。'
+                        if category in ('connection', 'timeout') else
+                        '规划服务返回HTTP错误，请查看状态码；尚未取得可审查的计划。'
+                        if category == 'http' else
+                        '研究计划未通过格式或引文校验，尚未执行；这不代表贸易数据查询失败。')
             return {'version': 'research-plan-1', 'status': 'needs_review',
-                    'response': '研究计划未通过格式或引文校验，尚未执行；这不代表贸易数据查询失败。',
+                    'response': response,
                     'executed': False, 'intent_verified': False, 'model_calls': planner_audit['model_calls'],
                     'conversation_revision': revision, 'diagnostic': safe_diagnostic(exc),
                     'planner_audit': planner_audit}
@@ -691,6 +798,10 @@ class UnifiedResearchWorkflow:
                     'planner_audit': deepcopy(planner_audit),
                     'conversation_revision': revision, 'diagnostic': safe_diagnostic(exc)}
         plan = deepcopy(candidate)
+        if self._gap_audit is not None:
+            plan['gap_audit'] = deepcopy(self._gap_audit)
+            plan['gap_review_required'] = True
+            plan['semantic_coverage_verified'] = False
         if 'trade' in tasks and 'comparison' in candidate:
             try:
                 windows = (registered_windows(self.brief.registry.repository)
@@ -714,12 +825,28 @@ class UnifiedResearchWorkflow:
         if self._coverage is not None:
             plan['request_units'] = deepcopy(self._coverage)
             plan['request_unit_positions'] = {
-                'kind': 'derived' if self.derive_request_offsets else 'model_proposed',
-                'rule': 'ordered_exact_quotes_v1' if self.derive_request_offsets else 'literal_offsets_v1'}
+                'kind': ('derived_partial' if self._gap_audit is not None
+                         else 'derived' if self.derive_request_offsets else 'model_proposed'),
+                'rule': ('host_gap_review_0102' if self._gap_audit is not None
+                         else 'ordered_exact_quotes_v1' if self.derive_request_offsets
+                         else 'literal_offsets_v1')}
             plan['semantic_coverage_verified'] = False
             for obligation in plan['obligations']:
                 obligation['request_ids'] = [u['id'] for u in self._coverage
                                              if u['task_id'] == obligation['id']]
+            if self.neutral_trade_mapping and self._model_request_units is not None:
+                plan['request_unit_contract'] = 'neutral-trade-mapping-0105'
+                plan['neutral_trade_mapping'] = True
+                plan['model_request_units'] = deepcopy(self._model_request_units)
+                plan['request_unit_mapping'] = [
+                    {'request_id': normalized['id'],
+                     'model_target': original['target'],
+                     'derived_target': normalized['target'],
+                     'task_id': normalized['task_id'],
+                     'semantic_coverage_verified': False,
+                     'rule': 'neutral_domain_plus_explicit_comparison_0105'}
+                    for original, normalized in zip(self._model_request_units, self._coverage)
+                ]
         plan['task_ids'] = [item['id'] for item in plan['obligations']]
         request = None
         brief_preview = None
@@ -785,6 +912,7 @@ class UnifiedResearchWorkflow:
                                       'status': 'ready_for_confirmation',
                                       'amounts_read': False}
         token = secrets.token_urlsafe(24)
+        gap_review_token = secrets.token_urlsafe(24) if self._gap_audit is not None else None
         inner_token = brief_preview['confirmation_token'] if brief_preview else None
         try:
             fingerprints = self._fingerprints()
@@ -796,43 +924,115 @@ class UnifiedResearchWorkflow:
                     'diagnostic': safe_diagnostic(exc)}
         snapshot = deepcopy(plan)
         self._pending = {
-            'token': token, 'inner_token': inner_token, 'plan': snapshot,
+            # A plan with host-observed gaps cannot reach the normal
+            # confirmation gate until an independent separator review is
+            # explicitly accepted.
+            'token': None if gap_review_token else token,
+            'inner_token': inner_token, 'plan': snapshot,
             'question': question, 'revision': revision, 'fingerprints': fingerprints,
             'tasks': deepcopy(tasks),
             'planner_audit': deepcopy(planner_audit),
             'budget': deepcopy(_MODEL_BUDGET),
+            'request': deepcopy(request or {'tasks': tasks, 'trade': candidate.get('trade'),
+                                            'comparison': candidate.get('comparison'),
+                                            'policy_search_query': candidate.get('policy_search_query'),
+                                            'policy_question': candidate.get('policy_question'),
+                                            'policy_as_of': candidate.get('policy_as_of')}),
+            'task_previews': deepcopy(task_previews),
+            'gap_audit': deepcopy(self._gap_audit),
+            'gap_review_token': gap_review_token,
+            'gap_review': None,
         }
-        version = ('research-plan-3' if 'policy_search_query' in candidate
-                   else 'research-plan-2' if 'comparison' in candidate else 'research-plan-1')
-        return {'version': version, 'status': 'needs_confirmation',
-                'confirmation_token': token, 'question': question,
-                'conversation_revision': revision, 'plan': deepcopy(snapshot),
-                'request': deepcopy(request or {'tasks': tasks, 'trade': candidate.get('trade'),
-                                                'comparison': candidate.get('comparison'),
-                                                'policy_search_query': candidate.get('policy_search_query'),
-                                                'policy_question': candidate.get('policy_question'),
-                                                'policy_as_of': candidate.get('policy_as_of')}),
-                'fingerprints': deepcopy(fingerprints),
-                'provenance': deepcopy(plan['provenance']),
-                'obligations': deepcopy(plan['obligations']),
-                'task_ids': list(plan['task_ids']),
-                'case_settings': deepcopy(plan['case_settings']),
-                'derived_parameters': deepcopy(plan['derived_parameters']),
-                'planner_audit': deepcopy(planner_audit),
-                'budget': deepcopy(_MODEL_BUDGET),
-                'configuration': {
-                    'planning': deepcopy(planner_audit['configuration']),
-                    'policy_generation': _configuration_snapshot(
-                        None, 'not_requested', stage='policy_generation'),
-                },
-                'tasks': tasks,
-                'policy_candidate_count': task_previews.get('policy', {}).get('candidate_count', 0),
-                'trade_assessment': task_previews.get('trade', {'status': 'not_requested',
-                                                               'executed': False,
-                                                               'amounts_read': False}),
-                'task_previews': deepcopy(task_previews),
-                'response': '这是待确认的研究计划，不是查询结果。确认后才会读取金额或调用政策回答模型。',
-                'executed': False, 'intent_verified': False, 'model_calls': 1}
+        return self._pending_preview(
+            status='needs_gap_review' if gap_review_token else 'needs_confirmation')
+
+    def _pending_preview(self, *, status=None, response=None):
+        """Render a pending plan without exposing a usable token too early."""
+        pending = self._pending
+        if pending is None:
+            return {'status': 'confirmation_rejected', 'executed': False,
+                    'intent_verified': False}
+        plan = pending['plan']
+        if status is None:
+            status = 'needs_gap_review' if pending.get('gap_review_token') else 'needs_confirmation'
+        version = ('research-plan-4' if 'request_units' in plan else
+                   'research-plan-3' if 'policy_search_query' in plan
+                   else 'research-plan-2' if 'comparison' in plan else 'research-plan-1')
+        previews = pending.get('task_previews', {})
+        result = {'version': version, 'status': status,
+                  'question': pending['question'],
+                  'conversation_revision': pending['revision'], 'plan': deepcopy(plan),
+                  'request': deepcopy(pending.get('request', {})),
+                  'fingerprints': deepcopy(pending['fingerprints']),
+                  'provenance': deepcopy(plan['provenance']),
+                  'obligations': deepcopy(plan['obligations']),
+                  'task_ids': list(plan['task_ids']),
+                  'case_settings': deepcopy(plan['case_settings']),
+                  'derived_parameters': deepcopy(plan['derived_parameters']),
+                  'planner_audit': deepcopy(pending['planner_audit']),
+                  'budget': deepcopy(pending['budget']),
+                  'configuration': {
+                      'planning': deepcopy(pending['planner_audit']['configuration']),
+                      'policy_generation': _configuration_snapshot(
+                          None, 'not_requested', stage='policy_generation'),
+                  },
+                  'tasks': deepcopy(pending['tasks']),
+                  'policy_candidate_count': previews.get('policy', {}).get('candidate_count', 0),
+                  'trade_assessment': previews.get('trade', {'status': 'not_requested',
+                                                             'executed': False,
+                                                             'amounts_read': False}),
+                  'task_previews': deepcopy(previews),
+                  'executed': False, 'intent_verified': False, 'model_calls': 1}
+        if 'request_units' in plan:
+            result['request_units'] = deepcopy(plan['request_units'])
+            result['semantic_coverage_verified'] = False
+            result['coverage_preview'] = preview_text(plan['request_units'], plan, status)
+        if pending.get('token'):
+            result['confirmation_token'] = pending['token']
+        if pending.get('gap_review_token'):
+            result.update(gap_review_token=pending['gap_review_token'],
+                          gap_review_required=True,
+                          gap_audit=deepcopy(pending.get('gap_audit')),
+                          response=(response or
+                                    '模型引文漏了可疑分隔符；请逐项审查gap，批准后才会出现执行确认。'))
+        else:
+            result.update(gap_review_required=False,
+                          response=(response or
+                                    '这是待确认的研究计划，不是查询结果。确认后才会读取金额或调用政策回答模型。'))
+            if pending.get('gap_review') is not None:
+                result['gap_review'] = deepcopy(pending['gap_review'])
+                result['gap_review_required'] = True
+        return result
+
+    def approve_gap_review(self, token, submission, *, reviewer=None):
+        """Accept a separator-only review, then issue a one-time confirmation token."""
+        pending = self._pending
+        if (pending is None or not pending.get('gap_review_token')
+                or token != pending.get('gap_review_token')):
+            return {'status': 'confirmation_rejected', 'executed': False,
+                    'intent_verified': False}
+        try:
+            if self._fingerprints() != pending['fingerprints']:
+                self._clear_pending()
+                raise ValueError('sources changed since planning')
+            record = validate_gap_review(pending['gap_audit'], submission, reviewer)
+        except (Exception, KeyboardInterrupt) as exc:
+            return {'status': 'needs_review', 'response': 'gap审查记录不完整或未绑定本次原文，尚未执行。',
+                    'diagnostic': safe_diagnostic(exc), 'executed': False,
+                    'intent_verified': False}
+        if not record['approved']:
+            self._clear_pending()
+            return {'status': 'gap_review_rejected',
+                    'response': 'gap审查未全部通过，计划已作废，尚未执行。',
+                    'gap_review': record, 'executed': False, 'intent_verified': False}
+        pending['gap_review'] = record
+        pending['gap_review_token'] = None
+        pending['token'] = secrets.token_urlsafe(24)
+        pending['plan']['gap_review'] = deepcopy(record)
+        pending['plan']['gap_review_required'] = True
+        pending['plan']['gap_review_approved'] = True
+        return self._pending_preview(status='needs_confirmation',
+                                     response='gap仅包含已逐项审查的普通分隔符；仍需再次确认整份研究计划后才执行。')
 
     def cancel(self):
         self._clear_pending()
@@ -879,9 +1079,11 @@ class UnifiedResearchWorkflow:
         return entries
 
     @staticmethod
-    def _expected_delivery_files(tasks, *, model_requested):
+    def _expected_delivery_files(tasks, *, model_requested, gap_reviewed=False):
         """Files that must exist for a run to count as delivered."""
         expected = list(_DELIVERY_CORE_FILES)
+        if gap_reviewed:
+            expected.append('gap-review.json')
         if tasks == ['policy', 'trade']:
             expected.append('trade-result.json')
         if 'policy' in tasks and model_requested:
@@ -984,7 +1186,7 @@ class UnifiedResearchWorkflow:
             pass
         return marker
 
-    def _confirm_trade_only(self, plan, output, *, secret=''):
+    def _confirm_trade_only(self, plan, output, *, secret='', entry_kind='natural_language_plan'):
         output.mkdir(parents=True, exist_ok=False)
         journal = ExecutionJournal(output / 'execution-audit.jsonl', secret=secret)
         journal.append('confirmed', status='accepted', detail={'tasks': ['trade']})
@@ -999,6 +1201,7 @@ class UnifiedResearchWorkflow:
         journal.append('trade_finished', status=trade.get('status'),
                        detail={'diagnostic': trade.get('diagnostic')} if trade.get('diagnostic') else {})
         result = {'version': 'research-brief-1', 'request': {'trade': request},
+                  'entry_kind': entry_kind,
                   'trade': trade, 'policy': {'generation': {'status': 'not_requested', 'claims': []},
                   'audit': {'source_kind': 'not_requested', 'new_api_calls': 0}},
                   'new_api_calls': 0, 'model_training': False, 'intent_verified': False,
@@ -1024,7 +1227,8 @@ class UnifiedResearchWorkflow:
         (output / 'report.zh-CN.md').write_text(_render_trade_only(result))
         return result
 
-    def _confirm_policy_only(self, plan, output, *, model=None, source_kind='live', secret=''):
+    def _confirm_policy_only(self, plan, output, *, model=None, source_kind='live', secret='',
+                             entry_kind='natural_language_plan'):
         output.mkdir(parents=True, exist_ok=False)
         journal = ExecutionJournal(output / 'execution-audit.jsonl', secret=secret)
         journal.append('confirmed', status='accepted', detail={'tasks': ['policy']})
@@ -1056,6 +1260,7 @@ class UnifiedResearchWorkflow:
                        detail={'model_calls': policy.get('audit', {}).get('model_calls', 0),
                                'new_api_calls': policy.get('audit', {}).get('new_api_calls', 0)})
         result = {'version': 'research-brief-1', 'request': request,
+                  'entry_kind': entry_kind,
                   'policy_evidence': evidence, 'policy': policy,
                   'trade': {'status': 'not_requested'}, 'new_api_calls':
                   policy.get('audit', {}).get('new_api_calls', 0),
@@ -1075,7 +1280,7 @@ class UnifiedResearchWorkflow:
         return result
 
     def confirm(self, token, output, *, model=None, source_kind='live', secret=''):
-        if self._pending is None or token != self._pending['token']:
+        if self._pending is None or not self._pending.get('token') or token != self._pending['token']:
             return {'status': 'confirmation_rejected', 'executed': False, 'intent_verified': False}
         pending = deepcopy(self._pending)
         self._pending = None
@@ -1094,6 +1299,22 @@ class UnifiedResearchWorkflow:
                     'executed': False, 'intent_verified': False}
         plan, question = pending['plan'], pending['question']
         tasks = pending['tasks']
+        if plan.get('gap_audit') is not None and not plan.get('gap_review_approved'):
+            # The separate gap-review gate must never be bypassed by a caller
+            # that happens to know an old or missing confirmation token.
+            self.brief._pending = None
+            return {'status': 'confirmation_rejected',
+                    'reason': 'gap审查尚未明确通过，未执行。',
+                    'executed': False, 'intent_verified': False}
+        if plan.get('gap_audit') is not None:
+            try:
+                record = validate_gap_review(plan['gap_audit'], plan.get('gap_review'))
+                if not record['approved'] or record != pending.get('gap_review'):
+                    raise ValueError('gap review changed')
+            except Exception:
+                self.brief._pending = None
+                return {'status': 'confirmation_rejected', 'reason': 'gap审查绑定失效。',
+                        'executed': False, 'intent_verified': False}
         output = Path(output)
         run_id = secrets.token_urlsafe(12)
         started_at = _utc_now()
@@ -1111,7 +1332,8 @@ class UnifiedResearchWorkflow:
             'policy_generation': policy_configuration,
         }, secret)
         expected_files = self._expected_delivery_files(
-            tasks, model_requested=model_requested)
+            tasks, model_requested=model_requested,
+            gap_reviewed=bool(plan.get('gap_review')))
         intent_path = self._delivery_intent_path(output)
         # Never repair or annotate a directory belonging to another attempt.
         # The exclusive sibling reservation also prevents reuse after a crash
@@ -1141,14 +1363,17 @@ class UnifiedResearchWorkflow:
             if tasks == ['policy', 'trade']:
                 result = self.brief.confirm(pending['inner_token'], output, model=model,
                                              source_kind=source_kind, secret=secret,
+                                             entry_kind='natural_language_plan',
                                              audit_context={'tasks': tasks,
                                                             'conversation_revision': pending['revision'],
                                                             'fingerprints': pending['fingerprints']})
             elif tasks == ['trade']:
-                result = self._confirm_trade_only(plan, output, secret=secret)
+                result = self._confirm_trade_only(plan, output, secret=secret,
+                                                  entry_kind='natural_language_plan')
             else:
                 result = self._confirm_policy_only(plan, output, model=model,
-                                                   source_kind=source_kind, secret=secret)
+                                                   source_kind=source_kind, secret=secret,
+                                                   entry_kind='natural_language_plan')
         except (Exception, KeyboardInterrupt) as exc:
             self.brief._pending = None
             # mkdir lost a race: the directory is not ours to annotate.
@@ -1199,6 +1424,10 @@ class UnifiedResearchWorkflow:
             if 'request_units' in safe_plan:
                 unified['request_results'] = request_results(safe_plan['request_units'], unified['obligations'])
                 unified['semantic_coverage_verified'] = False
+            if safe_plan.get('gap_audit') is not None:
+                unified['gap_audit'] = deepcopy(safe_plan['gap_audit'])
+                unified['gap_review'] = deepcopy(safe_plan.get('gap_review'))
+                unified['gap_review_required'] = True
             unified['task_ids'] = list(safe_plan.get('task_ids', []))
             unified['model_call_ledger'] = _redact(self._model_call_ledger(pending, result), secret)
             unified['model_calls_total'] = sum(item['model_calls']
@@ -1238,9 +1467,16 @@ class UnifiedResearchWorkflow:
                                    + _safe_markdown(item['quote']).replace('\n', ' ')
                                    + '；' + labels.get(item['execution_status'], '待核对') + '\n')
                     prefix += '\n'
+                if unified.get('gap_audit') is not None:
+                    gaps = [g for g in unified['gap_audit'].get('segments', [])
+                            if g.get('source') == 'host_gap' and str(g.get('quote', '')).strip()]
+                    prefix += ('原文gap审查：已由宿主保留 ' + str(len(gaps))
+                               + ' 个分隔符；审查通过不等于语义覆盖已验证，详见 gap-review.json。\n\n')
                 _atomic_text(report, prefix + report.read_text())
             self._write_json(output, 'obligations.json', unified['obligations'])
             self._write_json(output, 'model-call-ledger.json', unified['model_call_ledger'])
+            if plan.get('gap_review') is not None:
+                self._write_json(output, 'gap-review.json', plan['gap_review'], secret)
             # Write the core result once before calculating the delivery
             # marker; the marker itself is intentionally not part of the
             # required-files set to avoid a circular completeness check.
@@ -1282,8 +1518,37 @@ class UnifiedResearchWorkflow:
             raise
 
 
+# This is the one configuration used by the user-facing natural-language
+# entry and by the reviewed development runner. Keeping the switches here
+# prevents a successful smoke path from silently drifting away from the path
+# a user actually runs. ``allow_host_gap_review`` remains an explicit caller
+# choice because it requires a human to inspect each omitted separator.
+PRODUCT_WORKFLOW_OPTIONS = {
+    'require_comparison': True,
+    'require_search_query': True,
+    'require_request_units': True,
+    'derive_request_offsets': True,
+    'allow_grouped_policy_requests': True,
+    'neutral_trade_mapping': True,
+}
+
+
+def build_product_workflow(planner_model, *, planner_source_kind='fixture',
+                           allow_host_gap_review=False):
+    """Build the strict workflow shared by production and reviewed smoke paths."""
+
+    return UnifiedResearchWorkflow(
+        planner_model,
+        **PRODUCT_WORKFLOW_OPTIONS,
+        allow_host_gap_review=allow_host_gap_review,
+        planner_source_kind=planner_source_kind,
+    )
+
+
 def _render_trade_only(result):
     lines = ['# TradeShock：贸易查询', '', '> 这是已确认的描述性贸易查询，不是因果估计。', '']
+    if result.get('entry_kind') == 'natural_language_plan':
+        lines.insert(3, '> 范围由模型根据自然语言提出，经确认后执行；确认不等于语义正确，仍需逐项核对。')
     request = result['request']['trade']
     lines += ['范围：美国进口 / List 1 暴露范围 / ' + _safe_markdown(request['origin'])
               + ' / ' + _safe_markdown(request['hs6'] or '政策整体') + '；消费进口额，美元。', '']
@@ -1300,14 +1565,19 @@ def _render_trade_only(result):
     lines += ['', '这是描述性查询；项目当前不发布关税因果效果。']
     lines += ['', '来源（完整字段见 result.json）：']
     for source in result['trade'].get('sources', {}).values():
-        lines += ['- ' + _safe_markdown(source.get('path', '来源'))
+        label = source.get('path') or source.get('file_name') or source.get('kind', '来源')
+        lines += ['- ' + _safe_markdown(label)
                   + '；SHA256：' + _safe_markdown(source.get('sha256', '未提供'))]
+        if source.get('url'):
+            lines += ['  来源网址：' + _safe_markdown(source['url'])]
     return '\n'.join(lines)
 
 
 def _render_policy_only(result):
     lines = ['# TradeShock：政策证据查询', '', '> 政策片段和模型草稿分开保存，引用存在不等于语义已证明。', '',
              f"生成状态：{result['policy']['generation']['status']}。", '']
+    if result.get('entry_kind') == 'natural_language_plan':
+        lines.insert(3, '> 范围由模型根据自然语言提出，经确认后执行；确认不等于语义正确，仍需逐项核对。')
     lines += [_safe_markdown(result['request']['policy_question']),
               '政策文档出版截止：' + _safe_markdown(result['request']['policy_as_of']) + '。', '']
     if result['request'].get('policy_search_query'):

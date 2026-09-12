@@ -31,6 +31,8 @@ def main(argv=None):
     parser.add_argument('--comparison-id', help='registered 的登记ID')
     parser.add_argument('--generate', action='store_true', help='确认后调用一次GLM；不自动重试')
     parser.add_argument('--confirm', action='store_true', help='明确确认本次命令给出的范围')
+    parser.add_argument('--allow-host-gap-review', action='store_true',
+                        help='自然语言模式允许逐项审查模型漏掉的普通分隔符')
     parser.add_argument('--output-root', type=Path, default=ROOT / 'tmp/research-brief')
     args = parser.parse_args(argv)
     if args.natural_language:
@@ -43,7 +45,11 @@ def main(argv=None):
             forwarded.append('--confirm')
         if args.generate:
             forwarded.append('--generate')
+        if args.allow_host_gap_review:
+            forwarded.append('--allow-host-gap-review')
         return natural_main(forwarded)
+    if args.allow_host_gap_review:
+        parser.error('--allow-host-gap-review 只适用于 --natural-language 模式。')
     if not args.months:
         parser.error('显式参数模式需要 --months；自然语言模式请使用 --natural-language。')
     if not args.policy_as_of:

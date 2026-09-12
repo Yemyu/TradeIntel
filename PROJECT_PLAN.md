@@ -1,11 +1,55 @@
 # TradeShock AI — Learning-first Project Plan
 
+**0119当前：0118接线复审未通过完整契约。** 已修复主组事实待审/拒绝仍完成、基准复算失败继续、B无来源判对；实际HTTP payload未捕获，快照仍partial。下一轮Luna最高按[0119五项清单](docs/decisions/0119-controls-integration-review.zh-CN.md)补齐同一离线实现单元，再交Astra中审查。[Phase 51中文学习](docs/learning/phase-51-review-gates.zh-CN.md)。以下0118为历史报告，不能用作完整验收证明。
+
+**0118当前：首轮离线接线完成，进入Astra复审。** 现有运行器已接入规划前贸易baseline、执行前范围比较、政策主/B同配置检查、调用后provider-neutral捕获和逐事实审查包；事实审查默认待人工，正式`acceptance_ready=false`。602项本地测试通过，0外部API。下一阶段推荐Astra中复审组合/边界fixture、事实审查绑定和真实题前门槛；在线仍关闭、不推送。[中文学习](docs/learning/phase-50-independent-comparison.zh-CN.md)。以下为历史状态。
+
+**0117当前：验收复审发现并修复空审核放行、B否定句误评分和A遗漏变化额检查。** 离线完成改称`synthetic_protocol_completed`，正式`acceptance_ready=false`；快照目前仅部分覆盖。仍需独立冻结A请求、统一主/B模型配置与逐事实审查、完整plan/gap接线。[0117复审与后续规范](docs/decisions/0117-acceptance-reaudit.zh-CN.md)为最新依据；下方0116的完整完成声明已被本条更正。
+
+**0116当前：A/B离线控制和安全验收绑定已接通。** A现在直接从声明源表复算贸易金额；B使用同一政策问题但不传检索证据，保存真实回答并记录事实召回差距。计划/答案审查、交付哈希、消息捕获、完整依赖快照和`approve_question → finalize_reviewed`绑定已实现；589项本地测试通过，0外部API。`acceptance_ready=true`只适用于带控制的合成运行，不是模型准确率，也不解冻0111在线题集。下一阶段推荐Astra中审查清单适配和是否启动新题，之后才由Luna最高执行预检。详见[0116决定](docs/decisions/0116-runner-audit.zh-CN.md)。以下为历史记录。
+
+**0114历史：审查发现并修复0113的提前完成、截断放行、用量丢失、审计材料覆盖/串改与虚构witness问题。** 8个新增反例；0113组件尚未达到完整验收协议，在线0111仍禁用。下一阶段Luna最高按[0114接线清单](docs/decisions/0114-acceptance-guard-review.zh-CN.md)完成合成整链与A/B对照，之后Astra审查并冻结实现，再准备正式题。不要直接重编题或启动API。[中文学习](docs/learning/phase-46-review-vs-return.zh-CN.md)。下方0113及更早均为历史状态。
+
+**0113当前：0112验收保护层已用合成材料实现，11项反例测试和全套566项工程测试通过，0 API。** 连接/结构/交付失败不可被人工批准覆盖；依赖串改、未知用量和80,000 tokens预算会在下一次调用前停止；固定问题行保留`not_run`；原始响应和审查提交支持脱敏保存与哈希绑定。这只是验收基础设施，不是模型准确率，也不解冻0111在线批次。下一阶段推荐Astra中审查组件边界、政策截止日前证据和新题语义，之后才由Luna最高接入新运行器。[0113决定](docs/decisions/0113-prospective-acceptance-guards-implementation.zh-CN.md) [Phase 45中文学习](docs/learning/phase-45-acceptance-guards.zh-CN.md)
+
+**0112唯一当前：0111验收审查未通过，在线入口已禁用，候选题与原快照保留。** 金额复算通过不代表题目语义正确；已复现连接错误可被人工通过误记成功。下一阶段按[0112修复规范](docs/decisions/0112-prospective-audit.zh-CN.md)先用合成材料完善通用验收器、账本、逐项审查和对照，再准备正式新题。零API，0109成绩与因果状态不变。下方0111完成表述已被本审查限定。
+
+**0111唯一当前：全新24题已冻结，独立参考值和零API预检通过；尚未启动在线验收。** 入口与带独立清单的中性贸易开发路径已统一，来源显示和中文说明已修复，548项此前完整测试通过。旧兼容开发模式仍保留，不计入严格验收；旧R01–R24题集禁用，0109四题不重刷。下一阶段Astra中审查[0111](docs/decisions/0111-prospective-set-frozen.zh-CN.md)的题目隔离、参考值复算和运行器门控；通过后才决定是否启动GLM在线主批次。份额/同比长线目标未取消。以下为历史状态。
+
+**0109唯一当前：中性方案真实四场景全部经逐项审查通过，6调用/13,105 tokens，无重试。** 包含原先失败的月份比较和末尾句号gap审查；份额不支持时完整保留需求并停止。仅为已知开发题，不是独立准确率或项目最终完成。下一阶段Astra中做真实使用验收设计与差距审查，不重复刷四题；详见[0109](docs/decisions/0109-live-four-case-completion.zh-CN.md)。以下均为历史状态。
+
+**0108唯一当前：无认证HEAD/POST可达，真实新批次首题仍connection失败，根因未锁定。** 本轮1次业务尝试、用量未知、后3题未运行。已补脱敏异常链和正确网络错误提示；下一阶段Astra中按[0108新快照](docs/decisions/0108-intermittent-connection-diagnostics.zh-CN.md)做一次有诊断的业务批次，失败则依据底层异常停止定位，不重复HEAD→重跑循环。以下为历史安排。
+
+**0107唯一当前：0106真实新批次首题规划超时，1次尝试、服务端用量未知，其余3题未运行。** 无重试。随后一次无认证HEAD也返回连接异常。下一阶段Astra中做有界网络诊断，恢复后才新开冻结批次，不修改任务设计或刷生成接口。[实际记录](docs/decisions/0107-live-planner-timeout.zh-CN.md)。以下为历史安排。
+
+**0106唯一当前：中性标签接线审查完成，修复提示冲突、清单开关约束、gap原始来源绑定与澄清兼容。** 新增6项测试，全套539项通过，0API。下一阶段Astra中直接按[0106冻结条件](docs/decisions/0106-neutral-integration-review.zh-CN.md)做新四题/最多6调用，首错停止，不再追加设计阶段。[中文学习](docs/learning/phase-42-review-before-live.zh-CN.md)。以下为历史状态，最新执行安排以本项与总参考文件第十一节为准。
+
+**0105唯一当前：冗余贸易分类已接入开发检查入口并完成离线风险验证；报告来源文字已修复。** 新增15项测试，全套533项通过，0API。方向反转、请求误标背景仍需独立语义核对，不能把结构通过当成功；0104真实结果仍为2通过/1失败/1未运行。下一阶段Astra中按[0105审查交接](docs/decisions/0105-neutral-trade-contract.zh-CN.md)审查接线差异，之后才决定是否冻结真实批次。[中文学习](docs/learning/phase-41-single-trade-intent.zh-CN.md)。以下“当前/下一步”为历史记录，均不得覆盖本项及总参考文件第十一节。
+
 > 中文项目名：可信贸易政策 AI 分析师  
 > 项目目标：以 AI 原生协作方式学习数据与 AI 工程的概念、设计、选择和验证，同时完成可用于 NTU Applied AI 申请的主项目。日常实现代码主要由 AI 完成。
 
 > **方向锚点：** 新阶段开始前先阅读[项目总参考文件](docs/PROJECT_CONTEXT_REFERENCE.zh-CN.md)。阶段日志记录发生了什么；总参考文件规定项目要做成什么。
 
-## 当前进度（2026-09-11）
+## 当前进度（2026-09-12）
+
+**0104当前：真实前两题通过，包括政策＋贸易完整报告；第三题因比较任务标签冲突拒绝，第四题未运行。** 5调用/10,900tokens，2通过1失败1未运行，非总体准确率。下一阶段Astra中离线审查任务标签与比较契约重复表达，并修正报告入口来源模板；不直接重试。[实际结果](docs/decisions/0104-live-combined-delivery.zh-CN.md)。
+
+**0103当前：已审查并补齐四题运行器与独立清单接线。** 修复对齐重构、过期审查、空确认凭据，新增反例验证；全套518项工程测试通过，0103模式零API预检通过。下一阶段Astra中直接新四题/最多6调用，逐项核对真实内容，首错停止。[审查记录和试验边界](docs/decisions/0103-host-gap-integration-review.zh-CN.md)。下方0102“接线完成”当时尚不包括运行器，现已补齐。
+
+**0102当前：选定“原文引文 + 宿主独立gap审查”，已完成接线、命令行入口和离线回归。** 0101第二题只读重放可完整保存四个缺失标点，仍是review_required而非成功执行；现在含gap的计划不会拿到普通确认 token，命令行开启`--allow-host-gap-review`后须逐项确认，审查通过后才可二次确认。全套513项工程测试通过，0新API，无提交推送。下一阶段Astra审查接线差异与反例，再决定是否进行新的小规模真实检查；不继续提示刷题。[锁定规范](docs/decisions/0102-host-gap-review-design.zh-CN.md) [中文学习及答案](docs/learning/phase-40-original-text-and-interpretation.zh-CN.md)。下方为历史记录。
+
+**0101最新：真实连接正常，首题审查通过，第二题仅原文分隔标点缺失被拒。** 3调用/6404tokens，1通过1失败2未运行；字段已合法，诊断副本未执行。停止继续加提示刷题，下一阶段Astra中比较宿主补存分隔记录、预分原文ID和结构化输出方案，先锁定最小安全修正。[结果与边界](docs/decisions/0101-live-punctuation-boundary.zh-CN.md)。无提交推送，下方为历史安排。
+
+**0100最新（2026-09-12）：4次无凭据连接检查均可达，默认Python路径恢复。** 暂无法锁定上次TLS中断根因，不改代理/证书/适配器。下一阶段Astra中核对原0098快照后直接新4题/最多6调用，不重复连接准备、首错停止。[诊断与通俗说明](docs/decisions/0100-transport-recovery-check.zh-CN.md)。0模型调用，无提交推送，下方为历史记录。
+
+**0099最新（2026-09-12）：新真实批次在首个连接阶段停止。** 1次尝试，用量未知，无模型内容；无凭据HEAD中curl可达，项目Python复现TLS EOF。下一阶段Astra中有界诊断连接，不改提示、不用付费生成探测、不禁用TLS验证。[记录](docs/decisions/0099-live-transport-interruption.zh-CN.md)。以下为历史进度。
+
+**0098唯一当前：规划接口说明已局部修正。** 新模式从校验器生成精确evidence键名清单，明确贸易键不加_quote，补充原文标点保留方式；不自动修键或忽略字符。新增4测试、相关21项通过，零调用预检通过。下一阶段Astra中直接新目录4题/最多6调用检查，若仍失败不继续提示刷题。[诊断、验证与说明](docs/decisions/0098-planner-wire-guidance.zh-CN.md)。0097通过与失败记录不改，下方为历史安排。
+
+**0097唯一当前：首题真实整链经逐项审查通过，第二题规划格式被拒。** 3次真实调用/5911tokens；1题通过、1题失败、2题未运行，不是总体准确率。D89-2主要范围参数正确，但原文漏标点、evidence字段名不合契约，未执行查询。下一阶段Astra中局部审查实际规划字段说明及复制负担，不加题、不直接重试。[真实结果](docs/decisions/0097-first-case-accepted-second-plan-rejected.zh-CN.md) [中文学习](docs/learning/phase-39-first-live-case.zh-CN.md)。用户已授权后续继续使用所提供凭据，不每次索取、不写Git。下方是历史安排。
+
+**0096唯一当前：政策纯JSON输出指令已明确。** 仅在FOCUS_RULES解释“直接回答”必须在claims内，禁止JSON外文字；严格解析器不改，新增4项测试，相关14项通过，0API。下一阶段Astra中核对新快照后直接真实4题/最多6调用，不另加设计阶段。[实现与推送状态](docs/decisions/0096-policy-json-instruction.zh-CN.md) [中文学习](docs/learning/phase-38-json-output.zh-CN.md)。本地25fd01f推送重试返回Repository not found，当前活动身份无法访问Yemyu/TradeIntel，未改远程；本轮新增修改尚未提交。下方为历史安排。
 
 **0095唯一当前：真实首题已生成有引用的两项答案，但被输出格式门槛拒收。** 新清单计划审查通过；GLM在JSON前附普通文字，现严格解析器拒收，首错停止。实际2调用/4085tokens，其余3题未运行。事后只读核对日期和税率有原文支持，不将其改判为成功交付。下一阶段Luna最高只明确最终JSON输出指令并做离线格式回归，不扩建、不续跑、不静默截掉正文。[结果与局部修正规范](docs/decisions/0095-live-answer-format-failure.zh-CN.md)。下方为历史安排。
 
