@@ -93,20 +93,21 @@ POLICY_RESPONSE_SCHEMA = {
     "type": "object",
     "required": ["claims"],
     "properties": {
-        "answer": {"type": "string"},
         "claims": {
             "type": "array",
+            "maxItems": 6,
             "items": {
                 "type": "object",
                 "required": ["text", "citations"],
                 "properties": {
-                    "text": {"type": "string"},
+                    "text": {"type": "string", "minLength": 1, "maxLength": 1500},
                     "citations": {"type": "array", "items": {"type": "string"}},
                 },
                 "additionalProperties": False,
             },
         },
     },
+    "additionalProperties": False,
 }
 
 
@@ -536,10 +537,11 @@ def _validate_policy_case_reference(case: SyntheticCase) -> None:
             or reference.get("question") != loaded.get("question")
             or reference.get("as_of") != loaded.get("as_of")):
         raise AcceptanceGuardError("policy_reference_changed")
-    if digest(reference.get("facts")) != digest(loaded.get("facts")):
+    if (digest(reference.get("facts")) != digest(loaded.get("facts"))
+            or digest(case.facts) != digest(loaded.get("facts"))):
         raise AcceptanceGuardError("policy_facts_changed")
-    if not reference.get("source_catalog"):
-        raise AcceptanceGuardError("policy_reference_sources_missing")
+    if digest(reference.get("source_catalog")) != digest(loaded.get("source_catalog")):
+        raise AcceptanceGuardError("policy_reference_sources_changed")
 
 
 def _direct_trade_recompute(result: Mapping[str, Any]) -> dict[str, Any]:
@@ -689,8 +691,9 @@ def _policy_control_messages(question: str, as_of: str | None = None) -> list[di
                 "你是一个没有外部检索结果的政策问答基线。回答下面的问题时，"
                 "只能使用模型自身已有知识；不要假装看到了政策原文，不要编造引用。"
                 "如果无法可靠回答，可以明确说明不确定。仅输出 JSON："
-                "{\"answer\":\"...\",\"claims\":[{\"text\":\"...\",\"citations\":[]}] }。"
+                "{\"claims\":[{\"text\":\"...\",\"citations\":[]}] }。"
                 "claims中的每一项必须同时包含text和citations；没有主张时使用空数组。"
+                "只能有claims顶层字段；最多6条，每条text为非空文字且不超过1500字符。"
             ),
         },
         {"role": "user", "content": json.dumps(
@@ -710,17 +713,21 @@ def _evaluate_no_evidence_response(case: SyntheticCase, response: ModelResponse)
         parsed = None
     strict_schema = isinstance(case.policy_reference, Mapping)
     claims: list[Any] = []
-    schema_valid = True
+    schema_valid = False
     if isinstance(parsed, Mapping):
         candidate = parsed.get("claims")
         if isinstance(candidate, list):
+            schema_valid = True
             if strict_schema:
+                schema_valid = set(parsed) == {"claims"} and len(candidate) <= 6
                 for item in candidate:
                     if (not isinstance(item, Mapping)
                             or set(item) != {"text", "citations"}
                             or not isinstance(item.get("text"), str)
+                            or not item["text"].strip() or len(item["text"]) > 1500
                             or not isinstance(item.get("citations"), list)
-                            or any(not isinstance(ref, str) for ref in item["citations"])):
+                            or any(not isinstance(ref, str) or not ref.strip()
+                                   for ref in item["citations"])):
                         schema_valid = False
                         continue
                     claims.append({"text": item["text"],
@@ -749,7 +756,7 @@ def _evaluate_no_evidence_response(case: SyntheticCase, response: ModelResponse)
     return {
         "version": "control-b-no-evidence-0116",
         "control": "B",
-        "status": "validated",
+        "status": "validated" if schema_valid else "invalid_schema",
         "method": "same_question_without_retrieved_evidence",
         "response": {"text": text, "parsed": parsed, "metadata": safe_metadata(response.metadata)},
         "expected_fact_count": len(expected),
@@ -1149,6 +1156,9 @@ class ProspectiveSyntheticRunner:
             )
             payload = _evaluate_no_evidence_response(case, response)
             payload["question_id"] = case.id
+            if not payload["claim_schema_valid"]:
+                ledger.record_artifact(f"controls/{case.id}-control-b-invalid.json", payload)
+                raise AcceptanceGuardError("baseline_claim_schema_invalid")
             if case.facts:
                 parsed = payload.get("response", {}).get("parsed", {})
                 parsed = parsed if isinstance(parsed, Mapping) else {}
@@ -1406,7 +1416,8 @@ class ProspectiveSyntheticRunner:
                           and str(exc) in {"controls_not_implemented_0116",
                                            "acceptance_integration_incomplete_0116",
                                            "control_a_failed", "baseline_recompute_failed",
-                                           "baseline_fact_review_pending"}
+                                           "baseline_fact_review_pending",
+                                           "baseline_claim_schema_invalid"}
                           else f"runner_failed:{_failure_category(exc)}")
                 self._stop(ledger, active_case.id, reason)
         summary = {**ledger.summary(),

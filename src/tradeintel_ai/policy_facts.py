@@ -1,4 +1,6 @@
-"""Load the small, human-reviewed policy fact set used by strict acceptance.
+"""Load the curated policy reference used by strict acceptance.
+
+Structural validation does not certify independent human semantic review.
 
 This is intentionally separate from retrieval.  Retrieval proposes passages;
 this file records which official passages are allowed as the independent
@@ -97,6 +99,8 @@ def load_frozen_policy_reference(root: str | Path) -> dict[str, Any]:
             raise ValueError("官方来源出版日期无效") from exc
         if published.isoformat() != row["published"]:
             raise ValueError("官方来源出版日期必须使用标准日期")
+        if published > cutoff:
+            raise ValueError("官方来源出版日期晚于题目截止日")
         if type(row.get("page")) is not int or row["page"] <= 0:
             raise ValueError("官方来源页码无效")
         local_path = (project_root / row["path"]).resolve()
