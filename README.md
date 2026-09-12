@@ -1,6 +1,6 @@
 # TradeShock AI
 
-Current review (0119): pending or rejected main fact reviews now stop the runner, failed reference arithmetic is rejected, and baseline fact judgments require review evidence. The recorded model settings are not actual HTTP payload captures. The 0118 implementation is partial; online acceptance remains disabled. See the [review and remaining implementation checklist](docs/decisions/0119-controls-integration-review.zh-CN.md). Earlier checkpoints below are historical.
+Current review (0119): pending or rejected main fact reviews now stop the runner, failed reference arithmetic is rejected, and baseline fact judgments require review evidence. Strict policy cases use a separately frozen official-facts file; the runner can capture a redacted self-consistent HTTP payload at the compatible model's final opener boundary, while synthetic fixtures without that boundary remain unverified. Registered-window recomputation, the host gap-review hook, final delivery reinspection, and an explicit source/data/runtime snapshot are now wired; transitive packages, semantic human review, complete combined-fixture coverage, and online acceptance remain pending. See the [review and remaining implementation checklist](docs/decisions/0119-controls-integration-review.zh-CN.md). Earlier checkpoints below are historical.
 
 An evidence-grounded AI assistant for analysing trade-policy shocks and trade diversion.
 

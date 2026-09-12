@@ -7,24 +7,24 @@
 1. 主组事实审核明确给出missing/unsupported，批次仍完成；默认pending_human也仍完成。现主组待审或拒绝立即停止，后续B调用不会发生。B有有效但错误的人工结论可以作为对照观测；B待审不能完成批次。
 2. 独立A源表复算返回passed=false，仍被保存为可用基准。现复算失败停止，尚未调用规划模型。
 3. B事实审查可以在没有任何参考来源时标supported。现两个组的supported/contradicted均须引用审核包中的证据。该证据供审核者使用，不代表传给无文档组模型。
-4. 配对捕获只是调用后重新读取模型对象的配置，并未拦截真正HTTP请求；两组同为默认值也会标actual_payloads_verified=true。现改为false并注明声明配置，不能据此声称已核实实际发送参数。
+4. 配对捕获只是调用后重新读取模型对象的配置，并未拦截真正HTTP请求；两组同为默认值也会标actual_payloads_verified=true。现在运行器在兼容模型的最终`urllib`发送边界临时包裹opener，生成自洽的脱敏`http_payload`捕获；静态fixture没有该捕获时仍标false，验收器还会逐项核对实际payload的模型参数、超时、问题和截止日。适配器源文件本身保持历史冻结哈希不变。
 5. 任意fixture回调可提交事实标签。结构验证现仅标review_structure_verified，semantic_accuracy_measured=false；人工标签是否可靠必须另审。
 
-新增tests/test_acceptance_review_0119.py的5项回归测试。前4类保护中的待审、拒绝、错误基准和B无来源放行，均在修改前复现；随后修复通过。更新了0118旧测试中“待审仍完成”的错误预期。
+新增tests/test_acceptance_review_0119.py的11项回归测试，并新增独立facts schema反例。前4类保护中的待审、拒绝、错误基准和B无来源放行，均在修改前复现；随后修复通过；新增gap未审查阻断、真实opener捕获、事实与允许来源绑定、未知citation及非法facts日期/字段阻断反例。更新了0118旧测试中“待审仍完成”的错误预期。
 
-验证结果：定向12项通过；全套`PYTHONPATH=src .venv/bin/python -m unittest discover -s tests`607项通过（45.311秒），`git diff --check`通过。合成回调与测试身份不等于真实模型或人工盲审成绩；未提交、未推送。
+验证结果：定向12项通过；全套`PYTHONPATH=src .venv/bin/python -m unittest discover -s tests`615项通过（约34秒），`git diff --check`通过。合成回调与测试身份不等于真实模型或人工盲审成绩；未调用API。
 
 ## 本轮未满足的0118要求
 
 当前仍是部分实现，不能称0118整个阶段完成：
 
-- baseline可选，已有旧fixture可绕过独立范围比较；已提供baseline也没有独立审查者身份。registered窗口仍不支持独立复算，且其months=None会在工具执行前失败。没有证明政策比较窗口与基准月全部接通。
+- baseline可选，已有旧fixture可绕过独立范围比较；已提供baseline也没有独立审查者身份。registered窗口的独立月份展开和源表复算已接入严格runner，但旧fixture仍可选择不提供baseline；四类组合整链尚未共同验收。
 - policy_question/as_of仍取自主组preview，没有调用前冻结的公开政策子问题；组合题可能把规划错误带进两个组。
 - 主组claims为text/citations对象，B仍为answer+字符串claims；声明的共享schema不是实际统一输出。B解析还有过滤不合格claim的路径，不能用于严格事实评分。
 - 默认facts里的policy-1为占位ID，没有官方页码、出版日、文件哈希和截止日核验；主组审核用检索结果，B审核包目前没有独立参考证据。因此B正确事实的严格审查会被保护条件阻止，需要先补冻结证据，不能放宽审查绕过。
-- 基础事实审核函数尚未检查原文quote、双向fact/claim关联、完整断言拆分及引用逐条支持；人工结果未成为账本approve_question/finalize_reviewed的完整不可绕过绑定。当前修复首先在runner入口阻断已发现的放行。
-- gap审查尚未接入，默认workflow不启用host_gap_review；组合/澄清四类完整fixture尚未共同验收。
-- 依赖快照仍明确partial：没有冻结注入代码、所有DataPaths、依赖版本、目录成员和真实有效prompt/payload。不得使用“完整快照已生成”的说法。
+- 严格事实审核现在检查冻结fact的允许来源、claim中的未知citation、引用摘录和逐事实/逐claim完整性；仍不自动判断语义真伪，且旧版兼容packet保留较宽结构。人工结果已绑定approve_question/finalize_reviewed，但仍需Astra复审人工语义边界。
+- gap审查入口已接入严格runner；没有独立gap审查器时会在`needs_gap_review`停止，已批准后仍需再次审核整份计划。默认历史fixture不启用该门；组合/澄清四类完整fixture尚未共同验收。
+- 依赖快照已冻结显式源代码、DataPaths、需求文件、运行时身份和注入回调源文件；转移依赖包、操作系统库和动态供应商环境仍在快照外，不能称“全部依赖完整冻结”。
 
 ## 下一轮一次性交付（Luna最高）
 
@@ -32,7 +32,7 @@
 
 1. 为严格路径加入必需的独立请求和调用前冻结policy_question/as_of、官方facts参考文件；历史fixture仅保留兼容测试标签。参考缺字段/日期/文件/审查人时预检失败，不发请求。
 2. 实现registered参考月份独立解析和四类fixture，接入既有gap审批接口；贸易基准必须源表复算通过，执行与审核材料互相绑定。
-3. 主/B统一claims对象和公共回答约束；在ResearchPolicyModel实际请求出口捕获脱敏payload，用模拟opener验证与冻结配置逐项相符（包括timeout、问题和截止日）。不能用读取模型属性代替发送证据。
+3. 主/B统一claims对象和公共回答约束；在ResearchPolicyModel实际请求出口由运行器捕获脱敏payload，用模拟opener验证与冻结配置逐项相符（包括timeout、问题和截止日）。不能用读取模型属性代替发送证据，也不能为了接线而改写历史冻结适配器。
 4. 两组审核包使用同一冻结事实来源，B模型消息仍不含来源。所有claim均须审核，原文、事实及引用关系完整校验；main失败停止，B答错保留为观测，未审不能完成。
 5. 在ledger最终批准与收尾时重新核验这些材料和实际交付，完整冻结实际依赖。针对绕过入口、错组审核、丢claim、配置漂移、错窗口和交付串改各写行为反例；四类合成整链通过后交Astra中审查。
 

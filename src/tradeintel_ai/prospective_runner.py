@@ -34,6 +34,8 @@ from .prospective_acceptance import (
     compare_trade_scope,
     digest,
     freeze_dependencies,
+    requirement_names,
+    runtime_environment,
     validate_fact_review,
     validate_policy_pair,
     validate_structured_review,
@@ -48,6 +50,8 @@ from .answer_checklist import (
     validate_review as validate_legacy_checklist_review,
 )
 from .policy_workflow import safe_metadata
+from .request_capture import complete_with_capture
+from .policy_facts import REFERENCE_RELATIVE, load_frozen_policy_reference, reference_evidence
 
 
 MODEL_STAGES = ("planning", "policy_with_evidence", "policy_no_evidence")
@@ -69,6 +73,13 @@ class SyntheticCase:
     # from ``reference`` and are never passed to the model factory.
     independent_request: Mapping[str, Any] | None = None
     facts: tuple[Mapping[str, Any], ...] = ()
+    # Strict policy cases carry an independent, host-owned question/cutoff and
+    # source facts.  Legacy synthetic fixtures may leave this unset.
+    policy_reference: Mapping[str, Any] | None = None
+    # A case may opt into the existing host separator-gap gate.  It is kept
+    # off for historical fixtures so they retain their old compatibility
+    # contract; strict cases must supply a separate human gap reviewer.
+    allow_host_gap_review: bool = False
 
 
 @dataclass(frozen=True)
@@ -80,16 +91,30 @@ class ModelInput:
 
 POLICY_RESPONSE_SCHEMA = {
     "type": "object",
-    "required": ["answer", "claims"],
+    "required": ["claims"],
     "properties": {
         "answer": {"type": "string"},
-        "claims": {"type": "array", "items": {"type": "string"}},
+        "claims": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["text", "citations"],
+                "properties": {
+                    "text": {"type": "string"},
+                    "citations": {"type": "array", "items": {"type": "string"}},
+                },
+                "additionalProperties": False,
+            },
+        },
     },
 }
 
 
 def default_cases() -> tuple[SyntheticCase, ...]:
     """Return small, deterministic cases covering support and clarification."""
+
+    policy_reference = load_frozen_policy_reference(_project_root())
+    policy_facts = tuple(policy_reference["facts"])
 
     return (
         SyntheticCase(
@@ -130,15 +155,9 @@ def default_cases() -> tuple[SyntheticCase, ...]:
             checklist=({"id": "policy_claim", "kind": "policy"},),
             reference={"gold_marker": "policy-gold-only-not-in-messages"},
             run_controls=True,
-            control_facts=("2018-07-06", "25%"),
-            facts=(
-                {"id": "effective_date", "required_fact": "生效日期为2018-07-06",
-                 "acceptable_paraphrases": ("2018-07-06",),
-                 "evidence_ids": ("policy-1",)},
-                {"id": "additional_rate", "required_fact": "额外税率为25%",
-                 "acceptable_paraphrases": ("25%", "百分之二十五"),
-                 "evidence_ids": ("policy-1",)},
-            ),
+            control_facts=tuple(fact["expected_value"] for fact in policy_facts),
+            facts=policy_facts,
+            policy_reference=policy_reference,
         ),
     )
 
@@ -199,8 +218,19 @@ def _model_pair_settings(model: Any, *, question: str, as_of: str) -> dict[str, 
 def _policy_pair_packet(case: SyntheticCase, preview: Mapping[str, Any],
                         with_model: Any, without_model: Any) -> dict[str, Any]:
     request = preview.get("request") if isinstance(preview.get("request"), Mapping) else {}
-    policy_question = request.get("policy_question") or preview.get("plan", {}).get("policy_question")
-    as_of = request.get("policy_as_of") or preview.get("plan", {}).get("policy_as_of")
+    policy_reference = case.policy_reference
+    if isinstance(policy_reference, Mapping):
+        policy_question = policy_reference.get("question")
+        as_of = policy_reference.get("as_of")
+        planned_question = request.get("policy_question")
+        planned_as_of = request.get("policy_as_of")
+        if planned_question != policy_question or planned_as_of != as_of:
+            raise AcceptanceGuardError("policy_reference_scope_mismatch")
+    else:
+        # Compatibility path for historical synthetic fixtures.  The strict
+        # default cases always carry the independent reference above.
+        policy_question = request.get("policy_question") or preview.get("plan", {}).get("policy_question")
+        as_of = request.get("policy_as_of") or preview.get("plan", {}).get("policy_as_of")
     if not isinstance(policy_question, str) or not isinstance(as_of, str):
         raise AcceptanceGuardError("policy pair needs a frozen question and cutoff")
     with_settings = _model_pair_settings(with_model, question=policy_question, as_of=as_of)
@@ -215,6 +245,8 @@ def _policy_pair_packet(case: SyntheticCase, preview: Mapping[str, Any],
         "without_evidence": {"configuration": without_settings},
         "prompt_difference": "with_evidence receives retrieved policy evidence; without_evidence does not",
         "response_schema": deepcopy(POLICY_RESPONSE_SCHEMA),
+        "policy_reference_sha256": (policy_reference.get("reference_sha256")
+                                    if isinstance(policy_reference, Mapping) else None),
         "contract": contract,
         "actual_payloads_verified": False,
         "semantic_accuracy_measured": False,
@@ -235,7 +267,8 @@ def _policy_claims_from_result(result: Mapping[str, Any]) -> tuple[list[dict[str
 
 def _fact_review_packet(case: SyntheticCase, arm: str, *, answer: str,
                         claims: Sequence[Mapping[str, Any]],
-                        evidence: Mapping[str, Any]) -> dict[str, Any]:
+                        evidence: Mapping[str, Any],
+                        reference_sha256: str | None = None) -> dict[str, Any]:
     if arm not in {"with_evidence", "without_evidence"}:
         raise AcceptanceGuardError("unknown policy review arm")
     normalized_claims = []
@@ -246,13 +279,19 @@ def _fact_review_packet(case: SyntheticCase, arm: str, *, answer: str,
             if isinstance(claim.get("citations", []), list) else [],
         })
     return {
-        "version": "fact-review-packet-0118",
+        "version": ("fact-review-packet-0119" if reference_sha256
+                    else "fact-review-packet-0118"),
         "case_id": case.id,
         "arm": arm,
         "question": case.question,
+        "policy_question": (case.policy_reference.get("question")
+                             if isinstance(case.policy_reference, Mapping) else None),
+        "policy_as_of": (case.policy_reference.get("as_of")
+                          if isinstance(case.policy_reference, Mapping) else None),
         "answer": {"text": answer, "claims": normalized_claims},
         "facts": [deepcopy(dict(item)) for item in case.facts],
         "evidence": deepcopy(dict(evidence)),
+        "reference_sha256": reference_sha256,
     }
 
 
@@ -269,14 +308,27 @@ def _independent_trade_baseline(case: SyntheticCase) -> dict[str, Any]:
     # the model-derived request as a repair source.
     compare_trade_scope(request, request)
     registry = EvidenceRegistryV21()
-    execution = execute_request({"task": "trade", "request": dict(request["trade"])}, registry)
+    execution_trade = deepcopy(dict(request["trade"]))
+    comparison = request["comparison"]
+    if execution_trade.get("months") is None:
+        if not isinstance(comparison, Mapping) or comparison.get("kind") != "registered":
+            raise AcceptanceGuardError("independent trade request needs explicit months")
+        from .research_comparison import registered_windows
+        windows = registered_windows(registry.repository)
+        window = windows.get(comparison.get("comparison_id"))
+        if not isinstance(window, Mapping):
+            raise AcceptanceGuardError("independent registered window is missing")
+        execution_trade["months"] = sorted(
+            list(window.get("reference_months", [])) + list(window.get("current_months", []))
+        )
+    execution = execute_request({"task": "trade", "request": execution_trade}, registry)
     if execution.get("status") != "evidence_ready":
         raise AcceptanceGuardError("independent_trade_baseline_failed")
     data = next((row.get("data") for row in execution.get("tool_results", [])
                  if isinstance(row, Mapping) and row.get("tool_name") == "get_trade_series"), None)
     if not isinstance(data, Mapping):
         raise AcceptanceGuardError("independent trade result is missing")
-    summary = summary_with_comparison(data, request["comparison"], registry.repository)
+    summary = summary_with_comparison(data, comparison, registry.repository)
     baseline_result = {"request": request, "summary": summary}
     recompute = _direct_trade_recompute(baseline_result)
     if recompute.get("checks", {}).get("passed") is not True:
@@ -286,6 +338,7 @@ def _independent_trade_baseline(case: SyntheticCase) -> dict[str, Any]:
         "case_id": case.id,
         "question_sha256": digest(case.question),
         "request": request,
+        "execution_request": {"trade": execution_trade, "comparison": comparison},
         "execution_status": execution.get("status"),
         "data": deepcopy(dict(data)),
         "source_hashes": deepcopy(execution.get("sources", {})),
@@ -340,7 +393,9 @@ class LedgerBoundModel:
         assert_no_reference_leakage(messages, self.reference)
         reservation = self.ledger.reserve(self.question_id, self.stage)
         try:
-            response = _normalise_response(self.base.complete(messages=messages, tools=tools))
+            response = _normalise_response(
+                complete_with_capture(self.base, messages=messages, tools=tools)
+            )
             self.ledger.complete(
                 reservation,
                 metadata=response.metadata,
@@ -443,6 +498,50 @@ def _file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _callable_descriptor(value: Any) -> dict[str, Any]:
+    """Describe injected code without serializing its source or secrets."""
+
+    import inspect
+
+    if value is None:
+        return {"kind": "none"}
+    result: dict[str, Any] = {
+        "kind": "callable",
+        "module": getattr(value, "__module__", type(value).__module__),
+        "qualname": getattr(value, "__qualname__", type(value).__qualname__),
+    }
+    try:
+        source_path = inspect.getsourcefile(value) or inspect.getfile(value)
+    except (OSError, TypeError):
+        source_path = None
+    if isinstance(source_path, str):
+        path = Path(source_path).resolve()
+        if path.is_file():
+            result["source_path"] = str(path)
+            result["source_sha256"] = _file_sha256(path)
+    return result
+
+
+def _validate_policy_case_reference(case: SyntheticCase) -> None:
+    """Fail before planning if a strict policy case lost its independent facts."""
+
+    reference = case.policy_reference
+    if reference is None:
+        return
+    if not isinstance(reference, Mapping):
+        raise AcceptanceGuardError("policy_reference must be an object")
+    loaded = load_frozen_policy_reference(_project_root())
+    if (reference.get("reference_sha256") != loaded.get("reference_sha256")
+            or reference.get("corpus_sha256") != loaded.get("corpus_sha256")
+            or reference.get("question") != loaded.get("question")
+            or reference.get("as_of") != loaded.get("as_of")):
+        raise AcceptanceGuardError("policy_reference_changed")
+    if digest(reference.get("facts")) != digest(loaded.get("facts")):
+        raise AcceptanceGuardError("policy_facts_changed")
+    if not reference.get("source_catalog"):
+        raise AcceptanceGuardError("policy_reference_sources_missing")
+
+
 def _direct_trade_recompute(result: Mapping[str, Any]) -> dict[str, Any]:
     """Recompute the delivered monthly values without calling project tools.
 
@@ -455,18 +554,21 @@ def _direct_trade_recompute(result: Mapping[str, Any]) -> dict[str, Any]:
     request = result.get("request", {}).get("trade", {})
     if not isinstance(request, Mapping):
         raise AcceptanceGuardError("control A needs the confirmed trade request")
-    months = request.get("months")
     summary = result.get("summary")
     if not isinstance(summary, Mapping):
         raise AcceptanceGuardError("control A needs a delivered trade summary")
+    comparison = result.get("request", {}).get("comparison", {})
+    months = request.get("months")
+    if months is None and comparison.get("kind") == "registered":
+        months = [row.get("month") for row in summary.get("series", [])
+                  if isinstance(row, Mapping)]
     if not isinstance(months, list) or not months or any(not isinstance(month, str) for month in months):
-        raise AcceptanceGuardError("control A needs explicit months")
+        raise AcceptanceGuardError("control A needs explicit or registered months")
     if len(months) != len(set(months)):
         raise AcceptanceGuardError("control A duplicate requested months")
     months = sorted(months)
-    comparison = result.get("request", {}).get("comparison", {})
-    if comparison.get("kind") not in {"sequence", "endpoint"}:
-        raise AcceptanceGuardError("control A currently supports explicit sequence/endpoint only")
+    if comparison.get("kind") not in {"sequence", "endpoint", "registered"}:
+        raise AcceptanceGuardError("control A has an unknown comparison kind")
     origin = request.get("origin")
     fields = {
         "China": "target_import_value_consumption_usd",
@@ -538,6 +640,25 @@ def _direct_trade_recompute(result: Mapping[str, Any]) -> dict[str, Any]:
                                   for key, value in expected_comparison.items()})
         comparison_checks["summary_delta"] = summary.get("endpoint_change_usd") == change
         comparison_checks["summary_percent"] = summary.get("endpoint_change_percent") == rate
+    elif comparison["kind"] == "registered":
+        actual_registered = summary.get("comparison", {})
+        reference = actual_registered.get("reference_months")
+        current = actual_registered.get("current_months")
+        if (not isinstance(reference, list) or not isinstance(current, list)
+                or set(reference) & set(current)
+                or any(month not in by_month for month in reference + current)):
+            raise AcceptanceGuardError("control A registered window is incomplete")
+        base = sum(by_month[month] for month in reference)
+        target = sum(by_month[month] for month in current)
+        change = target - base
+        rate = (str((Decimal(change) * 100 / Decimal(base)).quantize(Decimal("0.01")))
+                if base else None)
+        comparison_checks.update({
+            "reference_months": actual_registered.get("reference_months") == reference,
+            "current_months": actual_registered.get("current_months") == current,
+            "change_usd": actual_registered.get("change_usd") == change,
+            "change_percent": actual_registered.get("change_percent") == rate,
+        })
     passed = bool(series_equal and total_equal and all(comparison_checks.values()))
     return {
         "version": "control-a-direct-table-0116",
@@ -568,7 +689,8 @@ def _policy_control_messages(question: str, as_of: str | None = None) -> list[di
                 "你是一个没有外部检索结果的政策问答基线。回答下面的问题时，"
                 "只能使用模型自身已有知识；不要假装看到了政策原文，不要编造引用。"
                 "如果无法可靠回答，可以明确说明不确定。仅输出 JSON："
-                "{\"answer\":\"...\",\"claims\":[\"...\"]}。"
+                "{\"answer\":\"...\",\"claims\":[{\"text\":\"...\",\"citations\":[]}] }。"
+                "claims中的每一项必须同时包含text和citations；没有主张时使用空数组。"
             ),
         },
         {"role": "user", "content": json.dumps(
@@ -586,16 +708,39 @@ def _evaluate_no_evidence_response(case: SyntheticCase, response: ModelResponse)
         parsed = json.loads(text)
     except (TypeError, ValueError):
         parsed = None
-    claims: list[str] = []
+    strict_schema = isinstance(case.policy_reference, Mapping)
+    claims: list[Any] = []
+    schema_valid = True
     if isinstance(parsed, Mapping):
         candidate = parsed.get("claims")
         if isinstance(candidate, list):
-            claims = [item for item in candidate if isinstance(item, str)]
+            if strict_schema:
+                for item in candidate:
+                    if (not isinstance(item, Mapping)
+                            or set(item) != {"text", "citations"}
+                            or not isinstance(item.get("text"), str)
+                            or not isinstance(item.get("citations"), list)
+                            or any(not isinstance(ref, str) for ref in item["citations"])):
+                        schema_valid = False
+                        continue
+                    claims.append({"text": item["text"],
+                                   "citations": list(item["citations"])})
+            else:
+                claims = [item for item in candidate if isinstance(item, str)]
+                schema_valid = len(claims) == len(candidate)
         answer = parsed.get("answer")
         if isinstance(answer, str):
-            text_for_search = answer + " " + " ".join(claims)
+            claim_text = " ".join(
+                item.get("text", "") if isinstance(item, Mapping) else str(item)
+                for item in claims
+            )
+            text_for_search = answer + " " + claim_text
         else:
-            text_for_search = text + " " + " ".join(claims)
+            claim_text = " ".join(
+                item.get("text", "") if isinstance(item, Mapping) else str(item)
+                for item in claims
+            )
+            text_for_search = text + " " + claim_text
     else:
         text_for_search = text
     expected = list(case.control_facts)
@@ -611,6 +756,8 @@ def _evaluate_no_evidence_response(case: SyntheticCase, response: ModelResponse)
         "literal_matches": found,
         "literal_match_fraction": (len(found) / len(expected) if expected else None),
         "fact_recall": None,
+        "claim_schema": "policy-claims-v2" if strict_schema else "legacy-string-claims",
+        "claim_schema_valid": schema_valid,
         "answer_quality": "unreviewed",
         "semantic_accuracy_measured": False,
         "interpretation": "仅记录字符串出现情况；否定句也可能命中，需逐事实审查后才能判断正确、遗漏或矛盾。",
@@ -680,6 +827,7 @@ class ProspectiveSyntheticRunner:
                  model_factory: Callable[..., Any],
                  reviewer: Callable[[Mapping[str, Any]], Mapping[str, Any]] = fixture_review,
                  fact_reviewer: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+                 gap_reviewer: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
                  reviewer_id: str = "offline-fixture-reviewer") -> None:
         self.output = Path(output)
         self.cases = deepcopy(tuple(default_cases() if cases is None else cases))
@@ -692,6 +840,9 @@ class ProspectiveSyntheticRunner:
         self.model_factory = model_factory
         self.reviewer = reviewer
         self.fact_reviewer = fact_reviewer
+        if gap_reviewer is not None and not callable(gap_reviewer):
+            raise AcceptanceGuardError("gap reviewer must be callable")
+        self.gap_reviewer = gap_reviewer
         if not isinstance(reviewer_id, str) or not reviewer_id.strip():
             raise AcceptanceGuardError("explicit reviewer ID is required")
         self.reviewer_id = reviewer_id
@@ -708,11 +859,25 @@ class ProspectiveSyntheticRunner:
                  root / "src/tradeintel_ai/research_brief.py",
                  root / "src/tradeintel_ai/repository.py",
                  root / "src/tradeintel_ai/policy_retrieval.py",
+                 root / "src/tradeintel_ai/request_capture.py",
+                 root / "src/tradeintel_ai/policy_facts.py",
+                 root / REFERENCE_RELATIVE,
+                 root / "requirements.txt",
                  root / "data/processed/analysis/policy_case_monthly.csv",
                  root / "data/processed/policy/section301_list1_event.csv",
                  root / "data/processed/analysis/registered_comparison_windows.json",
                  root / "docs/experiments/phase13a-policy-retrieval/corpus.json",
                  root / "docs/experiments/phase13a-policy-retrieval/development_results.json"]
+        # The repository exposes a finite set of read-only evidence paths.
+        # Include every one in the snapshot instead of relying on whichever
+        # subset a particular fixture happened to touch.
+        repository_paths = EvidenceRegistryV21().repository.paths
+        for name, descriptor in vars(type(repository_paths)).items():
+            if isinstance(descriptor, property):
+                paths.append(getattr(repository_paths, name))
+        # All project Python modules participate in the executable contract;
+        # this also covers a helper imported indirectly by the workflow.
+        paths.extend(sorted((root / "src/tradeintel_ai").glob("*.py")))
         corpus_path = root / "docs/experiments/phase13a-policy-retrieval/corpus.json"
         if corpus_path.is_file():
             try:
@@ -725,7 +890,19 @@ class ProspectiveSyntheticRunner:
                 # The explicit corpus JSON remains in the freeze list; a
                 # malformed corpus is rejected by the workflow itself.
                 pass
+        callable_descriptors = {
+            "workflow_factory": _callable_descriptor(self.workflow_factory),
+            "model_factory": _callable_descriptor(self.model_factory),
+            "reviewer": _callable_descriptor(self.reviewer),
+            "fact_reviewer": _callable_descriptor(self.fact_reviewer),
+            "gap_reviewer": _callable_descriptor(self.gap_reviewer),
+        }
+        for descriptor in callable_descriptors.values():
+            source_path = descriptor.get("source_path")
+            if isinstance(source_path, str):
+                paths.append(Path(source_path))
         paths = list(dict.fromkeys(path.resolve() for path in paths))
+        requirements_path = root / "requirements.txt"
         return freeze_dependencies(
             paths,
             configuration={
@@ -733,12 +910,44 @@ class ProspectiveSyntheticRunner:
                 "case_ids": [case.id for case in self.cases],
                 "cases": [asdict(case) for case in self.cases],
                 "acceptance_ready": False,
-                "dependency_coverage": "partial; injected code/configuration and transitive inputs are not fully frozen",
+                "dependency_coverage": (
+                    "explicit source/data files, runtime identity and injected callable source are frozen; "
+                    "transitive packages and OS libraries remain outside the snapshot"
+                ),
+                "runtime_environment": runtime_environment(
+                    requirement_names(requirements_path)
+                ),
+                "injected_callables": callable_descriptors,
                 "reviewer_id": self.reviewer_id,
                 "fact_reviewer": getattr(self.fact_reviewer, "__name__", None),
+                "gap_reviewer": getattr(self.gap_reviewer, "__name__", None),
                 "external_calls": False,
             },
         )
+
+    def _build_workflow(self, planner: LedgerBoundModel, case: SyntheticCase) -> Any:
+        """Build the requested workflow without swallowing factory failures."""
+
+        kwargs: dict[str, Any] = {"planner_source_kind": "fixture"}
+        if case.allow_host_gap_review:
+            kwargs["allow_host_gap_review"] = True
+        # Custom offline factories from earlier phases often accept only the
+        # original planner_source_kind keyword.  Inspect the signature before
+        # adding the new optional gap switch; a TypeError raised *inside* a
+        # factory must still propagate as a real failure.
+        if "allow_host_gap_review" not in kwargs:
+            return self.workflow_factory(planner, **kwargs)
+        import inspect
+        try:
+            signature = inspect.signature(self.workflow_factory)
+        except (TypeError, ValueError) as exc:
+            raise AcceptanceGuardError("gap-enabled workflow factory signature is unavailable") from exc
+        parameters = signature.parameters.values()
+        accepts_kwargs = any(parameter.kind == parameter.VAR_KEYWORD
+                             for parameter in parameters)
+        if not accepts_kwargs and "allow_host_gap_review" not in signature.parameters:
+            raise AcceptanceGuardError("workflow factory does not support host gap review")
+        return self.workflow_factory(planner, **kwargs)
 
     def _review(self, ledger: ProspectiveCallLedger, case: SyntheticCase,
                 stage: str, packet: Mapping[str, Any]) -> dict[str, Any]:
@@ -831,6 +1040,10 @@ class ProspectiveSyntheticRunner:
                 "request_config": deepcopy(dict(settings)),
                 "messages_sha256": digest(payload.get("messages", [])),
                 "tools_sha256": digest(payload.get("tools", [])),
+                "request_capture": deepcopy(
+                    payload.get("metadata", {}).get("request_capture")
+                    if isinstance(payload.get("metadata"), Mapping) else None
+                ),
                 "response_artifact": deepcopy(dict(artifact)),
             }
         comparable_keys = ("model", "temperature", "max_tokens", "thinking", "stream", "base_url")
@@ -839,15 +1052,42 @@ class ProspectiveSyntheticRunner:
         differences = [key for key in comparable_keys if left.get(key) != right.get(key)]
         if differences:
             raise AcceptanceGuardError("policy_pair_actual_payload_mismatch")
+        actual_captures = [captures[arm].get("request_capture") for arm in captures]
+        http_capture_available = all(
+            isinstance(item, Mapping) and item.get("kind") == "http_payload"
+            for item in actual_captures
+        )
+        verification_differences: list[str] = []
+        if http_capture_available:
+            for arm in ("with_evidence", "without_evidence"):
+                capture = captures[arm]["request_capture"]
+                payload = capture.get("payload")
+                declared = pair_packet.get(arm, {}).get("configuration", {})
+                if not isinstance(payload, Mapping) or not isinstance(declared, Mapping):
+                    verification_differences.append(f"{arm}.payload")
+                    continue
+                for key in ("model", "temperature", "max_tokens", "thinking", "stream"):
+                    if payload.get(key) != declared.get(key):
+                        verification_differences.append(f"{arm}.{key}")
+                if capture.get("timeout_seconds") != declared.get("timeout_seconds"):
+                    verification_differences.append(f"{arm}.timeout_seconds")
+                serialized = json.dumps(payload.get("messages", []), ensure_ascii=False)
+                for label in ("question", "as_of"):
+                    value = pair_packet.get(label)
+                    if not isinstance(value, str) or value not in serialized:
+                        verification_differences.append(f"{arm}.{label}")
+        if verification_differences:
+            raise AcceptanceGuardError("policy_pair_actual_payload_mismatch")
         return {
             "version": "policy-pair-capture-0118",
             "case_id": case_id,
             "declared_contract_sha256": pair_packet.get("contract", {}).get("configuration_sha256"),
             "captures": captures,
             "comparable_settings_equal": not differences,
-            "differences": differences,
-            "actual_payloads_verified": False,
-            "capture_kind": "declared_settings_after_call; not HTTP payload capture",
+            "differences": differences + verification_differences,
+            "actual_payloads_verified": http_capture_available,
+            "capture_kind": ("http_payload" if http_capture_available
+                             else "declared_settings_after_call; not HTTP payload capture"),
             "semantic_accuracy_measured": False,
         }
 
@@ -896,10 +1136,14 @@ class ProspectiveSyntheticRunner:
             if model is None:
                 raise AcceptanceGuardError("controls_not_implemented_0116")
             policy_request = result.get("request", {}) if isinstance(result.get("request"), Mapping) else {}
-            policy_question = policy_request.get("policy_question")
-            if not isinstance(policy_question, str) or not policy_question.strip():
-                policy_question = case.question
-            policy_as_of = policy_request.get("policy_as_of")
+            if isinstance(case.policy_reference, Mapping):
+                policy_question = case.policy_reference.get("question")
+                policy_as_of = case.policy_reference.get("as_of")
+            else:
+                policy_question = policy_request.get("policy_question")
+                if not isinstance(policy_question, str) or not policy_question.strip():
+                    policy_question = case.question
+                policy_as_of = policy_request.get("policy_as_of")
             response = model.complete(
                 messages=_policy_control_messages(policy_question, policy_as_of), tools=[]
             )
@@ -909,14 +1153,25 @@ class ProspectiveSyntheticRunner:
                 parsed = payload.get("response", {}).get("parsed", {})
                 parsed = parsed if isinstance(parsed, Mapping) else {}
                 raw_claims = parsed.get("claims", [])
-                claims = [{"text": item, "citations": []} for item in raw_claims
-                          if isinstance(item, str)]
+                if isinstance(case.policy_reference, Mapping):
+                    claims = [deepcopy(dict(item)) for item in raw_claims
+                              if isinstance(item, Mapping)
+                              and set(item) == {"text", "citations"}
+                              and isinstance(item.get("text"), str)
+                              and isinstance(item.get("citations"), list)]
+                else:
+                    claims = [{"text": item, "citations": []} for item in raw_claims
+                              if isinstance(item, str)]
                 packet = _fact_review_packet(
                     case, "without_evidence",
                     answer=parsed.get("answer", payload["response"]["text"])
                     if isinstance(parsed.get("answer", payload["response"]["text"]), str)
                     else payload["response"]["text"],
-                    claims=claims, evidence={},
+                    claims=claims,
+                    evidence=(reference_evidence(case.policy_reference)
+                              if isinstance(case.policy_reference, Mapping) else {}),
+                    reference_sha256=(case.policy_reference.get("reference_sha256")
+                                      if isinstance(case.policy_reference, Mapping) else None),
                 )
                 payload["fact_review"] = self._record_fact_review(ledger, case, packet)
             control_id = f"control_b:{case.id}"
@@ -935,6 +1190,8 @@ class ProspectiveSyntheticRunner:
         return control_ids
 
     def run(self) -> dict[str, Any]:
+        for case in self.cases:
+            _validate_policy_case_reference(case)
         snapshot = self._snapshot()
         ledger = ProspectiveCallLedger(
             [case.id for case in self.cases], self.output,
@@ -958,9 +1215,38 @@ class ProspectiveSyntheticRunner:
                     _call_factory(self.model_factory, "planning", case), ledger,
                     case.id, "planning", case.reference,
                 )
-                workflow = self.workflow_factory(planner, planner_source_kind="fixture")
+                workflow = self._build_workflow(planner, case)
                 preview = workflow.prepare(case.question, audit_output=case_dir / "planning")
                 ledger.record_artifact(f"{case.id}/preview.json", preview)
+                if preview.get("status") == "needs_gap_review":
+                    if self.gap_reviewer is None:
+                        self._stop(ledger, case.id, "gap_review_pending")
+                        break
+                    gap_packet = {
+                        "case_id": case.id,
+                        "question": case.question,
+                        "gap_audit": deepcopy(preview.get("gap_audit")),
+                        "preview": deepcopy(preview),
+                    }
+                    submission = self.gap_reviewer(deepcopy(gap_packet))
+                    if not isinstance(submission, Mapping):
+                        self._stop(ledger, case.id, "gap_review_rejected")
+                        break
+                    gap_preview = workflow.approve_gap_review(
+                        preview.get("gap_review_token"), submission,
+                        reviewer=self.reviewer_id,
+                    )
+                    if gap_preview.get("status") != "needs_confirmation":
+                        self._stop(ledger, case.id, "gap_review_rejected")
+                        break
+                    preview = gap_preview
+                    if isinstance(preview.get("gap_review"), Mapping):
+                        ledger.record_artifact(
+                            f"{case.id}/gap-review.json", preview["gap_review"]
+                        )
+                    # Keep both the pre-review plan and the post-review plan:
+                    # the latter is the one reviewed and bound to execution.
+                    ledger.record_artifact(f"{case.id}/preview-after-gap.json", preview)
                 plan_packet = {
                     "preview": preview,
                     "checklist": [deepcopy(item) for item in case.checklist],
@@ -1049,7 +1335,14 @@ class ProspectiveSyntheticRunner:
                         case, "with_evidence",
                         answer=(result.get("policy", {}).get("generation", {}).get("raw_text", "")
                                 if isinstance(result.get("policy"), Mapping) else ""),
-                        claims=claims, evidence=evidence,
+                        claims=claims,
+                        evidence={
+                            **(reference_evidence(case.policy_reference)
+                               if isinstance(case.policy_reference, Mapping) else {}),
+                            **evidence,
+                        },
+                        reference_sha256=(case.policy_reference.get("reference_sha256")
+                                          if isinstance(case.policy_reference, Mapping) else None),
                     )
                     main_fact_review = self._record_fact_review(
                         ledger, case, main_fact_packet
@@ -1132,6 +1425,7 @@ def run_synthetic_batch(output: str | Path, *, model_factory: Callable[..., Any]
                         workflow_factory: Callable[..., Any] = build_product_workflow,
                         reviewer: Callable[[Mapping[str, Any]], Mapping[str, Any]] = fixture_review,
                         fact_reviewer: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+                        gap_reviewer: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
                         reviewer_id: str = "offline-fixture-reviewer") -> dict[str, Any]:
     """Convenience wrapper used by offline tests and development scripts."""
 
@@ -1142,6 +1436,7 @@ def run_synthetic_batch(output: str | Path, *, model_factory: Callable[..., Any]
         model_factory=model_factory,
         reviewer=reviewer,
         fact_reviewer=fact_reviewer,
+        gap_reviewer=gap_reviewer,
         reviewer_id=reviewer_id,
     ).run()
 
