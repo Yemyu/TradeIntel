@@ -5,8 +5,10 @@ import json
 from pathlib import Path
 
 from .policy_workflow import safe_metadata, safe_diagnostic
+from .transport_diagnostic import transport_detail
 from .research_models import ResearchPlannerModel, ResearchPolicyModel
-from .unified_research import UnifiedResearchWorkflow, inspect_delivery, _atomic_text
+from .unified_research import (UnifiedResearchWorkflow, build_product_workflow,
+                               inspect_delivery, _atomic_text)
 from .answer_checklist import load_checklists, validate_review, file_hashes, unchanged
 
 
@@ -40,14 +42,25 @@ def write_json(path, value):
     _atomic_text(path, json.dumps(value, ensure_ascii=False, indent=2) + '\n')
 
 
-def workflow(model, source_kind, checklist_review=False):
+def workflow(model, source_kind, checklist_review=False, host_gap_review=False,
+             neutral_trade_mapping=False):
+    if neutral_trade_mapping and not checklist_review:
+        raise ValueError('neutral trade mapping requires independent checklist review')
+    if host_gap_review and not checklist_review:
+        raise ValueError('host gaps require independent checklist review')
+    if neutral_trade_mapping:
+        return build_product_workflow(model, planner_source_kind=source_kind,
+                                      allow_host_gap_review=host_gap_review)
     return UnifiedResearchWorkflow(model, require_comparison=True, require_search_query=True,
                                    require_request_units=True, derive_request_offsets=True,
                                    allow_grouped_policy_requests=checklist_review,
+                                   allow_host_gap_review=host_gap_review,
+                                   neutral_trade_mapping=neutral_trade_mapping,
                                    planner_source_kind=source_kind)
 
 
-def snapshot(config, source_kind, checklist_review=False):
+def snapshot(config, source_kind, checklist_review=False, host_gap_review=False,
+             neutral_trade_mapping=False):
     """No credentials; references stay in local review files, not model messages."""
     planner = ResearchPlannerModel(config)
     policy = ResearchPolicyModel(config)
@@ -58,7 +71,8 @@ def snapshot(config, source_kind, checklist_review=False):
                               'timeout_seconds': config.timeout_seconds,
                               'planning': planner.effective_request_settings(),
                               'policy_generation': policy.effective_request_settings()},
-            'fingerprints': workflow(planner, source_kind)._fingerprints(),
+            'fingerprints': workflow(planner, source_kind, checklist_review,
+                                      neutral_trade_mapping=neutral_trade_mapping)._fingerprints(),
             'entry_sha256': hashlib.sha256((root / 'scripts/run_development_smoke.py').read_bytes()).hexdigest(),
             'reference_source_sha256': hashlib.sha256(
                 (root / 'docs/experiments/phase13k-results.zh-CN.md').read_bytes()).hexdigest(),
@@ -67,8 +81,19 @@ def snapshot(config, source_kind, checklist_review=False):
     if checklist_review:
         result.update(version='development-smoke-0093', checklists=load_checklists(CASES),
                       integrity_revision='0094',
-                      fingerprints=workflow(planner, source_kind, True)._fingerprints(),
+                      fingerprints=workflow(planner, source_kind, True,
+                                             neutral_trade_mapping=neutral_trade_mapping)._fingerprints(),
                       semantic_approval='independent_checklist_external_review')
+    if host_gap_review:
+        result.update(version='development-smoke-0103', integrity_revision='0103',
+                      fingerprints=workflow(planner, source_kind, checklist_review, True,
+                                             neutral_trade_mapping=neutral_trade_mapping)._fingerprints(),
+                      host_gap_review=True)
+    if neutral_trade_mapping:
+        result.update(version='development-smoke-0108', integrity_revision='0108',
+                      neutral_trade_mapping=True,
+                      fingerprints=workflow(planner, source_kind, checklist_review,
+                                             host_gap_review, True)._fingerprints())
     return result
 
 
@@ -80,9 +105,16 @@ def validate_config(config):
         raise ValueError('本批配置必须是glm-4.7、温度0、超时60秒')
 
 
-def preflight(config, *, checklist_review=False):
+def preflight(config, *, checklist_review=False, host_gap_review=False,
+              neutral_trade_mapping=False):
     validate_config(config)
-    manifest = snapshot(config, 'live', True) if checklist_review else snapshot(config, 'live')
+    manifest = (snapshot(config, 'live', True,
+                         neutral_trade_mapping=neutral_trade_mapping)
+                if checklist_review else snapshot(config, 'live',
+                                                  neutral_trade_mapping=neutral_trade_mapping))
+    if host_gap_review:
+        manifest = snapshot(config, 'live', checklist_review, True,
+                            neutral_trade_mapping=neutral_trade_mapping)
     return {'status': 'offline_preflight_passed', 'new_api_calls': 0,
             'local_key_present': bool(config.api_key.strip()),
             'account_credit': 'not_checked', 'manifest': manifest,
@@ -146,6 +178,7 @@ class CallLedger:
             return response
         except (Exception, KeyboardInterrupt) as exc:
             record.update(status='failed', diagnostic=safe_diagnostic(exc))
+            record['transport_detail'] = transport_detail(exc)
             self.state['status'] = 'stopped'
             self.save()
             raise
@@ -158,7 +191,7 @@ class CallLedger:
 
 
 def run_batch(config, output, *, reviewer, reviewer_id, source_kind='live', model_factory=None,
-              checklist_review=False):
+              checklist_review=False, host_gap_review=False, neutral_trade_mapping=False):
     """New protocol requires structured reviewer decisions; legacy accepts True.
 
     No resume or automatic approval. Production CLI requires an interactive reviewer.
@@ -171,7 +204,14 @@ def run_batch(config, output, *, reviewer, reviewer_id, source_kind='live', mode
         raise ValueError('explicit reviewer required')
     if source_kind == 'live' and not config.api_key.strip():
         raise ValueError('本地未设置API密钥；未调用')
-    get_snapshot = lambda: (snapshot(config, source_kind, True) if checklist_review else snapshot(config, source_kind))
+    get_snapshot = lambda: (snapshot(config, source_kind, True,
+                                     neutral_trade_mapping=neutral_trade_mapping)
+                            if checklist_review else snapshot(
+                                config, source_kind,
+                                neutral_trade_mapping=neutral_trade_mapping))
+    if host_gap_review:
+        get_snapshot = lambda: snapshot(config, source_kind, checklist_review, True,
+                                        neutral_trade_mapping=neutral_trade_mapping)
     manifest = get_snapshot()
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
@@ -230,6 +270,8 @@ def run_batch(config, output, *, reviewer, reviewer_id, source_kind='live', mode
             raise SmokeStopped('review_not_approved')
         ledger.check()
 
+        return record if checklist_review else None
+
     try:
         for case, row in zip(CASES, ledger.state['cases']):
             active_row = row
@@ -237,7 +279,21 @@ def run_batch(config, output, *, reviewer, reviewer_id, source_kind='live', mode
             row['status'] = 'planning'
             ledger.save()
             model = ledger.bind(factory('planning'), case['id'], 'planning')
-            active_work = workflow(model, source_kind, True) if checklist_review else workflow(model, source_kind)
+            if checklist_review:
+                active_work = (workflow(model, source_kind, True,
+                                        neutral_trade_mapping=True)
+                               if neutral_trade_mapping else
+                               workflow(model, source_kind, True))
+            else:
+                active_work = (workflow(model, source_kind,
+                                        neutral_trade_mapping=True)
+                               if neutral_trade_mapping else
+                               workflow(model, source_kind))
+            if host_gap_review:
+                active_work = (workflow(model, source_kind, checklist_review, True,
+                                        neutral_trade_mapping=True)
+                               if neutral_trade_mapping else
+                               workflow(model, source_kind, checklist_review, True))
             run_dir = output / case['id']
             preview = active_work.prepare(case['question'], audit_output=run_dir / 'planning', secret=config.api_key)
             write_json(run_dir / 'preview.json', preview)
@@ -248,9 +304,18 @@ def run_batch(config, output, *, reviewer, reviewer_id, source_kind='live', mode
                 review(case, row, 'plan', preview)
                 active_work.cancel()
             else:
-                if preview['status'] != 'needs_confirmation' or sorted(preview['tasks']) != sorted(case['tasks']):
+                allowed = ('needs_confirmation', 'needs_gap_review') if host_gap_review else ('needs_confirmation',)
+                if preview['status'] not in allowed or sorted(preview['tasks']) != sorted(case['tasks']):
                     raise SmokeStopped('unexpected_plan_status_or_tasks')
-                review(case, row, 'plan', preview)
+                record = review(case, row, 'plan', preview)
+                if preview['status'] == 'needs_gap_review':
+                    preview = active_work.approve_gap_review(preview['gap_review_token'],
+                                                            record['gap_review'], reviewer=record['reviewer'])
+                    if preview['status'] != 'needs_confirmation':
+                        raise SmokeStopped('gap_review_not_accepted')
+                    write_json(run_dir / 'reviewed-preview.json', preview)
+                    reviewed_files.update(file_hashes(run_dir))
+                    ledger.check()
                 policy = ledger.bind(factory('policy_generation'), case['id'], 'policy_generation') if case['policy'] else None
                 row.update(status='executing', confirmation_basis='explicit_development_reviewer_approval')
                 ledger.save()

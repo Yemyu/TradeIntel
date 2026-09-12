@@ -15,6 +15,9 @@ from tradeintel_ai.answer_checklist import template
 def main(argv=None):
     parser = argparse.ArgumentParser(description='0089四场景开发检查；默认零API预检，不是正式准确率验收。')
     parser.add_argument('--execute', action='store_true')
+    parser.add_argument('--allow-host-gap-review', action='store_true', help='0103原文gap独立审查模式')
+    parser.add_argument('--neutral-trade-mapping', action='store_true',
+                        help='0105贸易领域标签与比较字段分离；需独立审查，默认关闭')
     parser.add_argument('--output', type=Path, help='真实运行必须使用全新目录；不续跑')
     parser.add_argument('--reviewer', help='审查者标识；每次执行和答复均须显式审查')
     args = parser.parse_args(argv)
@@ -24,7 +27,9 @@ def main(argv=None):
     config = OpenAICompatibleConfig.from_env(env)
     try:
         if not args.execute:
-            print(json.dumps(preflight(config, checklist_review=True), ensure_ascii=False, indent=2))
+            print(json.dumps(preflight(config, checklist_review=True,
+                                       host_gap_review=args.allow_host_gap_review,
+                                       neutral_trade_mapping=args.neutral_trade_mapping), ensure_ascii=False, indent=2))
             return 0
         if not args.output or not args.reviewer or not sys.stdin.isatty():
             parser.error('真实运行需要全新--output、--reviewer和可交互终端；未调用。')
@@ -45,7 +50,8 @@ def main(argv=None):
             return json.loads('\n'.join(lines)) if lines else None
 
         result = run_batch(config, args.output, reviewer=reviewer, reviewer_id=args.reviewer,
-                           checklist_review=True)
+                           checklist_review=True, host_gap_review=args.allow_host_gap_review,
+                           neutral_trade_mapping=args.neutral_trade_mapping)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0 if result['status'] == 'development_review_complete' else 2
     except (ValueError, OSError):

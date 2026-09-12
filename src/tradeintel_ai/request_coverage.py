@@ -7,6 +7,78 @@ UNIT_KEYS = {'start', 'end', 'quote', 'kind', 'target'}
 TARGETS = {'policy', 'trade_series', 'trade_comparison', 'unsupported', 'none'}
 TASK_IDS = {'policy': 'policy_question', 'trade_series': 'trade_series',
             'trade_comparison': 'trade_comparison'}
+NEUTRAL_TRADE_TARGET = 'trade'
+
+
+def normalize_neutral_trade_units(units, comparison, *, clarification=False):
+    """Derive one legacy execution target from an explicit comparison.
+
+    This adapter is intentionally host-owned.  It rejects legacy trade labels
+    so a caller cannot silently claim that an old response used the new
+    contract, and it never mutates the model's original list.
+    """
+    if not isinstance(units, list) or not units:
+        raise ValueError('neutral request units must be a nonempty list')
+    has_trade = any(isinstance(unit, dict) and unit.get('target') == NEUTRAL_TRADE_TARGET
+                    for unit in units)
+    if clarification and comparison is not None:
+        raise ValueError('clarification cannot contain comparison')
+    if has_trade and not clarification and (not isinstance(comparison, dict)
+                      or comparison.get('kind') not in ('sequence', 'endpoint', 'registered')):
+        raise ValueError('neutral trade mapping requires an explicit comparison')
+    # Clarification has no executable task; this is only a legacy domain
+    # placeholder for coverage validation, never a resolved comparison.
+    target = ('trade_series' if clarification or comparison['kind'] == 'sequence' else 'trade_comparison') \
+        if has_trade else None
+    normalized = []
+    for unit in units:
+        if not isinstance(unit, dict) or set(unit) != {'quote', 'kind', 'target'}:
+            raise ValueError('neutral request unit fields')
+        if unit['target'] in ('trade_series', 'trade_comparison'):
+            raise ValueError('legacy trade target is not accepted in neutral mode')
+        item = deepcopy(unit)
+        if item['target'] == NEUTRAL_TRADE_TARGET:
+            if item['kind'] != 'request':
+                raise ValueError('neutral trade domain must be a request')
+            item['target'] = target
+        normalized.append(item)
+    return normalized, target
+
+
+def validate_unit_labels(units):
+    """Validate model labels without claiming that they cover the question.
+
+    The strict validator below additionally checks positions and every
+    non-whitespace character.  The host-gap proposal needs this smaller
+    operation so a reviewer can inspect a lossless alignment while the model's
+    labels remain independently visible and unverified.
+    """
+    if not isinstance(units, list) or not units or len(units) > 100:
+        raise ValueError('request_units must contain 1–100 units')
+    result = []
+    requests = 0
+    for unit in units:
+        if not isinstance(unit, dict) or set(unit) != {'quote', 'kind', 'target'}:
+            raise ValueError('request unit fields')
+        quote = unit['quote']
+        if not isinstance(quote, str) or not quote.strip():
+            raise ValueError('empty quoted unit')
+        if unit['kind'] not in ('request', 'context', 'constraint') or unit['target'] not in TARGETS:
+            raise ValueError('request kind or target')
+        if unit['kind'] == 'request' and unit['target'] == 'none':
+            raise ValueError('request has no target')
+        if unit['kind'] != 'request' and unit['target'] != 'none':
+            raise ValueError('context cannot create execution task')
+        item = deepcopy(unit)
+        if item['kind'] == 'request':
+            requests += 1
+            item['id'] = f'request-{requests:03d}'
+            item['task_id'] = TASK_IDS.get(item['target'])
+        else:
+            item['id'] = None
+            item['task_id'] = None
+        result.append(item)
+    return result
 
 
 def materialize_units(units, question):
