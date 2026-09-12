@@ -1,5 +1,7 @@
 # TradeShock AI — Learning-first Project Plan
 
+**0120当前：政策参考与B对照解析漏洞已离线修复，整体验收仍未通过。** 修复必答清单/来源替换、未来证据和非法B输出放行，修正必答事实与题目错配；无新API或模型成绩。下一阶段Astra中复现并修复登记月份独立核对及审核/报告绑定，在线仍关闭。详见[0120](docs/decisions/0120-policy-reference-review.zh-CN.md)与[Phase 52中文学习](docs/learning/phase-52-policy-reference-review.zh-CN.md)。以下为历史报告。
+
 **0119当前：0118接线复审已完成首轮离线修复，仍未达到在线验收门槛。** 已修复主组事实待审/拒绝仍完成、基准复算失败继续、B无来源判对；严格政策题现在使用独立官方facts，兼容模型的最终opener边界可留下脱敏HTTP payload捕获；登记窗口独立复算、宿主gap审查入口、最终交付复核和显式源/数据/运行时快照已接线。仍需Astra复审完整组合fixture、转移包依赖与人工语义审核边界；在线仍关闭。[0119复审](docs/decisions/0119-controls-integration-review.zh-CN.md)是当前依据。[Phase 51中文学习](docs/learning/phase-51-review-gates.zh-CN.md)。以下0118为历史报告，不能用作完整验收证明。
 
 **0118当前：首轮离线接线完成，进入Astra复审。** 现有运行器已接入规划前贸易baseline、执行前范围比较、政策主/B同配置检查、调用后provider-neutral捕获和逐事实审查包；事实审查默认待人工，正式`acceptance_ready=false`。602项本地测试通过，0外部API。下一阶段推荐Astra中复审组合/边界fixture、事实审查绑定和真实题前门槛；在线仍关闭、不推送。[中文学习](docs/learning/phase-50-independent-comparison.zh-CN.md)。以下为历史状态。

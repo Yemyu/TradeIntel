@@ -3,7 +3,8 @@
   "policy_id": "us_301_list1_2018",
   "question": "第一批关税何时生效，额外税率是多少？",
   "as_of": "2018-07-06",
-  "reviewer": "official-source-curator",
+  "reviewer": "ai-curated-reference-not-independent-human-review",
+  "review_status": "pending_independent_human_review",
   "reviewed_at": "2026-09-13",
   "corpus_path": "docs/experiments/phase13a-policy-retrieval/corpus.json",
   "facts": [
@@ -20,13 +21,6 @@
       "expected_value": "25%",
       "acceptable_paraphrases": ["25%", "25 percent", "百分之二十五"],
       "evidence_ids": ["initial_notice:p2:c5100"]
-    },
-    {
-      "id": "covered_subheadings",
-      "claim": "最终初始行动清单缩减为818个税则子目。",
-      "expected_value": "818",
-      "acceptable_paraphrases": ["818", "818个税则子目", "818 tariff subheadings"],
-      "evidence_ids": ["initial_notice:p2:c3400"]
     }
   ],
   "sources": [

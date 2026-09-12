@@ -48,7 +48,8 @@ def reject_facts(packet):
 
 class AcceptanceReview0119Tests(unittest.TestCase):
     def test_declared_settings_are_not_claimed_as_actual_http_payload(self):
-        case = replace(default_cases()[2], facts=())
+        # Capture-only legacy fixture: strict cases may no longer drop facts.
+        case = replace(default_cases()[2], facts=(), policy_reference=None)
         with TemporaryDirectory() as tmp:
             out = Path(tmp) / 'run'
             run_synthetic_batch(out, cases=[case], model_factory=policy_factory)
