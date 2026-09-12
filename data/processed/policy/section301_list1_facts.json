@@ -1,0 +1,64 @@
+{
+  "version": "policy-facts-0119",
+  "policy_id": "us_301_list1_2018",
+  "question": "第一批关税何时生效，额外税率是多少？",
+  "as_of": "2018-07-06",
+  "reviewer": "official-source-curator",
+  "reviewed_at": "2026-09-13",
+  "corpus_path": "docs/experiments/phase13a-policy-retrieval/corpus.json",
+  "facts": [
+    {
+      "id": "effective_date",
+      "claim": "第一批额外关税适用于2018-07-06及之后进入消费或从仓库提取消费的相关商品。",
+      "expected_value": "2018-07-06",
+      "acceptable_paraphrases": ["2018-07-06", "2018年7月6日", "July 6, 2018"],
+      "evidence_ids": ["initial_notice:p1:c4668"]
+    },
+    {
+      "id": "additional_rate",
+      "claim": "相关中国商品的额外从价税率为25%。",
+      "expected_value": "25%",
+      "acceptable_paraphrases": ["25%", "25 percent", "百分之二十五"],
+      "evidence_ids": ["initial_notice:p2:c5100"]
+    },
+    {
+      "id": "covered_subheadings",
+      "claim": "最终初始行动清单缩减为818个税则子目。",
+      "expected_value": "818",
+      "acceptable_paraphrases": ["818", "818个税则子目", "818 tariff subheadings"],
+      "evidence_ids": ["initial_notice:p2:c3400"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "initial_notice:p1:c4668",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 1,
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "quote": "Applicable date of duties: The additional duties set out in Annex A to this notice are applicable with respect to products that are entered for consumption, or withdrawn from warehouse for consumption, on or after July 6, 2018."
+    },
+    {
+      "id": "initial_notice:p2:c5100",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 2,
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "quote": "Products of China that are provided for in new HTSUS heading 9903.88.01, as established by Annex A of this notice that are entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern daylight time on July 6, 2018, shall be subject to an additional duty of 25 percent ad valorem."
+    },
+    {
+      "id": "initial_notice:p2:c3400",
+      "title": "2018年6月初始公告（含后续拟议行动）",
+      "published": "2018-06-20",
+      "page": 2,
+      "url": "https://ustr.gov/sites/default/files/2018-13248.pdf",
+      "path": "data/raw/policy/ustr-section301-list1-2018.pdf",
+      "sha256": "3e27dfb420dc308a079e7a71f2715fa29ed00fbbd84dbec4514f2cd66b9cf301",
+      "quote": "the Trade Representative has determined to narrow the proposed list in the April 6, 2018 notice to 818 tariff subheadings, with an approximate annual trade value of $34 billion."
+    }
+  ]
+}

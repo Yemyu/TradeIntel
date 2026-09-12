@@ -20,12 +20,17 @@ from __future__ import annotations
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
+import importlib.metadata as importlib_metadata
 import json
+import platform
 from pathlib import Path
+import re
+import sys
 import time
 import uuid
 from typing import Any, Callable, Iterable, Mapping
 from .answer_checklist import at
+from .request_capture import sanitize_request_capture
 
 
 HARD_FAILURE_CATEGORIES = frozenset({
@@ -111,6 +116,47 @@ def digest(value: Any) -> str:
         json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
         .encode("utf-8")
     ).hexdigest()
+
+
+def runtime_environment(package_names: Iterable[str] = ()) -> dict[str, Any]:
+    """Return the small runtime identity used by strict dependency snapshots.
+
+    This is deliberately limited to interpreter identity and the packages
+    named by the snapshot.  It does not claim to freeze every transitive wheel
+    or OS library; the snapshot's coverage label must remain honest about that
+    boundary.
+    """
+
+    packages: dict[str, str | None] = {}
+    for name in sorted({item for item in package_names if isinstance(item, str) and item.strip()}):
+        try:
+            packages[name] = importlib_metadata.version(name)
+        except importlib_metadata.PackageNotFoundError:
+            packages[name] = None
+    return {
+        "python_implementation": platform.python_implementation(),
+        "python_version": platform.python_version(),
+        "python_executable": str(Path(sys.executable).resolve()),
+        "packages": packages,
+    }
+
+
+def requirement_names(path: str | Path) -> tuple[str, ...]:
+    """Parse package names only; versions remain in the frozen file hash."""
+
+    try:
+        lines = Path(path).read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return ()
+    names = []
+    for line in lines:
+        line = line.split("#", 1)[0].strip()
+        if not line or line.startswith(("-", "git+", "http:", "https:")):
+            continue
+        match = re.match(r"([A-Za-z0-9][A-Za-z0-9_.-]*)", line)
+        if match:
+            names.append(match.group(1))
+    return tuple(sorted(set(names)))
 
 
 def _utc_now() -> str:
@@ -253,6 +299,37 @@ def validate_fact_review(packet: Mapping[str, Any],
     if not isinstance(evidence, Mapping):
         raise AcceptanceGuardError("fact review evidence must be an object")
     citation_ids = set(evidence)
+    strict_reference = packet.get("version") == "fact-review-packet-0119"
+    if strict_reference:
+        reference_sha256 = packet.get("reference_sha256")
+        if (not isinstance(reference_sha256, str) or len(reference_sha256) != 64
+                or any(char not in "0123456789abcdef" for char in reference_sha256)):
+            raise AcceptanceGuardError("strict fact review needs a frozen reference fingerprint")
+        for fact in facts:
+            declared_sources = fact.get("evidence_ids") if isinstance(fact, Mapping) else None
+            if (not isinstance(declared_sources, (list, tuple)) or not declared_sources
+                    or any(source_id not in citation_ids for source_id in declared_sources)):
+                raise AcceptanceGuardError("strict fact is not bound to frozen evidence")
+        if (not isinstance(packet.get("policy_question"), str)
+                or not isinstance(packet.get("policy_as_of"), str)):
+            raise AcceptanceGuardError("strict fact review needs the frozen policy question")
+        for claim in claims:
+            if (not isinstance(claim, Mapping)
+                    or not isinstance(claim.get("text"), str)
+                    or not isinstance(claim.get("citations"), list)
+                    or any(not isinstance(source_id, str) or source_id not in citation_ids
+                           for source_id in claim["citations"])):
+                raise AcceptanceGuardError("strict claim cites unknown or malformed evidence")
+    else:
+        # Preserve the legacy string-claim packet shape, but still reject an
+        # explicitly supplied citation that is not in the packet.
+        for claim in claims:
+            if isinstance(claim, Mapping) and "citations" in claim:
+                citations = claim.get("citations")
+                if (not isinstance(citations, list)
+                        or any(not isinstance(source_id, str) or source_id not in citation_ids
+                               for source_id in citations)):
+                    raise AcceptanceGuardError("claim cites unknown or malformed evidence")
     fact_records = []
     fact_failures = {status: 0 for status in ("missing", "contradicted", "unverifiable")}
     for fact_id in fact_ids:
@@ -272,13 +349,20 @@ def validate_fact_review(packet: Mapping[str, Any],
                 raise AcceptanceGuardError("supported or contradicted facts need a claim")
             source_id = row.get("source_id")
             excerpt = row.get("evidence_excerpt")
+            declared_sources = None
+            if strict_reference:
+                frozen_fact = next(item for item in facts if item.get("id") == fact_id)
+                declared_sources = frozen_fact.get("evidence_ids")
             # The baseline model sees no evidence, but its reviewer still
             # needs the same frozen reference evidence as the main reviewer.
             if (not isinstance(source_id, str) or source_id not in citation_ids
+                    or (strict_reference and (
+                        not isinstance(declared_sources, (list, tuple))
+                        or source_id not in declared_sources))
                     or not isinstance(evidence[source_id], Mapping)
                     or not isinstance(excerpt, str) or not excerpt.strip()
                     or excerpt not in str(evidence[source_id].get("text", ""))):
-                raise AcceptanceGuardError("fact evidence quote is not in the packet")
+                raise AcceptanceGuardError("fact evidence quote is not bound to the declared source")
         elif claim_indices and status == "missing":
             raise AcceptanceGuardError("missing fact cannot cite an answer claim")
         if status in fact_failures:
@@ -358,6 +442,9 @@ def _safe_metadata(metadata: Mapping[str, Any] | None) -> dict[str, Any]:
         value = usage.get(key)
         if type(value) is int and value >= 0:
             result["usage"][key] = value
+    capture = sanitize_request_capture(metadata.get("request_capture"))
+    if capture is not None:
+        result["request_capture"] = capture
     return result
 
 
@@ -425,6 +512,17 @@ def verify_dependencies(snapshot: Mapping[str, Any]) -> None:
             if key in snapshot}
     if snapshot.get("snapshot_sha256") != digest(body):
         raise FrozenInputChanged("dependency snapshot fingerprint changed")
+    configuration = snapshot.get("configuration")
+    if isinstance(configuration, Mapping):
+        environment = configuration.get("runtime_environment")
+        if isinstance(environment, Mapping):
+            expected_packages = environment.get("packages", {})
+            if not isinstance(expected_packages, Mapping):
+                raise FrozenInputChanged("runtime package snapshot is malformed")
+            expected = deepcopy(dict(environment))
+            actual = runtime_environment(expected_packages.keys())
+            if actual != expected:
+                raise FrozenInputChanged("runtime environment changed")
     records = snapshot.get("files")
     if not isinstance(records, list) or not records:
         raise FrozenInputChanged("dependency snapshot has no explicit files")
@@ -1277,6 +1375,36 @@ class ProspectiveCallLedger:
                 raise AcceptanceGuardError("delivery inspection is unreadable") from exc
             if not isinstance(delivery, Mapping) or delivery.get("verified") is not True:
                 raise AcceptanceGuardError("delivery inspection is not verified")
+            # A policy answer with fact packets is not accepted until the
+            # packets' decisions are durably present.  The no-evidence arm is
+            # an observation and may be rejected semantically, but it cannot
+            # be silently skipped after it was requested.
+            fact_prefix = f"reviews/{question_id}-facts-"
+            fact_paths = {name for name in self.state["artifacts"] if name.startswith(fact_prefix)}
+            if fact_paths:
+                main_decision_name = f"{fact_prefix}with_evidence-decision.json"
+                main_decision = self.state["artifacts"].get(main_decision_name)
+                if not isinstance(main_decision, Mapping):
+                    raise AcceptanceGuardError("support acceptance requires the main fact review")
+                try:
+                    main_value = json.loads(
+                        (self.output / main_decision["path"]).read_text(encoding="utf-8")
+                    )
+                except (OSError, ValueError, TypeError) as exc:
+                    raise AcceptanceGuardError("main fact review is unreadable") from exc
+                if not isinstance(main_value, Mapping) or main_value.get("approved") is not True:
+                    raise AcceptanceGuardError("support acceptance requires an approved main fact review")
+                b_requested = any(
+                    isinstance(value, Mapping)
+                    and value.get("question_id") in {None, question_id}
+                    and isinstance(key, str)
+                    and key.startswith(f"control_b:{question_id}")
+                    for key, value in self.state.get("controls", {}).items()
+                )
+                if b_requested:
+                    b_decision_name = f"{fact_prefix}without_evidence-decision.json"
+                    if not isinstance(self.state["artifacts"].get(b_decision_name), Mapping):
+                        raise AcceptanceGuardError("support acceptance requires the baseline fact review")
         else:
             if answer_stage is not None or delivery_artifact_name is not None:
                 raise AcceptanceGuardError("non-support acceptance cannot bind an answer delivery")
@@ -1332,15 +1460,39 @@ class ProspectiveCallLedger:
             control = self.state["controls"].get(control_id)
             if not isinstance(control, Mapping) or control.get("status") != "validated":
                 raise AcceptanceGuardError(f"validated control is missing: {control_id}")
-        for question in self.state["questions"]:
-            if question.get("status") not in {"accepted", "accepted_terminal"}:
-                raise AcceptanceGuardError("every question must have an acceptance binding")
-            binding = question.get("acceptance_binding")
-            if not isinstance(binding, Mapping) or binding.get("question_id") != question.get("id"):
-                raise AcceptanceGuardError("question status is not bound to reviewed execution")
-            body = {key: deepcopy(value) for key, value in binding.items() if key != "binding_sha256"}
-            if binding.get("binding_sha256") != digest(body):
-                raise FrozenInputChanged("acceptance binding changed")
+        try:
+            self.verify_snapshot_fn(self.snapshot)
+            for artifact in self.state["artifacts"].values():
+                path = self.output / artifact["path"]
+                if (not path.is_file()
+                        or hashlib.sha256(path.read_bytes()).hexdigest() != artifact["sha256"]):
+                    raise FrozenInputChanged("saved response or review changed")
+            for question in self.state["questions"]:
+                if question.get("status") not in {"accepted", "accepted_terminal"}:
+                    raise AcceptanceGuardError("every question must have an acceptance binding")
+                binding = question.get("acceptance_binding")
+                if not isinstance(binding, Mapping) or binding.get("question_id") != question.get("id"):
+                    raise AcceptanceGuardError("question status is not bound to reviewed execution")
+                body = {key: deepcopy(value) for key, value in binding.items() if key != "binding_sha256"}
+                if binding.get("binding_sha256") != digest(body):
+                    raise FrozenInputChanged("acceptance binding changed")
+                delivery_artifact = binding.get("delivery_artifact")
+                if not isinstance(delivery_artifact, Mapping):
+                    continue
+                inspection_path = self.output / delivery_artifact.get("path", "")
+                try:
+                    saved_delivery = json.loads(inspection_path.read_text(encoding="utf-8"))
+                except (OSError, ValueError, TypeError) as exc:
+                    raise FrozenInputChanged("delivery inspection is unreadable") from exc
+                from .unified_research import inspect_delivery
+                actual_dir = inspection_path.parent / "delivery"
+                if inspect_delivery(actual_dir) != saved_delivery:
+                    raise FrozenInputChanged("delivery changed before finalization")
+        except FrozenInputChanged:
+            self.state["status"] = "stopped"
+            self.state["stop_reason"] = "frozen_inputs_changed"
+            self._save()
+            raise
         self.state["status"] = "completed"
         self.state["completed_at_utc"] = _utc_now()
         self._save()

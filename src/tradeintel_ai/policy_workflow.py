@@ -7,6 +7,7 @@ import time
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from .model_adapter import OpenAICompatibleModel
+from .request_capture import sanitize_request_capture
 from .policy_response_format import normalize_policy_response
 from .policy_retrieval import draft_answer
 
@@ -38,6 +39,9 @@ def safe_metadata(metadata):
     usage=metadata.get('usage')
     result['usage']={k:v for k,v in (usage.items() if isinstance(usage,dict) else [])
                      if k in ('prompt_tokens','completion_tokens','total_tokens') and type(v) is int and v>=0}
+    capture = sanitize_request_capture(metadata.get('request_capture')) if isinstance(metadata, dict) else None
+    if capture is not None:
+        result['request_capture'] = capture
     return result
 
 

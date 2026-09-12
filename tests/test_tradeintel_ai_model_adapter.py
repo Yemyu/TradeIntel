@@ -11,6 +11,8 @@ from src.tradeintel_ai.model_adapter import (
     _normalise_messages,
     _normalise_tools,
 )
+from src.tradeintel_ai.request_capture import capture_http_request, complete_with_capture
+from src.tradeintel_ai.research_models import ResearchPolicyModel
 
 
 class FakeResponse:
@@ -97,6 +99,7 @@ class TradeIntelAiModelAdapterTests(unittest.TestCase):
             captured["timeout"] = timeout
             captured["headers"] = dict(request.headers)
             captured["payload"] = json.loads(request.data.decode("utf-8"))
+            captured["request_capture"] = capture_http_request(request, timeout)
             return FakeResponse(
                 {
                     "id": "chatcmpl-test",
@@ -133,12 +136,43 @@ class TradeIntelAiModelAdapterTests(unittest.TestCase):
         self.assertEqual(response.metadata["model"], "test-model")
         self.assertEqual(response.metadata["requested_model"], "test-model")
         self.assertEqual(response.metadata["usage"]["total_tokens"], 14)
+        capture = captured["request_capture"]
+        self.assertEqual(capture["kind"], "http_payload")
+        self.assertEqual(capture["timeout_seconds"], 60.0)
+        self.assertEqual(capture["payload"]["model"], "test-model")
+        self.assertNotIn("Authorization", json.dumps(capture))
+        self.assertNotIn("test-secret", json.dumps(capture))
+        self.assertEqual(capture["payload"], captured["payload"])
         self.assertEqual(captured["url"], "http://localhost:8000/v1/chat/completions")
         self.assertEqual(captured["timeout"], 60.0)
         self.assertEqual(captured["headers"]["Authorization"], "Bearer test-secret")
         self.assertEqual(captured["payload"]["model"], "test-model")
         self.assertEqual(captured["payload"]["messages"][0]["role"], "system")
         self.assertEqual(captured["payload"]["tools"][0]["function"]["name"], "get_policy_event")
+
+    def test_complete_with_capture_attaches_the_final_payload_without_headers(self):
+        def opener(request, timeout):
+            payload = json.loads(request.data.decode("utf-8"))
+            self.assertEqual(timeout, 60.0)
+            self.assertEqual(payload["model"], "test-model")
+            self.assertEqual(payload["max_tokens"], 768)
+            self.assertEqual(payload["thinking"], {"type": "disabled"})
+            return FakeResponse({
+                "model": "test-model",
+                "choices": [{"finish_reason": "stop",
+                             "message": {"content": '{"claims": []}'}}],
+            })
+
+        model = ResearchPolicyModel(self.config, opener=opener)
+        response = complete_with_capture(
+            model, messages=[{"role": "user", "content": "查政策"}], tools=[]
+        )
+        capture = response.metadata["request_capture"]
+        self.assertEqual(capture["kind"], "http_payload")
+        self.assertEqual(capture["payload"]["model"], "test-model")
+        self.assertEqual(capture["payload"]["max_tokens"], 768)
+        self.assertNotIn("Authorization", json.dumps(capture))
+        self.assertNotIn("test-secret", json.dumps(capture))
 
     def test_from_env_requires_model_name_but_does_not_print_key(self):
         with self.assertRaisesRegex(ModelAdapterError, "TRADEINTEL_MODEL_NAME"):
