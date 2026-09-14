@@ -1,0 +1,84 @@
+{
+  "version": "live-demo-package-0141",
+  "source_run": "tmp/live-development-0140-policy",
+  "files": [
+    {
+      "path": "policy-report.zh-CN.md",
+      "sha256": "7a40e528cf89f5806acb3e812c4fc899979460a5d197b6b6a63e4b2cbcd98d73",
+      "size": 9620
+    },
+    {
+      "path": "combined-report.zh-CN.md",
+      "sha256": "207f1b29adec63033eabf2fca7fd7acdf38713ab9c1ade180759d73323beded7",
+      "size": 13812
+    },
+    {
+      "path": "policy-fact-review-summary.json",
+      "sha256": "8393960c92f90e89edb862a699b7106ff22a8bc7fe869b7b63f6cea56a6b5494",
+      "size": 696
+    },
+    {
+      "path": "combined-fact-review-summary.json",
+      "sha256": "b69ddf580127ebd391a9db47e46f3e2f37bfdfca6c32a468f3e986788833c0ae",
+      "size": 702
+    },
+    {
+      "path": "combined-trade-baseline.json",
+      "sha256": "ad68885708674155a23abcee69a805dd8612eeb9242d181829b26781e7e6a5ed",
+      "size": 5566
+    },
+    {
+      "path": "combined-scope-comparison.json",
+      "sha256": "6e8adb75d5a07cf59becffa3bff3dce4cf59e9cf4e147139e6aa076ebe9eb2bd",
+      "size": 288
+    },
+    {
+      "path": "combined-delivery-inspection.json",
+      "sha256": "c3b16b41edae66f2f5d6367bd660958d6f032faf5b62adc8ad4b783c12254c1e",
+      "size": 111
+    },
+    {
+      "path": "policy-delivery-inspection.json",
+      "sha256": "ec881252df58c976920bc0c47df7ac65c3263ec445eb1659651b0157b9a3e719",
+      "size": 109
+    },
+    {
+      "path": "combined-policy-pair-contract.json",
+      "sha256": "42b4890325d958c639c01a4a6a05b3fa1af4a0d86b5a3044e1d46d7610a3542c",
+      "size": 2525
+    },
+    {
+      "path": "policy-pair-contract.json",
+      "sha256": "c98606a95b60151157ccee6bbdd605515089a8bc779e684e5b6b06fda2fef0e4",
+      "size": 2523
+    },
+    {
+      "path": "combined-control-a.json",
+      "sha256": "2c557ca76ad11a09c622f7fe799a8ffa03e17db347c51ca47238fa85836a5d7a",
+      "size": 1421
+    },
+    {
+      "path": "combined-control-b.json",
+      "sha256": "3e88b0da2465dff3256b3c34b6d91a783476ef5c5c42dc1a3f728f867c50bb27",
+      "size": 3918
+    },
+    {
+      "path": "policy-control-b.json",
+      "sha256": "65815c17ed0480f16c07ea65dcecd8b90793bbcc9d2e6594d3bb7ad29bb8a1cc",
+      "size": 3910
+    },
+    {
+      "path": "run-summary.json",
+      "sha256": "c1c77f878645d2b504f8ee77b909eec71afe0aa2946944c8c3714d88eaa77ef1",
+      "size": 967
+    }
+  ],
+  "excluded": [
+    "api keys",
+    "provider configuration",
+    "full frozen snapshot",
+    "standalone raw HTTP capture files",
+    "host review packets"
+  ],
+  "audit_note": "2026-09-13说明更正：仅展示和只读复核，非完整复现环境。两个control-b摘要仍嵌套request_capture；不保证排除所有HTTP记录，外发前需单独审查。完整审计仍在source_run。所列文件内容及哈希未变，本清单自身哈希已改变。"
+}

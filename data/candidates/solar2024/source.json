@@ -1,0 +1,25 @@
+{
+  "status": "candidate_not_published",
+  "policy_id": "us_301_solar2024",
+  "document_number": "2024-21217",
+  "publication_date": "2024-09-18",
+  "retrieved_on": "2026-09-14",
+  "url": "https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm",
+  "local_path": "data/candidates/solar2024/2024-21217.html",
+  "sha256": "578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654",
+  "implementation_guidance_url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3b85471",
+  "scope": ["85414200", "85414300"],
+  "additional_rate_percent_in_this_notice": 50,
+  "chapter99_heading": "9903.91.02",
+  "effective_date": "2024-09-27",
+  "effective_time_local": "00:01",
+  "timezone_as_written": "eastern daylight time",
+  "entry_condition": "entered for consumption or withdrawn from warehouse for consumption",
+  "evidence_locations": ["Annex A Solar Cells", "Annex C heading 9903.91.02", "U.S. note 31(c)", "U.S. note 31(a) general qualifications"],
+  "limitations": [
+    "Historical notice component only, not current total tariff or all later amendments.",
+    "General qualifications in note 31(a) and other applicable duties must not be omitted.",
+    "Downloaded current HTML is not proof of its historical availability vintage.",
+    "Candidate metadata is not active routing or a validated release."
+  ]
+}

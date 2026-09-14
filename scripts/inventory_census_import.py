@@ -75,9 +75,18 @@ def load_policy_hts8(path: Path) -> set[str]:
     return values
 
 
+def resolve_member(zip_file: ZipFile, expected: str) -> str:
+    """Allow case-only source naming differences, never ambiguous/nested matches."""
+    matches = [info.filename for info in zip_file.infolist()
+               if not info.is_dir() and info.filename.casefold() == expected.casefold()]
+    if len(matches) != 1:
+        raise InventoryError(f"Expected one {expected} member, found {matches}")
+    return matches[0]
+
+
 def load_country_names(zip_file: ZipFile) -> dict[str, str]:
     names: dict[str, str] = {}
-    with zip_file.open(COUNTRY_MEMBER) as handle:
+    with zip_file.open(resolve_member(zip_file, COUNTRY_MEMBER)) as handle:
         for line_number, raw in enumerate(handle, start=1):
             line = raw.decode("latin-1").rstrip("\r\n")
             if not line:
@@ -179,16 +188,10 @@ def inventory_archive(
 
     try:
         with ZipFile(archive_path) as zip_file:
-            required_members = {DETAIL_MEMBER, COUNTRY_MEMBER}
-            available_members = set(zip_file.namelist())
-            missing_members = required_members - available_members
-            if missing_members:
-                raise InventoryError(
-                    f"Archive is missing required members: {sorted(missing_members)}"
-                )
+            detail_member = resolve_member(zip_file, DETAIL_MEMBER)
             country_names = load_country_names(zip_file)
 
-            with zip_file.open(DETAIL_MEMBER) as handle:
+            with zip_file.open(detail_member) as handle:
                 for line_number, raw in enumerate(handle, start=1):
                     raw_detail_rows += 1
                     record = parse_detail_line(raw, line_number=line_number)

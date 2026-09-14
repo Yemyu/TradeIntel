@@ -1,0 +1,190 @@
+{
+  "version": "independent-trade-baseline-0118",
+  "case_id": "SYN-COMBINED-01",
+  "question_sha256": "446a8f6b3252877f74af755b6ac3f14b9cb5bbc1023149c73d68a6adde14b562",
+  "request": {
+    "trade": {
+      "policy_id": "us_301_list1_2018",
+      "operation": "read",
+      "metric": "import_value_consumption_usd",
+      "origin": "other_origins",
+      "granularity": "policy_aggregate",
+      "months": [
+        "2018-09",
+        "2018-10"
+      ],
+      "hs6": null,
+      "causal_effect": false
+    },
+    "comparison": {
+      "kind": "endpoint",
+      "reference_month": "2018-09",
+      "current_month": "2018-10"
+    }
+  },
+  "execution_request": {
+    "trade": {
+      "policy_id": "us_301_list1_2018",
+      "operation": "read",
+      "metric": "import_value_consumption_usd",
+      "origin": "other_origins",
+      "granularity": "policy_aggregate",
+      "months": [
+        "2018-09",
+        "2018-10"
+      ],
+      "hs6": null,
+      "causal_effect": false
+    },
+    "comparison": {
+      "kind": "endpoint",
+      "reference_month": "2018-09",
+      "current_month": "2018-10"
+    }
+  },
+  "execution_status": "evidence_ready",
+  "data": {
+    "policy_id": "us_301_list1_2018",
+    "scope": "section301_list1",
+    "hs6": null,
+    "origin": "other_origins",
+    "measure": "import_value_consumption_usd",
+    "start": "2018-09",
+    "end": "2018-10",
+    "months": 2,
+    "series": [
+      {
+        "month": "2018-09",
+        "value_usd": 36587820118,
+        "observed_product_count": 812,
+        "observed_product_level": "policy_hts8",
+        "source_hts10_count": 0,
+        "source_hts10_mapped_count": 0
+      },
+      {
+        "month": "2018-10",
+        "value_usd": 41012723839,
+        "observed_product_count": 812,
+        "observed_product_level": "policy_hts8",
+        "source_hts10_count": 0,
+        "source_hts10_mapped_count": 0
+      }
+    ],
+    "total_usd": 77600543957,
+    "observed_total_usd": 77600543957,
+    "coverage_complete": true,
+    "missing_months": [],
+    "requested_months": [
+      "2018-09",
+      "2018-10"
+    ],
+    "unavailable_months": [],
+    "available_window": {
+      "start": "2016-01",
+      "end": "2019-12"
+    }
+  },
+  "source_hashes": {
+    "Sa8f7845f2f6d": {
+      "kind": "local_evidence_file",
+      "path": "data/processed/analysis/policy_case_monthly.csv",
+      "sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400"
+    },
+    "Seec1385d4759": {
+      "kind": "official_census_archive",
+      "month": "2018-09",
+      "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1809.ZIP",
+      "file_name": "IMDB1809.ZIP",
+      "sha256": "dc5c1617a6481aa66c966766f8d93ad9ef76289ee02e4d6c620651bebe13cd9e"
+    },
+    "S64fc9ae90145": {
+      "kind": "official_census_archive",
+      "month": "2018-10",
+      "url": "https://www.census.gov/trade/downloads/2018/Merch/im_m/IMDB1810.ZIP",
+      "file_name": "IMDB1810.ZIP",
+      "sha256": "d08670b3212e20e3ecd41888b732edec9c5970e83612a83430a699b028d196dc"
+    },
+    "S0232afa88112": {
+      "kind": "local_evidence_file",
+      "path": "data/processed/causal/matching_balance_report.json",
+      "sha256": "d56736bd61a4cd8b1a65fd5c7bd36a7b06c37cf11117836d5d5990e21d327b0a"
+    },
+    "S00a3612fb4ca": {
+      "kind": "local_evidence_file",
+      "path": "data/processed/causal/matching_balance_report_v2.json",
+      "sha256": "f847942edd66041ea2777832157369e710229b26a6b5bd5cf88b259a9f0c2c53"
+    },
+    "Sd5fdeeb574eb": {
+      "kind": "local_evidence_file",
+      "path": "data/processed/causal/matching_balance_report_v3.json",
+      "sha256": "5e072fc9f972a51b15aef478607623fd2c2d441c2463d977a721ed68bf1592e9"
+    },
+    "S975ca9ada16d": {
+      "kind": "local_evidence_file",
+      "path": "data/processed/causal/causal_trade_panel_manifest.json",
+      "sha256": "9c338f6e3a1c4698d937bf1a864bf191adf19d4d85d4310d90f5fbb38720ee0d"
+    }
+  },
+  "independent_recompute": {
+    "version": "control-a-direct-table-0116",
+    "control": "A",
+    "status": "validated",
+    "method": "independent_csv_recomputation",
+    "source": {
+      "path": "data/processed/analysis/policy_case_monthly.csv",
+      "sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400"
+    },
+    "request": {
+      "origin": "other_origins",
+      "hs6": null,
+      "months": [
+        "2018-09",
+        "2018-10"
+      ]
+    },
+    "actual": {
+      "series": [
+        {
+          "month": "2018-09",
+          "value_usd": 36587820118
+        },
+        {
+          "month": "2018-10",
+          "value_usd": 41012723839
+        }
+      ],
+      "total_usd": 77600543957
+    },
+    "independent": {
+      "series": [
+        {
+          "month": "2018-09",
+          "value_usd": 36587820118
+        },
+        {
+          "month": "2018-10",
+          "value_usd": 41012723839
+        }
+      ],
+      "total_usd": 77600543957
+    },
+    "checks": {
+      "series_equal": true,
+      "total_equal": true,
+      "comparison_checks": {
+        "kind": true,
+        "reference_months": true,
+        "current_months": true,
+        "change_usd": true,
+        "change_percent": true,
+        "summary_delta": true,
+        "summary_percent": true
+      },
+      "passed": true
+    },
+    "scope_limit": "Arithmetic check against the confirmed model-derived request; not an independent intent baseline.",
+    "interpretation": "工作流结果与独立源表复算一致。"
+  },
+  "reference_origin": "host_frozen_fixture_request_before_planning",
+  "model_input_boundary": "not_sent_to_model"
+}

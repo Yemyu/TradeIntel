@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "question_status_counts": {
+    "accepted": 2,
+    "accepted_terminal": 1
+  },
+  "call_count": 5,
+  "acceptance_ready": false,
+  "semantic_accuracy_measured": false,
+  "network_calls": 0,
+  "warning": "synthetic fixture only; not model accuracy or human semantic review"
+}

@@ -1,0 +1,61 @@
+{
+  "version": "control-a-direct-table-0116",
+  "control": "A",
+  "status": "validated",
+  "method": "independent_csv_recomputation",
+  "source": {
+    "path": "data/processed/analysis/policy_case_monthly.csv",
+    "sha256": "0638c2074fb7ec0059c5a94ad56d01c264ba6f5215f5701aac532d37f6104400"
+  },
+  "request": {
+    "origin": "other_origins",
+    "hs6": null,
+    "months": [
+      "2018-09",
+      "2018-10"
+    ]
+  },
+  "actual": {
+    "series": [
+      {
+        "month": "2018-09",
+        "value_usd": 36587820118
+      },
+      {
+        "month": "2018-10",
+        "value_usd": 41012723839
+      }
+    ],
+    "total_usd": 77600543957
+  },
+  "independent": {
+    "series": [
+      {
+        "month": "2018-09",
+        "value_usd": 36587820118
+      },
+      {
+        "month": "2018-10",
+        "value_usd": 41012723839
+      }
+    ],
+    "total_usd": 77600543957
+  },
+  "checks": {
+    "series_equal": true,
+    "total_equal": true,
+    "comparison_checks": {
+      "kind": true,
+      "reference_months": true,
+      "current_months": true,
+      "change_usd": true,
+      "change_percent": true,
+      "summary_delta": true,
+      "summary_percent": true
+    },
+    "passed": true
+  },
+  "scope_limit": "Arithmetic check against the confirmed model-derived request; not an independent intent baseline.",
+  "interpretation": "工作流结果与独立源表复算一致。",
+  "question_id": "SYN-COMBINED-01"
+}

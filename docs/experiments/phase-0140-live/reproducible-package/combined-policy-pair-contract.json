@@ -1,0 +1,84 @@
+{
+  "version": "policy-pair-0118",
+  "case_id": "SYN-COMBINED-01",
+  "question": "第一批关税何时生效，额外税率是多少？",
+  "as_of": "2018-07-06",
+  "with_evidence": {
+    "configuration": {
+      "question": "第一批关税何时生效，额外税率是多少？",
+      "as_of": "2018-07-06",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "model": "glm-4.7",
+      "temperature": 0.0,
+      "max_tokens": 768,
+      "thinking": {
+        "type": "disabled"
+      },
+      "stream": false,
+      "timeout_seconds": 180.0,
+      "response_schema_sha256": "ea6db82f0c041da470c2148bbba59333b6abe419f22fe3d0783e3d8b2bf03f8d"
+    }
+  },
+  "without_evidence": {
+    "configuration": {
+      "question": "第一批关税何时生效，额外税率是多少？",
+      "as_of": "2018-07-06",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "model": "glm-4.7",
+      "temperature": 0.0,
+      "max_tokens": 768,
+      "thinking": {
+        "type": "disabled"
+      },
+      "stream": false,
+      "timeout_seconds": 180.0,
+      "response_schema_sha256": "ea6db82f0c041da470c2148bbba59333b6abe419f22fe3d0783e3d8b2bf03f8d"
+    }
+  },
+  "prompt_difference": "only evidence field differs; conditional instructions are shared",
+  "evidence_only_ablation_verified": false,
+  "response_schema": {
+    "type": "object",
+    "required": [
+      "claims"
+    ],
+    "properties": {
+      "claims": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "required": [
+            "text",
+            "citations"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1500
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "policy_reference_sha256": "473d0fc8f442771bb0379585f7e2f84c933339b4590da51090baedcef1c47471",
+  "contract": {
+    "configuration_equal": true,
+    "configuration_sha256": "905c7e7b4d5bf5920f3717d72c69911e34877647c1f1647cd8056be658227d37",
+    "actual_calls_verified": false,
+    "semantic_accuracy_measured": false
+  },
+  "actual_payloads_verified": false,
+  "semantic_accuracy_measured": false,
+  "shared_prompt_sha256": "191862e4f190ba4d0f8d7e2a843e71f21526b3621bd406da0b5253d57061898a"
+}

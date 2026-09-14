@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TradeShock AI · 贸易政策研究助手</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #667085;
+      --line: #dfe5ef;
+      --panel: #fff;
+      --bg: #f5f7fb;
+      --blue: #2563eb;
+      --blue-dark: #173b8f;
+      --blue-soft: #eaf1ff;
+      --green: #087443;
+      --green-soft: #e8f7ef;
+      --amber: #8a5600;
+      --amber-soft: #fff5d9;
+      --red: #b42318;
+      --red-soft: #fff0ee;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--bg); line-height: 1.6; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 26px 20px 60px; }
+    .hero { color: white; background: linear-gradient(135deg, #183b91, #2766da); border-radius: 18px; padding: 30px 34px; box-shadow: 0 12px 28px #1e3a8a22; }
+    .hero h1 { margin: 0 0 5px; font-size: clamp(25px, 4vw, 37px); letter-spacing: .01em; }
+    .hero p { margin: 0; opacity: .92; max-width: 850px; }
+    .hero-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 17px; font-size: 13px; }
+    .badge { display: inline-flex; align-items: center; border: 1px solid #ffffff55; background: #ffffff1f; border-radius: 999px; padding: 3px 10px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin-top: 18px; }
+    .card { grid-column: span 12; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; box-shadow: 0 3px 12px #243b6410; }
+    .half { grid-column: span 6; }
+    @media (max-width: 780px) { .half { grid-column: span 12; } .shell { padding: 14px 12px 42px; } .card { padding: 18px 16px; } }
+    h2 { margin: 0 0 13px; color: var(--blue-dark); font-size: 21px; }
+    h3 { margin: 20px 0 8px; font-size: 16px; }
+    p { margin: 7px 0; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .notice { padding: 13px 15px; border-radius: 10px; background: var(--amber-soft); border-left: 4px solid #d28a00; color: #553700; }
+    .tip { padding: 13px 15px; border-radius: 10px; background: var(--blue-soft); border-left: 4px solid var(--blue); color: #183b76; }
+    .status { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 4px 11px; font-size: 13px; background: var(--amber-soft); color: var(--amber); }
+    .status.ready { background: var(--green-soft); color: var(--green); }
+    .status.error { background: var(--red-soft); color: var(--red); }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: end; }
+    @media (max-width: 680px) { .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    label { display: flex; flex-direction: column; gap: 5px; color: #344054; font-size: 13px; }
+    input, select, button { font: inherit; }
+    input, select { width: 100%; min-height: 40px; color: var(--ink); border: 1px solid #c8d1df; border-radius: 8px; padding: 7px 9px; background: #fff; }
+    button { min-height: 40px; cursor: pointer; border: 0; border-radius: 8px; padding: 7px 15px; color: white; background: var(--blue); font-weight: 600; transition: opacity .15s, transform .15s; }
+    button:hover { transform: translateY(-1px); }
+    button:disabled { cursor: wait; opacity: .55; transform: none; }
+    button.secondary { color: var(--blue-dark); background: var(--blue-soft); border: 1px solid #bed0ff; }
+    button.warning { color: #674100; background: var(--amber-soft); border: 1px solid #ead18b; }
+    .query-status { min-height: 24px; margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0; }
+    @media (max-width: 680px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat { border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; background: #fbfcff; }
+    .stat span { display: block; color: var(--muted); font-size: 12px; }
+    .stat strong { display: block; margin-top: 3px; font-size: 17px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 9px; }
+    table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 11px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: #3d4b63; background: #f3f6fb; font-weight: 600; }
+    tr:last-child td { border-bottom: 0; }
+    .bars { display: grid; gap: 7px; margin-top: 12px; }
+    .bar-row { display: grid; grid-template-columns: 66px 1fr 105px; gap: 7px; align-items: center; font-size: 12px; }
+    .bar-track { height: 10px; border-radius: 999px; background: #edf0f5; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #5b8def, #2563eb); }
+    .bar-value { text-align: right; color: #475467; }
+    .source-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    @media (max-width: 680px) { .source-list { grid-template-columns: 1fr; } }
+    .source { display: block; padding: 12px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink); background: #fcfdff; }
+    .source:hover { border-color: #94b4ff; background: #f6f9ff; }
+    .source strong { display: block; color: var(--blue-dark); }
+    .source small { display: block; margin-top: 2px; color: var(--muted); }
+    .update-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr); gap: 14px; align-items: start; }
+    @media (max-width: 780px) { .update-layout { grid-template-columns: 1fr; } }
+    .update-box { border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px; background: #fbfcff; }
+    .update-box h3 { margin: 0 0 7px; font-size: 15px; color: var(--blue-dark); }
+    .update-box p { margin: 6px 0; font-size: 13px; }
+    .version-chip { display: inline-block; max-width: 100%; overflow-wrap: anywhere; padding: 3px 7px; border-radius: 5px; background: #eef2f8; color: #475467; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .update-list { margin: 6px 0 0; padding-left: 18px; color: #475467; font-size: 13px; }
+    .update-list li { margin: 3px 0; }
+    .update-box a { color: var(--blue-dark); }
+    .products { display: grid; gap: 8px; }
+    .product { display: grid; grid-template-columns: 100px 1fr 70px; gap: 8px; align-items: start; border-bottom: 1px dashed var(--line); padding: 8px 0; font-size: 13px; }
+    .product:last-child { border-bottom: 0; }
+    .product code { color: var(--blue-dark); font-weight: 600; }
+    .rate { text-align: right; color: var(--amber); font-weight: 600; }
+    .demo-buttons { display: flex; flex-wrap: wrap; gap: 9px; margin: 12px 0; }
+    .demo-result { min-height: 46px; border-radius: 9px; padding: 11px 13px; background: #f5f7fa; color: #475467; font-size: 13px; }
+    .demo-result.ok { background: var(--green-soft); color: #075b36; }
+    .demo-result.fail { background: var(--red-soft); color: var(--red); }
+    .demo-result a { color: inherit; font-weight: 700; }
+    details { margin-top: 12px; }
+    summary { cursor: pointer; color: var(--blue-dark); font-weight: 600; }
+    footer { margin-top: 22px; text-align: center; color: var(--muted); font-size: 13px; }
+    code.path { padding: 2px 5px; border-radius: 4px; background: #f0f2f5; color: #475467; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <h1>TradeShock AI</h1>
+      <p>贸易政策研究助手：把官方政策范围、真实贸易数据和受约束的 AI 调查步骤连在一起，生成可核查的中文研究初稿。</p>
+      <div class="hero-meta">
+        <span class="badge">受约束原型</span>
+        <span class="badge" id="health-badge">正在检查模型配置…</span>
+        <span class="badge">不做因果结论 · 不等于实时税则</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>先看清楚：这个页面能做什么</h2>
+        <div class="tip"><b>当前登记案例：</b>2025 年生效的美国 Section 301 钨、硅片和多晶硅政策，精确覆盖 5 个 HTS8 税号；贸易数据窗口为 2025-01 至 2026-07。</div>
+        <p class="muted">查询按钮只读取已经验收的本地数据并重新计算金额；它不会调用大模型。AI 演示需要你明确点击后才调用项目本地配置的 GLM，并且程序负责事实、百分比和来源，模型只选择后续调查方向。</p>
+        <p class="notice"><b>重要边界：</b>页面展示的是美国消费进口“暴露规模”，不是损失额、中国出口依赖率，也不能证明关税导致了变化。没有国内产量、库存、价格和交货期证据时，不能声称供应是否紧张。</p>
+      </section>
+
+      <section class="card half">
+        <h2>登记政策范围</h2>
+        <div id="policy-summary" class="muted">正在读取政策登记…</div>
+        <div id="policy-products" class="products" aria-live="polite"></div>
+      </section>
+
+      <section class="card half">
+        <h2>政策原文与编码来源</h2>
+        <div id="sources" class="source-list" aria-live="polite"></div>
+        <p class="muted">完整政策段落证据保存在 <code class="path">data/processed/policy_exposure/policy_corpus.json</code>；页面只展示可公开访问的来源链接。</p>
+      </section>
+
+      <section class="card">
+        <h2>数据版本更新</h2>
+        <p><a href="/api/update-brief" target="_blank" rel="noopener">查看最新登记版本的更新简报</a></p>
+        <p><a href="/api/version-report" target="_blank" rel="noopener">打开最新数据报告（截止期、月表与图表）</a> · 新页面保留固定版本链接，不覆盖旧报告。</p>
+        <div class="update-layout">
+          <div class="update-box">
+            <span id="update-status" class="status">正在读取版本状态…</span>
+            <div id="update-summary" aria-live="polite" style="margin-top:9px"></div>
+            <div id="update-details"></div>
+          </div>
+          <div class="update-box">
+            <h3>这块是做什么的？</h3>
+            <p>查询使用独立保存的数据副本。新候选校验失败时，仍可读取上一版；发布副本自身损坏时会停止查询。</p>
+            <p class="muted">当前页面只读取本地已登记版本；不会自行联网下载，也不会把新增月份自动解释成政策效果。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>查询已登记贸易数据</h2>
+        <div class="controls">
+          <label>开始月份<input id="start" type="month" value="2025-01" min="2025-01" max="2026-07"></label>
+          <label>结束月份<input id="end" type="month" value="2026-07" min="2025-01" max="2026-07"></label>
+          <label>原产地<select id="origin"><option value="China">中国</option><option value="all_origins">全部原产地</option><option value="other_origins">其他原产地（不含中国）</option></select></label>
+          <label>商品范围<select id="hts8"><option value="">五个税号整体</option></select></label>
+        </div>
+        <div style="margin-top:12px"><button id="query-button">查询数据</button></div>
+        <div id="query-status" class="query-status" role="status"></div>
+        <div id="query-output" hidden>
+          <div id="stats" class="stats"></div>
+          <div class="table-wrap"><table><thead><tr><th>月份</th><th>全部来源消费进口额</th><th>中国原产金额</th><th>中国占比</th></tr></thead><tbody id="series-body"></tbody></table></div>
+          <h3>金额变化（用于观察规模，不是政策效果）</h3>
+          <div id="bars" class="bars"></div>
+          <details id="breakdown-details"><summary>展开最近一个月的分商品金额</summary><div id="breakdown" class="table-wrap" style="margin-top:9px"></div></details>
+          <p class="muted" id="query-limitations"></p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>提出研究问题</h2>
+        <p><a href="/review/interpretation">人工审阅固定存档建议（保存决定，不发布案例、不调用模型）</a></p>
+        <details class="box"><summary>按明确参数创建研究任务（候选案例需先通过发布）</summary>
+          <p class="muted">这不是自由问答：程序按你的选择查数，AI只写待审阅解释。候选未开放时只返回说明，零模型调用。</p>
+          <div class="controls">
+            <label>案例<select id="task-case"><option value="us_301_solar2024">2024光伏电池/组件（候选）</option></select></label>
+            <label>月份<input id="task-month" type="month" min="2025-01" max="2026-07" value="2026-07"></label>
+            <label>商品<select id="task-product"><option value="all">全部两类商品</option><option value="85414200">85414200 · 未组装电池</option><option value="85414300">85414300 · 已组装组件</option></select></label>
+          </div>
+          <button id="task-submit" class="secondary">检查开放状态并提交（开放后最多一次模型请求）</button>
+          <div id="task-result" role="status">尚未提交。下方可先查看固定真实结果。</div>
+        </details>
+        <p><a href="/demo/research-review" target="_blank" rel="noopener">查看最新真实结果：两类光伏商品的数据、AI原话与审阅意见（只读，不调用API）</a></p>
+        <p><a href="/demo/solar" target="_blank" rel="noopener">查看早期流程演示：光伏组件简报（只读、不调用API、仍待补核）</a></p>
+        <p class="muted">支持登记政策的单月查询、排序，以及政策＋单月/多月贸易简报。请明确月份（多月需起止）和税号；比较可写“以2026-06为基准，比较2026-07”。没有对应可比性核查时只展示金额，不自动给变化率。每次提交最多两次模型请求，结果仍需审阅。</p>
+        <label>你的问题<textarea id="research-question" rows="4" maxlength="2000" style="width:100%;font:inherit;padding:10px" placeholder="例如：列出登记政策全部税号在2026年4月的中国金额和份额。"></textarea></label>
+        <label for="research-case">本次问题的政策案例</label>
+        <select id="research-case" disabled>
+          <option value="">正在读取后台案例登记…</option>
+        </select>
+        <p id="research-catalog-status" class="muted" role="status">案例状态尚未加载，暂不能提交。</p>
+        <p class="muted">该选择仅用于本次研究问答，不改变上方固定案例的数据看板。未写明案例的普通问题仍默认第一案例。候选案例只返回状态说明，不调用模型。</p>
+        <button id="research-button" disabled style="margin-top:10px">提交问题（最多两次模型请求）</button>
+        <div id="research-result" class="demo-result" role="status" style="margin-top:10px">尚未提交问题。</div>
+      </section>
+
+      <section class="card">
+        <h2>历史固定演示：让模型选择“下一步查什么”</h2>
+        <p class="muted">这不是一个自由聊天框。每个按钮都是已登记的固定案例；点击后最多执行 3 次模型请求，失败也会保留本地记录。程序不会把模型生成的数字直接放进报告。</p>
+        <div class="demo-buttons">
+          <button class="secondary demo-button" data-case="may-tungsten">运行 2026-05 单税号</button>
+          <button class="secondary demo-button" data-case="june-tungsten">运行 2026-06 保留失败案例</button>
+          <button class="warning demo-button" data-case="july-scope">运行 2026-07 五税号整体</button>
+        </div>
+        <div id="demo-result" class="demo-result" role="status">尚未调用模型。你可以先使用上面的确定性查询。</div>
+        <p class="muted">密钥只在后端的项目本地配置中使用，浏览器不会接触密钥。学习说明：<code class="path">docs/learning/web-demo.zh-CN.md</code>。</p>
+      </section>
+    </div>
+    <footer>TradeShock AI · 本地页面 · 事实和边界由程序生成，报告仍需人工审阅</footer>
+  </main>
+
+  <script>
+    "use strict";
+    const $ = (id) => document.getElementById(id);
+    const money = (value) => value === null || value === undefined ? "未知" : Number(value).toLocaleString("en-US") + " 美元";
+    const pct = (value) => value === null || value === undefined ? "未知" : Number(value).toFixed(2) + "%";
+    const setText = (node, value) => { node.textContent = value == null ? "" : String(value); };
+    function appendDataReport(box, binding) {
+      if (!binding) return;
+      const note=document.createElement('p');setText(note,binding.message);box.appendChild(note);
+      if (binding.status==='bound' && typeof binding.url==='string' && /^\/api\/version-report\?version=[0-9a-f]{64}$/.test(binding.url)) {
+        const link=document.createElement('a');link.href=binding.url;link.target='_blank';link.rel='noopener';
+        setText(link,'查看本次分析使用的数据版本');box.appendChild(link);
+      }
+    }
+    $("task-submit").addEventListener("click", async () => {
+      const button=$("task-submit"), box=$("task-result"); button.disabled=true;
+      setText(box,"正在检查任务范围…");
+      try {
+        const result=await getJSON('/api/research-structured',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({policy_id:$("task-case").value,month:$("task-month").value,product:$("task-product").value,task:'source_and_investigation'})});
+        setText(box,result.message+'（模型请求 '+result.model_calls+' 次；解释未经批准）');
+        appendDataReport(box,result.data_report);
+        if (typeof result.review_url === 'string' && /^\/review\/interpretation\?run_id=exposure-\d{8}T\d{6}-[0-9a-f]{8}$/.test(result.review_url)) {
+          const link=document.createElement('a');link.href=result.review_url;link.textContent='审阅本次结果并导出';
+          box.append(document.createElement('br'),link);
+        }
+        for (const artifact of result.artifacts || []) {
+          if (!/^\/api\/research-artifact\/exposure-\d{8}T\d{6}-[0-9a-f]{8}\/(source-packet|interpretation-pending)\.zh-CN\.md$/.test(artifact.url)) continue;
+          const link=document.createElement('a'); link.href=artifact.url; link.textContent=artifact.label; link.target='_blank'; link.rel='noopener';
+          box.append(document.createElement('br'),link);
+        }
+      } catch(error) { setText(box,error.message); }
+      finally {button.disabled=false;}
+    });
+
+    async function getJSON(url, options) {
+      const response = await fetch(url, options);
+      let body = {};
+      try { body = await response.json(); } catch (_) { body = {}; }
+      if (!response.ok) throw new Error(body.message || "请求失败（HTTP " + response.status + "）");
+      return body;
+    }
+
+    function renderPolicy(policy) {
+      const dates = policy.dates || {};
+      setText($("policy-summary"), "目标原产地：" + (policy.target_origin || "") + "；登记范围：" + (policy.data_window || {}).start + " 至 " + (policy.data_window || {}).end + "（" + (policy.data_window || {}).months + " 个月）。公告 " + (dates.announcement_date || "未知") + "，安排生效 " + (dates.effective_date || "未知") + "。");
+      const products = $("policy-products");
+      products.replaceChildren();
+      (policy.products || []).forEach((item) => {
+        const row = document.createElement("div"); row.className = "product";
+        const code = document.createElement("code"); setText(code, item.hts8); row.appendChild(code);
+        const description = document.createElement("span"); setText(description, item.description_zh || item.description || ""); row.appendChild(description);
+        const rate = document.createElement("span"); rate.className = "rate"; setText(rate, "+" + item.additional_rate_percent + "%"); row.appendChild(rate);
+        products.appendChild(row);
+      });
+      const sources = $("sources"); sources.replaceChildren();
+      (policy.sources || []).forEach((item) => {
+        const link = document.createElement("a"); link.className = "source"; link.href = item.url; link.target = "_blank"; link.rel = "noopener noreferrer";
+        const title = document.createElement("strong"); setText(title, item.label); link.appendChild(title);
+        const kind = document.createElement("small"); setText(kind, item.kind + " · " + item.description); link.appendChild(kind);
+        sources.appendChild(link);
+      });
+      const select = $("hts8");
+      (policy.products || []).forEach((item) => { const option = document.createElement("option"); option.value = item.hts8; setText(option, item.hts8 + " · " + item.description_zh); select.appendChild(option); });
+    }
+
+    function shortVersion(value) { return value ? String(value).slice(0, 12) + "…" : "未知"; }
+    function monthList(values, emptyText) {
+      return Array.isArray(values) && values.length ? values.join("、") : emptyText;
+    }
+    function addUpdateParagraph(parent, text, className) {
+      const paragraph = document.createElement("p");
+      if (className) paragraph.className = className;
+      setText(paragraph, text);
+      parent.appendChild(paragraph);
+      return paragraph;
+    }
+    function renderUpdate(update) {
+      const status = $("update-status");
+      const summary = $("update-summary");
+      const details = $("update-details");
+      status.className = "status";
+      summary.replaceChildren();
+      details.replaceChildren();
+      if (!update || update.status === "error") {
+        status.classList.add("error");
+        setText(status, "版本状态读取失败");
+        addUpdateParagraph(summary, (update && update.message) || "本地版本登记无法读取。", "muted");
+        return;
+      }
+      if (update.status !== "ready" || !update.active_version) {
+        setText(status, "尚未登记活动版本");
+        addUpdateParagraph(summary, "当前页面仍可做确定性查询，但还没有可回溯的活动版本指针。", "muted");
+        return;
+      }
+      status.classList.add("ready");
+      setText(status, "活动版本已登记");
+      const active = update.active || {};
+      const diff = active.difference || {};
+      const version = document.createElement("span");
+      version.className = "version-chip";
+      setText(version, "版本 " + shortVersion(update.active_version));
+      summary.appendChild(version);
+      addUpdateParagraph(summary, "已发布的数据副本通过指纹校验；登记时间：" + (active.activated_at_utc || active.created_at_utc || "未知"));
+      const list = document.createElement("ul");
+      list.className = "update-list";
+      const items = [
+        "新增月份：" + monthList(diff.added_months, "无"),
+        "修订月份：" + monthList(diff.revised_months, "无"),
+        "移除月份：" + monthList(diff.removed_months, "无"),
+        "政策登记文件：" + (diff.policy_changed ? "有变化，需审查" : "未变化"),
+        "候选版本：" + ((update.candidates || []).length ? (update.candidates.length + " 个待处理") : "无") + "；失败记录：" + (update.failure_count || 0) + " 条"
+      ];
+      items.forEach((text) => { const item = document.createElement("li"); setText(item, text); list.appendChild(item); });
+      details.appendChild(list);
+      const reviewed = diff.reviewed_comparison;
+      if (reviewed && reviewed.hts8) {
+        addUpdateParagraph(details, reviewed.hts8 + " 编码连续性复核：" + money(reviewed.reference_usd) + " → " + money(reviewed.current_usd) + "（" + Number(reviewed.change_percent).toFixed(2) + "%）。");
+        if (reviewed.source_url) {
+          const link = document.createElement("a");
+          link.href = reviewed.source_url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          setText(link, "打开编码复核来源");
+          details.appendChild(link);
+        }
+      }
+    }
+
+    function renderExposure(result) {
+      const data = result.data || {}; const series = data.series || [];
+      $("query-output").hidden = false;
+      const values = series.map((item) => item.value_usd).filter((value) => value !== null && value !== undefined);
+      const last = series[series.length - 1] || {};
+      const stats = $("stats"); stats.replaceChildren();
+      [["统计月份", series.length + " 个月"], ["查询金额合计", money(data.observed_total_usd)], ["最近月份", last.month || "未知"], ["最近月中国份额", pct(last.target_share_percent)]].forEach(([label, value]) => { const box = document.createElement("div"); box.className = "stat"; const small = document.createElement("span"); setText(small, label); const strong = document.createElement("strong"); setText(strong, value); box.append(small, strong); stats.appendChild(box); });
+      const body = $("series-body"); body.replaceChildren();
+      series.forEach((item) => { const tr = document.createElement("tr"); [item.month, money(item.all_origins_value_usd), money(item.china_value_usd), pct(item.target_share_percent)].forEach((value) => { const td = document.createElement("td"); setText(td, value); tr.appendChild(td); }); body.appendChild(tr); });
+      const bars = $("bars"); bars.replaceChildren(); const max = Math.max(...values, 1);
+      series.forEach((item) => { const row = document.createElement("div"); row.className = "bar-row"; const label = document.createElement("span"); setText(label, item.month); const track = document.createElement("div"); track.className = "bar-track"; const fill = document.createElement("div"); fill.className = "bar-fill"; fill.style.width = (item.value_usd == null ? 0 : Math.max(2, Number(item.value_usd) / max * 100)) + "%"; track.appendChild(fill); const value = document.createElement("span"); value.className = "bar-value"; setText(value, money(item.value_usd)); row.append(label, track, value); bars.appendChild(row); });
+      const breakdown = $("breakdown"); breakdown.replaceChildren(); const products = last.product_breakdown || [];
+      if (!products.length) { const text = document.createElement("p"); text.className = "muted"; setText(text, "单税号查询没有重复展示分商品表。"); breakdown.appendChild(text); } else { const table = document.createElement("table"); const head = document.createElement("thead"); const hr = document.createElement("tr"); ["HTS8", "全部来源金额", "中国原产金额", "中国占该项", "占范围总额"].forEach((value) => { const th = document.createElement("th"); setText(th, value); hr.appendChild(th); }); head.appendChild(hr); const tb = document.createElement("tbody"); products.forEach((item) => { const tr = document.createElement("tr"); [item.hts8, money(item.all_origins_value_usd), money(item.china_value_usd), pct(item.china_share_percent), pct(item.share_of_scope_imports_percent)].forEach((value) => { const td = document.createElement("td"); setText(td, value); tr.appendChild(td); }); tb.appendChild(tr); }); table.append(head, tb); breakdown.appendChild(table); }
+      setText($("query-limitations"), (result.limitations || []).join("；"));
+    }
+
+    async function queryData() {
+      const button = $("query-button"); button.disabled = true; setText($("query-status"), "正在读取并校验本地数据…"); $("query-output").hidden = true;
+      const params = new URLSearchParams({ start: $("start").value, end: $("end").value, origin: $("origin").value }); if ($("hts8").value) params.set("hts8", $("hts8").value);
+      try { const result = await getJSON("/api/exposure?" + params.toString()); renderExposure(result); setText($("query-status"), "查询完成：数字由确定性工具计算，可回查来源。" + (result.data_version ? " 本次版本：" + shortVersion(result.data_version) : " 尚未登记数据版本。")); }
+      catch (error) { $("query-output").hidden = true; setText($("query-status"), "查询未完成：" + error.message); }
+      finally { button.disabled = false; }
+    }
+
+    async function loadInitial() {
+      try { const health = await getJSON("/api/health"); const badge = $("health-badge"); setText(badge, health.status === "ready" ? "模型已配置 · " + health.model : "确定性查询可用 · " + (health.message || "模型未配置")); if (health.status === "ready") badge.style.background = "#ffffff35"; }
+      catch (error) { setText($("health-badge"), "模型状态读取失败"); }
+      try { renderUpdate(await getJSON("/api/update")); }
+      catch (error) { renderUpdate({ status: "error", message: error.message }); }
+      try { const policy = await getJSON("/api/policy"); renderPolicy(policy); await queryData(); }
+      catch (error) { setText($("policy-summary"), "政策登记读取失败：" + error.message); }
+    }
+
+    async function runDemo(button) {
+      const caseName = button.dataset.case; if (!window.confirm("这会调用本地配置的模型并产生最多 3 次请求。确定运行“" + button.textContent + "”吗？")) return;
+      document.querySelectorAll(".demo-button").forEach((item) => { item.disabled = true; }); const box = $("demo-result"); box.className = "demo-result"; setText(box, "正在运行受约束 AI 演示；模型响应不会直接成为事实…");
+      try { const result = await getJSON("/api/ai-demo", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ case: caseName }) }); box.className = result.report_available ? "demo-result ok" : "demo-result fail"; box.replaceChildren(); const text = document.createElement("span"); setText(text, result.message + "（" + result.model_calls + " 次模型请求）"); box.appendChild(text); if (result.report_url) { const link = document.createElement("a"); link.href = result.report_url; link.target = "_blank"; link.rel = "noopener"; setText(link, " 打开报告"); box.appendChild(link); } }
+      catch (error) { box.className = "demo-result fail"; setText(box, "AI 演示未完成：" + error.message); }
+      finally { document.querySelectorAll(".demo-button").forEach((item) => { item.disabled = false; }); }
+    }
+
+    let researchCaseNames = {};
+    async function loadResearchCases() {
+      try {
+        const catalog = await getJSON('/api/cases');
+        if (!Array.isArray(catalog.cases) || !catalog.cases.length) throw new Error('案例登记为空');
+        const select = $("research-case"); select.replaceChildren();
+        const auto = document.createElement('option'); auto.value = '';
+        setText(auto, '根据问题识别（光伏含糊时先追问）'); select.appendChild(auto);
+        for (const entry of catalog.cases) {
+          const option = document.createElement('option'); option.value = entry.policy_id;
+          setText(option, entry.label + '｜' + entry.status_label); select.appendChild(option);
+          researchCaseNames[entry.policy_id] = entry.label;
+        }
+        setText($("research-catalog-status"), catalog.boundary);
+        select.disabled = false; $("research-button").disabled = false;
+      } catch (error) {
+        setText($("research-catalog-status"), '案例状态加载失败，请刷新后重试；不会猜测开放状态。');
+      }
+    }
+    $("research-button").addEventListener("click", async () => {
+      const question = $("research-question").value.trim();
+      const box = $("research-result");
+      if (!question) { setText(box, "请先输入问题。"); return; }
+      const button = $("research-button"); button.disabled = true;
+      setText(box, "正在识别任务并查询证据…");
+      try {
+        const policy_id = $("research-case").value || null;
+        const result = await getJSON("/api/research", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({question, policy_id})});
+        setText(box, "案例：" + (researchCaseNames[result.policy_id] || "尚待明确") + "。" + result.message + "（模型请求 " + result.model_calls + " 次）");
+        appendDataReport(box,result.data_report);
+        if (result.delivery) {
+          const notice = document.createElement("p");
+          setText(notice, "交付状态：" + result.delivery.label + "。" + result.delivery.boundary);
+          box.appendChild(notice);
+        }
+        if (result.report_url) { const link = document.createElement("a"); link.href=result.report_url; link.target="_blank"; link.rel="noopener"; setText(link," 打开研究初稿"); box.appendChild(link); }
+      } catch(error) { setText(box, "未完成：" + error.message); }
+      finally { button.disabled=false; }
+    });
+    $("query-button").addEventListener("click", queryData);
+    document.querySelectorAll(".demo-button").forEach((button) => button.addEventListener("click", () => runDemo(button)));
+    loadInitial();
+    loadResearchCases();
+  </script>
+</body>
+</html>

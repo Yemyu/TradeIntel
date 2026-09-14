@@ -1,0 +1,40 @@
+{
+  "version": "live-demo-package-0141",
+  "source_run_status": "completed",
+  "question_ids": [
+    "SYN-POLICY-01",
+    "SYN-COMBINED-01"
+  ],
+  "question_statuses": [
+    {
+      "id": "SYN-POLICY-01",
+      "status": "accepted",
+      "stages": [
+        "planning",
+        "policy_with_evidence",
+        "policy_no_evidence"
+      ]
+    },
+    {
+      "id": "SYN-COMBINED-01",
+      "status": "accepted",
+      "stages": [
+        "planning",
+        "policy_with_evidence",
+        "policy_no_evidence"
+      ]
+    }
+  ],
+  "reported_tokens": 11049,
+  "token_budget": 20000,
+  "external_calls": true,
+  "automatic_retry": false,
+  "run_mode": "live_development",
+  "reviewer_type": "ai_assisted",
+  "frozen_snapshot_sha256": "48eae921f7f76a5140d8d1fa8903a0bd0304e500cbac15cd2ab92ae221a1d3bf",
+  "terminal_reason": null,
+  "terminal_at_utc": null,
+  "semantic_accuracy_measured": false,
+  "causal_effect_estimated": false,
+  "training_or_fine_tuning": false
+}

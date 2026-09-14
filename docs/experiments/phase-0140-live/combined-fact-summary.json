@@ -1,0 +1,21 @@
+{
+  "status": "reviewed",
+  "approved": true,
+  "packet": {
+    "path": "reviews/SYN-COMBINED-01-facts-with_evidence-packet.json",
+    "sha256": "c1eb65c766ebd725a510c32a57a689c598483ea8d0656451cb5dcd0922b21934",
+    "size": 14837
+  },
+  "submission": {
+    "path": "reviews/SYN-COMBINED-01-facts-with_evidence-submission.json",
+    "sha256": "c4e1c5ef7aca73d2622dcf153641048b8d2d7e1574b69e7330bc333378564e71",
+    "size": 1364
+  },
+  "decision": {
+    "path": "reviews/SYN-COMBINED-01-facts-with_evidence-decision.json",
+    "sha256": "4741f23ccc7f660f0c352d39704db6ece6d3709199fe875d6aa49eaad154b295",
+    "size": 491
+  },
+  "semantic_accuracy_measured": false,
+  "review_structure_verified": true
+}

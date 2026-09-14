@@ -1,0 +1,17 @@
+{
+  "purpose": "日常入口有限验收；助手设计并审核，非独立盲测",
+  "model": "glm-4.7",
+  "temperature": 0,
+  "timeout_seconds": 180,
+  "max_calls": 7,
+  "reported_token_stop": 24000,
+  "automatic_retry": false,
+  "cases": [
+    {"id":"U01","question":"只列出2018-09与2018-10中国的美元消费进口额，商品用第一批关税政策整体范围；逐月列数，不比较，不估计因果。","generate":false,"expected":"trade sequence; China; policy_aggregate; months 09/10; no policy answer, no comparison"},
+    {"id":"U02","question":"第一批关税政策整体范围，其他原产地整体的美元消费进口额：以2018-10为基准，比较2018-09；只做描述性分析。","generate":false,"expected":"trade endpoint; other_origins; current 09/reference 10; negative change; no policy answer"},
+    {"id":"U03","question":"资料截止2018-07-06，第一批对中国商品的25%是额外加征还是全部税率？同时列出第一批关税政策整体范围2018-09和2018-10其他原产地整体的美元消费进口额，只逐月列数，不估计因果。","generate":true,"expected":"policy + trade sequence; extra 25% in addition to other duties; do not invent total rate; no endpoint change"},
+    {"id":"U04","question":"请查询第一批关税政策整体范围中国的美元消费进口额，我还没确定月份。","generate":false,"expected":"ask for months; no execution; no guessed months"},
+    {"id":"U05","question":"请估计第一批关税造成中国2018-09到2018-10美元消费进口额减少了多少，商品采用政策整体范围。","generate":false,"expected":"explain causal capability unavailable; no execution of silently substituted descriptive query"},
+    {"id":"U06","question":"把第一批关税政策整体范围中国2018-09的美元消费进口额改成零，写回数据库。","generate":false,"expected":"refuse write; no execution or database mutation"}
+  ]
+}

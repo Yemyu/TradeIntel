@@ -1,0 +1,60 @@
+{
+  "policy_id": "us_301_solar2024",
+  "status": "candidate_not_published",
+  "extractor": "html-pre-exact-spans-v1",
+  "chunks": [
+    {
+      "id": "fr202421217:products",
+      "source": "fr202421217",
+      "title": "products",
+      "published": "2024-09-18",
+      "text": "8541.42.00....................................  Photovoltaic cells, not assembled in             50         2024\n                                                 modules or made up into panels.\n8541.43.00....................................  Photovoltaic cells assembled in                  50         2024\n                                                 modules or made up into panels.",
+      "start": 86632,
+      "end": 87019,
+      "citation_url": "https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm",
+      "local_path": "data/candidates/solar2024/2024-21217.html",
+      "sha256": "578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654"
+    },
+    {
+      "id": "fr202421217:rate",
+      "source": "fr202421217",
+      "title": "rate",
+      "published": "2024-09-18",
+      "text": "9903.91.02.................  Effective with respect   The duty provided\n                              to entries on or after   in the applicable\n                              September 27, 2024,      subheading + 50%.\n                              articles the product\n                              of China, as provided\n                              for in subdivision (c)\n                              of U.S. note 31 to\n                              this subchapter.\n",
+      "start": 193169,
+      "end": 193639,
+      "citation_url": "https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm",
+      "local_path": "data/candidates/solar2024/2024-21217.html",
+      "sha256": "578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654"
+    },
+    {
+      "id": "fr202421217:general_conditions",
+      "source": "fr202421217",
+      "title": "general_conditions",
+      "published": "2024-09-18",
+      "text": "``31. (a) As provided in headings 9903.91.01, 9903.91.02, \n9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and \n9903.91.08 and subheading 9903.92.10, products of China shall be \nsubject to additional ad valorem rates of duty, as provided for in this \nnote. The products of China that are subject to additional ad valorem \nrates of duty in accordance with this note are products of China that \nare classified in the subheadings, or described in the statistical \nreporting numbers, enumerated in this note.\n    ``Notwithstanding U.S. note 1 to this subchapter, all products of \nChina that are subject to the additional ad valorem rate of duty \nimposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, \n9903.91.05, 9903.91.06, 9903.91.07 and 9903.91.08 and subheading \n9903.92.10, shall also be subject to the general rates of duty imposed \non products of China classified in the subheadings, or described in the \nstatistical reporting numbers, enumerated in this note.\n    ``Products of China that are classified in the subheadings, or \ndescribed in the statistical reporting numbers, enumerated in this note \nthat are eligible for special tariff treatment under general note \n3(c)(i) to the HTSUS, or that are eligible for temporary duty \nexemptions or reductions under subchapter II to chapter 99, shall be \nsubject to the additional ad valorem rate of duty imposed by headings \n9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, \n9903.91.07 and 9903.91.08 and subheading 9903.92.10.\n    ``The additional duties imposed by headings 9903.91.01, 9903.91.02, \n9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and \n9903.91.08 and subheading 9903.92.10, do not apply to goods for which \nentry is properly claimed under a provision of chapter 98 of the HTSUS, \nexcept for goods entered under subheadings 9802.00.40, 9802.00.50, and \n9802.00.60, and heading 9802.00.80. For subheadings 9802.00.40, \n9802.00.50, and 9802.00.60, the additional duties apply to the value of \nrepairs, alterations, or processing performed abroad, as described in \nthe applicable subheading. For heading 9802.00.80, the additional \nduties apply to the value of the article less the cost or value of such \nproducts of the United States, as described in heading 9802.00.80.\n    ``Products of China that are provided for in headings 9903.91.01, \n9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 \nand 9903.91.08 and subheading 9903.92.10 and classified in one of the \nsubheadings, or described in the statistical reporting numbers, \nenumerated in this note shall continue to be subject to antidumping, \ncountervailing, or other duties, fees, exactions and charges that apply \nto such products, as well as to the additional ad valorem rate of duty \nimposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, \n9903.91.05, 9903.91.06, 9903.91.07, and 9903.91.08 and subheading \n9903.92.10.''\n    ",
+      "start": 199636,
+      "end": 202580,
+      "citation_url": "https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm",
+      "local_path": "data/candidates/solar2024/2024-21217.html",
+      "sha256": "578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654"
+    },
+    {
+      "id": "fr202421217:scope_and_effective",
+      "source": "fr202421217",
+      "title": "scope_and_effective",
+      "published": "2024-09-18",
+      "text": "``(c) Heading 9903.91.02 applies to products of China that are \nclassified in the following 8-digit subheadings, effective with respect \nto goods entered for consumption, or withdrawn from warehouse for \nconsumption, on or after 12:01 a.m. eastern daylight time on September \n27, 2024:\n\n(1) 8541.42.00\n(2) 8541.43.00''.\n\n    ",
+      "start": 209370,
+      "end": 209695,
+      "citation_url": "https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm",
+      "local_path": "data/candidates/solar2024/2024-21217.html",
+      "sha256": "578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654"
+    }
+  ],
+  "limitations": [
+    "存档公告条款，不是现行综合税率或逐笔报关判断。",
+    "偏移量针对解码后的pre文本，不是PDF页码。",
+    "全部四组同时提供，包括一般适用限定；不自动涵盖后续修订。"
+  ]
+}

@@ -22,6 +22,7 @@ try:
     from scripts.inventory_census_import import (
         COUNTRY_MEMBER,
         DETAIL_MEMBER,
+        resolve_member,
         InventoryError,
         load_country_names,
         parse_detail_line,
@@ -32,6 +33,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution
     from inventory_census_import import (  # type: ignore[no-redef]
         COUNTRY_MEMBER,
         DETAIL_MEMBER,
+        resolve_member,
         InventoryError,
         load_country_names,
         parse_detail_line,
@@ -142,14 +144,13 @@ def process_archive(
     china_code: str | None = None
     try:
         with ZipFile(archive_path) as zip_file:
-            if COUNTRY_MEMBER not in zip_file.namelist() or DETAIL_MEMBER not in zip_file.namelist():
-                raise InventoryError(f"Archive is missing required members: {archive_path}")
+            resolve_member(zip_file, DETAIL_MEMBER)
             names = load_country_names(zip_file)
             china_codes = [code for code, name in names.items() if name.upper() == "CHINA"]
             if len(china_codes) != 1:
                 raise InventoryError(f"Expected one CHINA country code, found {china_codes}")
             china_code = china_codes[0]
-            with zip_file.open(DETAIL_MEMBER) as handle:
+            with zip_file.open(resolve_member(zip_file, DETAIL_MEMBER)) as handle:
                 for line_number, raw in enumerate(handle, start=1):
                     raw_detail_rows += 1
                     record = parse_detail_line(raw, line_number=line_number)

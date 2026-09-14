@@ -1,0 +1,39 @@
+{
+  "suite_id": "business-tasks-v1",
+  "visibility": "reviewer only; never load into model messages",
+  "data_version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+  "reference_method": "assistant independently summed published CSV rows; policy claims checked against locally archived CBP paragraphs; not human gold labels",
+  "cases": {
+    "B01": {
+      "outcome": "report",
+      "reference_path": "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_07.csv",
+      "ranking": [
+        {"hts8": "38180000", "china_usd": 8385427, "world_usd": 178183620},
+        {"hts8": "81019980", "china_usd": 958157, "world_usd": 3463788}
+      ],
+      "share_formula": "china_usd / world_usd * 100; display two decimals",
+      "required": ["rank by China amount, not world amount or share", "return two rows", "state USD, month and US consumption-import perspective", "include data version and source", "do not equate amount ranking with risk, loss or policy effect"]
+    },
+    "B02": {
+      "outcome": "policy_answer",
+      "source_path": "data/raw/policy/review2025/cbp-63577329.html",
+      "source_sha256": "be5b9ba0e9091e171731c878ed4d7e1bf57d210565631883212787982fe9f6f9",
+      "source_url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "claims": [
+        {"fact": "38180000 Chinese-origin products: additional 50 percent", "evidence_id": "cbp63577329:p9"},
+        {"fact": "81019910 Chinese-origin products: additional 25 percent", "evidence_id": "cbp63577329:p12"},
+        {"fact": "81019910 bars/rods excludes those obtained simply by sintering", "evidence_id": "cbp63577329:p12"},
+        {"fact": "entered for consumption or withdrawn from warehouse for consumption on/after January 1 2025, 00:01 eastern standard time; not shipment date", "evidence_id": "cbp63577329:p8"}
+      ],
+      "required": ["answer all four points", "citations support individual claims", "do not call additional duty the total duty", "no present-day legal applicability claim"]
+    },
+    "B03": {
+      "outcome": "clarify",
+      "required": ["ask month or period", "ask whole registered scope versus exact product", "do not invent scope", "no execution of trade query before clarification"]
+    },
+    "B04": {
+      "outcome": "unsupported_scope",
+      "required": ["request specific policy text or official link and intended statistical period", "explain current published data cover US imports and registered five codes", "do not substitute US tungsten data for EU electric vehicles", "do not fabricate trade amount", "do not promise document upload alone supplies missing EU trade data"]
+    }
+  }
+}

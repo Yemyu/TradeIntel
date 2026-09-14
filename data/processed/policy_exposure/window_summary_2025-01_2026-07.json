@@ -1,0 +1,1198 @@
+{
+  "report_type": "descriptive_policy_exposure_window",
+  "policy_id": "us_301_review2025_tungsten_solar",
+  "window": {
+    "start": "2025-01",
+    "end": "2026-07",
+    "month_count": 19
+  },
+  "target_origin": "CHINA",
+  "months": [
+    {
+      "year": 2025,
+      "month": 1,
+      "period": "2025-01",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 160016383,
+      "china_origin_value_usd": 12759911,
+      "china_origin_share_percent": 7.9741,
+      "output_rows": 87,
+      "source_sha256": "3ef6ae71d00e40398d03482a96a1b8d691df3887bf537392854de1b65c5117ef",
+      "source_file_name": "IMDB2501.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "period": "2025-02",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 146836029,
+      "china_origin_value_usd": 13957093,
+      "china_origin_share_percent": 9.5052,
+      "output_rows": 111,
+      "source_sha256": "38a5245913f727c96b9a243c406efcba9b8980a8d65aa58789977e9a3210c238",
+      "source_file_name": "IMDB2502.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "period": "2025-03",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 161007201,
+      "china_origin_value_usd": 8634066,
+      "china_origin_share_percent": 5.3625,
+      "output_rows": 120,
+      "source_sha256": "b0bf50cc4c39bb56023d288efc6a6dd022093d3b1b31399cf1e2a3220af3f5a1",
+      "source_file_name": "IMDB2503.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "period": "2025-04",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 154407931,
+      "china_origin_value_usd": 8318001,
+      "china_origin_share_percent": 5.387,
+      "output_rows": 129,
+      "source_sha256": "035acc164e919fefc45b7ca7b7d85b05a461f527f60da781b7d00ace58906503",
+      "source_file_name": "IMDB2504.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "period": "2025-05",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 153210899,
+      "china_origin_value_usd": 5325542,
+      "china_origin_share_percent": 3.476,
+      "output_rows": 142,
+      "source_sha256": "24818243d93c889972ae78ec8cdf1c6c581621998d9b83eaf8a169f232ae6fa7",
+      "source_file_name": "IMDB2505.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "period": "2025-06",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 170773806,
+      "china_origin_value_usd": 7489029,
+      "china_origin_share_percent": 4.3853,
+      "output_rows": 149,
+      "source_sha256": "4a55c8101bdb0810cfaa646da2d9c274d7033e22ab5a3b119c9efe24e270bf13",
+      "source_file_name": "IMDB2506.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "period": "2025-07",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 157937598,
+      "china_origin_value_usd": 8702988,
+      "china_origin_share_percent": 5.5104,
+      "output_rows": 161,
+      "source_sha256": "7d72cf07b9a1696fe8f054d8bbc25ce45bf6fb9ef0b5b8e893c6be9a10c1215a",
+      "source_file_name": "IMDB2507.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "period": "2025-08",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 162506998,
+      "china_origin_value_usd": 9112783,
+      "china_origin_share_percent": 5.6076,
+      "output_rows": 167,
+      "source_sha256": "4fd343e4b33fdbe013329db1f46264abe93363e1c04216855fc27fd6f76da022",
+      "source_file_name": "IMDB2508.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "period": "2025-09",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 163836650,
+      "china_origin_value_usd": 8315594,
+      "china_origin_share_percent": 5.0755,
+      "output_rows": 172,
+      "source_sha256": "8d84ce467c4613d1c1d40a64b9c206cd126a65a1f93907cbe0efa585f5352df9",
+      "source_file_name": "IMDB2509.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "period": "2025-10",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 164674072,
+      "china_origin_value_usd": 10243775,
+      "china_origin_share_percent": 6.2206,
+      "output_rows": 181,
+      "source_sha256": "29d00dfaf0cc2106e31470feb5752b669580d9faa6c243053542461a338a2cd2",
+      "source_file_name": "IMDB2510.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "period": "2025-11",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 133234473,
+      "china_origin_value_usd": 8130700,
+      "china_origin_share_percent": 6.1025,
+      "output_rows": 182,
+      "source_sha256": "7172f2b90090c23ad8d634da08711ec2491e43ca96603643e16ceafde29a9453",
+      "source_file_name": "IMDB2511.ZIP"
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "period": "2025-12",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 186089380,
+      "china_origin_value_usd": 10001374,
+      "china_origin_share_percent": 5.3745,
+      "output_rows": 184,
+      "source_sha256": "c6f1c92d5c6fc35ac1957db788276b6112a169545415338b3a0d045ed9125480",
+      "source_file_name": "IMDB2512.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "period": "2026-01",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 139262219,
+      "china_origin_value_usd": 9199632,
+      "china_origin_share_percent": 6.606,
+      "output_rows": 88,
+      "source_sha256": "f45ba6917e0aa4269146053927b3a764b796ae3f80c4d3ea6881fac863feeac4",
+      "source_file_name": "IMDB2601.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "period": "2026-02",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 165242024,
+      "china_origin_value_usd": 5191262,
+      "china_origin_share_percent": 3.1416,
+      "output_rows": 112,
+      "source_sha256": "1c43d47e7c34003be8dd24ecbe9ee81d3761c6ab7bd6d5a36ac81db8fad97f4e",
+      "source_file_name": "IMDB2602.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "period": "2026-03",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 179483547,
+      "china_origin_value_usd": 12112731,
+      "china_origin_share_percent": 6.7487,
+      "output_rows": 130,
+      "source_sha256": "a263062b3b95ba083475393663c71adbab2ae973311b69ffd5570011f040a92e",
+      "source_file_name": "IMDB2603.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "period": "2026-04",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 185498130,
+      "china_origin_value_usd": 8534572,
+      "china_origin_share_percent": 4.6009,
+      "output_rows": 141,
+      "source_sha256": "7f2075efb381a5229e8ffc7e1e8a797ca886af5841a84f09cbb4250091b566fe",
+      "source_file_name": "IMDB2604.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "period": "2026-05",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 173851773,
+      "china_origin_value_usd": 17689931,
+      "china_origin_share_percent": 10.1753,
+      "output_rows": 149,
+      "source_sha256": "7b9ae6411e2504241277422ecd928e4d4f2362916f237bf191c83a84758f8200",
+      "source_file_name": "IMDB2605.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "period": "2026-06",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 221073162,
+      "china_origin_value_usd": 22071544,
+      "china_origin_share_percent": 9.9838,
+      "output_rows": 159,
+      "source_sha256": "a074a5e31da8b005ffd65e2be756ee9d9888f68a4ad2f5c1a6e704160779012d",
+      "source_file_name": "IMDB2606.ZIP"
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "period": "2026-07",
+      "policy_id": "us_301_review2025_tungsten_solar",
+      "import_value_consumption_usd": 193774871,
+      "china_origin_value_usd": 10251657,
+      "china_origin_share_percent": 5.2905,
+      "output_rows": 220,
+      "source_sha256": "55274118bcdbf4e2e6585322069d795d3f24d1b29ef8256d73c4058c2acf6997",
+      "source_file_name": "IMDB2607.ZIP"
+    }
+  ],
+  "products": [
+    {
+      "period": "2025-01",
+      "year": 2025,
+      "month": 1,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 7361348,
+      "china_origin_value_usd": 149463,
+      "china_origin_share_percent": 2.0304
+    },
+    {
+      "period": "2025-01",
+      "year": 2025,
+      "month": 1,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 146026770,
+      "china_origin_value_usd": 8037090,
+      "china_origin_share_percent": 5.5038
+    },
+    {
+      "period": "2025-01",
+      "year": 2025,
+      "month": 1,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 3100101,
+      "china_origin_value_usd": 2061905,
+      "china_origin_share_percent": 66.5109
+    },
+    {
+      "period": "2025-01",
+      "year": 2025,
+      "month": 1,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 1175898,
+      "china_origin_value_usd": 934621,
+      "china_origin_share_percent": 79.4815
+    },
+    {
+      "period": "2025-01",
+      "year": 2025,
+      "month": 1,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2352266,
+      "china_origin_value_usd": 1576832,
+      "china_origin_share_percent": 67.0346
+    },
+    {
+      "period": "2025-02",
+      "year": 2025,
+      "month": 2,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 20423384,
+      "china_origin_value_usd": 250444,
+      "china_origin_share_percent": 1.2263
+    },
+    {
+      "period": "2025-02",
+      "year": 2025,
+      "month": 2,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 122822981,
+      "china_origin_value_usd": 11600159,
+      "china_origin_share_percent": 9.4446
+    },
+    {
+      "period": "2025-02",
+      "year": 2025,
+      "month": 2,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 178872,
+      "china_origin_value_usd": 118828,
+      "china_origin_share_percent": 66.4319
+    },
+    {
+      "period": "2025-02",
+      "year": 2025,
+      "month": 2,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 571135,
+      "china_origin_value_usd": 201550,
+      "china_origin_share_percent": 35.2894
+    },
+    {
+      "period": "2025-02",
+      "year": 2025,
+      "month": 2,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2839657,
+      "china_origin_value_usd": 1786112,
+      "china_origin_share_percent": 62.8989
+    },
+    {
+      "period": "2025-03",
+      "year": 2025,
+      "month": 3,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 22524678,
+      "china_origin_value_usd": 352933,
+      "china_origin_share_percent": 1.5669
+    },
+    {
+      "period": "2025-03",
+      "year": 2025,
+      "month": 3,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 135257517,
+      "china_origin_value_usd": 6470326,
+      "china_origin_share_percent": 4.7837
+    },
+    {
+      "period": "2025-03",
+      "year": 2025,
+      "month": 3,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 1036998,
+      "china_origin_value_usd": 1023928,
+      "china_origin_share_percent": 98.7396
+    },
+    {
+      "period": "2025-03",
+      "year": 2025,
+      "month": 3,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 501667,
+      "china_origin_value_usd": 276627,
+      "china_origin_share_percent": 55.1416
+    },
+    {
+      "period": "2025-03",
+      "year": 2025,
+      "month": 3,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 1686341,
+      "china_origin_value_usd": 510252,
+      "china_origin_share_percent": 30.2579
+    },
+    {
+      "period": "2025-04",
+      "year": 2025,
+      "month": 4,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 15437352,
+      "china_origin_value_usd": 182087,
+      "china_origin_share_percent": 1.1795
+    },
+    {
+      "period": "2025-04",
+      "year": 2025,
+      "month": 4,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 135927532,
+      "china_origin_value_usd": 6570278,
+      "china_origin_share_percent": 4.8337
+    },
+    {
+      "period": "2025-04",
+      "year": 2025,
+      "month": 4,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 149774,
+      "china_origin_value_usd": 141236,
+      "china_origin_share_percent": 94.2994
+    },
+    {
+      "period": "2025-04",
+      "year": 2025,
+      "month": 4,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 952525,
+      "china_origin_value_usd": 636009,
+      "china_origin_share_percent": 66.7708
+    },
+    {
+      "period": "2025-04",
+      "year": 2025,
+      "month": 4,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 1940748,
+      "china_origin_value_usd": 788391,
+      "china_origin_share_percent": 40.623
+    },
+    {
+      "period": "2025-05",
+      "year": 2025,
+      "month": 5,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 12328999,
+      "china_origin_value_usd": 7073,
+      "china_origin_share_percent": 0.0574
+    },
+    {
+      "period": "2025-05",
+      "year": 2025,
+      "month": 5,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 138292714,
+      "china_origin_value_usd": 4360509,
+      "china_origin_share_percent": 3.1531
+    },
+    {
+      "period": "2025-05",
+      "year": 2025,
+      "month": 5,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 262380,
+      "china_origin_value_usd": 241280,
+      "china_origin_share_percent": 91.9582
+    },
+    {
+      "period": "2025-05",
+      "year": 2025,
+      "month": 5,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 434225,
+      "china_origin_value_usd": 249605,
+      "china_origin_share_percent": 57.4829
+    },
+    {
+      "period": "2025-05",
+      "year": 2025,
+      "month": 5,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 1892581,
+      "china_origin_value_usd": 467075,
+      "china_origin_share_percent": 24.6793
+    },
+    {
+      "period": "2025-06",
+      "year": 2025,
+      "month": 6,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 15506995,
+      "china_origin_value_usd": 196346,
+      "china_origin_share_percent": 1.2662
+    },
+    {
+      "period": "2025-06",
+      "year": 2025,
+      "month": 6,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 152989322,
+      "china_origin_value_usd": 6296159,
+      "china_origin_share_percent": 4.1154
+    },
+    {
+      "period": "2025-06",
+      "year": 2025,
+      "month": 6,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 117060,
+      "china_origin_value_usd": 59974,
+      "china_origin_share_percent": 51.2336
+    },
+    {
+      "period": "2025-06",
+      "year": 2025,
+      "month": 6,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 731936,
+      "china_origin_value_usd": 355655,
+      "china_origin_share_percent": 48.591
+    },
+    {
+      "period": "2025-06",
+      "year": 2025,
+      "month": 6,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 1428493,
+      "china_origin_value_usd": 580895,
+      "china_origin_share_percent": 40.6649
+    },
+    {
+      "period": "2025-07",
+      "year": 2025,
+      "month": 7,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 15569318,
+      "china_origin_value_usd": 89752,
+      "china_origin_share_percent": 0.5765
+    },
+    {
+      "period": "2025-07",
+      "year": 2025,
+      "month": 7,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 136894250,
+      "china_origin_value_usd": 5507460,
+      "china_origin_share_percent": 4.0231
+    },
+    {
+      "period": "2025-07",
+      "year": 2025,
+      "month": 7,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 945635,
+      "china_origin_value_usd": 920361,
+      "china_origin_share_percent": 97.3273
+    },
+    {
+      "period": "2025-07",
+      "year": 2025,
+      "month": 7,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 1616945,
+      "china_origin_value_usd": 1236050,
+      "china_origin_share_percent": 76.4435
+    },
+    {
+      "period": "2025-07",
+      "year": 2025,
+      "month": 7,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2911450,
+      "china_origin_value_usd": 949365,
+      "china_origin_share_percent": 32.608
+    },
+    {
+      "period": "2025-08",
+      "year": 2025,
+      "month": 8,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 15529770,
+      "china_origin_value_usd": 234525,
+      "china_origin_share_percent": 1.5102
+    },
+    {
+      "period": "2025-08",
+      "year": 2025,
+      "month": 8,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 142296444,
+      "china_origin_value_usd": 6006681,
+      "china_origin_share_percent": 4.2212
+    },
+    {
+      "period": "2025-08",
+      "year": 2025,
+      "month": 8,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 1823101,
+      "china_origin_value_usd": 1823101,
+      "china_origin_share_percent": 100.0
+    },
+    {
+      "period": "2025-08",
+      "year": 2025,
+      "month": 8,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 1095348,
+      "china_origin_value_usd": 495797,
+      "china_origin_share_percent": 45.2639
+    },
+    {
+      "period": "2025-08",
+      "year": 2025,
+      "month": 8,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 1762335,
+      "china_origin_value_usd": 552679,
+      "china_origin_share_percent": 31.3606
+    },
+    {
+      "period": "2025-09",
+      "year": 2025,
+      "month": 9,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 19601326,
+      "china_origin_value_usd": 18813,
+      "china_origin_share_percent": 0.096
+    },
+    {
+      "period": "2025-09",
+      "year": 2025,
+      "month": 9,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 139584059,
+      "china_origin_value_usd": 6146750,
+      "china_origin_share_percent": 4.4036
+    },
+    {
+      "period": "2025-09",
+      "year": 2025,
+      "month": 9,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 1413141,
+      "china_origin_value_usd": 1028749,
+      "china_origin_share_percent": 72.7988
+    },
+    {
+      "period": "2025-09",
+      "year": 2025,
+      "month": 9,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 961718,
+      "china_origin_value_usd": 298039,
+      "china_origin_share_percent": 30.9903
+    },
+    {
+      "period": "2025-09",
+      "year": 2025,
+      "month": 9,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2276406,
+      "china_origin_value_usd": 823243,
+      "china_origin_share_percent": 36.1642
+    },
+    {
+      "period": "2025-10",
+      "year": 2025,
+      "month": 10,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 20496832,
+      "china_origin_value_usd": 299381,
+      "china_origin_share_percent": 1.4606
+    },
+    {
+      "period": "2025-10",
+      "year": 2025,
+      "month": 10,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 136869890,
+      "china_origin_value_usd": 7328192,
+      "china_origin_share_percent": 5.3541
+    },
+    {
+      "period": "2025-10",
+      "year": 2025,
+      "month": 10,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 4013307,
+      "china_origin_value_usd": 1384668,
+      "china_origin_share_percent": 34.5019
+    },
+    {
+      "period": "2025-10",
+      "year": 2025,
+      "month": 10,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 1013286,
+      "china_origin_value_usd": 200974,
+      "china_origin_share_percent": 19.8339
+    },
+    {
+      "period": "2025-10",
+      "year": 2025,
+      "month": 10,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2280757,
+      "china_origin_value_usd": 1030560,
+      "china_origin_share_percent": 45.185
+    },
+    {
+      "period": "2025-11",
+      "year": 2025,
+      "month": 11,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 5760842,
+      "china_origin_value_usd": 41735,
+      "china_origin_share_percent": 0.7245
+    },
+    {
+      "period": "2025-11",
+      "year": 2025,
+      "month": 11,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 121971730,
+      "china_origin_value_usd": 6100622,
+      "china_origin_share_percent": 5.0017
+    },
+    {
+      "period": "2025-11",
+      "year": 2025,
+      "month": 11,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 1707658,
+      "china_origin_value_usd": 396070,
+      "china_origin_share_percent": 23.1938
+    },
+    {
+      "period": "2025-11",
+      "year": 2025,
+      "month": 11,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 729220,
+      "china_origin_value_usd": 298795,
+      "china_origin_share_percent": 40.9746
+    },
+    {
+      "period": "2025-11",
+      "year": 2025,
+      "month": 11,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 3065023,
+      "china_origin_value_usd": 1293478,
+      "china_origin_share_percent": 42.2012
+    },
+    {
+      "period": "2025-12",
+      "year": 2025,
+      "month": 12,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 18867324,
+      "china_origin_value_usd": 74716,
+      "china_origin_share_percent": 0.396
+    },
+    {
+      "period": "2025-12",
+      "year": 2025,
+      "month": 12,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 158174911,
+      "china_origin_value_usd": 6221405,
+      "china_origin_share_percent": 3.9332
+    },
+    {
+      "period": "2025-12",
+      "year": 2025,
+      "month": 12,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 4719418,
+      "china_origin_value_usd": 1963827,
+      "china_origin_share_percent": 41.6116
+    },
+    {
+      "period": "2025-12",
+      "year": 2025,
+      "month": 12,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 882842,
+      "china_origin_value_usd": 444592,
+      "china_origin_share_percent": 50.3592
+    },
+    {
+      "period": "2025-12",
+      "year": 2025,
+      "month": 12,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 3444885,
+      "china_origin_value_usd": 1296834,
+      "china_origin_share_percent": 37.6452
+    },
+    {
+      "period": "2026-01",
+      "year": 2026,
+      "month": 1,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 8049886,
+      "china_origin_value_usd": 84776,
+      "china_origin_share_percent": 1.0531
+    },
+    {
+      "period": "2026-01",
+      "year": 2026,
+      "month": 1,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 125591165,
+      "china_origin_value_usd": 6599601,
+      "china_origin_share_percent": 5.2548
+    },
+    {
+      "period": "2026-01",
+      "year": 2026,
+      "month": 1,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 1422442,
+      "china_origin_value_usd": 831616,
+      "china_origin_share_percent": 58.464
+    },
+    {
+      "period": "2026-01",
+      "year": 2026,
+      "month": 1,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 944300,
+      "china_origin_value_usd": 451405,
+      "china_origin_share_percent": 47.8031
+    },
+    {
+      "period": "2026-01",
+      "year": 2026,
+      "month": 1,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 3254426,
+      "china_origin_value_usd": 1232234,
+      "china_origin_share_percent": 37.8633
+    },
+    {
+      "period": "2026-02",
+      "year": 2026,
+      "month": 2,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 7578049,
+      "china_origin_value_usd": 100452,
+      "china_origin_share_percent": 1.3256
+    },
+    {
+      "period": "2026-02",
+      "year": 2026,
+      "month": 2,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 151991724,
+      "china_origin_value_usd": 3267192,
+      "china_origin_share_percent": 2.1496
+    },
+    {
+      "period": "2026-02",
+      "year": 2026,
+      "month": 2,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 1900304,
+      "china_origin_value_usd": 432746,
+      "china_origin_share_percent": 22.7725
+    },
+    {
+      "period": "2026-02",
+      "year": 2026,
+      "month": 2,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 1450339,
+      "china_origin_value_usd": 321974,
+      "china_origin_share_percent": 22.1999
+    },
+    {
+      "period": "2026-02",
+      "year": 2026,
+      "month": 2,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2321608,
+      "china_origin_value_usd": 1068898,
+      "china_origin_share_percent": 46.0413
+    },
+    {
+      "period": "2026-03",
+      "year": 2026,
+      "month": 3,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 4825984,
+      "china_origin_value_usd": 190370,
+      "china_origin_share_percent": 3.9447
+    },
+    {
+      "period": "2026-03",
+      "year": 2026,
+      "month": 3,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 162467115,
+      "china_origin_value_usd": 6515523,
+      "china_origin_share_percent": 4.0104
+    },
+    {
+      "period": "2026-03",
+      "year": 2026,
+      "month": 3,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 6911191,
+      "china_origin_value_usd": 3411092,
+      "china_origin_share_percent": 49.3561
+    },
+    {
+      "period": "2026-03",
+      "year": 2026,
+      "month": 3,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 1343487,
+      "china_origin_value_usd": 468745,
+      "china_origin_share_percent": 34.8902
+    },
+    {
+      "period": "2026-03",
+      "year": 2026,
+      "month": 3,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 3935770,
+      "china_origin_value_usd": 1527001,
+      "china_origin_share_percent": 38.798
+    },
+    {
+      "period": "2026-04",
+      "year": 2026,
+      "month": 4,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 6092669,
+      "china_origin_value_usd": 28666,
+      "china_origin_share_percent": 0.4705
+    },
+    {
+      "period": "2026-04",
+      "year": 2026,
+      "month": 4,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 171483388,
+      "china_origin_value_usd": 6134978,
+      "china_origin_share_percent": 3.5776
+    },
+    {
+      "period": "2026-04",
+      "year": 2026,
+      "month": 4,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 2374813,
+      "china_origin_value_usd": 338657,
+      "china_origin_share_percent": 14.2604
+    },
+    {
+      "period": "2026-04",
+      "year": 2026,
+      "month": 4,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 2739806,
+      "china_origin_value_usd": 1047632,
+      "china_origin_share_percent": 38.2375
+    },
+    {
+      "period": "2026-04",
+      "year": 2026,
+      "month": 4,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 2807454,
+      "china_origin_value_usd": 984639,
+      "china_origin_share_percent": 35.0723
+    },
+    {
+      "period": "2026-05",
+      "year": 2026,
+      "month": 5,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 8792729,
+      "china_origin_value_usd": 19647,
+      "china_origin_share_percent": 0.2234
+    },
+    {
+      "period": "2026-05",
+      "year": 2026,
+      "month": 5,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 144436756,
+      "china_origin_value_usd": 7157931,
+      "china_origin_share_percent": 4.9558
+    },
+    {
+      "period": "2026-05",
+      "year": 2026,
+      "month": 5,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 8490858,
+      "china_origin_value_usd": 2390284,
+      "china_origin_share_percent": 28.1513
+    },
+    {
+      "period": "2026-05",
+      "year": 2026,
+      "month": 5,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 8702833,
+      "china_origin_value_usd": 6470446,
+      "china_origin_share_percent": 74.3487
+    },
+    {
+      "period": "2026-05",
+      "year": 2026,
+      "month": 5,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 3428597,
+      "china_origin_value_usd": 1651623,
+      "china_origin_share_percent": 48.172
+    },
+    {
+      "period": "2026-06",
+      "year": 2026,
+      "month": 6,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 8108502,
+      "china_origin_value_usd": 48756,
+      "china_origin_share_percent": 0.6013
+    },
+    {
+      "period": "2026-06",
+      "year": 2026,
+      "month": 6,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 192915687,
+      "china_origin_value_usd": 7778943,
+      "china_origin_share_percent": 4.0323
+    },
+    {
+      "period": "2026-06",
+      "year": 2026,
+      "month": 6,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 12586857,
+      "china_origin_value_usd": 12148101,
+      "china_origin_share_percent": 96.5142
+    },
+    {
+      "period": "2026-06",
+      "year": 2026,
+      "month": 6,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 2273430,
+      "china_origin_value_usd": 575126,
+      "china_origin_share_percent": 25.2977
+    },
+    {
+      "period": "2026-06",
+      "year": 2026,
+      "month": 6,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 5188686,
+      "china_origin_value_usd": 1520618,
+      "china_origin_share_percent": 29.3064
+    },
+    {
+      "period": "2026-07",
+      "year": 2026,
+      "month": 7,
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "import_value_consumption_usd": 6457801,
+      "china_origin_value_usd": 25928,
+      "china_origin_share_percent": 0.4015
+    },
+    {
+      "period": "2026-07",
+      "year": 2026,
+      "month": 7,
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "import_value_consumption_usd": 178183620,
+      "china_origin_value_usd": 8385427,
+      "china_origin_share_percent": 4.7061
+    },
+    {
+      "period": "2026-07",
+      "year": 2026,
+      "month": 7,
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "import_value_consumption_usd": 3077376,
+      "china_origin_value_usd": 139999,
+      "china_origin_share_percent": 4.5493
+    },
+    {
+      "period": "2026-07",
+      "year": 2026,
+      "month": 7,
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "import_value_consumption_usd": 2592286,
+      "china_origin_value_usd": 742146,
+      "china_origin_share_percent": 28.629
+    },
+    {
+      "period": "2026-07",
+      "year": 2026,
+      "month": 7,
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "import_value_consumption_usd": 3463788,
+      "china_origin_value_usd": 958157,
+      "china_origin_share_percent": 27.6621
+    }
+  ],
+  "limitations": [
+    "这是美国消费进口规模和原产地份额，不是政策造成的损失或因果效果。",
+    "金额是名义美元，不能直接解释为数量或利润变化。",
+    "统计数据按月发布，不等于实时数据；窗口中的 2026-07 是当前已验证的最后月份。",
+    "中国份额不代表中国对美国的出口依赖，也不代表其他来源可以立即替代。"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "status": "reviewed_specific_transition",
+  "reference_month": "2026-06",
+  "current_month": "2026-07",
+  "source_url": "https://www.usitc.gov/tariff_affairs/documents/list_of_committee_changes_for_july_1_2026-final.pdf",
+  "source_pages": [
+    43,
+    44
+  ],
+  "effective_date": "2026-07-01",
+  "decision": "Official transfer table keeps all four successors within 38180000. Aggregate all children; never fill prior successor months with zero.",
+  "scope_limit": "This verifies the June-to-July 2026 code transition only, not all 19 months or economic causality.",
+  "sources": [
+    {
+      "path": "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_06.csv",
+      "sha256": "edbea967ee059cb56d2d987d056a3d446d4e9d665ae9b31a7f420b8c32ac2ecb"
+    },
+    {
+      "path": "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_07.csv",
+      "sha256": "e283032c3bcae946cc30a45766bfd8ea53bd1a1151307b9724427a44dfd3789f"
+    }
+  ],
+  "observed_codes": {
+    "06": {
+      "3818000010": 8101532,
+      "3818000095": 122275838,
+      "3818000030": 4667182,
+      "3818000020": 57871135
+    },
+    "07": {
+      "3818000010": 8604272,
+      "3818000020": 48234587,
+      "3818000030": 5093159,
+      "3818000091": 71251609,
+      "3818000095": 0,
+      "3818000040": 37744971,
+      "3818000050": 3512469,
+      "3818000045": 3742553
+    }
+  },
+  "comparison": {
+    "reference_value_usd": 192915687,
+    "current_value_usd": 178183620,
+    "change_usd": -14732067,
+    "change_percent": -7.6365,
+    "aggregation": "complete HTS8 38180000, not individual successor codes",
+    "successor_codes": [
+      "3818000040",
+      "3818000045",
+      "3818000050",
+      "3818000091"
+    ]
+  }
+}

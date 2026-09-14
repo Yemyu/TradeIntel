@@ -20,6 +20,7 @@ from __future__ import annotations
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
+import fcntl
 import importlib.metadata as importlib_metadata
 import json
 import platform
@@ -299,6 +300,10 @@ def validate_fact_review(packet: Mapping[str, Any],
     if not isinstance(evidence, Mapping):
         raise AcceptanceGuardError("fact review evidence must be an object")
     citation_ids = set(evidence)
+    citation_evidence = packet.get("citation_evidence", {})
+    if not isinstance(citation_evidence, Mapping):
+        raise AcceptanceGuardError("citation evidence must be an object")
+    claim_citation_ids = citation_ids | set(citation_evidence)
     strict_reference = packet.get("version") == "fact-review-packet-0119"
     if strict_reference:
         reference_sha256 = packet.get("reference_sha256")
@@ -317,7 +322,7 @@ def validate_fact_review(packet: Mapping[str, Any],
             if (not isinstance(claim, Mapping)
                     or not isinstance(claim.get("text"), str)
                     or not isinstance(claim.get("citations"), list)
-                    or any(not isinstance(source_id, str) or source_id not in citation_ids
+                    or any(not isinstance(source_id, str) or source_id not in claim_citation_ids
                            for source_id in claim["citations"])):
                 raise AcceptanceGuardError("strict claim cites unknown or malformed evidence")
     else:
@@ -710,6 +715,12 @@ def validate_structured_review(
         raise AcceptanceGuardError("explicit reviewer required")
     if stage not in {"plan", "answer"}:
         raise AcceptanceGuardError("unknown review stage")
+    if stage == 'answer' and 'report_document' in packet:
+        report = packet['report_document']
+        if (not isinstance(report, Mapping) or not isinstance(report.get('text'), str)
+                or hashlib.sha256(report['text'].encode('utf-8')).hexdigest() != report.get('sha256')
+                or submission.get('report_sha256') != report.get('sha256')):
+            raise AcceptanceGuardError('answer review must bind the actual report text')
     if expected_kind not in {"support", "clarification", "boundary"}:
         raise AcceptanceGuardError("unknown review kind")
     if not isinstance(packet, Mapping) or not isinstance(submission, Mapping):
@@ -915,6 +926,9 @@ class ProspectiveCallLedger:
         frozen_snapshot: Mapping[str, Any],
         stage_budgets: Mapping[str, int] | None = None,
         token_budget: int = DEFAULT_TOKEN_BUDGET,
+        run_mode: str = "synthetic",
+        external_calls: bool = False,
+        reviewer_type: str = "fixture",
         verify_snapshot_fn: Callable[[Mapping[str, Any]], None] = verify_dependencies,
     ) -> None:
         ids = list(question_ids)
@@ -924,6 +938,16 @@ class ProspectiveCallLedger:
             raise AcceptanceGuardError("question IDs must be unique")
         if type(token_budget) is not int or token_budget <= 0:
             raise AcceptanceGuardError("positive token budget required")
+        if run_mode not in {"synthetic", "live_development"}:
+            raise AcceptanceGuardError("unknown prospective run mode")
+        if type(external_calls) is not bool:
+            raise AcceptanceGuardError("external_calls must be boolean")
+        if run_mode == "live_development" and external_calls is not True:
+            raise AcceptanceGuardError("live_development requires external_calls=true")
+        if run_mode == "synthetic" and external_calls is not False:
+            raise AcceptanceGuardError("synthetic mode cannot record external calls")
+        if not isinstance(reviewer_type, str) or not reviewer_type.strip():
+            raise AcceptanceGuardError("reviewer_type is required")
         budgets = dict(DEFAULT_STAGE_BUDGETS)
         if stage_budgets is not None:
             budgets.update(stage_budgets)
@@ -940,6 +964,9 @@ class ProspectiveCallLedger:
         self.verify_snapshot_fn(self.snapshot)
         self.stage_budgets = budgets
         self.token_budget = token_budget
+        self.run_mode = run_mode
+        self.external_calls = external_calls
+        self.reviewer_type = reviewer_type
         self._active: dict[str, Any] | None = None
         self._started = {}
         self.state: dict[str, Any] = {
@@ -952,10 +979,14 @@ class ProspectiveCallLedger:
             "stage_budgets": deepcopy(budgets),
             "reported_tokens": 0,
             "token_budget": token_budget,
+            "run_mode": run_mode,
+            "external_calls": external_calls,
+            "reviewer_type": reviewer_type,
             "usage_status": "none",
             "stop_reason": None,
             "controls": {},
             "reviews": {},
+            "pending_review_packets": {},
             "frozen_snapshot_sha256": self.snapshot.get("snapshot_sha256"),
             "automatic_retry": False,
             "resume_supported": False,
@@ -965,6 +996,106 @@ class ProspectiveCallLedger:
     def _save(self) -> None:
         _atomic_json(self.ledger_path, self.state)
         self._ledger_sha256 = hashlib.sha256(self.ledger_path.read_bytes()).hexdigest()
+
+    def pause_for_review(self, checkpoint: Mapping[str, Any]) -> None:
+        """Persist an explicit boundary; an active/uncertain call cannot pause."""
+        self._assert_running()
+        if (not isinstance(checkpoint, Mapping)
+                or checkpoint.get('question_id') not in self.question_ids
+                or checkpoint.get('stage') not in {'plan_review', 'answer_review', 'fact_review', 'baseline_review', 'gap_review'}):
+            raise AcceptanceGuardError('invalid review checkpoint')
+        name = f"checkpoints/review-{len(self.state['artifacts'])}.json"
+        artifact = self.record_artifact(name, checkpoint)
+        self.state['review_checkpoint'] = artifact
+        self.state['status'] = 'waiting_review'
+        self.state['resume_supported'] = True
+        self._save()
+
+    @classmethod
+    def resume_review(cls, output: str | Path, *, frozen_snapshot: Mapping[str, Any],
+                      verify_snapshot_fn=verify_dependencies):
+        """Reopen only a clean, explicitly persisted review boundary.
+
+        Does not replay calls or approve the review. The caller must continue
+        from the returned checkpoint rather than rerun prepare/confirm.
+        """
+        path = Path(output)
+        if path.is_symlink() or not path.is_dir():
+            raise AcceptanceGuardError('invalid resume directory')
+        ledger_path = path / 'ledger.json'
+        if ledger_path.is_symlink():
+            raise AcceptanceGuardError('invalid resume ledger')
+        try:
+            raw = ledger_path.read_bytes()
+            state = json.loads(raw)
+        except (OSError, ValueError) as exc:
+            raise AcceptanceGuardError('unreadable resume ledger') from exc
+        if (not isinstance(state, dict) or state.get('status') != 'waiting_review'
+                or state.get('resume_supported') is not True
+                or state.get('frozen_snapshot_sha256') != frozen_snapshot.get('snapshot_sha256')):
+            raise AcceptanceGuardError('batch is not at the supplied review boundary')
+        verify_snapshot_fn(frozen_snapshot)
+        calls = state.get('calls')
+        if (not isinstance(calls, list) or any(
+                row.get('status') not in {'returned', 'completed'}
+                or row.get('usage_status') != 'reported'
+                or type(row.get('total_tokens')) is not int
+                or row['total_tokens'] < 0
+                or not isinstance(row.get('raw_response'), dict) for row in calls)):
+            raise AcceptanceGuardError('uncertain or incomplete call cannot resume')
+        if (sum(row['total_tokens'] for row in calls) != state.get('reported_tokens')
+                or state['reported_tokens'] >= state['token_budget']):
+            raise AcceptanceGuardError('invalid resume usage or exhausted budget')
+        artifacts = state.get('artifacts', {})
+        for item in artifacts.values():
+            target = path / item['path']
+            if (not target.resolve().is_relative_to(path.resolve()) or target.is_symlink()
+                    or not target.is_file()
+                    or hashlib.sha256(target.read_bytes()).hexdigest() != item['sha256']):
+                raise AcceptanceGuardError('resume artifact changed')
+        for row in calls:
+            item = row['raw_response']
+            if artifacts.get(item['path']) != item:
+                raise AcceptanceGuardError('resume response binding missing')
+        checkpoint = state.get('review_checkpoint')
+        if not isinstance(checkpoint, dict) or artifacts.get(checkpoint.get('path')) != checkpoint:
+            raise AcceptanceGuardError('resume checkpoint missing')
+        obj = cls.__new__(cls)
+        obj.output, obj.ledger_path = path, ledger_path
+        obj.snapshot = deepcopy(dict(frozen_snapshot))
+        obj.verify_snapshot_fn = verify_snapshot_fn
+        obj.question_ids = tuple(state['question_ids'])
+        obj.stage_budgets, obj.token_budget = state['stage_budgets'], state['token_budget']
+        obj.run_mode, obj.external_calls = state['run_mode'], state['external_calls']
+        obj.reviewer_type = state['reviewer_type']
+        obj._active, obj._started = None, {}
+        obj.state = state
+        obj._ledger_sha256 = hashlib.sha256(raw).hexdigest()
+        # Keep waiting until the orchestrator explicitly consumes the boundary.
+        return obj
+
+    def continue_review(self) -> dict[str, Any]:
+        """Return the saved boundary and permit subsequent ledger operations."""
+        if self.state.get('status') != 'waiting_review':
+            raise AcceptanceGuardError('not waiting for review')
+        # A separate stable inode protects the read/consume transition even
+        # though saving the JSON ledger replaces its inode atomically.
+        lock_path = self.output / '.resume.lock'
+        if lock_path.is_symlink():
+            raise AcceptanceGuardError('invalid resume lock')
+        with lock_path.open('a') as lock:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+            try:
+                checked = type(self).resume_review(self.output, frozen_snapshot=self.snapshot,
+                                                 verify_snapshot_fn=self.verify_snapshot_fn)
+                if checked.state != self.state:
+                    raise AcceptanceGuardError('review ledger changed since reopening')
+                checkpoint = json.loads((self.output / self.state['review_checkpoint']['path']).read_text())
+                self.state['status'] = 'running'
+                self._save()
+                return checkpoint
+            finally:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
 
     def _assert_running(self) -> None:
         if self.state.get("status") != "running":
@@ -1203,8 +1334,46 @@ class ProspectiveCallLedger:
             "packet_artifact": artifacts.get(prefix + "-packet.json"),
             "validation_artifact": validation_artifact,
         }
+        self.state.get("pending_review_packets", {}).pop(review_key, None)
         self._save()
         return deepcopy(artifacts)
+
+    def record_review_packet(
+        self,
+        question_id: str,
+        stage: str,
+        packet: Mapping[str, Any],
+        *,
+        secret: str = "",
+    ) -> dict[str, Any]:
+        """Persist a review packet before handing it to a reviewer.
+
+        Live development reviews may require a human/host pause.  Saving the
+        packet first means the exact material to be reviewed survives that
+        pause, while the normal ``record_review`` call still creates the
+        separately validated submission and decision artifacts.
+        """
+
+        self._assert_running()
+        self._question(question_id)
+        if stage not in STAGES:
+            raise AcceptanceGuardError("unknown review stage")
+        if not isinstance(packet, Mapping):
+            raise AcceptanceGuardError("review packet must be an object")
+        key = f"{question_id}:{stage}"
+        if key in self.state.get("reviews", {}) or key in self.state.get("pending_review_packets", {}):
+            raise AcceptanceGuardError("duplicate review packet")
+        name = f"reviews/{question_id}-{stage}-pending-packet.json"
+        artifact = persist_artifact(self.output, name, packet, secret=secret)
+        self.state["artifacts"][name] = artifact
+        self.state.setdefault("pending_review_packets", {})[key] = {
+            "question_id": question_id,
+            "stage": stage,
+            "packet_sha256": digest(packet),
+            "artifact": artifact,
+        }
+        self._save()
+        return deepcopy(artifact)
 
     def record_artifact(
         self,
@@ -1244,6 +1413,12 @@ class ProspectiveCallLedger:
                 raise
             if self._active is not None:
                 raise AcceptanceStopped("active call must be completed first")
+        if getattr(self, '_reusing_artifacts', False) and name in self.state['artifacts']:
+            artifact = self.state['artifacts'][name]
+            saved = json.loads((self.output / artifact['path']).read_text())
+            if digest(saved) != digest(_secret_safe(value, secret)):
+                raise AcceptanceGuardError('resumed artifact content differs')
+            return deepcopy(artifact)
         artifact = persist_artifact(self.output, name, value, secret=secret)
         self.state["artifacts"][name] = artifact
         self._save()
@@ -1321,6 +1496,83 @@ class ProspectiveCallLedger:
         self._save()
         return deepcopy(question)
 
+    def delivery_fingerprint(self, directory: Path) -> dict[str, str]:
+        """Bind actual bytes and directory membership, including the marker."""
+        directory = Path(directory)
+        if directory.is_symlink() or not directory.resolve().is_relative_to(self.output.resolve()):
+            raise AcceptanceGuardError("delivery path escapes batch")
+        if not directory.is_dir():
+            raise AcceptanceGuardError("delivery directory missing")
+        hashes = {}
+        for path in sorted(directory.rglob("*")):
+            if path.is_symlink():
+                raise AcceptanceGuardError("delivery symlinks are not accepted")
+            if path.is_file():
+                hashes[str(path.relative_to(directory))] = hashlib.sha256(path.read_bytes()).hexdigest()
+        if "delivery-status.json" not in hashes:
+            raise AcceptanceGuardError("delivery marker missing")
+        return hashes
+
+    def _read_bound_artifact(self, name: str) -> Any:
+        artifact = self.state["artifacts"].get(name)
+        if not isinstance(artifact, Mapping):
+            raise AcceptanceGuardError(f"required review artifact missing: {name}")
+        path = self.output / artifact["path"]
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != artifact["sha256"]:
+            raise FrozenInputChanged("review artifact changed")
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def _fact_bindings(self, question_id: str, *, baseline: bool) -> dict[str, Any]:
+        prefix = f"reviews/{question_id}-facts-"
+        required = self.snapshot.get('configuration', {}).get('required_reviews', {}).get(question_id, {})
+        if not required.get('facts') and not any(name.startswith(prefix) for name in self.state["artifacts"]):
+            return {}
+        if required.get('facts'):
+            baseline = True
+        bindings = {}
+        for arm in (["with_evidence", "without_evidence"] if baseline else ["with_evidence"]):
+            names = {kind: f"{prefix}{arm}-{kind}.json"
+                     for kind in ("packet", "submission", "decision")}
+            values = {kind: self._read_bound_artifact(name) for kind, name in names.items()}
+            packet = values["packet"]
+            if packet.get("case_id") != question_id or packet.get("arm") != arm:
+                raise AcceptanceGuardError("fact review belongs to another case or arm")
+            decision = validate_fact_review(packet, values["submission"])
+            if digest(decision) != digest(values["decision"]):
+                raise AcceptanceGuardError("saved fact decision differs from recomputed review")
+            if arm == "with_evidence" and decision.get("approved") is not True:
+                raise AcceptanceGuardError("support acceptance requires an approved main fact review")
+            bindings[arm] = {kind: deepcopy(self.state["artifacts"][name])
+                             for kind, name in names.items()}
+        return bindings
+
+    def _gap_bindings(self, question_id: str) -> dict[str, Any]:
+        configuration = self.snapshot.get('configuration', {})
+        if not configuration.get('strict_protocol'):
+            return {}
+        initial = self._read_bound_artifact(f'{question_id}/preview.json')
+        if initial.get('status') != 'needs_gap_review':
+            return {}
+        names = {kind: f'{question_id}/gap-{kind}.json'
+                 for kind in ('packet', 'submission', 'outcome', 'review')}
+        values = {kind: self._read_bound_artifact(name) for kind, name in names.items()}
+        packet = values['packet']
+        if packet.get('case_id') != question_id or packet.get('preview') != initial:
+            raise AcceptanceGuardError('gap packet differs from initial preview')
+        if packet.get('gap_audit') != initial.get('gap_audit'):
+            raise AcceptanceGuardError('gap audit differs from initial preview')
+        from .quote_gap_audit import validate_gap_review
+        try:
+            decision = validate_gap_review(packet['gap_audit'], values['submission'],
+                                           configuration.get('reviewer_id'))
+        except (ValueError, TypeError, KeyError) as exc:
+            raise AcceptanceGuardError('gap review failed revalidation') from exc
+        if (decision.get('approved') is not True or decision != values['review']
+                or values['outcome'].get('status') != 'needs_confirmation'
+                or values['outcome'].get('gap_review') != decision):
+            raise AcceptanceGuardError('gap decision differs from revalidated review')
+        return {kind: deepcopy(self.state['artifacts'][name]) for kind, name in names.items()}
+
     def approve_question(
         self,
         question_id: str,
@@ -1345,6 +1597,12 @@ class ProspectiveCallLedger:
         if self._active is not None:
             raise AcceptanceStopped("active call must be completed first")
         question = self._question(question_id)
+        gap_bindings = self._gap_bindings(question_id)
+        fact_bindings = {}
+        delivery_files = None
+        required = self.snapshot.get('configuration', {}).get('required_reviews', {}).get(question_id, {})
+        if required.get('baseline') and f'control_a:{question_id}' not in self.state['controls']:
+            raise AcceptanceGuardError('strict baseline control missing')
         plan_key = f"{question_id}:planning"
         plan = self.state["reviews"].get(plan_key)
         if not isinstance(plan, Mapping) or plan.get("approved") is not True:
@@ -1375,36 +1633,18 @@ class ProspectiveCallLedger:
                 raise AcceptanceGuardError("delivery inspection is unreadable") from exc
             if not isinstance(delivery, Mapping) or delivery.get("verified") is not True:
                 raise AcceptanceGuardError("delivery inspection is not verified")
-            # A policy answer with fact packets is not accepted until the
-            # packets' decisions are durably present.  The no-evidence arm is
-            # an observation and may be rejected semantically, but it cannot
-            # be silently skipped after it was requested.
-            fact_prefix = f"reviews/{question_id}-facts-"
-            fact_paths = {name for name in self.state["artifacts"] if name.startswith(fact_prefix)}
-            if fact_paths:
-                main_decision_name = f"{fact_prefix}with_evidence-decision.json"
-                main_decision = self.state["artifacts"].get(main_decision_name)
-                if not isinstance(main_decision, Mapping):
-                    raise AcceptanceGuardError("support acceptance requires the main fact review")
-                try:
-                    main_value = json.loads(
-                        (self.output / main_decision["path"]).read_text(encoding="utf-8")
-                    )
-                except (OSError, ValueError, TypeError) as exc:
-                    raise AcceptanceGuardError("main fact review is unreadable") from exc
-                if not isinstance(main_value, Mapping) or main_value.get("approved") is not True:
-                    raise AcceptanceGuardError("support acceptance requires an approved main fact review")
-                b_requested = any(
-                    isinstance(value, Mapping)
-                    and value.get("question_id") in {None, question_id}
-                    and isinstance(key, str)
-                    and key.startswith(f"control_b:{question_id}")
-                    for key, value in self.state.get("controls", {}).items()
-                )
-                if b_requested:
-                    b_decision_name = f"{fact_prefix}without_evidence-decision.json"
-                    if not isinstance(self.state["artifacts"].get(b_decision_name), Mapping):
-                        raise AcceptanceGuardError("support acceptance requires the baseline fact review")
+            snapshot_name = f"{question_id}/delivery-files.json"
+            delivery_files = self._read_bound_artifact(snapshot_name)
+            if self.snapshot.get('configuration', {}).get('strict_protocol'):
+                answer_packet = self._read_bound_artifact(answer['packet_artifact']['path'])
+                report = answer_packet.get('report_document', {})
+                if (report.get('sha256') != delivery_files.get('report.zh-CN.md')
+                        or report.get('machine_result_sha256') != delivery_files.get('unified-result.json')):
+                    raise AcceptanceGuardError('reviewed report differs from frozen delivery')
+            if self.delivery_fingerprint(delivery_path.parent / "delivery") != delivery_files:
+                raise FrozenInputChanged("delivery bytes changed during review")
+            fact_bindings = self._fact_bindings(
+                question_id, baseline=f"control_b:{question_id}" in self.state["controls"])
         else:
             if answer_stage is not None or delivery_artifact_name is not None:
                 raise AcceptanceGuardError("non-support acceptance cannot bind an answer delivery")
@@ -1432,6 +1672,9 @@ class ProspectiveCallLedger:
             "answer_review": (deepcopy(self.state["reviews"].get(f"{question_id}:{answer_stage}"))
                               if answer_stage else None),
             "delivery_artifact": deepcopy(delivery_artifact),
+            "delivery_files": deepcopy(delivery_files),
+            "fact_reviews": fact_bindings,
+            "gap_reviews": gap_bindings,
             "controls": control_refs,
             "reason": reason,
         }
@@ -1477,6 +1720,12 @@ class ProspectiveCallLedger:
                 if binding.get("binding_sha256") != digest(body):
                     raise FrozenInputChanged("acceptance binding changed")
                 delivery_artifact = binding.get("delivery_artifact")
+                if self._gap_bindings(question['id']) != binding.get('gap_reviews', {}):
+                    raise FrozenInputChanged('gap review binding changed')
+                facts = self._fact_bindings(
+                    question["id"], baseline=f"control_b:{question['id']}" in self.state["controls"])
+                if facts != binding.get("fact_reviews", {}):
+                    raise FrozenInputChanged("fact review binding changed")
                 if not isinstance(delivery_artifact, Mapping):
                     continue
                 inspection_path = self.output / delivery_artifact.get("path", "")
@@ -1486,6 +1735,8 @@ class ProspectiveCallLedger:
                     raise FrozenInputChanged("delivery inspection is unreadable") from exc
                 from .unified_research import inspect_delivery
                 actual_dir = inspection_path.parent / "delivery"
+                if self.delivery_fingerprint(actual_dir) != binding.get("delivery_files"):
+                    raise FrozenInputChanged("delivery bytes changed before finalization")
                 if inspect_delivery(actual_dir) != saved_delivery:
                     raise FrozenInputChanged("delivery changed before finalization")
         except FrozenInputChanged:
@@ -1522,12 +1773,18 @@ class ProspectiveCallLedger:
             "call_count": len(self.state["calls"]),
             "stage_counts": {stage: self._stage_count(stage) for stage in STAGES},
             "reported_tokens": self.state["reported_tokens"],
+            "token_budget": self.state["token_budget"],
+            "stage_budgets": deepcopy(self.state.get("stage_budgets", {})),
             "usage_status": self.state["usage_status"],
             "stop_reason": self.state["stop_reason"],
+            "run_mode": self.state.get("run_mode", "synthetic"),
+            "external_calls": self.state.get("external_calls", False),
+            "reviewer_type": self.state.get("reviewer_type", "fixture"),
             "automatic_retry": False,
             "resume_supported": False,
             "controls": deepcopy(self.state.get("controls", {})),
             "reviews": deepcopy(self.state.get("reviews", {})),
+            "pending_review_packets": deepcopy(self.state.get("pending_review_packets", {})),
         }
 
 

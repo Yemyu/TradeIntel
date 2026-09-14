@@ -1,0 +1,72 @@
+{
+  "schema": "exposure-version-store-1",
+  "active_version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+  "versions": {
+    "8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038": {
+      "version": "8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038",
+      "status": "superseded",
+      "before_version": null,
+      "requires_review": false,
+      "ready_for_activation": true,
+      "source": "replay:exposure-update-replay-20260914",
+      "created_at_utc": "2026-09-14T05:57:34.750619+00:00",
+      "snapshot_path": "data/processed/policy_exposure/versions/8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038/snapshot.json",
+      "difference": null
+    },
+    "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b": {
+      "version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+      "status": "active",
+      "before_version": "8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038",
+      "requires_review": false,
+      "ready_for_activation": true,
+      "source": "replay:exposure-update-replay-20260914",
+      "created_at_utc": "2026-09-14T05:57:34.751654+00:00",
+      "snapshot_path": "data/processed/policy_exposure/versions/91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b/snapshot.json",
+      "difference": {
+        "status": "changed",
+        "before_version": "8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038",
+        "after_version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+        "added_months": [
+          "2026-07"
+        ],
+        "removed_months": [],
+        "revised_months": [],
+        "policy_changed": false,
+        "requires_review": false,
+        "reviewed_comparison": {
+          "hts8": "38180000",
+          "reference_usd": 192915687,
+          "current_usd": 178183620,
+          "change_usd": -14732067,
+          "change_percent": -7.6365,
+          "review_sha256": "d16e86f00662cbc4d8cf50c1078f686508b58a5d5bf630280920275dc1998b96",
+          "source_url": "https://www.usitc.gov/tariff_affairs/documents/list_of_committee_changes_for_july_1_2026-final.pdf"
+        }
+      },
+      "activated_at_utc": "2026-09-14T05:57:34.752089+00:00",
+      "release_digest": "633da5518fbd84f586fb7d034633e02706860d2f27fd0d96f685eb7494a955b7"
+    }
+  },
+  "failures": [],
+  "last_update": {
+    "status": "changed",
+    "before_version": "8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038",
+    "after_version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+    "added_months": [
+      "2026-07"
+    ],
+    "removed_months": [],
+    "revised_months": [],
+    "policy_changed": false,
+    "requires_review": false,
+    "reviewed_comparison": {
+      "hts8": "38180000",
+      "reference_usd": 192915687,
+      "current_usd": 178183620,
+      "change_usd": -14732067,
+      "change_percent": -7.6365,
+      "review_sha256": "d16e86f00662cbc4d8cf50c1078f686508b58a5d5bf630280920275dc1998b96",
+      "source_url": "https://www.usitc.gov/tariff_affairs/documents/list_of_committee_changes_for_july_1_2026-final.pdf"
+    }
+  }
+}

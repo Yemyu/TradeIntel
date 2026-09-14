@@ -1,0 +1,21 @@
+{
+  "status": "reviewed",
+  "approved": true,
+  "packet": {
+    "path": "reviews/SYN-POLICY-01-facts-with_evidence-packet.json",
+    "sha256": "179034799612199f55f7681a8e6e05dfb8ded5b1800cb4169e70c92fad0c4d75",
+    "size": 14648
+  },
+  "submission": {
+    "path": "reviews/SYN-POLICY-01-facts-with_evidence-submission.json",
+    "sha256": "586f019e2f591759e530a854c5d50d5afc56e33f5ca8014efcfc84127b1b6b70",
+    "size": 1388
+  },
+  "decision": {
+    "path": "reviews/SYN-POLICY-01-facts-with_evidence-decision.json",
+    "sha256": "911d92863f195d5fd9a96eea2ce8a60b8e3df7ccb95564e3100f29ad2ba21396",
+    "size": 489
+  },
+  "semantic_accuracy_measured": false,
+  "review_structure_verified": true
+}

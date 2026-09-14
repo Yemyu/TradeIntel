@@ -1,0 +1,8 @@
+{
+  "scope_equal": true,
+  "differences": [],
+  "reference_sha256": "b4fd23fdbdfe7a5cee8a62a63cdd09f56a582a0a2e870ae5f714b3de5ae2a84e",
+  "proposed_sha256": "b4fd23fdbdfe7a5cee8a62a63cdd09f56a582a0a2e870ae5f714b3de5ae2a84e",
+  "proposal_repaired": false,
+  "provenance_verified": false
+}

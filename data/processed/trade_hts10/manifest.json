@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-09T17:02:04+00:00",
+  "generated_at_utc": "2026-09-13T16:30:49+00:00",
   "status": "hts10_monthly_detail_extracted",
   "retention_policy": "raw_archives_retained_until_project_data_design_is_settled",
   "months": [
@@ -552,6 +552,25 @@
       "raw_all_origin_value_usd": 218836897427,
       "raw_china_value_usd": 44787879410,
       "monthly_output": "data/processed/trade_hts10/monthly/trade_hts10_2018_05.csv",
+      "download_status": "downloaded"
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP",
+      "source_file_name": "IMDB2607.ZIP",
+      "source_sha256": "55274118bcdbf4e2e6585322069d795d3f24d1b29ef8256d73c4058c2acf6997",
+      "source_archive_bytes": 217007159,
+      "source_retrieved_at_utc": "2026-09-13T16:30:44+00:00",
+      "status": "processed",
+      "raw_archive_retained_after_processing": true,
+      "raw_detail_rows": 2432958,
+      "unique_hts10_count": 18813,
+      "china_unique_hts10_count": 13912,
+      "output_rows": 18813,
+      "raw_all_origin_value_usd": 325552185079,
+      "raw_china_value_usd": 25291684967,
+      "monthly_output": "data/processed/trade_hts10/monthly/trade_hts10_2026_07.csv",
       "download_status": "downloaded"
     }
   ]

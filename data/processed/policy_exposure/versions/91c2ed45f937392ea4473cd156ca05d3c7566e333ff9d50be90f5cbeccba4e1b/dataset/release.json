@@ -1,0 +1,31 @@
+{
+  "version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+  "files": {
+    "data/processed/policy/section301_review2025_event.csv": "fac5b4e637ee83e7529584d3332e6289afabb5d2d08a35fafd86d4a09844be52",
+    "data/processed/policy/section301_review2025_products.csv": "623e9abd3b170f324b3d557aceab28d5505e4784dae5dbed6b179b06ecd9a6f6",
+    "data/processed/policy_exposure/policy_metadata_corrections.json": "bd55927eaf16e1aa04abac9b4d0f1c71acc9a2449b491cbaa89f063a4d1cdce0",
+    "data/processed/policy_exposure/policy_corpus.json": "11f9f52730fd358eb3616bae6bbe838b386581f80d8ff68cd00e8da5b41f003b",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_01.csv": "db582ab0183d0d1597a21471d8f63dad986e62b110c8099f6bc9e83684a68953",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_02.csv": "9f84e5ca279f10107361d0314246108c81659f917bcc8ceffa61c2130df18d7d",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_03.csv": "a3ec5c45ad8b352aff045abf4e815934b382c765a168cdd1d8927c540a8f7a9f",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_04.csv": "19a480635d68324f30bf66c6506049e32963f5b38b4ac1d74c0b34a42a324a3c",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_05.csv": "9c2b90f75f1e8239317b094953be848768fb7dd0a9db99a86615b7cd45321c46",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_06.csv": "2bbf992b22da1539ee900787da30eb14d5e3e3ffbb1a6ff5bc2388c35d3f9497",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_07.csv": "db57707150cf9d348d39b166a39448276a24e9ddec2ea48282d1cbed34f3470b",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_08.csv": "d8fbe04f58a485001b7ce43622a85f572c14199b913cf2618251e01c0bab35de",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_09.csv": "59aa4aa9390440a04c16704d8a8dba02679bbf9cae07470c7859730ce372ed5d",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_10.csv": "a11c38e34e7bd6eacb5f12d7084c039e43c90d73e145508fb51644b2f5dbf05a",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_11.csv": "f0a06b4bbbda8d1dcee4866d4953c3ea6ae0a4721adf4fc0ebc8e13138e8fb26",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2025_12.csv": "6d7a198ce72631153c22e13fc35ab744376d1d18ccb4642599cf2048ec030238",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_01.csv": "32d8295cbf68c8ee4e7d9297461b62f37b2db0cbafcb48b6f74c2ebfedd871f6",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_02.csv": "4dfb20d23775147f1333ce68adf82c61cd90e354b0d4a5b8c59bf78c83d236d9",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_03.csv": "fac6f03f4993ba7fbf9f7f5ac2319c7656bcfdee82fa50cc2a4b531e0ec69880",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_04.csv": "e5a4de130c2331c7e87d13f1a2fefa3cf03f01a2869c4fe37e284b0cade1e613",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_05.csv": "37e3c21708a3274dddadce3a3264d24151dbe1b84630474d252f801f89f739f4",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_06.csv": "edbea967ee059cb56d2d987d056a3d446d4e9d665ae9b31a7f420b8c32ac2ecb",
+    "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_07.csv": "e283032c3bcae946cc30a45766bfd8ea53bd1a1151307b9724427a44dfd3789f",
+    "data/processed/policy_exposure/manifest.json": "4288baedc40dac3e2498cd275397d0135b13e11fb1bf9ff4d70606237a5cb02d",
+    "data/processed/policy_exposure/window_validation_2025-01_2026-07.json": "7251cc9319b1425d8edd7efe53a00fad0499d9918ca888c5b659c20e888a60b9",
+    "data/raw/policy/review2025/cbp-63577329.html": "be5b9ba0e9091e171731c878ed4d7e1bf57d210565631883212787982fe9f6f9"
+  }
+}

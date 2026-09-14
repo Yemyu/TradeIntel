@@ -1,0 +1,12 @@
+{
+  "not_for_model_input": true,
+  "policy_id": "us_301_solar2024",
+  "hts8": "85414200",
+  "month": "2026-04",
+  "world_usd": 166510013,
+  "china_usd": 88760,
+  "china_share_percent_display": "0.05",
+  "source": "data/candidates/solar2024/monthly/us_301_solar2024_2026_04.csv",
+  "policy_reference": "data/candidates/solar2024/policy_corpus.json",
+  "required_meaning": ["未组装成组件或面板的光伏电池", "中国原产", "额外50%并非综合税率", "2024-09-27 00:01 eastern daylight time", "entered for consumption or withdrawn from warehouse for consumption", "一般税率和其他适用税费仍需核查", "chapter 98存在例外和特殊处理，不能概括为全免或无例外"]
+}
