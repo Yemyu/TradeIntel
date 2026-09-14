@@ -1,4 +1,7 @@
-"""Credential-free capture of the HTTP payload sent by an adapter.
+"""Header-free capture of the HTTP payload sent by an adapter.
+
+Message bodies may contain sensitive user data. Omitting authentication
+headers is not comprehensive content redaction.
 
 The historical evaluation manifests freeze ``model_adapter.py``.  That file
 must not be edited after a run has been recorded, so capture is installed at
@@ -125,17 +128,19 @@ def capture_model_opener(model: Any) -> Iterator[_CaptureSink | None]:
 
 
 def _attach(response: Any, capture: Mapping[str, object] | None) -> Any:
-    if capture is None:
-        return response
     if isinstance(response, ModelResponse):
         metadata = dict(response.metadata)
-        metadata["request_capture"] = deepcopy_capture(capture)
+        metadata.pop("request_capture", None)
+        if capture is not None:
+            metadata["request_capture"] = deepcopy_capture(capture)
         return ModelResponse(text=response.text, tool_calls=response.tool_calls,
                              metadata=metadata)
     if isinstance(response, Mapping):
         result = dict(response)
         metadata = dict(result.get("metadata", {})) if isinstance(result.get("metadata"), Mapping) else {}
-        metadata["request_capture"] = deepcopy_capture(capture)
+        metadata.pop("request_capture", None)
+        if capture is not None:
+            metadata["request_capture"] = deepcopy_capture(capture)
         result["metadata"] = metadata
         return result
     return response

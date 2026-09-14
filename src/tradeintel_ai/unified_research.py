@@ -33,6 +33,7 @@ from .request_coverage import (materialize_units, validate_units,
 from .quote_gap_audit import audit_quote_gaps, digest_audit, validate_gap_review, validate_alignment
 from .research_models import ResearchPlannerModel
 from .transport_diagnostic import transport_detail
+from .comparison_direction import check_endpoint_direction, ComparisonDirectionError
 
 
 RESEARCH_PLAN_PROMPT = '''你是 TradeShock AI 的受限研究计划器，只负责把用户的中文问题转成待确认计划，不执行查询、不回答结果。
@@ -83,6 +84,9 @@ NEUTRAL_TRADE_UNITS_PROMPT = '''
 trade只表示“这是一个贸易数据请求”，不表示逐月列数或比较；具体方式只能在顶层comparison填写一次。
 宿主会依据已核验的comparison生成内部执行映射，模型不得输出或猜测第二个贸易target。旧target值视为旧格式，不能在本模式自动兼容或修正。
 原始request_units必须保留；结构通过仍不是语义通过，比较方向、月份、国家、商品粒度、金额口径和所有额外要求仍需独立审查。
+先判断用户要求产出什么，再识别任务。提到政策名称、清单或政策整体范围，可能仅限定贸易查询的商品集合；没有要求解释、查证或比较政策内容时，不因此新增policy任务。这类范围说明保留为原文context/none或constraint/none，或者保留在同一完整贸易请求中。
+如果用户确实要求解释政策日期、税率、适用条件或政策变化，必须保留policy任务；同时查询贸易数据时保留两个任务。政策任务缺资料截止日时澄清，不能删掉政策问题以便执行贸易部分。不要仅凭“政策”字样或是否有问号决定任务。
+request_units不必按分号拆分；同一贸易任务及其范围、比较方式和限制可以作为一个完整连续quote保留（包括全部标点）。确有独立政策问题时仍分列，不可隐藏在贸易片段里；分列时标点必须归入相邻片段或独立context/none。输出前逐字符核对拼接结果。
 '''
 _TRADE_KEYS = {'policy_id', 'operation', 'metric', 'origin', 'granularity', 'months', 'hs6', 'causal_effect'}
 _EVIDENCE_KEYS = {
@@ -366,11 +370,12 @@ class UnifiedResearchWorkflow:
                  require_search_query=False, require_request_units=False,
                  derive_request_offsets=False, allow_grouped_policy_requests=False,
                  planner_source_kind='fixture', allow_host_gap_review=False,
-                 neutral_trade_mapping=False):
+                 neutral_trade_mapping=False, require_endpoint_direction=False):
         self.planner_model = planner_model
         # Historical programmatic callers remain compatible; the live CLI opts
         # into the strict contract. The model cannot choose this host setting.
         self.require_comparison = require_comparison
+        self.require_endpoint_direction = require_endpoint_direction
         self.require_search_query = require_search_query
         self.require_request_units = require_request_units
         if derive_request_offsets and not require_request_units:
@@ -591,7 +596,58 @@ class UnifiedResearchWorkflow:
         self._pending = None
         self.brief._pending = None
 
+    def export_review_state(self):
+        """JSON-only pending state for a ledger-bound review checkpoint."""
+        if self._pending is None:
+            raise ValueError('没有等待审核或确认的计划')
+        if self._fingerprints() != self._pending['fingerprints']:
+            raise ValueError('待审计划的数据或契约已变化')
+        return json.loads(json.dumps({
+            'version': 'workflow-review-state-0131',
+            'pending': self._pending, 'brief_pending': self.brief._pending,
+            'conversation_revision': self._conversation_revision,
+            'planner_configuration': _configuration_snapshot(
+                self.planner_model, self.planner_source_kind, stage='planning'),
+            'options': {name: getattr(self, name) for name in (
+                'require_request_units', 'derive_request_offsets',
+                'allow_grouped_policy_requests', 'allow_host_gap_review', 'neutral_trade_mapping')},
+        }, ensure_ascii=False, allow_nan=False))
+
+    def restore_review_state(self, state):
+        """Restore only an already hash-verified checkpoint, without replanning.
+
+        The owning ledger must verify the artifact; these checks additionally
+        bind it to the current workflow configuration and data dependencies.
+        """
+        if self._pending is not None or self.brief._pending is not None:
+            raise ValueError('不能覆盖现有待确认计划')
+        if not isinstance(state, dict) or state.get('version') != 'workflow-review-state-0131':
+            raise ValueError('未知待审状态版本')
+        pending = state.get('pending')
+        if (not isinstance(pending, dict) or not pending
+                or pending.get('fingerprints') != self._fingerprints()
+                or state.get('planner_configuration') != _configuration_snapshot(
+                    self.planner_model, self.planner_source_kind, stage='planning')):
+            raise ValueError('待审计划来源或模型配置已变化')
+        expected_options = {name: getattr(self, name) for name in (
+            'require_request_units', 'derive_request_offsets',
+            'allow_grouped_policy_requests', 'allow_host_gap_review', 'neutral_trade_mapping')}
+        if state.get('options') != expected_options:
+            raise ValueError('待审计划工作流选项已变化')
+        inner = state.get('brief_pending')
+        if pending.get('inner_token') is not None and (
+                not isinstance(inner, list) or len(inner) != 2
+                or inner[0] != pending['inner_token']):
+            raise ValueError('组合任务内部确认状态不一致')
+        revision = state.get('conversation_revision')
+        if type(revision) is not int or pending.get('revision') != revision:
+            raise ValueError('对话版本不一致')
+        self._pending = deepcopy(pending)
+        self.brief._pending = tuple(deepcopy(inner)) if inner is not None else None
+        self._conversation_revision = revision
+
     def prepare(self, question, *, conversation_revision=None, audit_output=None, secret=''):
+        self._validated_tasks = None
         self._coverage = None
         self._coverage_candidate = {}
         self._gap_audit = None
@@ -599,6 +655,10 @@ class UnifiedResearchWorkflow:
         self._neutral_request_target = None
         result = self._prepare(question, conversation_revision=conversation_revision,
                                audit_output=audit_output, secret=secret)
+        # Preserve task provenance on every post-validation early return.
+        # Never invent an empty task list for malformed/absent model output.
+        if self._validated_tasks is not None:
+            result.setdefault('tasks', deepcopy(self._validated_tasks))
         if self._coverage is not None:
             result['version'] = 'research-plan-4'
             result['request_units'] = deepcopy(self._coverage)
@@ -733,6 +793,9 @@ class UnifiedResearchWorkflow:
                 self._gap_audit = deepcopy(gap_audit)
             else:
                 valid = validate_plan(candidate, question)
+            self._validated_tasks = deepcopy(candidate['tasks'])
+            if valid and self.require_endpoint_direction:
+                check_endpoint_direction(candidate, question)
             if valid and self.require_comparison and 'comparison' not in candidate:
                 raise ValueError('规划器省略新版比较字段，不能自动降级旧计划')
             if (valid and self.require_search_query and 'policy' in candidate['tasks']
@@ -742,6 +805,7 @@ class UnifiedResearchWorkflow:
                 planner_audit['status'] = 'scope_selection'
                 save('audit.json', planner_audit)
                 return {'status': 'needs_scope_selection', 'executed': False,
+                        'tasks': deepcopy(candidate['tasks']),
                         'intent_verified': False, 'model_calls': 1,
                         'planner_audit': deepcopy(planner_audit),
                         'response': '部分要求超出当前执行范围，请调整范围后重新预览；整份计划尚未执行。'}
@@ -749,6 +813,7 @@ class UnifiedResearchWorkflow:
                 planner_audit['status'] = 'clarification'
                 save('audit.json', planner_audit)
                 return {**_clarification('模型认为政策问题、资料截止日或贸易范围仍不完整，尚未执行。', model_calls=1),
+                        'tasks': deepcopy(candidate['tasks']),
                         'planner_audit': deepcopy(planner_audit),
                         'gap_audit': deepcopy(gap_audit) if gap_audit is not None else None}
             planner_audit['status'] = 'validated'
@@ -768,6 +833,10 @@ class UnifiedResearchWorkflow:
                         '规划服务返回HTTP错误，请查看状态码；尚未取得可审查的计划。'
                         if category == 'http' else
                         '研究计划未通过格式或引文校验，尚未执行；这不代表贸易数据查询失败。')
+            if isinstance(exc, ComparisonDirectionError):
+                response = str(exc)
+            elif isinstance(exc, ValueError) and str(exc) == 'research evidence quote':
+                response = '模型引用的字段依据不是你的连续原话，计划已拦截；请核对月份和比较方向后重新明确请求，尚未执行。'
             return {'version': 'research-plan-1', 'status': 'needs_review',
                     'response': response,
                     'executed': False, 'intent_verified': False, 'model_calls': planner_audit['model_calls'],
@@ -1540,6 +1609,7 @@ def build_product_workflow(planner_model, *, planner_source_kind='fixture',
     return UnifiedResearchWorkflow(
         planner_model,
         **PRODUCT_WORKFLOW_OPTIONS,
+        require_endpoint_direction=True,
         allow_host_gap_review=allow_host_gap_review,
         planner_source_kind=planner_source_kind,
     )

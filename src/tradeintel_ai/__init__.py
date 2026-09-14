@@ -21,6 +21,11 @@ from .tools import (
     get_policy_event,
     get_trade_series,
 )
+from .policy_exposure_tools import (
+    POLICY_EXPOSURE_ID,
+    PolicyExposureRegistry,
+    get_policy_exposure_series,
+)
 
 __all__ = [
     "DataPaths",
@@ -42,6 +47,9 @@ __all__ = [
     "get_descriptive_change",
     "get_policy_event",
     "get_trade_series",
+    "get_policy_exposure_series",
+    "PolicyExposureRegistry",
+    "POLICY_EXPOSURE_ID",
     "enforce_causal_safety",
     "DEFAULT_BASE_URL",
     "DEFAULT_SYSTEM_PROMPT",

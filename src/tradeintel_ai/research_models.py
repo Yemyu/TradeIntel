@@ -23,3 +23,16 @@ class ResearchPlannerModel(OpenAICompatibleModel):
 class ResearchPolicyModel(ResearchPlannerModel):
     max_output_tokens = 768
     stage = 'policy_generation'
+
+
+class JsonResearchModel(ResearchPlannerModel):
+    """Explicit JSON syntax mode; does not promise schema or factual validity."""
+    def _payload(self, *, messages, tools):
+        if tools:
+            raise ValueError('JSON question model does not execute function tools')
+        payload = super()._payload(messages=messages, tools=tools)
+        payload['response_format'] = {'type':'json_object'}
+        return payload
+
+    def effective_request_settings(self):
+        return {**super().effective_request_settings(), 'response_format':{'type':'json_object'}}

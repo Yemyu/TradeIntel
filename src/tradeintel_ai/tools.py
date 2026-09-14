@@ -499,6 +499,7 @@ def build_evidence_bundle(
         "get_descriptive_change",
         "get_data_quality_status",
         "get_causal_readiness",
+        "get_policy_exposure_series",
     }
     evidence: list[dict[str, object]] = []
     all_sources: list[object] = []

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "extractor": "stdlib HTMLParser paragraphs v1",
+  "coverage": [
+    {
+      "source": "cbp63577329",
+      "published": "2024-12-31",
+      "kind": "HTML paragraphs",
+      "excluded": "other sections including separate 100% technical correction, FTZ, attachments, later amendments, current total tariffs"
+    }
+  ],
+  "chunks": [
+    {
+      "id": "cbp63577329:p8",
+      "page_id": "cbp63577329:html",
+      "source": "cbp63577329",
+      "title": "CBP Section 301 implementation guidance",
+      "published": "2024-12-31",
+      "page": 1,
+      "paragraph_index": 8,
+      "text": "The tariff increases take effect on January 1, 2025, with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern standard time. See 89 FR 101682.",
+      "sha256": "be5b9ba0e9091e171731c878ed4d7e1bf57d210565631883212787982fe9f6f9",
+      "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "citation_url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "local_path": "data/raw/policy/review2025/cbp-63577329.html",
+      "retrieved_at": "2026-09-14T05:07:27.670234+00:00",
+      "paragraph_indices": [
+        8
+      ]
+    },
+    {
+      "id": "cbp63577329:p9",
+      "page_id": "cbp63577329:html",
+      "source": "cbp63577329",
+      "title": "CBP Section 301 implementation guidance",
+      "published": "2024-12-31",
+      "page": 1,
+      "paragraph_index": 9,
+      "text": "For certain polysilicon and wafer products of China classified in the following 8-digit subheadings below, importers shall submit heading 9903.91.05 to pay the additional 50 percent rate of duty:\n(1) 2804.61.00 (Silicon containing by weight not less than 99.99 percent of silicon)\n(2) 3818.00.00 (Chemical elements doped for use in electronics, in the form of discs, wafers etc., chemical compounds doped for electronic use).",
+      "sha256": "be5b9ba0e9091e171731c878ed4d7e1bf57d210565631883212787982fe9f6f9",
+      "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "citation_url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "local_path": "data/raw/policy/review2025/cbp-63577329.html",
+      "retrieved_at": "2026-09-14T05:07:27.670234+00:00",
+      "paragraph_indices": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "cbp63577329:p12",
+      "page_id": "cbp63577329:html",
+      "source": "cbp63577329",
+      "title": "CBP Section 301 implementation guidance",
+      "published": "2024-12-31",
+      "page": 1,
+      "paragraph_index": 12,
+      "text": "For certain tungsten products of China classified in the following 8-digit subheadings below, importers shall submit heading 9903.91.11 to pay the additional 25 percent rate of duty:\n(1) 8101.94.00 (Tungsten, unwrought (including bars and rods obtained simply by sintering)\n(2) 8101.99.10 (Tungsten bars and rods (o/than those obtained simply by sintering), profiles, plates, sheets, strip and foil)\n(3) 8101.99.80 (Tungsten, articles nesoi).",
+      "sha256": "be5b9ba0e9091e171731c878ed4d7e1bf57d210565631883212787982fe9f6f9",
+      "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "citation_url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "local_path": "data/raw/policy/review2025/cbp-63577329.html",
+      "retrieved_at": "2026-09-14T05:07:27.670234+00:00",
+      "paragraph_indices": [
+        12,
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "limitations": [
+    "仅登记CBP执行通知正文；不是现行综合税则。",
+    "段落索引是本地HTML提取序号，不是PDF页码；检索命中仍需核对具体主张。",
+    "抓取版本来自当前网页，出版日期筛选不等于历史发布版本回测。"
+  ]
+}

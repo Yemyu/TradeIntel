@@ -1,0 +1,193 @@
+{
+  "report_type": "descriptive_policy_exposure",
+  "policy": {
+    "policy_id": "us_301_review2025_tungsten_solar",
+    "policy_name": "U.S. Section 301 four-year review: tungsten, wafers and polysilicon",
+    "importer": "United States",
+    "target_origin": "China",
+    "announcement_date": "2024-12-16",
+    "effective_date": "2025-01-01",
+    "source_url": "https://www.federalregister.gov/documents/2024/12/16/2024-29462/notice-of-modification-chinas-acts-policies-and-practices-related-to-technology-transfer",
+    "implementation_source_url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+    "scope_note": "Five HTSUS subheadings; rates are the additional duties stated in the notice, not a complete landed tariff."
+  },
+  "statistical_period": {
+    "year": 2026,
+    "month": 7
+  },
+  "source_sha256": "55274118bcdbf4e2e6585322069d795d3f24d1b29ef8256d73c4058c2acf6997",
+  "input_path": "data/processed/policy_exposure/monthly/us_301_review2025_tungsten_solar_2026_07.csv",
+  "scope": {
+    "policy_hts8_count": 5,
+    "observed_policy_hts8_count": 5
+  },
+  "overall": {
+    "import_value_consumption_usd": 193774871,
+    "target_origin_value_usd": 10251657,
+    "target_origin_share_percent": 5.2905
+  },
+  "products": [
+    {
+      "canonical_hts8": "28046100",
+      "product_description": "Silicon containing by weight not less than 99.99 percent of silicon",
+      "product_description_zh": "含硅量不低于 99.99% 的硅",
+      "additional_rate_percent": 50.0,
+      "import_value_consumption_usd": 6457801,
+      "target_origin_value_usd": 25928,
+      "target_origin_share_percent": 0.4015,
+      "top_origins": [
+        {
+          "origin_name": "TAIWAN",
+          "import_value_consumption_usd": 3448281
+        },
+        {
+          "origin_name": "GERMANY",
+          "import_value_consumption_usd": 1251752
+        },
+        {
+          "origin_name": "MALAYSIA",
+          "import_value_consumption_usd": 1192666
+        },
+        {
+          "origin_name": "JAPAN",
+          "import_value_consumption_usd": 442626
+        },
+        {
+          "origin_name": "DENMARK",
+          "import_value_consumption_usd": 47996
+        }
+      ]
+    },
+    {
+      "canonical_hts8": "38180000",
+      "product_description": "Chemical elements doped for use in electronics; discs, wafers and compounds",
+      "product_description_zh": "掺杂用于电子工业的化学元素；圆片、晶圆及相关化合物",
+      "additional_rate_percent": 50.0,
+      "import_value_consumption_usd": 178183620,
+      "target_origin_value_usd": 8385427,
+      "target_origin_share_percent": 4.7061,
+      "top_origins": [
+        {
+          "origin_name": "TAIWAN",
+          "import_value_consumption_usd": 54259913
+        },
+        {
+          "origin_name": "JAPAN",
+          "import_value_consumption_usd": 49366565
+        },
+        {
+          "origin_name": "KOREA, SOUTH",
+          "import_value_consumption_usd": 19315028
+        },
+        {
+          "origin_name": "GERMANY",
+          "import_value_consumption_usd": 9455046
+        },
+        {
+          "origin_name": "CHINA",
+          "import_value_consumption_usd": 8385427
+        }
+      ]
+    },
+    {
+      "canonical_hts8": "81019400",
+      "product_description": "Tungsten, unwrought including bars and rods obtained simply by sintering",
+      "product_description_zh": "未锻造钨（包括仅通过烧结制成的棒材和条材）",
+      "additional_rate_percent": 25.0,
+      "import_value_consumption_usd": 3077376,
+      "target_origin_value_usd": 139999,
+      "target_origin_share_percent": 4.5493,
+      "top_origins": [
+        {
+          "origin_name": "VIETNAM",
+          "import_value_consumption_usd": 2262000
+        },
+        {
+          "origin_name": "AUSTRIA",
+          "import_value_consumption_usd": 426585
+        },
+        {
+          "origin_name": "CANADA",
+          "import_value_consumption_usd": 212360
+        },
+        {
+          "origin_name": "CHINA",
+          "import_value_consumption_usd": 139999
+        },
+        {
+          "origin_name": "SINGAPORE",
+          "import_value_consumption_usd": 24240
+        }
+      ]
+    },
+    {
+      "canonical_hts8": "81019910",
+      "product_description": "Tungsten bars rods profiles plates sheets strip and foil",
+      "product_description_zh": "钨棒、钨条、型材、板、片、带及箔",
+      "additional_rate_percent": 25.0,
+      "import_value_consumption_usd": 2592286,
+      "target_origin_value_usd": 742146,
+      "target_origin_share_percent": 28.629,
+      "top_origins": [
+        {
+          "origin_name": "AUSTRIA",
+          "import_value_consumption_usd": 1521514
+        },
+        {
+          "origin_name": "CHINA",
+          "import_value_consumption_usd": 742146
+        },
+        {
+          "origin_name": "GERMANY",
+          "import_value_consumption_usd": 285746
+        },
+        {
+          "origin_name": "SINGAPORE",
+          "import_value_consumption_usd": 36180
+        },
+        {
+          "origin_name": "TAIWAN",
+          "import_value_consumption_usd": 6700
+        }
+      ]
+    },
+    {
+      "canonical_hts8": "81019980",
+      "product_description": "Tungsten articles nesoi",
+      "product_description_zh": "其他未列名钨制品",
+      "additional_rate_percent": 25.0,
+      "import_value_consumption_usd": 3463788,
+      "target_origin_value_usd": 958157,
+      "target_origin_share_percent": 27.6621,
+      "top_origins": [
+        {
+          "origin_name": "CHINA",
+          "import_value_consumption_usd": 958157
+        },
+        {
+          "origin_name": "GERMANY",
+          "import_value_consumption_usd": 911547
+        },
+        {
+          "origin_name": "AUSTRIA",
+          "import_value_consumption_usd": 540788
+        },
+        {
+          "origin_name": "FRANCE",
+          "import_value_consumption_usd": 374437
+        },
+        {
+          "origin_name": "INDIA",
+          "import_value_consumption_usd": 193463
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "这是美国消费进口规模和原产地份额，不是关税造成的损失或政策因果效果。",
+    "税率是公告写明的额外税率，不是完整叠加后的当前总税率。",
+    "只覆盖五个登记 HTS8；没有把相似商品或 HS6 前缀静默扩进来。",
+    "统计期为 2026-07；月度统计有发布滞后，不能称实时数据。",
+    "供应来源份额不代表该来源拥有足够产能，也不代表发生了贸易转移。"
+  ]
+}

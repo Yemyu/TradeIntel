@@ -1,0 +1,897 @@
+{
+  "policy_id": "us_301_review2025_tungsten_solar",
+  "start": "2025-01",
+  "end": "2026-06",
+  "mode": "current_vintage_window_replay",
+  "months": {
+    "2025-01": {
+      "output_sha256": "db582ab0183d0d1597a21471d8f63dad986e62b110c8099f6bc9e83684a68953",
+      "archive_sha256": "3ef6ae71d00e40398d03482a96a1b8d691df3887bf537392854de1b65c5117ef",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2501.ZIP",
+      "metrics": {
+        "month": "2025-01",
+        "value_usd": 12759911,
+        "all_origins_value_usd": 160016383,
+        "china_value_usd": 12759911,
+        "target_share_percent": 7.9741,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 7361348,
+            "china_value_usd": 149463,
+            "china_share_percent": 2.0304,
+            "share_of_scope_imports_percent": 4.6004
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 146026770,
+            "china_value_usd": 8037090,
+            "china_share_percent": 5.5038,
+            "share_of_scope_imports_percent": 91.2574
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 3100101,
+            "china_value_usd": 2061905,
+            "china_share_percent": 66.5109,
+            "share_of_scope_imports_percent": 1.9374
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 1175898,
+            "china_value_usd": 934621,
+            "china_share_percent": 79.4815,
+            "share_of_scope_imports_percent": 0.7349
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2352266,
+            "china_value_usd": 1576832,
+            "china_share_percent": 67.0346,
+            "share_of_scope_imports_percent": 1.47
+          }
+        ]
+      }
+    },
+    "2025-02": {
+      "output_sha256": "9f84e5ca279f10107361d0314246108c81659f917bcc8ceffa61c2130df18d7d",
+      "archive_sha256": "38a5245913f727c96b9a243c406efcba9b8980a8d65aa58789977e9a3210c238",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2502.ZIP",
+      "metrics": {
+        "month": "2025-02",
+        "value_usd": 13957093,
+        "all_origins_value_usd": 146836029,
+        "china_value_usd": 13957093,
+        "target_share_percent": 9.5052,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 20423384,
+            "china_value_usd": 250444,
+            "china_share_percent": 1.2263,
+            "share_of_scope_imports_percent": 13.909
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 122822981,
+            "china_value_usd": 11600159,
+            "china_share_percent": 9.4446,
+            "share_of_scope_imports_percent": 83.6464
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 178872,
+            "china_value_usd": 118828,
+            "china_share_percent": 66.4319,
+            "share_of_scope_imports_percent": 0.1218
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 571135,
+            "china_value_usd": 201550,
+            "china_share_percent": 35.2894,
+            "share_of_scope_imports_percent": 0.389
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2839657,
+            "china_value_usd": 1786112,
+            "china_share_percent": 62.8989,
+            "share_of_scope_imports_percent": 1.9339
+          }
+        ]
+      }
+    },
+    "2025-03": {
+      "output_sha256": "a3ec5c45ad8b352aff045abf4e815934b382c765a168cdd1d8927c540a8f7a9f",
+      "archive_sha256": "b0bf50cc4c39bb56023d288efc6a6dd022093d3b1b31399cf1e2a3220af3f5a1",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2503.ZIP",
+      "metrics": {
+        "month": "2025-03",
+        "value_usd": 8634066,
+        "all_origins_value_usd": 161007201,
+        "china_value_usd": 8634066,
+        "target_share_percent": 5.3625,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 22524678,
+            "china_value_usd": 352933,
+            "china_share_percent": 1.5669,
+            "share_of_scope_imports_percent": 13.9899
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 135257517,
+            "china_value_usd": 6470326,
+            "china_share_percent": 4.7837,
+            "share_of_scope_imports_percent": 84.0071
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 1036998,
+            "china_value_usd": 1023928,
+            "china_share_percent": 98.7396,
+            "share_of_scope_imports_percent": 0.6441
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 501667,
+            "china_value_usd": 276627,
+            "china_share_percent": 55.1416,
+            "share_of_scope_imports_percent": 0.3116
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 1686341,
+            "china_value_usd": 510252,
+            "china_share_percent": 30.2579,
+            "share_of_scope_imports_percent": 1.0474
+          }
+        ]
+      }
+    },
+    "2025-04": {
+      "output_sha256": "19a480635d68324f30bf66c6506049e32963f5b38b4ac1d74c0b34a42a324a3c",
+      "archive_sha256": "035acc164e919fefc45b7ca7b7d85b05a461f527f60da781b7d00ace58906503",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2504.ZIP",
+      "metrics": {
+        "month": "2025-04",
+        "value_usd": 8318001,
+        "all_origins_value_usd": 154407931,
+        "china_value_usd": 8318001,
+        "target_share_percent": 5.387,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 15437352,
+            "china_value_usd": 182087,
+            "china_share_percent": 1.1795,
+            "share_of_scope_imports_percent": 9.9978
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 135927532,
+            "china_value_usd": 6570278,
+            "china_share_percent": 4.8337,
+            "share_of_scope_imports_percent": 88.0314
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 149774,
+            "china_value_usd": 141236,
+            "china_share_percent": 94.2994,
+            "share_of_scope_imports_percent": 0.097
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 952525,
+            "china_value_usd": 636009,
+            "china_share_percent": 66.7708,
+            "share_of_scope_imports_percent": 0.6169
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 1940748,
+            "china_value_usd": 788391,
+            "china_share_percent": 40.623,
+            "share_of_scope_imports_percent": 1.2569
+          }
+        ]
+      }
+    },
+    "2025-05": {
+      "output_sha256": "9c2b90f75f1e8239317b094953be848768fb7dd0a9db99a86615b7cd45321c46",
+      "archive_sha256": "24818243d93c889972ae78ec8cdf1c6c581621998d9b83eaf8a169f232ae6fa7",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2505.ZIP",
+      "metrics": {
+        "month": "2025-05",
+        "value_usd": 5325542,
+        "all_origins_value_usd": 153210899,
+        "china_value_usd": 5325542,
+        "target_share_percent": 3.476,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 12328999,
+            "china_value_usd": 7073,
+            "china_share_percent": 0.0574,
+            "share_of_scope_imports_percent": 8.0471
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 138292714,
+            "china_value_usd": 4360509,
+            "china_share_percent": 3.1531,
+            "share_of_scope_imports_percent": 90.263
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 262380,
+            "china_value_usd": 241280,
+            "china_share_percent": 91.9582,
+            "share_of_scope_imports_percent": 0.1713
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 434225,
+            "china_value_usd": 249605,
+            "china_share_percent": 57.4829,
+            "share_of_scope_imports_percent": 0.2834
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 1892581,
+            "china_value_usd": 467075,
+            "china_share_percent": 24.6793,
+            "share_of_scope_imports_percent": 1.2353
+          }
+        ]
+      }
+    },
+    "2025-06": {
+      "output_sha256": "2bbf992b22da1539ee900787da30eb14d5e3e3ffbb1a6ff5bc2388c35d3f9497",
+      "archive_sha256": "4a55c8101bdb0810cfaa646da2d9c274d7033e22ab5a3b119c9efe24e270bf13",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2506.ZIP",
+      "metrics": {
+        "month": "2025-06",
+        "value_usd": 7489029,
+        "all_origins_value_usd": 170773806,
+        "china_value_usd": 7489029,
+        "target_share_percent": 4.3853,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 15506995,
+            "china_value_usd": 196346,
+            "china_share_percent": 1.2662,
+            "share_of_scope_imports_percent": 9.0804
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 152989322,
+            "china_value_usd": 6296159,
+            "china_share_percent": 4.1154,
+            "share_of_scope_imports_percent": 89.5859
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 117060,
+            "china_value_usd": 59974,
+            "china_share_percent": 51.2336,
+            "share_of_scope_imports_percent": 0.0685
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 731936,
+            "china_value_usd": 355655,
+            "china_share_percent": 48.591,
+            "share_of_scope_imports_percent": 0.4286
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 1428493,
+            "china_value_usd": 580895,
+            "china_share_percent": 40.6649,
+            "share_of_scope_imports_percent": 0.8365
+          }
+        ]
+      }
+    },
+    "2025-07": {
+      "output_sha256": "db57707150cf9d348d39b166a39448276a24e9ddec2ea48282d1cbed34f3470b",
+      "archive_sha256": "7d72cf07b9a1696fe8f054d8bbc25ce45bf6fb9ef0b5b8e893c6be9a10c1215a",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2507.ZIP",
+      "metrics": {
+        "month": "2025-07",
+        "value_usd": 8702988,
+        "all_origins_value_usd": 157937598,
+        "china_value_usd": 8702988,
+        "target_share_percent": 5.5104,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 15569318,
+            "china_value_usd": 89752,
+            "china_share_percent": 0.5765,
+            "share_of_scope_imports_percent": 9.8579
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 136894250,
+            "china_value_usd": 5507460,
+            "china_share_percent": 4.0231,
+            "share_of_scope_imports_percent": 86.6762
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 945635,
+            "china_value_usd": 920361,
+            "china_share_percent": 97.3273,
+            "share_of_scope_imports_percent": 0.5987
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 1616945,
+            "china_value_usd": 1236050,
+            "china_share_percent": 76.4435,
+            "share_of_scope_imports_percent": 1.0238
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2911450,
+            "china_value_usd": 949365,
+            "china_share_percent": 32.608,
+            "share_of_scope_imports_percent": 1.8434
+          }
+        ]
+      }
+    },
+    "2025-08": {
+      "output_sha256": "d8fbe04f58a485001b7ce43622a85f572c14199b913cf2618251e01c0bab35de",
+      "archive_sha256": "4fd343e4b33fdbe013329db1f46264abe93363e1c04216855fc27fd6f76da022",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2508.ZIP",
+      "metrics": {
+        "month": "2025-08",
+        "value_usd": 9112783,
+        "all_origins_value_usd": 162506998,
+        "china_value_usd": 9112783,
+        "target_share_percent": 5.6076,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 15529770,
+            "china_value_usd": 234525,
+            "china_share_percent": 1.5102,
+            "share_of_scope_imports_percent": 9.5564
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 142296444,
+            "china_value_usd": 6006681,
+            "china_share_percent": 4.2212,
+            "share_of_scope_imports_percent": 87.5633
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 1823101,
+            "china_value_usd": 1823101,
+            "china_share_percent": 100.0,
+            "share_of_scope_imports_percent": 1.1219
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 1095348,
+            "china_value_usd": 495797,
+            "china_share_percent": 45.2639,
+            "share_of_scope_imports_percent": 0.674
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 1762335,
+            "china_value_usd": 552679,
+            "china_share_percent": 31.3606,
+            "share_of_scope_imports_percent": 1.0845
+          }
+        ]
+      }
+    },
+    "2025-09": {
+      "output_sha256": "59aa4aa9390440a04c16704d8a8dba02679bbf9cae07470c7859730ce372ed5d",
+      "archive_sha256": "8d84ce467c4613d1c1d40a64b9c206cd126a65a1f93907cbe0efa585f5352df9",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2509.ZIP",
+      "metrics": {
+        "month": "2025-09",
+        "value_usd": 8315594,
+        "all_origins_value_usd": 163836650,
+        "china_value_usd": 8315594,
+        "target_share_percent": 5.0755,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 19601326,
+            "china_value_usd": 18813,
+            "china_share_percent": 0.096,
+            "share_of_scope_imports_percent": 11.9639
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 139584059,
+            "china_value_usd": 6146750,
+            "china_share_percent": 4.4036,
+            "share_of_scope_imports_percent": 85.1971
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 1413141,
+            "china_value_usd": 1028749,
+            "china_share_percent": 72.7988,
+            "share_of_scope_imports_percent": 0.8625
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 961718,
+            "china_value_usd": 298039,
+            "china_share_percent": 30.9903,
+            "share_of_scope_imports_percent": 0.587
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2276406,
+            "china_value_usd": 823243,
+            "china_share_percent": 36.1642,
+            "share_of_scope_imports_percent": 1.3894
+          }
+        ]
+      }
+    },
+    "2025-10": {
+      "output_sha256": "a11c38e34e7bd6eacb5f12d7084c039e43c90d73e145508fb51644b2f5dbf05a",
+      "archive_sha256": "29d00dfaf0cc2106e31470feb5752b669580d9faa6c243053542461a338a2cd2",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2510.ZIP",
+      "metrics": {
+        "month": "2025-10",
+        "value_usd": 10243775,
+        "all_origins_value_usd": 164674072,
+        "china_value_usd": 10243775,
+        "target_share_percent": 6.2206,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 20496832,
+            "china_value_usd": 299381,
+            "china_share_percent": 1.4606,
+            "share_of_scope_imports_percent": 12.4469
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 136869890,
+            "china_value_usd": 7328192,
+            "china_share_percent": 5.3541,
+            "share_of_scope_imports_percent": 83.1156
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 4013307,
+            "china_value_usd": 1384668,
+            "china_share_percent": 34.5019,
+            "share_of_scope_imports_percent": 2.4371
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 1013286,
+            "china_value_usd": 200974,
+            "china_share_percent": 19.8339,
+            "share_of_scope_imports_percent": 0.6153
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2280757,
+            "china_value_usd": 1030560,
+            "china_share_percent": 45.185,
+            "share_of_scope_imports_percent": 1.385
+          }
+        ]
+      }
+    },
+    "2025-11": {
+      "output_sha256": "f0a06b4bbbda8d1dcee4866d4953c3ea6ae0a4721adf4fc0ebc8e13138e8fb26",
+      "archive_sha256": "7172f2b90090c23ad8d634da08711ec2491e43ca96603643e16ceafde29a9453",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2511.ZIP",
+      "metrics": {
+        "month": "2025-11",
+        "value_usd": 8130700,
+        "all_origins_value_usd": 133234473,
+        "china_value_usd": 8130700,
+        "target_share_percent": 6.1025,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 5760842,
+            "china_value_usd": 41735,
+            "china_share_percent": 0.7245,
+            "share_of_scope_imports_percent": 4.3238
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 121971730,
+            "china_value_usd": 6100622,
+            "china_share_percent": 5.0017,
+            "share_of_scope_imports_percent": 91.5467
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 1707658,
+            "china_value_usd": 396070,
+            "china_share_percent": 23.1938,
+            "share_of_scope_imports_percent": 1.2817
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 729220,
+            "china_value_usd": 298795,
+            "china_share_percent": 40.9746,
+            "share_of_scope_imports_percent": 0.5473
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 3065023,
+            "china_value_usd": 1293478,
+            "china_share_percent": 42.2012,
+            "share_of_scope_imports_percent": 2.3005
+          }
+        ]
+      }
+    },
+    "2025-12": {
+      "output_sha256": "6d7a198ce72631153c22e13fc35ab744376d1d18ccb4642599cf2048ec030238",
+      "archive_sha256": "c6f1c92d5c6fc35ac1957db788276b6112a169545415338b3a0d045ed9125480",
+      "source_url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP",
+      "metrics": {
+        "month": "2025-12",
+        "value_usd": 10001374,
+        "all_origins_value_usd": 186089380,
+        "china_value_usd": 10001374,
+        "target_share_percent": 5.3745,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 18867324,
+            "china_value_usd": 74716,
+            "china_share_percent": 0.396,
+            "share_of_scope_imports_percent": 10.1389
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 158174911,
+            "china_value_usd": 6221405,
+            "china_share_percent": 3.9332,
+            "share_of_scope_imports_percent": 84.9994
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 4719418,
+            "china_value_usd": 1963827,
+            "china_share_percent": 41.6116,
+            "share_of_scope_imports_percent": 2.5361
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 882842,
+            "china_value_usd": 444592,
+            "china_share_percent": 50.3592,
+            "share_of_scope_imports_percent": 0.4744
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 3444885,
+            "china_value_usd": 1296834,
+            "china_share_percent": 37.6452,
+            "share_of_scope_imports_percent": 1.8512
+          }
+        ]
+      }
+    },
+    "2026-01": {
+      "output_sha256": "32d8295cbf68c8ee4e7d9297461b62f37b2db0cbafcb48b6f74c2ebfedd871f6",
+      "archive_sha256": "f45ba6917e0aa4269146053927b3a764b796ae3f80c4d3ea6881fac863feeac4",
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2601.ZIP",
+      "metrics": {
+        "month": "2026-01",
+        "value_usd": 9199632,
+        "all_origins_value_usd": 139262219,
+        "china_value_usd": 9199632,
+        "target_share_percent": 6.606,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 8049886,
+            "china_value_usd": 84776,
+            "china_share_percent": 1.0531,
+            "share_of_scope_imports_percent": 5.7804
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 125591165,
+            "china_value_usd": 6599601,
+            "china_share_percent": 5.2548,
+            "share_of_scope_imports_percent": 90.1832
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 1422442,
+            "china_value_usd": 831616,
+            "china_share_percent": 58.464,
+            "share_of_scope_imports_percent": 1.0214
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 944300,
+            "china_value_usd": 451405,
+            "china_share_percent": 47.8031,
+            "share_of_scope_imports_percent": 0.6781
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 3254426,
+            "china_value_usd": 1232234,
+            "china_share_percent": 37.8633,
+            "share_of_scope_imports_percent": 2.3369
+          }
+        ]
+      }
+    },
+    "2026-02": {
+      "output_sha256": "4dfb20d23775147f1333ce68adf82c61cd90e354b0d4a5b8c59bf78c83d236d9",
+      "archive_sha256": "1c43d47e7c34003be8dd24ecbe9ee81d3761c6ab7bd6d5a36ac81db8fad97f4e",
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2602.ZIP",
+      "metrics": {
+        "month": "2026-02",
+        "value_usd": 5191262,
+        "all_origins_value_usd": 165242024,
+        "china_value_usd": 5191262,
+        "target_share_percent": 3.1416,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 7578049,
+            "china_value_usd": 100452,
+            "china_share_percent": 1.3256,
+            "share_of_scope_imports_percent": 4.586
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 151991724,
+            "china_value_usd": 3267192,
+            "china_share_percent": 2.1496,
+            "share_of_scope_imports_percent": 91.9813
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 1900304,
+            "china_value_usd": 432746,
+            "china_share_percent": 22.7725,
+            "share_of_scope_imports_percent": 1.15
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 1450339,
+            "china_value_usd": 321974,
+            "china_share_percent": 22.1999,
+            "share_of_scope_imports_percent": 0.8777
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2321608,
+            "china_value_usd": 1068898,
+            "china_share_percent": 46.0413,
+            "share_of_scope_imports_percent": 1.405
+          }
+        ]
+      }
+    },
+    "2026-03": {
+      "output_sha256": "fac6f03f4993ba7fbf9f7f5ac2319c7656bcfdee82fa50cc2a4b531e0ec69880",
+      "archive_sha256": "a263062b3b95ba083475393663c71adbab2ae973311b69ffd5570011f040a92e",
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2603.ZIP",
+      "metrics": {
+        "month": "2026-03",
+        "value_usd": 12112731,
+        "all_origins_value_usd": 179483547,
+        "china_value_usd": 12112731,
+        "target_share_percent": 6.7487,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 4825984,
+            "china_value_usd": 190370,
+            "china_share_percent": 3.9447,
+            "share_of_scope_imports_percent": 2.6888
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 162467115,
+            "china_value_usd": 6515523,
+            "china_share_percent": 4.0104,
+            "share_of_scope_imports_percent": 90.5192
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 6911191,
+            "china_value_usd": 3411092,
+            "china_share_percent": 49.3561,
+            "share_of_scope_imports_percent": 3.8506
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 1343487,
+            "china_value_usd": 468745,
+            "china_share_percent": 34.8902,
+            "share_of_scope_imports_percent": 0.7485
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 3935770,
+            "china_value_usd": 1527001,
+            "china_share_percent": 38.798,
+            "share_of_scope_imports_percent": 2.1928
+          }
+        ]
+      }
+    },
+    "2026-04": {
+      "output_sha256": "e5a4de130c2331c7e87d13f1a2fefa3cf03f01a2869c4fe37e284b0cade1e613",
+      "archive_sha256": "7f2075efb381a5229e8ffc7e1e8a797ca886af5841a84f09cbb4250091b566fe",
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2604.ZIP",
+      "metrics": {
+        "month": "2026-04",
+        "value_usd": 8534572,
+        "all_origins_value_usd": 185498130,
+        "china_value_usd": 8534572,
+        "target_share_percent": 4.6009,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 6092669,
+            "china_value_usd": 28666,
+            "china_share_percent": 0.4705,
+            "share_of_scope_imports_percent": 3.2845
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 171483388,
+            "china_value_usd": 6134978,
+            "china_share_percent": 3.5776,
+            "share_of_scope_imports_percent": 92.4448
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 2374813,
+            "china_value_usd": 338657,
+            "china_share_percent": 14.2604,
+            "share_of_scope_imports_percent": 1.2802
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 2739806,
+            "china_value_usd": 1047632,
+            "china_share_percent": 38.2375,
+            "share_of_scope_imports_percent": 1.477
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 2807454,
+            "china_value_usd": 984639,
+            "china_share_percent": 35.0723,
+            "share_of_scope_imports_percent": 1.5135
+          }
+        ]
+      }
+    },
+    "2026-05": {
+      "output_sha256": "37e3c21708a3274dddadce3a3264d24151dbe1b84630474d252f801f89f739f4",
+      "archive_sha256": "7b9ae6411e2504241277422ecd928e4d4f2362916f237bf191c83a84758f8200",
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2605.ZIP",
+      "metrics": {
+        "month": "2026-05",
+        "value_usd": 17689931,
+        "all_origins_value_usd": 173851773,
+        "china_value_usd": 17689931,
+        "target_share_percent": 10.1753,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 8792729,
+            "china_value_usd": 19647,
+            "china_share_percent": 0.2234,
+            "share_of_scope_imports_percent": 5.0576
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 144436756,
+            "china_value_usd": 7157931,
+            "china_share_percent": 4.9558,
+            "share_of_scope_imports_percent": 83.0804
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 8490858,
+            "china_value_usd": 2390284,
+            "china_share_percent": 28.1513,
+            "share_of_scope_imports_percent": 4.884
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 8702833,
+            "china_value_usd": 6470446,
+            "china_share_percent": 74.3487,
+            "share_of_scope_imports_percent": 5.0059
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 3428597,
+            "china_value_usd": 1651623,
+            "china_share_percent": 48.172,
+            "share_of_scope_imports_percent": 1.9721
+          }
+        ]
+      }
+    },
+    "2026-06": {
+      "output_sha256": "edbea967ee059cb56d2d987d056a3d446d4e9d665ae9b31a7f420b8c32ac2ecb",
+      "archive_sha256": "a074a5e31da8b005ffd65e2be756ee9d9888f68a4ad2f5c1a6e704160779012d",
+      "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2606.ZIP",
+      "metrics": {
+        "month": "2026-06",
+        "value_usd": 22071544,
+        "all_origins_value_usd": 221073162,
+        "china_value_usd": 22071544,
+        "target_share_percent": 9.9838,
+        "product_breakdown": [
+          {
+            "hts8": "28046100",
+            "all_origins_value_usd": 8108502,
+            "china_value_usd": 48756,
+            "china_share_percent": 0.6013,
+            "share_of_scope_imports_percent": 3.6678
+          },
+          {
+            "hts8": "38180000",
+            "all_origins_value_usd": 192915687,
+            "china_value_usd": 7778943,
+            "china_share_percent": 4.0323,
+            "share_of_scope_imports_percent": 87.2633
+          },
+          {
+            "hts8": "81019400",
+            "all_origins_value_usd": 12586857,
+            "china_value_usd": 12148101,
+            "china_share_percent": 96.5142,
+            "share_of_scope_imports_percent": 5.6935
+          },
+          {
+            "hts8": "81019910",
+            "all_origins_value_usd": 2273430,
+            "china_value_usd": 575126,
+            "china_share_percent": 25.2977,
+            "share_of_scope_imports_percent": 1.0284
+          },
+          {
+            "hts8": "81019980",
+            "all_origins_value_usd": 5188686,
+            "china_value_usd": 1520618,
+            "china_share_percent": 29.3064,
+            "share_of_scope_imports_percent": 2.347
+          }
+        ]
+      }
+    }
+  },
+  "policy_files": {
+    "data/processed/policy/section301_review2025_event.csv": "fac5b4e637ee83e7529584d3332e6289afabb5d2d08a35fafd86d4a09844be52",
+    "data/processed/policy/section301_review2025_products.csv": "623e9abd3b170f324b3d557aceab28d5505e4784dae5dbed6b179b06ecd9a6f6",
+    "data/processed/policy_exposure/policy_metadata_corrections.json": "bd55927eaf16e1aa04abac9b4d0f1c71acc9a2449b491cbaa89f063a4d1cdce0",
+    "data/processed/policy_exposure/policy_corpus.json": "11f9f52730fd358eb3616bae6bbe838b386581f80d8ff68cd00e8da5b41f003b"
+  },
+  "version": "8bb7cb8301165d238e4ba55a853fe7598fff613b87024c8af2604d9e77a46038"
+}

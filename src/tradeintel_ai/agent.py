@@ -41,6 +41,7 @@ CAUSAL_ASSERTION_TERMS = (
 MODEL_TOOL_NAMES = frozenset({
     "get_policy_event", "get_trade_series", "get_descriptive_change",
     "get_data_quality_status", "get_causal_readiness",
+    "get_policy_exposure_series",
 })
 
 

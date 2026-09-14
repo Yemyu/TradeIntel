@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .env
+.local/
 .DS_Store
 .ipynb_checkpoints/
 tmp/
@@ -22,3 +23,6 @@ data/processed/causal/causal_trade_hs6_monthly.csv
 # keep the small provenance manifest, not the 90+ MB monthly CSVs, in Git.
 data/processed/trade_hts10/monthly/
 data/processed/trade_hts8/monthly/
+
+# Monthly policy-exposure CSVs are reproducible from retained Census ZIPs.
+data/processed/policy_exposure/monthly/

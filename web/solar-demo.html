@@ -1,0 +1,385 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeShock AI｜单商品离线流程演示</title>
+<style>body{font:17px/1.8 system-ui,sans-serif;background:#f4f6f9;color:#172b40;margin:0}main{max-width:980px;margin:auto;padding:32px 20px}section{background:white;padding:24px;margin:20px 0;border-radius:12px}h1,h2{line-height:1.4}.warning{border-left:5px solid #bd6c00;background:#fff5dd}.metrics{display:flex;gap:24px;flex-wrap:wrap}.metrics strong{display:block;font-size:25px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.65 ui-monospace,monospace}summary{cursor:pointer;padding:12px 0}small{overflow-wrap:anywhere}a{color:#155c99}</style>
+<main><h1>一份贸易政策简报是怎样产生的？</h1>
+<section class="warning"><b>单商品只读流程演示，不是第二案例已上线，也不是双商品验收通过。</b><br>本页使用已有真实模型回答的离线规范化重放（source-choice-v1，85414300、2026年6月；原始运行因格式失败）。后续双商品2026年7月任务先遇到断连，一次恢复已收到回答，但格式和部分解释仍未通过；之后的事实卡加AI建议路径已有真实输出，尚未完成案例验收。打开本页不调用API。内容仍需人工审阅。</section>
+<section><h2>1．用户提出问题</h2><p>请针对85414300制作2026年6月的存档政策与贸易简报，说明政策适用条件，并列出美国该商品的全部来源消费进口额、中国原产金额和中国份额，附核查依据。</p><p>程序识别：2024光伏电池/组件政策 → 85414300 → 2026年6月。它不是根据关键词随便写一篇新闻摘要；本页也不代表全部登记商品都已完成验收。</p></section>
+<section><h2>2．程序查真实贸易资料并计算</h2><div class="metrics"><div>美国全部来源消费进口额<strong>$351,366,193</strong></div><div>其中中国原产<strong>$276,580</strong></div><div>中国份额<strong>0.08%</strong></div></div><p>份额分母是美国该税号全部来源进口额。这不是中国出口对美依赖率，也不是关税损失、实际税基或供应替代能力。</p></section>
+<section><h2>3．AI解释政策，程序附原文</h2><p>AI负责说明商品、税率、生效、原产地和一般限定，并选证据编号。程序提供完整原文，避免模型复制长表格时漏句。</p><details><summary>products</summary><p><a href="https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm">官方出处</a></p><pre>8541.42.00....................................  Photovoltaic cells, not assembled in             50         2024
+                                                 modules or made up into panels.
+8541.43.00....................................  Photovoltaic cells assembled in                  50         2024
+                                                 modules or made up into panels.</pre></details><details><summary>rate</summary><p><a href="https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm">官方出处</a></p><pre>9903.91.02.................  Effective with respect   The duty provided
+                              to entries on or after   in the applicable
+                              September 27, 2024,      subheading + 50%.
+                              articles the product
+                              of China, as provided
+                              for in subdivision (c)
+                              of U.S. note 31 to
+                              this subchapter.
+</pre></details><details><summary>general_conditions</summary><p><a href="https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm">官方出处</a></p><pre>``31. (a) As provided in headings 9903.91.01, 9903.91.02, 
+9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+9903.91.08 and subheading 9903.92.10, products of China shall be 
+subject to additional ad valorem rates of duty, as provided for in this 
+note. The products of China that are subject to additional ad valorem 
+rates of duty in accordance with this note are products of China that 
+are classified in the subheadings, or described in the statistical 
+reporting numbers, enumerated in this note.
+    ``Notwithstanding U.S. note 1 to this subchapter, all products of 
+China that are subject to the additional ad valorem rate of duty 
+imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+9903.91.05, 9903.91.06, 9903.91.07 and 9903.91.08 and subheading 
+9903.92.10, shall also be subject to the general rates of duty imposed 
+on products of China classified in the subheadings, or described in the 
+statistical reporting numbers, enumerated in this note.
+    ``Products of China that are classified in the subheadings, or 
+described in the statistical reporting numbers, enumerated in this note 
+that are eligible for special tariff treatment under general note 
+3(c)(i) to the HTSUS, or that are eligible for temporary duty 
+exemptions or reductions under subchapter II to chapter 99, shall be 
+subject to the additional ad valorem rate of duty imposed by headings 
+9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 
+9903.91.07 and 9903.91.08 and subheading 9903.92.10.
+    ``The additional duties imposed by headings 9903.91.01, 9903.91.02, 
+9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+9903.91.08 and subheading 9903.92.10, do not apply to goods for which 
+entry is properly claimed under a provision of chapter 98 of the HTSUS, 
+except for goods entered under subheadings 9802.00.40, 9802.00.50, and 
+9802.00.60, and heading 9802.00.80. For subheadings 9802.00.40, 
+9802.00.50, and 9802.00.60, the additional duties apply to the value of 
+repairs, alterations, or processing performed abroad, as described in 
+the applicable subheading. For heading 9802.00.80, the additional 
+duties apply to the value of the article less the cost or value of such 
+products of the United States, as described in heading 9802.00.80.
+    ``Products of China that are provided for in headings 9903.91.01, 
+9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 
+and 9903.91.08 and subheading 9903.92.10 and classified in one of the 
+subheadings, or described in the statistical reporting numbers, 
+enumerated in this note shall continue to be subject to antidumping, 
+countervailing, or other duties, fees, exactions and charges that apply 
+to such products, as well as to the additional ad valorem rate of duty 
+imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+9903.91.05, 9903.91.06, 9903.91.07, and 9903.91.08 and subheading 
+9903.92.10.&#x27;&#x27;
+    </pre></details><details><summary>scope_and_effective</summary><p><a href="https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm">官方出处</a></p><pre>``(c) Heading 9903.91.02 applies to products of China that are 
+classified in the following 8-digit subheadings, effective with respect 
+to goods entered for consumption, or withdrawn from warehouse for 
+consumption, on or after 12:01 a.m. eastern daylight time on September 
+27, 2024:
+
+(1) 8541.42.00
+(2) 8541.43.00&#x27;&#x27;.
+
+    </pre></details></section>
+<section class="warning"><h2>4．本次内容补核：还有什么不能直接相信？</h2><p><b>以下是开发助手审阅意见，不是模型原回答，也不是独立专业法律审核。</b></p><p>原回答“产品继续受反倾销、反补贴或其他税费约束”需要明确限定：其他税费<b>仅在依法适用时</b>继续适用，不能据此认定这件商品一定同时缴纳所有税费。</p><p>建议表述：“如该商品适用反倾销、反补贴或其他税费，这些税费仍继续适用；具体适用情况需另行核查。”此建议未写回原模型答案。</p><p>章98存在一般例外及特定子目特殊处理，本演示不作逐笔报关裁决。报告解释的是存档条款，不是今天的综合税率。</p></section>
+<section><h2>5．交付给分析人员的用途</h2><p>先获得可回查的贸易规模和政策条件，再补核其他适用税费、具体商品和后续修订，用于撰写人工审阅后的简报。不是自动批准、走势预测或因果结论。</p><details><summary>查看完整原始重放报告（未替换中文内容）</summary><pre># 贸易政策研究初稿（待审阅）
+
+交付状态：待人工审阅初稿。可下载不等于验收通过；不得作为已核准结论外发。
+
+
+问题：请针对85414300制作2026年6月的存档政策与贸易简报，说明政策适用条件，并列出美国该商品的全部来源消费进口额、中国原产金额和中国份额，附核查依据。
+
+数据版本：`943178938492bbe2581f5ed99ed488eddeed41943d50f74db3aa22b60d9c4fb8`。
+
+## 贸易规模（程序计算）
+
+统计期：2026-06；美国消费进口；单位：美元。排序字段：none。
+
+| HTS8 | 中国金额 | 全部来源金额 | 中国占该项进口 |
+|---|---:|---:|---:|
+| 85414300 | 276,580 | 351,366,193 | 0.08% |
+
+金额排序用于安排调查，不能直接当作风险、损失或政策效果排名。
+
+来源：
+```json
+[
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/event.csv&quot;,
+    &quot;sha256&quot;: &quot;6596241c56459b1f5e4af2cc59810e18e96e71b6c3875cf24ef1e85e2f2be929&quot;,
+    &quot;url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/products.csv&quot;,
+    &quot;sha256&quot;: &quot;cff761b3ac69a85394da525b5e1074f34d7becdce3fece406bd3d7fe32e2e02f&quot;,
+    &quot;url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/manifest.json&quot;,
+    &quot;sha256&quot;: &quot;d0679ea9ce727e8e6c2e4052dd0e494444ef1b8a5682693c562d30caead1b8bc&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/monthly/us_301_solar2024_2026_06.csv&quot;,
+    &quot;sha256&quot;: &quot;20658bcea074c5fa7cf5a399e4c2e37fd4295a23d48fea1f103452c634f43dde&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;official_census_archive&quot;,
+    &quot;month&quot;: &quot;2026-06&quot;,
+    &quot;url&quot;: &quot;https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2606.ZIP&quot;,
+    &quot;file_name&quot;: &quot;IMDB2606.ZIP&quot;,
+    &quot;sha256&quot;: &quot;a074a5e31da8b005ffd65e2be756ee9d9888f68a4ad2f5c1a6e704160779012d&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/policy_corpus.json&quot;,
+    &quot;sha256&quot;: &quot;b6c6cb2c236741c673fd28d0fc1954c54721373b7fe513ca4c3ec7b4ffb6c4cb&quot;
+  }
+]
+```
+
+此表统计政策登记税号的贸易规模，不是逐笔实际征税基数。中国份额的分母是美国该税号全部来源进口，不是中国对全球出口。
+金额不能直接乘公告税率当成应缴税额；具体商品限定、豁免、入境条件及后续税则尚需核查。
+
+## 政策与统计连接
+
+以下仅核对登记税号在本次原文中出现；商品限定和税则适用仍需逐项审阅。
+
+| 统计HTS8 | 政策原文段落 |
+|---|---|
+| 85414300 | fr202421217:products, fr202421217:scope_and_effective |
+
+登记商品中文描述（程序读取，仍需与原文核对）：未记录
+
+所问编码 85414300 的原文所在行 [fr202421217:products](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)：
+
+&gt; 8541.43.00....................................  Photovoltaic cells assembled in                  50         2024
+
+这是定位摘录，不包含所有上文条件；完整段落见下方核查区。
+
+所问编码 85414300 的原文所在行 [fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)：
+
+&gt; (2) 8541.43.00&#x27;&#x27;.
+
+这是定位摘录，不包含所有上文条件；完整段落见下方核查区。
+
+## 条件填写状态
+
+字段与证据绑定检查不等于语义核验通过。
+
+本次由AI选择证据编号、程序展示完整原文；未要求模型逐字摘录，不宣称模型摘录准确率。
+
+## 适用范围与遗漏提示（程序检查）
+
+以下只是遗漏提示与原文展示，不是AI解释正确或法律适用已获批准。
+
+
+原文中的原产范围不能被贸易表的“中国金额”列代替；请对照以下来源核查：
+
+- [fr202421217:rate](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+- [fr202421217:general_conditions](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+- [fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+### 一般适用限定原文（无论AI是否引用均展示）
+
+[fr202421217:general_conditions](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; ``31. (a) As provided in headings 9903.91.01, 9903.91.02, 
+&gt; 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+&gt; 9903.91.08 and subheading 9903.92.10, products of China shall be 
+&gt; subject to additional ad valorem rates of duty, as provided for in this 
+&gt; note. The products of China that are subject to additional ad valorem 
+&gt; rates of duty in accordance with this note are products of China that 
+&gt; are classified in the subheadings, or described in the statistical 
+&gt; reporting numbers, enumerated in this note.
+&gt;     ``Notwithstanding U.S. note 1 to this subchapter, all products of 
+&gt; China that are subject to the additional ad valorem rate of duty 
+&gt; imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+&gt; 9903.91.05, 9903.91.06, 9903.91.07 and 9903.91.08 and subheading 
+&gt; 9903.92.10, shall also be subject to the general rates of duty imposed 
+&gt; on products of China classified in the subheadings, or described in the 
+&gt; statistical reporting numbers, enumerated in this note.
+&gt;     ``Products of China that are classified in the subheadings, or 
+&gt; described in the statistical reporting numbers, enumerated in this note 
+&gt; that are eligible for special tariff treatment under general note 
+&gt; 3(c)(i) to the HTSUS, or that are eligible for temporary duty 
+&gt; exemptions or reductions under subchapter II to chapter 99, shall be 
+&gt; subject to the additional ad valorem rate of duty imposed by headings 
+&gt; 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 
+&gt; 9903.91.07 and 9903.91.08 and subheading 9903.92.10.
+&gt;     ``The additional duties imposed by headings 9903.91.01, 9903.91.02, 
+&gt; 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+&gt; 9903.91.08 and subheading 9903.92.10, do not apply to goods for which 
+&gt; entry is properly claimed under a provision of chapter 98 of the HTSUS, 
+&gt; except for goods entered under subheadings 9802.00.40, 9802.00.50, and 
+&gt; 9802.00.60, and heading 9802.00.80. For subheadings 9802.00.40, 
+&gt; 9802.00.50, and 9802.00.60, the additional duties apply to the value of 
+&gt; repairs, alterations, or processing performed abroad, as described in 
+&gt; the applicable subheading. For heading 9802.00.80, the additional 
+&gt; duties apply to the value of the article less the cost or value of such 
+&gt; products of the United States, as described in heading 9802.00.80.
+&gt;     ``Products of China that are provided for in headings 9903.91.01, 
+&gt; 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 
+&gt; and 9903.91.08 and subheading 9903.92.10 and classified in one of the 
+&gt; subheadings, or described in the statistical reporting numbers, 
+&gt; enumerated in this note shall continue to be subject to antidumping, 
+&gt; countervailing, or other duties, fees, exactions and charges that apply 
+&gt; to such products, as well as to the additional ad valorem rate of duty 
+&gt; imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+&gt; 9903.91.05, 9903.91.06, 9903.91.07, and 9903.91.08 and subheading 
+&gt; 9903.92.10.&#x27;&#x27;
+&gt;     
+
+## AI解释与逐项原文核查
+
+以下解释由模型生成，尚未完成语义审阅。原文由程序从本次检索记录展示，不由模型改写。
+
+### 主张 1
+
+85414300｜商品限定：组装在组件中或制成面板的光伏电池。
+
+对应原文：
+
+[fr202421217:products](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+公告日期：2024-09-18；抓取时间：未记录。
+
+&gt; 8541.42.00....................................  Photovoltaic cells, not assembled in             50         2024
+&gt;                                                  modules or made up into panels.
+&gt; 8541.43.00....................................  Photovoltaic cells assembled in                  50         2024
+&gt;                                                  modules or made up into panels.
+
+### 主张 2
+
+85414300｜额外税率：适用子目税率加50%。
+
+对应原文：
+
+[fr202421217:rate](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+公告日期：2024-09-18；抓取时间：未记录。
+
+&gt; 9903.91.02.................  Effective with respect   The duty provided
+&gt;                               to entries on or after   in the applicable
+&gt;                               September 27, 2024,      subheading + 50%.
+&gt;                               articles the product
+&gt;                               of China, as provided
+&gt;                               for in subdivision (c)
+&gt;                               of U.S. note 31 to
+&gt;                               this subchapter.
+
+### 主张 3
+
+85414300｜生效条件：于2024年9月27日美东夏令时00:01或之后入境消费，或从仓库提取消费时生效。
+
+对应原文：
+
+[fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+公告日期：2024-09-18；抓取时间：未记录。
+
+&gt; ``(c) Heading 9903.91.02 applies to products of China that are 
+&gt; classified in the following 8-digit subheadings, effective with respect 
+&gt; to goods entered for consumption, or withdrawn from warehouse for 
+&gt; consumption, on or after 12:01 a.m. eastern daylight time on September 
+&gt; 27, 2024:
+&gt; 
+&gt; (1) 8541.42.00
+&gt; (2) 8541.43.00&#x27;&#x27;.
+&gt; 
+&gt;     
+
+程序时刻提示：原文 `12:01 a.m.` → `00:01`（24小时制）；未转换时区、未推断日期或适用条件。
+
+### 主张 4
+
+85414300｜原产地适用范围：中国原产。
+
+对应原文：
+
+[fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+公告日期：2024-09-18；抓取时间：未记录。
+
+&gt; ``(c) Heading 9903.91.02 applies to products of China that are 
+&gt; classified in the following 8-digit subheadings, effective with respect 
+&gt; to goods entered for consumption, or withdrawn from warehouse for 
+&gt; consumption, on or after 12:01 a.m. eastern daylight time on September 
+&gt; 27, 2024:
+&gt; 
+&gt; (1) 8541.42.00
+&gt; (2) 8541.43.00&#x27;&#x27;.
+&gt; 
+&gt;     
+
+程序时刻提示：原文 `12:01 a.m.` → `00:01`（24小时制）；未转换时区、未推断日期或适用条件。
+
+### 主张 5
+
+85414300｜一般适用限定：中国产品须受额外从价税率约束，且仍适用中国产品的一般税率。符合HTSUS总注3(c)(i)特殊关税待遇或第99章第II分章临时免税/减税资格的产品，仍须缴纳额外关税。第98章条款（特定子目除外）入境的货物不适用额外关税。产品继续受反倾销、反补贴或其他税费约束。
+
+对应原文：
+
+[fr202421217:general_conditions](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+公告日期：2024-09-18；抓取时间：未记录。
+
+&gt; ``31. (a) As provided in headings 9903.91.01, 9903.91.02, 
+&gt; 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+&gt; 9903.91.08 and subheading 9903.92.10, products of China shall be 
+&gt; subject to additional ad valorem rates of duty, as provided for in this 
+&gt; note. The products of China that are subject to additional ad valorem 
+&gt; rates of duty in accordance with this note are products of China that 
+&gt; are classified in the subheadings, or described in the statistical 
+&gt; reporting numbers, enumerated in this note.
+&gt;     ``Notwithstanding U.S. note 1 to this subchapter, all products of 
+&gt; China that are subject to the additional ad valorem rate of duty 
+&gt; imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+&gt; 9903.91.05, 9903.91.06, 9903.91.07 and 9903.91.08 and subheading 
+&gt; 9903.92.10, shall also be subject to the general rates of duty imposed 
+&gt; on products of China classified in the subheadings, or described in the 
+&gt; statistical reporting numbers, enumerated in this note.
+&gt;     ``Products of China that are classified in the subheadings, or 
+&gt; described in the statistical reporting numbers, enumerated in this note 
+&gt; that are eligible for special tariff treatment under general note 
+&gt; 3(c)(i) to the HTSUS, or that are eligible for temporary duty 
+&gt; exemptions or reductions under subchapter II to chapter 99, shall be 
+&gt; subject to the additional ad valorem rate of duty imposed by headings 
+&gt; 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 
+&gt; 9903.91.07 and 9903.91.08 and subheading 9903.92.10.
+&gt;     ``The additional duties imposed by headings 9903.91.01, 9903.91.02, 
+&gt; 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+&gt; 9903.91.08 and subheading 9903.92.10, do not apply to goods for which 
+&gt; entry is properly claimed under a provision of chapter 98 of the HTSUS, 
+&gt; except for goods entered under subheadings 9802.00.40, 9802.00.50, and 
+&gt; 9802.00.60, and heading 9802.00.80. For subheadings 9802.00.40, 
+&gt; 9802.00.50, and 9802.00.60, the additional duties apply to the value of 
+&gt; repairs, alterations, or processing performed abroad, as described in 
+&gt; the applicable subheading. For heading 9802.00.80, the additional 
+&gt; duties apply to the value of the article less the cost or value of such 
+&gt; products of the United States, as described in heading 9802.00.80.
+&gt;     ``Products of China that are provided for in headings 9903.91.01, 
+&gt; 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 
+&gt; and 9903.91.08 and subheading 9903.92.10 and classified in one of the 
+&gt; subheadings, or described in the statistical reporting numbers, 
+&gt; enumerated in this note shall continue to be subject to antidumping, 
+&gt; countervailing, or other duties, fees, exactions and charges that apply 
+&gt; to such products, as well as to the additional ad valorem rate of duty 
+&gt; imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+&gt; 9903.91.05, 9903.91.06, 9903.91.07, and 9903.91.08 and subheading 
+&gt; 9903.92.10.&#x27;&#x27;
+&gt;     
+
+## 人工核查清单（尚未勾选）
+
+- 商品编码、商品限定和原产地是否同时匹配？
+- 写的是额外税率还是综合税率？例外或排除条件有没有遗漏？
+- 日期、24小时制时刻、原文时区是否一致？
+- 生效判断是入境、供消费入境，还是从仓库提取供消费？不能混用。
+- 引用是否支持整句话，而不仅仅提到了相同商品？
+
+## 证据范围与未知
+
+检索截止日：2026-09-14。这不是现行税则核验日期。
+
+HTML段落序号不是PDF页码；当前网页的抓取副本不证明历史时点即可获得该版本。
+
+仅解释存档政策，不确认现行综合税率；本报告未计算贸易损失、政策因果效应或未来走势。
+
+- 存档公告条款，不是现行综合税率或逐笔报关判断。
+- 偏移量针对解码后的pre文本，不是PDF页码。
+- 全部四组同时提供，包括一般适用限定；不自动涵盖后续修订。
+</pre></details></section>
+<section><h2>来源与运行边界</h2><small>数据版本：943178938492bbe2581f5ed99ed488eddeed41943d50f74db3aa22b60d9c4fb8<br>报告SHA-256：f8267eeb72b796e883cf46e5096e6e1ec56f9bc34db5cb342f51f8ce1cbd0e83<br>本页展示静态存档，不自动更新。不能把原始失败、离线重放和人工审阅混成一次模型成功。</small></section></main></html>

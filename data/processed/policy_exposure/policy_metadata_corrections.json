@@ -1,0 +1,19 @@
+{
+  "policy_id": "us_301_review2025_tungsten_solar",
+  "reviewed_on": "2026-09-14",
+  "dates": {
+    "announcement_date": "2024-12-11",
+    "federal_register_publication_date": "2024-12-16",
+    "cbp_guidance_publication_date": "2024-12-31",
+    "effective_date": "2025-01-01"
+  },
+  "announcement_source": "https://ustr.gov/about-us/policy-offices/press-office/press-releases/2024/december/ustr-increases-tariffs-under-section-301-tungsten-products-wafers-and-polysilicon-concluding",
+  "guidance_source": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+  "products": {
+    "81019910": {
+      "product_description": "Tungsten bars and rods other than those obtained simply by sintering; profiles, plates, sheets, strip and foil",
+      "product_description_zh": "钨棒和钨条（不包括仅经烧结得到的棒材）；型材、板、片、带及箔"
+    }
+  },
+  "note": "Explicit correction overlay for legacy CSV metadata. Does not change HTS scope or trade amounts. Dates distinguish announcement, publication and implementation. Not current combined tariff advice."
+}

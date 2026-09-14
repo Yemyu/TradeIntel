@@ -26,6 +26,7 @@ from zipfile import BadZipFile, ZipFile
 try:
     from scripts.inventory_census_import import (
         DETAIL_MEMBER,
+        resolve_member,
         InventoryError,
         load_country_names,
         load_policy_hts8,
@@ -35,6 +36,7 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - supports direct script execution
     from inventory_census_import import (  # type: ignore[no-redef]
         DETAIL_MEMBER,
+        resolve_member,
         InventoryError,
         load_country_names,
         load_policy_hts8,
@@ -155,7 +157,18 @@ def download_archive(
             # truncated ZIP.  Validate the central directory and required
             # member before treating the download as complete.
             with ZipFile(temporary) as archive:
-                archive.getinfo(DETAIL_MEMBER)
+                members = archive.namelist()
+                try:
+                    resolve_member(archive, DETAIL_MEMBER)
+                except InventoryError:
+                    # A readable ZIP with an unexpected schema is evidence,
+                    # not a transient transport failure. Retain it for review
+                    # and stop rather than downloading the same bytes again.
+                    temporary.replace(destination)
+                    raise InventoryError(
+                        f"Archive retained at {destination}; expected {DETAIL_MEMBER}; "
+                        f"actual members: {members[:30]}. Review layout before processing."
+                    )
             break
         except (
             HTTPError,
@@ -261,7 +274,7 @@ def process_archive(
     try:
         with ZipFile(archive_path) as zip_file:
             country_names = load_country_names(zip_file)
-            with zip_file.open(DETAIL_MEMBER) as handle:
+            with zip_file.open(resolve_member(zip_file, DETAIL_MEMBER)) as handle:
                 for line_number, raw in enumerate(handle, start=1):
                     raw_detail_rows += 1
                     record = parse_detail_line(raw, line_number=line_number)

@@ -120,8 +120,9 @@ def build_corpus(root: Path) -> dict:
 
 
 class PolicyRetriever:
-    def __init__(self, corpus: dict):
+    def __init__(self, corpus: dict, *, scope_checker=scope_refusal):
         self.corpus = corpus
+        self.scope_checker = scope_checker
         self.chunks = corpus['chunks']
         self.terms = [Counter(tokens(c['text'])) for c in self.chunks]
         self.lengths = [sum(t.values()) for t in self.terms]
@@ -139,10 +140,10 @@ class PolicyRetriever:
         if search_query is not None:
             search_query = validate_search_query(search_query)
         cutoff = date.fromisoformat(as_of) if as_of is not None else None
-        reason = scope_refusal(question)
+        reason = self.scope_checker(question)
         result = {'question': question, 'search_query': search_query or question,
                   'status': 'no_evidence', 'hits': [],
-                  'method': method, 'as_of': as_of, 'limitations': LIMITATIONS,
+                  'method': method, 'as_of': as_of, 'limitations': self.corpus.get('limitations', LIMITATIONS),
                   'scope': self.corpus['coverage']}
         if reason:
             return {**result, 'reason': reason}
@@ -163,7 +164,7 @@ class PolicyRetriever:
                     score += idf * tf * 2.5 / (tf + 1.5 * (.25 + .75 * length / self.average))
             if score > 0:
                 ranked.append({**chunk, 'score': round(score, 8),
-                               'citation_url': f"{chunk['url']}#page={chunk['page']}"})
+                               'citation_url': chunk.get('citation_url', f"{chunk['url']}#page={chunk['page']}")})
         ranked.sort(key=lambda c: (-c['score'], c['id']))
         hits = ranked[:top_k]
         return {**result, 'status': 'candidate_evidence' if hits else 'no_evidence',

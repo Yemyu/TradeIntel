@@ -1,0 +1,387 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TradeShock AI · 真实研究结果与审阅</title>
+<style>body{margin:0;background:#f3f6fa;color:#172c40;font:17px/1.75 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:28px 20px}h1,h2,h3{line-height:1.35}section{margin:28px 0}article,.box{background:white;padding:22px;border:1px solid #d9e2eb;border-radius:12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.banner,.review{background:#fff4dd;border-left:4px solid #ad6900;padding:16px}.tag,dt,small{color:#475d70}dd{margin:0 0 12px;font-weight:700;font-size:23px}blockquote{margin:12px 0;border-left:3px solid #8097ae;padding-left:14px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 monospace}summary{cursor:pointer;padding:12px}a{color:#125b9b}small{overflow-wrap:anywhere}</style></head><body><main>
+<a href="/">← 返回查询首页</a><h1>这次研究查到了什么，哪些建议能用？</h1>
+<p>2024 年光伏政策 · 2026 年 7 月消费进口 · 两类登记商品</p>
+<div class="banner"><strong>真实运行记录，只读展示；整份未批准。</strong><br>数据由程序计算，建议来自一次 GLM-4.7 调用，审阅意见由开发助手另行撰写。打开本页不会调用 API；不是实时数据，也不是第二案例已经开放。</div>
+<section><h2>一、程序查到的贸易规模</h2><div class="grid"><article><h3>HTS 85414200</h3><dl><dt>美国全部来源消费进口</dt><dd>$360,659,187</dd><dt>其中中国原产</dt><dd>$104,278</dd><dt>中国份额</dt><dd>0.03%</dd></dl></article><article><h3>HTS 85414300</h3><dl><dt>美国全部来源消费进口</dt><dd>$361,358,006</dd><dt>其中中国原产</dt><dd>$223,607</dd><dt>中国份额</dt><dd>0.06%</dd></dl></article></div><p>份额分母是美国该税号全部来源进口。这不是中国出口依赖率，也不是关税税基、损失或政策效果。</p></section>
+<section><h2>二、AI 原话与逐项审阅</h2><p>事实编号只说明引用关联，不证明推论成立。以下没有把审阅建议改写回模型答案。</p><div class="grid"><article><h3>建议 1</h3><p class="tag">AI 原话 · 未批准</p><blockquote>需确认统计金额中是否存在通过第三国转运或轻微加工以规避原产地认定的商品，以核实中国原产份额的准确性。</blockquote><p>事实关联：trade.available</p><div class="review"><strong>助手审阅：不采纳为优先调查</strong><p>本次数据没有给出转运或规避的证据。不能把第三国来源自动当成规避；这条提问也不是已发现违规。</p></div></article><article><h3>建议 2</h3><p class="tag">AI 原话 · 未批准</p><blockquote>现有数据为海关统计金额，未包含企业实际承担的关税成本及合同中的价格转嫁安排，无法直接评估政策对终端价格的影响。</blockquote><p>事实关联：trade.available</p><div class="review"><strong>助手审阅：有限用途，仍需审阅</strong><p>正确区分贸易统计与企业税负、合同安排。可作为研究边界提醒，但不是已经分析出价格影响，也不是深度个性化结论。</p></div></article></div></section>
+<section class="box"><h2>三、你可以如何使用</h2><p>先确认商品和月份，查看贸易规模；再区分已有统计与尚缺的企业合同、实际税负信息。不要据此认定违规、预测涨价或作采购决定。</p><p>本页只有存档查看功能。首页的查询功能仍限已启用案例；第二案例仍在候选阶段，没有“点击即批准”功能。</p><a href="https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm" target="_blank" rel="noopener noreferrer">查看本案例存档政策原文</a></section>
+<section class="box"><h2>四、复核记录</h2><p>一次模型请求，1725 tokens；无重试。既有记录未改写，不是独立准确率评测。</p><details><summary>查看原始模型 JSON（已转义）</summary><pre>{&quot;notes&quot;:[{&quot;kind&quot;:&quot;investigation&quot;,&quot;fact_ids&quot;:[&quot;trade.available&quot;],&quot;text&quot;:&quot;需确认统计金额中是否存在通过第三国转运或轻微加工以规避原产地认定的商品，以核实中国原产份额的准确性。&quot;},{&quot;kind&quot;:&quot;limitation&quot;,&quot;fact_ids&quot;:[&quot;trade.available&quot;],&quot;text&quot;:&quot;现有数据为海关统计金额，未包含企业实际承担的关税成本及合同中的价格转嫁安排，无法直接评估政策对终端价格的影响。&quot;}]}</pre></details><details><summary>查看程序贸易证据 JSON（已转义）</summary><pre>{
+  &quot;tool_name&quot;: &quot;get_policy_exposure_series&quot;,
+  &quot;tool_version&quot;: &quot;1.0&quot;,
+  &quot;status&quot;: &quot;ok&quot;,
+  &quot;causal_claim&quot;: false,
+  &quot;post_policy_activity_used_for_matching&quot;: false,
+  &quot;data&quot;: {
+    &quot;policy_id&quot;: &quot;us_301_solar2024&quot;,
+    &quot;policy_name&quot;: &quot;Section 301 solar cells and modules 2024&quot;,
+    &quot;scope&quot;: &quot;registered_policy_hts8&quot;,
+    &quot;hts8&quot;: null,
+    &quot;origin&quot;: &quot;China&quot;,
+    &quot;measure&quot;: &quot;import_value_consumption_usd&quot;,
+    &quot;start&quot;: &quot;2026-07&quot;,
+    &quot;end&quot;: &quot;2026-07&quot;,
+    &quot;months&quot;: 1,
+    &quot;requested_months&quot;: [
+      &quot;2026-07&quot;
+    ],
+    &quot;series&quot;: [
+      {
+        &quot;month&quot;: &quot;2026-07&quot;,
+        &quot;value_usd&quot;: 327885,
+        &quot;all_origins_value_usd&quot;: 722017193,
+        &quot;china_value_usd&quot;: 327885,
+        &quot;target_share_percent&quot;: 0.0454,
+        &quot;product_breakdown&quot;: [
+          {
+            &quot;hts8&quot;: &quot;85414200&quot;,
+            &quot;all_origins_value_usd&quot;: 360659187,
+            &quot;china_value_usd&quot;: 104278,
+            &quot;china_share_percent&quot;: 0.0289,
+            &quot;share_of_scope_imports_percent&quot;: 49.9516
+          },
+          {
+            &quot;hts8&quot;: &quot;85414300&quot;,
+            &quot;all_origins_value_usd&quot;: 361358006,
+            &quot;china_value_usd&quot;: 223607,
+            &quot;china_share_percent&quot;: 0.0619,
+            &quot;share_of_scope_imports_percent&quot;: 50.0484
+          }
+        ]
+      }
+    ],
+    &quot;total_usd&quot;: 327885,
+    &quot;observed_total_usd&quot;: 327885,
+    &quot;coverage_complete&quot;: true,
+    &quot;missing_months&quot;: [],
+    &quot;product&quot;: null
+  },
+  &quot;evidence&quot;: {
+    &quot;sources&quot;: [
+      {
+        &quot;kind&quot;: &quot;local_evidence_file&quot;,
+        &quot;path&quot;: &quot;data/candidates/solar2024/event.csv&quot;,
+        &quot;sha256&quot;: &quot;6596241c56459b1f5e4af2cc59810e18e96e71b6c3875cf24ef1e85e2f2be929&quot;,
+        &quot;url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;local_evidence_file&quot;,
+        &quot;path&quot;: &quot;data/candidates/solar2024/products.csv&quot;,
+        &quot;sha256&quot;: &quot;cff761b3ac69a85394da525b5e1074f34d7becdce3fece406bd3d7fe32e2e02f&quot;,
+        &quot;url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;local_evidence_file&quot;,
+        &quot;path&quot;: &quot;data/candidates/solar2024/manifest.json&quot;,
+        &quot;sha256&quot;: &quot;d0679ea9ce727e8e6c2e4052dd0e494444ef1b8a5682693c562d30caead1b8bc&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;local_evidence_file&quot;,
+        &quot;path&quot;: &quot;data/candidates/solar2024/monthly/us_301_solar2024_2026_07.csv&quot;,
+        &quot;sha256&quot;: &quot;9b63073967782c4428c82c077df2edc82850921f3e38ffb80452845c8d86c349&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;official_census_archive&quot;,
+        &quot;month&quot;: &quot;2026-07&quot;,
+        &quot;url&quot;: &quot;https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP&quot;,
+        &quot;file_name&quot;: &quot;IMDB2607.ZIP&quot;,
+        &quot;sha256&quot;: &quot;55274118bcdbf4e2e6585322069d795d3f24d1b29ef8256d73c4058c2acf6997&quot;
+      },
+      {
+        &quot;kind&quot;: &quot;local_evidence_file&quot;,
+        &quot;path&quot;: &quot;data/candidates/solar2024/policy_corpus.json&quot;,
+        &quot;sha256&quot;: &quot;b6c6cb2c236741c673fd28d0fc1954c54721373b7fe513ca4c3ec7b4ffb6c4cb&quot;
+      }
+    ],
+    &quot;selection_rule&quot;: &quot;登记政策的精确 HTS8；不扩大到 HS6 或相似商品&quot;
+  },
+  &quot;limitations&quot;: [
+    &quot;CONCORD 编码存在性已检查；跨期编码定义连续性仍待审阅，不能据此保证同比可比。&quot;,
+    &quot;金额是美国消费进口的描述性贸易暴露，不是关税造成的损失或因果效果。&quot;,
+    &quot;中国份额不等于中国对美国出口依赖，也不代表其他来源可以立即替代。&quot;,
+    &quot;统计期按月发布；缺失月份保留为未知，不能补零。&quot;
+  ],
+  &quot;policy_metadata&quot;: {
+    &quot;status&quot;: &quot;no_reviewed_correction_record&quot;
+  },
+  &quot;policy_evidence&quot;: {
+    &quot;status&quot;: &quot;candidate_evidence&quot;,
+    &quot;policy_id&quot;: &quot;us_301_solar2024&quot;,
+    &quot;question&quot;: &quot;登记政策  税率 生效 商品范围&quot;,
+    &quot;as_of&quot;: &quot;2026-09-14&quot;,
+    &quot;hits&quot;: [
+      {
+        &quot;id&quot;: &quot;fr202421217:products&quot;,
+        &quot;source&quot;: &quot;fr202421217&quot;,
+        &quot;title&quot;: &quot;products&quot;,
+        &quot;published&quot;: &quot;2024-09-18&quot;,
+        &quot;text&quot;: &quot;8541.42.00....................................  Photovoltaic cells, not assembled in             50         2024\n                                                 modules or made up into panels.\n8541.43.00....................................  Photovoltaic cells assembled in                  50         2024\n                                                 modules or made up into panels.&quot;,
+        &quot;start&quot;: 86632,
+        &quot;end&quot;: 87019,
+        &quot;citation_url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;,
+        &quot;local_path&quot;: &quot;data/candidates/solar2024/2024-21217.html&quot;,
+        &quot;sha256&quot;: &quot;578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654&quot;
+      },
+      {
+        &quot;id&quot;: &quot;fr202421217:rate&quot;,
+        &quot;source&quot;: &quot;fr202421217&quot;,
+        &quot;title&quot;: &quot;rate&quot;,
+        &quot;published&quot;: &quot;2024-09-18&quot;,
+        &quot;text&quot;: &quot;9903.91.02.................  Effective with respect   The duty provided\n                              to entries on or after   in the applicable\n                              September 27, 2024,      subheading + 50%.\n                              articles the product\n                              of China, as provided\n                              for in subdivision (c)\n                              of U.S. note 31 to\n                              this subchapter.\n&quot;,
+        &quot;start&quot;: 193169,
+        &quot;end&quot;: 193639,
+        &quot;citation_url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;,
+        &quot;local_path&quot;: &quot;data/candidates/solar2024/2024-21217.html&quot;,
+        &quot;sha256&quot;: &quot;578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654&quot;
+      },
+      {
+        &quot;id&quot;: &quot;fr202421217:general_conditions&quot;,
+        &quot;source&quot;: &quot;fr202421217&quot;,
+        &quot;title&quot;: &quot;general_conditions&quot;,
+        &quot;published&quot;: &quot;2024-09-18&quot;,
+        &quot;text&quot;: &quot;``31. (a) As provided in headings 9903.91.01, 9903.91.02, \n9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and \n9903.91.08 and subheading 9903.92.10, products of China shall be \nsubject to additional ad valorem rates of duty, as provided for in this \nnote. The products of China that are subject to additional ad valorem \nrates of duty in accordance with this note are products of China that \nare classified in the subheadings, or described in the statistical \nreporting numbers, enumerated in this note.\n    ``Notwithstanding U.S. note 1 to this subchapter, all products of \nChina that are subject to the additional ad valorem rate of duty \nimposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, \n9903.91.05, 9903.91.06, 9903.91.07 and 9903.91.08 and subheading \n9903.92.10, shall also be subject to the general rates of duty imposed \non products of China classified in the subheadings, or described in the \nstatistical reporting numbers, enumerated in this note.\n    ``Products of China that are classified in the subheadings, or \ndescribed in the statistical reporting numbers, enumerated in this note \nthat are eligible for special tariff treatment under general note \n3(c)(i) to the HTSUS, or that are eligible for temporary duty \nexemptions or reductions under subchapter II to chapter 99, shall be \nsubject to the additional ad valorem rate of duty imposed by headings \n9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, \n9903.91.07 and 9903.91.08 and subheading 9903.92.10.\n    ``The additional duties imposed by headings 9903.91.01, 9903.91.02, \n9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and \n9903.91.08 and subheading 9903.92.10, do not apply to goods for which \nentry is properly claimed under a provision of chapter 98 of the HTSUS, \nexcept for goods entered under subheadings 9802.00.40, 9802.00.50, and \n9802.00.60, and heading 9802.00.80. For subheadings 9802.00.40, \n9802.00.50, and 9802.00.60, the additional duties apply to the value of \nrepairs, alterations, or processing performed abroad, as described in \nthe applicable subheading. For heading 9802.00.80, the additional \nduties apply to the value of the article less the cost or value of such \nproducts of the United States, as described in heading 9802.00.80.\n    ``Products of China that are provided for in headings 9903.91.01, \n9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 \nand 9903.91.08 and subheading 9903.92.10 and classified in one of the \nsubheadings, or described in the statistical reporting numbers, \nenumerated in this note shall continue to be subject to antidumping, \ncountervailing, or other duties, fees, exactions and charges that apply \nto such products, as well as to the additional ad valorem rate of duty \nimposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, \n9903.91.05, 9903.91.06, 9903.91.07, and 9903.91.08 and subheading \n9903.92.10.&#x27;&#x27;\n    &quot;,
+        &quot;start&quot;: 199636,
+        &quot;end&quot;: 202580,
+        &quot;citation_url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;,
+        &quot;local_path&quot;: &quot;data/candidates/solar2024/2024-21217.html&quot;,
+        &quot;sha256&quot;: &quot;578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654&quot;
+      },
+      {
+        &quot;id&quot;: &quot;fr202421217:scope_and_effective&quot;,
+        &quot;source&quot;: &quot;fr202421217&quot;,
+        &quot;title&quot;: &quot;scope_and_effective&quot;,
+        &quot;published&quot;: &quot;2024-09-18&quot;,
+        &quot;text&quot;: &quot;``(c) Heading 9903.91.02 applies to products of China that are \nclassified in the following 8-digit subheadings, effective with respect \nto goods entered for consumption, or withdrawn from warehouse for \nconsumption, on or after 12:01 a.m. eastern daylight time on September \n27, 2024:\n\n(1) 8541.42.00\n(2) 8541.43.00&#x27;&#x27;.\n\n    &quot;,
+        &quot;start&quot;: 209370,
+        &quot;end&quot;: 209695,
+        &quot;citation_url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;,
+        &quot;local_path&quot;: &quot;data/candidates/solar2024/2024-21217.html&quot;,
+        &quot;sha256&quot;: &quot;578aa44e3c369edf56617a67ff339db1b45e0890f46f088176c085a66355d654&quot;
+      }
+    ],
+    &quot;reason&quot;: null,
+    &quot;method&quot;: &quot;registered_complete_sections&quot;,
+    &quot;limitations&quot;: [
+      &quot;存档公告条款，不是现行综合税率或逐笔报关判断。&quot;,
+      &quot;偏移量针对解码后的pre文本，不是PDF页码。&quot;,
+      &quot;全部四组同时提供，包括一般适用限定；不自动涵盖后续修订。&quot;
+    ]
+  },
+  &quot;data_version&quot;: &quot;943178938492bbe2581f5ed99ed488eddeed41943d50f74db3aa22b60d9c4fb8&quot;
+}</pre></details><small>数据版本：943178938492bbe2581f5ed99ed488eddeed41943d50f74db3aa22b60d9c4fb8<br>模型回答文件 SHA-256：5603d3fe80d3e98711550266a4d9ed0e2003d45e50bb7a177088bf980d09a69a<br>本页审阅意见不是独立专业审核，尚未进行浏览器视觉验收。</small></section><section class="box"><h2>完整来源资料包</h2><details><summary>展开政策事实卡、全部原文及数据来源</summary><pre># 贸易政策研究初稿（待审阅）
+
+问题：请为2024年光伏电池和组件政策的全部登记商品制作2026-07美国消费进口简报，列出全部来源金额、中国原产金额和份额，并提出待核查问题及原因。
+
+数据版本：`943178938492bbe2581f5ed99ed488eddeed41943d50f74db3aa22b60d9c4fb8`。
+
+## 贸易规模（程序计算）
+
+统计期：2026-07；美国消费进口；单位：美元。排序字段：none。
+
+| HTS8 | 中国金额 | 全部来源金额 | 中国占该项进口 |
+|---|---:|---:|---:|
+| 85414200 | 104,278 | 360,659,187 | 0.03% |
+| 85414300 | 223,607 | 361,358,006 | 0.06% |
+
+金额排序用于安排调查，不能直接当作风险、损失或政策效果排名。
+
+来源：
+```json
+[
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/event.csv&quot;,
+    &quot;sha256&quot;: &quot;6596241c56459b1f5e4af2cc59810e18e96e71b6c3875cf24ef1e85e2f2be929&quot;,
+    &quot;url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/products.csv&quot;,
+    &quot;sha256&quot;: &quot;cff761b3ac69a85394da525b5e1074f34d7becdce3fece406bd3d7fe32e2e02f&quot;,
+    &quot;url&quot;: &quot;https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/manifest.json&quot;,
+    &quot;sha256&quot;: &quot;d0679ea9ce727e8e6c2e4052dd0e494444ef1b8a5682693c562d30caead1b8bc&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/monthly/us_301_solar2024_2026_07.csv&quot;,
+    &quot;sha256&quot;: &quot;9b63073967782c4428c82c077df2edc82850921f3e38ffb80452845c8d86c349&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;official_census_archive&quot;,
+    &quot;month&quot;: &quot;2026-07&quot;,
+    &quot;url&quot;: &quot;https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP&quot;,
+    &quot;file_name&quot;: &quot;IMDB2607.ZIP&quot;,
+    &quot;sha256&quot;: &quot;55274118bcdbf4e2e6585322069d795d3f24d1b29ef8256d73c4058c2acf6997&quot;
+  },
+  {
+    &quot;kind&quot;: &quot;local_evidence_file&quot;,
+    &quot;path&quot;: &quot;data/candidates/solar2024/policy_corpus.json&quot;,
+    &quot;sha256&quot;: &quot;b6c6cb2c236741c673fd28d0fc1954c54721373b7fe513ca4c3ec7b4ffb6c4cb&quot;
+  }
+]
+```
+
+此表统计政策登记税号的贸易规模，不是逐笔实际征税基数。中国份额的分母是美国该税号全部来源进口，不是中国对全球出口。
+金额不能直接乘公告税率当成应缴税额；具体商品限定、豁免、入境条件及后续税则尚需核查。
+
+## 政策事实卡（程序据已核查原文生成，不是AI回答）
+
+数据版本：943178938492bbe2581f5ed99ed488eddeed41943d50f74db3aa22b60d9c4fb8
+
+- 存档生效起点：2024-09-27 00:01 美国东部夏令时间（EDT）
+- 原产范围：中国原产
+- 适用事件：消费入境或从仓库提取消费
+- 额外税率：在适用子目税率之外加征50%；不代表综合税率。
+
+- 仅此存档公告，不是现行综合税率。
+- 章98例外、其他适用税费及逐笔适用条件须查完整原文。
+
+这张事实卡不代表AI解释通过；AI失败时仍只是一份来源资料，不是完整简报。
+
+[fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; ``(c) Heading 9903.91.02 applies to products of China that are 
+&gt; classified in the following 8-digit subheadings, effective with respect 
+&gt; to goods entered for consumption, or withdrawn from warehouse for 
+&gt; consumption, on or after 12:01 a.m. eastern daylight time on September 
+&gt; 27, 2024:
+&gt; 
+&gt; (1) 8541.42.00
+&gt; (2) 8541.43.00&#x27;&#x27;.
+&gt; 
+&gt;     
+
+[fr202421217:rate](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; 9903.91.02.................  Effective with respect   The duty provided
+&gt;                               to entries on or after   in the applicable
+&gt;                               September 27, 2024,      subheading + 50%.
+&gt;                               articles the product
+&gt;                               of China, as provided
+&gt;                               for in subdivision (c)
+&gt;                               of U.S. note 31 to
+&gt;                               this subchapter.
+
+## 政策与统计连接
+
+以下仅核对登记税号在本次原文中出现；商品限定和税则适用仍需逐项审阅。
+
+| 统计HTS8 | 政策原文段落 |
+|---|---|
+| 85414200 | fr202421217:products, fr202421217:scope_and_effective |
+| 85414300 | fr202421217:products, fr202421217:scope_and_effective |
+
+所问编码 85414200 的原文所在行 [fr202421217:products](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)：
+
+&gt; 8541.42.00....................................  Photovoltaic cells, not assembled in             50         2024
+
+这是定位摘录，不包含所有上文条件；完整段落见下方核查区。
+
+所问编码 85414200 的原文所在行 [fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)：
+
+&gt; (1) 8541.42.00
+
+这是定位摘录，不包含所有上文条件；完整段落见下方核查区。
+
+所问编码 85414300 的原文所在行 [fr202421217:products](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)：
+
+&gt; 8541.43.00....................................  Photovoltaic cells assembled in                  50         2024
+
+这是定位摘录，不包含所有上文条件；完整段落见下方核查区。
+
+所问编码 85414300 的原文所在行 [fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)：
+
+&gt; (2) 8541.43.00&#x27;&#x27;.
+
+这是定位摘录，不包含所有上文条件；完整段落见下方核查区。
+
+## 交付限制
+
+仅交付程序数据与原文资料；AI解释在独立待审阅附件中，未获采纳。
+
+以下为完整候选政策证据，例外和商品限定不得由简短事实卡替代。
+
+[fr202421217:products](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; 8541.42.00....................................  Photovoltaic cells, not assembled in             50         2024
+&gt;                                                  modules or made up into panels.
+&gt; 8541.43.00....................................  Photovoltaic cells assembled in                  50         2024
+&gt;                                                  modules or made up into panels.
+
+[fr202421217:rate](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; 9903.91.02.................  Effective with respect   The duty provided
+&gt;                               to entries on or after   in the applicable
+&gt;                               September 27, 2024,      subheading + 50%.
+&gt;                               articles the product
+&gt;                               of China, as provided
+&gt;                               for in subdivision (c)
+&gt;                               of U.S. note 31 to
+&gt;                               this subchapter.
+
+[fr202421217:general_conditions](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; ``31. (a) As provided in headings 9903.91.01, 9903.91.02, 
+&gt; 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+&gt; 9903.91.08 and subheading 9903.92.10, products of China shall be 
+&gt; subject to additional ad valorem rates of duty, as provided for in this 
+&gt; note. The products of China that are subject to additional ad valorem 
+&gt; rates of duty in accordance with this note are products of China that 
+&gt; are classified in the subheadings, or described in the statistical 
+&gt; reporting numbers, enumerated in this note.
+&gt;     ``Notwithstanding U.S. note 1 to this subchapter, all products of 
+&gt; China that are subject to the additional ad valorem rate of duty 
+&gt; imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+&gt; 9903.91.05, 9903.91.06, 9903.91.07 and 9903.91.08 and subheading 
+&gt; 9903.92.10, shall also be subject to the general rates of duty imposed 
+&gt; on products of China classified in the subheadings, or described in the 
+&gt; statistical reporting numbers, enumerated in this note.
+&gt;     ``Products of China that are classified in the subheadings, or 
+&gt; described in the statistical reporting numbers, enumerated in this note 
+&gt; that are eligible for special tariff treatment under general note 
+&gt; 3(c)(i) to the HTSUS, or that are eligible for temporary duty 
+&gt; exemptions or reductions under subchapter II to chapter 99, shall be 
+&gt; subject to the additional ad valorem rate of duty imposed by headings 
+&gt; 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 
+&gt; 9903.91.07 and 9903.91.08 and subheading 9903.92.10.
+&gt;     ``The additional duties imposed by headings 9903.91.01, 9903.91.02, 
+&gt; 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 and 
+&gt; 9903.91.08 and subheading 9903.92.10, do not apply to goods for which 
+&gt; entry is properly claimed under a provision of chapter 98 of the HTSUS, 
+&gt; except for goods entered under subheadings 9802.00.40, 9802.00.50, and 
+&gt; 9802.00.60, and heading 9802.00.80. For subheadings 9802.00.40, 
+&gt; 9802.00.50, and 9802.00.60, the additional duties apply to the value of 
+&gt; repairs, alterations, or processing performed abroad, as described in 
+&gt; the applicable subheading. For heading 9802.00.80, the additional 
+&gt; duties apply to the value of the article less the cost or value of such 
+&gt; products of the United States, as described in heading 9802.00.80.
+&gt;     ``Products of China that are provided for in headings 9903.91.01, 
+&gt; 9903.91.02, 9903.91.03, 9903.91.04, 9903.91.05, 9903.91.06, 9903.91.07 
+&gt; and 9903.91.08 and subheading 9903.92.10 and classified in one of the 
+&gt; subheadings, or described in the statistical reporting numbers, 
+&gt; enumerated in this note shall continue to be subject to antidumping, 
+&gt; countervailing, or other duties, fees, exactions and charges that apply 
+&gt; to such products, as well as to the additional ad valorem rate of duty 
+&gt; imposed by headings 9903.91.01, 9903.91.02, 9903.91.03, 9903.91.04, 
+&gt; 9903.91.05, 9903.91.06, 9903.91.07, and 9903.91.08 and subheading 
+&gt; 9903.92.10.&#x27;&#x27;
+&gt;     
+
+[fr202421217:scope_and_effective](https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm)
+
+&gt; ``(c) Heading 9903.91.02 applies to products of China that are 
+&gt; classified in the following 8-digit subheadings, effective with respect 
+&gt; to goods entered for consumption, or withdrawn from warehouse for 
+&gt; consumption, on or after 12:01 a.m. eastern daylight time on September 
+&gt; 27, 2024:
+&gt; 
+&gt; (1) 8541.42.00
+&gt; (2) 8541.43.00&#x27;&#x27;.
+&gt; 
+&gt;     
+
+</pre></details></section></main></body></html>
