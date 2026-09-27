@@ -1693,6 +1693,7 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
     output_root: Path
     coordinator: DemoCoordinator
     static_root: Path
+    trade_data_root: Path
     version_store: ExposureVersionStore
     trade_model_factory: Any = None
 
@@ -1794,7 +1795,7 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/trade/catalog":
                 from .trade_data_repository import TradeDataRepository
                 self._send_json(HTTPStatus.OK,
-                                TradeDataRepository(self.repository.paths.root).catalog())
+                                TradeDataRepository(self.trade_data_root).catalog())
                 return
             if parsed.path == "/api/trade/report-state":
                 from .trade_report_store import get_state
@@ -2047,10 +2048,10 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     try:
                         if payload["flow"] == "export":
                             from .trade_export_repository import ExportDataRepository, ExportTradeQuery
-                            result = ExportDataRepository(self.repository.paths.root).query(
+                            result = ExportDataRepository(self.trade_data_root).query(
                                 ExportTradeQuery(**payload))
                         else:
-                            result = TradeDataRepository(self.repository.paths.root).query(
+                            result = TradeDataRepository(self.trade_data_root).query(
                                 TradeQuery(**payload))
                     except TradeDataError as exc:
                         raise WebRequestError(str(exc)) from exc
@@ -2065,7 +2066,7 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     from .trade_data_repository import TradeDataError
                     try:
                         result = prepare_trade_question(
-                            self.repository.paths.root, payload["question"],
+                            self.trade_data_root, payload["question"],
                             selected_flow=payload.get("selected_flow"),
                             selected_product_id=payload.get("selected_product_id"),
                             catalog_version=payload.get("catalog_version"))
@@ -2083,7 +2084,7 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     from .trade_data_repository import TradeDataError
                     try:
                         result = generate_trade_report(
-                            self.repository.paths.root, payload["question"],
+                            self.trade_data_root, payload["question"],
                             selected_flow=payload["selected_flow"],
                             dataset_version=payload["dataset_version"],
                             selected_product_id=payload.get("selected_product_id"),
@@ -2213,7 +2214,8 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     result = prepare_announcement_statistics(
                         self.repository.paths.root, payload["policy_id"], payload["doc_version"],
                         selected_codes=payload.get("selected_codes"),
-                        start_month=payload.get("start_month"), end_month=payload.get("end_month"))
+                        start_month=payload.get("start_month"), end_month=payload.get("end_month"),
+                        trade_root=self.trade_data_root)
                     self._send_json(HTTPStatus.OK, result)
                     return
                 if parsed.path == "/api/announcements/statistics/report":
@@ -2221,7 +2223,8 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                         raise WebRequestError("请提交服务器返回的完整确认范围")
                     from .announcement_statistics_report import generate_announcement_statistics_record
                     result = generate_announcement_statistics_record(self.repository.paths.root,
-                                                                       payload["prepared"])
+                                                                       payload["prepared"],
+                                                                       trade_root=self.trade_data_root)
                     self._send_json(HTTPStatus.OK, result)
                     return
                 if parsed.path == "/api/announcements/coverage/check":
@@ -2323,12 +2326,19 @@ def create_server(
     host: str = DEFAULT_WEB_HOST,
     port: int = DEFAULT_WEB_PORT,
     output_root: Path | None = None,
+    trade_data_root: Path | None = None,
     structured_model_factory=None,
     trade_model_factory=None,
 ) -> ThreadingHTTPServer:
     """Create a configured local server; useful for the CLI and offline tests."""
 
     project_root = _configured_root(root)
+    data_root = project_root if trade_data_root is None else Path(trade_data_root).expanduser().resolve()
+    if trade_data_root is not None and not (
+        data_root.is_dir() and (data_root / "BUNDLE_MANIFEST.json").is_file()
+        and (data_root / "data").is_dir()
+    ):
+        raise ValueError("独立贸易数据目录须包含 BUNDLE_MANIFEST.json 和 data/；服务未启动")
     repository = EvidenceRepository()
     # EvidenceRepository resolves the package checkout by default.  Tests can
     # provide an alternate root without changing global process state.
@@ -2346,6 +2356,7 @@ def create_server(
     ConfiguredHandler.output_root = target_output
     ConfiguredHandler.coordinator = DemoCoordinator(structured_model_factory=structured_model_factory)
     ConfiguredHandler.static_root = static_root
+    ConfiguredHandler.trade_data_root = data_root
     ConfiguredHandler.version_store = ExposureVersionStore(project_root)
     ConfiguredHandler.trade_model_factory = trade_model_factory
     return ThreadingHTTPServer((host, port), ConfiguredHandler)

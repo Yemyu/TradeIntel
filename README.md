@@ -72,14 +72,14 @@ To make a plain folder containing those four files, without overwriting an exist
 
 The folder is a data supplement, not a standalone project or a zip archive. It contains no API configuration, credentials, Census ZIP archives, or temporary run records. Copy its `data/` directory into a prepared checkout and run the verification command again.
 
-The general U.S. trade workspace uses a separate, larger supplement: 124 processed data/index files (about 579 MB), covering 48 import months, 12 export months and the matching product catalogs. The current sample is local and ignored by Git at `tmp/handoff-runs/trade-demo-data-20260925/`; a verified local ZIP is at `tmp/handoff-runs/trade-demo-data-20260927.zip`. Neither is publicly hosted or included in a normal clone. [Local ZIP installation instructions](docs/LOCAL_RUN.zh-CN.md) explain the one tracked manifest that will be replaced in a fresh checkout. To generate and verify a fresh copy from the full published files already present in this checkout, choose a new output directory:
+The general U.S. trade workspace uses a separate, larger supplement: 124 processed data/index files (about 579 MB), covering 48 import months, 12 export months and the matching product catalogs. The current sample is local and ignored by Git at `tmp/handoff-runs/trade-demo-data-20260925/`; a verified local ZIP is at `tmp/handoff-runs/trade-demo-data-20260927.zip`. Neither is publicly hosted or included in a normal clone. [Local setup instructions](docs/LOCAL_RUN.zh-CN.md) recommend unpacking the ZIP into a separate ignored directory and passing `--trade-data-root` to the web server, so the code checkout stays untouched. To generate and verify a fresh copy from the full published files already present in this checkout, choose a new output directory:
 
 ```bash
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py create --output tmp/handoff-runs/trade-demo-data
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root tmp/handoff-runs/trade-demo-data
 ```
 
-To use it in a separate checkout, copy the package's `data/` directory and `BUNDLE_MANIFEST.json` into that checkout's root, then run `PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .`. This verifies data bytes and versions only; it does not install dependencies or prove a clean-machine deployment. The supplement excludes raw Census ZIPs, MySQL files, credentials, source code and historical run records. See the [isolated demo verification](docs/handoff/runs/20260925-TRADE-DEMO-BUNDLE.zh-CN.md).
+To use it in a separate checkout, unpack the ZIP to a separate directory containing `data/` and `BUNDLE_MANIFEST.json`, verify with `PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root /path/to/unpacked-bundle`, then start the page with `.venv/bin/python scripts/run_web.py --trade-data-root /path/to/unpacked-bundle`. This verifies data bytes and versions only; it does not install dependencies or prove a clean-machine deployment. The supplement excludes raw Census ZIPs, MySQL files, credentials, source code and historical run records. See the [isolated demo verification](docs/handoff/runs/20260925-TRADE-DEMO-BUNDLE.zh-CN.md).
 
 From the repository root, in an interactive terminal:
 

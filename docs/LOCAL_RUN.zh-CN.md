@@ -16,25 +16,28 @@
 python3 -m venv .venv
 ```
 
-只在**没有个人数据改动的新克隆**中，将 ZIP 解压到仓库根目录。下面的示例路径须换成数据包在本机的实际绝对路径；`-o` 会用包内较新的进口清单覆盖克隆里已跟踪的旧清单，不能对已有工作目录盲目执行：
+推荐把数据包解到**项目目录内、但不受 Git 管理的独立目录**。下面的 ZIP 路径须换成实际绝对路径；目标目录要选一个尚不存在的新目录，不要把包解到仓库根目录或覆盖旧版本：
 
 ```bash
-unzip -o "/绝对路径/trade-demo-data-20260927.zip" -d .
+mkdir -p .local
+unzip "/绝对路径/trade-demo-data-20260927.zip" -d .local/trade-data-bundle-1
 ```
 
-若拿到的是未压缩的目录包，就把其中的 `data/` 与 `BUNDLE_MANIFEST.json` 放到仓库根目录。两种方式随后都先核验文件与版本：
+若拿到的是未压缩的目录包，可以直接使用该目录。传给程序的是**同时包含 `BUNDLE_MANIFEST.json` 和 `data/` 的目录**，不是 ZIP，也不是内层 `data/`。先核验文件与版本：
 
 ```bash
-PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .
+PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-bundle-1
 ```
 
-只有返回 `"status": "verified"` 才继续。这个检查不下载数据，也不调用模型或 MySQL。解压后 Git 显示旧进口清单被修改、部分数据目录为未跟踪文件，是当前独立数据包安装方式的预期现象；**不要把这些数据顺手提交进代码仓库**。本机[最终 ZIP 装入干净克隆的验收](handoff/runs/20260927-ZIP-INSTALL-CLEAN-CLONE-QA.zh-CN.md)已通过数据校验及大豆进口报告，但没有在本轮重新验证完整依赖、Windows 或公网运行。
+只有返回 `"status": "verified"` 才继续。这个检查不下载数据，也不调用模型或 MySQL；独立目录受到 `.gitignore` 保护，不会把数据混进代码提交。旧版“解入克隆根目录”的方法仍可兼容，但会覆盖 Git 已跟踪的进口清单，只适合确认没有个人改动的新克隆；本页不再推荐该方法。随包 README 目前写的是旧方法，**以本页的新用法为准**。
 
 随后启动本地页面：
 
 ```bash
-.venv/bin/python scripts/run_web.py
+.venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-bundle-1
 ```
+
+启动命令会再次核验数据包；若目录、文件或版本不对，服务会直接拒绝启动，不会悄悄使用仓库里的旧数据。贸易查询和公告统计读取独立目录，政策资料及报告记录仍留在项目工作目录；更换数据版时解到**新的目录**、核验后再改启动参数，不自动删旧版。
 
 在浏览器打开 `http://127.0.0.1:8765/preview/`，例如输入“最近美国大豆进口有什么变化？”，从候选中确认大豆商品组，再生成报告。最近月份是**本项目已发布数据的末月**，不是当天实时更新的数字。若要使用其他分析或历史政策命令，应按根目录 `README.md` 的对应说明另行安装 `requirements.txt` 并准备它们所需的数据；上述步骤只保证普通商品报告。
 
