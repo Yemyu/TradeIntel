@@ -5,7 +5,7 @@
 ## 需要什么
 
 - 本仓库的源码和网页。
-- 单独提供的通用贸易数据补充包：124 个已处理文件，约 579 MB，内含 `BUNDLE_MANIFEST.json` 和 `data/`。普通 Git 克隆不带这个包。原始 Census ZIP、API 密钥和 MySQL 数据都不在包内。
+- 单独提供的通用贸易数据补充包：124 个已处理文件，解压后约 579 MB，ZIP 约 64 MiB，内含 `BUNDLE_MANIFEST.json`、中文说明和 `data/`。普通 Git 克隆不带这个包；目前核验过的 ZIP 只在原工作区的 `tmp/handoff-runs/trade-demo-data-20260927.zip`，**尚无公开下载地址**。原始 Census ZIP、API 密钥和 MySQL 数据都不在包内。
 - Python。本机已在 macOS 上用 Python 3.13.3 的新虚拟环境验证普通进口、出口和双向报告；另一次[完整依赖安装复验](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md)也在本机通过。当前报告保存代码使用 POSIX 文件接口，Windows 尚不能按下方命令视作已支持。
 
 本地候选的[干净 Git 克隆验收](handoff/runs/20260927-CLEAN-CLONE-QA.zh-CN.md)已覆盖下述三类报告、网页生成和重启恢复；前提是另行补入数据包，普通克隆自身不含数据。
@@ -16,13 +16,21 @@
 python3 -m venv .venv
 ```
 
-将数据补充包的 `data/` 目录和 `BUNDLE_MANIFEST.json` 复制到仓库根目录，先核验文件与版本：
+只在**没有个人数据改动的新克隆**中，将 ZIP 解压到仓库根目录。下面的示例路径须换成数据包在本机的实际绝对路径；`-o` 会用包内较新的进口清单覆盖克隆里已跟踪的旧清单，不能对已有工作目录盲目执行：
+
+```bash
+unzip -o "/绝对路径/trade-demo-data-20260927.zip" -d .
+```
+
+若拿到的是未压缩的目录包，就把其中的 `data/` 与 `BUNDLE_MANIFEST.json` 放到仓库根目录。两种方式随后都先核验文件与版本：
 
 ```bash
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .
 ```
 
-只有返回 `"status": "verified"` 才继续。这个检查不下载数据，也不调用模型或 MySQL。随后启动本地页面：
+只有返回 `"status": "verified"` 才继续。这个检查不下载数据，也不调用模型或 MySQL。解压后 Git 显示旧进口清单被修改、部分数据目录为未跟踪文件，是当前独立数据包安装方式的预期现象；**不要把这些数据顺手提交进代码仓库**。本机[最终 ZIP 装入干净克隆的验收](handoff/runs/20260927-ZIP-INSTALL-CLEAN-CLONE-QA.zh-CN.md)已通过数据校验及大豆进口报告，但没有在本轮重新验证完整依赖、Windows 或公网运行。
+
+随后启动本地页面：
 
 ```bash
 .venv/bin/python scripts/run_web.py
