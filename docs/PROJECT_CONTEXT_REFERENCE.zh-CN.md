@@ -1,5 +1,9 @@
 # TradeShock AI — 唯一当前长上下文
 
+## 2026-09-27 最新恢复点：独立目录说明版 ZIP 已在干净克隆复验
+
+[本机打包与验收](handoff/runs/20260927-ISOLATED-ZIP-V2-QA.zh-CN.md)：推荐 ZIP 改为 `tmp/handoff-runs/trade-demo-data-20260927-isolated-v2.zip`，67,464,901 字节，SHA-256 `1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6`；旧 ZIP 原样保留。新 ZIP 的 124 个数据文件和三版本与旧包相同，随包 README 改为解到 `.local/`、用 `--trade-data-root` 启动。代码 @ `0e4df32` 的 macOS Python 3.13.3 干净克隆实际解包、核验、运行 `/preview/`，三类报告金额及重启读回全部与既定值一致，Git 干净，13 项定向测试通过。无模型 API/MySQL/推送。**产品仍是本地美国贸易数据报告候选**，AI 内容、新公告自动发现、Windows/公网/外部分发未据此升级；下一步需先明确分享对象和拟外发材料范围，不能自动上传数据或开放仓库。
+
 ## 2026-09-27 最新恢复点：网页审阅测试在无临时文件的干净克隆全绿
 
 [记录](handoff/runs/20260927-REVIEW-FIXTURE-CLEAN-CLONE-QA.zh-CN.md)：前次干净克隆的一项旧网页测试缺 Git 忽略临时 fixture；当前工作区已有合成 fixture 修复，核验后仅把协调部分提交为 `9360ec4`。新克隆中相关 22/22、连同分根与贸易查询共 36/36 通过，Git 干净；另一项 `test_web_app.py` 未提交改动原样保留。外置 ZIP 的真实三类报告金额、重启恢复与 Git 不变验收在[上一记录](handoff/runs/20260927-EXTERNAL-ZIP-CLEAN-CLONE-QA.zh-CN.md)；本轮不重做数据包。未调用模型/MySQL、未推送。下一步仅做本地候选交付差距的只读盘点，别把这次测试改善扩大解释成模型质量或自动新政策功能已通过。
