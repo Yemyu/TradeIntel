@@ -1,3 +1,4 @@
+from tests.review_fixture import write_review_fixture
 import json
 import tempfile
 import unittest
@@ -8,13 +9,11 @@ from pathlib import Path
 from tradeintel_ai.interpretation_review_store import FILES, packet, submit, reviewed_draft
 from tradeintel_ai.host_review import _publish
 
-SOURCE=Path(__file__).resolve().parents[1]/'tmp/trade-aware-interpretation-v1-first/run'
 
 
 class ReviewRevisionTests(unittest.TestCase):
     def prepare(self, root):
-        for name in FILES:
-            (root/name).write_bytes((SOURCE/name).read_bytes())
+        write_review_fixture(root)
         return {'fingerprint':packet(root)['fingerprint'],'reviewer':'fixture','facts_checked':True,
                 'decisions':[{'index':0,'verdict':'reject','reason':'unsupported'},
                              {'index':1,'verdict':'needs_revision','reason':'check source'}]}

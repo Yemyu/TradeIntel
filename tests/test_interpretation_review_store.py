@@ -1,14 +1,14 @@
+from tests.review_fixture import write_review_fixture
 from pathlib import Path
 import tempfile
 import unittest
 from tradeintel_ai.interpretation_review_store import packet, submit, FILES
 
 ROOT=Path(__file__).resolve().parents[1]
-SOURCE=ROOT/'tmp/trade-aware-interpretation-v1-first/run'
 
 class ReviewStoreTests(unittest.TestCase):
     def copy(self,root):
-        for name in FILES: (root/name).write_bytes((SOURCE/name).read_bytes())
+        write_review_fixture(root)
     def payload(self,root):
         return {'fingerprint':packet(root)['fingerprint'],'reviewer':'test-reviewer','facts_checked':True,
                 'decisions':[{'index':0,'verdict':'reject','reason':'No evidence for priority'},

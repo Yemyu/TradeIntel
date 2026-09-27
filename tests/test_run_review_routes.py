@@ -9,6 +9,7 @@ from unittest.mock import patch
 from src.tradeintel_ai.web_app import create_server
 from src.tradeintel_ai.interpretation_review_store import FILES
 from tests.test_policy_exposure_tools import make_fixture
+from tests.review_fixture import write_review_fixture
 
 
 class RunReviewRoutesTests(unittest.TestCase):
@@ -17,12 +18,10 @@ class RunReviewRoutesTests(unittest.TestCase):
             root=Path(folder)
             make_fixture(root)
             ids=['exposure-20260914T120000-abcdef12','exposure-20260914T120001-abcdef13']
-            source=Path(__file__).resolve().parents[1]/'tmp/trade-aware-interpretation-v1-first/run'
             for run_id in ids:
                 target=root/'runs'/run_id
                 target.mkdir(parents=True)
-                for name in FILES:
-                    (target/name).write_bytes((source/name).read_bytes())
+                write_review_fixture(target)
             server=create_server(root=root,host='127.0.0.1',port=0,output_root=root/'runs')
             thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
             base=f'http://127.0.0.1:{server.server_port}'
