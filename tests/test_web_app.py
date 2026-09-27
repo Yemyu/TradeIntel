@@ -20,6 +20,7 @@ from src.tradeintel_ai.web_app import (
 )
 from src.tradeintel_ai.exposure_version_store import ExposureVersionStore, VersionStoreError, content_digest
 from tests.test_policy_exposure_tools import make_fixture
+from tests.review_fixture import write_review_fixture
 
 
 class WebAppTests(unittest.TestCase):
@@ -178,10 +179,9 @@ class WebAppTests(unittest.TestCase):
                     urlopen(base+'/api/research-artifact/'+run_id+'/status.json')
                 self.assertEqual(forbidden.exception.code,400)
                 from src.tradeintel_ai.interpretation_review_store import FILES
-                source=Path(__file__).resolve().parents[1]/'tmp/trade-aware-interpretation-v1-first/run'
                 review_dir=root/'tmp/trade-aware-interpretation-v1-first/run'
                 review_dir.mkdir(parents=True)
-                for name in FILES:(review_dir/name).write_bytes((source/name).read_bytes())
+                write_review_fixture(review_dir)
                 with patch('src.tradeintel_ai.web_app.load_config',side_effect=AssertionError('review must not load credentials')):
                     with urlopen(base+'/api/saved-interpretation-review') as response:
                         review=json.loads(response.read())

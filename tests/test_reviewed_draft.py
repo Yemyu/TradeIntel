@@ -1,3 +1,4 @@
+from tests.review_fixture import write_review_fixture
 import tempfile
 import unittest
 import json
@@ -5,11 +6,10 @@ from unittest.mock import patch
 from pathlib import Path
 from tradeintel_ai.interpretation_review_store import FILES, packet, submit, reviewed_draft
 
-SOURCE=Path(__file__).resolve().parents[1]/'tmp/trade-aware-interpretation-v1-first/run'
 
 class ReviewedDraftTests(unittest.TestCase):
     def copy(self,root):
-        for name in FILES:(root/name).write_bytes((SOURCE/name).read_bytes())
+        write_review_fixture(root)
     def payload(self,root,first='reject',second='accept',facts=True):
         return {'fingerprint':packet(root)['fingerprint'],'reviewer':'local-review','facts_checked':facts,
                 'decisions':[{'index':0,'verdict':first,'reason':'本次资料不足以支持该方向'},
@@ -23,8 +23,8 @@ class ReviewedDraftTests(unittest.TestCase):
             self.assertIn('现有数据为海关统计金额',draft)
             self.assertIn('/api/version-report?version=',draft)
             self.assertNotIn('第三国转运或轻微加工',draft)
-            self.assertIn('360,659,187',draft)
-            self.assertIn('fr202421217:scope_and_effective',draft)
+            self.assertIn('1,200',draft)
+            self.assertIn('synthetic:scope_and_effective',draft)
             self.assertEqual(before,{name:(root/name).read_bytes() for name in FILES})
     def test_export_rejects_pending_revision_or_unchecked(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -67,6 +67,6 @@ class ReviewedDraftTests(unittest.TestCase):
                 return content
             with patch.object(Path,'read_bytes',replace_after_read):
                 draft=reviewed_draft(root)
-            self.assertIn('360,659,187',draft)
+            self.assertIn('1,200',draft)
             self.assertNotIn('999,999,999',draft)
             self.assertEqual(packet(root)['status'],'stale')
