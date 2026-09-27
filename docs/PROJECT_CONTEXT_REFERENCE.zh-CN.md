@@ -1,5 +1,9 @@
 # TradeShock AI — 唯一当前长上下文
 
+## 2026-09-27 最新恢复点：最终 ZIP → 干净克隆 → 大豆报告已过
+
+[本机干净克隆验收](handoff/runs/20260927-ZIP-INSTALL-CLEAN-CLONE-QA.zh-CN.md)从 `0d6252d` 克隆，解压本机最终 ZIP 并按清单核验，明确选大豆 HS4 `1201` 后生成 2026-07 美国进口 46,041,287 美元，与此前验收相同。只用 macOS Python 3.13.3，未在本轮重装依赖或测页面/Windows。ZIP 与克隆唯一已跟踪路径冲突是旧 `trade_hts10/manifest.json`；覆盖后 Git 变脏，当前也没有自动 ZIP 安装命令。这是下一阶段必须处理的安装/更新体验问题，不是数据错误。ZIP 仍在本机、未上传；分发对象、外发范围和渠道尚未决定。
+
 ## 2026-09-27 最新恢复点：本机 ZIP 已可核验，仍未公开分发
 
 [本机数据 ZIP](handoff/runs/20260927-LOCAL-ZIP-PACKAGE.zh-CN.md)位于 `tmp/handoff-runs/trade-demo-data-20260927.zip`，包含 124 个数据文件、清单和中文说明，67,464,723 字节；逐一解包后项目核验为 `verified`。本地 Git 候选和 macOS 完整依赖/商品报告验收仍有效。ZIP 未纳入 Git、未上传；外发范围、托管渠道和 Windows/公网验收没有决定。下一阶段先定数据包交付方案与边界，不把本机核验误称为正式发布；公告 AI 三字段支线仍暂停。
