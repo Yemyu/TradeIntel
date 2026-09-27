@@ -1,5 +1,7 @@
 # 本地候选新环境依赖安装尝试（2026-09-27）
 
+> 后续已通过[本机代理与系统证书下的完整安装复验](20260927-FULL-INSTALL-QA.zh-CN.md)。本页记录首次失败原因，不再代表当前安装状态。
+
 ## 目标与隔离
 
 从本地 `codex/local-release-candidate` @ `d6dc061` 克隆到独立临时目录，在 macOS / Python 3.13.3 下新建 `.venv`，尝试按仓库 `requirements.txt` 安装四个固定版本，再做 `pip check` 与产品路径复验。只在临时虚拟环境安装；不改系统 Python、全局 pip 配置、原工作区或数据包。不调用模型/MySQL，不推送。

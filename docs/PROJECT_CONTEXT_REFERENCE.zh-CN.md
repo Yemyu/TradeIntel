@@ -1,5 +1,9 @@
 # TradeShock AI — 唯一当前长上下文
 
+## 2026-09-27 最新恢复点：本地候选完整依赖与商品报告已在 macOS 干净克隆通过
+
+[最终隔离复验](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md)：`codex/local-release-candidate` @ `95ef22d` 在新 Python 3.13.3 `.venv` 中装入 `requirements.txt` 四项，`pip check` 通过；另补独立数据包后 124 文件核验、Python 28/28、Node 18/18、三类真实报告及网页重启恢复通过。此前终端直连 TLS 失败通过仅对安装命令指定本机代理与系统证书解决，未降低证书校验或更改全局设置。0 模型 API、0 MySQL、未推送。下一待决是 579 MB 数据包如何交给使用者及外发范围；当前结果仍不是 Windows、新机器、公网服务或稳定 AI 内容验收。
+
 ## 2026-09-27 最新恢复点：完整依赖安装因终端 HTTPS 失败，未验收
 
 [新虚拟环境安装尝试](handoff/runs/20260927-FULL-INSTALL-ATTEMPT.zh-CN.md)：本地候选 @ `d6dc061` 已克隆并建 Python 3.13.3 `.venv`；默认清华镜像与官方 PyPI 都发生 TLS/证书错误，临时环境只有 pip，四个要求的依赖一个也未装入。未运行 `pip check` 或安装后的测试，未更改系统/全局配置。普通商品报告此前不依赖这些包的干净克隆验收仍有效。要复验完整安装，先解决终端可信 HTTPS 或提供经核验离线 wheel；不要用跳过证书校验掩盖问题。数据包交付方式与外发范围仍未决定，未推送。
