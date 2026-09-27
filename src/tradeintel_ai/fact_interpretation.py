@@ -22,7 +22,8 @@ def trade_context(trade, sheet):
         rows=month.get('product_breakdown',[])
         if not rows or len({r['hts8'] for r in rows})!=len(rows): raise ValueError('invalid product rows')
         for row in rows:
-            if row['hts8'] not in ('85414200','85414300'): raise ValueError('foreign trade code')
+            codes=tuple(r['hts8'] for r in sheet['product_rates']) if 'product_rates' in sheet else ('85414200','85414300')
+            if row['hts8'] not in codes: raise ValueError('foreign trade code')
             world=row.get('all_origins_value_usd'); china=row.get('china_value_usd')
             if type(world) is not int or type(china) is not int or not 0<=china<=world:
                 raise ValueError('invalid trade amounts')
@@ -44,6 +45,15 @@ notes为1至3项；kind只能是investigation或limitation。只使用所给事�
 
 def fact_catalog(sheet):
     refs = {s['id']:s for s in sheet['sources']}
+    if 'product_rates' in sheet:
+        scope=sheet['scope_source_id']
+        origin_sources={r.get('origin_source_id',r.get('source_id')) for r in sheet['product_rates']}
+        if scope not in refs or any(r['source_id'] not in refs for r in sheet['product_rates']) or not origin_sources <= refs.keys():
+            return []
+        return [{'id':'policy.effective','value':sheet['effective_date']+' '+sheet['clock_24h']+' '+sheet['timezone'],'source_id':scope},
+                {'id':'policy.origin','value':sheet['origin'],'source_id':sorted(origin_sources)},
+                {'id':'policy.entry_events','value':sheet['entry_events'],'source_id':scope},
+                *({'id':'policy.additional_duty.'+r['hts8'],'value':r['additional_duty_percent'],'source_id':r['source_id']} for r in sheet['product_rates'])]
     scope='fr202421217:scope_and_effective'
     rate='fr202421217:rate'
     return [
@@ -59,7 +69,7 @@ def messages(question, sheet, trade=None):
     if not facts: raise ValueError('missing source facts')
     context=trade_context(trade,sheet) if trade is not None else None
     if context: facts+=deepcopy(context['facts'])
-    return [{'role':'system','content':CONTRACT+'\n已完成查询不得说成没有数据，不重复要求计算已有金额/份额；可以区分现有统计与尚未确认的逐笔适用、成本承担。调查项必须说明尚缺的信息及用途。'},
+    return [{'role':'system','content':CONTRACT+'\n已完成查询不得说成没有数据，不重复要求计算已有金额/份额；可以区分现有统计与尚未确认的逐笔适用、成本承担。调查项必须说明尚缺的信息及用途。\n没有异常交易证据时，不将转运、规避或原产地造假列为优先调查。不能仅因生效前入库或签约就推定豁免；存档条件指消费入境或从仓库提取消费的事件，其他例外需要明确原文依据。'},
             {'role':'user','content':json.dumps({'question':question,'facts':facts,
                 'trade_context':context,'sources':sheet['sources'],'boundary':'没有企业合同、实际税单或替代产能证据。'},ensure_ascii=False)}]
 
@@ -84,6 +94,10 @@ def review(answer, sheet, trade=None):
             flags.append({'index':i,'reason':'possible_fact_restatement_or_unsupported_conclusion'})
         if trade is not None and re.search(r'(?:缺乏|缺少|没有|尚无).{0,16}(?:贸易流量|进口金额|贸易数据)|(?:重新|再|需).{0,8}(?:计算|查询).{0,12}(?:金额|份额)',note['text']):
             flags.append({'index':i,'reason':'possible_missing_data_claim_or_duplicate_completed_query'})
+        if re.search(r'转运|规避|造假',note['text']):
+            flags.append({'index':i,'reason':'origin_anomaly_requires_transaction_evidence'})
+        if re.search(r'豁免|免税',note['text']) and re.search(r'入库|签约|生效前',note['text']):
+            flags.append({'index':i,'reason':'exemption_inference_requires_explicit_clause'})
     return {'status':'needs_revision' if flags else 'manual_review_required',
             'approved':False,'semantic_approval':False,'flags':flags,
             'data_version':sheet['data_version'],

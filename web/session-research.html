@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>TradeIntel 会话研究</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 24px; max-width: 860px; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; }
+  button { margin: 4px 6px 4px 0; padding: 6px 14px; }
+  input, select { margin: 4px 8px 4px 0; padding: 4px 6px; }
+  .state { font-weight: 600; }
+  .muted { color: #666; font-size: 13px; }
+  pre { background: #f7f7f7; padding: 8px; white-space: pre-wrap; }
+  table { border-collapse: collapse; }
+  td, th { border: 1px solid #ccc; padding: 4px 10px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>会话研究流程（确定性基准：全程不调用模型）</h1>
+
+<section id="policy-box">
+  <strong>当前研究对象：</strong><span id="policy-label">已登记主案例</span>
+  <p id="policy-note" class="muted">先提出范围，确认前不会查询贸易数据。</p>
+</section>
+
+<section id="session-box">
+  <button id="create">新建会话</button>
+  <span id="session-label" class="muted">未创建</span>
+</section>
+
+<section id="ask-box">
+  <label>问题 <input id="question" value="请分析2026-07全部登记商品的中国原产金额与占比"></label>
+  <button id="start">开始任务</button>
+  <span id="start-note" class="muted"></span>
+</section>
+
+<section id="confirm-box">
+  <h3>确认范围（确认前不执行任何查询）</h3>
+  <pre id="proposal-result">尚未提出范围</pre>
+  <label>重点
+    <select id="focus">
+      <option value="contrast">金额与占比对照</option>
+      <option value="china_amount">中国原产金额</option>
+      <option value="china_share">中国来源占比</option>
+    </select>
+  </label>
+  <button id="confirm">确认范围并查询证据</button>
+  <span id="confirm-note" class="muted"></span>
+</section>
+
+<section id="evidence-box">
+  <h3>证据面板（确定性计算）</h3>
+  <table id="evidence-table"><thead><tr><th>HTS8</th><th>全部来源(美元)</th><th>中国原产(美元)</th><th>中国来源占比</th></tr></thead><tbody></tbody></table>
+  <button id="generate">生成程序报告（A3，无模型）</button>
+  <span id="generate-note" class="muted"></span>
+</section>
+
+<section id="review-box">
+  <h3>审阅与导出</h3>
+  <span id="task-state" class="state">未知</span>
+  <button id="review-pass">审阅通过</button>
+  <a id="draft-link" href="#" style="display:none">查看/下载程序草稿（Markdown）</a>
+  <a id="export-link" href="#" style="display:none">下载程序报告（Markdown）</a>
+  <p class="muted">程序草稿在确定性报告生成后即可查看；最终报告仍需通过确认和导出门。AI解释合同（v3）尚未采纳：此页默认不含模型内容，未来AI解释必须走逐项审阅服务。</p>
+  <p class="muted">新公告必须先在“新公告导入”页完成候选确认和 exact 覆盖核对，再通过带绑定参数的链接进入本页；页面不会把公告的缺失商品补成零。</p>
+</section>
+
+<section id="followup-box">
+  <h3>追问（返回候选请求，确认后才生效）</h3>
+  <label>追问 <input id="followup-text" value="那上月呢？" size="40"></label>
+  <label>商品卡片
+    <select id="followup-product"><option value="">不更换商品范围</option></select>
+  </label>
+  <button id="followup">解析追问</button>
+  <button id="followup-confirm">确认候选请求</button>
+  <pre id="followup-result"></pre>
+</section>
+
+<section id="state-box">
+  <h3>会话状态（刷新自动恢复）</h3>
+  <pre id="state"></pre>
+</section>
+
+<script>
+const API = {
+  post: (path, body) => fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                     body: JSON.stringify(body || {})}).then(r => r.json().then(j => ({ok: r.ok, status: r.status, body: j}))),
+  get: (path) => fetch(path).then(r => r.json().then(j => ({ok: r.ok, status: r.status, body: j})))
+};
+
+const query = (() => {
+  const search = (typeof window !== 'undefined' && window.location && window.location.search) || '';
+  if (typeof URLSearchParams === 'function') return new URLSearchParams(search);
+  return {get: () => null};
+})();
+const PAGE_CONFIG = (() => {
+  const policyId = query.get('policy_id') || 'us_301_review2025_tungsten_solar';
+  const docVersion = query.get('doc_version') || '';
+  const candidateDigest = query.get('candidate_digest') || '';
+  const month = query.get('month') || '';
+  const productText = query.get('products') || '';
+  const products = productText.split(',').map(item => item.trim()).filter(Boolean);
+  return {policyId, docVersion, candidateDigest, month,
+          products: products.length ? products : null,
+          isAnnouncement: Boolean(docVersion && candidateDigest)};
+})();
+
+function currentRequest() {
+  // The primary page no longer manufactures a request in the browser.  A
+  // request is produced by /proposal and confirmed by its server-side id.
+  // Announcement links carry scope in PAGE_CONFIG; the current HTML has no
+  // legacy month/product inputs. The server still validates this scope.
+  const month = document.getElementById('month');
+  const product = document.getElementById('product');
+  if (!PAGE_CONFIG.isAnnouncement && (!month || !product)) return null;
+  const request = {policy_id: PAGE_CONFIG.policyId,
+                   month: month ? month.value : PAGE_CONFIG.month,
+                   product: product ? product.value : 'all',
+                   focus: document.getElementById('focus').value,
+                   original_question: (document.getElementById('question') || {}).value || ''};
+  if (PAGE_CONFIG.products) {
+    request.product = 'all';
+    request.products = PAGE_CONFIG.products.slice();
+  }
+  return request;
+}
+
+let pendingProposal = null;
+let lastSessionState = null;
+
+function currentBinding() {
+  if (!PAGE_CONFIG.isAnnouncement) return null;
+  return {policy_id: PAGE_CONFIG.policyId, doc_version: PAGE_CONFIG.docVersion,
+          candidate_digest: PAGE_CONFIG.candidateDigest};
+}
+
+function setOptionalText(id, text) {
+  const node = document.getElementById(id);
+  if (node) node.textContent = text;
+}
+
+function configurePage() {
+  const month = document.getElementById('month');
+  const product = document.getElementById('product');
+  if (PAGE_CONFIG.month && month) month.value = PAGE_CONFIG.month;
+  if (PAGE_CONFIG.products && product) product.value = PAGE_CONFIG.products.join(',');
+  if (PAGE_CONFIG.isAnnouncement) {
+    setOptionalText('policy-label', '新公告 ' + PAGE_CONFIG.policyId +
+      '（已绑定版本 ' + PAGE_CONFIG.docVersion + '）');
+    setOptionalText('policy-note', '本页使用服务器登记的公告版本和已核对的贸易覆盖；所选商品：' +
+      (PAGE_CONFIG.products ? PAGE_CONFIG.products.join('、') : '公告完整范围') +
+      '。确认前不会查询贸易数据。');
+  }
+}
+
+function sessionId() { return localStorage.getItem('tradeintel_session_id') || ''; }
+function setSession(id) { localStorage.setItem('tradeintel_session_id', id); document.getElementById('session-label').textContent = id; }
+function latestTask(state) {
+  const tasks = Object.values(state.tasks || {});
+  tasks.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+  return tasks[0] || null;
+}
+const STATE_LABELS = {received: '已接收', awaiting_confirmation: '等待确认', evidence_ready: '证据就绪',
+  generation_started: '生成中', response_saved: '已保存', needs_review: '待审阅',
+  reviewed: '已审阅', exportable: '已可导出', failed: '失败', unknown_outcome: '未知结果'};
+
+function hash(text) {
+  let h = 5381;
+  for (let i = 0; i < text.length; i += 1) { h = ((h << 5) + h + text.charCodeAt(i)) >>> 0; }
+  return 'djb2-' + h.toString(16);
+}
+
+function renderEvidence(evidence) {
+  const tbody = document.querySelector('#evidence-table tbody');
+  tbody.replaceChildren();
+  const rows = evidence && evidence.rows ? evidence.rows : [];
+  if (rows.length) rows.forEach(row => {
+    const tr = document.createElement('tr');
+    [row.hts8, String(row.world_import_usd), String(row.china_import_usd),
+     row.share_status === 'known' ? row.china_share_percent + '%' : '未知'].forEach(cell => {
+      const td = document.createElement('td');
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  else if (evidence && evidence.evidence) {
+    const observations = evidence.evidence.observations || [];
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 4;
+    td.textContent = '多期证据已生成：' + observations.length +
+      ' 条观察；数据版本 ' + (evidence.data_version || '未知') +
+      '。详细内容由程序报告和来源引用展开。';
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  }
+}
+
+function renderState(state) {
+  lastSessionState = state;
+  const saved = state.scope_proposals || {};
+  const proposalEntries = Object.values(saved);
+  if (proposalEntries.length && !pendingProposal) {
+    pendingProposal = proposalEntries.sort((a, b) => (a.created_at < b.created_at ? 1 : -1))[0];
+    const proposal = pendingProposal;
+    setOptionalText('proposal-result', JSON.stringify({
+      question: proposal.question, products: proposal.product_cards,
+      window: proposal.request && proposal.request.window,
+      data_version: proposal.data_version,
+      query_executed: proposal.query_executed, message: proposal.message}, null, 2));
+  }
+  const productSelect = document.getElementById('followup-product');
+  if (productSelect && pendingProposal && pendingProposal.product_cards) {
+    const old = productSelect.value;
+    productSelect.replaceChildren(new Option('不更换商品范围', ''));
+    pendingProposal.product_cards.forEach(card => {
+      const label = card.hts8 + ' ' + (card.name || card.name_en || '');
+      productSelect.appendChild(new Option(label, card.hts8));
+    });
+    if ([...productSelect.options].some(option => option.value === old)) productSelect.value = old;
+  }
+  document.getElementById('state').textContent = JSON.stringify({
+    session_id: state.session_id, messages: state.messages,
+    current_request: state.current_request, revision: state.revision,
+    tasks: Object.fromEntries(Object.entries(state.tasks || {}).map(([k, t]) =>
+      [k, {task_id: t.task_id, state: t.state, request: t.request_snapshot,
+           evidence: t.evidence, has_response: !!t.response}]))
+  }, null, 2);
+  const task = latestTask(state);
+  const taskState = task ? (STATE_LABELS[task.state] || task.state) : '无任务';
+  document.getElementById('task-state').textContent = taskState;
+  const draftLink = document.getElementById('draft-link');
+  if (draftLink) {
+    if (task && ['response_saved', 'needs_review', 'reviewed', 'exportable'].includes(task.state)
+        && task.response && (task.response.a3_markdown || task.response.markdown)) {
+      draftLink.style.display = '';
+      draftLink.href = '/api/session/draft?session_id=' + state.session_id + '&task_id=' + task.task_id;
+    } else { draftLink.style.display = 'none'; }
+  }
+  const link = document.getElementById('export-link');
+  if (task && task.state === 'exportable' && task.response
+      && (task.response.a3_markdown || task.response.markdown)) {
+    link.style.display = '';
+    link.href = '/api/session/export?session_id=' + state.session_id + '&task_id=' + task.task_id;
+  } else { link.style.display = 'none'; }
+  if (task && task.evidence) renderEvidence(task.evidence);
+}
+
+async function load() {
+  if (!sessionId()) return;
+  const res = await API.get('/api/session?session_id=' + encodeURIComponent(sessionId()));
+  if (res.ok) { setSession(res.body.session_id); renderState(res.body); }
+}
+
+async function onCreate() {
+  const res = await API.post('/api/session/create', {});
+  if (res.ok) {
+    // A new session must not reuse a proposal belonging to the previous one.
+    pendingProposal = null;
+    setOptionalText('proposal-result', '尚未提出范围');
+    setSession(res.body.session.session_id);
+    renderState(res.body.session);
+  }
+}
+
+async function onStart() {
+  const note = document.getElementById('start-note');
+  const question = document.getElementById('question').value;
+  if (!sessionId()) { note.textContent = '请先新建会话'; return; }
+  const existing = latestTask(lastSessionState || {});
+  const existingQuestion = existing && existing.request_snapshot &&
+    existing.request_snapshot.original_question;
+  const duplicateStates = ['received', 'awaiting_confirmation', 'evidence_ready',
+    'generation_started', 'response_saved', 'needs_review', 'reviewed', 'exportable'];
+  if (existing && duplicateStates.includes(existing.state) && existingQuestion === question) {
+    note.textContent = '相同问题已有任务，不重复创建；请查看现有任务或换一个问题';
+    return;
+  }
+  if (pendingProposal && pendingProposal.question === question &&
+      !(lastSessionState && lastSessionState.current_request)) {
+    note.textContent = '相同问题已有待确认范围提案，请先确认或换一个问题';
+    return;
+  }
+  await API.post('/api/session/message', {session_id: sessionId(), role: 'user', content: question});
+  if (PAGE_CONFIG.isAnnouncement) {
+    // The announcement page has already supplied a server-registered
+    // document version and candidate digest in its URL.  It must use the
+    // legacy announcement binding path, not the multi-period proposal path.
+    const request = currentRequest();
+    pendingProposal = {announcement: true, request,
+                       question, message: '公告范围已加载，确认后由服务器重新核对版本和贸易覆盖'};
+    document.getElementById('proposal-result').textContent = JSON.stringify({
+      question, products: request.products || [request.product], month: request.month,
+      policy_binding: currentBinding(), query_executed: false,
+      message: pendingProposal.message}, null, 2);
+    note.textContent = '公告范围已准备，请确认后再开始查询';
+    return;
+  }
+  const selected = PAGE_CONFIG.products ? PAGE_CONFIG.products.slice() : 'all';
+  const products = selected;
+  const res = await API.post('/api/session/proposal',
+    {session_id: sessionId(), original_question: question, policy_id: PAGE_CONFIG.policyId,
+     selected_products: PAGE_CONFIG.products || products});
+  if (!res.ok) { note.textContent = res.body.message || '范围提案失败'; return; }
+  pendingProposal = res.body;
+  document.getElementById('proposal-result').textContent = JSON.stringify({
+    question: res.body.question, products: res.body.product_cards,
+    window: res.body.request.window, data_version: res.body.data_version,
+    query_executed: res.body.query_executed, message: res.body.message}, null, 2);
+  note.textContent = '范围提案已生成，请确认后再开始查询';
+}
+
+async function onConfirm() {
+  const note = document.getElementById('confirm-note');
+  if (!sessionId()) { note.textContent = '请先新建会话'; return; }
+  if (PAGE_CONFIG.isAnnouncement && pendingProposal && pendingProposal.announcement) {
+    const request = pendingProposal.request || currentRequest();
+    const body = {session_id: sessionId(), request,
+                  policy_binding: currentBinding()};
+    const confirmed = await API.post('/api/session/request', body);
+    if (!confirmed.ok) { note.textContent = confirmed.body.message || '公告绑定确认失败'; return; }
+    const boundRequest = (confirmed.body.session && confirmed.body.session.current_request) || request;
+    const started = await API.post('/api/session/task/start',
+      {session_id: sessionId(), prompt_digest: hash(questionDigest(boundRequest)),
+       request: boundRequest});
+    if (!started.ok) { note.textContent = started.body.message || '任务启动失败'; return; }
+    const task = latestTask(started.body.session || confirmed.body.session);
+    const evidence = await API.post('/api/session/task/evidence',
+      {session_id: sessionId(), task_id: task.task_id});
+    if (!evidence.ok) { note.textContent = evidence.body.message || '证据查询失败'; await load(); return; }
+    note.textContent = '公告已绑定，证据已生成（确定性查询）';
+    await load();
+    return;
+  }
+  const request = pendingProposal && pendingProposal.request ? pendingProposal.request : currentRequest();
+  if (!request || !pendingProposal) {
+    note.textContent = '请先点击“开始任务”生成范围提案'; return;
+  }
+  const confirmed = await API.post('/api/session/confirm-proposal',
+    {session_id: sessionId(), proposal_id: pendingProposal.proposal_id});
+  if (!confirmed.ok) { note.textContent = confirmed.body.message || '确认失败'; return; }
+  const state = confirmed.body.session;
+  const started = await API.post('/api/session/task/start',
+    {session_id: sessionId(), prompt_digest: hash(request.original_question), request});
+  if (!started.ok) { note.textContent = started.body.message || '任务启动失败'; return; }
+  const task = latestTask(started.body.session || state);
+  const evidence = await API.post('/api/session/task/evidence',
+    {session_id: sessionId(), task_id: task.task_id});
+  if (!evidence.ok) { note.textContent = evidence.body.message || '证据查询失败'; await load(); return; }
+  note.textContent = '证据已生成（确定性查询）';
+  await load();
+}
+
+function questionDigest(request) {
+  return request && request.original_question ? request.original_question :
+    (document.getElementById('question') || {}).value || '';
+}
+
+async function onGenerate() {
+  const state = await API.get('/api/session?session_id=' + encodeURIComponent(sessionId()));
+  const task = latestTask(state.body);
+  const res = await API.post('/api/session/task/generate',
+    {session_id: sessionId(), task_id: task.task_id});
+  document.getElementById('generate-note').textContent =
+    res.ok ? '程序报告已生成，等待人工审阅' : (res.body.message || '生成失败');
+  await load();
+}
+
+async function onReviewPass() {
+  const state = await API.get('/api/session?session_id=' + encodeURIComponent(sessionId()));
+  const task = latestTask(state.body);
+  if (task.state !== 'needs_review' && task.state !== 'reviewed') return;
+  await API.post('/api/session/task/transition',
+    {session_id: sessionId(), task_id: task.task_id,
+     state: task.state === 'needs_review' ? 'reviewed' : 'exportable',
+     reason: '人工审阅通过'});
+  await load();
+}
+
+async function onFollowup() {
+  const selected = document.getElementById('followup-product').value;
+  const body = {session_id: sessionId(), text: document.getElementById('followup-text').value};
+  if (selected) body.selected_products = [selected];
+  const res = await API.post('/api/session/followup',
+    body);
+  if (res.ok && res.body.proposal) pendingProposal = res.body.proposal;
+  document.getElementById('followup-result').textContent = JSON.stringify(res.body, null, 2);
+}
+
+async function onFollowupConfirm() {
+  const parsed = JSON.parse(document.getElementById('followup-result').textContent || '{}');
+  if (parsed.proposal && parsed.proposal.proposal_id) {
+    const res = await API.post('/api/session/confirm-proposal',
+      {session_id: sessionId(), proposal_id: parsed.proposal.proposal_id});
+    if (res.ok) await load();
+    return;
+  }
+  if (!parsed.candidate_request) return;
+  const candidateRequest = {...parsed.candidate_request};
+  if (PAGE_CONFIG.isAnnouncement && PAGE_CONFIG.products && !candidateRequest.products) {
+    candidateRequest.products = PAGE_CONFIG.products.slice();
+  }
+  const body = {session_id: sessionId(), candidate_request: candidateRequest};
+  const binding = currentBinding();
+  if (binding) body.policy_binding = binding;
+  const res = await API.post('/api/session/confirm-request',
+    body);
+  if (res.ok) await load();
+}
+
+document.getElementById('create').addEventListener('click', onCreate);
+document.getElementById('start').addEventListener('click', onStart);
+document.getElementById('confirm').addEventListener('click', onConfirm);
+document.getElementById('generate').addEventListener('click', onGenerate);
+document.getElementById('review-pass').addEventListener('click', onReviewPass);
+document.getElementById('followup').addEventListener('click', onFollowup);
+document.getElementById('followup-confirm').addEventListener('click', onFollowupConfirm);
+configurePage();
+load();
+</script>
+</body>
+</html>

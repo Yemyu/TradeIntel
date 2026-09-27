@@ -19,6 +19,7 @@ from .policy_review_report import render_policy_review
 from .business_series import summarize_series, render_series
 from .comparison_direction import check_endpoint_direction
 from .policy_conditions import contract_for_policy, fields_for_policy, validate_conditions, validate_solar_choices, solar_output_schema
+from .response_contract import canonical_response, parse_json_response
 
 PLAN_PROMPT = '''把用户问题转成JSON任务。资料范围仅美国进口、2025年登记的中国钨/硅片/多晶硅五税号政策。
 已登记不等于只有2025年的数据。可用统计月份以附带的数据能力说明为准，不用模型自身时间知识拒绝已发布月份。
@@ -40,18 +41,7 @@ policy只解释保存的CBP2024-12-31通知，不确认当前综合税率。不�
 
 
 def object_response(text):
-    text = text.strip()
-    match = re.fullmatch(r'```(?:json)?\s*\n(.*?)\n```', text, re.S)
-    if match:
-        text = match[1]
-    def unique(pairs):
-        result = {}
-        for key, value in pairs:
-            if key in result:
-                raise ValueError('duplicate JSON field')
-            result[key] = value
-        return result
-    value = json.loads(text, object_pairs_hook=unique)
+    value = parse_json_response(text)
     if not isinstance(value, dict):
         raise ValueError('response must be an object')
     return value
@@ -82,8 +72,14 @@ def validate_plan(plan, question):
         if plan['message'] in ('中文补问缺少的月份、商品或排序条件', '说明未覆盖及所需政策原文、国家商品和统计期'):
             raise ValueError('schema placeholder is not a user answer')
         return
-    # This scope filter is a conservative guard, not proof of language understanding.
-    if re.search(r'欧盟|电动汽车|写回|删除|因果|预测', question):
+    # This scope filter is a conservative guard, not proof of language
+    # understanding. Negative boundary statements such as “不做因果分析”
+    # are allowed; affirmative causal/prediction requests are not.
+    negative_boundary = re.compile(r'(?:不|不要|无需|不做|不进行|不需要|不要求).{0,8}(?:因果|预测)')
+    boundary_removed = negative_boundary.sub('', question)
+    def affirmative(term):
+        return bool(re.search(term, boundary_removed))
+    if re.search(r'欧盟|电动汽车|写回|删除', question) or affirmative(r'因果') or affirmative(r'预测'):
         raise ValueError('question exceeds supported execution scope')
     if kind == 'policy' and set(plan) == {'kind'}:
         return
@@ -139,8 +135,9 @@ def validate_plan(plan, question):
                 raise ValueError('row limit not explicit')
 
 
-def run_business_question(model, question, output: Path, *, repository=None, secret='', policy_id=None, interpretation_mode=False, structured_task=None):
+def run_business_question(model, question, output: Path, *, repository=None, secret='', policy_id=None, interpretation_mode=False, structured_task=None, original_question=None, planning_audit=None, month_resolution=None):
     selected_plan = None
+    v2_mode = bool(structured_task and structured_task.get('task') == 'monthly_exposure')
     if structured_task is not None:
         from .structured_task import compile_task
         canonical, selected_plan = compile_task(structured_task)
@@ -167,8 +164,13 @@ def run_business_question(model, question, output: Path, *, repository=None, sec
         save(stage + '-response.json', asdict(response))
         if response.tool_calls or response.metadata.get('finish_reason') == 'length':
             raise ValueError('unexpected tools or truncated response')
-        return object_response(response.text)
+        parsed = object_response(response.text)
+        save(stage + '-canonical.json', canonical_response(response.text, stage=stage))
+        return parsed
     save('input.json', {'question': question, 'structured_task':structured_task,
+                        'original_question': original_question,
+                        'planning_audit': planning_audit,
+                        'month_resolution': month_resolution,
                         'input_mode':'structured' if selected_plan else 'natural_language'})
     try:
         save('case-selection.json', {'policy_id': policy_id, 'status': selection_status or 'selected',
@@ -205,10 +207,10 @@ def run_business_question(model, question, output: Path, *, repository=None, sec
         validate_plan(plan, question)
         save('plan.json', plan)
         state['kind'] = plan['kind']
-        if interpretation_mode and (policy_id != SECOND or plan['kind'] not in ('brief','series_brief')):
+        if interpretation_mode and (policy_id not in (SECOND,POLICY_EXPOSURE_ID) or plan['kind'] not in ('brief','series_brief')):
             state['failure_stage'] = 'interpretation_task_routing'
             state['message'] = '模型未选择此实验要求的综合简报任务；请核查已保存的规划回答。'
-            raise ValueError('interpretation mode only supports solar briefs')
+            raise ValueError('interpretation mode requires a registered brief')
         if plan['kind'] in ('clarify', 'unsupported'):
             state.update(status=plan['kind'], message=plan['message'])
         else:
@@ -259,10 +261,19 @@ def run_business_question(model, question, output: Path, *, repository=None, sec
                 if not hits:
                     raise ValueError('no supported policy evidence')
                 fact_sheet = None
+                if interpretation_mode and policy_id==POLICY_EXPOSURE_ID:
+                    from .primary_fact_sheet import build_primary_fact_sheet
+                    fact_sheet=build_primary_fact_sheet(evidence,version,root=repo.paths.root)
+                    save('policy-facts.json',fact_sheet)
+                    from .policy_product_details import project
+                    requested_codes = ([r['hts8'] for r in trade_rows] if plan['kind'] in ('brief', 'series_brief')
+                                       else [r['hts8'] for r in fact_sheet['product_rates']])
+                    lines+=render_fact_sheet(project(fact_sheet, requested_codes))
                 if policy_id == SECOND and plan['kind'] in ('brief', 'series_brief'):
-                    fact_sheet = build_fact_sheet(evidence, version)
+                    fact_sheet = build_fact_sheet(evidence, version,root=repo.paths.root)
                     save('policy-facts.json', fact_sheet)
-                    fact_lines = render_fact_sheet(fact_sheet)
+                    from .policy_product_details import project
+                    fact_lines = render_fact_sheet(project(fact_sheet, [r['hts8'] for r in trade_rows]))
                     (output/'policy-facts.zh-CN.md').write_text('\n'.join(fact_lines)+'\n')
                     lines += fact_lines
                 if plan['kind'] in ('brief', 'series_brief'):
@@ -294,6 +305,29 @@ def run_business_question(model, question, output: Path, *, repository=None, sec
                                           '这是定位摘录，不包含所有上文条件；完整段落见下方核查区。', '']
                 condition_codes = [r['hts8'] for r in trade_rows] if plan['kind'] in ('brief', 'series_brief') else []
                 if interpretation_mode:
+                    if v2_mode:
+                        from .evidence_bundle import build_evidence_bundle, render_observations
+                        from .research_brief_v2 import messages as v2_messages, review as v2_review, render_pending as v2_render_pending
+                        bundle = build_evidence_bundle(trade_for_interpretation, fact_sheet, focus=structured_task.get('focus','contrast'))
+                        save('evidence-bundle.json', bundle)
+                        lines += render_observations(bundle)
+                        interpreted = ask('interpretation', v2_messages(question, bundle))
+                        reviewed = v2_review(interpreted, bundle)
+                        save('interpretation-review.json', reviewed)
+                        attachment = v2_render_pending(interpreted, reviewed)
+                        (output/'interpretation-pending.zh-CN.md').write_text(attachment.replace(secret,'[REDACTED]') if secret else attachment)
+                        lines += ['## AI解释交付限制','', 'AI只解释程序已经计算出的观察；文字仍需人工审阅，未获采纳。', '',
+                                  '完整政策证据与同版本数据链接如下：','']
+                        for hit in hits:
+                            lines += [f"[{hit['id']}]({hit['citation_url']})",'', *('> '+line for line in hit['text'].splitlines()),'']
+                        pin_repository(repo, policy_id=policy_id)
+                        lines += [f"同版本固定数据页：`/api/version-report?version={version}`。该页仅提供同版背景数据，不扩大本次AI解释范围。", '']
+                        (output/'source-packet.zh-CN.md').write_text('\n'.join(lines)+'\n')
+                        state.update(status='interpretation_needs_review', interpretation_status=reviewed['status'],
+                                     message='程序观察与AI解释已生成；解释仍需人工审阅，不是已验收完整简报。',
+                                     delivery={'status':'needs_completion','approved':False})
+                        save('status.json', state)
+                        return state
                     from .fact_interpretation import messages, review, render_pending, trade_context
                     save('interpretation-trade-context.json', trade_context(trade_for_interpretation, fact_sheet))
                     interpreted = ask('interpretation', messages(question, fact_sheet, trade_for_interpretation))

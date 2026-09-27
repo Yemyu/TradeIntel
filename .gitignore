@@ -23,6 +23,9 @@ data/processed/causal/causal_trade_hs6_monthly.csv
 # keep the small provenance manifest, not the 90+ MB monthly CSVs, in Git.
 data/processed/trade_hts10/monthly/
 data/processed/trade_hts8/monthly/
+data/processed/trade_scheduleb10/monthly/
+# Monthly official commodity-name indexes are regenerated from the same ZIPs.
+data/processed/trade_classification/monthly/
 
 # Monthly policy-exposure CSVs are reproducible from retained Census ZIPs.
 data/processed/policy_exposure/monthly/

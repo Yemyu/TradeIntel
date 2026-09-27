@@ -11,7 +11,10 @@ def research_data_link(root, run):
         state=_read(run/'status.json')
         version=state.get('data_version')
         if not isinstance(version,str):return unknown
-        store=ExposureVersionStore(root)
+        from .policy_cases import resolve_case
+        policy_id = state.get('policy_id')
+        case = resolve_case(policy_id, require_enabled=False) if policy_id else None
+        store=ExposureVersionStore(root, root / case.versions) if case else ExposureVersionStore(root)
         snapshot=store.load_snapshot(version)
         store.release_root(version)
         if assess_report(run,store,snapshot)['status']!='unchanged_scope':return unknown
@@ -28,7 +31,8 @@ def research_data_link(root, run):
                 metrics=matches[0]
             for field in ('all_origins_value_usd','china_value_usd'):
                 if type(row.get(field)) is not int or row[field]!=metrics.get(field):return unknown
-        return {'status':'bound','url':'/api/version-report?version='+version,
+        return {'status':'bound','url':'/api/version-report?version='+version + (
+                    '&policy_id='+case.policy_id if case and case.policy_id != 'us_301_review2025_tungsten_solar' else ''),
                 'data_version':version,'months':data['requested_months'],
                 'hts8':data.get('hts8'),
                 'message':'本次查询：'+ '、'.join(data['requested_months'])+

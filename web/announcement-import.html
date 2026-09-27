@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>TradeIntel 新公告导入</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 24px; max-width: 1100px; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; }
+  button { margin: 4px 6px 4px 0; padding: 6px 14px; }
+  input, select, textarea { margin: 4px 8px 4px 0; padding: 4px 6px; }
+  textarea { width: 96%; min-height: 130px; display: block; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { border: 1px solid #ccc; padding: 5px 7px; font-size: 13px; vertical-align: top; }
+  td input { width: 95%; box-sizing: border-box; }
+  td select { max-width: 100%; }
+  .citation-control { display: block; width: 100%; box-sizing: border-box; margin-bottom: 6px; }
+  textarea.citation-control { min-height: 58px; resize: vertical; }
+  .citation-fill { margin: 0 0 8px; }
+  #saved-sections { max-height: 360px; overflow: auto; border: 1px solid #ddd; padding: 8px 12px; }
+  #saved-sections pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 4px 0 14px; }
+  #reading-preview { background: #f7faf7; border-left: 3px solid #699077; padding: 10px 14px; margin: 12px 0; }
+  #reading-preview article { border-top: 1px solid #d7e4d9; padding: 8px 0; }
+  #reading-preview details { margin: 7px 0; }
+  #reading-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #fff; padding: 8px; }
+  .muted { color: #666; font-size: 13px; }
+  .ok { color: #176b38; }
+  .warn { color: #8a4b00; }
+  code { background: #f4f4f4; padding: 1px 4px; }
+</style>
+</head>
+<body>
+<h1>新公告导入（候选确认路径）</h1>
+<p class="muted">这是一条独立的更新路径：导入原文 → 逐字段确认 → 启用 → 覆盖核对 → 重新确认研究范围。导入本身不会进入检索，也不会自动调用模型。</p>
+
+<section>
+  <h3>1. 登记公告原文</h3>
+  <label>政策ID <input id="policy-id" placeholder="为这次公告填写唯一ID"></label>
+  <label>来源ID <input id="source-id" placeholder="例如 notice:2026:p1"></label>
+  <label>来源URL（自行核实，可留空） <input id="source-url" size="48" placeholder="https://..."></label>
+  <textarea id="source-text" placeholder="粘贴完整公告原文（不要只粘标题）"></textarea>
+  <p class="warn">这里保存的是你粘贴的文字和填写的网址；系统不会抓取网址或验证来源。请在确认字段前自行对照原始公告。</p>
+  <button id="import">登记为候选</button>
+  <span id="import-note" class="muted"></span>
+</section>
+
+<section>
+  <h3>2. 生成并填写13字段确认表</h3>
+  <div>公告版本：<code id="doc-version">—</code> <button id="template" disabled>生成确认模板</button></div>
+  <p class="muted">先选择原文段落，再点“填入整段原文”；也可以删减为该段里的准确原句。已知字段至少一条引文，有冲突的字段至少两条；查不到时说明原因。系统只核对引文是否来自原文，内容含义仍由你确认。商品税号和税率要填 JSON，例如 <code>[{"code":"28046100","precision":"whole_hts8"}]</code>、<code>{"28046100":50}</code>。</p>
+  <details id="document-details"><summary>查看已保存原文与段落编号</summary><p id="source-provenance" class="warn"></p><div id="saved-sections"></div></details>
+  <p><label>离线阅读笔记（JSON，仅供核对） <input id="reading-preview-file" type="file" accept=".json,application/json" disabled></label>
+    <span id="reading-preview-note" class="muted">先生成确认模板；此处不会调用模型或自动填写字段。</span></p>
+  <div id="reading-preview" hidden><p class="warn">阅读笔记仅提示原文位置，不能证明解释正确；请自行核对后填写下表。</p>
+    <div id="reading-preview-items"></div></div>
+  <table id="fields"><thead><tr><th>字段</th><th>状态</th><th>值</th><th>原因（unknown必填）</th><th>段落ID</th><th>逐字引文</th></tr></thead><tbody></tbody></table>
+  <button id="submit" disabled>提交候选校验</button>
+  <button id="enable" disabled>确认并启用</button>
+  <span id="candidate-note" class="muted"></span>
+</section>
+
+<section>
+  <h3>3. 覆盖与重新绑定</h3>
+  <label>统计月份 <input id="coverage-month" value="2025-01" pattern="\d{4}-\d{2}"></label>
+  <label>本次商品范围 <input id="coverage-codes" size="42" placeholder="留空=公告完整范围；可填28046100,38180000"></label>
+  <pre id="coverage">尚未启用</pre>
+  <p id="rebind" class="warn"></p>
+  <button id="check-coverage" disabled>核对贸易覆盖</button>
+  <button id="load-coverage" disabled>读取覆盖状态</button>
+  <a id="research-link" href="#" style="display:none">使用本公告进入研究助手</a>
+  <div id="statistics-report-controls" hidden>
+    <h4>生成公告相关贸易报告</h4>
+    <label>开始月份 <input id="statistics-start-month" placeholder="默认最近12个月"></label>
+    <label>结束月份 <input id="statistics-end-month" placeholder="默认数据最新月"></label>
+    <p class="muted">报告显示中国来源的美国消费进口数据。默认选公告中已确认的完整 HTS8 商品；可在“本次商品范围”填写子集。</p>
+    <button id="prepare-statistics-report" type="button">查看并确认范围</button>
+    <p id="statistics-scope-note" class="muted"></p>
+    <button id="generate-statistics-report" type="button" disabled>生成图表报告</button>
+  </div>
+</section>
+
+<script>
+const API = {
+  post: (path, body) => fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                      body: JSON.stringify(body || {})}).then(r => r.json().then(j => ({ok: r.ok, body: j}))),
+  get: (path) => fetch(path).then(r => r.json().then(j => ({ok: r.ok, body: j})))
+};
+let templateFields = [];
+let savedSections = [];
+let evidenceCounts = [];
+let candidateReady = false;
+let candidateDigest = '';
+let preparedStatisticsScope = null;
+const readingFields = ['rate_meaning', 'conditions', 'exceptions'];
+const readingSchema = 'announcement-reading-suggestions-v2';
+const fieldLabels = {title:'公告标题', publication_date:'发布日期', effective_date:'生效日期',
+  clock_24h:'生效时刻', timezone:'时区', entry_events:'适用入境事件', origin:'原产地',
+  hts_codes:'商品税号', rates:'额外税率', rate_meaning:'税率性质', conditions:'适用条件',
+  exceptions:'例外条款', revisions:'后续修订'};
+
+function value(id) {
+  const node = document.getElementById(id);
+  if (!node) return '';
+  return String(node.value ?? node.textContent ?? '').trim();
+}
+function setNote(id, text, ok) {
+  const node = document.getElementById(id); node.textContent = text; node.className = ok ? 'ok' : 'muted';
+}
+function setStatisticsControlsVisible(visible) {
+  const node = document.getElementById('statistics-report-controls');
+  if (node) node.hidden = !visible;
+}
+function bodyFor(path) {
+  return {policy_id: value('policy-id'), doc_version: value('doc-version'), fields: collectFields()};
+}
+function invalidateCandidate() {
+  candidateReady = false;
+  candidateDigest = '';
+  document.getElementById('enable').disabled = true;
+}
+function clearReadingPreview() {
+  document.getElementById('reading-preview-items').replaceChildren();
+  document.getElementById('reading-preview').hidden = true;
+  document.getElementById('reading-preview-file').value = '';
+}
+async function sha256Text(text) {
+  if (!globalThis.crypto?.subtle || !globalThis.TextEncoder) {
+    throw new Error('当前浏览器无法核对公告摘要，阅读笔记不会显示。');
+  }
+  const bytes = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+}
+function sourceLocation(start, end) {
+  let offset = 0;
+  for (let index = 0; index < savedSections.length; index++) {
+    const next = offset + savedSections[index].text.length;
+    if (offset < end && next > start) return index;
+    offset = next;
+  }
+  return -1;
+}
+async function renderReadingPreview(notes) {
+  clearReadingPreview();
+  const source = savedSections.map(section => section.text).join('');
+  if (!source || !notes || notes.schema_version !== readingSchema || notes.status !== 'review_only' ||
+      notes.doc_version !== value('doc-version') || notes.source_sha256 !== await sha256Text(source) ||
+      !Array.isArray(notes.items) || notes.items.length !== 3) {
+    throw new Error('阅读笔记与当前已保存公告不一致，或不是已校验的 v2 笔记。');
+  }
+  const items = new Map();
+  for (const item of notes.items) {
+    if (!readingFields.includes(item.field) || items.has(item.field) ||
+        !['known', 'unknown', 'conflict'].includes(item.status) ||
+        !Array.isArray(item.claims) || typeof item.reason !== 'string') {
+      throw new Error('阅读笔记字段无效。');
+    }
+    if ((item.status === 'unknown' && (item.claims.length || !item.reason.trim())) ||
+        (item.status === 'known' && (!item.claims.length || item.reason)) ||
+        (item.status === 'conflict' && (item.claims.length < 2 || !item.reason.trim()))) {
+      throw new Error('阅读笔记状态与要点不一致。');
+    }
+    for (const claim of item.claims) {
+      if (typeof claim.text !== 'string' || !claim.text.trim() ||
+          !Array.isArray(claim.source_passages) || !claim.source_passages.length) {
+        throw new Error('阅读笔记缺少可核对的原文。');
+      }
+      for (const passage of claim.source_passages) {
+        if (!Number.isInteger(passage.start) || !Number.isInteger(passage.end) ||
+            passage.start < 0 || passage.end <= passage.start || passage.end > source.length ||
+            passage.text !== source.slice(passage.start, passage.end) ||
+            passage.text_sha256 !== await sha256Text(passage.text) ||
+            sourceLocation(passage.start, passage.end) < 0) {
+          throw new Error('阅读笔记引用的原文位置不匹配。');
+        }
+      }
+    }
+    items.set(item.field, item);
+  }
+  if (items.size !== 3) throw new Error('阅读笔记缺少字段。');
+  const container = document.getElementById('reading-preview-items');
+  for (const field of readingFields) {
+    const item = items.get(field);
+    const article = document.createElement('article');
+    const heading = document.createElement('strong');
+    heading.textContent = fieldLabels[field] + ' · ' + item.status;
+    article.appendChild(heading);
+    if (item.reason) {
+      const reason = document.createElement('p'); reason.textContent = item.reason;
+      article.appendChild(reason);
+    }
+    for (const claim of item.claims) {
+      const detail = document.createElement('details');
+      const summary = document.createElement('summary'); summary.textContent = claim.text;
+      detail.appendChild(summary);
+      for (const passage of claim.source_passages) {
+        const jump = document.createElement('button'); jump.type = 'button';
+        jump.textContent = '定位到已保存原文 ' + passage.passage_id;
+        jump.addEventListener('click', () => {
+          document.getElementById('document-details').open = true;
+          const target = document.getElementById('saved-source-' + sourceLocation(passage.start, passage.end));
+          if (target?.scrollIntoView) target.scrollIntoView({block: 'center'});
+        });
+        detail.appendChild(jump);
+        const excerpt = document.createElement('pre'); excerpt.textContent = passage.text;
+        detail.appendChild(excerpt);
+      }
+      article.appendChild(detail);
+    }
+    container.appendChild(article);
+  }
+  document.getElementById('reading-preview').hidden = false;
+  setNote('reading-preview-note', '笔记已核对版本和原文；仍需人工判断条款含义。', true);
+}
+async function onReadingPreviewFile(event) {
+  try {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    await renderReadingPreview(JSON.parse(await file.text()));
+  } catch (error) {
+    clearReadingPreview();
+    setNote('reading-preview-note', error.message || '阅读笔记无法显示。', false);
+  }
+}
+function addEvidenceRow(index, sectionCell, quoteCell) {
+  const number = evidenceCounts[index]++;
+  const suffix = number ? '-' + number : '';
+  const section = document.createElement('select');
+  section.id = 'section-' + index + suffix;
+  section.className = 'citation-control';
+  const blank = document.createElement('option'); blank.value = ''; blank.textContent = '选择段落';
+  section.appendChild(blank);
+  savedSections.forEach(item => {
+    const option = document.createElement('option');
+    option.value = item.section_id;
+    const excerpt = item.text.replace(/\s+/g, ' ').trim().slice(0, 55);
+    option.textContent = item.section_id + (excerpt ? ' · ' + excerpt : '');
+    section.appendChild(option);
+  });
+  sectionCell.appendChild(section);
+  const quote = document.createElement('textarea');
+  quote.id = 'quote-' + index + suffix;
+  quote.className = 'citation-control';
+  quote.placeholder = '复制该段原文中的文字';
+  quoteCell.appendChild(quote);
+  const fill = document.createElement('button'); fill.type = 'button';
+  fill.id = 'fill-quote-' + index + suffix;
+  fill.className = 'citation-fill'; fill.textContent = '填入整段原文';
+  fill.addEventListener('click', () => {
+    const chosen = savedSections.find(item => item.section_id === section.value);
+    if (!chosen) { setNote('candidate-note', '请先选择原文段落。', false); return; }
+    quote.value = chosen.text;
+    invalidateCandidate();
+  });
+  quoteCell.appendChild(fill);
+}
+function collectFields() {
+  return templateFields.map((field, index) => {
+    const status = document.getElementById('status-' + index).value;
+    const fieldValue = document.getElementById('value-' + index).value;
+    const reason = document.getElementById('reason-' + index).value;
+    let parsedValue = fieldValue || null;
+    if (fieldValue && ['hts_codes', 'rates', 'entry_events'].includes(field.field)) {
+      try { parsedValue = JSON.parse(fieldValue); } catch (_error) { parsedValue = fieldValue; }
+    }
+    const item = {field: field.field, status, value: parsedValue, reason: reason || null, evidence: []};
+    if (status !== 'unknown') {
+      for (let number = 0; number < evidenceCounts[index]; number++) {
+        const suffix = number ? '-' + number : '';
+        const sectionId = document.getElementById('section-' + index + suffix).value.trim();
+        const quote = document.getElementById('quote-' + index + suffix).value;
+        if (!sectionId && !quote.trim()) continue;
+        if (!sectionId || !quote.trim()) throw new Error(field.field + ' 的引文需要同时填写段落ID和原文');
+        item.evidence.push({doc_version: value('doc-version'), section_id: sectionId, quote});
+      }
+      if (status === 'known' && item.evidence.length < 1) throw new Error(field.field + ' 至少需要一条引文');
+      if (status === 'conflict' && item.evidence.length < 2) throw new Error(field.field + ' 冲突状态至少需要两条引文');
+    }
+    return item;
+  });
+}
+function requestedCodes() {
+  const raw = value('coverage-codes');
+  if (!raw) return null;
+  const values = raw.trim().startsWith('[') ? JSON.parse(raw) : raw.split(',');
+  if (!Array.isArray(values)) throw new Error('商品范围必须是逗号分隔的 HTS8');
+  return values.map(item => typeof item === 'object' ? String(item.code || '') : String(item).trim())
+    .filter(Boolean);
+}
+function renderTemplate(template) {
+  templateFields = template.fields || [];
+  savedSections = template.sections || [];
+  evidenceCounts = templateFields.map(() => 0);
+  invalidateCandidate();
+  const provenance = template.source_provenance === 'user_supplied_unverified'
+    ? '来源：用户粘贴，网址未核验。' : '来源核验状态未知；请自行对照原始公告。';
+  document.getElementById('source-provenance').textContent = provenance +
+    (template.source_url ? ' 填写的网址：' + template.source_url : ' 未填写来源网址。');
+  const saved = document.getElementById('saved-sections');
+  saved.replaceChildren();
+  savedSections.forEach((item, index) => {
+    const label = document.createElement('strong'); label.textContent = item.section_id;
+    label.id = 'saved-source-' + index;
+    const text = document.createElement('pre'); text.textContent = item.text;
+    saved.appendChild(label); saved.appendChild(text);
+  });
+  clearReadingPreview();
+  document.getElementById('reading-preview-file').disabled = false;
+  setNote('reading-preview-note', '可载入离线生成并校验的 JSON 笔记；不会自动填写字段。', true);
+  const tbody = document.querySelector('#fields tbody');
+  tbody.replaceChildren();
+  templateFields.forEach((field, index) => {
+    const tr = document.createElement('tr');
+    const name = document.createElement('td'); name.textContent = fieldLabels[field.field] || field.field;
+    name.title = field.field; tr.appendChild(name);
+    const status = document.createElement('select'); status.id = 'status-' + index;
+    ['unknown', 'known', 'conflict'].forEach(optionValue => {
+      const option = document.createElement('option'); option.value = optionValue; option.textContent = optionValue;
+      if (optionValue === field.status) option.selected = true;
+      status.appendChild(option);
+    });
+    const statusCell = document.createElement('td'); statusCell.appendChild(status); tr.appendChild(statusCell);
+    [['value-' + index, field.value || ''], ['reason-' + index, field.reason || '']].forEach(([id, initial]) => {
+      const cell = document.createElement('td'); const input = document.createElement('input');
+      input.id = id; input.value = initial; cell.appendChild(input); tr.appendChild(cell);
+    });
+    const sectionCell = document.createElement('td'); tr.appendChild(sectionCell);
+    const quoteCell = document.createElement('td'); tr.appendChild(quoteCell);
+    addEvidenceRow(index, sectionCell, quoteCell);
+    const more = document.createElement('button'); more.type = 'button'; more.id = 'add-evidence-' + index;
+    more.textContent = '添加引文';
+    more.addEventListener('click', () => { addEvidenceRow(index, sectionCell, quoteCell); invalidateCandidate(); });
+    quoteCell.appendChild(more);
+    tbody.appendChild(tr);
+  });
+  document.getElementById('submit').disabled = false;
+  setNote('candidate-note', '模板已生成：请逐项确认后提交。', true);
+}
+async function onImport() {
+  const res = await API.post('/api/announcements/import', {
+    policy_id: value('policy-id'), source_id: value('source-id'), url: value('source-url'),
+    text: document.getElementById('source-text').value
+  });
+  if (!res.ok) { setNote('import-note', res.body.message || '登记失败', false); return; }
+  invalidateCandidate();
+  clearReadingPreview();
+  document.getElementById('reading-preview-file').disabled = true;
+  setNote('reading-preview-note', '先生成确认模板；此处不会调用模型或自动填写字段。', false);
+  document.querySelector('#fields tbody').replaceChildren();
+  document.getElementById('saved-sections').replaceChildren();
+  document.getElementById('submit').disabled = true;
+  document.getElementById('doc-version').textContent = res.body.doc_version;
+  document.getElementById('doc-version').value = res.body.doc_version;
+  document.getElementById('template').disabled = false;
+  setStatisticsControlsVisible(res.body.doc_status === 'enabled');
+  setNote('import-note', '已登记为候选；来源网址未核验，暂不会进入检索。', true);
+}
+async function onTemplate() {
+  // An empty `fields` array is the submit contract, so do not send it while
+  // requesting the server-owned confirmation template.
+  const res = await API.post('/api/announcements/template', {
+    policy_id: value('policy-id'), doc_version: value('doc-version')
+  });
+  if (!res.ok) { setNote('candidate-note', res.body.message || '模板生成失败', false); return; }
+  renderTemplate(res.body);
+}
+async function onSubmit() {
+  let body;
+  try { body = bodyFor('/api/announcements/submit'); }
+  catch (error) { invalidateCandidate(); setNote('candidate-note', error.message, false); return; }
+  const res = await API.post('/api/announcements/submit', body);
+  candidateReady = res.ok;
+  candidateDigest = res.ok ? String(res.body.candidate_digest || '') : '';
+  document.getElementById('enable').disabled = !candidateReady;
+  setNote('candidate-note', res.ok ? '候选校验通过；仍未启用。现在可以人工确认并启用。' : (res.body.message || '候选校验失败'), res.ok);
+}
+async function onEnable() {
+  if (!candidateReady) return;
+  let body;
+  try { body = bodyFor('/api/announcements/enable'); }
+  catch (error) { invalidateCandidate(); setNote('candidate-note', error.message, false); return; }
+  const res = await API.post('/api/announcements/enable', {
+    ...body, operator: 'local-user',
+    candidate_digest: candidateDigest
+  });
+  if (!res.ok) { setNote('candidate-note', res.body.message || '启用失败', false); return; }
+  document.getElementById('enable').disabled = true;
+  const checkButton = document.getElementById('check-coverage');
+  if (checkButton) checkButton.disabled = false;
+  document.getElementById('load-coverage').disabled = false;
+  document.getElementById('coverage').textContent = JSON.stringify(res.body.coverage, null, 2);
+  const link = document.getElementById('research-link');
+  if (link) link.style.display = 'none';
+  document.getElementById('rebind').textContent = res.body.rebind_required ? '公告已启用：已有研究范围必须重新确认（rebind_required）。' : '';
+  setNote('candidate-note', '已启用；贸易覆盖仍需受信任查询，当前为 not_checked。', true);
+  setStatisticsControlsVisible(true);
+}
+async function onPrepareStatisticsReport() {
+  const body = {policy_id: value('policy-id'), doc_version: value('doc-version')};
+  try {
+    const codes = requestedCodes();
+    if (codes) body.selected_codes = codes;
+  } catch (error) { setNote('statistics-scope-note', error.message, false); return; }
+  const start = value('statistics-start-month'), end = value('statistics-end-month');
+  if (start) body.start_month = start;
+  if (end) body.end_month = end;
+  const button = document.getElementById('prepare-statistics-report');
+  button.disabled = true;
+  try {
+    const res = await API.post('/api/announcements/statistics/prepare', body);
+    if (!res.ok) throw new Error(res.body.message || '范围读取失败');
+    preparedStatisticsScope = res.body;
+    const partial = (res.body.excluded_partial_entries || []).map(item => item.code).join('、');
+    document.getElementById('statistics-scope-note').textContent =
+      `请确认：中国来源美国进口，${res.body.start_month} 至 ${res.body.end_month}，` +
+      `${res.body.selected_codes.length} 个完整 HTS8（${res.body.selected_codes.join(', ')}）。` +
+      `数据最新月份：${res.body.latest_available_month || '无'}。` +
+      (res.body.unselected_whole_codes?.length ? ` 另有完整税号未选择：${res.body.unselected_whole_codes.join(', ')}。` : '') +
+      (partial ? ` 未纳入部分编码：${partial}。` : '');
+    document.getElementById('generate-statistics-report').disabled = false;
+  } catch (error) {
+    preparedStatisticsScope = null;
+    document.getElementById('generate-statistics-report').disabled = true;
+    setNote('statistics-scope-note', error.message, false);
+  } finally { button.disabled = false; }
+}
+async function onGenerateStatisticsReport() {
+  if (!preparedStatisticsScope) return;
+  const button = document.getElementById('generate-statistics-report');
+  button.disabled = true;
+  try {
+    const res = await API.post('/api/announcements/statistics/report', {prepared: preparedStatisticsScope});
+    if (!res.ok) throw new Error(res.body.message || '报告生成失败');
+    window.location.href = '/preview/?announcement_report_id=' + encodeURIComponent(res.body.report_id) + '#report';
+  } catch (error) {
+    setNote('statistics-scope-note', error.message, false);
+    button.disabled = false;
+  }
+}
+async function onCoverageCheck() {
+  let selected;
+  try { selected = requestedCodes(); }
+  catch (error) { setNote('candidate-note', error.message || '商品范围格式无效', false); return; }
+  const body = {
+    policy_id: value('policy-id'), doc_version: value('doc-version'),
+    month: value('coverage-month')
+  };
+  if (selected) body.requested_codes = selected;
+  const res = await API.post('/api/announcements/coverage/check', body);
+  if (!res.ok) { setNote('candidate-note', res.body.message || '覆盖核对失败', false); return; }
+  document.getElementById('coverage').textContent = JSON.stringify(res.body.coverage || res.body, null, 2);
+  const status = res.body.coverage && res.body.coverage.trade_coverage;
+  const link = document.getElementById('research-link');
+  if (link && status === 'exact') {
+    const params = new URLSearchParams({policy_id: value('policy-id'),
+      doc_version: value('doc-version'), candidate_digest: candidateDigest,
+      month: value('coverage-month')});
+    if (selected) params.set('products', selected.join(','));
+    link.href = '/session-research?' + params.toString();
+    link.style.display = '';
+  } else if (link) {
+    link.style.display = 'none';
+  }
+  setNote('candidate-note', status === 'exact' ? '贸易覆盖 exact：可以打开研究助手重新确认该月份。' :
+    '贸易覆盖不是 exact；请先处理缺失或部分范围，系统不会补零。', status === 'exact');
+}
+async function onCoverage() {
+  const query = '?policy_id=' + encodeURIComponent(value('policy-id')) + '&doc_version=' + encodeURIComponent(value('doc-version'));
+  const res = await API.get('/api/announcements/coverage' + query);
+  document.getElementById('coverage').textContent = JSON.stringify(res.body.coverage || res.body, null, 2);
+  setStatisticsControlsVisible(true);
+}
+document.getElementById('import').addEventListener('click', onImport);
+document.getElementById('template').addEventListener('click', onTemplate);
+document.getElementById('submit').addEventListener('click', onSubmit);
+document.getElementById('enable').addEventListener('click', onEnable);
+document.getElementById('reading-preview-file').addEventListener('change', onReadingPreviewFile);
+document.querySelector('#fields tbody').addEventListener('input', invalidateCandidate);
+document.querySelector('#fields tbody').addEventListener('change', invalidateCandidate);
+const checkButton = document.getElementById('check-coverage');
+if (checkButton) checkButton.addEventListener('click', onCoverageCheck);
+document.getElementById('load-coverage').addEventListener('click', onCoverage);
+const prepareStatisticsButton = document.getElementById('prepare-statistics-report');
+if (prepareStatisticsButton) prepareStatisticsButton.addEventListener('click', onPrepareStatisticsReport);
+const generateStatisticsButton = document.getElementById('generate-statistics-report');
+if (generateStatisticsButton) generateStatisticsButton.addEventListener('click', onGenerateStatisticsReport);
+</script>
+</body>
+</html>

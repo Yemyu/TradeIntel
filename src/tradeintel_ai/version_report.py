@@ -38,9 +38,18 @@ def render_version_report(snapshot):
 <h2>逐月来源</h2><ul>{''.join(sources)}</ul><p>缺失金额不按零处理；零分母份额记为未知。金额不是税款、企业损失或政策因果影响。</p></html>'''
 
 
-def version_report(root, version=None):
-    store=ExposureVersionStore(root)
+def version_report(root, version=None, *, policy_id=None):
+    from pathlib import Path
+    from .policy_cases import resolve_case
+    case = resolve_case(policy_id) if policy_id else None
+    store=ExposureVersionStore(root, Path(root) / case.versions) if case else ExposureVersionStore(root)
     selected=version if version is not None else store.active_version()
     if not selected:raise VersionStoreError('尚无活动版本')
     store.release_root(selected)
-    return render_version_report(store.load_snapshot(selected))
+    snapshot = store.load_snapshot(selected)
+    if case and snapshot['policy_id'] != case.policy_id:
+        raise VersionStoreError('数据版本不属于指定政策')
+    html = render_version_report(snapshot)
+    if case and case.policy_id != 'us_301_review2025_tungsten_solar':
+        html = html.replace('?version='+selected+'"', '?version='+selected+'&amp;policy_id='+escape(case.policy_id, quote=True)+'"')
+    return html
