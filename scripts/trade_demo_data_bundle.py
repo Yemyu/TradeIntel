@@ -208,12 +208,18 @@ def create(output: Path, *, root: Path = ROOT) -> dict[str, object]:
             json.dumps(bundle_manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         (staging / "BUNDLE_README.zh-CN.md").write_text(
             "# TradeShock 商品贸易演示数据\n\n"
-            "本目录提供所列月份内全部已发布的美国进口/出口加工数据和商品名称索引，不是只包含小麦；不含源码、原始ZIP、模型密钥或MySQL数据。\n\n"
-            "数据包含124个数据文件，清单 `BUNDLE_MANIFEST.json` 记录每个文件的大小和SHA-256。"
-            "将 `data/` 合并到项目根目录，并将 `BUNDLE_MANIFEST.json` 放在项目根目录后，可在项目根目录运行：\n\n"
-            "```sh\nPYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .\n```\n\n"
-            "只有返回 `status: verified` 才能使用这些数据。核验不会下载、改写或发布数据。"
-            "本数据包本身不是完整应用；政策案例数据不包含在内。\n",
+            "这里有清单所列月份的美国进口、出口加工数据和商品名称索引，不只包含演示用的小麦。"
+            "数据包不含项目源码、原始 Census ZIP、模型密钥或 MySQL 数据。\n\n"
+            "请在项目根目录将整个 ZIP 解到一个**新的独立目录**，例如 `.local/trade-data-bundle-1/`。"
+            "不要把 `data/` 合并到代码目录，也不要覆盖旧数据包。解压后先核验，再启动本地页面：\n\n"
+            "```sh\n"
+            "PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-bundle-1\n"
+            ".venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-bundle-1\n"
+            "```\n\n"
+            "参数指向同时包含 `BUNDLE_MANIFEST.json` 和 `data/` 的目录，不是内层 `data/`。"
+            "清单记录124个数据文件的大小与SHA-256；只有返回 `status: verified` 才继续。"
+            "核验不下载数据，也不调用模型或 MySQL。数据包本身不是完整应用，政策案例数据不在包内。"
+            "更完整的本地安装说明见代码仓库的 `docs/LOCAL_RUN.zh-CN.md`。\n",
             encoding="utf-8")
         checked = verify(staging)
         if output.exists():
