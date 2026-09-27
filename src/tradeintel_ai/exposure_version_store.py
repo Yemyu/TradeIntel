@@ -13,6 +13,7 @@ import json
 import os
 import re
 import uuid
+from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
@@ -162,6 +163,18 @@ class ExposureVersionStore:
     def active_version(self) -> str | None:
         return self._registry().get("active_version")
 
+    def version_record(self, version: str) -> dict[str, Any]:
+        """Return the server-owned registry record for a version.
+
+        Callers use this before binding a request so a snapshot file that
+        merely exists on disk cannot be mistaken for a published version.
+        """
+        registry = self._registry()
+        record = registry.get("versions", {}).get(version)
+        if not isinstance(record, dict):
+            raise VersionStoreError("数据版本未登记")
+        return deepcopy(record)
+
     def verify_working_files(self) -> dict[str, Any] | None:
         """Bind working files to the active fingerprint; never imply a backup."""
         registry = self._registry()
@@ -227,8 +240,14 @@ class ExposureVersionStore:
         files = dict(snapshot['policy_files'])
         for month, entry in snapshot['months'].items():
             files[f"{case.monthly}/{snapshot['policy_id']}_{month.replace('-', '_')}.csv"] = entry['output_sha256']
-        for name in ('manifest.json', 'window_validation_2025-01_2026-07.json'):
-            relative = str(Path(case.manifest).parent / name)
+        receipt_name = f"window_validation_{snapshot['start']}_{snapshot['end']}.json"
+        receipt_relative = Path(case.manifest).parent / receipt_name
+        if not (self.root / receipt_relative).exists():
+            # Keep the original registered receipt name readable for legacy
+            # snapshots whose metadata predates the versioned window name.
+            receipt_relative = Path(case.manifest).parent / "window_validation_2025-01_2026-07.json"
+        for relative_path in (Path(case.manifest), receipt_relative):
+            relative = str(relative_path)
             files[relative] = hashlib.sha256((self.root / relative).read_bytes()).hexdigest()
         corpus_name = case.corpus
         if corpus_name in files:

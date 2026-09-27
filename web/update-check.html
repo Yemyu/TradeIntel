@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>TradeIntel 更新检查（fixture）</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 24px; max-width: 760px; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; }
+  button { padding: 6px 14px; }
+  .kv { margin: 4px 0; }
+  .kv b { display: inline-block; width: 140px; }
+  table { border-collapse: collapse; }
+  td, th { border: 1px solid #ccc; padding: 4px 10px; font-size: 13px; }
+  .muted { color: #666; font-size: 13px; }
+</style>
+</head>
+<body>
+<h1>受控更新检查（只读页面：不配置抓取源时仅记录检查时间）</h1>
+
+<section>
+  <div class="kv"><b>最近检查时间</b><span id="last-checked">未知</span></div>
+  <div class="kv"><b>最近检查结果</b><span id="last-check-status">未知</span></div>
+  <div class="kv"><b>数据统计截止月</b><span id="cutoff">未知</span></div>
+  <div class="kv"><b>活动数据版本</b><span id="active-version">未知</span></div>
+  <div class="kv"><b>月份数</b><span id="month-count">未知</span></div>
+  <button id="check">检查更新</button>
+  <span id="check-note" class="muted"></span>
+</section>
+
+<section>
+  <h3>最近检查记录（与版本创建时间分开记录）</h3>
+  <table id="check-history"><thead><tr><th>检查时间</th><th>结果</th><th>差异</th></tr></thead><tbody></tbody></table>
+  <p class="muted">无变化不创建新版本；真实抓取源由受控来源登记提供，本轮页面只记录检查行为。</p>
+</section>
+
+<script>
+function render(status) {
+  document.getElementById('last-checked').textContent = status.last_checked || '从未检查';
+  document.getElementById('last-check-status').textContent = status.last_check_status || '—';
+  document.getElementById('cutoff').textContent = status.data_cutoff_month || '—';
+  document.getElementById('active-version').textContent = status.active_version || '—';
+  document.getElementById('month-count').textContent = String(status.month_count ?? '—');
+  const tbody = document.querySelector('#check-history tbody');
+  tbody.replaceChildren();
+  (status.check_history || []).forEach(entry => {
+    const tr = document.createElement('tr');
+    [entry.checked_at, entry.status || '—',
+     [entry.difference_status, entry.added_months ? '新增:' + entry.added_months.join(',') : '',
+      entry.revised_months ? '修订:' + entry.revised_months.join(',') : ''].filter(Boolean).join('；') || '—'
+    ].forEach(cell => {
+      const td = document.createElement('td');
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+async function load() {
+  const res = await fetch('/api/update-status').then(r => r.json());
+  render(res);
+}
+
+async function onCheck() {
+  const note = document.getElementById('check-note');
+  note.textContent = '检查中…';
+  const res = await fetch('/api/update/check', {method: 'POST',
+    headers: {'Content-Type': 'application/json'}, body: JSON.stringify({})})
+    .then(r => r.json().then(j => ({ok: r.ok, body: j})));
+  note.textContent = res.ok ? (res.body.message || '检查完成') : (res.body.message || '检查失败');
+  await load();
+}
+
+document.getElementById('check').addEventListener('click', onCheck);
+load();
+</script>
+</body>
+</html>

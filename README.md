@@ -1,10 +1,26 @@
 # TradeShock AI
 
-An evidence-grounded trade-policy research assistant under development. The product goal is to connect official policy scope to trade data, run verifiable calculations and produce cited briefings with update tracking. The current checkout includes one newly registered 2025 Section 301 exposure case across 19 verified months; the broader product is not yet complete.
+## 当前可试用的贸易查询（2026-09-27）
+
+本地工作台可根据已发布的美国进口、出口商品目录提出候选，由用户确认商品、方向和月份，再生成带逐月图表与来源的报告。进口文件有 **48 个已加工月**（2016-01 至 2018-05、2025-01 至 2026-07，两个不连续时段）；出口文件有 **2025-08 至 2026-07 的连续 12 个月**。进口消费金额与出口 Census Schedule B 总出口额（FAS）按方向分别显示。商品名检索还需用户核对候选，不能理解为所有自然说法都能自动匹配。
+
+通用报告的模型解读是可选试用功能：数据图表不依赖模型；模型回答可能有误，需要对照数据核实。调用会把报告事实发送给配置的服务商，可能产生费用。[现有回答复核](docs/handoff/runs/20260925-TRADE-AI-VALUE-REVIEW.zh-CN.md)显示：v3 六份原答和一次 v4 开发答尚未证明比数据报告多提供具体帮助，其中一份 v3 回答还混淆了最近月与整个区间的变化；这次复核不是独立盲评。MySQL 已与当前进出口文件整版对账，但网页仍以已发布文件为报告数据源。普通 Git 克隆不含通用查询所需的 124 个数据文件；当前工作区的独立副本已在新建 Python 3.13 虚拟环境复现进口、出口和双向报告，但真正的 Git 克隆、新电脑和公网部署还需分别验收。数据补充包约 579 MB；本机原始数据目录约 9.4 GiB。先看[本地版快速上手](docs/LOCAL_RUN.zh-CN.md)，再看[当前状态](docs/handoff/STATUS.zh-CN.md)和[发布边界](docs/handoff/PRODUCT_RELEASE_DECISION_20260925.zh-CN.md)。
+
+## 历史执行覆盖：2026-09-22（当前状态以上节为准）
+
+产品目标是“新政策→贸易数据→有据、可读的观察简报”。范围确认、多期证据、程序报告和追问已接入服务链；浏览器与公告分流已有fixture验收。DeepSeek Flash high在明确政策输出格式后，一道已见Q3开发题通过结构、预算与AI辅助内容核查，并已接入待审阅报告预览。历史失败单独保留；单题结果不代表新问题的稳定通过率。报告仍需用户审阅。完整记录见[模型实测](docs/MODEL_SELECTION.zh-CN.md)。
+
+An evidence-grounded U.S. goods-trade research assistant under development. It confirms a product and date range, then reports observed monthly imports or exports with charts and official sources. The optional model explanation remains under quality review; this is not a live news feed or a public service.
 
 **Scope decision (2026-09-13):** self-developed causal identification has been removed from the product roadmap. Historical experiments remain available as records, not pending product requirements. [Current roadmap](PROJECT_PLAN.md).
 
 [中文项目介绍与演示](docs/DELIVERY.zh-CN.md) · [中文操作说明](docs/learning/using-the-research-entry.zh-CN.md) · [Acceptance results](docs/experiments/product-acceptance.zh-CN.md)
+
+[模型选择与实测对照（中文）](docs/MODEL_SELECTION.zh-CN.md) explains which model runs the project, which models only assist development, and why no runtime model is currently claimed to be stable. The offline execution controls and score-table generator are recorded in [the runner closeout](docs/handoff/runs/20260922-PUBLIC-RUNNER-CONTROLS.md).
+
+[与 Claude/RAG/贸易智能项目的定位比较](docs/COMPETITIVE_POSITIONING.zh-CN.md) explains why this is not simply another document-chat demo.
+
+The table reports task counts, pass fractions and failure types. Historical GLM-4.7 acceptance (5/6) is separate from newer Air development failures. In-conversation Luna/Astra demonstrations had access to earlier analysis and are not independent benchmark scores.
 
 [Concise three-file showcase](docs/showcase/README.zh-CN.md) provides the project scope and two archived reports without internal learning notes or request captures.
 
@@ -16,7 +32,7 @@ An evidence-grounded trade-policy research assistant under development. The prod
 - Queries the registered 2025 tungsten/wafers/polysilicon case through a read-only tool using exact HTS8 scope and monthly source fingerprints.
 - Stops missing-scope and unsupported requests; checks supported explicit comparison-direction phrases.
 
-This is an AI application, not a trained foundation model. There is no fine-tuning, multi-agent deployment or accepted causal-effect estimate. The policy corpus covers indexed narrative text from two historical notices, not a complete tariff database or current legal guidance.
+This is an AI application, not a trained foundation model. There is no fine-tuning, multi-agent deployment or accepted causal-effect estimate. The policy corpus covers indexed narrative text from two historical notices, not a complete tariff database or current legal guidance. Runtime model results and limits are recorded in the [model comparison note](docs/MODEL_SELECTION.zh-CN.md).
 
 ## View results without running anything
 
@@ -46,7 +62,7 @@ Check the four files omitted from a normal Git checkout without downloading or c
 .venv/bin/python scripts/verify_portable_data.py
 ```
 
-The command's `"status": "ready"` means only the four listed files match; it does not certify application readiness or the rest of the checkout. The exact paths, public source URLs and SHA-256 values are in [PORTABLE_DATA_MANIFEST.json](data/PORTABLE_DATA_MANIFEST.json). Missing, mismatched or incomplete manifests return a non-zero exit. The source-manifest hash binds the archived metadata including its retrieval timestamp; downloading the same PDFs again can produce different metadata and requires review rather than blindly changing the expected hash.
+This older check covers only the four policy-reference files in `PORTABLE_DATA_MANIFEST.json`; `"status": "ready"` does not certify the general trade reports or the rest of the checkout. Missing, mismatched or incomplete manifests return a non-zero exit. The source-manifest hash binds archived metadata including its retrieval timestamp; downloading the same PDFs again can produce different metadata and requires review rather than blindly changing the expected hash.
 
 To make a plain folder containing those four files, without overwriting an existing path:
 
@@ -55,6 +71,15 @@ To make a plain folder containing those four files, without overwriting an exist
 ```
 
 The folder is a data supplement, not a standalone project or a zip archive. It contains no API configuration, credentials, Census ZIP archives, or temporary run records. Copy its `data/` directory into a prepared checkout and run the verification command again.
+
+The general U.S. trade workspace uses a separate, larger supplement: 124 processed data/index files (about 579 MB), covering 48 import months, 12 export months and the matching product catalogs. The current sample is local and ignored by Git at `tmp/handoff-runs/trade-demo-data-20260925/`; it is not publicly hosted. To generate and verify a fresh copy from the full published files already present in this checkout, choose a new output directory:
+
+```bash
+PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py create --output tmp/handoff-runs/trade-demo-data
+PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root tmp/handoff-runs/trade-demo-data
+```
+
+To use it in a separate checkout, copy the package's `data/` directory and `BUNDLE_MANIFEST.json` into that checkout's root, then run `PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .`. This verifies data bytes and versions only; it does not install dependencies or prove a clean-machine deployment. The supplement excludes raw Census ZIPs, MySQL files, credentials, source code and historical run records. See the [isolated demo verification](docs/handoff/runs/20260925-TRADE-DEMO-BUNDLE.zh-CN.md).
 
 From the repository root, in an interactive terminal:
 
@@ -80,13 +105,7 @@ To open the local Chinese page (no public deployment):
 .venv/bin/python scripts/run_web.py
 ```
 
-Open the printed `http://127.0.0.1:8765` address. The page's data query is
-deterministic and reads only the registered 2025 Section 301 exposure case.
-The page also shows the locally activated data version and the latest
-added/revised-month difference; it does not download new data by itself.
-Its research question box supports bounded single-month queries, descending
-product rankings and archived policy explanations, using up to two model calls.
-This entry has offline integration tests; live task acceptance remains pending.
+Open `http://127.0.0.1:8765/preview/`. This unified page combines project introduction, the general trade question workspace and report reading. Queries are deterministic after the user confirms the official product and date range; they read the published import/export files and do not download new data. The separately registered 2025 Section 301 case remains a bounded policy-data route, not a general policy updater. Model explanations are optional drafts and still need content-quality review.
 See the [Chinese question-entry guide](docs/learning/business-question-entry.zh-CN.md).
 The complete Chinese workflow (fixed data version → AI review → export) is in [full workflow guide](docs/learning/full-workflow.zh-CN.md).
 The three AI-demo buttons are explicit, bounded GLM runs; the browser never

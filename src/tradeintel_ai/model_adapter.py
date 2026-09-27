@@ -14,6 +14,9 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import socket
+import ssl
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
@@ -37,6 +40,40 @@ DEFAULT_SYSTEM_PROMPT = """你是 TradeShock AI 的证据约束分析助手。
 
 class ModelAdapterError(RuntimeError):
     """A safe, user-facing model transport or response-contract error."""
+
+    def __init__(self, message: str, *, details: Mapping[str, object] | None = None) -> None:
+        super().__init__(message)
+        self.details = dict(details or {})
+
+
+def safe_error_details(error: BaseException) -> dict[str, object]:
+    """Classify typed causes only. Never serialize messages, headers or bodies."""
+    seen = set()
+    current = error
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        if isinstance(current, HTTPError):
+            code = current.code
+            if type(code) is int and 100 <= code <= 599:
+                return {"category": "http_error", "http_status": code}
+            return {"category": "http_error"}
+        if isinstance(current, ssl.SSLCertVerificationError):
+            return {"category": "tls_certificate_verification"}
+        if isinstance(current, ssl.SSLError):
+            return {"category": "tls_error"}
+        if isinstance(current, socket.gaierror):
+            return {"category": "dns_error"}
+        if isinstance(current, TimeoutError):
+            return {"category": "timeout"}
+        if isinstance(current, ConnectionError):
+            return {"category": "connection_error"}
+        if isinstance(current, (json.JSONDecodeError, UnicodeDecodeError)):
+            return {"category": "response_decode_error"}
+        if isinstance(current, URLError) and isinstance(current.reason, BaseException):
+            current = current.reason
+        else:
+            current = current.__cause__
+    return {"category": "unclassified_error"}
 
 
 @dataclass(frozen=True)
@@ -263,10 +300,15 @@ class OpenAICompatibleModel:
         *,
         system_prompt: str = DEFAULT_SYSTEM_PROMPT,
         opener: Callable[..., Any] = urlopen,
+        request_params: Mapping[str, object] | None = None,
     ) -> None:
         self.config = config
         self.system_prompt = system_prompt.strip()
         self._opener = opener
+        allowed = {"max_tokens", "thinking", "reasoning_effort"}
+        if request_params is not None and set(request_params) - allowed:
+            raise ValueError("不支持的模型请求参数")
+        self.request_params = dict(request_params or {})
 
     @classmethod
     def from_env(
@@ -290,6 +332,7 @@ class OpenAICompatibleModel:
             "messages": normalised_messages,
             "temperature": self.config.temperature,
         }
+        payload.update(self.request_params)
         if tools:
             payload["tools"] = _normalise_tools(tools)
             payload["tool_choice"] = "auto"
@@ -316,10 +359,22 @@ class OpenAICompatibleModel:
                 raw = response.read()
         except HTTPError as exc:
             # Never include request headers or payload: they may contain secrets
-            # or user data.  The status code is enough for a useful diagnosis.
-            raise ModelAdapterError(f"模型服务返回 HTTP {exc.code}") from exc
+            # or user data. Only a short identifier-valued error code/param
+            # from the provider may be kept for diagnostics.
+            details: dict[str, object] = {"http_status": exc.code}
+            try:
+                provider_error = json.loads(exc.read(4096).decode("utf-8"))
+                provider_error = provider_error.get("error", {}) if isinstance(provider_error, Mapping) else {}
+                if isinstance(provider_error, Mapping):
+                    for key in ("code", "param"):
+                        value = provider_error.get(key)
+                        if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9_.-]{1,80}", value):
+                            details[key] = value
+            except (ValueError, UnicodeError, OSError):
+                pass
+            raise ModelAdapterError(f"模型服务返回 HTTP {exc.code}", details=details) from exc
         except URLError as exc:
-            raise ModelAdapterError(f"无法连接模型服务：{exc.reason}") from exc
+            raise ModelAdapterError("无法连接模型服务") from exc
         except TimeoutError as exc:
             raise ModelAdapterError("模型服务请求超时") from exc
         try:

@@ -118,7 +118,7 @@
       <section class="card">
         <h2>先看清楚：这个页面能做什么</h2>
         <div class="tip"><b>当前登记案例：</b>2025 年生效的美国 Section 301 钨、硅片和多晶硅政策，精确覆盖 5 个 HTS8 税号；贸易数据窗口为 2025-01 至 2026-07。</div>
-        <p class="muted">查询按钮只读取已经验收的本地数据并重新计算金额；它不会调用大模型。AI 演示需要你明确点击后才调用项目本地配置的 GLM，并且程序负责事实、百分比和来源，模型只选择后续调查方向。</p>
+        <p class="muted">查询按钮只读取已经验收的本地数据并重新计算金额，不调用大模型。研究入口由程序负责数字和来源，AI 解释数据观察并提出待核查问题；下方旧演示则只让模型选择后续调查方向。AI 内容均须审阅，不会自动成为事实。</p>
         <p class="notice"><b>重要边界：</b>页面展示的是美国消费进口“暴露规模”，不是损失额、中国出口依赖率，也不能证明关税导致了变化。没有国内产量、库存、价格和交货期证据时，不能声称供应是否紧张。</p>
       </section>
 
@@ -138,6 +138,7 @@
         <h2>数据版本更新</h2>
         <p><a href="/api/update-brief" target="_blank" rel="noopener">查看最新登记版本的更新简报</a></p>
         <p><a href="/api/version-report" target="_blank" rel="noopener">打开最新数据报告（截止期、月表与图表）</a> · 新页面保留固定版本链接，不覆盖旧报告。</p>
+        <p><a href="/announcement-import">导入一份新官方公告（候选确认→启用→覆盖核对）</a></p>
         <div class="update-layout">
           <div class="update-box">
             <span id="update-status" class="status">正在读取版本状态…</span>
@@ -175,19 +176,25 @@
       <section class="card">
         <h2>提出研究问题</h2>
         <p><a href="/review/interpretation">人工审阅固定存档建议（保存决定，不发布案例、不调用模型）</a></p>
-        <details class="box"><summary>按明确参数创建研究任务（候选案例需先通过发布）</summary>
-          <p class="muted">这不是自由问答：程序按你的选择查数，AI只写待审阅解释。候选未开放时只返回说明，零模型调用。</p>
+        <details class="box" open><summary>选择月份和商品，生成研究资料</summary>
+          <p class="muted">程序读取所选范围的贸易数据与政策条款，先计算金额和来源占比，再让 AI 解释两种关注角度。结果仍需逐条审阅，采纳后导出研究稿。</p>
           <div class="controls">
-            <label>案例<select id="task-case"><option value="us_301_solar2024">2024光伏电池/组件（候选）</option></select></label>
+            <label>案例<select id="task-case"><option value="us_301_review2025_tungsten_solar">2025钨／硅片／多晶硅</option></select></label>
             <label>月份<input id="task-month" type="month" min="2025-01" max="2026-07" value="2026-07"></label>
-            <label>商品<select id="task-product"><option value="all">全部两类商品</option><option value="85414200">85414200 · 未组装电池</option><option value="85414300">85414300 · 已组装组件</option></select></label>
+            <label>商品<select id="task-product"><option value="all">全部五类商品</option><option value="28046100">28046100 · 多晶硅</option><option value="38180000">38180000 · 硅片等</option><option value="81019400">81019400 · 未锻造钨</option><option value="81019910">81019910 · 钨条杆等</option><option value="81019980">81019980 · 其他钨制品</option></select></label>
           </div>
-          <button id="task-submit" class="secondary">检查开放状态并提交（开放后最多一次模型请求）</button>
+          <button id="task-submit" class="secondary">生成数据观察与待审阅解释（一次模型请求）</button>
           <div id="task-result" role="status">尚未提交。下方可先查看固定真实结果。</div>
+          <details class="box" style="margin-top:14px"><summary>自然语言 v2：先预览，再确认执行</summary>
+            <p class="muted">本入口只支持明确的单月、单个税号或全部登记税号。多月、排除条件或“最新月份”等要求会先澄清，不调用模型。其他问题最多调用一次模型生成范围预览；你确认后，才读取固定版本并调用一次解释模型。不会默认猜案例或改月份。</p>
+            <label>研究问题<textarea id="natural-v2-question" rows="3" maxlength="2000" style="width:100%;font:inherit;padding:10px" placeholder="例如：请分析 2026 年 7 月 2025 钨政策全部登记税号，中国原产金额和中国来源占比有什么区别？"></textarea></label>
+            <div style="margin-top:10px"><button id="natural-v2-preview" class="secondary">先生成任务预览（最多一次解析请求）</button> <button id="natural-v2-confirm" disabled>确认并执行</button></div>
+            <div id="natural-v2-result" class="demo-result" role="status">尚未生成预览；确认前不会读取数据。</div>
+          </details>
         </details>
         <p><a href="/demo/research-review" target="_blank" rel="noopener">查看最新真实结果：两类光伏商品的数据、AI原话与审阅意见（只读，不调用API）</a></p>
         <p><a href="/demo/solar" target="_blank" rel="noopener">查看早期流程演示：光伏组件简报（只读、不调用API、仍待补核）</a></p>
-        <p class="muted">支持登记政策的单月查询、排序，以及政策＋单月/多月贸易简报。请明确月份（多月需起止）和税号；比较可写“以2026-06为基准，比较2026-07”。没有对应可比性核查时只展示金额，不自动给变化率。每次提交最多两次模型请求，结果仍需审阅。</p>
+        <p class="muted">下方是保留的旧版研究入口，不是上方单月 v2 流程。旧版支持登记政策的单月查询、排序及单月/多月资料整理；这不代表 v2 已支持多月解释。请明确起止月份和税号。没有对应可比性核查时只展示金额，不自动给变化率。每次提交最多两次模型请求，结果仍需审阅。</p>
         <label>你的问题<textarea id="research-question" rows="4" maxlength="2000" style="width:100%;font:inherit;padding:10px" placeholder="例如：列出登记政策全部税号在2026年4月的中国金额和份额。"></textarea></label>
         <label for="research-case">本次问题的政策案例</label>
         <select id="research-case" disabled>
@@ -223,17 +230,27 @@
     function appendDataReport(box, binding) {
       if (!binding) return;
       const note=document.createElement('p');setText(note,binding.message);box.appendChild(note);
-      if (binding.status==='bound' && typeof binding.url==='string' && /^\/api\/version-report\?version=[0-9a-f]{64}$/.test(binding.url)) {
+      if (binding.status==='bound' && typeof binding.url==='string' && /^\/api\/version-report\?version=[0-9a-f]{64}(&policy_id=us_301_solar2024)?$/.test(binding.url)) {
         const link=document.createElement('a');link.href=binding.url;link.target='_blank';link.rel='noopener';
         setText(link,'查看本次分析使用的数据版本');box.appendChild(link);
       }
+    }
+    function appendCourseAdapter(box, adapter) {
+      if (!adapter || adapter.status !== 'validated') return;
+      const note = document.createElement('p');
+      note.className = 'muted';
+      const count = Array.isArray(adapter.hts8) ? adapter.hts8.length : 0;
+      const version = adapter.data_version ? String(adapter.data_version).slice(0, 12) + '…' : '未知';
+      setText(note, '工具适配已通过：固定贸易指标查询，' + count + ' 个登记 HTS8；数据版本 ' + version + '。');
+      box.appendChild(note);
     }
     $("task-submit").addEventListener("click", async () => {
       const button=$("task-submit"), box=$("task-result"); button.disabled=true;
       setText(box,"正在检查任务范围…");
       try {
-        const result=await getJSON('/api/research-structured',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({policy_id:$("task-case").value,month:$("task-month").value,product:$("task-product").value,task:'source_and_investigation'})});
+        const result=await getJSON('/api/research-structured',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({policy_id:$("task-case").value,month:$("task-month").value,product:$("task-product").value,task:'monthly_exposure'})});
         setText(box,result.message+'（模型请求 '+result.model_calls+' 次；解释未经批准）');
+        appendCourseAdapter(box,result.course_adapter);
         appendDataReport(box,result.data_report);
         if (typeof result.review_url === 'string' && /^\/review\/interpretation\?run_id=exposure-\d{8}T\d{6}-[0-9a-f]{8}$/.test(result.review_url)) {
           const link=document.createElement('a');link.href=result.review_url;link.textContent='审阅本次结果并导出';
@@ -246,6 +263,56 @@
         }
       } catch(error) { setText(box,error.message); }
       finally {button.disabled=false;}
+    });
+
+    let naturalV2Token = null;
+    $('natural-v2-question').addEventListener('input', () => {
+      naturalV2Token = null;
+      $('natural-v2-confirm').disabled = true;
+    });
+    function renderNaturalV2Request(box, result) {
+      box.replaceChildren();
+      const message = document.createElement("p"); setText(message, result.response || result.message || ""); box.appendChild(message);
+      if (result.request) {
+        const list = document.createElement("ul");
+        const labels = {policy_id:"政策案例", month:"统计月份", product:"商品范围", focus:"关注角度", policy_view:"政策视图", schema_version:"请求版本"};
+        for (const key of ["policy_id","month","product","focus","policy_view","schema_version"]) {
+          if (!(key in result.request)) continue;
+          const item = document.createElement("li"); setText(item, (labels[key] || key) + "：" + result.request[key]); list.appendChild(item);
+        }
+        box.appendChild(list);
+      }
+      if (result.month_resolution?.intent === 'latest_available') { const note=document.createElement("p"); setText(note,"最新可用月份解析为：" + result.month_resolution.resolved_month + "（来自当前已发布数据版本，不代表今天的实时数据）。"); box.appendChild(note); }
+      if (result.data_version) { const note=document.createElement("p"); setText(note,"绑定数据版本：" + result.data_version.slice(0,12) + "…"); box.appendChild(note); }
+      if (result.status === "needs_confirmation") { const note=document.createElement("p"); note.className="muted"; setText(note,"请逐项核对上面的预览；点击确认后才会执行。"); box.appendChild(note); }
+    }
+    $("natural-v2-preview").addEventListener("click", async () => {
+      const question = $("natural-v2-question").value.trim();
+      const box = $("natural-v2-result"), preview = $("natural-v2-preview"), confirm = $("natural-v2-confirm");
+      naturalV2Token = null; confirm.disabled = true;
+      if (!question) { setText(box, "请先输入研究问题。"); return; }
+      preview.disabled = true; setText(box, "正在生成任务预览；尚未读取数据…");
+      try {
+        const result = await getJSON("/api/research-v2/preview", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({question})});
+        renderNaturalV2Request(box, result);
+        if ($('natural-v2-question').value.trim() !== question) {
+          setText(box, '问题已修改，请重新生成预览。');
+        } else if (result.status === "needs_confirmation" && typeof result.confirmation_token === "string") { naturalV2Token = result.confirmation_token; confirm.disabled = false; }
+      } catch (error) { setText(box, "预览未完成：" + error.message); }
+      finally { preview.disabled = false; }
+    });
+    $("natural-v2-confirm").addEventListener("click", async () => {
+      const box = $("natural-v2-result"), confirm = $("natural-v2-confirm");
+      if (!naturalV2Token) { setText(box, "没有有效的确认令牌，请先重新生成预览。"); return; }
+      confirm.disabled = true; setText(box, "正在执行已确认的结构化任务…");
+      try {
+        const result = await getJSON("/api/research-v2/confirm", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({confirmation_token:naturalV2Token})});
+        naturalV2Token = null; renderNaturalV2Request(box, result);
+        appendCourseAdapter(box,result.course_adapter);
+        appendDataReport(box, result.data_report);
+        if (typeof result.review_url === "string" && /^\/review\/interpretation\?run_id=exposure-\d{8}T\d{6}-[0-9a-f]{8}$/.test(result.review_url)) { const link=document.createElement('a'); link.href=result.review_url; link.target='_blank'; link.rel='noopener'; setText(link,'审阅本次结果并导出'); box.append(document.createElement('br'),link); }
+      } catch (error) { naturalV2Token = null; setText(box, "执行未完成：" + error.message); }
+      finally { confirm.disabled = true; }
     });
 
     async function getJSON(url, options) {

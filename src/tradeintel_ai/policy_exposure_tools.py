@@ -184,6 +184,7 @@ def get_policy_exposure_series(
     start: str = "2025-01",
     end: str = "2026-07",
     repository: EvidenceRepository | None = None,
+    include_origins: bool = False,
 ) -> dict[str, object]:
     """Return a registered policy's monthly descriptive exposure series."""
 
@@ -241,7 +242,13 @@ def get_policy_exposure_series(
             series.append({"month": label, "value_usd": None, "target_share_percent": None})
             continue
         output_path = monthly_dir / f"{policy_id}_{key[0]}_{key[1]:02d}.csv"
-        receipt_path = monthly_dir.parent / "window_validation_2025-01_2026-07.json"
+        snapshot_start = str((snapshot or {}).get("start") or case.start)
+        snapshot_end = str((snapshot or {}).get("end") or case.end)
+        receipt_path = monthly_dir.parent / f"window_validation_{snapshot_start}_{snapshot_end}.json"
+        if not receipt_path.exists() and (snapshot_start, snapshot_end) != (case.start, case.end):
+            # Legacy case receipts were named for the original registered
+            # window. A pinned release may still carry that exact file.
+            receipt_path = monthly_dir.parent / f"window_validation_{case.start}_{case.end}.json"
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
         matches = [entry for entry in receipt.get("months", [])
                    if (entry.get("year"), entry.get("month")) == key]
@@ -294,10 +301,28 @@ def get_policy_exposure_series(
             group = [row for row in filtered if row['canonical_hts8'] == code]
             world = sum(int(row['import_value_consumption_usd']) for row in group)
             china = sum(int(row['import_value_consumption_usd']) for row in group if row['origin_code'] == '5700')
-            breakdown.append({'hts8': code, 'all_origins_value_usd': world,
+            product = {'hts8': code, 'all_origins_value_usd': world,
                               'china_value_usd': china,
                               'china_share_percent': round(china / world * 100, 4) if world else None,
-                              'share_of_scope_imports_percent': round(world / all_value * 100, 4) if all_value else None})
+                              'share_of_scope_imports_percent': round(world / all_value * 100, 4) if all_value else None}
+            if include_origins:
+                by_origin: dict[str, dict[str, object]] = {}
+                for row in group:
+                    origin_code = row['origin_code']
+                    current = by_origin.setdefault(origin_code, {
+                        'origin_code': origin_code,
+                        'origin_name': row.get('origin_name', ''),
+                        'value_usd': 0,
+                    })
+                    if current['origin_name'] != row.get('origin_name', ''):
+                        raise RepositoryError(f"同一来源代码对应多个名称：{label}/{code}/{origin_code}")
+                    current['value_usd'] = int(current['value_usd']) + int(row['import_value_consumption_usd'])
+                origin_rows = sorted(by_origin.values(),
+                                     key=lambda value: (-int(value['value_usd']), str(value['origin_code'])))
+                if sum(int(value['value_usd']) for value in origin_rows) != world:
+                    raise RepositoryError(f"来源地聚合不守恒：{label}/{code}")
+                product['origin_breakdown'] = origin_rows
+            breakdown.append(product)
         series.append({
             "month": label,
             "value_usd": value,
@@ -320,6 +345,7 @@ def get_policy_exposure_series(
             "scope": "registered_policy_hts8",
             "hts8": hts8,
             "origin": selected_origin,
+            "include_origins": bool(include_origins),
             "measure": "import_value_consumption_usd",
             "start": start,
             "end": end,

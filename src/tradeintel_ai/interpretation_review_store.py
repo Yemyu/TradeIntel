@@ -1,10 +1,122 @@
 """Content-bound local reviewer decisions; never changes case publication."""
 import hashlib
 import json
+from copy import deepcopy
 from datetime import datetime, timezone
 from .host_review import _publish, _read
+from .response_contract import parse_json_response
 
 FILES=('status.json','trade-evidence.json','policy-facts.json','interpretation-response.json','source-packet.zh-CN.md')
+V2_FILES=FILES+('evidence-bundle.json', 'interpretation-canonical.json')
+SESSION_REVIEW_PROTOCOL = 'session-explanation-review-v1'
+PUBLIC_SESSION_REVIEW_PROTOCOL = 'public-brief-explanation-review-v1'
+LEGACY_REVIEW_PROTOCOL = 'legacy-interpretation'
+V2_REVIEW_PROTOCOL = 'research-brief-v2'
+
+
+def validate_session_review(payload, expected_items, *, reviewer):
+    """Validate the session explanation review contract.
+
+    The session flow stores its content-bound history in ``session_store``;
+    this shared validator keeps its field semantics alongside the legacy and
+    v2 file-backed review protocols without pretending those old packets are
+    the new session packet.
+    """
+    if not isinstance(reviewer, str) or not reviewer.strip() or len(reviewer.strip()) > 80:
+        raise ValueError('reviewer is required')
+    if not isinstance(payload, dict) or type(payload.get('facts_checked')) is not bool:
+        raise ValueError('facts_checked must be boolean')
+    decisions = payload.get('decisions')
+    if not isinstance(decisions, list) or len(decisions) != len(expected_items):
+        raise ValueError('必须逐项审阅每个解释和追问')
+    clean = []
+    for item, decision in zip(expected_items, decisions):
+        if not isinstance(decision, dict) or set(decision) != {'index', 'kind', 'verdict', 'reason'}:
+            raise ValueError('审阅项字段无效')
+        if (decision['index'] != item['index'] or decision['kind'] != item['kind']
+                or decision['verdict'] not in {'accept', 'reject', 'needs_revision'}
+                or not isinstance(decision['reason'], str)
+                or not 1 <= len(decision['reason'].strip()) <= 1000):
+            raise ValueError('审阅项顺序、结论或理由无效')
+        clean.append(deepcopy(decision))
+    eligible = bool(payload['facts_checked'] and clean
+                    and any(d['kind'] == 'finding' and d['verdict'] == 'accept' for d in clean)
+                    and all(d['verdict'] != 'needs_revision' for d in clean))
+    return {
+        'protocol': SESSION_REVIEW_PROTOCOL,
+        'schema_version': SESSION_REVIEW_PROTOCOL,
+        'reviewer': reviewer.strip(),
+        'facts_checked': payload['facts_checked'],
+        'decisions': clean,
+        'eligible_for_export': eligible,
+        'created_at': payload.get('created_at'),
+        'status': 'accepted' if eligible else 'rejected_or_incomplete',
+    }
+
+
+def validate_public_session_review(payload, expected_items, *, reviewer):
+    """Validate item decisions for the multi-period public explanation.
+
+    This is deliberately a separate protocol from the legacy A3 explanation
+    review: the new contract reviews interpretation/watch entries keyed by
+    observation IDs, not ``finding``/``followup`` slots.
+    """
+    if not isinstance(reviewer, str) or not reviewer.strip() or len(reviewer.strip()) > 80:
+        raise ValueError('reviewer is required')
+    if not isinstance(payload, dict) or type(payload.get('facts_checked')) is not bool:
+        raise ValueError('facts_checked must be boolean')
+    decisions = payload.get('decisions')
+    if not isinstance(decisions, list) or len(decisions) != len(expected_items):
+        raise ValueError('必须逐项审阅每个解释和观察事项')
+    clean = []
+    for item, decision in zip(expected_items, decisions):
+        if not isinstance(decision, dict) or set(decision) != {'index', 'kind', 'verdict', 'reason'}:
+            raise ValueError('审阅项字段无效')
+        if (decision['index'] != item['index'] or decision['kind'] != item['kind']
+                or decision['verdict'] not in {'accept', 'reject', 'needs_revision'}
+                or not isinstance(decision['reason'], str)
+                or not 1 <= len(decision['reason'].strip()) <= 1000):
+            raise ValueError('审阅项顺序、结论或理由无效')
+        clean.append(deepcopy(decision))
+    has_policy = any(item.get('kind') == 'policy_explanation' for item in expected_items)
+    eligible = bool(payload['facts_checked']
+                    and any(d['kind'] == 'interpretation' and d['verdict'] == 'accept'
+                            for d in clean)
+                    and (not has_policy or all(
+                        d['verdict'] == 'accept'
+                        for d in clean if d['kind'] == 'policy_explanation'))
+                    and all(d['verdict'] != 'needs_revision' for d in clean))
+    return {
+        'protocol': PUBLIC_SESSION_REVIEW_PROTOCOL,
+        'schema_version': PUBLIC_SESSION_REVIEW_PROTOCOL,
+        'reviewer': reviewer.strip(),
+        'facts_checked': payload['facts_checked'],
+        'decisions': clean,
+        'eligible_for_export': eligible,
+        'created_at': payload.get('created_at'),
+        'status': 'accepted' if eligible else 'rejected_or_incomplete',
+    }
+
+
+def validate_review_payload(protocol, payload, expected_items=None, *, reviewer=None):
+    """Dispatch validation by protocol without changing old packet semantics.
+
+    The filesystem-backed legacy and v2 reviewers still require their bound
+    ``packet`` and :func:`submit` flow.  The session explanation is the only
+    protocol validated from an in-memory task payload; making that distinction
+    explicit prevents callers from silently treating one schema as another.
+    """
+    if protocol == SESSION_REVIEW_PROTOCOL:
+        if expected_items is None or reviewer is None:
+            raise ValueError('session review requires expected items and reviewer')
+        return validate_session_review(payload, expected_items, reviewer=reviewer)
+    if protocol == PUBLIC_SESSION_REVIEW_PROTOCOL:
+        if expected_items is None or reviewer is None:
+            raise ValueError('public session review requires expected items and reviewer')
+        return validate_public_session_review(payload, expected_items, reviewer=reviewer)
+    if protocol in {LEGACY_REVIEW_PROTOCOL, V2_REVIEW_PROTOCOL}:
+        raise ValueError('filesystem review packets must use packet()/submit()')
+    raise ValueError('unsupported review protocol')
 
 
 def _review_digest(record):
@@ -35,7 +147,10 @@ def _review_history(run):
 def _packet_snapshot(run):
     hashes={}
     contents={}
-    for name in FILES:
+    file_names = V2_FILES if (run/'evidence-bundle.json').is_file() else FILES
+    if 'evidence-bundle.json' in file_names and (run/'input.json').exists():
+        file_names = (*file_names, 'input.json')
+    for name in file_names:
         path=run/name
         if path.is_symlink() or not path.is_file(): raise ValueError('review source missing or unsafe')
         contents[name]=path.read_bytes()
@@ -47,11 +162,45 @@ def _packet_snapshot(run):
         raise ValueError('not a reviewable interpretation run')
     if any(obj.get('data_version')!=status['data_version'] for obj in (trade,facts)):
         raise ValueError('review version mismatch')
-    notes=json.loads(json.loads(contents['interpretation-response.json'])['text'])['notes']
+    response_payload=json.loads(contents['interpretation-response.json'])
+    parsed=parse_json_response(response_payload['text'])
+    if 'interpretation-canonical.json' in file_names:
+        canonical=json.loads(contents['interpretation-canonical.json'])
+        expected_hash=hashlib.sha256(response_payload['text'].encode('utf-8')).hexdigest()
+        if canonical.get('raw_sha256') != expected_hash or canonical.get('parsed') != parsed:
+            raise ValueError('canonical response does not match raw response')
+    if 'evidence-bundle.json' in file_names:
+        if parsed.get('schema_version') != 'research-brief-v2':
+            raise ValueError('v2 response contract mismatch')
+        from .evidence_bundle import build_evidence_bundle
+        from .research_brief_v2 import review
+        bundle = json.loads(contents['evidence-bundle.json'])
+        expected = build_evidence_bundle(trade, facts, focus=bundle['request']['focus'])
+        if bundle != expected:
+            raise ValueError('evidence bundle does not match bound trade and policy facts')
+        if status.get('policy_id', bundle['policy_id']) != bundle['policy_id']:
+            raise ValueError('run policy does not match evidence bundle')
+        if 'input.json' in contents:
+            request = json.loads(contents['input.json']).get('structured_task')
+            if not isinstance(request,dict) or any([
+                request.get('policy_id') != bundle['policy_id'],
+                request.get('month') != bundle['request']['month'],
+                request.get('product') != bundle['request']['product'],
+                request.get('focus','contrast') != bundle['request']['focus'],
+            ]):
+                raise ValueError('saved request does not match evidence bundle')
+        model_review = review(parsed, bundle)
+        notes=parsed.get('findings', [])
+    else:
+        notes=parsed['notes']
     # Identical answers from separate runs still need separate decisions.
     fingerprint=hashlib.sha256(json.dumps({'run':run.name,'files':hashes},sort_keys=True).encode()).hexdigest()
     result={'fingerprint':fingerprint,'data_version':status['data_version'],'hashes':hashes,
-            'notes':notes,'decision':None,'status':'pending','case_publication_allowed':False}
+            'notes':notes,'decision':None,'status':'pending','case_publication_allowed':False,
+            'contract':'research-brief-v2' if 'evidence-bundle.json' in file_names else 'legacy-interpretation'}
+    if 'evidence-bundle.json' in file_names:
+        result['evidence_bundle'] = bundle
+        result['model_task_coverage'] = model_review['task_coverage']
     history=_review_history(run)
     result.update(history=history, revision=len(history), review_digest=None)
     if history:
@@ -59,6 +208,13 @@ def _packet_snapshot(run):
         result['decision']=record
         result['review_digest']=_review_digest(record)
         result['status']='recorded' if record['fingerprint']==fingerprint else 'stale'
+    if 'evidence-bundle.json' in file_names:
+        from .research_brief_v2 import task_coverage
+        accepted_notes = []
+        if result['status'] == 'recorded':
+            accepted_notes = [notes[item['index']] for item in result['decision']['decisions']
+                              if item['verdict'] == 'accept']
+        result['accepted_task_coverage'] = task_coverage(accepted_notes, bundle)
     return result, trade, facts
 
 
@@ -112,6 +268,8 @@ def reviewed_draft(run):
     It never changes the saved model response or the review decision.
     """
     current, trade, facts=_packet_snapshot(run)
+    if (run/'evidence-bundle.json').is_file():
+        return _reviewed_v2(run, current, trade, facts)
     decision=current.get('decision')
     if current.get('status')!='recorded' or not isinstance(decision,dict):
         raise ValueError('human review is still pending or stale')
@@ -162,7 +320,8 @@ def reviewed_draft(run):
               f"- 生效起点：{facts.get('effective_date','未知')} {facts.get('clock_24h','')} {facts.get('timezone','')}",
               f"- 原产范围：{facts.get('origin','未知')}",
               f"- 适用事件：{'或'.join(facts.get('entry_events',[]))}",
-              f"- 额外税率：适用子目税率之外加征{facts.get('additional_duty_percent','未知')}%；不代表综合税率。", '',
+              *([f"- {r['hts8']}：额外加征{r['additional_duty_percent']}%，不代表综合税率。" for r in facts['product_rates']]
+                if 'product_rates' in facts else [f"- 额外税率：适用子目税率之外加征{facts.get('additional_duty_percent','未知')}%；不代表综合税率。"]), '',
               '政策事实由程序依据已核查公告生成；章98例外、其他适用税费及逐笔适用条件仍需按完整原文核查。']
     source_ids=[]
     for source in facts.get('sources',[]):
@@ -182,4 +341,67 @@ def reviewed_draft(run):
               f"审阅包指纹：`{current['fingerprint']}`"]
     for name,digest in current['hashes'].items():
         lines.append(f"- `{name}`：`{digest}`")
+    return '\n'.join(lines)+'\n'
+
+
+def _reviewed_v2(run, current, trade, facts):
+    """Render accepted v2 findings against the immutable evidence bundle."""
+    decision=current.get('decision')
+    if current.get('status')!='recorded' or not isinstance(decision,dict):
+        raise ValueError('human review is still pending or stale')
+    if decision.get('facts_checked') is not True or decision.get('eligible_for_reviewed_draft') is not True:
+        raise ValueError('review is not eligible for draft export')
+    bundle=current['evidence_bundle']
+    decisions=decision.get('decisions')
+    if not isinstance(decisions,list) or len(decisions)!=len(current['notes']):
+        raise ValueError('review decision coverage incomplete')
+    accepted=[]
+    for index,item in enumerate(decisions):
+        if item.get('index') != index or item.get('verdict') == 'needs_revision':
+            raise ValueError('review still has a revision item')
+        if item.get('verdict') == 'accept':
+            accepted.append((index,current['notes'][index],item))
+    if not accepted:
+        raise ValueError('no accepted interpretation finding')
+    lines=['# 人工审阅稿（v2，待进一步复核）','',
+           '> 本稿只纳入本次人工选择的 AI 解释；不构成法律意见、税款/损失结论、因果结论或案例发布批准。','']
+    from .research_brief_v2 import render_coverage
+    lines[2:2] = [render_coverage(current['accepted_task_coverage']), '']
+    from .evidence_bundle import render_observations
+    lines += render_observations(bundle)
+    lines += ['', '| 商品 | 美国全部来源金额（美元） | 中国原产金额（美元） | 中国占该商品进口 |',
+              '|---|---:|---:|---:|']
+    for p in bundle['profiles']:
+        share = '未知（分母为零）' if p['china_share_of_product_percent'] is None else f"{p['china_share_of_product_percent']:.2f}%"
+        lines.append(f"| {p['hts8']} | {p['world_import_usd']:,} | {p['china_import_usd']:,} | {share} |")
+    lines += ['', '份额分母是美国该商品全部来源消费进口额。', '', '## 政策事实与限制', '']
+    if facts.get('effective_date'):
+        lines.append(f"生效时点：{facts['effective_date']} {facts.get('clock_24h','')} {facts.get('timezone','')}")
+    if facts.get('origin'):
+        lines.append('原产范围：' + facts['origin'])
+    for rate in facts.get('product_rates', []):
+        if rate['hts8'] in {p['hts8'] for p in bundle['profiles']}:
+            lines.append(f"- {rate['hts8']}：存档额外税率 {rate.get('additional_duty_percent','未知')}%；依据 {rate.get('source_id','未知')}。")
+            detail = rate.get('details')
+            if detail:
+                lines += ['  登记名称：' + (detail['registered_name_zh'] or detail['registered_name']),
+                          '  适用条件未知：' + detail['conditions']['reason'],
+                          '  例外未知：' + detail['exceptions']['reason']]
+    lines += ['- '+item['text'] for item in bundle['limitations']]
+    lines += ['', '## 来源', '']
+    for source in bundle['sources']:
+        url = source.get('url') or source.get('source_url')
+        label = source.get('id') or source.get('path', '来源')
+        lines.append(f"- [{label}]({url})" if url else f"- {label}")
+        digest = source.get('sha256') or source.get('document_sha256')
+        if digest:
+            lines.append(f"  SHA-256：`{digest}`")
+    lines += ['', '## AI 解释（人工采纳）', '']
+    for index,note,item in accepted:
+        lines += [f"### 解释 {index+1}", '', f"关联观察：{note.get('observation_id')}", '',
+                  note.get('explanation',''), '', f"人工审阅理由：{item.get('reason','')}", '']
+    lines += ['## 范围与版本', '', f"- 政策：`{bundle['policy_id']}`", f"- 数据版本：`{bundle['data_version']}`",
+              f"- 统计期：{bundle['request']['month']}", '', '## 审阅状态', '',
+              f"审阅版本：{current['revision']}；审阅包指纹：`{current['fingerprint']}`",
+              'case_publication_allowed=false；本稿仍需继续复核。', '']
     return '\n'.join(lines)+'\n'

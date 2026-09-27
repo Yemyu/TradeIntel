@@ -58,6 +58,7 @@ def retrieve_exposure_policy(root, question, *, as_of):
         if (not indices or any(type(i) is not int or not 0 <= i < len(parsed[raw]) for i in indices)
                 or '\n'.join(parsed[raw][i] for i in indices) != chunk['text']):
             raise ValueError('policy chunk differs from source paragraph')
-    return PolicyRetriever(corpus, scope_checker=scope_check).search(
+    result = PolicyRetriever(corpus, scope_checker=scope_check).search(
         question, as_of=as_of, top_k=3,
         search_query='tungsten polysilicon wafers subheadings additional duty January 1 2025')
+    return {**result, 'policy_id': 'us_301_review2025_tungsten_solar'}

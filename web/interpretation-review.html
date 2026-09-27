@@ -8,20 +8,59 @@
 <p id="change-box" hidden><label>本次修订原因<textarea id="change-reason" maxlength="1000"></textarea></label></p>
 <button id="revise" hidden>修订审阅决定</button><button id="cancel-revision" hidden>取消修订</button>
 <button id="save" disabled>保存本次审阅决定（不发布案例）</button><p id="export"></p><pre id="record"></pre><details><summary>审阅历史</summary><pre id="history"></pre></details>
+<section id="save-confirmation" class="warn" hidden aria-label="确认保存审阅">
+<p>确认保存一个新的审阅版本？旧决定与原回答都会保留，不发布案例。修改表单后需重新确认。</p>
+<p id="save-summary"></p><button id="confirm-save">确认保存此版本</button> <button id="cancel-save">取消保存</button>
+</section>
 <script>
 'use strict';let current;let editingRevision=false;const el=id=>document.getElementById(id);
+let pendingSave=null;
+function cancelSave(){pendingSave=null;el('save-confirmation').hidden=true;}
+el('cancel-save').addEventListener('click',cancelSave);
+for(const id of ['notes','reviewer','facts','change-reason']){el(id).addEventListener('input',cancelSave);el(id).addEventListener('change',cancelSave);}
 const params=new URLSearchParams(window.location.search);
 const selectedRun=params.get('run_id');
 const validSelector=Array.from(params.keys()).every(k=>k==='run_id')&&params.getAll('run_id').length<=1&&(!params.has('run_id')||/^exposure-\d{8}T\d{6}-[0-9a-f]{8}$/.test(selectedRun));
 const suffix=selectedRun?'?run_id='+encodeURIComponent(selectedRun):'';
 const reviewEndpoint='/api/saved-interpretation-review'+suffix;
 const draftEndpoint='/api/saved-interpretation-draft'+suffix;
+// Keep viewing and downloading as two explicit actions.  The original
+// endpoint remains the same-origin, version-bound export; the download hint
+// is added in the page so a browser does not treat Markdown as an ambiguous
+// navigation target.
+function decorateExportLinks(){
+  const exportBox=el('export');
+  if(!exportBox||typeof exportBox.querySelector!=='function')return;
+  const downloadLink=exportBox.querySelector('a');
+  if(!downloadLink||downloadLink.dataset.exportReady==='1')return;
+  downloadLink.dataset.exportReady='1';
+  downloadLink.download=(selectedRun||'tradeintel')+'-reviewed.md';
+  downloadLink.textContent='下载人工审阅稿（只含采纳项；不发布案例）';
+  const viewLink=downloadLink.cloneNode(true);
+  viewLink.removeAttribute('download');
+  viewLink.target='_blank';
+  viewLink.textContent='查看人工审阅稿';
+  viewLink.dataset.exportView='1';
+  exportBox.append(document.createTextNode(' · '),viewLink);
+}
+// The production browser provides MutationObserver.  The small stale-record
+// UI test harness intentionally does not, so keep page initialization usable
+// there and decorate links immediately after load when observation is absent.
+if(typeof MutationObserver==='function'){
+  const exportObserver=new MutationObserver(decorateExportLinks);
+  exportObserver.observe(el('export'),{childList:true});
+}else{
+  if(typeof window.setTimeout==='function')window.setTimeout(decorateExportLinks,0);
+  else decorateExportLinks();
+}
 el('run-label').textContent=selectedRun&&validSelector?'当前运行：'+selectedRun:'固定开发案例存档';
 if(selectedRun&&validSelector){el('source-link').href='/api/research-artifact/'+selectedRun+'/source-packet.zh-CN.md';el('source-link').textContent='查看本次来源资料';}
 
-async function load(){editingRevision=false;el('revise').hidden=true;el('cancel-revision').hidden=true;el('change-box').hidden=true;el('change-reason').value='';el('export').replaceChildren();el('record').textContent='';el('save').disabled=true;try{const response=await fetch(reviewEndpoint);const data=await response.json();if(!response.ok)throw Error(data.message);current=data;el('notes').replaceChildren();el('history').textContent=JSON.stringify(data.history||[],null,2);
+async function load(){cancelSave();editingRevision=false;el('revise').hidden=true;el('cancel-revision').hidden=true;el('change-box').hidden=true;el('change-reason').value='';el('export').replaceChildren();el('record').textContent='';el('save').disabled=true;try{const response=await fetch(reviewEndpoint);const data=await response.json();if(!response.ok)throw Error(data.message);current=data;el('notes').replaceChildren();el('history').textContent=JSON.stringify(data.history||[],null,2);
 el('data-report').replaceChildren();
-if(data.data_report){const b=data.data_report;el('data-report').textContent=b.message;if(b.status==='bound'&&typeof b.url==='string'&&/^\/api\/version-report\?version=[0-9a-f]{64}$/.test(b.url)){const a=document.createElement('a');a.href=b.url;a.textContent=' 查看同版本数据';a.target='_blank';a.rel='noopener';el('data-report').append(a);}}
+let coverageBox=document.getElementById('task-coverage');if(!coverageBox){coverageBox=document.createElement('p');coverageBox.id='task-coverage';coverageBox.className='warn';el('notes').before(coverageBox);}coverageBox.textContent='';
+if(data.model_task_coverage){const labels={amount_leader:'金额解释',share_leader:'份额解释',rank_contrast:'两种排序对照',single_product_profile:'单商品解释'};const describe=c=>c.structural_coverage_complete?'观察引用齐全，解释质量仍待核对':'缺少'+c.missing_observation_types.map(x=>labels[x]||x).join('、');coverageBox.textContent='原回答：'+describe(data.model_task_coverage)+'；已采纳内容：'+describe(data.accepted_task_coverage)+'。采纳素材不等于整题完成。';}
+if(data.data_report){const b=data.data_report;el('data-report').textContent=b.message;if(b.status==='bound'&&typeof b.url==='string'&&/^\/api\/version-report\?version=[0-9a-f]{64}(&policy_id=us_301_solar2024)?$/.test(b.url)){const a=document.createElement('a');a.href=b.url;a.textContent=' 查看同版本数据';a.target='_blank';a.rel='noopener';el('data-report').append(a);}}
 if(data.status==='stale'){
 el('status').textContent='资料版本已变化，旧审阅已过期。';
 el('boundary').textContent='旧决定不能应用于当前建议，审阅稿暂不可导出。旧记录保留在下方供追溯；当前页面尚不支持重新审阅。';
@@ -29,7 +68,8 @@ el('reviewer').value='';el('reviewer').disabled=true;el('facts').checked=false;e
 el('record').textContent='旧版本记录（不适用于当前资料）：\n'+JSON.stringify(data.decision,null,2);
 return;
 }
-data.notes.forEach((note,index)=>{const article=document.createElement('article');const title=document.createElement('h2');title.textContent='建议 '+(index+1);const quote=document.createElement('blockquote');quote.textContent=note.text;const refs=document.createElement('p');refs.textContent='关联事实：'+note.fact_ids.join(', ');const select=document.createElement('select');select.id='verdict-'+index;select.setAttribute('aria-label','建议 '+(index+1)+' 的决定');for(const [value,label] of [['','请选择'],['accept','采纳为待审阅稿素材'],['reject','不采纳'],['needs_revision','需要修改']]){const option=document.createElement('option');option.value=value;option.textContent=label;select.append(option);}const reason=document.createElement('textarea');reason.id='reason-'+index;reason.maxLength=1000;reason.placeholder='说明证据与理由，不能只填“同意”';reason.setAttribute('aria-label','建议 '+(index+1)+' 的审阅理由');const saved=data.decision&&data.decision.decisions&&data.decision.decisions[index];if(saved){select.value=saved.verdict;reason.value=saved.reason;select.disabled=true;reason.disabled=true;}article.append(title,quote,refs,select,reason);el('notes').append(article);});
+const v2=data.contract==='research-brief-v2';
+data.notes.forEach((note,index)=>{const article=document.createElement('article');const title=document.createElement('h2');title.textContent=(v2?'解释 ':'建议 ')+(index+1);const quote=document.createElement('blockquote');quote.textContent=v2?note.explanation:note.text;const refs=document.createElement('p');refs.textContent=v2?'关联观察：'+note.observation_id+'；局限：'+(note.limitation_ids||[]).join(', '):'关联事实：'+note.fact_ids.join(', ');const select=document.createElement('select');select.id='verdict-'+index;select.setAttribute('aria-label',(v2?'解释 ':'建议 ')+(index+1)+' 的决定');for(const [value,label] of [['','请选择'],['accept','采纳为待审阅稿素材'],['reject','不采纳'],['needs_revision','需要修改']]){const option=document.createElement('option');option.value=value;option.textContent=label;select.append(option);}const reason=document.createElement('textarea');reason.id='reason-'+index;reason.maxLength=1000;reason.placeholder='说明证据与理由，不能只填“同意”';reason.setAttribute('aria-label',(v2?'解释 ':'建议 ')+(index+1)+' 的审阅理由');const saved=data.decision&&data.decision.decisions&&data.decision.decisions[index];if(saved){select.value=saved.verdict;reason.value=saved.reason;select.disabled=true;reason.disabled=true;}article.append(title,quote,refs,select,reason);el('notes').append(article);});
 el('revise').hidden=data.status!=='recorded';el('status').textContent='审阅状态：'+data.status+'；审阅版本：'+(data.revision||0)+'。';el('save').disabled=data.status!=='pending';el('reviewer').disabled=data.status!=='pending';el('facts').disabled=data.status!=='pending';if(data.decision){el('reviewer').value=data.decision.reviewer||'';el('facts').checked=data.decision.facts_checked===true;el('boundary').textContent=data.decision.eligible_for_reviewed_draft?'审阅已记录。下面的审阅稿只含采纳项，仍不是案例发布批准。':'审阅已记录，但当前不满足审阅稿导出条件；可通过修订重新审阅，仍不是案例发布批准。';el('record').textContent=JSON.stringify(data.decision,null,2);if(data.status==='recorded'&&data.decision.eligible_for_reviewed_draft===true){const link=document.createElement('a');link.href=draftEndpoint;link.textContent='下载/查看人工审阅稿（只含采纳项；不发布案例）';link.target='_blank';link.rel='noopener';el('export').append(link);}}
 }catch(error){el('status').textContent=error.message;el('save').disabled=true;}}
 el('revise').addEventListener('click',()=>{
@@ -41,5 +81,7 @@ current.notes.forEach((_,index)=>{el('verdict-'+index).disabled=false;el('reason
 el('save').disabled=false;el('status').textContent='正在修订第'+current.revision+'版；请重新核查事实并说明改动原因。';
 });
 el('cancel-revision').addEventListener('click',()=>load());
-el('save').addEventListener('click',async()=>{const decisions=current.notes.map((_,index)=>({index,verdict:el('verdict-'+index).value,reason:el('reason-'+index).value.trim()}));if(!el('reviewer').value.trim()||decisions.some(d=>!d.verdict||!d.reason)){el('status').textContent='请填写审阅者标签、每项决定和理由。';return;}if(editingRevision&&!el('change-reason').value.trim()){el('status').textContent='请填写本次修订原因。';return;}if(!confirm('保存一个新的审阅版本？旧决定与原回答都会保留。'))return;el('save').disabled=true;try{const response=await fetch(reviewEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fingerprint:current.fingerprint,reviewer:el('reviewer').value.trim(),facts_checked:el('facts').checked,decisions,...(editingRevision?{base_review_digest:current.review_digest,change_reason:el('change-reason').value.trim()}:{})})});const data=await response.json();if(!response.ok)throw Error(data.message);await load();}catch(error){el('status').textContent=error.message;el('save').disabled=false;}});if(validSelector){load();}else{el('status').textContent='运行编号无效，请从研究结果入口重新打开。';el('save').disabled=true;}
+el('save').addEventListener('click',()=>{cancelSave();const decisions=current.notes.map((_,index)=>({index,verdict:el('verdict-'+index).value,reason:el('reason-'+index).value.trim()}));if(!el('reviewer').value.trim()||decisions.some(d=>!d.verdict||!d.reason)){el('status').textContent='请填写审阅者标签、每项决定和理由。';return;}if(editingRevision&&!el('change-reason').value.trim()){el('status').textContent='请填写本次修订原因。';return;}pendingSave={fingerprint:current.fingerprint,reviewer:el('reviewer').value.trim(),facts_checked:el('facts').checked,decisions,...(editingRevision?{base_review_digest:current.review_digest,change_reason:el('change-reason').value.trim()}:{})};el('save-summary').textContent='审阅者：'+pendingSave.reviewer+'；共'+decisions.length+'条，其中采纳'+decisions.filter(d=>d.verdict==='accept').length+'条。';el('save-confirmation').hidden=false;});
+el('confirm-save').addEventListener('click',async()=>{if(!pendingSave)return;const payload=pendingSave;cancelSave();el('save').disabled=true;try{const response=await fetch(reviewEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await response.json();if(!response.ok)throw Error(data.message);await load();}catch(error){el('status').textContent=error.message;el('save').disabled=false;}});
+if(validSelector){load();}else{el('status').textContent='运行编号无效，请从研究结果入口重新打开。';el('save').disabled=true;}
 </script></main></body></html>
