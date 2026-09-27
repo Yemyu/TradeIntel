@@ -72,7 +72,7 @@ To make a plain folder containing those four files, without overwriting an exist
 
 The folder is a data supplement, not a standalone project or a zip archive. It contains no API configuration, credentials, Census ZIP archives, or temporary run records. Copy its `data/` directory into a prepared checkout and run the verification command again.
 
-The general U.S. trade workspace uses a separate, larger supplement: 124 processed data/index files (about 579 MB), covering 48 import months, 12 export months and the matching product catalogs. The current sample is local and ignored by Git at `tmp/handoff-runs/trade-demo-data-20260925/`; it is not publicly hosted. To generate and verify a fresh copy from the full published files already present in this checkout, choose a new output directory:
+The general U.S. trade workspace uses a separate, larger supplement: 124 processed data/index files (about 579 MB), covering 48 import months, 12 export months and the matching product catalogs. The current sample is local and ignored by Git at `tmp/handoff-runs/trade-demo-data-20260925/`; a verified local ZIP is at `tmp/handoff-runs/trade-demo-data-20260927.zip`. Neither is publicly hosted or included in a normal clone. [Local ZIP installation instructions](docs/LOCAL_RUN.zh-CN.md) explain the one tracked manifest that will be replaced in a fresh checkout. To generate and verify a fresh copy from the full published files already present in this checkout, choose a new output directory:
 
 ```bash
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py create --output tmp/handoff-runs/trade-demo-data
