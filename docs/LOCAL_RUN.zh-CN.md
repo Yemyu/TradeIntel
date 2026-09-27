@@ -5,7 +5,7 @@
 ## 需要什么
 
 - 本仓库的源码和网页。
-- 单独提供的通用贸易数据补充包：124 个已处理文件，解压后约 579 MB，ZIP 约 64 MiB，内含 `BUNDLE_MANIFEST.json`、中文说明和 `data/`。普通 Git 克隆不带这个包；目前核验过的 ZIP 只在原工作区的 `tmp/handoff-runs/trade-demo-data-20260927.zip`，**尚无公开下载地址**。原始 Census ZIP、API 密钥和 MySQL 数据都不在包内。
+- 单独提供的通用贸易数据补充包：124 个已处理文件，解压后约 579 MB，ZIP 约 64 MiB，内含 `BUNDLE_MANIFEST.json`、中文说明和 `data/`。普通 Git 克隆不带这个包；当前推荐的本机 ZIP 是 `tmp/handoff-runs/trade-demo-data-20260927-isolated-v2.zip`，SHA-256 为 `1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6`，**尚无公开下载地址**。原始 Census ZIP、API 密钥和 MySQL 数据都不在包内。
 - Python。本机已在 macOS 上用 Python 3.13.3 的新虚拟环境验证普通进口、出口和双向报告；另一次[完整依赖安装复验](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md)也在本机通过。当前报告保存代码使用 POSIX 文件接口，Windows 尚不能按下方命令视作已支持。
 
 本地候选的[干净 Git 克隆验收](handoff/runs/20260927-CLEAN-CLONE-QA.zh-CN.md)已覆盖下述三类报告、网页生成和重启恢复；前提是另行补入数据包，普通克隆自身不含数据。
@@ -20,7 +20,7 @@ python3 -m venv .venv
 
 ```bash
 mkdir -p .local
-unzip "/绝对路径/trade-demo-data-20260927.zip" -d .local/trade-data-bundle-1
+unzip "/绝对路径/trade-demo-data-20260927-isolated-v2.zip" -d .local/trade-data-bundle-1
 ```
 
 若拿到的是未压缩的目录包，可以直接使用该目录。传给程序的是**同时包含 `BUNDLE_MANIFEST.json` 和 `data/` 的目录**，不是 ZIP，也不是内层 `data/`。先核验文件与版本：
@@ -29,7 +29,7 @@ unzip "/绝对路径/trade-demo-data-20260927.zip" -d .local/trade-data-bundle-1
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-bundle-1
 ```
 
-只有返回 `"status": "verified"` 才继续。这个检查不下载数据，也不调用模型或 MySQL；独立目录受到 `.gitignore` 保护，不会把数据混进代码提交。旧版“解入克隆根目录”的方法仍可兼容，但会覆盖 Git 已跟踪的进口清单，只适合确认没有个人改动的新克隆；本页不再推荐该方法。随包 README 目前写的是旧方法，**以本页的新用法为准**。
+只有返回 `"status": "verified"` 才继续。这个检查不下载数据，也不调用模型或 MySQL；独立目录受到 `.gitignore` 保护，不会把数据混进代码提交。旧版“解入克隆根目录”的方法仍可兼容，但会覆盖 Git 已跟踪的进口清单，只适合确认没有个人改动的新克隆；本页不再推荐该方法。当前推荐的 v2 ZIP 随包 README 已改为独立目录用法；旧 ZIP 的 README 仍是旧方法，旧文件保持原样供追溯。
 
 随后启动本地页面：
 
