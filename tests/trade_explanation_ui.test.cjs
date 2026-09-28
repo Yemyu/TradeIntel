@@ -193,6 +193,28 @@ test('v4 relation card appears beside the monthly report in Chinese and English'
   assert.ok(env.report().textContent.includes('moved from down in 2026-06 to up in 2026-07'));
 });
 
+test('same-year peak gap appears as a deterministic page fact without enabling a model call', async () => {
+  const card = {id:'import.same_year_peak_gap', status:'available', eligible_for_ai:false, flow:'import',
+    year:'2026', latest_month:'2026-07', latest_usd:75, high_usd:81, high_months:['2026-05'], gap_usd:6,
+    fact:'2026年已观察月份中，最高为2026-05的81美元；2026-07为75美元，低于该峰值6美元。'};
+  const record = {kind:'trade-query-v1', question:'最近美国自行车进口有什么变化', report_id:'report-1',
+    report_sha256:'a'.repeat(64), scope:{flow:'import', product_label:'自行车', product_code:'8712',
+      partner:'ALL_ORIGINS', start_month:'2025-08', end_month:'2026-07'},
+    summary:{latest_month:'2026-07', latest_value_usd:75, previous_month:'2026-06', month_change_usd:-6,
+      period_total_usd:100}, series:[{month:'2026-06',status:'observed',value_usd:81},
+      {month:'2026-07',status:'observed',value_usd:75}], sources:[], notes:[],
+    explanation:{status:'not_requested', protocol:'trade-data-explanation-v4', available:false, observations:[card]}};
+  const env=makeEnv(record);
+  vm.runInContext(script,env.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.ok(env.report().textContent.includes('按同年已观察月份比较'));
+  assert.ok(env.report().textContent.includes('2026-07为75美元'));
+  env.context.document.documentElement.lang='en';
+  env.events['tradeintel:language']();
+  assert.ok(env.report().textContent.includes('Compare observed months within the year'));
+  assert.ok(env.report().textContent.includes('6 USD below that high'));
+});
+
 test('v4 combined import-export relation appears after both direction sections', async () => {
   const importCard = {id:'import.recent_run', status:'available', eligible_for_ai:true, flow:'import',
     direction:'增加', consecutive_changes:2, months:['2026-05','2026-06','2026-07'],
@@ -439,9 +461,9 @@ test('announcement statistics report restores, shows coverage and sources, and s
       source_url: 'https://official.example/notice', fields: [
         {field: 'effective_date', status: 'known', value: '2025-01-01'},
         {field: 'hts_codes', status: 'known', value: [{code: '28046100', precision: 'whole_hts8'}]},
-        {field: 'rates', status: 'known', value: {'28046100': 0}},
-        {field: 'conditions', status: 'known', value: ['Initial tariff level of 0 percent.']},
-        {field: 'revisions', status: 'known', value: 'The rate will be announced later.'}],
+        {field: 'rates', status: 'known', value: {'28046100': 10}},
+        {field: 'conditions', status: 'known', value: ['The original notice stated 10 percent.']},
+        {field: 'revisions', status: 'known', value: 'Later notices stated 15 percent and then 7.5 percent.'}],
       citations: [{field: 'effective_date', section_id: 'p1', quote: 'Effective January 1, 2025.'}]},
     monthly: [{month: '2026-06', status: 'queryable_aggregate', observed_value_usd: 100,
       complete_codes: 1, selected_codes: 1, rows: []},
@@ -465,10 +487,16 @@ test('announcement statistics report restores, shows coverage and sources, and s
   assert.ok(env.report().textContent.includes('2804610020'));
   assert.ok(env.report().textContent.includes('美国人口普查局月度贸易数据'));
   assert.ok(env.report().textContent.includes('查看 2 个月的贸易数据来源'));
-  assert.ok(env.report().textContent.includes('附加税率：0%（1 个税号）'));
+  assert.ok(env.report().textContent.includes('公告原文记载的附加税率：10%（1 个税号）'));
+  assert.ok(env.report().textContent.includes('不等于图表月份或今天实际适用的税率'));
+  assert.ok(env.report().textContent.includes('后来的调整和排除，我们还没有核对'));
+  assert.ok(!env.report().textContent.includes('现行税率：10%'));
+  const warning = env.created.find(item => item.className === 'announcement-applicability-note');
+  assert.ok(warning && !String(warning.className).includes('print-exclude'));
   assert.ok(env.report().textContent.includes('完整条款可展开查看'));
   assert.ok(env.report().textContent.includes('以下数据报告按已发布的贸易数据生成，不调用模型。'));
   assert.ok(!env.report().textContent.includes('试用模型解读'));
+  record.scope.notice_time_relation = 'before_recorded_effective_month';
   env.context.document.documentElement.lang = 'en';
   env.events['tradeintel:language']();
   assert.ok(env.report().textContent.includes('U.S. imports of products in this notice'));
@@ -476,4 +504,55 @@ test('announcement statistics report restores, shows coverage and sources, and s
   assert.ok(env.report().textContent.includes('Data sources'));
   assert.ok(env.report().textContent.includes('View trade-data sources for 2 months'));
   assert.ok(env.report().textContent.includes('Observed value (USD)'));
+  assert.ok(env.report().textContent.includes('do not treat them as rates for the charted months or today'));
+  assert.ok(env.report().textContent.includes('earlier trade context, not post-policy results'));
+});
+
+test('partial notice shows broader-product chart, while source-only notice never shows a trade bar', async () => {
+  const base = {
+    kind: 'announcement-context-report-v1', report_id: 'c'.repeat(32),
+    policy: {policy_population: '仅部分泵类货品', source_url: 'https://official.example/notice',
+      source_provenance: 'user_supplied_unverified', evidence: [{section_id: 'p1', quote: 'Except pumps'}],
+      confirmed_fields: [{field: 'conditions', status: 'known', value: '特定用途', reason: '',
+        evidence: [{section_id: 'p1', quote: 'Except pumps'}]}]},
+    scope: {statistical_population: '整个 84139190 商品组', context_code: '84139190',
+      unobserved_eligibility: [{description: '月表不能识别用途'}]},
+    monthly: [{month: '2026-07', whole_parent_value_usd: 300}],
+    sources: [{month: '2026-07', url: 'https://official.example/month.zip'}], notes: [],
+  };
+  const parent = makeEnv({...base, context_type: 'parent'});
+  parent.context.location.search = '?announcement_report_id=' + base.report_id;
+  vm.runInContext(script, parent.context);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.match(parent.report().textContent, /整个 84139190 商品组/);
+  assert.match(parent.report().textContent, /300 美元/);
+  assert.match(parent.report().textContent, /不是政策覆盖额/);
+  assert.ok(parent.created.some(item => item.className === 'trade-bar-row'));
+  parent.context.document.documentElement.lang = 'en';
+  parent.events['tradeintel:language']();
+  assert.match(parent.report().textContent, /broader product group/);
+
+  const sourceOnly = makeEnv({...base, context_type: 'source_only', monthly: [],
+    policy: {...base.policy, confirmed_fields: [
+      ...base.policy.confirmed_fields,
+      {field: 'rates', status: 'known', value: ['84% 第99章条目', '75美元 每件邮政货品'],
+        evidence: [{section_id: 'p1', quote: '84%'}]},
+    ]},
+    scope: {statistical_population: null, unobserved_eligibility: [{description: '邮寄方式无法从月表识别'}]},
+    sources: [{url: 'https://official.example/notice'}]});
+  sourceOnly.context.location.search = '?announcement_report_id=' + base.report_id;
+  vm.runInContext(script, sourceOnly.context);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.match(sourceOnly.report().textContent, /这里不画贸易图/);
+  assert.ok(!sourceOnly.created.some(item => item.className === 'trade-bar-row'));
+  assert.ok(!sourceOnly.report().textContent.includes('300 美元'));
+  assert.ok(!sourceOnly.report().textContent.includes('贸易数据原包'));
+  assert.ok(!sourceOnly.report().textContent.includes('上层商品按官方子码核对'));
+  assert.match(sourceOnly.report().textContent, /没有查询贸易数据/);
+  assert.equal(sourceOnly.created.filter(item => item.tag === 'a' && item.href === base.policy.source_url).length, 1);
+  assert.ok(sourceOnly.created.some(item => item.tag === 'li' && item.textContent === '84% 第99章条目'));
+  assert.ok(!sourceOnly.report().textContent.includes('["84%'));
+  const details = sourceOnly.report().querySelectorAll('details:not([open])');
+  sourceOnly.events.beforeprint();
+  assert.ok(details.every(item => item.open));
 });

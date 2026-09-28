@@ -58,6 +58,32 @@ def _part(report: Mapping[str, Any]) -> list[Mapping[str, Any]]:
     raise ValueError("报告类型无效")
 
 
+def _facts_for_question(catalog: Mapping[str, Any], question: str) -> list[dict[str, Any]]:
+    """Keep the prompt bounded without removing facts from the signed catalog.
+
+    Peak-gap facts are generated for every observed month so they remain
+    auditable.  The model only needs the explicitly requested month; when a
+    question has no machine-readable month, use the latest peak-gap fact for
+    each flow as the conservative default.  All other fact types are retained.
+    """
+    facts = list(catalog["facts"])
+    peak = [fact for fact in facts if ".year_peak_gap." in fact["id"]]
+    if not peak:
+        return facts
+    requested = set(re.findall(r"\d{4}-(?:0[1-9]|1[0-2])", question))
+    if requested:
+        selected = [fact for fact in peak if any(fact["id"].endswith(month) for month in requested)]
+    else:
+        selected = []
+        latest_by_flow: dict[str, dict[str, Any]] = {}
+        for fact in peak:
+            flow = fact["id"].split(".", 1)[0]
+            latest_by_flow[flow] = fact
+        selected = list(latest_by_flow.values())
+    selected_ids = {fact["id"] for fact in selected}
+    return [fact for fact in facts if ".year_peak_gap." not in fact["id"] or fact["id"] in selected_ids]
+
+
 def _rows(part: Mapping[str, Any]) -> list[Mapping[str, Any]]:
     rows = part.get("series")
     scope = part.get("scope")
@@ -138,6 +164,27 @@ def build_catalog(report: Mapping[str, Any]) -> dict[str, Any]:
                 f"{month[:4]}年已观察的{len(year_changes)}次同年相邻月{direction}金额变化中，"
                 f"截至{month}的这次变化按绝对金额排第{rank}；最大变化截至{'、'.join(leaders)}。",
                 [month], sources)
+        # Publish a report-bound fact for every observed month.  This lets a
+        # follow-up ask about any month without asking the model to calculate
+        # a difference; missing months are not treated as zero.
+        by_year: dict[str, list[Mapping[str, Any]]] = {}
+        for row in rows:
+            if row["status"] == "observed":
+                by_year.setdefault(row["month"][:4], []).append(row)
+        for year, year_rows in by_year.items():
+            if len(year_rows) < 2:
+                continue
+            high = max(row["value_usd"] for row in year_rows)
+            peak_rows = [row for row in year_rows if row["value_usd"] == high]
+            peak_months = [row["month"] for row in peak_rows]
+            for row in year_rows:
+                gap = high - row["value_usd"]
+                comparison = "与该峰值相同" if gap == 0 else f"低于该峰值{gap:,}美元"
+                add(flow, f"year_peak_gap.{row['month']}",
+                    f"{year}年已观察月份中，最高为{'、'.join(peak_months)}的{high:,}美元；"
+                    f"{row['month']}为{row['value_usd']:,}美元，{comparison}。",
+                    [row["month"], *peak_months],
+                    [row["source_url"], *(item["source_url"] for item in peak_rows)])
     if len(parts) == 2:
         left, right = scopes
         if (left["product_code"] != right["product_code"] or
@@ -165,7 +212,7 @@ def messages(report: Mapping[str, Any], question: str, catalog: Mapping[str, Any
     payload = {"schema_version": PROTOCOL, "report_sha256": catalog["report_sha256"],
                "followup_question_sha256": qdigest, "catalog_sha256": digest,
                "original_question": report.get("question"), "followup_question": question.strip(),
-               "scopes": catalog["scopes"], "facts": catalog["facts"]}
+               "scopes": catalog["scopes"], "facts": _facts_for_question(catalog, question)}
     instruction = ("你只回答读者对已确认贸易数据报告的这一个追问。只使用给定事实，不搜索或猜测。"
                    "请选择能回答问题的事实ID，最多两点；不要把金额当成数量、单价或贸易差额，"
                    "不要推断原因、政策效果、预测或投资建议。数据不足时直接说明当前不能判断。"

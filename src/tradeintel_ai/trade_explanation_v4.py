@@ -116,6 +116,28 @@ def _one_direction(part: Mapping[str, Any]) -> tuple[list[dict[str, Any]], str |
                            f"最低为{low:,}美元（{'、'.join(lows)}）；未观察月份不参加比较。",
                            [row["month"] for row in observed], eligible=False))
         cards[-1].update(high_usd=high, high_months=highs, low_usd=low, low_months=lows)
+        # This is a deterministic page fact, not a model relation.  Keeping
+        # it out of eligible_card_ids prevents a generic explanation call
+        # from introducing an unrelated year comparison, while the follow-up
+        # catalog exposes the same calculation for every observed month.
+        latest_observed = observed[-1]
+        latest_year_rows = [row for row in observed
+                            if row["month"][:4] == latest_observed["month"][:4]]
+        if len(latest_year_rows) >= 2:
+            year_high = max(row["value_usd"] for row in latest_year_rows)
+            year_peaks = [row for row in latest_year_rows if row["value_usd"] == year_high]
+            year_peak_months = [row["month"] for row in year_peaks]
+            year_gap = year_high - latest_observed["value_usd"]
+            comparison = "与该峰值相同" if year_gap == 0 else f"低于该峰值{year_gap:,}美元"
+            cards.append(_card(
+                part, "same_year_peak_gap",
+                f"{latest_observed['month'][:4]}年已观察月份中，最高为{'、'.join(year_peak_months)}的"
+                f"{year_high:,}美元；{latest_observed['month']}为{latest_observed['value_usd']:,}美元，"
+                f"{comparison}。",
+                [latest_observed["month"], *year_peak_months], eligible=False,
+                year=latest_observed["month"][:4], latest_month=latest_observed["month"],
+                latest_usd=latest_observed["value_usd"], high_usd=year_high,
+                high_months=year_peak_months, gap_usd=year_gap))
     summary = part.get("summary")
     if isinstance(summary, Mapping) and summary.get("complete_window") is True:
         total = summary.get("period_total_usd")

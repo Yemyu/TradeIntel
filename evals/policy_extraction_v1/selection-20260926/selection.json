@@ -1,0 +1,41 @@
+{
+  "schema_version": "policy-acceptance-selection-v1",
+  "selected_at_date": "2026-09-26",
+  "role": "acceptance_design_seen",
+  "status": "reference_fixed_input_adaptation_pending",
+  "model_calls": 0,
+  "reference": "docs/handoff/POLICY_ACCEPTANCE_DESIGN_20260926.zh-CN.md",
+  "reference_sha256": "b2f76d4009a19efa4af53e2ac2dea22e67b9f525f818cfb4218d9e0d908b3df7",
+  "pilot_code_sha256_at_selection": "12be70f01a9a8555074996dfe16ce6192c13c5f44a7ed5cdd81880efd824873d",
+  "cases": [
+    {
+      "id": "H1",
+      "bulletin": "66492057",
+      "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3f69699",
+      "file": "csms-66492057.html",
+      "raw_bytes": 26743,
+      "source_sha256": "042607081d74682be7795a6d50b3184f881916d9f6478bb8361e83cf8998589b",
+      "text_sha256": "3ca11fd0385f9912353e13168309b7f0698cfb60c191971d77041624808ea52f",
+      "text_bytes": 8455,
+      "messages_bytes_before_adaptation": 10478,
+      "critical_facts": 46,
+      "ordinary_facts": 5,
+      "known_program_blocker": "standard 4.2.4 HTS10 quotation currently rejected"
+    },
+    {
+      "id": "H2",
+      "bulletin": "66814923",
+      "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3fb83cb",
+      "file": "csms-66814923.html",
+      "raw_bytes": 21310,
+      "source_sha256": "2ef6158c52a8adfbc4715732eb9f3e9ac3a7898b617796b66caf5873c25fde58",
+      "text_sha256": "0ad19b95364445b7e4227cc040e61208f2d1723b7f6564e9adb3b0a8f7959cb0",
+      "text_bytes": 5300,
+      "messages_bytes_before_adaptation": 7161,
+      "critical_facts": 25,
+      "ordinary_facts": 4,
+      "contract_note": "exemption meaning is known; no literal numeric percentage in notice"
+    }
+  ],
+  "boundary": "No blind or independent-human-gold claim; no API authorization; no provider-ready package yet."
+}

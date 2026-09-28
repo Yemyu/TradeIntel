@@ -1,0 +1,27 @@
+{
+  "schema_version": "public-brief-historical-review-v1",
+  "source_run_id": "pub-20260922T072305-168f830f1a",
+  "question_id": "q1",
+  "verdict": "minor_error",
+  "reviewer": "Astra",
+  "ai_assisted": true,
+  "checks": {
+    "structure": {
+      "passed": true,
+      "reason": "六条解释和三条观察事项通过生产解析及引用约束。"
+    },
+    "facts": {
+      "passed": false,
+      "reason": "o42将尚未核验写成口径未通过核验，并猜测商品编码或统计口径变化，现有材料未确认该原因。"
+    },
+    "relevance": {
+      "passed": true,
+      "reason": "回答说明了已核验商品的环比金额和来源构成，区分了贸易观察与政策因果。"
+    },
+    "usefulness": {
+      "passed": true,
+      "reason": "回答给出具体来源构成和下一期统计、政策版本及口径核验的跟踪方向。"
+    }
+  },
+  "note": "可作为非重大错误的历史开发前置参考；不计为v3新Q1调用或通过。"
+}

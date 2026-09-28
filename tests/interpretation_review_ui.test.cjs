@@ -13,6 +13,7 @@ test('an approved record becoming stale loses its link and cannot label new note
     return {children: [], disabled: false, value: '', checked: false, textContent: '',
       set id(value) { nodes.set(value, this); },
       append(...items) { this.children.push(...items); },
+      before(...items) { this.previousSiblings = items; },
       replaceChildren(...items) { this.children = items; },
       setAttribute() {}, addEventListener(event,handler) {this[event]=handler;}};
   }
@@ -20,6 +21,7 @@ test('an approved record becoming stale loses its link and cannot label new note
   let response = {status:'recorded', revision:1,review_digest:'base-digest',notes:[{text:'old note',fact_ids:['a']}],
     decision:{reviewer:'fixture',facts_checked:true,eligible_for_reviewed_draft:true,
       decisions:[{verdict:'accept',reason:'old evidence'}]}};
+  for (const id of ['save-confirmation','save-summary','confirm-save','cancel-save']) nodes.set(id,element());
   nodes.set('data-report', element());
   response.data_report={status:'bound',url:'/api/version-report?version='+'a'.repeat(64),message:'同版本背景'};
   const run='exposure-20260914T120000-abcdef12';
@@ -43,6 +45,16 @@ test('an approved record becoming stale loses its link and cannot label new note
   nodes.get('change-reason').value='核查后调整';
   nodes.get('facts').checked=true;
   await nodes.get('save').click();
+  assert.equal(submitted,undefined,'first click must not save');
+  nodes.get('cancel-save').click();
+  await nodes.get('confirm-save').click();
+  assert.equal(submitted,undefined,'cancel invalidates confirmation');
+  await nodes.get('save').click();
+  nodes.get('reviewer').input();
+  await nodes.get('confirm-save').click();
+  assert.equal(submitted,undefined,'editing invalidates confirmation');
+  await nodes.get('save').click();
+  await nodes.get('confirm-save').click();
   assert.equal(submitted.base_review_digest,'base-digest');
   assert.equal(submitted.change_reason,'核查后调整');
   response = {...response,status:'stale',notes:[{text:'changed note',fact_ids:['b']}]};

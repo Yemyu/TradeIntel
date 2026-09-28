@@ -26,6 +26,11 @@
   .ok { color: #176b38; }
   .warn { color: #8a4b00; }
   code { background: #f4f4f4; padding: 1px 4px; }
+  .linkage-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; }
+  .linkage-row input[type="text"] { flex: 1 1 320px; }
+  .scope-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; }
+  .scope-pair article { border: 1px solid #d4ded7; background: #f8faf8; border-radius: 8px; padding: 12px; }
+  .scope-pair p { white-space: pre-wrap; overflow-wrap: anywhere; }
 </style>
 </head>
 <body>
@@ -38,7 +43,7 @@
   <label>来源ID <input id="source-id" placeholder="例如 notice:2026:p1"></label>
   <label>来源URL（自行核实，可留空） <input id="source-url" size="48" placeholder="https://..."></label>
   <textarea id="source-text" placeholder="粘贴完整公告原文（不要只粘标题）"></textarea>
-  <p class="warn">这里保存的是你粘贴的文字和填写的网址；系统不会抓取网址或验证来源。请在确认字段前自行对照原始公告。</p>
+  <p class="warn">这里只接收你粘贴的完整文字，不抓取网址、解析 PDF 或核验来源。若公告和附件太长，页面会拒绝导入；请保留原件，不要删掉条件或附件来缩短正文。</p>
   <button id="import">登记为候选</button>
   <span id="import-note" class="muted"></span>
 </section>
@@ -46,6 +51,9 @@
 <section>
   <h3>2. 生成并填写13字段确认表</h3>
   <div>公告版本：<code id="doc-version">—</code> <button id="template" disabled>生成确认模板</button></div>
+  <p><label>已有公告版本 <input id="resume-doc-version" size="28" placeholder="刷新后可粘贴版本编号"></label>
+    <button id="load-enabled-announcement" type="button">读取已启用的公告</button>
+    <span class="muted">刷新页面后，填政策 ID 和公告版本，再点这里继续。</span></p>
   <p class="muted">先选择原文段落，再点“填入整段原文”；也可以删减为该段里的准确原句。已知字段至少一条引文，有冲突的字段至少两条；查不到时说明原因。系统只核对引文是否来自原文，内容含义仍由你确认。商品税号和税率要填 JSON，例如 <code>[{"code":"28046100","precision":"whole_hts8"}]</code>、<code>{"28046100":50}</code>。</p>
   <details id="document-details"><summary>查看已保存原文与段落编号</summary><p id="source-provenance" class="warn"></p><div id="saved-sections"></div></details>
   <p><label>离线阅读笔记（JSON，仅供核对） <input id="reading-preview-file" type="file" accept=".json,application/json" disabled></label>
@@ -59,7 +67,7 @@
 </section>
 
 <section>
-  <h3>3. 覆盖与重新绑定</h3>
+  <details><summary>旧版覆盖核对（仅适用于完整八位税号）</summary>
   <label>统计月份 <input id="coverage-month" value="2025-01" pattern="\d{4}-\d{2}"></label>
   <label>本次商品范围 <input id="coverage-codes" size="42" placeholder="留空=公告完整范围；可填28046100,38180000"></label>
   <pre id="coverage">尚未启用</pre>
@@ -71,10 +79,59 @@
     <h4>生成公告相关贸易报告</h4>
     <label>开始月份 <input id="statistics-start-month" placeholder="默认最近12个月"></label>
     <label>结束月份 <input id="statistics-end-month" placeholder="默认数据最新月"></label>
-    <p class="muted">报告显示中国来源的美国消费进口数据。默认选公告中已确认的完整 HTS8 商品；可在“本次商品范围”填写子集。</p>
+    <p class="muted">报告显示中国来源的美国消费进口数据。默认选公告中已确认的完整 HTS8 商品；可在“本次商品范围”填写子集。公告原文税率不等于所选月份的实际适用税率，后续修订与排除仍需另行核对。</p>
     <button id="prepare-statistics-report" type="button">查看并确认范围</button>
     <p id="statistics-scope-note" class="muted"></p>
     <button id="generate-statistics-report" type="button" disabled>生成图表报告</button>
+  </div>
+  </details>
+</section>
+
+<section id="linkage-workflow" hidden>
+  <h3>3. 确认公告与贸易数据的关系</h3>
+  <p class="muted">先核对原文到底限定了哪些货品、来源和入境条件，再选择能展示的贸易背景。引文位置正确不等于法律解释已经核实。金额不会被称为政策影响额。</p>
+  <label>关系
+    <select id="linkage-relation">
+      <option value="">请选择</option>
+      <option value="code_aligned">完整八位税号：按原严格商品报告</option>
+      <option value="parent_context">部分税号：只看较宽的商品组</option>
+      <option value="country_context">广泛货品：只看中国大陆进口背景</option>
+      <option value="no_statistical_link">现有月表对不上：只给公告原文</option>
+    </select>
+  </label>
+  <label>原产地对应
+    <select id="linkage-origin">
+      <option value="mainland_only">公告仅指中国大陆来源</option>
+      <option value="mainland_subset_of_china_hk">公告含中国和香港，图只显示大陆子集</option>
+      <option value="other">公告指其他来源</option>
+      <option value="unknown">原产地尚未确认</option>
+    </select>
+  </label>
+  <label>上层商品编码（仅部分税号时填写） <input id="linkage-context-code" placeholder="从已确认的部分编码推导，例如 84139190"></label>
+  <label>公告实际指向什么对象 <textarea id="linkage-policy-scope" placeholder="用一句话说明原公告限定的人、货或入境事件"></textarea></label>
+  <h4>贸易月表无法核对的条件</h4>
+  <div id="linkage-eligibility-rows"></div>
+  <button id="add-linkage-eligibility" type="button">添加条件</button>
+  <h4>支持上述判断的原文</h4>
+  <div id="linkage-evidence-rows"></div>
+  <button id="add-linkage-evidence" type="button">添加引文</button>
+  <p><button id="confirm-linkage" type="button">确认关联判断</button> <span id="linkage-note" class="muted"></span></p>
+  <div id="linkage-report-controls" hidden>
+    <h4>4. 生成报告</h4>
+    <label>开始月份 <input id="linkage-start-month" placeholder="需要图表时填写 YYYY-MM"></label>
+    <label>结束月份 <input id="linkage-end-month" placeholder="需要图表时填写 YYYY-MM"></label>
+    <p class="muted">只看原文的公告不用选择月份。可查月份来自已发布数据，不会自动补最新数据。</p>
+    <button id="prepare-linkage-report" type="button">查看这次会查什么</button>
+    <div id="linkage-scope" hidden>
+      <div class="scope-pair">
+        <article><strong>公告对象</strong><p id="linkage-policy-population"></p></article>
+        <article><strong>实际统计对象</strong><p id="linkage-statistical-population"></p></article>
+      </div>
+      <p id="linkage-eligibility-note" class="warn"></p>
+      <p id="linkage-months-note" class="muted"></p>
+      <p class="warn">贸易背景不等于公告覆盖金额；原公告税率也不等于报告月份实际税率。</p>
+      <button id="generate-linkage-report" type="button">确认范围并生成报告</button>
+    </div>
   </div>
 </section>
 
@@ -90,6 +147,10 @@ let evidenceCounts = [];
 let candidateReady = false;
 let candidateDigest = '';
 let preparedStatisticsScope = null;
+let preparedLinkageScope = null;
+let linkageAssessment = null;
+const linkageConditions = [];
+const linkageCitations = [];
 const readingFields = ['rate_meaning', 'conditions', 'exceptions'];
 const readingSchema = 'announcement-reading-suggestions-v2';
 const fieldLabels = {title:'公告标题', publication_date:'发布日期', effective_date:'生效日期',
@@ -108,6 +169,117 @@ function setNote(id, text, ok) {
 function setStatisticsControlsVisible(visible) {
   const node = document.getElementById('statistics-report-controls');
   if (node) node.hidden = !visible;
+}
+function setLinkageVisible(visible) {
+  const node = document.getElementById('linkage-workflow');
+  if (node) node.hidden = !visible;
+}
+function invalidateLinkageScope() {
+  preparedLinkageScope = null;
+  const scope = document.getElementById('linkage-scope');
+  if (scope) scope.hidden = true;
+}
+function invalidateLinkageDecision() {
+  linkageAssessment = null;
+  document.getElementById('linkage-report-controls').hidden = true;
+  invalidateLinkageScope();
+  setNote('linkage-note', '关联判断已改动，请重新确认后再查看报告范围。', false);
+}
+function linkageOption(select, label, key) {
+  const option = document.createElement('option'); option.value = key;
+  option.textContent = label; select.appendChild(option);
+}
+function addLinkageCondition(initial = {}) {
+  const host = document.getElementById('linkage-eligibility-rows');
+  if (!host) return;
+  const row = document.createElement('div'); row.className = 'linkage-row';
+  const dimension = document.createElement('select');
+  for (const [key, label] of Object.entries({exception_status:'例外资格', entry_event:'入境事件',
+    shipping_method:'邮寄方式', shipment_value:'单件金额', firm_qualification:'企业资格',
+    approved_use:'批准用途', other:'其他或尚未知晓'})) linkageOption(dimension, label, key);
+  dimension.value = initial.dimension || 'exception_status';
+  const defines = document.createElement('input'); defines.type = 'checkbox';
+  defines.checked = Boolean(initial.defines_population);
+  const definesLabel = document.createElement('label'); definesLabel.textContent = '该条件决定公告适用对象';
+  definesLabel.appendChild(defines);
+  const description = document.createElement('input'); description.type = 'text';
+  description.placeholder = '具体说明为什么月度商品表无法核对';
+  description.value = initial.description || '';
+  row.appendChild(dimension); row.appendChild(definesLabel); row.appendChild(description);
+  host.appendChild(row);
+  linkageConditions.push({dimension, defines, description});
+  for (const control of [dimension, defines, description]) control.addEventListener('change', invalidateLinkageDecision);
+  description.addEventListener('input', invalidateLinkageDecision);
+}
+function fillLinkageSections(select, chosen = '') {
+  select.replaceChildren(); linkageOption(select, '选择原文段落', '');
+  for (const item of savedSections) linkageOption(select,
+    `${item.section_id} · ${item.text.replace(/\s+/g, ' ').trim().slice(0, 55)}`, item.section_id);
+  select.value = chosen;
+}
+function addLinkageCitation(initial = {}) {
+  const host = document.getElementById('linkage-evidence-rows');
+  if (!host) return;
+  const row = document.createElement('div'); row.className = 'linkage-row';
+  const section = document.createElement('select');
+  fillLinkageSections(section, initial.section_id || '');
+  const quote = document.createElement('textarea'); quote.className = 'citation-control';
+  quote.placeholder = '逐字粘贴支持判断的原文，不要改写';
+  quote.value = initial.quote || '';
+  const fill = document.createElement('button'); fill.type = 'button'; fill.textContent = '填入整段原文';
+  fill.addEventListener('click', () => {
+    const selected = savedSections.find(item => item.section_id === section.value);
+    if (!selected) { setNote('linkage-note', '请先选择原文段落。', false); return; }
+    quote.value = selected.text; invalidateLinkageDecision();
+  });
+  row.appendChild(section); row.appendChild(quote); row.appendChild(fill); host.appendChild(row);
+  linkageCitations.push({section, quote});
+  section.addEventListener('change', invalidateLinkageDecision);
+  quote.addEventListener('input', invalidateLinkageDecision);
+}
+function resetLinkageRows(assessment = null) {
+  const conditions = document.getElementById('linkage-eligibility-rows');
+  const citations = document.getElementById('linkage-evidence-rows');
+  if (!conditions || !citations) return;
+  conditions.replaceChildren(); citations.replaceChildren();
+  linkageConditions.length = 0; linkageCitations.length = 0;
+  for (const item of assessment?.unobserved_eligibility?.length ? assessment.unobserved_eligibility : [{}])
+    addLinkageCondition(item);
+  for (const item of assessment?.evidence?.length ? assessment.evidence : [{}])
+    addLinkageCitation(item);
+}
+function showLinkageAssessment(assessment) {
+  linkageAssessment = assessment;
+  document.getElementById('linkage-relation').value = assessment.relation;
+  document.getElementById('linkage-origin').value = assessment.origin_alignment;
+  document.getElementById('linkage-context-code').value = assessment.context_code || '';
+  document.getElementById('linkage-policy-scope').value = assessment.policy_scope_summary;
+  resetLinkageRows(assessment);
+  const sourceOnly = assessment.relation === 'no_statistical_link';
+  for (const id of ['linkage-start-month', 'linkage-end-month']) {
+    const input = document.getElementById(id);
+    input.disabled = sourceOnly;
+    if (sourceOnly) input.value = '';
+  }
+  document.getElementById('linkage-report-controls').hidden = false;
+  invalidateLinkageScope();
+  setNote('linkage-note', '已载入人工确认的关联判断；可以查看报告范围。', true);
+}
+function collectLinkageProposal() {
+  const eligibility = linkageConditions.filter(item => item.description.value.trim()).map(item => ({
+    dimension: item.dimension.value, defines_population: Boolean(item.defines.checked),
+    description: item.description.value.trim()}));
+  const evidence = linkageCitations.filter(item => item.section.value || item.quote.value.trim())
+    .map(item => {
+      if (!item.section.value || !item.quote.value.trim()) throw Error('引文需要同时选择段落并填写原文。');
+      return {doc_version: value('doc-version'), section_id: item.section.value,
+        quote: item.quote.value};
+    });
+  if (!eligibility.length || !evidence.length) throw Error('至少填写一项无法核对的条件和一条原文引文。');
+  return {relation: value('linkage-relation'), origin_alignment: value('linkage-origin'),
+    context_code: value('linkage-context-code') || null,
+    policy_scope_summary: value('linkage-policy-scope'),
+    unobserved_eligibility: eligibility, evidence};
 }
 function bodyFor(path) {
   return {policy_id: value('policy-id'), doc_version: value('doc-version'), fields: collectFields()};
@@ -336,10 +508,15 @@ function renderTemplate(template) {
   setNote('candidate-note', '模板已生成：请逐项确认后提交。', true);
 }
 async function onImport() {
-  const res = await API.post('/api/announcements/import', {
+  const request = {
     policy_id: value('policy-id'), source_id: value('source-id'), url: value('source-url'),
     text: document.getElementById('source-text').value
-  });
+  };
+  if (new TextEncoder().encode(JSON.stringify(request)).length > 262144) {
+    setNote('import-note', '公告原文与附件超过当前页面的导入上限；本次没有登记。请保留完整原件，不要删节后冒充完整公告。', false);
+    return;
+  }
+  const res = await API.post('/api/announcements/import', request);
   if (!res.ok) { setNote('import-note', res.body.message || '登记失败', false); return; }
   invalidateCandidate();
   clearReadingPreview();
@@ -351,7 +528,9 @@ async function onImport() {
   document.getElementById('doc-version').textContent = res.body.doc_version;
   document.getElementById('doc-version').value = res.body.doc_version;
   document.getElementById('template').disabled = false;
+  document.getElementById('resume-doc-version').value = res.body.doc_version;
   setStatisticsControlsVisible(res.body.doc_status === 'enabled');
+  setLinkageVisible(false); linkageAssessment = null; invalidateLinkageScope();
   setNote('import-note', '已登记为候选；来源网址未核验，暂不会进入检索。', true);
 }
 async function onTemplate() {
@@ -383,6 +562,7 @@ async function onEnable() {
     candidate_digest: candidateDigest
   });
   if (!res.ok) { setNote('candidate-note', res.body.message || '启用失败', false); return; }
+  candidateDigest = res.body.candidate_digest;
   document.getElementById('enable').disabled = true;
   const checkButton = document.getElementById('check-coverage');
   if (checkButton) checkButton.disabled = false;
@@ -393,6 +573,85 @@ async function onEnable() {
   document.getElementById('rebind').textContent = res.body.rebind_required ? '公告已启用：已有研究范围必须重新确认（rebind_required）。' : '';
   setNote('candidate-note', '已启用；贸易覆盖仍需受信任查询，当前为 not_checked。', true);
   setStatisticsControlsVisible(true);
+  setLinkageVisible(true);
+  resetLinkageRows();
+  document.getElementById('linkage-report-controls').hidden = true;
+  setNote('linkage-note', '请根据公告原文选择关系并填写依据，再生成报告。', true);
+}
+async function onLoadEnabledAnnouncement() {
+  linkageAssessment = null;
+  invalidateLinkageScope();
+  document.getElementById('linkage-report-controls').hidden = true;
+  const policyId = value('policy-id');
+  const docVersion = value('resume-doc-version') || value('doc-version');
+  if (!policyId || !docVersion) { setNote('linkage-note', '请填政策 ID 和公告版本。', false); return; }
+  const query = '?' + new URLSearchParams({policy_id: policyId, doc_version: docVersion});
+  const setup = await API.get('/api/announcements/linkage/setup' + query);
+  if (!setup.ok) { setNote('candidate-note', setup.body.message || '读取已启用公告失败', false); return; }
+  document.getElementById('doc-version').textContent = docVersion;
+  document.getElementById('doc-version').value = docVersion;
+  candidateDigest = setup.body.candidate_digest;
+  savedSections = setup.body.sections || [];
+  setLinkageVisible(true); setStatisticsControlsVisible(true);
+  resetLinkageRows();
+  const assessment = await API.get('/api/announcements/linkage/assessment' + query);
+  if (assessment.ok) showLinkageAssessment(assessment.body);
+  else {
+    document.getElementById('linkage-report-controls').hidden = true;
+    setNote('linkage-note', '公告已读取；关联判断尚未确认，请对照原文填写。', true);
+  }
+  if (globalThis.history?.replaceState)
+    history.replaceState(null, '', '/announcement-import' + query);
+}
+async function onConfirmLinkage() {
+  let proposal;
+  try { proposal = collectLinkageProposal(); }
+  catch (error) { setNote('linkage-note', error.message, false); return; }
+  if (!candidateDigest) { setNote('linkage-note', '先启用或读取已启用的公告。', false); return; }
+  const button = document.getElementById('confirm-linkage'); button.disabled = true;
+  try {
+    const result = await API.post('/api/announcements/linkage/confirm', {
+      policy_id: value('policy-id'), doc_version: value('doc-version'),
+      proposal, candidate_digest: candidateDigest, confirmed_by: 'local-user'});
+    if (!result.ok) throw Error(result.body.message || '关联判断未通过');
+    showLinkageAssessment(result.body);
+    const query = '?' + new URLSearchParams({policy_id: value('policy-id'), doc_version: value('doc-version')});
+    if (globalThis.history?.replaceState) history.replaceState(null, '', '/announcement-import' + query);
+  } catch (error) { setNote('linkage-note', error.message, false); }
+  finally { button.disabled = false; }
+}
+async function onPrepareLinkageReport() {
+  if (!linkageAssessment) { setNote('linkage-note', '先确认公告与贸易数据的关系。', false); return; }
+  const body = {policy_id: value('policy-id'), doc_version: value('doc-version')};
+  const start = value('linkage-start-month'), end = value('linkage-end-month');
+  if (start) body.start_month = start;
+  if (end) body.end_month = end;
+  const button = document.getElementById('prepare-linkage-report'); button.disabled = true;
+  try {
+    const result = await API.post('/api/announcements/linkage/prepare', body);
+    if (!result.ok) throw Error(result.body.message || '无法准备报告范围');
+    preparedLinkageScope = result.body;
+    document.getElementById('linkage-policy-population').textContent = result.body.policy_population;
+    document.getElementById('linkage-statistical-population').textContent =
+      result.body.statistical_population || '没有可对应的月度贸易统计；只提供公告原文事实卡。';
+    document.getElementById('linkage-eligibility-note').textContent =
+      (result.body.unobserved_eligibility || []).map(item => item.description).join('；');
+    document.getElementById('linkage-months-note').textContent = result.body.months.length
+      ? `${result.body.start_month} 至 ${result.body.end_month}；${result.body.months.length} 个已发布月份。`
+      : '不查询贸易数据，不生成图表。';
+    document.getElementById('linkage-scope').hidden = false;
+    setNote('linkage-note', '请对照“公告对象”和“实际统计对象”；确认后才会生成。', true);
+  } catch (error) { invalidateLinkageScope(); setNote('linkage-note', error.message, false); }
+  finally { button.disabled = false; }
+}
+async function onGenerateLinkageReport() {
+  if (!preparedLinkageScope) return;
+  const button = document.getElementById('generate-linkage-report'); button.disabled = true;
+  try {
+    const result = await API.post('/api/announcements/linkage/report', {prepared: preparedLinkageScope});
+    if (!result.ok) throw Error(result.body.message || '报告生成失败');
+    window.location.href = '/preview/?announcement_report_id=' + encodeURIComponent(result.body.report_id) + '#report';
+  } catch (error) { setNote('linkage-note', error.message, false); button.disabled = false; }
 }
 async function onPrepareStatisticsReport() {
   const body = {policy_id: value('policy-id'), doc_version: value('doc-version')};
@@ -413,7 +672,7 @@ async function onPrepareStatisticsReport() {
     document.getElementById('statistics-scope-note').textContent =
       `请确认：中国来源美国进口，${res.body.start_month} 至 ${res.body.end_month}，` +
       `${res.body.selected_codes.length} 个完整 HTS8（${res.body.selected_codes.join(', ')}）。` +
-      `数据最新月份：${res.body.latest_available_month || '无'}。` +
+      `所选区间内最近可用月份：${res.body.latest_available_month || '无'}。` +
       (res.body.unselected_whole_codes?.length ? ` 另有完整税号未选择：${res.body.unselected_whole_codes.join(', ')}。` : '') +
       (partial ? ` 未纳入部分编码：${partial}。` : '');
     document.getElementById('generate-statistics-report').disabled = false;
@@ -473,6 +732,24 @@ document.getElementById('import').addEventListener('click', onImport);
 document.getElementById('template').addEventListener('click', onTemplate);
 document.getElementById('submit').addEventListener('click', onSubmit);
 document.getElementById('enable').addEventListener('click', onEnable);
+document.getElementById('load-enabled-announcement').addEventListener('click', onLoadEnabledAnnouncement);
+document.getElementById('add-linkage-eligibility').addEventListener('click', () => {
+  addLinkageCondition(); invalidateLinkageDecision();
+});
+document.getElementById('add-linkage-evidence').addEventListener('click', () => {
+  addLinkageCitation(); invalidateLinkageDecision();
+});
+document.getElementById('confirm-linkage').addEventListener('click', onConfirmLinkage);
+document.getElementById('prepare-linkage-report').addEventListener('click', onPrepareLinkageReport);
+document.getElementById('generate-linkage-report').addEventListener('click', onGenerateLinkageReport);
+for (const id of ['linkage-relation','linkage-origin','linkage-context-code','linkage-policy-scope']) {
+  document.getElementById(id).addEventListener('input', invalidateLinkageDecision);
+  document.getElementById(id).addEventListener('change', invalidateLinkageDecision);
+}
+for (const id of ['linkage-start-month','linkage-end-month']) {
+  document.getElementById(id).addEventListener('input', invalidateLinkageScope);
+  document.getElementById(id).addEventListener('change', invalidateLinkageScope);
+}
 document.getElementById('reading-preview-file').addEventListener('change', onReadingPreviewFile);
 document.querySelector('#fields tbody').addEventListener('input', invalidateCandidate);
 document.querySelector('#fields tbody').addEventListener('change', invalidateCandidate);
@@ -483,6 +760,15 @@ const prepareStatisticsButton = document.getElementById('prepare-statistics-repo
 if (prepareStatisticsButton) prepareStatisticsButton.addEventListener('click', onPrepareStatisticsReport);
 const generateStatisticsButton = document.getElementById('generate-statistics-report');
 if (generateStatisticsButton) generateStatisticsButton.addEventListener('click', onGenerateStatisticsReport);
+resetLinkageRows();
+if (globalThis.location?.search) {
+  const params = new URLSearchParams(location.search);
+  if (params.get('policy_id') && params.get('doc_version')) {
+    document.getElementById('policy-id').value = params.get('policy_id');
+    document.getElementById('resume-doc-version').value = params.get('doc_version');
+    onLoadEnabledAnnouncement();
+  }
+}
 </script>
 </body>
 </html>
