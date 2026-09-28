@@ -15,7 +15,8 @@ const fieldNames = ['title', 'publication_date', 'effective_date', 'clock_24h', 
 function makeEnv() {
   const nodes = new Map();
   const requested = [];
-  const state = {docVersion: 'docver-synthetic-k3', submitted: false, enabled: false};
+  const state = {docVersion: 'docver-synthetic-k3', submitted: false, enabled: false,
+    linkageProposal: null};
   const dynamicIds = new Map();
   function element(tag = 'div') {
     const node = {tagName: tag.toUpperCase(), children: [], value: '', textContent: '', disabled: false,
@@ -35,6 +36,7 @@ function makeEnv() {
   nodes.get('source-url').value = 'https://official.example/notice';
   nodes.get('source-text').value = 'Synthetic Notice\nPublished 2024.\nEffective January 1, 2025.';
   nodes.set('doc-version', element('code'));
+  nodes.set('resume-doc-version', element('input'));
   nodes.set('fields', element('table'));
   const tbody = element('tbody');
   nodes.set('fields-tbody', tbody);
@@ -47,6 +49,14 @@ function makeEnv() {
   nodes.set('coverage-month', element('input')); nodes.get('coverage-month').value = '2025-01';
   nodes.set('coverage-codes', element('input')); nodes.get('coverage-codes').value = '28046100';
   nodes.set('research-link', element('a'));
+  ['load-enabled-announcement','linkage-workflow','linkage-relation','linkage-origin',
+    'linkage-context-code','linkage-policy-scope','linkage-note',
+    'linkage-report-controls','linkage-start-month','linkage-end-month',
+    'linkage-scope','linkage-policy-population','linkage-statistical-population',
+    'linkage-eligibility-note','linkage-months-note','linkage-eligibility-rows',
+    'linkage-evidence-rows','add-linkage-eligibility','add-linkage-evidence',
+    'confirm-linkage','prepare-linkage-report','generate-linkage-report']
+    .forEach(id => nodes.set(id, element()));
   nodes.get('template').disabled = true; nodes.get('submit').disabled = true;
   nodes.get('enable').disabled = true; nodes.get('load-coverage').disabled = true;
   function findById(node, id) {
@@ -70,12 +80,24 @@ function makeEnv() {
       fields: fieldNames.map(field => ({field, status: 'unknown', value: null, reason: 'synthetic reason'}))}),
     '/api/announcements/submit': () => { state.submitted = true; return {status: 'candidate_ready', candidate_digest: 'digest-synthetic'}; },
     '/api/announcements/enable': () => { state.enabled = true; return {status: 'enabled', rebind_required: true,
-      coverage: {trade_coverage: 'not_checked'}}; },
+      candidate_digest: 'digest-synthetic', coverage: {trade_coverage: 'not_checked'}}; },
     '/api/announcements/coverage': () => ({coverage: {trade_coverage: 'not_checked'}}),
     '/api/announcements/coverage/check': () => ({coverage: {trade_coverage: 'exact'}}),
+    '/api/announcements/linkage/confirm': body => {
+      state.linkageProposal = body.proposal;
+      return {...body.proposal, policy_id: body.policy_id, doc_version: body.doc_version,
+        candidate_digest: body.candidate_digest, assessment_digest: 'assessment-synthetic'};
+    },
+    '/api/announcements/linkage/prepare': body => ({route: 'announcement-context-report-v1:parent',
+      policy_population: state.linkageProposal?.policy_scope_summary,
+      statistical_population: '整个 84139190 商品组，包括公告未覆盖货品',
+      unobserved_eligibility: state.linkageProposal?.unobserved_eligibility || [],
+      months: ['2026-07'], start_month: body.start_month, end_month: body.end_month}),
+    '/api/announcements/linkage/report': () => ({report_id: 'a'.repeat(32)}),
   };
   const context = vm.createContext({
     URLSearchParams,
+    window: {location: {href: ''}},
     crypto: webcrypto,
     TextEncoder,
     document: {
@@ -88,7 +110,7 @@ function makeEnv() {
       const route = url.split('?')[0];
       const handler = responses[route];
       if (!handler) return {ok: false, json: async () => ({message: 'not found'})};
-      return {ok: true, json: async () => handler()};
+      return {ok: true, json: async () => handler(options ? JSON.parse(options.body || '{}') : null)};
     },
   });
   return {context, nodes, tbody, requested, state};
@@ -193,6 +215,18 @@ test('import sends the pasted notice text byte-for-byte without trimming whitesp
   assert.equal(requested.find(item => item.url === '/api/announcements/import').body.text, original);
 });
 
+test('oversize complete notice is rejected before import without trimming it', async () => {
+  const {context, nodes, requested} = makeEnv();
+  const original = '附件完整正文'.repeat(30000);
+  nodes.get('source-text').value = original;
+  vm.runInContext(script, context);
+  await nodes.get('import').onclick();
+  assert.equal(requested.filter(item => item.url === '/api/announcements/import').length, 0);
+  assert.match(nodes.get('import-note').textContent, /超过当前页面的导入上限/);
+  assert.equal(nodes.get('source-text').value, original);
+  assert.equal(nodes.get('enable').disabled, true);
+});
+
 test('offline reading notes show sourced claims but never fill or submit the form', async () => {
   const {context, nodes, requested} = makeEnv();
   vm.runInContext(script, context);
@@ -222,4 +256,45 @@ test('offline reading notes show sourced claims but never fill or submit the for
   notes.source_sha256 = '0'.repeat(64);
   await assert.rejects(context.renderReadingPreview(notes), /不一致/);
   assert.equal(nodes.get('reading-preview').hidden, true);
+});
+
+test('confirmed partial notice shows policy and wider data populations before report', async () => {
+  const {context, nodes, requested} = makeEnv();
+  vm.runInContext(script, context);
+  await nodes.get('import').onclick();
+  await nodes.get('template').onclick();
+  await nodes.get('submit').onclick();
+  await nodes.get('enable').onclick();
+  assert.equal(nodes.get('linkage-workflow').hidden, false);
+  nodes.get('linkage-relation').value = 'parent_context';
+  nodes.get('linkage-origin').value = 'mainland_only';
+  nodes.get('linkage-context-code').value = '84139190';
+  nodes.get('linkage-policy-scope').value = '仅十位税号里的排除货品';
+  const condition = nodes.get('linkage-eligibility-rows').children[0];
+  condition.children[2].value = '月度数据不能识别排除资格';
+  condition.children[1].children[0].checked = true;
+  const citation = nodes.get('linkage-evidence-rows').children[0];
+  citation.children[0].value = 'notice:new:p1:para1';
+  citation.children[1].value = 'Synthetic Notice';
+  await nodes.get('confirm-linkage').onclick();
+  const confirmed = requested.find(item => item.url === '/api/announcements/linkage/confirm');
+  assert.equal(confirmed.body.proposal.context_code, '84139190');
+  assert.equal(confirmed.body.proposal.evidence[0].quote, 'Synthetic Notice');
+  nodes.get('linkage-start-month').value = '2026-07';
+  nodes.get('linkage-end-month').value = '2026-07';
+  await nodes.get('prepare-linkage-report').onclick();
+  assert.match(nodes.get('linkage-policy-population').textContent, /十位税号/);
+  assert.match(nodes.get('linkage-statistical-population').textContent, /整个 84139190/);
+  assert.equal(nodes.get('linkage-scope').hidden, false);
+  assert.equal(requested.filter(item => item.url === '/api/announcements/linkage/report').length, 0,
+    'preparation must not generate a report before range confirmation');
+  await nodes.get('generate-linkage-report').onclick();
+  assert.match(context.window.location.href, /announcement_report_id=/);
+  nodes.get('linkage-policy-scope').value = '修改后的公告范围';
+  nodes.get('linkage-policy-scope').oninput();
+  assert.equal(nodes.get('linkage-scope').hidden, true);
+  assert.equal(nodes.get('linkage-report-controls').hidden, true);
+  await nodes.get('prepare-linkage-report').onclick();
+  assert.match(nodes.get('linkage-note').textContent, /先确认/);
+  assert.equal(requested.filter(item => item.url === '/api/announcements/linkage/prepare').length, 1);
 });

@@ -1,0 +1,48 @@
+{
+  "schema_version": "public-brief-provider-matrix-v1",
+  "purpose": "新提示词与high组合验收；不作为单变量推理档位实验。真实调用仍需独立冻结和授权。",
+  "questions": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+  ],
+  "candidates": [
+    {
+      "id": "deepseek-flash-high-v2",
+      "label": "DeepSeek flash high 新提示词",
+      "channel": "openai_compatible_api",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-flash",
+      "secret_env": "TRADEINTEL_DEEPSEEK_API_KEY",
+      "request_params": {
+        "max_tokens": 8192,
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high"
+      },
+      "reasoning_effort": "high",
+      "status": "ready_for_formal"
+    },
+    {
+      "id": "deepseek-pro-high-v2",
+      "label": "DeepSeek pro high 新提示词",
+      "channel": "openai_compatible_api",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "secret_env": "TRADEINTEL_DEEPSEEK_API_KEY",
+      "request_params": {
+        "max_tokens": 8192,
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high"
+      },
+      "reasoning_effort": "high",
+      "status": "ready_for_formal"
+    }
+  ]
+}

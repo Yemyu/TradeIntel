@@ -1,0 +1,5 @@
+case_id,provider,exact_model_id,reasoning_setting,route,request_received,protocol_pass,scope_pass,citation_pass,factual_pass,serious_error,helpfulness,reviewer_note,elapsed_seconds,input_tokens,output_tokens,cost_verified
+f1,,,,,,,,,,,,,,,,
+f2,,,,,,,,,,,,,,,,
+f3,,,,,,,,,,,,,,,,
+f4,,,,,,,,,,,,,,,,

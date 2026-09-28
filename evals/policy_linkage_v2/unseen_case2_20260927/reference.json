@@ -1,0 +1,62 @@
+{
+  "schema_version": "policy-linkage-case-reference-v1",
+  "case_id": "fr2025-16733-exclusion-extension",
+  "reference_status": "astra_source_review_not_independent_human_gold",
+  "question": "这份关税排除延期公告改了什么？哪些商品还能继续享受排除？",
+  "policy_id": "unseen-exclusions-20250902",
+  "source_id": "fr2025-16733:official",
+  "source_url": "https://www.govinfo.gov/content/pkg/FR-2025-09-02/html/2025-16733.htm",
+  "source_file_sha256": "deb739fb211f977566c0a0aba29d9d110d8701dbbeab2b99ef6f778603134183",
+  "source_file_bytes": 6366,
+  "fields": [
+    {"field":"title","status":"known","value":"Notice of Product Exclusion Extensions: China's Acts, Policies, and Practices Related to Technology Transfer, Intellectual Property, and Innovation","quotes":["Notice of Product Exclusion Extensions: China's Acts, Policies, and Practices Related to Technology Transfer, Intellectual Property, and Innovation"]},
+    {"field":"publication_date","status":"known","value":"2025-09-02","quotes":["[Federal Register Volume 90, Number 167 (Tuesday, September 2, 2025)]"]},
+    {"field":"effective_date","status":"known","value":"附件A和B将排除延长至2025-11-29；具体入境窗口按原文为2025-09-01 00:01 eastern standard time起、2025-11-29 23:59 eastern daylight time前。原文时区照录，未自行换算或更正。2025-09-02是刊登日期。",
+      "quotes":["The extension is effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern standard time on September 1, 2025, and before 11:59 p.m. eastern daylight time on November 29, 2025. Effective on September 1, 2025, the article description of heading 9903.88.69", "The extension is effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern standard time on September 1, 2025, and before 11:59 p.m. eastern daylight time on November 29, 2025. Effective on September 1, 2025, the article description of heading 9903.88.70"]},
+    {"field":"clock_24h","status":"known","value":"开始00:01；结束23:59之前；仅照录附件窗口，不换算为统一时区。",
+      "quotes":["on or after 12:01 a.m. eastern standard time on September 1, 2025, and before 11:59 p.m. eastern daylight time on November 29, 2025. Effective on September 1, 2025, the article description of heading 9903.88.69"]},
+    {"field":"timezone","status":"known","value":"原文起点写eastern standard time（EST），终点写eastern daylight time（EDT）；保留原文，不因日历季节推断并改成同一时区。",
+      "quotes":["on or after 12:01 a.m. eastern standard time on September 1, 2025, and before 11:59 p.m. eastern daylight time on November 29, 2025. Effective on September 1, 2025, the article description of heading 9903.88.69"]},
+    {"field":"entry_events","status":"known","value":"在附件规定的时间窗口内，货物消费入境，或从保税仓提取供消费。",
+      "quotes":["The extension is effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern standard time on September 1, 2025, and before 11:59 p.m. eastern daylight time on November 29, 2025. Effective on September 1, 2025, the article description of heading 9903.88.69"]},
+    {"field":"origin","status":"known","value":"中国相关产品（原文certain products of China）；本份未重述完整原产地判定及香港适用规则。",
+      "quotes":["innovation by excluding from additional duties certain products of China."]},
+    {"field":"hts_codes","status":"unknown","value":null,"reason":"本份只给第99章申报税目9903.88.69和9903.88.70及旧注释引用，没有逐项列出178项排除的普通十位商品编码和文字描述；不能把申报税目当普通HTS8，也不能据公告标题猜商品。","quotes":[]},
+    {"field":"rates","status":"unknown","value":null,"reason":"本份延长既有附加税排除，没有规定可填入的数值税率；排除某项附加税不等于综合税率为0，也不表示免除其他税费。","quotes":[]},
+    {"field":"rate_meaning","status":"known","value":"将既有178项Section 301附加税排除继续延长90天；没有新增统一税率，也没有重述各商品的综合应缴税率。",
+      "quotes":["innovation by excluding from additional duties certain products of China.","determined that an additional 90-day further extension (through November 29, 2025) of the 178 exclusions extended in the June 5, 2025 notice is appropriate."]},
+    {"field":"conditions","status":"known","value":"产品须符合原排除的文字描述，具体范围同时由十位HTSUS统计编码及第99章注释中的产品描述限定；附件A/B分别延长9903.88.69和9903.88.70下的排除。178是排除项目数，不能当成178个完整HTS8商品。引用的详细清单未随本份重列，现阶段无法逐项对应月度贸易数据。",
+      "quotes":["available for any product that meets the description in the product exclusion. Further, the scope of each exclusion is governed by the scope of the ten-digit Harmonized Tariff Schedule of the United States (HTSUS) statistical reporting numbers and product descriptions set forth in U.S. notes 20(vvv)(i), 20(vvv)(ii), 20(vvv)(iii), 20(vvv)(iv), and 20(www) to subchapter III of chapter 99 of the HTSUS."]},
+    {"field":"exceptions","status":"unknown","value":null,"reason":"本份通过旧公告和HTS注释定义排除资格，未重述全部产品描述、限制及其他税收措施；不能据此确认所有例外已经核完。","quotes":[]},
+    {"field":"revisions","status":"unknown","value":null,"reason":"本记录只审阅2025-16733原公告，后续延期或修订未完整核对；只描述当时公告内容，不声称今天仍按该截止日或这些条件执行。","quotes":[]}
+  ],
+  "linkage": {
+    "relation":"no_statistical_link",
+    "origin_alignment":"unknown",
+    "context_code":null,
+    "policy_scope_summary":"本份公告延长178项既有Section 301产品排除。完整商品范围来自被引用的十位编码及产品文字描述，本份未重列清单；两个第99章税目不代表可直接查询的商品组，当前无法生成这178项对应的贸易金额。",
+    "unobserved_eligibility":[{"dimension":"other","defines_population":true,"description":"缺少被引用的完整十位商品编码与限定描述，无法判断月表哪些行属于178项排除，也不能用全部中国商品金额代替。"}],
+    "quotes":["available for any product that meets the description in the product exclusion. Further, the scope of each exclusion is governed by the scope of the ten-digit Harmonized Tariff Schedule of the United States (HTSUS) statistical reporting numbers and product descriptions set forth in U.S. notes 20(vvv)(i), 20(vvv)(ii), 20(vvv)(iii), 20(vvv)(iv), and 20(www) to subchapter III of chapter 99 of the HTSUS."]
+  },
+  "expected": {
+    "route":"source_fact_card_only",
+    "kind":"announcement-context-report-v1",
+    "context_type":"source_only",
+    "monthly":[],
+    "chart_status":"not_available",
+    "policy_amount_status":"not_determined",
+    "model_calls":0,
+    "trade_queries":0,
+    "source_document_only":true,
+    "current_applicability_status":"not_verified",
+    "critical_checks":[
+      "13字段及逐字引文全部保留，unknown原因不丢失",
+      "2025-09-02刊登日、2025-09-01窗口起点和2025-11-29终点分别保留",
+      "EST起点和EDT终点照原文保留，不自动修正或声称已换算",
+      "178项排除不变成178个完整商品；99038869/99038870不得当商品查询",
+      "税率未知不能填0；延期排除不能说成全面免税",
+      "无金额无图，不将公告URL标为贸易原包，不声称进行贸易复算",
+      "刷新和重启读回一致；中英文固定UI保留原文适用边界；打印可读"
+    ]
+  }
+}

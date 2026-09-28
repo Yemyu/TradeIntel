@@ -15,6 +15,7 @@ from urllib.request import Request, urlopen
 from src.tradeintel_ai.announcement_flow import (
     REQUIRED_FIELDS, confirm_and_enable, load_announcement_store, submit_candidates,
 )
+from src.tradeintel_ai.announcement_statistics_report import _notice_time_relation
 from src.tradeintel_ai.trade_classification_catalog import build_catalog
 from src.tradeintel_ai.trade_data_repository import TradeDataRepository
 from src.tradeintel_ai.web_app import _handle_announcement_import, create_server
@@ -146,7 +147,8 @@ class SplitTradeDataRootTests(unittest.TestCase):
         imported = _handle_announcement_import(self.code_root, {
             "policy_id": "wheat-notice", "source_id": "notice:wheat",
             "url": "https://official.example/wheat",
-            "text": "Products of China are covered.\nHTS 10019900 is listed.",
+            "text": ("Products of China are covered.\nHTS 10019900 is listed.\n"
+                     "An additional duty of 10 percent is listed for September 1, 2027."),
         })
         version = imported["doc_version"]
         store = load_announcement_store(self.code_root, "wheat-notice")
@@ -165,6 +167,12 @@ class SplitTradeDataRootTests(unittest.TestCase):
                 fields.append({"field": name, "status": "known",
                                "value": [{"code": "10019900", "precision": "whole_hts8"}],
                                "evidence": citation("HTS 10019900")})
+            elif name == "rates":
+                fields.append({"field": name, "status": "known", "value": {"10019900": 10},
+                               "evidence": citation("An additional duty of 10 percent")})
+            elif name == "effective_date":
+                fields.append({"field": name, "status": "known", "value": "2027-09-01",
+                               "evidence": citation("September 1, 2027")})
             else:
                 fields.append({"field": name, "status": "unknown", "value": None,
                                "reason": "fixture 未确认"})
@@ -177,11 +185,37 @@ class SplitTradeDataRootTests(unittest.TestCase):
             "policy_id": "wheat-notice", "doc_version": version,
             "start_month": "2026-07", "end_month": "2026-07",
         })
+        with self.assertRaises(HTTPError) as current_request:
+            self._post(base, "/api/announcements/statistics/prepare", {
+                "policy_id": "wheat-notice", "doc_version": version,
+                "rate_mode": "current_applicable_rate",
+            })
+        self.assertEqual(current_request.exception.code, 400)
         self.assertEqual(prepared["dataset_version"], self.data_version)
         result = self._post(base, "/api/announcements/statistics/report", {"prepared": prepared})
         self.assertEqual(result["monthly"][0]["observed_value_usd"], 10)
         self.assertEqual(result["policy"]["doc_version"], version)
+        self.assertEqual(result["policy"]["rate_evidence_scope"], "source_document_only")
+        self.assertEqual(result["policy"]["current_applicability_status"], "not_verified")
+        self.assertEqual(result["scope"]["notice_time_relation"], "before_recorded_effective_month")
+        self.assertEqual(next(item["value"] for item in result["policy"]["fields"]
+                              if item["field"] == "rates"), {"10019900": 10})
+        with urlopen(base + f"/api/trade/report-state?report_id={result['report_id']}") as response:
+            restored = json.load(response)
+        self.assertEqual(restored["report_sha256"], result["report_sha256"])
+        self.assertEqual(restored["policy"]["current_applicability_status"], "not_verified")
         self.assertFalse((self.data_root / ".local").exists())
+
+    def test_only_exact_recorded_date_can_label_all_trade_months_as_earlier(self):
+        self.assertEqual(_notice_time_relation(
+            {"status": "known", "value": "2027-09-01"}, "2026-07"),
+            "before_recorded_effective_month")
+        for value in ("2027-09", "2027-02-31", "2026-07-31", None):
+            with self.subTest(value=value):
+                self.assertEqual(_notice_time_relation(
+                    {"status": "known", "value": value}, "2026-07"), "not_determined")
+        self.assertEqual(_notice_time_relation(
+            {"status": "unknown", "value": "2027-09-01"}, "2026-07"), "not_determined")
 
     def test_explicit_missing_bundle_fails_without_fallback(self):
         with self.assertRaisesRegex(ValueError, "独立贸易数据目录"):

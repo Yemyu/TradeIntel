@@ -1,0 +1,387 @@
+{
+  "date": "2026-09-15",
+  "kind": "offline_design_diagnostics_not_model_evaluation",
+  "git_head": "a87554c",
+  "worktree": "pre-existing uncommitted primary-workflow changes preserved",
+  "provider_calls": 0,
+  "unit_tests": {
+    "run": 870,
+    "failures": 3,
+    "errors": 44,
+    "skipped": 0,
+    "classification": [
+      {
+        "kind": "frozen_experiment_direct_failures",
+        "errors": 44,
+        "failures": 1,
+        "action": "Preserve historical hashes; separate frozen replay from current unit regression."
+      },
+      {
+        "kind": "archived_demo_indirect_frozen_failure",
+        "failures": 1,
+        "test": "test_confirmed_workflow.ConfirmationTests.test_cli_demo_simulated_confirmation_and_cancellation",
+        "evidence": "Calling review() for the demo archive raises ValueError: frozen file mismatch."
+      },
+      {
+        "kind": "earlier_safe_rejection_than_test_expected",
+        "failures": 1,
+        "test": "test_neutral_review_0106.NeutralReviewTests.test_trade_batch_review_blocks_negative_or_changed_sources (reverse)",
+        "evidence": "prepare() returns needs_review without confirmation token; response identifies reversed comparison; existing assertion expects reviewer stage plan."
+      }
+    ],
+    "results": [
+      {
+        "kind": "error",
+        "test": "test_acceptance_v21.PilotTests.test_interrupt_is_not_success",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_acceptance_v21.PilotTests.test_length_terminated_model_draft_is_incomplete_even_with_report",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_acceptance_v21.PilotTests.test_offline_preflight_never_calls_model",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_acceptance_v21.PilotTests.test_reference_is_only_structural_and_wrong_scope_fails",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_acceptance_v21.PilotTests.test_three_transport_failures_stop_and_preserve_plan",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_acceptance_v21.PilotTests.test_two_round_acceptance_simulation_journal_redaction_and_no_auto_scores",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_glm46v_diagnostic.GlmDiagnosticTests.test_extra_tool_request_stops_without_execution",
+        "exception": "ValueError: frozen files changed"
+      },
+      {
+        "kind": "error",
+        "test": "test_glm46v_diagnostic.GlmDiagnosticTests.test_http_error_counted_and_stops_once",
+        "exception": "ValueError: frozen files changed"
+      },
+      {
+        "kind": "error",
+        "test": "test_glm46v_diagnostic.GlmDiagnosticTests.test_http_to_parser_retains_json_failure_and_responses",
+        "exception": "ValueError: frozen files changed"
+      },
+      {
+        "kind": "error",
+        "test": "test_glm46v_diagnostic.GlmDiagnosticTests.test_interrupt_preserves_attempt_and_finished_marker",
+        "exception": "ValueError: frozen files changed"
+      },
+      {
+        "kind": "error",
+        "test": "test_glm46v_diagnostic.GlmDiagnosticTests.test_valid_response_is_replayable",
+        "exception": "ValueError: frozen files changed"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_continuation.ContinuationTests.test_correct_mock_completes_without_duplicate_pilot_calls",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_continuation.ContinuationTests.test_scope_excludes_every_prior_attempt",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_continuation.ContinuationTests.test_transport_stops_and_claim_blocks_repeat",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_guarded_runner.GuardedRunnerTests.test_correct_mock_completes_without_duplicate_pilot_calls",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_guarded_runner.GuardedRunnerTests.test_pilot_failure_stops_at_three",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_holdout.HoldoutTests.test_composition_unique_cases_and_references",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_holdout.HoldoutTests.test_first_http_failure_counts_attempt_and_stops",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_holdout.HoldoutTests.test_semantic_errors_do_not_stop_and_payload_has_no_gold",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_repair.RepairTests.test_correct_mock_completes_without_duplicate_pilot_calls",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_intent_repair.RepairTests.test_pilot_failure_stops_at_three",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_live_continuation.ContinuationTests.test_cooldowns_are_bounded_and_stopped_file_can_resume",
+        "exception": "ValueError: 冻结后的代码、证据或评分程序已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_live_continuation.ContinuationTests.test_ctrl_c_retains_report_and_prior_slots",
+        "exception": "ValueError: 冻结后的代码、证据或评分程序已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_live_continuation.ContinuationTests.test_preserves_failures_and_finishes_exact_remaining_slots",
+        "exception": "ValueError: 冻结后的代码、证据或评分程序已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_live_continuation.ContinuationTests.test_rejects_nonprefix_and_changed_provider_without_request",
+        "exception": "ValueError: 冻结后的代码、证据或评分程序已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_planner_development.PlannerRunTests.test_mock_six_calls_no_confirmation_or_reference_payload",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_planner_development.PlannerRunTests.test_transport_stops_at_one",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_planner_v2_runner.PlannerV2RunTests.test_mock_six_calls_no_confirmation_or_reference_payload",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_planner_v2_runner.PlannerV2RunTests.test_transport_stops_at_one",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_planner_v4_runner.RunnerTests.test_transport_no_second_call",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_planner_v4_runner.RunnerTests.test_two_stage_budget_and_exact_fields",
+        "exception": "ValueError: frozen file mismatch"
+      },
+      {
+        "kind": "error",
+        "test": "test_score_acceptance_v21.ScoreTests.test_end_to_end_failed_collection_and_journal_tamper",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v21_pilot.PilotTests.test_eight_task_simulation_journal_redaction_and_no_auto_scores",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v21_pilot.PilotTests.test_interrupt_is_not_success",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v21_pilot.PilotTests.test_length_terminated_model_draft_is_incomplete_even_with_report",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v21_pilot.PilotTests.test_offline_preflight_never_calls_model",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v21_pilot.PilotTests.test_reference_is_only_structural_and_wrong_scope_fails",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v21_pilot.PilotTests.test_three_transport_failures_stop_and_preserve_plan",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v2_pilot.PilotTests.test_eight_task_simulation_journal_redaction_and_no_auto_scores",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v2_pilot.PilotTests.test_interrupt_is_not_success",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v2_pilot.PilotTests.test_length_terminated_model_draft_is_incomplete_even_with_report",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v2_pilot.PilotTests.test_offline_preflight_never_calls_model",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v2_pilot.PilotTests.test_reference_is_only_structural_and_wrong_scope_fails",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "error",
+        "test": "test_v2_pilot.PilotTests.test_three_transport_failures_stop_and_preserve_plan",
+        "exception": "ValueError: 试验冻结文件已变化：src/tradeintel_ai/agent.py"
+      },
+      {
+        "kind": "failure",
+        "test": "test_confirmed_workflow.ConfirmationTests.test_cli_demo_simulated_confirmation_and_cancellation",
+        "trace": "Traceback (most recent call last):\n  File \"/Users/ye/dev/projects/TradeIntel/tests/test_confirmed_workflow.py\", line 33, in test_cli_demo_simulated_confirmation_and_cancellation\n    self.assertEqual(result.returncode,0,result.stderr)\nAssertionError: 1 != 0 : \n"
+      },
+      {
+        "kind": "failure",
+        "test": "test_neutral_review_0106.NeutralReviewTests.test_trade_batch_review_blocks_negative_or_changed_sources (mode='reverse')",
+        "trace": "Traceback (most recent call last):\n  File \"/Users/ye/dev/projects/TradeIntel/tests/test_neutral_review_0106.py\", line 101, in test_trade_batch_review_blocks_negative_or_changed_sources\n    self.assertEqual(stages, ['plan', 'answer'] if mode == 'accepted' else ['plan'])\nAssertionError: Lists differ: [] != ['plan']\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n'plan'\n\n- []\n+ ['plan']\n"
+      },
+      {
+        "kind": "failure",
+        "test": "test_tradeintel_ai_final_evaluation.FinalEvaluationFreezeTests.test_final_manifest_freezes_protocol_gold_runtime_and_questions",
+        "trace": "Traceback (most recent call last):\n  File \"/Users/ye/dev/projects/TradeIntel/tests/test_tradeintel_ai_final_evaluation.py\", line 60, in test_final_manifest_freezes_protocol_gold_runtime_and_questions\n    self.assertEqual(actual, expected, path)\nAssertionError: '0f5754f027bb21d72a86a9a06e75296016e5a380e8ad5f46560c43c020b79a0b' != '48630f4b38601419ce139f0a7f7220ab220312c8c886b8a169dfc70ec4a45b59'\n- 0f5754f027bb21d72a86a9a06e75296016e5a380e8ad5f46560c43c020b79a0b\n+ 48630f4b38601419ce139f0a7f7220ab220312c8c886b8a169dfc70ec4a45b59\n : src/tradeintel_ai/agent.py\n"
+      }
+    ],
+    "limits": "This run uses the local workspace. It does not certify a clean checkout or live-model quality. External socket connections were blocked in the test runner process; fixture tests do not authorize live providers."
+  },
+  "diagnostics": {
+    "status": "diagnostics_recorded",
+    "api_calls": 0,
+    "evidence_run": "tmp/primary-interpretation-v1",
+    "boundary": "合成反例检查接口行为，不是模型准确率；无提醒仍待人工审阅。",
+    "evidence_hashes": {
+      "status.json": "679d9434be3a5efb7926145ba607a9a43e9f032dbb6e9ff59f8f953300759fdc",
+      "trade-evidence.json": "4b5560361d8e6245176353e302e955c1b7fbdc9282b1b08b6704a226ea7d2cc0",
+      "policy-facts.json": "bc327907c3d892d4105d6265cf6524b23e7659fe9abaa84cff6c65696826a25d",
+      "interpretation-response.json": "d4d3fce6e0943067a10352e7110437e20f7ef029e0fddfe5cba681ef6a94a508",
+      "source-packet.zh-CN.md": "a715f55fe35cb133bd69ff4382cb36e6e173c8d429e6068a8473eff5c67852bf"
+    },
+    "code_hashes": {
+      "src/tradeintel_ai/fact_interpretation.py": "3ef4ffe302826632e7afbfbb9dfdc1b9eba4241fa13f62405895f4ef2e64c7df",
+      "src/tradeintel_ai/business_workflow.py": "5115565c0104c714a558c02a0c990bc4e96bd5cda8049feecb95bf19fdf4e4b9",
+      "src/tradeintel_ai/interpretation_review_store.py": "8ca866e6b4144a56a9a3f64266e156dd165c3eb3d58a18b3e7c2b8aaa8cf0113"
+    },
+    "probes": [
+      {
+        "probe": "safe_negation",
+        "synthetic_text": "不能仅凭生效前入库认定豁免。",
+        "fact_ids": [
+          "policy.entry_events"
+        ],
+        "result": "needs_revision",
+        "flags": [
+          {
+            "index": 0,
+            "reason": "exemption_inference_requires_explicit_clause"
+          }
+        ],
+        "approved": false
+      },
+      {
+        "probe": "unsupported_inference",
+        "synthetic_text": "提前存放仓库的货物可以免交此次附加税。",
+        "fact_ids": [
+          "policy.entry_events"
+        ],
+        "result": "manual_review_required",
+        "flags": [],
+        "approved": false
+      },
+      {
+        "probe": "unrelated_reference",
+        "synthetic_text": "建议优先核查钨制品来源集中度。",
+        "fact_ids": [
+          "policy.effective"
+        ],
+        "result": "manual_review_required",
+        "flags": [],
+        "approved": false
+      },
+      {
+        "probe": "numeric_restatement",
+        "synthetic_text": "81019910的中国来源份额为28.629%。",
+        "fact_ids": [
+          "trade.2026-07.81019910"
+        ],
+        "result": "needs_revision",
+        "flags": [
+          {
+            "index": 0,
+            "reason": "possible_fact_restatement_or_unsupported_conclusion"
+          }
+        ],
+        "approved": false
+      },
+      {
+        "probe": "fenced_json_review_parity",
+        "business_parser_accepts": true,
+        "review_packet": "JSONDecodeError"
+      },
+      {
+        "probe": "omitted_analysis_inputs",
+        "tool_has_product_scope_weight": true,
+        "context_has_product_scope_weight": false,
+        "context_has_source_limitations": false
+      },
+      {
+        "probe": "scope_filter",
+        "question": "请使用目前已有的2026-07数据说明存档政策全部登记商品的贸易规模。",
+        "plan_result": "accepted",
+        "policy_filter": "登记的是2024年执行通知，不能确认现行全部税率。"
+      },
+      {
+        "probe": "scope_filter",
+        "question": "请分析2026-07全部登记商品，不做因果分析或预测。",
+        "plan_result": "question exceeds supported execution scope",
+        "policy_filter": null
+      }
+    ]
+  },
+  "independent_july_check": {
+    "version": "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b",
+    "method": "csv.DictReader grouped by canonical_hts8 and origin_code 5700; Decimal ratios, not application aggregation",
+    "world_usd": 193774871,
+    "china_usd": 10251657,
+    "products": [
+      {
+        "hts8": "38180000",
+        "world_usd": 178183620,
+        "china_usd": 8385427,
+        "china_within_product_pct": "4.71",
+        "product_within_world_scope_pct": "91.95",
+        "product_within_china_scope_pct": "81.80"
+      },
+      {
+        "hts8": "81019910",
+        "world_usd": 2592286,
+        "china_usd": 742146,
+        "china_within_product_pct": "28.63"
+      }
+    ],
+    "boundary": "Known development data; not a new model result, legal tariff base, realized loss, or causal estimate."
+  }
+}

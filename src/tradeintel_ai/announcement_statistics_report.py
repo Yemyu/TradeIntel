@@ -5,6 +5,7 @@ import csv
 import hashlib
 import json
 import re
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -36,6 +37,22 @@ def _month_index(value: str) -> int:
 
 def _month_at(index: int) -> str:
     return f"{index // 12:04d}-{index % 12 + 1:02d}"
+
+
+def _notice_time_relation(effective_field: dict[str, Any], end_month: str) -> str:
+    """Only identify a window wholly before a literal date in this document.
+
+    This says nothing about whether the notice was later amended or became law.
+    Partial dates and dates inside the selected final month remain undetermined.
+    """
+    value = effective_field.get("value") if effective_field.get("status") == "known" else None
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        return "not_determined"
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return "not_determined"
+    return "before_recorded_effective_month" if end_month < value[:7] else "not_determined"
 
 
 def _binding(root: Path, policy_id: str, doc_version: str) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -280,25 +297,31 @@ def build_announcement_statistics_report(root: Path, prepared: dict[str, Any], *
     fields = [{"field": item.get("field"), "status": item.get("status"),
                "value": item.get("value"), "reason": item.get("reason")}
               for item in binding["candidate"].get("fields", []) if isinstance(item, dict)]
+    report_scope = {key: prepared[key] for key in (
+        "dataset_id", "dataset_version", "classification_version", "flow", "reporter",
+        "partner", "metric", "selected_codes", "excluded_partial_entries",
+        "unselected_whole_codes", "start_month", "end_month", "latest_available_month")}
+    report_scope["notice_time_relation"] = _notice_time_relation(
+        binding["fields"].get("effective_date") or {}, prepared["end_month"])
     return {"kind": REPORT_KIND, "question": binding["fields"].get("title", {}).get("value") or "公告相关商品贸易情况",
             "policy": {"policy_id": prepared["policy_id"], "doc_version": prepared["doc_version"],
                        "candidate_digest": prepared["candidate_digest"], "title": document.get("title"),
+                       "rate_evidence_scope": "source_document_only",
+                       "current_applicability_status": "not_verified",
                        "fields": fields, "citations": _field_citations(binding["candidate"], prepared["doc_version"]),
                        "source_url": metadata.get("source_url") or next(
                            (item.get("url") for item in document.get("sources", [])
                             if isinstance(item, dict) and item.get("url")), None),
                        "source_provenance": metadata.get("source_provenance", "unknown"),
                        "source_url_verification": metadata.get("source_url_verification", "unknown")},
-            "scope": {key: prepared[key] for key in ("dataset_id", "dataset_version", "classification_version",
-                      "flow", "reporter", "partner", "metric", "selected_codes", "excluded_partial_entries",
-                      "unselected_whole_codes",
-                      "start_month", "end_month", "latest_available_month")},
+            "scope": report_scope,
             "monthly": monthly, "policy_amount_status": "not_determined",
             "sources": [{"type": "us_trade_month", "months": [item["month"] for item in monthly
                           if item.get("source_url") == url], "url": url}
                         for url in dict.fromkeys(item["source_url"] for item in monthly
                                                  if item.get("source_url"))],
             "notes": ["图表金额为该月已观测的中国来源消费进口额；缺失细分行不补零。",
+                      "公告原文的税率不代表所选月份的实际适用税率；后续修订与排除尚未核对。",
                       "它不是逐笔适用税额、政策造成的贸易变化或因果效果。",
                       "跨年商品编码可比性尚未核验；报告不计算跨年增幅。"]}
 

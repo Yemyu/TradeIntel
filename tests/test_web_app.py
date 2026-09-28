@@ -290,6 +290,43 @@ class WebAppTests(unittest.TestCase):
             self.assertTrue(result["report_available"])
             self.assertEqual(result["report_url"].split("/")[-1], result["run_id"])
 
+    def test_http_natural_v2_preview_and_confirm_use_separate_routes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            make_fixture(root)
+            server = create_server(root=root, port=0, output_root=root / 'runs')
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            base = f'http://127.0.0.1:{server.server_port}'
+            coordinator = server.RequestHandlerClass.coordinator
+            preview_payload = {
+                'status': 'needs_confirmation',
+                'request': {'schema_version': 'research-request-v2',
+                            'policy_id': 'us_301_review2025_tungsten_solar',
+                            'month': '2026-07', 'product': 'all',
+                            'focus': 'contrast', 'policy_view': 'archived_event'},
+                'confirmation_token': 'fixture-token', 'model_calls': 1,
+            }
+            confirm_payload = {'status': 'confirmation_rejected', 'execution_attempted': False}
+            try:
+                with patch.object(coordinator, 'natural_preview', return_value=preview_payload) as preview, \
+                     patch.object(coordinator, 'natural_confirm', return_value=confirm_payload) as confirm:
+                    request = Request(base + '/api/research-v2/preview',
+                                      data=json.dumps({'question': 'fixture'}).encode(),
+                                      headers={'Content-Type': 'application/json', 'Origin': base})
+                    with urlopen(request) as response:
+                        self.assertEqual(json.loads(response.read())['status'], 'needs_confirmation')
+                    self.assertEqual(preview.call_args.args, ('fixture',))
+                    request = Request(base + '/api/research-v2/confirm',
+                                      data=json.dumps({'confirmation_token': 'fixture-token'}).encode(),
+                                      headers={'Content-Type': 'application/json', 'Origin': base})
+                    with self.assertRaises(HTTPError) as context:
+                        urlopen(request)
+                    self.assertEqual(context.exception.code, 409)
+                    self.assertEqual(confirm.call_args.args, ('fixture-token',))
+            finally:
+                server.shutdown(); server.server_close(); thread.join(timeout=2)
+
 
 if __name__ == "__main__":
     unittest.main()

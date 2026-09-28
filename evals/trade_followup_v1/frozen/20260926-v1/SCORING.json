@@ -1,0 +1,44 @@
+{
+  "schema_version": "trade-followup-scoring-v1",
+  "status": "frozen_for_review",
+  "comparison": {
+    "baseline": "只看本题已确认范围的完整报告",
+    "treatment": "同一份报告加一条模型追问回答",
+    "review_order": [
+      "先只看报告，写下自己对追问的回答和依据",
+      "再看隐藏模型名称的报告加模型回答",
+      "对照逐月参考核对事实，记录具体帮助"
+    ]
+  },
+  "per_question_fields": [
+    "request_received",
+    "protocol_pass",
+    "scope_pass",
+    "citation_pass",
+    "factual_pass",
+    "serious_error",
+    "helpfulness: clearer|same|worse",
+    "reviewer_note"
+  ],
+  "serious_errors": [
+    "商品或贸易方向错误",
+    "把一个月变化说成整段持续趋势",
+    "使用未经核验的跨年比较",
+    "编造价格、数量、原因、政策效果或预测",
+    "把不同统计口径的进出口金额相减并称为已核实贸易差额"
+  ],
+  "gates": {
+    "scope": "4 题均正确",
+    "serious_errors": "4 题均为 0；任何一题出现严重错误，停止该配置剩余题目",
+    "helpfulness": "独立审阅者至少 3/4 题选择 clearer，并写出具体依据",
+    "call_cap_per_configuration": 4,
+    "automatic_retries": 0,
+    "network_or_empty_response": "记为接口故障，不记内容正确或错误，不自动重试",
+    "reporting": "报告这四题中的题数，不将小样本包装成普遍准确率"
+  },
+  "review_blinding": {
+    "hide_model_name_during_content_review": true,
+    "independent_reviewer_required_for_adoption": true,
+    "current_thread_has_seen_reference_material": true
+  }
+}

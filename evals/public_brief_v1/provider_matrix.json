@@ -1,0 +1,84 @@
+{
+  "schema_version": "public-brief-provider-matrix-v1",
+  "purpose": "公共四题验收的候选配置登记；不含密钥，不代表已经完成连接或质量验收。",
+  "candidate_package": "tmp/public-brief-eval-v2/unified-service-20260923-v2",
+  "questions": ["q1", "q2", "q3", "q4"],
+  "defaults": {
+    "temperature": 0,
+    "max_tokens": 2000,
+    "timeout_seconds": 90,
+    "thinking": {"type": "disabled"}
+  },
+  "candidates": [
+    {
+      "id": "codex-luna-highest",
+      "label": "GPT-5.6 Luna（最高推理）",
+      "channel": "codex_session",
+      "model_id": "gpt-5.6-luna",
+      "reasoning_effort": "max",
+      "status": "ready_for_manual_session",
+      "secret_env": null,
+      "notes": "独立干净会话逐题运行；当前对话里的示例不计入成绩。"
+    },
+    {
+      "id": "codex-sol-high",
+      "label": "GPT-5.6 Sol（高推理）",
+      "channel": "codex_session",
+      "model_id": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "status": "ready_for_manual_session",
+      "secret_env": null,
+      "notes": "与 Luna 使用同一题包、同一评分规则，不把渠道差异混入 API 排名。"
+    },
+    {
+      "id": "glm-46v",
+      "label": "GLM-4.6V",
+      "channel": "openai_compatible_api",
+      "provider": "zhipu",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "model_id": "glm-4.6v",
+      "secret_env": "TRADEINTEL_GLM_API_KEY",
+      "request_params": {"max_tokens": 8192, "thinking": {"type": "enabled"}},
+      "status": "ready_for_formal",
+      "notes": "此前disabled短探测成功；本轮enabled为官方动态思考开关，无强度档位。首次正式题同时验证本配置，不冒称已实测通过。总输出8192、正文估算2000、90秒、不自动重试。"
+    },
+    {
+      "id": "glm-45-air",
+      "label": "GLM-4.5-Air",
+      "channel": "openai_compatible_api",
+      "provider": "zhipu",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "model_id": "glm-4.5-air",
+      "secret_env": "TRADEINTEL_GLM_API_KEY",
+      "request_params": {"max_tokens": 8192, "thinking": {"type": "enabled"}},
+      "status": "ready_for_formal",
+      "notes": "此前disabled短探测成功；本轮enabled动态思考，不虚构high/max档位。首次正式题验证参数与质量。总输出8192、正文估算2000、90秒、不自动重试。"
+    },
+    {
+      "id": "deepseek-flash",
+      "label": "DeepSeek Flash",
+      "channel": "openai_compatible_api",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-flash",
+      "secret_env": "TRADEINTEL_DEEPSEEK_API_KEY",
+      "request_params": {"max_tokens": 8192, "thinking": {"type": "enabled"}, "reasoning_effort": "high"},
+      "reasoning_effort": "high",
+      "status": "ready_for_formal",
+      "notes": "型号来自成功探测。本轮enabled/high；temperature传0但思考模式不生效，不称确定性输出。总输出8192、正文估算2000、90秒、不自动重试。"
+    },
+    {
+      "id": "deepseek-pro",
+      "label": "DeepSeek Pro",
+      "channel": "openai_compatible_api",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "secret_env": "TRADEINTEL_DEEPSEEK_API_KEY",
+      "request_params": {"max_tokens": 8192, "thinking": {"type": "enabled"}, "reasoning_effort": "high"},
+      "reasoning_effort": "high",
+      "status": "ready_for_formal",
+      "notes": "本轮enabled/high；temperature传0但思考模式不生效。总输出8192、正文估算2000、90秒、不自动重试。首次正式题仍可能因账户或参数限制失败。"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 # TradeShock AI
 
-## 当前可试用的贸易查询（2026-09-27）
+## 当前可试用的贸易查询（2026-09-28）
 
 本地工作台可根据已发布的美国进口、出口商品目录提出候选，由用户确认商品、方向和月份，再生成带逐月图表与来源的报告。进口文件有 **48 个已加工月**（2016-01 至 2018-05、2025-01 至 2026-07，两个不连续时段）；出口文件有 **2025-08 至 2026-07 的连续 12 个月**。进口消费金额与出口 Census Schedule B 总出口额（FAS）按方向分别显示。商品名检索还需用户核对候选，不能理解为所有自然说法都能自动匹配。
 
 通用报告的模型解读是可选试用功能：数据图表不依赖模型；模型回答可能有误，需要对照数据核实。调用会把报告事实发送给配置的服务商，可能产生费用。[现有回答复核](docs/handoff/runs/20260925-TRADE-AI-VALUE-REVIEW.zh-CN.md)显示：v3 六份原答和一次 v4 开发答尚未证明比数据报告多提供具体帮助，其中一份 v3 回答还混淆了最近月与整个区间的变化；这次复核不是独立盲评。MySQL 已与当前进出口文件整版对账，但网页仍以已发布文件为报告数据源。普通 Git 克隆不含通用查询所需的 124 个数据文件；[本地候选的干净克隆与完整依赖复验](docs/handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md)在另行补入数据包、新建 macOS / Python 3.13 虚拟环境后，已复现进口、出口、双向报告及网页重启恢复。新电脑、Windows 和公网部署仍未验收。数据补充包约 579 MB；本机原始数据目录约 9.4 GiB。先看[本地版快速上手](docs/LOCAL_RUN.zh-CN.md)，再看[当前状态](docs/handoff/STATUS.zh-CN.md)和[发布边界](docs/handoff/PRODUCT_RELEASE_DECISION_20260925.zh-CN.md)。
+
+单独的公告阅读开发诊断也做过：DeepSeek API 一次回答覆盖七项事实，但因“附件全文未提供”的无据说法未通过；GPT-6 Luna Max 聊天窗口一次回答覆盖七项，未发现无据额外说法。两者不是同渠道盲测，不能据此排名或推断一般准确率；详情见[中文模型评测](docs/MODEL_SELECTION.zh-CN.md)。
 
 ## 历史执行覆盖：2026-09-22（当前状态以上节为准）
 
@@ -20,7 +22,7 @@ An evidence-grounded U.S. goods-trade research assistant under development. It c
 
 [与 Claude/RAG/贸易智能项目的定位比较](docs/COMPETITIVE_POSITIONING.zh-CN.md) explains why this is not simply another document-chat demo.
 
-The table reports task counts, pass fractions and failure types. Historical GLM-4.7 acceptance (5/6) is separate from newer Air development failures. In-conversation Luna/Astra demonstrations had access to earlier analysis and are not independent benchmark scores.
+The table reports task counts, pass fractions and failure types. Historical GLM-4.7 acceptance (5/6) is separate from newer Air development failures. One later GPT-6 Luna Max chat-window diagnostic on the seen R2 notice covered 7/7 reference points without an unsupported extra claim; it is not an API test or blind benchmark. Its comparison with the DeepSeek API result is confounded by channel and conversation context.
 
 [Concise three-file showcase](docs/showcase/README.zh-CN.md) provides the project scope and two archived reports without internal learning notes or request captures.
 

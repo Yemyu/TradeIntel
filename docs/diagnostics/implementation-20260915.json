@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-15",
+  "kind": "implementation_note",
+  "intended_provider_calls": 0,
+  "unintended_provider_call": {
+    "occurred": true,
+    "count": 1,
+    "cause": "新增测试一度混用 tradeintel_ai 与 src.tradeintel_ai 两个模块命名空间，预置模型补丁未命中",
+    "scope": "临时测试目录；没有写入项目 tmp、没有纳入任何模型评估或成绩",
+    "response_artifact_retained": false,
+    "follow_up": "已统一测试导入并用审计钩子阻断外部连接；未重试该请求"
+  },
+  "model_evaluation_counted": 0,
+  "boundary": "这不是新实验结果。不要把这次意外响应当作 v2 的正向成绩。"
+}

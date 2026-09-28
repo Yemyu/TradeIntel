@@ -1,0 +1,38 @@
+{
+  "catalog_version": "a758a0236d12bea52cae670b99b05997a1b1c14d8442bcda7ea05bb3b436a632",
+  "classification_source_urls": [
+    "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2508.ZIP",
+    "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2509.ZIP",
+    "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2510.ZIP",
+    "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2511.ZIP",
+    "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2601.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2602.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2603.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2604.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2605.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2606.ZIP",
+    "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP"
+  ],
+  "coverage_note": null,
+  "dataset_version": "dd9801492e80268e51480b08c2edcbf495aba3ce01b7ee64739566f67a151ef8",
+  "dataset_versions": {
+    "export": null,
+    "import": "dd9801492e80268e51480b08c2edcbf495aba3ce01b7ee64739566f67a151ef8"
+  },
+  "end_month": "2026-07",
+  "flow": "import",
+  "kind": "trade-query-v1",
+  "latest_available_month": "2026-07",
+  "message": "请核对商品、方向、月份和来源范围，再生成报告。",
+  "metric": "import_value_consumption_usd",
+  "official_product_en": "RICE",
+  "partner": "ALL_ORIGINS",
+  "product_code": "1006",
+  "product_label": "稻谷、大米",
+  "question": "最近美国稻米进口有什么变化？",
+  "reporter": "US",
+  "selected_product_id": "import:1006",
+  "start_month": "2025-08",
+  "status": "ready"
+}

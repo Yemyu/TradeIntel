@@ -1,0 +1,44 @@
+{
+  "schema_version": "announcement-reading-development-review-v1",
+  "case_id": "r2-reading-dev",
+  "review_date": "2026-09-28",
+  "reviewer_type": "codex_assisted_development_review",
+  "independent_human_review": false,
+  "source_role": "seen_development_only",
+  "body_sha256": "737e410a16ee4a0750e95269d17ad43065eb31b5caa4dc958880c8ec8bc89bb3",
+  "manifest_sha256": "6abda1602eee589cbd81b3bb83fcd0d085bd77b09cf75bd2b5e4007af17debaa",
+  "response_sha256": "cc8acdfa60bb0e9e319619ff5200c809019c40230809080ef1c27a16ad51578a",
+  "parsed_review_sha256": "6adf2db7691508261c85d15240ec7ef54739f1df9496b57f04bf5c487fd017af",
+  "reference_sha256": "727efca8c9c804c22e746a99f00c95d2b3241a63c98dabf51c6a2166fcc0fa5e",
+  "source_html_sha256": "a2b8d9ddeada1a7e0a97926a70da545eb40e883ec547c02e5d52221bf2b6ed78",
+  "technical_contract": "passed",
+  "points": [
+    {"id": 1, "result": "covered", "claims": ["rate_meaning:1", "rate_meaning:3"], "passages": ["P26"]},
+    {"id": 2, "result": "covered", "claims": ["rate_meaning:3", "rate_meaning:5", "exceptions:2"], "passages": ["P26", "P29"]},
+    {"id": 3, "result": "covered", "claims": ["rate_meaning:2", "rate_meaning:4"], "passages": ["P26", "P31"]},
+    {"id": 4, "result": "covered", "claims": ["conditions:1", "conditions:2", "conditions:3", "conditions:4"], "passages": ["P26", "P28", "P29"]},
+    {"id": 5, "result": "covered", "claims": ["conditions:5", "conditions:6"], "passages": ["P29"]},
+    {"id": 6, "result": "covered", "claims": ["exceptions:1", "conditions:5"], "passages": ["P29"]},
+    {"id": 7, "result": "covered", "claims": ["exceptions:2"], "passages": ["P29"]}
+  ],
+  "covered_points": 7,
+  "total_predefined_points": 7,
+  "additional_blocking_claims": [
+    {
+      "claim_id": "exceptions:3",
+      "text_fragment": "编号原文未提供附件全文",
+      "result": "unsupported_and_contradicted_by_supplied_document",
+      "evidence": "P30 is the Annex heading, P31 contains the amendment, and P32 closes with the signature and filing information. The complete saved HTML contains this same sequence. No supplied evidence establishes a missing portion of this notice's Annex.",
+      "stop_rule": "ANNOUNCEMENT_READING_ONE_CALL_DECISION_20260928.zh-CN.md budget/stop rule 3: a citation not supporting a claim fails the development gate"
+    }
+  ],
+  "development_gate": "failed",
+  "failure_type": "additional_unsupported_source_completeness_claim",
+  "human_work_saved": "not_measured",
+  "unseen_policy_accuracy": "not_measured",
+  "review_round_api_calls": 0,
+  "total_case_api_calls": 1,
+  "retry_allowed_under_this_plan": false,
+  "automatic_policy_activation_allowed": false,
+  "note": "Seven predefined facts covered is not an overall accuracy score. The remainder of exceptions:3 is not separately declared false merely because only three passages are cited. Raw answer and frozen rubric remain unchanged."
+}

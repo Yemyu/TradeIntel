@@ -1,0 +1,18 @@
+{
+  "schema_version": "trade-followup-model-matrix-v1",
+  "status": "not_frozen_no_model_calls_authorized_by_this_file",
+  "per_configuration_max_calls": 4,
+  "automatic_retries": 0,
+  "configurations": [],
+  "required_fields_before_a_run": [
+    "provider",
+    "exact_model_id_returned_by_service",
+    "reasoning_setting_and_provider_support",
+    "api_or_codex_conversation",
+    "endpoint_profile_without_credentials",
+    "per_question_order",
+    "aggregate_call_cap",
+    "usage_and_cost_recording_method"
+  ],
+  "note": "题目与判分材料先单独冻结；模型名单、服务商支持的推理档位及总调用上限须核对后另行冻结。不得把 Codex 对话模拟记成产品 API 调用。"
+}

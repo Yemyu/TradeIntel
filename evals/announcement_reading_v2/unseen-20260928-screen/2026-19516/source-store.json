@@ -1,0 +1,2842 @@
+{
+  "data_version": null,
+  "documents": [
+    {
+      "data_version": null,
+      "doc_id": "FR-2026-19516",
+      "doc_version": "docver-4856274e93216a5e",
+      "fetched_at": "2026-09-28T13:47:25.486841+00:00",
+      "offset_unit": "character",
+      "parser_version": "paragraph-lines-v1",
+      "policy_id": "FR-2026-19516",
+      "publication_time": "2026-09-24",
+      "publication_time_status": "known",
+      "sections": [
+        {
+          "end": 73,
+          "id": "fr:2026-19516:p1:para1",
+          "source_id": "fr:2026-19516:p1",
+          "start": 0,
+          "text": "\n[Federal Register Volume 91, Number 184 (Thursday, September 24, 2026)]\n"
+        },
+        {
+          "end": 83,
+          "id": "fr:2026-19516:p1:para2",
+          "source_id": "fr:2026-19516:p1",
+          "start": 73,
+          "text": "[Notices]\n"
+        },
+        {
+          "end": 103,
+          "id": "fr:2026-19516:p1:para3",
+          "source_id": "fr:2026-19516:p1",
+          "start": 83,
+          "text": "[Pages 60591-60593]\n"
+        },
+        {
+          "end": 187,
+          "id": "fr:2026-19516:p1:para4",
+          "source_id": "fr:2026-19516:p1",
+          "start": 103,
+          "text": "From the Federal Register Online via the Government Publishing Office [www.gpo.gov]\n"
+        },
+        {
+          "end": 213,
+          "id": "fr:2026-19516:p1:para5",
+          "source_id": "fr:2026-19516:p1",
+          "start": 187,
+          "text": "[FR Doc No: 2026-19516]\n\n\n"
+        },
+        {
+          "end": 286,
+          "id": "fr:2026-19516:p1:para6",
+          "source_id": "fr:2026-19516:p1",
+          "start": 213,
+          "text": "-----------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 310,
+          "id": "fr:2026-19516:p1:para7",
+          "source_id": "fr:2026-19516:p1",
+          "start": 286,
+          "text": "DEPARTMENT OF COMMERCE\n\n"
+        },
+        {
+          "end": 346,
+          "id": "fr:2026-19516:p1:para8",
+          "source_id": "fr:2026-19516:p1",
+          "start": 310,
+          "text": "International Trade Administration\n\n"
+        },
+        {
+          "end": 416,
+          "id": "fr:2026-19516:p1:para9",
+          "source_id": "fr:2026-19516:p1",
+          "start": 346,
+          "text": "[A-570-073; C-570-074; A-525-001; C-525-002; A-351-854; A-891-001; A-\n"
+        },
+        {
+          "end": 487,
+          "id": "fr:2026-19516:p1:para10",
+          "source_id": "fr:2026-19516:p1",
+          "start": 416,
+          "text": "729-803; A-428-849; A-533-895; C-533-896; A-560-835; A-475-842; A-523-\n"
+        },
+        {
+          "end": 559,
+          "id": "fr:2026-19516:p1:para11",
+          "source_id": "fr:2026-19516:p1",
+          "start": 487,
+          "text": "814; A-485-809; A-801-001; A-856-001; A-791-825; A-469-820; A-583-867; \n"
+        },
+        {
+          "end": 583,
+          "id": "fr:2026-19516:p1:para12",
+          "source_id": "fr:2026-19516:p1",
+          "start": 559,
+          "text": "A-489-839; C-489-840]\n\n\n"
+        },
+        {
+          "end": 649,
+          "id": "fr:2026-19516:p1:para13",
+          "source_id": "fr:2026-19516:p1",
+          "start": 583,
+          "text": "Common Alloy Aluminum Sheet From the People's Republic of China, \n"
+        },
+        {
+          "end": 717,
+          "id": "fr:2026-19516:p1:para14",
+          "source_id": "fr:2026-19516:p1",
+          "start": 649,
+          "text": "Bahrain, Brazil, Croatia, Egypt, Germany, India, Indonesia, Italy, \n"
+        },
+        {
+          "end": 788,
+          "id": "fr:2026-19516:p1:para15",
+          "source_id": "fr:2026-19516:p1",
+          "start": 717,
+          "text": "Oman, Romania, Serbia, Slovenia, South Africa, Spain, Taiwan, and the \n"
+        },
+        {
+          "end": 854,
+          "id": "fr:2026-19516:p1:para16",
+          "source_id": "fr:2026-19516:p1",
+          "start": 788,
+          "text": "Republic of T[uuml]rkiye: Final Results of Changed Circumstances \n"
+        },
+        {
+          "end": 921,
+          "id": "fr:2026-19516:p1:para17",
+          "source_id": "fr:2026-19516:p1",
+          "start": 854,
+          "text": "Reviews and Revocation of the Antidumping and Countervailing Duty \n"
+        },
+        {
+          "end": 938,
+          "id": "fr:2026-19516:p1:para18",
+          "source_id": "fr:2026-19516:p1",
+          "start": 921,
+          "text": "Orders, in Part\n\n"
+        },
+        {
+          "end": 1011,
+          "id": "fr:2026-19516:p1:para19",
+          "source_id": "fr:2026-19516:p1",
+          "start": 938,
+          "text": "AGENCY: Enforcement and Compliance, International Trade Administration, \n"
+        },
+        {
+          "end": 1035,
+          "id": "fr:2026-19516:p1:para20",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1011,
+          "text": "Department of Commerce.\n"
+        },
+        {
+          "end": 1103,
+          "id": "fr:2026-19516:p1:para21",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1035,
+          "text": "SUMMARY: The U.S. Department of Commerce (Commerce) is issuing the \n"
+        },
+        {
+          "end": 1169,
+          "id": "fr:2026-19516:p1:para22",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1103,
+          "text": "final results of the changed circumstances reviews (CCRs) of the \n"
+        },
+        {
+          "end": 1239,
+          "id": "fr:2026-19516:p1:para23",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1169,
+          "text": "antidumping duty (AD) and countervailing duty (CVD) orders on common \n"
+        },
+        {
+          "end": 1308,
+          "id": "fr:2026-19516:p1:para24",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1239,
+          "text": "alloy aluminum sheet (aluminum sheet) from the People's Republic of \n"
+        },
+        {
+          "end": 1373,
+          "id": "fr:2026-19516:p1:para25",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1308,
+          "text": "China (China), Bahrain, Brazil, Croatia, Egypt, Germany, India, \n"
+        },
+        {
+          "end": 1446,
+          "id": "fr:2026-19516:p1:para26",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1373,
+          "text": "Indonesia, Italy, Oman, Romania, Serbia, Slovenia, South Africa, Spain, \n"
+        },
+        {
+          "end": 1518,
+          "id": "fr:2026-19516:p1:para27",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1446,
+          "text": "Taiwan, and the Republic of T[uuml]rkiye (T[uuml]rkiye), to revoke the \n"
+        },
+        {
+          "end": 1580,
+          "id": "fr:2026-19516:p1:para28",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1518,
+          "text": "orders, in part, with respect to certain aluminum can stock.\n\n"
+        },
+        {
+          "end": 1619,
+          "id": "fr:2026-19516:p1:para29",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1580,
+          "text": "DATES: Applicable September 24, 2026.\n\n"
+        },
+        {
+          "end": 1692,
+          "id": "fr:2026-19516:p1:para30",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1619,
+          "text": "FOR FURTHER INFORMATION CONTACT: Daniel Saba, AD/CVD Operations, Office \n"
+        },
+        {
+          "end": 1762,
+          "id": "fr:2026-19516:p1:para31",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1692,
+          "text": "III, Enforcement and Compliance, International Trade Administration, \n"
+        },
+        {
+          "end": 1833,
+          "id": "fr:2026-19516:p1:para32",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1762,
+          "text": "U.S. Department of Commerce, 1401 Constitution Avenue NW, Washington, \n"
+        },
+        {
+          "end": 1871,
+          "id": "fr:2026-19516:p1:para33",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1833,
+          "text": "DC 20230; telephone: (202) 482-5849.\n\n"
+        },
+        {
+          "end": 1899,
+          "id": "fr:2026-19516:p1:para34",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1871,
+          "text": "SUPPLEMENTARY INFORMATION:\n\n"
+        },
+        {
+          "end": 1911,
+          "id": "fr:2026-19516:p1:para35",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1899,
+          "text": "Background\n\n"
+        },
+        {
+          "end": 1975,
+          "id": "fr:2026-19516:p1:para36",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1911,
+          "text": "    On August 11, 2026, Commerce published its initiations and \n"
+        },
+        {
+          "end": 2041,
+          "id": "fr:2026-19516:p1:para37",
+          "source_id": "fr:2026-19516:p1",
+          "start": 1975,
+          "text": "preliminary results in the CCRs on aluminum sheet from China and \n"
+        },
+        {
+          "end": 2112,
+          "id": "fr:2026-19516:p1:para38",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2041,
+          "text": "Bahrain et al.,\\1\\ in which Commerce found that changed circumstances \n"
+        },
+        {
+          "end": 2185,
+          "id": "fr:2026-19516:p1:para39",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2112,
+          "text": "warranted retroactive revocation of the China Aluminum Sheet Orders and \n"
+        },
+        {
+          "end": 2252,
+          "id": "fr:2026-19516:p1:para40",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2185,
+          "text": "Bahrain et al. Aluminum Sheet Orders,\\2\\ in part, with respect to \n"
+        },
+        {
+          "end": 2321,
+          "id": "fr:2026-19516:p1:para41",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2252,
+          "text": "certain aluminum can stock. We provided interested parties with the \n"
+        },
+        {
+          "end": 2391,
+          "id": "fr:2026-19516:p1:para42",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2321,
+          "text": "opportunity to comment and to request a public hearing regarding the \n"
+        },
+        {
+          "end": 2412,
+          "id": "fr:2026-19516:p1:para43",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2391,
+          "text": "Preliminary Results.\n"
+        },
+        {
+          "end": 2489,
+          "id": "fr:2026-19516:p1:para44",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2412,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 2557,
+          "id": "fr:2026-19516:p1:para45",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2489,
+          "text": "    \\1\\ See Common Alloy Aluminum Sheet from the People's Republic \n"
+        },
+        {
+          "end": 2617,
+          "id": "fr:2026-19516:p1:para46",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2557,
+          "text": "of China, Bahrain, Brazil, Croatia, Egypt, Germany, India, \n"
+        },
+        {
+          "end": 2683,
+          "id": "fr:2026-19516:p1:para47",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2617,
+          "text": "Indonesia, Italy, Oman, Romania, Serbia, Slovenia, South Africa, \n"
+        },
+        {
+          "end": 2748,
+          "id": "fr:2026-19516:p1:para48",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2683,
+          "text": "Spain, Taiwan, and the Republic of T[uuml]rkiye: Initiation and \n"
+        },
+        {
+          "end": 2816,
+          "id": "fr:2026-19516:p1:para49",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2748,
+          "text": "Preliminary Results of Changed Circumstances Reviews and Intent to \n"
+        },
+        {
+          "end": 2884,
+          "id": "fr:2026-19516:p1:para50",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2816,
+          "text": "Revoke the Antidumping and Countervailing Duty Orders, in Part, 91 \n"
+        },
+        {
+          "end": 2934,
+          "id": "fr:2026-19516:p1:para51",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2884,
+          "text": "FR 51666 (August 11, 2026) (Preliminary Results).\n"
+        },
+        {
+          "end": 3002,
+          "id": "fr:2026-19516:p1:para52",
+          "source_id": "fr:2026-19516:p1",
+          "start": 2934,
+          "text": "    \\2\\ See Common Alloy Aluminum Sheet from the People's Republic \n"
+        },
+        {
+          "end": 3067,
+          "id": "fr:2026-19516:p1:para53",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3002,
+          "text": "of China: Antidumping Duty Order, 84 FR 2813 (February 8, 2019) \n"
+        },
+        {
+          "end": 3133,
+          "id": "fr:2026-19516:p1:para54",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3067,
+          "text": "(China Aluminum Sheet AD Order); and Common Alloy Aluminum Sheet \n"
+        },
+        {
+          "end": 3201,
+          "id": "fr:2026-19516:p1:para55",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3133,
+          "text": "from the People's Republic of China: Countervailing Duty Order, 84 \n"
+        },
+        {
+          "end": 3262,
+          "id": "fr:2026-19516:p1:para56",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3201,
+          "text": "FR 2157 (February 6, 2019) (China Aluminum Sheet CVD Order) \n"
+        },
+        {
+          "end": 3330,
+          "id": "fr:2026-19516:p1:para57",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3262,
+          "text": "(collectively, China Aluminum Sheet Orders). See also Common Alloy \n"
+        },
+        {
+          "end": 3395,
+          "id": "fr:2026-19516:p1:para58",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3330,
+          "text": "Aluminum Sheet from Bahrain, India, and the Republic of Turkey: \n"
+        },
+        {
+          "end": 3465,
+          "id": "fr:2026-19516:p1:para59",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3395,
+          "text": "Countervailing Duty Orders, 86 FR 22144 (April 27, 2021) (Bahrain et \n"
+        },
+        {
+          "end": 3535,
+          "id": "fr:2026-19516:p1:para60",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3465,
+          "text": "al. Aluminum Sheet CVD Orders); and Common Alloy Aluminum Sheet from \n"
+        },
+        {
+          "end": 3603,
+          "id": "fr:2026-19516:p1:para61",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3535,
+          "text": "Bahrain, Brazil, Croatia, Egypt, Germany, India, Indonesia, Italy, \n"
+        },
+        {
+          "end": 3670,
+          "id": "fr:2026-19516:p1:para62",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3603,
+          "text": "Oman, Romania, Serbia, Slovenia, South Africa, Spain, Taiwan, and \n"
+        },
+        {
+          "end": 3740,
+          "id": "fr:2026-19516:p1:para63",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3670,
+          "text": "the Republic of Turkey, 86 FR 22139 (April 27, 2021) (Bahrain et al. \n"
+        },
+        {
+          "end": 3806,
+          "id": "fr:2026-19516:p1:para64",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3740,
+          "text": "Aluminum Sheet AD Orders) (collectively, Bahrain et al. Aluminum \n"
+        },
+        {
+          "end": 3821,
+          "id": "fr:2026-19516:p1:para65",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3806,
+          "text": "Sheet Orders).\n"
+        },
+        {
+          "end": 3898,
+          "id": "fr:2026-19516:p1:para66",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3821,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 3940,
+          "id": "fr:2026-19516:p1:para67",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3898,
+          "text": "Scope of the China Aluminum Sheet Orders\n\n"
+        },
+        {
+          "end": 4010,
+          "id": "fr:2026-19516:p1:para68",
+          "source_id": "fr:2026-19516:p1",
+          "start": 3940,
+          "text": "    The merchandise covered by these Orders is common alloy aluminum \n"
+        },
+        {
+          "end": 4080,
+          "id": "fr:2026-19516:p1:para69",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4010,
+          "text": "sheet from China. For a full description of the revised scope of the \n"
+        },
+        {
+          "end": 4126,
+          "id": "fr:2026-19516:p1:para70",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4080,
+          "text": "China Aluminum Sheet Orders, see Appendix I.\n\n"
+        },
+        {
+          "end": 4179,
+          "id": "fr:2026-19516:p1:para71",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4126,
+          "text": "Scope of the Bahrain et. al. Aluminum Sheet Orders 3\n"
+        },
+        {
+          "end": 4256,
+          "id": "fr:2026-19516:p1:para72",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4179,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 4318,
+          "id": "fr:2026-19516:p1:para73",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4256,
+          "text": "    \\3\\ We note that there is an error in the Bahrain et al. \n"
+        },
+        {
+          "end": 4388,
+          "id": "fr:2026-19516:p1:para74",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4318,
+          "text": "Aluminum Sheet CVD Orders, where the temper H-39 was not included in \n"
+        },
+        {
+          "end": 4455,
+          "id": "fr:2026-19516:p1:para75",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4388,
+          "text": "the scope language regarding the aluminum can stock exclusion. As \n"
+        },
+        {
+          "end": 4520,
+          "id": "fr:2026-19516:p1:para76",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4455,
+          "text": "seen in the final determinations of the CVD Orders, temper H-39 \n"
+        },
+        {
+          "end": 4583,
+          "id": "fr:2026-19516:p1:para77",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4520,
+          "text": "should have been included in the scope language regarding the \n"
+        },
+        {
+          "end": 4653,
+          "id": "fr:2026-19516:p1:para78",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4583,
+          "text": "aluminum can stock exclusion. See, e.g., Common Alloy Aluminum Sheet \n"
+        },
+        {
+          "end": 4721,
+          "id": "fr:2026-19516:p1:para79",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4653,
+          "text": "from Bahrain: Final Affirmative Countervailing Duty Determination, \n"
+        },
+        {
+          "end": 4771,
+          "id": "fr:2026-19516:p1:para80",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4721,
+          "text": "86 FR 13333 (March 8, 2021) (CAAS Bahrain Final).\n"
+        },
+        {
+          "end": 4848,
+          "id": "fr:2026-19516:p1:para81",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4771,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 4918,
+          "id": "fr:2026-19516:p1:para82",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4848,
+          "text": "    The merchandise covered by these Orders is common alloy aluminum \n"
+        },
+        {
+          "end": 4990,
+          "id": "fr:2026-19516:p1:para83",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4918,
+          "text": "sheet from Bahrain, Brazil, Croatia, Egypt, Germany, India, Indonesia, \n"
+        },
+        {
+          "end": 5060,
+          "id": "fr:2026-19516:p1:para84",
+          "source_id": "fr:2026-19516:p1",
+          "start": 4990,
+          "text": "Italy, Oman, Romania, Serbia, Slovenia, South Africa, Spain, Taiwan, \n"
+        },
+        {
+          "end": 5130,
+          "id": "fr:2026-19516:p1:para85",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5060,
+          "text": "and T[uuml]rkiye. For a full description of the revised scope of the \n"
+        },
+        {
+          "end": 5186,
+          "id": "fr:2026-19516:p1:para86",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5130,
+          "text": "Bahrain et al. Aluminum Sheet Orders, see Appendix II.\n\n"
+        },
+        {
+          "end": 5254,
+          "id": "fr:2026-19516:p1:para87",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5186,
+          "text": "Final Results of the CCRs and Intent To Revoke the Orders, in Part\n\n"
+        },
+        {
+          "end": 5320,
+          "id": "fr:2026-19516:p1:para88",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5254,
+          "text": "    Commerce did not receive comments, and as a result, Commerce \n"
+        },
+        {
+          "end": 5383,
+          "id": "fr:2026-19516:p1:para89",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5320,
+          "text": "continues to find that the individual members of the Aluminum \n"
+        },
+        {
+          "end": 5456,
+          "id": "fr:2026-19516:p1:para90",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5383,
+          "text": "Association Common Alloy Aluminum Sheet Trade Enforcement Working Group \n"
+        },
+        {
+          "end": 5527,
+          "id": "fr:2026-19516:p1:para91",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5456,
+          "text": "(CAAS Enforcement Working Group) \\4\\ and Jupiter Aluminum Corporation \n"
+        },
+        {
+          "end": 5598,
+          "id": "fr:2026-19516:p1:para92",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5527,
+          "text": "account for greater than 85 percent of the domestic industry and have \n"
+        },
+        {
+          "end": 5669,
+          "id": "fr:2026-19516:p1:para93",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5598,
+          "text": "expressed support for the CCR Requests.\\5\\ Thus, we find that changed \n"
+        },
+        {
+          "end": 5742,
+          "id": "fr:2026-19516:p1:para94",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5669,
+          "text": "circumstances warrant revocation of the China Aluminum Sheet Orders and \n"
+        },
+        {
+          "end": 5814,
+          "id": "fr:2026-19516:p1:para95",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5742,
+          "text": "Bahrain et al. Aluminum Sheet Orders, in part, with respect to certain \n"
+        },
+        {
+          "end": 5834,
+          "id": "fr:2026-19516:p1:para96",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5814,
+          "text": "aluminum can stock.\n"
+        },
+        {
+          "end": 5911,
+          "id": "fr:2026-19516:p1:para97",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5834,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 5981,
+          "id": "fr:2026-19516:p1:para98",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5911,
+          "text": "    \\4\\ The individual members of the CAAS Enforcement Working Group \n"
+        },
+        {
+          "end": 6042,
+          "id": "fr:2026-19516:p1:para99",
+          "source_id": "fr:2026-19516:p1",
+          "start": 5981,
+          "text": "are Arconic Corporation; Commonwealth Rolled Products Inc.; \n"
+        },
+        {
+          "end": 6109,
+          "id": "fr:2026-19516:p1:para100",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6042,
+          "text": "Constellium Rolled Products Ravenswood, LLC; JW Aluminum Company; \n"
+        },
+        {
+          "end": 6159,
+          "id": "fr:2026-19516:p1:para101",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6109,
+          "text": "Novelis Corporation; and Texarkana Aluminum, Inc.\n"
+        },
+        {
+          "end": 6214,
+          "id": "fr:2026-19516:p1:para102",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6159,
+          "text": "    \\5\\ See July 24th Response and July 28th Response.\n"
+        },
+        {
+          "end": 6291,
+          "id": "fr:2026-19516:p1:para103",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6214,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 6362,
+          "id": "fr:2026-19516:p1:para104",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6291,
+          "text": "    Commerce is revoking the China Aluminum Sheet Orders, in part, by \n"
+        },
+        {
+          "end": 6433,
+          "id": "fr:2026-19516:p1:para105",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6362,
+          "text": "replacing the following language originally in the scope of the China \n"
+        },
+        {
+          "end": 6457,
+          "id": "fr:2026-19516:p1:para106",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6433,
+          "text": "Aluminum Sheet Orders:\n\n"
+        },
+        {
+          "end": 6525,
+          "id": "fr:2026-19516:p1:para107",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6457,
+          "text": "    Excluded from the scope of these Orders is aluminum can stock, \n"
+        },
+        {
+          "end": 6592,
+          "id": "fr:2026-19516:p1:para108",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6525,
+          "text": "which is suitable for use in the manufacture of aluminum beverage \n"
+        },
+        {
+          "end": 6659,
+          "id": "fr:2026-19516:p1:para109",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6592,
+          "text": "cans, lids of such cans, or tabs used to open such cans. Aluminum \n"
+        },
+        {
+          "end": 6726,
+          "id": "fr:2026-19516:p1:para110",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6659,
+          "text": "can stock is produced to gauges that range from 0.200 mm to 0.292 \n"
+        },
+        {
+          "end": 6790,
+          "id": "fr:2026-19516:p1:para111",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6726,
+          "text": "mm, and has an H-19, H-41, H-48, or H-391 temper. In addition, \n"
+        },
+        {
+          "end": 6858,
+          "id": "fr:2026-19516:p1:para112",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6790,
+          "text": "aluminum can stock has a lubricant applied to the flat surfaces of \n"
+        },
+        {
+          "end": 6925,
+          "id": "fr:2026-19516:p1:para113",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6858,
+          "text": "the can stock to facilitate its movement through machines used in \n"
+        },
+        {
+          "end": 6991,
+          "id": "fr:2026-19516:p1:para114",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6925,
+          "text": "the manufacture of beverage cans. Aluminum can stock is properly \n"
+        },
+        {
+          "end": 7057,
+          "id": "fr:2026-19516:p1:para115",
+          "source_id": "fr:2026-19516:p1",
+          "start": 6991,
+          "text": "classified under Harmonized Tariff Schedule of the United States \n"
+        },
+        {
+          "end": 7109,
+          "id": "fr:2026-19516:p1:para116",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7057,
+          "text": "(HTSUS) subheadings 7606.12.3045 and 7606.12.3055.\n\n"
+        },
+        {
+          "end": 7177,
+          "id": "fr:2026-19516:p1:para117",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7109,
+          "text": "    The revised language for the China Aluminum Sheet Orders is as \n"
+        },
+        {
+          "end": 7187,
+          "id": "fr:2026-19516:p1:para118",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7177,
+          "text": "follows:\n\n"
+        },
+        {
+          "end": 7255,
+          "id": "fr:2026-19516:p1:para119",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7187,
+          "text": "    Excluded from the scope of these Orders is aluminum can stock, \n"
+        },
+        {
+          "end": 7322,
+          "id": "fr:2026-19516:p1:para120",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7255,
+          "text": "which is suitable for use in the manufacture of aluminum beverage \n"
+        },
+        {
+          "end": 7389,
+          "id": "fr:2026-19516:p1:para121",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7322,
+          "text": "cans, lids of such cans, or tabs used to open such cans. Aluminum \n"
+        },
+        {
+          "end": 7456,
+          "id": "fr:2026-19516:p1:para122",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7389,
+          "text": "can stock is produced to gauges that range from 0.200 mm to 0.292 \n"
+        },
+        {
+          "end": 7519,
+          "id": "fr:2026-19516:p1:para123",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7456,
+          "text": "mm, and has an H-19, H-41, H-48, H-39,\\6\\ or H-391 temper. In \n"
+        },
+        {
+          "end": 7530,
+          "id": "fr:2026-19516:p1:para124",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7519,
+          "text": "addition,\n\n"
+        },
+        {
+          "end": 7546,
+          "id": "fr:2026-19516:p1:para125",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7530,
+          "text": "[[Page 60592]]\n\n"
+        },
+        {
+          "end": 7614,
+          "id": "fr:2026-19516:p1:para126",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7546,
+          "text": "aluminum can stock has a lubricant applied to the flat surfaces of \n"
+        },
+        {
+          "end": 7681,
+          "id": "fr:2026-19516:p1:para127",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7614,
+          "text": "the can stock to facilitate its movement through machines used in \n"
+        },
+        {
+          "end": 7748,
+          "id": "fr:2026-19516:p1:para128",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7681,
+          "text": "the manufacture of beverage cans. Aluminum can stock is generally \n"
+        },
+        {
+          "end": 7816,
+          "id": "fr:2026-19516:p1:para129",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7748,
+          "text": "classifiable under Harmonized Tariff Schedule of the United States \n"
+        },
+        {
+          "end": 7881,
+          "id": "fr:2026-19516:p1:para130",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7816,
+          "text": "(HTSUS) subheadings 7606.12.3045 and 7606.12.3055; however, the \n"
+        },
+        {
+          "end": 7945,
+          "id": "fr:2026-19516:p1:para131",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7881,
+          "text": "written description of aluminum can stock covered by the scope \n"
+        },
+        {
+          "end": 8008,
+          "id": "fr:2026-19516:p1:para132",
+          "source_id": "fr:2026-19516:p1",
+          "start": 7945,
+          "text": "exclusion set forth above is dispositive, regardless of HTSUS \n"
+        },
+        {
+          "end": 8024,
+          "id": "fr:2026-19516:p1:para133",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8008,
+          "text": "classification.\n"
+        },
+        {
+          "end": 8101,
+          "id": "fr:2026-19516:p1:para134",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8024,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 8170,
+          "id": "fr:2026-19516:p1:para135",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8101,
+          "text": "    \\6\\ In the Preliminary Results, in the interest of aligning the \n"
+        },
+        {
+          "end": 8235,
+          "id": "fr:2026-19516:p1:para136",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8170,
+          "text": "aluminum can stock exclusion language across the China Aluminum \n"
+        },
+        {
+          "end": 8301,
+          "id": "fr:2026-19516:p1:para137",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8235,
+          "text": "Sheet Orders and Bahrain et al. Aluminum Sheet Orders we invited \n"
+        },
+        {
+          "end": 8369,
+          "id": "fr:2026-19516:p1:para138",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8301,
+          "text": "comment on whether it is appropriate to include temper H-39 in the \n"
+        },
+        {
+          "end": 8439,
+          "id": "fr:2026-19516:p1:para139",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8369,
+          "text": "modified exclusionary language for aluminum can stock with regard to \n"
+        },
+        {
+          "end": 8506,
+          "id": "fr:2026-19516:p1:para140",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8439,
+          "text": "the China Aluminum Sheet Orders. Commerce received no comments on \n"
+        },
+        {
+          "end": 8576,
+          "id": "fr:2026-19516:p1:para141",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8506,
+          "text": "the issue. Accordingly, pursuant to 19 CFR 351.225(q)(1)(iii)(A), we \n"
+        },
+        {
+          "end": 8638,
+          "id": "fr:2026-19516:p1:para142",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8576,
+          "text": "have clarified the scope and included temper ``H-39'' in the \n"
+        },
+        {
+          "end": 8687,
+          "id": "fr:2026-19516:p1:para143",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8638,
+          "text": "modified aluminum can stock exclusion language.\n\n"
+        },
+        {
+          "end": 8760,
+          "id": "fr:2026-19516:p1:para144",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8687,
+          "text": "    The revised scope description of the China Aluminum Sheet Orders in \n"
+        },
+        {
+          "end": 8807,
+          "id": "fr:2026-19516:p1:para145",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8760,
+          "text": "Appendix I includes this replacement language.\n"
+        },
+        {
+          "end": 8877,
+          "id": "fr:2026-19516:p1:para146",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8807,
+          "text": "    Commerce is revoking the Bahrain et al. Aluminum Sheet Orders in \n"
+        },
+        {
+          "end": 8947,
+          "id": "fr:2026-19516:p1:para147",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8877,
+          "text": "part, by replacing the following language originally in the scope of \n"
+        },
+        {
+          "end": 8990,
+          "id": "fr:2026-19516:p1:para148",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8947,
+          "text": "the Bahrain et al. Aluminum Sheet Orders:\n\n"
+        },
+        {
+          "end": 9058,
+          "id": "fr:2026-19516:p1:para149",
+          "source_id": "fr:2026-19516:p1",
+          "start": 8990,
+          "text": "    Excluded from the scope of these Orders is aluminum can stock, \n"
+        },
+        {
+          "end": 9125,
+          "id": "fr:2026-19516:p1:para150",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9058,
+          "text": "which is suitable for use in the manufacture of aluminum beverage \n"
+        },
+        {
+          "end": 9192,
+          "id": "fr:2026-19516:p1:para151",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9125,
+          "text": "cans, lids of such cans, or tabs used to open such cans. Aluminum \n"
+        },
+        {
+          "end": 9259,
+          "id": "fr:2026-19516:p1:para152",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9192,
+          "text": "can stock is produced to gauges that range from 0.200 mm to 0.292 \n"
+        },
+        {
+          "end": 9322,
+          "id": "fr:2026-19516:p1:para153",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9259,
+          "text": "mm, and has an H-19, H-41, H-48, H-39,\\7\\ or H-391 temper. In \n"
+        },
+        {
+          "end": 9388,
+          "id": "fr:2026-19516:p1:para154",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9322,
+          "text": "addition, aluminum can stock has a lubricant applied to the flat \n"
+        },
+        {
+          "end": 9450,
+          "id": "fr:2026-19516:p1:para155",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9388,
+          "text": "surfaces of the can stock to facilitate its movement through \n"
+        },
+        {
+          "end": 9515,
+          "id": "fr:2026-19516:p1:para156",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9450,
+          "text": "machines used in the manufacture of beverage cans. Aluminum can \n"
+        },
+        {
+          "end": 9585,
+          "id": "fr:2026-19516:p1:para157",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9515,
+          "text": "stock is properly classified under Harmonized Tariff Schedule of the \n"
+        },
+        {
+          "end": 9650,
+          "id": "fr:2026-19516:p1:para158",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9585,
+          "text": "United States (HTSUS) subheadings 7606.12.3045 and 7606.12.3055.\n"
+        },
+        {
+          "end": 9727,
+          "id": "fr:2026-19516:p1:para159",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9650,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 9789,
+          "id": "fr:2026-19516:p1:para160",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9727,
+          "text": "    \\7\\ We note that there is an error in the Bahrain et al. \n"
+        },
+        {
+          "end": 9859,
+          "id": "fr:2026-19516:p1:para161",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9789,
+          "text": "Aluminum Sheet CVD Orders, where the temper H-39 was not included in \n"
+        },
+        {
+          "end": 9926,
+          "id": "fr:2026-19516:p1:para162",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9859,
+          "text": "the scope language regarding the aluminum can stock exclusion. As \n"
+        },
+        {
+          "end": 9991,
+          "id": "fr:2026-19516:p1:para163",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9926,
+          "text": "seen in the final determinations of the CVD Orders, temper H-39 \n"
+        },
+        {
+          "end": 10054,
+          "id": "fr:2026-19516:p1:para164",
+          "source_id": "fr:2026-19516:p1",
+          "start": 9991,
+          "text": "should have been included in the scope language regarding the \n"
+        },
+        {
+          "end": 10124,
+          "id": "fr:2026-19516:p1:para165",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10054,
+          "text": "aluminum can stock exclusion. See, e.g., Common Alloy Aluminum Sheet \n"
+        },
+        {
+          "end": 10192,
+          "id": "fr:2026-19516:p1:para166",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10124,
+          "text": "from Bahrain: Final Affirmative Countervailing Duty Determination, \n"
+        },
+        {
+          "end": 10222,
+          "id": "fr:2026-19516:p1:para167",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10192,
+          "text": "86 FR 13333 (March 8, 2021).\n\n"
+        },
+        {
+          "end": 10293,
+          "id": "fr:2026-19516:p1:para168",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10222,
+          "text": "    The revised language for the Bahrain et al. Aluminum Sheet Orders \n"
+        },
+        {
+          "end": 10369,
+          "id": "fr:2026-19516:p1:para169",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10293,
+          "text": "---------------------------------------------------------------------------\n"
+        },
+        {
+          "end": 10385,
+          "id": "fr:2026-19516:p1:para170",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10369,
+          "text": "is as follows:\n\n"
+        },
+        {
+          "end": 10453,
+          "id": "fr:2026-19516:p1:para171",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10385,
+          "text": "    Excluded from the scope of these Orders is aluminum can stock, \n"
+        },
+        {
+          "end": 10520,
+          "id": "fr:2026-19516:p1:para172",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10453,
+          "text": "which is suitable for use in the manufacture of aluminum beverage \n"
+        },
+        {
+          "end": 10587,
+          "id": "fr:2026-19516:p1:para173",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10520,
+          "text": "cans, lids of such cans, or tabs used to open such cans. Aluminum \n"
+        },
+        {
+          "end": 10654,
+          "id": "fr:2026-19516:p1:para174",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10587,
+          "text": "can stock is produced to gauges that range from 0.200 mm to 0.292 \n"
+        },
+        {
+          "end": 10724,
+          "id": "fr:2026-19516:p1:para175",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10654,
+          "text": "mm, and has an H-19, H-41, H-48, H-39, or H-391 temper. In addition, \n"
+        },
+        {
+          "end": 10792,
+          "id": "fr:2026-19516:p1:para176",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10724,
+          "text": "aluminum can stock has a lubricant applied to the flat surfaces of \n"
+        },
+        {
+          "end": 10859,
+          "id": "fr:2026-19516:p1:para177",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10792,
+          "text": "the can stock to facilitate its movement through machines used in \n"
+        },
+        {
+          "end": 10926,
+          "id": "fr:2026-19516:p1:para178",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10859,
+          "text": "the manufacture of beverage cans. Aluminum can stock is generally \n"
+        },
+        {
+          "end": 10994,
+          "id": "fr:2026-19516:p1:para179",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10926,
+          "text": "classifiable under Harmonized Tariff Schedule of the United States \n"
+        },
+        {
+          "end": 11059,
+          "id": "fr:2026-19516:p1:para180",
+          "source_id": "fr:2026-19516:p1",
+          "start": 10994,
+          "text": "(HTSUS) subheadings 7606.12.3045 and 7606.12.3055; however, the \n"
+        },
+        {
+          "end": 11123,
+          "id": "fr:2026-19516:p1:para181",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11059,
+          "text": "written description of aluminum can stock covered by the scope \n"
+        },
+        {
+          "end": 11186,
+          "id": "fr:2026-19516:p1:para182",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11123,
+          "text": "exclusion set forth above is dispositive, regardless of HTSUS \n"
+        },
+        {
+          "end": 11203,
+          "id": "fr:2026-19516:p1:para183",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11186,
+          "text": "classification.\n\n"
+        },
+        {
+          "end": 11275,
+          "id": "fr:2026-19516:p1:para184",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11203,
+          "text": "    The revised scope description of the Bahrain et al. Aluminum Sheet \n"
+        },
+        {
+          "end": 11334,
+          "id": "fr:2026-19516:p1:para185",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11275,
+          "text": "Orders in Appendix II includes this replacement language.\n\n"
+        },
+        {
+          "end": 11385,
+          "id": "fr:2026-19516:p1:para186",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11334,
+          "text": "Application of the Final Results of These Reviews\n\n"
+        },
+        {
+          "end": 11455,
+          "id": "fr:2026-19516:p1:para187",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11385,
+          "text": "    The CAAS Enforcement Working Group requested that Commerce apply \n"
+        },
+        {
+          "end": 11525,
+          "id": "fr:2026-19516:p1:para188",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11455,
+          "text": "the final results of these reviews retroactively to all unliquidated \n"
+        },
+        {
+          "end": 11596,
+          "id": "fr:2026-19516:p1:para189",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11525,
+          "text": "entries of aluminum can stock.\\8\\ Section 751(d)(3) of the Tariff Act \n"
+        },
+        {
+          "end": 11667,
+          "id": "fr:2026-19516:p1:para190",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11596,
+          "text": "of 1930, as amended (the Act) provides that ``{a{time}  determination \n"
+        },
+        {
+          "end": 11740,
+          "id": "fr:2026-19516:p1:para191",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11667,
+          "text": "under this section to revoke an order . . . shall apply with respect to \n"
+        },
+        {
+          "end": 11811,
+          "id": "fr:2026-19516:p1:para192",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11740,
+          "text": "unliquidated entries of the subject merchandise which are entered, or \n"
+        },
+        {
+          "end": 11875,
+          "id": "fr:2026-19516:p1:para193",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11811,
+          "text": "withdrawn from warehouse, for consumption on or after the date \n"
+        },
+        {
+          "end": 11948,
+          "id": "fr:2026-19516:p1:para194",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11875,
+          "text": "determined by the administering authority.'' We note that substantially \n"
+        },
+        {
+          "end": 12014,
+          "id": "fr:2026-19516:p1:para195",
+          "source_id": "fr:2026-19516:p1",
+          "start": 11948,
+          "text": "all of the domestic industry, which is in support of the partial \n"
+        },
+        {
+          "end": 12083,
+          "id": "fr:2026-19516:p1:para196",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12014,
+          "text": "revocation, also agrees with applying the partial revocation to all \n"
+        },
+        {
+          "end": 12154,
+          "id": "fr:2026-19516:p1:para197",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12083,
+          "text": "unliquidated entries of aluminum can stock, noting that ``{t{time} he \n"
+        },
+        {
+          "end": 12222,
+          "id": "fr:2026-19516:p1:para198",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12154,
+          "text": "retroactive application of the final results of {Commerce's{time}  \n"
+        },
+        {
+          "end": 12290,
+          "id": "fr:2026-19516:p1:para199",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12222,
+          "text": "clarifying that the Orders' scope definitions exclude aluminum can \n"
+        },
+        {
+          "end": 12360,
+          "id": "fr:2026-19516:p1:para200",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12290,
+          "text": "stock is appropriate given that the Petitioners have always intended \n"
+        },
+        {
+          "end": 12429,
+          "id": "fr:2026-19516:p1:para201",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12360,
+          "text": "that aluminum can stock meeting the written description be excluded \n"
+        },
+        {
+          "end": 12495,
+          "id": "fr:2026-19516:p1:para202",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12429,
+          "text": "from the Orders' scope regardless of classification.'' \\9\\ Thus, \n"
+        },
+        {
+          "end": 12554,
+          "id": "fr:2026-19516:p1:para203",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12495,
+          "text": "because all parties are in agreement, and Commerce has no \n"
+        },
+        {
+          "end": 12618,
+          "id": "fr:2026-19516:p1:para204",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12554,
+          "text": "administrability concerns, the final results of these CCRs are \n"
+        },
+        {
+          "end": 12680,
+          "id": "fr:2026-19516:p1:para205",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12618,
+          "text": "applicable to all unliquidated entries of aluminum can stock \n"
+        },
+        {
+          "end": 12746,
+          "id": "fr:2026-19516:p1:para206",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12680,
+          "text": "retroactive to the date on which suspension of liquidation began.\n"
+        },
+        {
+          "end": 12823,
+          "id": "fr:2026-19516:p1:para207",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12746,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 12891,
+          "id": "fr:2026-19516:p1:para208",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12823,
+          "text": "    \\8\\ See CAAS Enforcement Working Group's Letter, ``Request for \n"
+        },
+        {
+          "end": 12954,
+          "id": "fr:2026-19516:p1:para209",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12891,
+          "text": "Initiation of Changed Circumstances Review to Further Clarify \n"
+        },
+        {
+          "end": 13024,
+          "id": "fr:2026-19516:p1:para210",
+          "source_id": "fr:2026-19516:p1",
+          "start": 12954,
+          "text": "Exclusion of Aluminum Can Stock from Scope of AD/CVD Orders,'' dated \n"
+        },
+        {
+          "end": 13046,
+          "id": "fr:2026-19516:p1:para211",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13024,
+          "text": "June 22, 2026 at 5-6.\n"
+        },
+        {
+          "end": 13115,
+          "id": "fr:2026-19516:p1:para212",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13046,
+          "text": "    \\9\\ Id. at 5. See also CAAS Enforcement Working Group's Letter, \n"
+        },
+        {
+          "end": 13180,
+          "id": "fr:2026-19516:p1:para213",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13115,
+          "text": "``Petitioner's Response to Second Supplemental Questionnaire,'' \n"
+        },
+        {
+          "end": 13208,
+          "id": "fr:2026-19516:p1:para214",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13180,
+          "text": "dated July 28, 2026 at 2-3.\n"
+        },
+        {
+          "end": 13285,
+          "id": "fr:2026-19516:p1:para215",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13208,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 13343,
+          "id": "fr:2026-19516:p1:para216",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13285,
+          "text": "Instructions to U.S. Customs and Border Protection (CBP)\n\n"
+        },
+        {
+          "end": 13411,
+          "id": "fr:2026-19516:p1:para217",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13343,
+          "text": "    Because we determine that there are changed circumstances that \n"
+        },
+        {
+          "end": 13482,
+          "id": "fr:2026-19516:p1:para218",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13411,
+          "text": "warrant the revocation of the China Aluminum Sheet Orders and Bahrain \n"
+        },
+        {
+          "end": 13546,
+          "id": "fr:2026-19516:p1:para219",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13482,
+          "text": "et al. Aluminum Sheet Orders, in part, we will instruct CBP to \n"
+        },
+        {
+          "end": 13618,
+          "id": "fr:2026-19516:p1:para220",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13546,
+          "text": "liquidate without regard to antidumping and countervailing duties, and \n"
+        },
+        {
+          "end": 13689,
+          "id": "fr:2026-19516:p1:para221",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13618,
+          "text": "to refund any estimated antidumping and countervailing duties on, all \n"
+        },
+        {
+          "end": 13754,
+          "id": "fr:2026-19516:p1:para222",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13689,
+          "text": "unliquidated entries of the merchandise covered by this partial \n"
+        },
+        {
+          "end": 13825,
+          "id": "fr:2026-19516:p1:para223",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13754,
+          "text": "revocation retroactive to the date on which suspension of liquidation \n"
+        },
+        {
+          "end": 13836,
+          "id": "fr:2026-19516:p1:para224",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13825,
+          "text": "began.\\10\\\n"
+        },
+        {
+          "end": 13913,
+          "id": "fr:2026-19516:p1:para225",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13836,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 13976,
+          "id": "fr:2026-19516:p1:para226",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13913,
+          "text": "    \\10\\ For the China Aluminum Sheet CVD Order suspension of \n"
+        },
+        {
+          "end": 14046,
+          "id": "fr:2026-19516:p1:para227",
+          "source_id": "fr:2026-19516:p1",
+          "start": 13976,
+          "text": "liquidation began on April 23, 2018. See Common Alloy Aluminum Sheet \n"
+        },
+        {
+          "end": 14108,
+          "id": "fr:2026-19516:p1:para228",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14046,
+          "text": "from the People's Republic of China: Preliminary Affirmative \n"
+        },
+        {
+          "end": 14173,
+          "id": "fr:2026-19516:p1:para229",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14108,
+          "text": "Countervailing Duty (CVD) Determination, Alignment of Final CVD \n"
+        },
+        {
+          "end": 14235,
+          "id": "fr:2026-19516:p1:para230",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14173,
+          "text": "Determination with Final Antidumping Duty Determination, and \n"
+        },
+        {
+          "end": 14305,
+          "id": "fr:2026-19516:p1:para231",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14235,
+          "text": "Preliminary CVD Determination of Critical Circumstances, 78 FR 17651 \n"
+        },
+        {
+          "end": 14373,
+          "id": "fr:2026-19516:p1:para232",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14305,
+          "text": "(April 23, 2018). For the China Aluminum Sheet AD Order suspension \n"
+        },
+        {
+          "end": 14434,
+          "id": "fr:2026-19516:p1:para233",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14373,
+          "text": "of liquidation began on June 22, 2018. See Antidumping Duty \n"
+        },
+        {
+          "end": 14498,
+          "id": "fr:2026-19516:p1:para234",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14434,
+          "text": "Investigation of Common Alloy Aluminum Sheet from the People's \n"
+        },
+        {
+          "end": 14568,
+          "id": "fr:2026-19516:p1:para235",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14498,
+          "text": "Republic of China: Affirmative Preliminary Determination of Sales at \n"
+        },
+        {
+          "end": 14632,
+          "id": "fr:2026-19516:p1:para236",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14568,
+          "text": "Less-Than-Fair Value, Preliminary Affirmative Determination of \n"
+        },
+        {
+          "end": 14701,
+          "id": "fr:2026-19516:p1:para237",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14632,
+          "text": "Critical Circumstances, and Postponement of Final Determination, 83 \n"
+        },
+        {
+          "end": 14770,
+          "id": "fr:2026-19516:p1:para238",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14701,
+          "text": "FR 29088 (June 22, 2018). For the Bahrain et al. Aluminum Sheet CVD \n"
+        },
+        {
+          "end": 14840,
+          "id": "fr:2026-19516:p1:para239",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14770,
+          "text": "Orders suspension of liquidation began on August 14, 2020. See e.g., \n"
+        },
+        {
+          "end": 14907,
+          "id": "fr:2026-19516:p1:para240",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14840,
+          "text": "Common Alloy Aluminum Sheet from Bahrain: Preliminary Affirmative \n"
+        },
+        {
+          "end": 14966,
+          "id": "fr:2026-19516:p1:para241",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14907,
+          "text": "Countervailing Duty Determination, and Alignment of Final \n"
+        },
+        {
+          "end": 15036,
+          "id": "fr:2026-19516:p1:para242",
+          "source_id": "fr:2026-19516:p1",
+          "start": 14966,
+          "text": "Determination with Final Antidumping Duty Determination, 85 FR 49636 \n"
+        },
+        {
+          "end": 15104,
+          "id": "fr:2026-19516:p1:para243",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15036,
+          "text": "(August 14, 2020). For the Bahrain et al. Aluminum Sheet AD Orders \n"
+        },
+        {
+          "end": 15174,
+          "id": "fr:2026-19516:p1:para244",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15104,
+          "text": "suspension of liquidation began on October 15, 2020. See e.g. Common \n"
+        },
+        {
+          "end": 15234,
+          "id": "fr:2026-19516:p1:para245",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15174,
+          "text": "Alloy Aluminum Sheet from Bahrain: Preliminary Affirmative \n"
+        },
+        {
+          "end": 15299,
+          "id": "fr:2026-19516:p1:para246",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15234,
+          "text": "Determination of Sales at Less Than Fair Value, Postponement of \n"
+        },
+        {
+          "end": 15366,
+          "id": "fr:2026-19516:p1:para247",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15299,
+          "text": "Final Determination, and Extension of Provisional Measures, 85 FR \n"
+        },
+        {
+          "end": 15392,
+          "id": "fr:2026-19516:p1:para248",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15366,
+          "text": "65372 (October 15, 2020).\n"
+        },
+        {
+          "end": 15469,
+          "id": "fr:2026-19516:p1:para249",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15392,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 15541,
+          "id": "fr:2026-19516:p1:para250",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15469,
+          "text": "    Commerce intends to issue instructions to CBP within 15 days after \n"
+        },
+        {
+          "end": 15612,
+          "id": "fr:2026-19516:p1:para251",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15541,
+          "text": "the date of publication of these final results of CCRs in the Federal \n"
+        },
+        {
+          "end": 15685,
+          "id": "fr:2026-19516:p1:para252",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15612,
+          "text": "Register. We note that Commerce normally issues assessment instructions \n"
+        },
+        {
+          "end": 15753,
+          "id": "fr:2026-19516:p1:para253",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15685,
+          "text": "no earlier than 35 days after the date of publication of the final \n"
+        },
+        {
+          "end": 15823,
+          "id": "fr:2026-19516:p1:para254",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15753,
+          "text": "results of a CCR in the Federal Register to allow interested parties \n"
+        },
+        {
+          "end": 15892,
+          "id": "fr:2026-19516:p1:para255",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15823,
+          "text": "sufficient time to challenge Commerce's determination.\\11\\ In these \n"
+        },
+        {
+          "end": 15959,
+          "id": "fr:2026-19516:p1:para256",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15892,
+          "text": "CCRs, as the request was supported by more than 85 percent of the \n"
+        },
+        {
+          "end": 16030,
+          "id": "fr:2026-19516:p1:para257",
+          "source_id": "fr:2026-19516:p1",
+          "start": 15959,
+          "text": "domestic industry, we received no comments from interested parties in \n"
+        },
+        {
+          "end": 16099,
+          "id": "fr:2026-19516:p1:para258",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16030,
+          "text": "opposition to the Preliminary Results, and due to the need to issue \n"
+        },
+        {
+          "end": 16166,
+          "id": "fr:2026-19516:p1:para259",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16099,
+          "text": "assessment instructions for the subject entries in an expeditious \n"
+        },
+        {
+          "end": 16234,
+          "id": "fr:2026-19516:p1:para260",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16166,
+          "text": "manner, we find it appropriate to shorten the timeline for issuing \n"
+        },
+        {
+          "end": 16274,
+          "id": "fr:2026-19516:p1:para261",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16234,
+          "text": "assessment instructions for these CCRs.\n"
+        },
+        {
+          "end": 16351,
+          "id": "fr:2026-19516:p1:para262",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16274,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 16421,
+          "id": "fr:2026-19516:p1:para263",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16351,
+          "text": "    \\11\\ See, e.g., Certain Metal Lockers and Parts Thereof from the \n"
+        },
+        {
+          "end": 16484,
+          "id": "fr:2026-19516:p1:para264",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16421,
+          "text": "People's Republic of China: Final Results of Antidumping Duty \n"
+        },
+        {
+          "end": 16554,
+          "id": "fr:2026-19516:p1:para265",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16484,
+          "text": "Changed Circumstances Reviews, and Revocation of the Antidumping and \n"
+        },
+        {
+          "end": 16621,
+          "id": "fr:2026-19516:p1:para266",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16554,
+          "text": "Countervailing Duty Orders, in Part, 89 FR 22377 (April 1, 2024). \n"
+        },
+        {
+          "end": 16686,
+          "id": "fr:2026-19516:p1:para267",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16621,
+          "text": "See also Jinan Farmlady Trading Co., Ltd. v. United States, 228 \n"
+        },
+        {
+          "end": 16719,
+          "id": "fr:2026-19516:p1:para268",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16686,
+          "text": "F.Supp.3d 1351, 1357 (CIT 2017).\n"
+        },
+        {
+          "end": 16796,
+          "id": "fr:2026-19516:p1:para269",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16719,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 16832,
+          "id": "fr:2026-19516:p1:para270",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16796,
+          "text": "Notification to Interested Parties\n\n"
+        },
+        {
+          "end": 16903,
+          "id": "fr:2026-19516:p1:para271",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16832,
+          "text": "    This notice is published in accordance with section 751(b)(1) and \n"
+        },
+        {
+          "end": 16972,
+          "id": "fr:2026-19516:p1:para272",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16903,
+          "text": "777(1) of the Act, 19 CFR 351.216, 19 CFR 351.221(c)(3), and 19 CFR \n"
+        },
+        {
+          "end": 16983,
+          "id": "fr:2026-19516:p1:para273",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16972,
+          "text": "351.222.\n\n\n"
+        },
+        {
+          "end": 17000,
+          "id": "fr:2026-19516:p1:para274",
+          "source_id": "fr:2026-19516:p1",
+          "start": 16983,
+          "text": "[[Page 60593]]\n\n\n"
+        },
+        {
+          "end": 17031,
+          "id": "fr:2026-19516:p1:para275",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17000,
+          "text": "    Dated: September 18, 2026.\n"
+        },
+        {
+          "end": 17047,
+          "id": "fr:2026-19516:p1:para276",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17031,
+          "text": "Steven Presing,\n"
+        },
+        {
+          "end": 17096,
+          "id": "fr:2026-19516:p1:para277",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17047,
+          "text": "Executive Director for Policy and Negotiations.\n\n"
+        },
+        {
+          "end": 17108,
+          "id": "fr:2026-19516:p1:para278",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17096,
+          "text": "Appendix I\n\n"
+        },
+        {
+          "end": 17158,
+          "id": "fr:2026-19516:p1:para279",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17108,
+          "text": "Revised Scope of the China Aluminum Sheet Orders\n\n"
+        },
+        {
+          "end": 17228,
+          "id": "fr:2026-19516:p1:para280",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17158,
+          "text": "    The merchandise covered by these Orders is aluminum common alloy \n"
+        },
+        {
+          "end": 17297,
+          "id": "fr:2026-19516:p1:para281",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17228,
+          "text": "sheet (common alloy sheet), which is a flat-rolled aluminum product \n"
+        },
+        {
+          "end": 17364,
+          "id": "fr:2026-19516:p1:para282",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17297,
+          "text": "having a thickness of 6.3 mm or less, but greater than 0.2 mm, in \n"
+        },
+        {
+          "end": 17429,
+          "id": "fr:2026-19516:p1:para283",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17364,
+          "text": "coils or cut-to-length, regardless of width. Common alloy sheet \n"
+        },
+        {
+          "end": 17495,
+          "id": "fr:2026-19516:p1:para284",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17429,
+          "text": "within the scope of these Orders includes both not clad aluminum \n"
+        },
+        {
+          "end": 17564,
+          "id": "fr:2026-19516:p1:para285",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17495,
+          "text": "sheet, as well as multi-alloy, clad aluminum sheet. With respect to \n"
+        },
+        {
+          "end": 17632,
+          "id": "fr:2026-19516:p1:para286",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17564,
+          "text": "not clad aluminum sheet, common alloy sheet is manufactured from a \n"
+        },
+        {
+          "end": 17698,
+          "id": "fr:2026-19516:p1:para287",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17632,
+          "text": "1XXX-, 3XXX-, or 5XXX-series alloy as designated by the Aluminum \n"
+        },
+        {
+          "end": 17762,
+          "id": "fr:2026-19516:p1:para288",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17698,
+          "text": "Association. With respect to multi-alloy, clad aluminum sheet, \n"
+        },
+        {
+          "end": 17828,
+          "id": "fr:2026-19516:p1:para289",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17762,
+          "text": "common alloy sheet is produced from a 3XXX-series core, to which \n"
+        },
+        {
+          "end": 17897,
+          "id": "fr:2026-19516:p1:para290",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17828,
+          "text": "cladding layers are applied to either one or both sides of the core.\n"
+        },
+        {
+          "end": 17964,
+          "id": "fr:2026-19516:p1:para291",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17897,
+          "text": "    Common alloy sheet may be made to ASTM specification B209-14, \n"
+        },
+        {
+          "end": 18025,
+          "id": "fr:2026-19516:p1:para292",
+          "source_id": "fr:2026-19516:p1",
+          "start": 17964,
+          "text": "but can also be made to other specifications. Regardless of \n"
+        },
+        {
+          "end": 18091,
+          "id": "fr:2026-19516:p1:para293",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18025,
+          "text": "specification, however, all common alloy sheet meeting the scope \n"
+        },
+        {
+          "end": 18159,
+          "id": "fr:2026-19516:p1:para294",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18091,
+          "text": "description is included in the scope. Subject merchandise includes \n"
+        },
+        {
+          "end": 18222,
+          "id": "fr:2026-19516:p1:para295",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18159,
+          "text": "common alloy sheet that has been further processed in a third \n"
+        },
+        {
+          "end": 18283,
+          "id": "fr:2026-19516:p1:para296",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18222,
+          "text": "country, including but not limited to annealing, tempering, \n"
+        },
+        {
+          "end": 18352,
+          "id": "fr:2026-19516:p1:para297",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18283,
+          "text": "painting, varnishing, trimming, cutting, punching, and/or slitting, \n"
+        },
+        {
+          "end": 18413,
+          "id": "fr:2026-19516:p1:para298",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18352,
+          "text": "or any other processing that would not otherwise remove the \n"
+        },
+        {
+          "end": 18477,
+          "id": "fr:2026-19516:p1:para299",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18413,
+          "text": "merchandise from the scope of these Orders if performed in the \n"
+        },
+        {
+          "end": 18527,
+          "id": "fr:2026-19516:p1:para300",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18477,
+          "text": "country of manufacture of the common alloy sheet.\n"
+        },
+        {
+          "end": 18595,
+          "id": "fr:2026-19516:p1:para301",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18527,
+          "text": "    Excluded from the scope of these Orders is aluminum can stock, \n"
+        },
+        {
+          "end": 18662,
+          "id": "fr:2026-19516:p1:para302",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18595,
+          "text": "which is suitable for use in the manufacture of aluminum beverage \n"
+        },
+        {
+          "end": 18729,
+          "id": "fr:2026-19516:p1:para303",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18662,
+          "text": "cans, lids of such cans, or tabs used to open such cans. Aluminum \n"
+        },
+        {
+          "end": 18796,
+          "id": "fr:2026-19516:p1:para304",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18729,
+          "text": "can stock is produced to gauges that range from 0.200 mm to 0.292 \n"
+        },
+        {
+          "end": 18866,
+          "id": "fr:2026-19516:p1:para305",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18796,
+          "text": "mm, and has an H-19, H-41, H-48, H-39, or H-391 temper. In addition, \n"
+        },
+        {
+          "end": 18934,
+          "id": "fr:2026-19516:p1:para306",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18866,
+          "text": "aluminum can stock has a lubricant applied to the flat surfaces of \n"
+        },
+        {
+          "end": 19001,
+          "id": "fr:2026-19516:p1:para307",
+          "source_id": "fr:2026-19516:p1",
+          "start": 18934,
+          "text": "the can stock to facilitate its movement through machines used in \n"
+        },
+        {
+          "end": 19068,
+          "id": "fr:2026-19516:p1:para308",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19001,
+          "text": "the manufacture of beverage cans. Aluminum can stock is generally \n"
+        },
+        {
+          "end": 19136,
+          "id": "fr:2026-19516:p1:para309",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19068,
+          "text": "classifiable under Harmonized Tariff Schedule of the United States \n"
+        },
+        {
+          "end": 19201,
+          "id": "fr:2026-19516:p1:para310",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19136,
+          "text": "(HTSUS) subheadings 7606.12.3045 and 7606.12.3055; however, the \n"
+        },
+        {
+          "end": 19265,
+          "id": "fr:2026-19516:p1:para311",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19201,
+          "text": "written description of aluminum can stock covered by the scope \n"
+        },
+        {
+          "end": 19328,
+          "id": "fr:2026-19516:p1:para312",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19265,
+          "text": "exclusion set forth above is dispositive, regardless of HTSUS \n"
+        },
+        {
+          "end": 19344,
+          "id": "fr:2026-19516:p1:para313",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19328,
+          "text": "classification.\n"
+        },
+        {
+          "end": 19410,
+          "id": "fr:2026-19516:p1:para314",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19344,
+          "text": "    Where the nominal and actual measurements vary, a product is \n"
+        },
+        {
+          "end": 19475,
+          "id": "fr:2026-19516:p1:para315",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19410,
+          "text": "within the scope if application of either the nominal or actual \n"
+        },
+        {
+          "end": 19545,
+          "id": "fr:2026-19516:p1:para316",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19475,
+          "text": "measurement would place it within the scope based on the definitions \n"
+        },
+        {
+          "end": 19564,
+          "id": "fr:2026-19516:p1:para317",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19545,
+          "text": "set for the above.\n"
+        },
+        {
+          "end": 19626,
+          "id": "fr:2026-19516:p1:para318",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19564,
+          "text": "    Common alloy sheet is currently classifiable under HTSUS \n"
+        },
+        {
+          "end": 19695,
+          "id": "fr:2026-19516:p1:para319",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19626,
+          "text": "subheadings 7606.11.3060, 7606.11.6000, 7606.12.3096, 7606.12.6000, \n"
+        },
+        {
+          "end": 19765,
+          "id": "fr:2026-19516:p1:para320",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19695,
+          "text": "7606.91.3095, 7606.91.6095, 7606.92.3035, and 7606.92.6095. Further, \n"
+        },
+        {
+          "end": 19834,
+          "id": "fr:2026-19516:p1:para321",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19765,
+          "text": "merchandise that falls within the scope of these Orders may also be \n"
+        },
+        {
+          "end": 19904,
+          "id": "fr:2026-19516:p1:para322",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19834,
+          "text": "entered into the United States under HTSUS subheadings 7606.11.3030, \n"
+        },
+        {
+          "end": 19961,
+          "id": "fr:2026-19516:p1:para323",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19904,
+          "text": "7606.12.3015, 7606.12.3025, 7606.12.3035, 7606.12.3091, \n"
+        },
+        {
+          "end": 20018,
+          "id": "fr:2026-19516:p1:para324",
+          "source_id": "fr:2026-19516:p1",
+          "start": 19961,
+          "text": "7606.91.3055, 7606.91.6055, 7606.92.3025, 7606.92.6055, \n"
+        },
+        {
+          "end": 20081,
+          "id": "fr:2026-19516:p1:para325",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20018,
+          "text": "7607.11.9090. Although the HTSUS subheadings are provided for \n"
+        },
+        {
+          "end": 20147,
+          "id": "fr:2026-19516:p1:para326",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20081,
+          "text": "convenience and customs purposes, the written description of the \n"
+        },
+        {
+          "end": 20189,
+          "id": "fr:2026-19516:p1:para327",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20147,
+          "text": "scope of these Orders is dispositive.\\12\\\n"
+        },
+        {
+          "end": 20266,
+          "id": "fr:2026-19516:p1:para328",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20189,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 20323,
+          "id": "fr:2026-19516:p1:para329",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20266,
+          "text": "    \\12\\ In the Preliminary Results, pursuant to 19 CFR \n"
+        },
+        {
+          "end": 20388,
+          "id": "fr:2026-19516:p1:para330",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20323,
+          "text": "351.225(q)(1)(iii)(B), we preliminarily clarified that aluminum \n"
+        },
+        {
+          "end": 20445,
+          "id": "fr:2026-19516:p1:para331",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20388,
+          "text": "sheet is currently classifiable under HTSUS subheadings \n"
+        },
+        {
+          "end": 20502,
+          "id": "fr:2026-19516:p1:para332",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20445,
+          "text": "7606.11.3060, 7606.11.6000, 7606.12.3096, 7606.12.6000, \n"
+        },
+        {
+          "end": 20572,
+          "id": "fr:2026-19516:p1:para333",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20502,
+          "text": "7606.91.3095, 7606.91.6095, 7606.92.3035, and 7606.92.6095. Further, \n"
+        },
+        {
+          "end": 20641,
+          "id": "fr:2026-19516:p1:para334",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20572,
+          "text": "merchandise that falls within the scope of these Orders may also be \n"
+        },
+        {
+          "end": 20711,
+          "id": "fr:2026-19516:p1:para335",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20641,
+          "text": "entered into the United States under HTSUS subheadings 7606.11.3030, \n"
+        },
+        {
+          "end": 20768,
+          "id": "fr:2026-19516:p1:para336",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20711,
+          "text": "7606.12.3015, 7606.12.3025, 7606.12.3035, 7606.12.3091, \n"
+        },
+        {
+          "end": 20825,
+          "id": "fr:2026-19516:p1:para337",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20768,
+          "text": "7606.91.3055, 7606.91.6055, 7606.92.3025, 7606.92.6055, \n"
+        },
+        {
+          "end": 20888,
+          "id": "fr:2026-19516:p1:para338",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20825,
+          "text": "7607.11.9090. Although the HTSUS subheadings are provided for \n"
+        },
+        {
+          "end": 20954,
+          "id": "fr:2026-19516:p1:para339",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20888,
+          "text": "convenience and customs purposes, the written description of the \n"
+        },
+        {
+          "end": 21023,
+          "id": "fr:2026-19516:p1:para340",
+          "source_id": "fr:2026-19516:p1",
+          "start": 20954,
+          "text": "scope of these Orders is dispositive. We invited interested parties \n"
+        },
+        {
+          "end": 21087,
+          "id": "fr:2026-19516:p1:para341",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21023,
+          "text": "to comment on this scope clarification. Because we received no \n"
+        },
+        {
+          "end": 21153,
+          "id": "fr:2026-19516:p1:para342",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21087,
+          "text": "comments, we have made no changes to our scope clarification and \n"
+        },
+        {
+          "end": 21202,
+          "id": "fr:2026-19516:p1:para343",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21153,
+          "text": "have modified the scope description accordingly.\n"
+        },
+        {
+          "end": 21279,
+          "id": "fr:2026-19516:p1:para344",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21202,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 21292,
+          "id": "fr:2026-19516:p1:para345",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21279,
+          "text": "Appendix II\n\n"
+        },
+        {
+          "end": 21351,
+          "id": "fr:2026-19516:p1:para346",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21292,
+          "text": "Revised Scope of the Bahrain et al. Aluminum Sheet Orders\n\n"
+        },
+        {
+          "end": 21421,
+          "id": "fr:2026-19516:p1:para347",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21351,
+          "text": "    The merchandise covered by these Orders is common alloy aluminum \n"
+        },
+        {
+          "end": 21491,
+          "id": "fr:2026-19516:p1:para348",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21421,
+          "text": "sheet, which is a flat-rolled aluminum product having a thickness of \n"
+        },
+        {
+          "end": 21560,
+          "id": "fr:2026-19516:p1:para349",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21491,
+          "text": "6.3 mm or less, but greater than 0.2 mm, in coils or cut-to-length, \n"
+        },
+        {
+          "end": 21627,
+          "id": "fr:2026-19516:p1:para350",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21560,
+          "text": "regardless of width. Common alloy sheet within the scope of these \n"
+        },
+        {
+          "end": 21691,
+          "id": "fr:2026-19516:p1:para351",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21627,
+          "text": "Orders includes both not clad aluminum sheet, as well as multi-\n"
+        },
+        {
+          "end": 21761,
+          "id": "fr:2026-19516:p1:para352",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21691,
+          "text": "alloy, clad aluminum sheet. With respect to not clad aluminum sheet, \n"
+        },
+        {
+          "end": 21826,
+          "id": "fr:2026-19516:p1:para353",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21761,
+          "text": "common alloy sheet is manufactured from a 1XXX-, 3XXX-, or 5XXX-\n"
+        },
+        {
+          "end": 21896,
+          "id": "fr:2026-19516:p1:para354",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21826,
+          "text": "series alloy as designated by the Aluminum Association. With respect \n"
+        },
+        {
+          "end": 21965,
+          "id": "fr:2026-19516:p1:para355",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21896,
+          "text": "to multi-alloy, clad aluminum sheet, common alloy sheet is produced \n"
+        },
+        {
+          "end": 22031,
+          "id": "fr:2026-19516:p1:para356",
+          "source_id": "fr:2026-19516:p1",
+          "start": 21965,
+          "text": "from a 3XXX-series core, to which cladding layers are applied to \n"
+        },
+        {
+          "end": 22101,
+          "id": "fr:2026-19516:p1:para357",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22031,
+          "text": "either one or both sides of the core. The use of a proprietary alloy \n"
+        },
+        {
+          "end": 22170,
+          "id": "fr:2026-19516:p1:para358",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22101,
+          "text": "or non-proprietary alloy that is not specifically registered by the \n"
+        },
+        {
+          "end": 22235,
+          "id": "fr:2026-19516:p1:para359",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22170,
+          "text": "Aluminum Association as a discrete 1XXX-, 3XXX-, or 5XXX-series \n"
+        },
+        {
+          "end": 22302,
+          "id": "fr:2026-19516:p1:para360",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22235,
+          "text": "alloy, but that otherwise has a chemistry that is consistent with \n"
+        },
+        {
+          "end": 22369,
+          "id": "fr:2026-19516:p1:para361",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22302,
+          "text": "these designations, does not remove an otherwise in-scope product \n"
+        },
+        {
+          "end": 22385,
+          "id": "fr:2026-19516:p1:para362",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22369,
+          "text": "from the scope.\n"
+        },
+        {
+          "end": 22455,
+          "id": "fr:2026-19516:p1:para363",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22385,
+          "text": "    Common alloy sheet may be made to ASTM specification B209-14 but \n"
+        },
+        {
+          "end": 22512,
+          "id": "fr:2026-19516:p1:para364",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22455,
+          "text": "can also be made to other specifications. Regardless of \n"
+        },
+        {
+          "end": 22578,
+          "id": "fr:2026-19516:p1:para365",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22512,
+          "text": "specification, however, all common alloy sheet meeting the scope \n"
+        },
+        {
+          "end": 22646,
+          "id": "fr:2026-19516:p1:para366",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22578,
+          "text": "description is included in the scope. Subject merchandise includes \n"
+        },
+        {
+          "end": 22709,
+          "id": "fr:2026-19516:p1:para367",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22646,
+          "text": "common alloy sheet that has been further processed in a third \n"
+        },
+        {
+          "end": 22770,
+          "id": "fr:2026-19516:p1:para368",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22709,
+          "text": "country, including but not limited to annealing, tempering, \n"
+        },
+        {
+          "end": 22839,
+          "id": "fr:2026-19516:p1:para369",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22770,
+          "text": "painting, varnishing, trimming, cutting, punching, and/or slitting, \n"
+        },
+        {
+          "end": 22900,
+          "id": "fr:2026-19516:p1:para370",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22839,
+          "text": "or any other processing that would not otherwise remove the \n"
+        },
+        {
+          "end": 22964,
+          "id": "fr:2026-19516:p1:para371",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22900,
+          "text": "merchandise from the scope of these Orders if performed in the \n"
+        },
+        {
+          "end": 23014,
+          "id": "fr:2026-19516:p1:para372",
+          "source_id": "fr:2026-19516:p1",
+          "start": 22964,
+          "text": "country of manufacture of the common alloy sheet.\n"
+        },
+        {
+          "end": 23082,
+          "id": "fr:2026-19516:p1:para373",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23014,
+          "text": "    Excluded from the scope of these Orders is aluminum can stock, \n"
+        },
+        {
+          "end": 23149,
+          "id": "fr:2026-19516:p1:para374",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23082,
+          "text": "which is suitable for use in the manufacture of aluminum beverage \n"
+        },
+        {
+          "end": 23216,
+          "id": "fr:2026-19516:p1:para375",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23149,
+          "text": "cans, lids of such cans, or tabs used to open such cans. Aluminum \n"
+        },
+        {
+          "end": 23283,
+          "id": "fr:2026-19516:p1:para376",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23216,
+          "text": "can stock is produced to gauges that range from 0.200 mm to 0.292 \n"
+        },
+        {
+          "end": 23353,
+          "id": "fr:2026-19516:p1:para377",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23283,
+          "text": "mm, and has an H-19, H-41, H-48, H-39, or H-391 temper. In addition, \n"
+        },
+        {
+          "end": 23421,
+          "id": "fr:2026-19516:p1:para378",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23353,
+          "text": "aluminum can stock has a lubricant applied to the flat surfaces of \n"
+        },
+        {
+          "end": 23488,
+          "id": "fr:2026-19516:p1:para379",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23421,
+          "text": "the can stock to facilitate its movement through machines used in \n"
+        },
+        {
+          "end": 23555,
+          "id": "fr:2026-19516:p1:para380",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23488,
+          "text": "the manufacture of beverage cans. Aluminum can stock is generally \n"
+        },
+        {
+          "end": 23623,
+          "id": "fr:2026-19516:p1:para381",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23555,
+          "text": "classifiable under Harmonized Tariff Schedule of the United States \n"
+        },
+        {
+          "end": 23688,
+          "id": "fr:2026-19516:p1:para382",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23623,
+          "text": "(HTSUS) subheadings 7606.12.3045 and 7606.12.3055; however, the \n"
+        },
+        {
+          "end": 23752,
+          "id": "fr:2026-19516:p1:para383",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23688,
+          "text": "written description of aluminum can stock covered by the scope \n"
+        },
+        {
+          "end": 23815,
+          "id": "fr:2026-19516:p1:para384",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23752,
+          "text": "exclusion set forth above is dispositive, regardless of HTSUS \n"
+        },
+        {
+          "end": 23831,
+          "id": "fr:2026-19516:p1:para385",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23815,
+          "text": "classification.\n"
+        },
+        {
+          "end": 23897,
+          "id": "fr:2026-19516:p1:para386",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23831,
+          "text": "    Where the nominal and actual measurements vary, a product is \n"
+        },
+        {
+          "end": 23962,
+          "id": "fr:2026-19516:p1:para387",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23897,
+          "text": "within the scope if application of either the nominal or actual \n"
+        },
+        {
+          "end": 24032,
+          "id": "fr:2026-19516:p1:para388",
+          "source_id": "fr:2026-19516:p1",
+          "start": 23962,
+          "text": "measurement would place it within the scope based on the definitions \n"
+        },
+        {
+          "end": 24051,
+          "id": "fr:2026-19516:p1:para389",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24032,
+          "text": "set for the above.\n"
+        },
+        {
+          "end": 24113,
+          "id": "fr:2026-19516:p1:para390",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24051,
+          "text": "    Common alloy sheet is currently classifiable under HTSUS \n"
+        },
+        {
+          "end": 24182,
+          "id": "fr:2026-19516:p1:para391",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24113,
+          "text": "subheadings 7606.11.3060, 7606.11.6000, 7606.12.3096, 7606.12.6000, \n"
+        },
+        {
+          "end": 24252,
+          "id": "fr:2026-19516:p1:para392",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24182,
+          "text": "7606.91.3095, 7606.91.6095, 7606.92.3035, and 7606.92.6095. Further, \n"
+        },
+        {
+          "end": 24321,
+          "id": "fr:2026-19516:p1:para393",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24252,
+          "text": "merchandise that falls within the scope of these Orders may also be \n"
+        },
+        {
+          "end": 24391,
+          "id": "fr:2026-19516:p1:para394",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24321,
+          "text": "entered into the United States under HTSUS subheadings 7606.11.3030, \n"
+        },
+        {
+          "end": 24448,
+          "id": "fr:2026-19516:p1:para395",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24391,
+          "text": "7606.12.3015, 7606.12.3025, 7606.12.3035, 7606.12.3091, \n"
+        },
+        {
+          "end": 24505,
+          "id": "fr:2026-19516:p1:para396",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24448,
+          "text": "7606.91.3055, 7606.91.6055, 7606.92.3025, 7606.92.6055, \n"
+        },
+        {
+          "end": 24568,
+          "id": "fr:2026-19516:p1:para397",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24505,
+          "text": "7607.11.9090. Although the HTSUS subheadings are provided for \n"
+        },
+        {
+          "end": 24634,
+          "id": "fr:2026-19516:p1:para398",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24568,
+          "text": "convenience and customs purposes, the written description of the \n"
+        },
+        {
+          "end": 24672,
+          "id": "fr:2026-19516:p1:para399",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24634,
+          "text": "scope of these Orders is dispositive.\n"
+        },
+        {
+          "end": 24716,
+          "id": "fr:2026-19516:p1:para400",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24672,
+          "text": "[FR Doc. 2026-19516 Filed 9-23-26; 8:45 am]\n"
+        },
+        {
+          "end": 24741,
+          "id": "fr:2026-19516:p1:para401",
+          "source_id": "fr:2026-19516:p1",
+          "start": 24716,
+          "text": "BILLING CODE 3510-DS-P\n\n\n"
+        }
+      ],
+      "sources": [
+        {
+          "document_sha256": "e0689ed625bb56f564dd1063b1985bd59f8eceb32bbf6fb4f90e4084d6bf4707",
+          "page": "1",
+          "source_id": "fr:2026-19516:p1",
+          "text_sha256": "8ca8e250cec45f44dafb77b28d4e243db5439072221878ead7b85f645e5c06e0",
+          "url": "https://www.federalregister.gov/documents/full_text/text/2026/09/24/2026-19516.txt"
+        }
+      ],
+      "status": "disabled",
+      "url": "https://www.federalregister.gov/documents/full_text/text/2026/09/24/2026-19516.txt"
+    }
+  ],
+  "limitations": [
+    "文档存储只包含已登记公告的正文段落，不是完整法规库。",
+    "publication_time 未知时，检索不得声称该文档在给定时间点已可得。"
+  ],
+  "policy_id": "FR-2026-19516",
+  "schema_version": "policy-document-store-v1"
+}

@@ -1,0 +1,107 @@
+{
+  "code_sha256": {
+    "scripts/freeze_trade_followup_eval.py": "6cccb52043ad87158b3ff11f89139f0709ccfc3918d3ab6d11c515027b7de64c",
+    "src/tradeintel_ai/response_contract.py": "7cb70632104a43d6fd41969834e4b2fd8f9b51150a20f7dbc6f10a3df33a9930",
+    "src/tradeintel_ai/trade_classification_catalog.py": "12a87f978d302ad00aa0d95b1e6762fcc1b5a3d63410917305b90e588b28250e",
+    "src/tradeintel_ai/trade_data_repository.py": "de2731d8eb9579e88eb5880640777822b28de46da43450fae4976090a351f57f",
+    "src/tradeintel_ai/trade_explanation.py": "8523df263937de8f6f226434598b42c17a06818bd2e15041e4b8599ebb6a4f33",
+    "src/tradeintel_ai/trade_export_repository.py": "bbcca3c093d5dde4217e8d5172f08700cedc57c8821099d026724a878f426fce",
+    "src/tradeintel_ai/trade_query_flow.py": "46249edd8c6818b2aa0d795bce690617ed960083d93b287f3861eb7ff8e94147",
+    "src/tradeintel_ai/trade_report_followup.py": "815e9ddbf5e5e50fbccda22b2127b5e3b6780cc4dc6c98f7a838e139f44c26cd"
+  },
+  "files_sha256": {
+    "MODEL_MATRIX_TEMPLATE.json": "42a37c15d5bd6b9fa896e57046aba04d1bac325fc7f4d5196902242eee943cc2",
+    "README.zh-CN.md": "284f7d92b2b9599a06967e48d4a7a41bd3a81e6e3388194f7bd6249d90e2fa7d",
+    "SCORING.json": "57f67e22cc9d2fe3e7a4c7d60b48d83bc90affa231120dc787cb70ca50aabc7d",
+    "host_artifacts/f1/catalog.json": "7be3ee4aef342b09d096c6b782b166f29ffb8f490c7518daac2254ecaaba2d37",
+    "host_artifacts/f1/choice.json": "baa449d5626b6fbd4c1a92f9f71ca55372c3c3962eca9dffceb21c7c38f51eae",
+    "host_artifacts/f1/proposal.json": "d912e9d19f50a98e1d571e862fd5b76344a7ec064eed1193f35eb6fa29af1271",
+    "host_artifacts/f1/report.json": "dd60586f80654e1da7faced098e6839b2fbe2559ae72460f5f2f19e509762690",
+    "host_artifacts/f2/catalog.json": "436c20ad4372795dbb9e2208d21107be41883b1ad2d7a3d4148b5240a627fa95",
+    "host_artifacts/f2/choice.json": "d0e38ee1a4c04ef882e8a12a9e776023e38687ceb565aea0972c6739d4949887",
+    "host_artifacts/f2/proposal.json": "c341ada114a2edb973059d0c864fef15a0c4a76dc6f7f81d92662118c5c59801",
+    "host_artifacts/f2/report.json": "5acae2b932e801eb65849335e6d23c0d444152fef2b22c5ad660d750de92e37f",
+    "host_artifacts/f3/catalog.json": "8e7bb2330e4f2cc3f341befe23a8fcac1cc184ca7f707ca8d7c09fc7f756f6bf",
+    "host_artifacts/f3/choice.json": "9dcf0554cd9f3adde8883089e28e35516341bae9765d4da3a8973e40b8d5f131",
+    "host_artifacts/f3/proposal.json": "e1def9df3415b6cf7cf44859a16cd1cc815310e6a17d7e3efa9c27f468d3a57d",
+    "host_artifacts/f3/report.json": "c31ec43377f387e6e5e437ade0ddfe7edfe2f9884dafbbb75b6b1725daa841c0",
+    "host_artifacts/f4/catalog.json": "40e4da806a2c85bd46c97884c0aed31ef4686779a5279f92a791ca8ec8e8ef98",
+    "host_artifacts/f4/choice.json": "55cc6c99e532a07ceadc717ee4214495ffd758b3d6e7407987aba9083fda84bb",
+    "host_artifacts/f4/proposal.json": "282825093cb53cfaa026a14d1e2216f57d781b92d1da8dcc9df9aaab49409744",
+    "host_artifacts/f4/report.json": "2256001178c1fce437181fc27e7fd9046d638f2565b7bcd289e61882b458b4e6",
+    "references/f1.json": "5cae4ae1e6463bf019b489709216b53bc3c64984ec90abee49cae57a2addaa1e",
+    "references/f2.json": "647ffeba2f52f3a870932672d8ef3d463e7b50fe7f3e8a089686af637ddbda04",
+    "references/f3.json": "f44da5cdf5dfe8ab4d020925176bd61a82d3277814df08cbd40f603f00a9df20",
+    "references/f4.json": "b7cb0e3e40da013b78ad2ed91ae59ed38d78c906f2fe76c6eadf7023c0cab4cb",
+    "requests/f1/messages.json": "09e1d9cee5c83e876f2d1322988634aeba05aaf522d648451e8ceab793729d20",
+    "requests/f2/messages.json": "2b9f8a0621d609fdd30080f6462122411b24a4dccc144b885341f6bb816f992b",
+    "requests/f3/messages.json": "0747b156f417cc20aaf320b7e54b9cc34a29d93ed884b4bbec11cab12bc64733",
+    "requests/f4/messages.json": "46997802d98afb3725bd7d1e3cf9c203e88eb8f0bc9c9e85afc227018374d0c6",
+    "review_template.csv": "4320dcc5a6fa96c5ac1ff23238d6f196c301bdcb7cb0ad4ca3dbf3ed75839a22",
+    "scenarios.json": "208312d77bbdb2d6b161d71c113affca41f42cbfd69d76e21c81c36e007e145c"
+  },
+  "manifest_note": "此清单最后写入；如果生成中断或文件后来变化，验证将拒绝该题包。",
+  "model_calls": 0,
+  "mysql_used": false,
+  "network_used": false,
+  "package_id": "trade-followup-v1-four-questions-20260926",
+  "protocol": "trade-report-followup-v1",
+  "scenario_ids": [
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+  ],
+  "scenarios": {
+    "f1": {
+      "catalog_sha256": "b35e43c1b6ea704e691770b2e2ac86eafa28b0875b63d91dc9becbc200c4e27a",
+      "catalog_version": "a758a0236d12bea52cae670b99b05997a1b1c14d8442bcda7ea05bb3b436a632",
+      "dataset_versions": {
+        "export": null,
+        "import": "dd9801492e80268e51480b08c2edcbf495aba3ce01b7ee64739566f67a151ef8"
+      },
+      "flow": "import",
+      "report_sha256": "bdeab12d320d6b006753cc2afc033ca5ffac212285cabceb7ba20fa6b90cf17b",
+      "request_bytes": 10976,
+      "selected_product_id": "import:0901"
+    },
+    "f2": {
+      "catalog_sha256": "8ba61a4d99fb1dce565b77b810cdc67ef86def573ff6d208767be9f663370bc7",
+      "catalog_version": "a758a0236d12bea52cae670b99b05997a1b1c14d8442bcda7ea05bb3b436a632",
+      "dataset_versions": {
+        "export": "4308e4a820cd86bb6a19e223b4ae887fe0a030eef4a8af0c1ce96cb8c30a4b9f",
+        "import": null
+      },
+      "flow": "export",
+      "report_sha256": "e03fe0ed40ceda1fdbfedc2f61874e18937a37e7dd5336e83ef7b19fbe9109f5",
+      "request_bytes": 10921,
+      "selected_product_id": "export:1005"
+    },
+    "f3": {
+      "catalog_sha256": "41d0e9234e80ba08f6583d455b5287ff8e046500a1682d2a8697e820293ecac6",
+      "catalog_version": "a758a0236d12bea52cae670b99b05997a1b1c14d8442bcda7ea05bb3b436a632",
+      "dataset_versions": {
+        "export": "4308e4a820cd86bb6a19e223b4ae887fe0a030eef4a8af0c1ce96cb8c30a4b9f",
+        "import": "dd9801492e80268e51480b08c2edcbf495aba3ce01b7ee64739566f67a151ef8"
+      },
+      "flow": "both",
+      "report_sha256": "d5892bf8fa96a30bc45745f7372cdfdb5c17d34214c74c19658006fe27f456b9",
+      "request_bytes": 21109,
+      "selected_product_id": "both:8471"
+    },
+    "f4": {
+      "catalog_sha256": "d87ff4f27d171ed84172a1c550cbf4f8eda543a8ace9cd2490c28f672615030d",
+      "catalog_version": "a758a0236d12bea52cae670b99b05997a1b1c14d8442bcda7ea05bb3b436a632",
+      "dataset_versions": {
+        "export": null,
+        "import": "dd9801492e80268e51480b08c2edcbf495aba3ce01b7ee64739566f67a151ef8"
+      },
+      "flow": "import",
+      "report_sha256": "4070f17dab7b5326fc3a99cf2334273124c9542d77e2cbe9b910ec4411f9546b",
+      "request_bytes": 10895,
+      "selected_product_id": "import:1006"
+    }
+  },
+  "schema_version": "trade-followup-eval-package-v1",
+  "status": "frozen_materials_execution_not_authorized"
+}

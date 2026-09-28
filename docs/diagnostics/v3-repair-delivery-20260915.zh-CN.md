@@ -1,0 +1,49 @@
+# v3 A—D 修复交付与待审
+
+> Astra后续核对：本报告是执行者交付记录，不能视作A—D完整通过。畸形observation_id仍触发TypeError，A3尚未展开conditions/exceptions及确定性观察，既有无损压缩尚未接入。当前整改以 `docs/handoff/MASTER_PLAN.zh-CN.md` 的S1为准。以下历史样例/测试记录保留。
+
+日期：2026-09-15。Luna最高按上一份 Astra 修复清单完成新增 v3 离线原型的集中修复；本文件是交付记录，不是模型质量成绩。没有调用 API、没有读取密钥、没有改动冻结的 v2/G2 文件。
+
+## 已完成
+
+### A：可信事实目录
+
+- `brief_fact_catalog.py` 现在在入口校验政策/版本/月份、商品范围、指标定义、单位、金额、合计、四位小数 `ROUND_HALF_UP` 比率、分子/分母指针、状态与零分母规则。
+- 拒绝 NaN、Infinity、布尔金额、负数、中国金额大于所有来源金额、缺失或重复来源，以及被篡改的榜首/并列观察。
+- 每个目录保留完整 `evidence_snapshot`，`validate_fact_catalog()` 会从快照重建并逐字段比较；目录自身摘要和输入证据摘要同时保留。
+- 修正 `scope_world_import_usd` 的原产范围为 `all_origins`，金额分母显示“不适用（金额指标本身）”，未知和单商品 100% 均用限定后的中文事实句。
+
+### B：政策证据进入 AI 与 A3
+
+- catalog 同时保留完整 `policy_facts` 和 `sources`；消息载荷传递政策身份、税率、日期/入境事件、商品条款、未知条件/例外和来源原文。
+- `policy_refs` 从商品条款的 `source_id`、共同适用条款和 `field_refs` 派生；开发案例可见 `cbp63577329:p8`、`p9`、`p12` 的原文。
+- `evidence_snapshot` 是审计副本，不进入模型消息，避免把实现元数据误当业务证据。
+
+### C：解析、绑定与安全展示
+
+- 新增 `parse_response()`，复用共享的重复键严格 JSON 解析器，保存 raw 文本、SHA-256、parsed 对象及校验结果。
+- `render_pending()` 每次重新校验当前回答；旧 review 结果不再能绕过摘要绑定。
+- HTML/Markdown 活动语法在展示层转义，原始回答仍保持不变；重复政策引用、跨商品引用、类型错误和外来 ID 拒绝。
+- “依赖/全球”等词只形成 `review_warnings`，状态仍是 `manual_review_required`，不会把合法限定句自动判成结构失败。
+
+### D：可复现离线交付
+
+`scripts/prepare_brief_v3_offline.py` 只接受显式 bundle、问题和新输出目录，拒绝覆盖；先完成所有校验，最后写 manifest。manifest 包含输入文件摘要、证据/目录摘要、逐产物 SHA-256、估算公式、8000 门槛、0 API/网络调用和“不是模型成绩”的边界。
+
+已生成开发样例：[`tmp/v3-offline-delivery-20260915-r1`](../../tmp/v3-offline-delivery-20260915-r1)。其中主案例产生 27 条事实、3 条确定性观察；完整政策原文进入消息后保守估算为 **31,341 tokens**，超过 8,000 门槛，因此 manifest 明确为 `blocked_budget`、`callable=false`。没有截断政策、减少商品或擅自提高上限。
+
+## 离线验收
+
+使用 `.venv/bin/python -m unittest` 运行：
+
+- `tests.test_v3_repairs`：9 项 A—D 反例测试通过；覆盖跨政策/月份/分母、NaN、profile/榜首篡改、快照重建、政策原文传递、渲染绕过、活动标记、raw 解析和 CLI 0 API 交付。
+- `tests.test_evidence_linked_brief`：10 项通过。
+- `tests.test_g1_repairs`：10 项通过。
+
+此前真实 G2 调用仍保持 stop；上述通过项不是模型准确率，也不是正式留出题成绩。
+
+## 未宣称完成与下一阶段
+
+1. 这套消息目前因完整业务证据超预算，不能直接作为可调用模型包；是否采用压缩后的业务视图、拆分请求或更高输入预算，需要 Astra 中重新做方法决策，不能由 Luna 静默改变。
+2. 需 Astra 中逐条复核 A—D 的真实差异和反例，再决定是否进入独立的 v3 真实模型实验；旧 G2 剩余槽不可复用。
+3. 在复核和采纳前，不接生产页面、不声称 AI 解释质量已提升、不恢复因果识别或训练/微调主线。

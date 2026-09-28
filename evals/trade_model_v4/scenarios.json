@@ -1,0 +1,46 @@
+{
+  "schema_version": "trade-model-v4-scenarios-v1",
+  "status": "developer_value_gate_not_blind",
+  "scenarios": [
+    {
+      "id": "v4-1",
+      "question": "美国未梳的棉花进口最近有什么变化？",
+      "flow": "import",
+      "selected_product_id": "import:5201",
+      "start_month": "2025-08",
+      "end_month": "2026-07",
+      "expected_eligible_card_ids": ["import.recent_turn"]
+    },
+    {
+      "id": "v4-2",
+      "question": "美国钢铁废碎料出口最近有什么变化？",
+      "flow": "export",
+      "selected_product_id": "export:7204",
+      "start_month": "2025-08",
+      "end_month": "2026-07",
+      "expected_eligible_card_ids": ["export.recent_run"]
+    },
+    {
+      "id": "v4-3",
+      "question": "最近美国轮胎进出口分别有什么变化？",
+      "flow": "both",
+      "selected_product_id": "both:4011",
+      "start_month": "2025-08",
+      "end_month": "2026-07",
+      "expected_eligible_card_ids": [
+        "import.recent_run",
+        "export.recent_turn",
+        "both.latest_relation"
+      ]
+    },
+    {
+      "id": "v4-4",
+      "question": "美国咖啡进口最近的变化是政策造成的吗？",
+      "flow": "import",
+      "selected_product_id": "import:0901",
+      "start_month": "2025-08",
+      "end_month": "2026-07",
+      "expected_eligible_card_ids": ["import.recent_turn"]
+    }
+  ]
+}

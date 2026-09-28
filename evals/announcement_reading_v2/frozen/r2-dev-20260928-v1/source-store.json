@@ -1,0 +1,2317 @@
+{
+  "data_version": null,
+  "documents": [
+    {
+      "data_version": "announcement-candidate",
+      "doc_id": "fr202523912",
+      "doc_version": "docver-cbb131783801bd95",
+      "fetched_at": null,
+      "offset_unit": "character",
+      "parser_version": "paragraph-lines-v1",
+      "policy_id": "r2_semiconductor_2025",
+      "publication_time": null,
+      "publication_time_status": "unknown",
+      "sections": [
+        {
+          "end": 70,
+          "id": "fr202523912:para1",
+          "source_id": "fr202523912",
+          "start": 0,
+          "text": "\n[Federal Register Volume 90, Number 245 (Monday, December 29, 2025)]\n"
+        },
+        {
+          "end": 80,
+          "id": "fr202523912:para2",
+          "source_id": "fr202523912",
+          "start": 70,
+          "text": "[Notices]\n"
+        },
+        {
+          "end": 100,
+          "id": "fr202523912:para3",
+          "source_id": "fr202523912",
+          "start": 80,
+          "text": "[Pages 60848-60850]\n"
+        },
+        {
+          "end": 184,
+          "id": "fr202523912:para4",
+          "source_id": "fr202523912",
+          "start": 100,
+          "text": "From the Federal Register Online via the Government Publishing Office [www.gpo.gov]\n"
+        },
+        {
+          "end": 211,
+          "id": "fr202523912:para5",
+          "source_id": "fr202523912",
+          "start": 184,
+          "text": "[FR Doc No: 2025-23912]\n\n\n\n"
+        },
+        {
+          "end": 227,
+          "id": "fr202523912:para6",
+          "source_id": "fr202523912",
+          "start": 211,
+          "text": "[[Page 60848]]\n\n"
+        },
+        {
+          "end": 299,
+          "id": "fr202523912:para7",
+          "source_id": "fr202523912",
+          "start": 227,
+          "text": "=======================================================================\n"
+        },
+        {
+          "end": 372,
+          "id": "fr202523912:para8",
+          "source_id": "fr202523912",
+          "start": 299,
+          "text": "-----------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 423,
+          "id": "fr202523912:para9",
+          "source_id": "fr202523912",
+          "start": 372,
+          "text": "OFFICE OF THE UNITED STATES TRADE REPRESENTATIVE\n\n\n"
+        },
+        {
+          "end": 488,
+          "id": "fr202523912:para10",
+          "source_id": "fr202523912",
+          "start": 423,
+          "text": "Notice of Action: China's Acts, Policies, and Practices Related \n"
+        },
+        {
+          "end": 546,
+          "id": "fr202523912:para11",
+          "source_id": "fr202523912",
+          "start": 488,
+          "text": "to Targeting of the Semiconductor Industry for Dominance\n\n"
+        },
+        {
+          "end": 605,
+          "id": "fr202523912:para12",
+          "source_id": "fr202523912",
+          "start": 546,
+          "text": "AGENCY: Office of the United States Trade Representative.\n\n"
+        },
+        {
+          "end": 632,
+          "id": "fr202523912:para13",
+          "source_id": "fr202523912",
+          "start": 605,
+          "text": "ACTION: Notice of action.\n\n"
+        },
+        {
+          "end": 705,
+          "id": "fr202523912:para14",
+          "source_id": "fr202523912",
+          "start": 632,
+          "text": "-----------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 766,
+          "id": "fr202523912:para15",
+          "source_id": "fr202523912",
+          "start": 705,
+          "text": "SUMMARY: The United States Trade Representative (U.S. Trade \n"
+        },
+        {
+          "end": 831,
+          "id": "fr202523912:para16",
+          "source_id": "fr202523912",
+          "start": 766,
+          "text": "Representative) has determined that China's acts, policies, and \n"
+        },
+        {
+          "end": 904,
+          "id": "fr202523912:para17",
+          "source_id": "fr202523912",
+          "start": 831,
+          "text": "practices are actionable under Section 301 of the Trade Act of 1974 and \n"
+        },
+        {
+          "end": 977,
+          "id": "fr202523912:para18",
+          "source_id": "fr202523912",
+          "start": 904,
+          "text": "that appropriate responsive action includes taking tariff action now on \n"
+        },
+        {
+          "end": 1048,
+          "id": "fr202523912:para19",
+          "source_id": "fr202523912",
+          "start": 977,
+          "text": "semiconductors from China, with an initial tariff level of 0 percent, \n"
+        },
+        {
+          "end": 1121,
+          "id": "fr202523912:para20",
+          "source_id": "fr202523912",
+          "start": 1048,
+          "text": "increasing in 18 months on June 23, 2027, to a rate to be announced not \n"
+        },
+        {
+          "end": 1181,
+          "id": "fr202523912:para21",
+          "source_id": "fr202523912",
+          "start": 1121,
+          "text": "fewer than 30 days prior to that date, as described below.\n\n"
+        },
+        {
+          "end": 1242,
+          "id": "fr202523912:para22",
+          "source_id": "fr202523912",
+          "start": 1181,
+          "text": "DATES: December 23, 2025: The effective date of the action.\n\n"
+        },
+        {
+          "end": 1312,
+          "id": "fr202523912:para23",
+          "source_id": "fr202523912",
+          "start": 1242,
+          "text": "FOR FURTHER INFORMATION CONTACT: Philip Butler, Chair of the Section \n"
+        },
+        {
+          "end": 1379,
+          "id": "fr202523912:para24",
+          "source_id": "fr202523912",
+          "start": 1312,
+          "text": "301 Committee or Nathaniel Halvorson, Deputy Assistant U.S. Trade \n"
+        },
+        {
+          "end": 1443,
+          "id": "fr202523912:para25",
+          "source_id": "fr202523912",
+          "start": 1379,
+          "text": "Representative for Monitoring & Enforcement at (202) 395-5725.\n\n"
+        },
+        {
+          "end": 1471,
+          "id": "fr202523912:para26",
+          "source_id": "fr202523912",
+          "start": 1443,
+          "text": "SUPPLEMENTARY INFORMATION:\n\n"
+        },
+        {
+          "end": 1486,
+          "id": "fr202523912:para27",
+          "source_id": "fr202523912",
+          "start": 1471,
+          "text": "I. Background\n\n"
+        },
+        {
+          "end": 1555,
+          "id": "fr202523912:para28",
+          "source_id": "fr202523912",
+          "start": 1486,
+          "text": "    On December 23, 2024, the U.S. Trade Representative initiated a \n"
+        },
+        {
+          "end": 1623,
+          "id": "fr202523912:para29",
+          "source_id": "fr202523912",
+          "start": 1555,
+          "text": "section 301 investigation of China's acts, policies, and practices \n"
+        },
+        {
+          "end": 1690,
+          "id": "fr202523912:para30",
+          "source_id": "fr202523912",
+          "start": 1623,
+          "text": "related to targeting of the semiconductor industry for dominance, \n"
+        },
+        {
+          "end": 1763,
+          "id": "fr202523912:para31",
+          "source_id": "fr202523912",
+          "start": 1690,
+          "text": "including to the extent that China's semiconductors are incorporated as \n"
+        },
+        {
+          "end": 1829,
+          "id": "fr202523912:para32",
+          "source_id": "fr202523912",
+          "start": 1763,
+          "text": "components into downstream products for critical industries like \n"
+        },
+        {
+          "end": 1899,
+          "id": "fr202523912:para33",
+          "source_id": "fr202523912",
+          "start": 1829,
+          "text": "defense, automotive, medical devices, aerospace, telecommunications, \n"
+        },
+        {
+          "end": 1964,
+          "id": "fr202523912:para34",
+          "source_id": "fr202523912",
+          "start": 1899,
+          "text": "and power generation and the electrical grid.\\1\\ The U.S. Trade \n"
+        },
+        {
+          "end": 2032,
+          "id": "fr202523912:para35",
+          "source_id": "fr202523912",
+          "start": 1964,
+          "text": "Representative also requested consultations with the Government of \n"
+        },
+        {
+          "end": 2102,
+          "id": "fr202523912:para36",
+          "source_id": "fr202523912",
+          "start": 2032,
+          "text": "China pursuant to Section 303 of the Trade Act (19 U.S.C. 2413). The \n"
+        },
+        {
+          "end": 2168,
+          "id": "fr202523912:para37",
+          "source_id": "fr202523912",
+          "start": 2102,
+          "text": "Government of China declined to hold consultations regarding the \n"
+        },
+        {
+          "end": 2240,
+          "id": "fr202523912:para38",
+          "source_id": "fr202523912",
+          "start": 2168,
+          "text": "investigation under this statutory framework. The notice of initiation \n"
+        },
+        {
+          "end": 2283,
+          "id": "fr202523912:para39",
+          "source_id": "fr202523912",
+          "start": 2240,
+          "text": "solicited written comments on, inter alia:\n"
+        },
+        {
+          "end": 2360,
+          "id": "fr202523912:para40",
+          "source_id": "fr202523912",
+          "start": 2283,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 2398,
+          "id": "fr202523912:para41",
+          "source_id": "fr202523912",
+          "start": 2360,
+          "text": "    \\1\\ 89 FR 106725 (Dec. 30, 2025).\n"
+        },
+        {
+          "end": 2475,
+          "id": "fr202523912:para42",
+          "source_id": "fr202523912",
+          "start": 2398,
+          "text": "---------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 2534,
+          "id": "fr202523912:para43",
+          "source_id": "fr202523912",
+          "start": 2475,
+          "text": "     China's acts, policies, and practices related to its \n"
+        },
+        {
+          "end": 2589,
+          "id": "fr202523912:para44",
+          "source_id": "fr202523912",
+          "start": 2534,
+          "text": "targeting of the semiconductor industry for dominance.\n"
+        },
+        {
+          "end": 2652,
+          "id": "fr202523912:para45",
+          "source_id": "fr202523912",
+          "start": 2589,
+          "text": "     Anticompetitive and non-market means employed by the PRC \n"
+        },
+        {
+          "end": 2716,
+          "id": "fr202523912:para46",
+          "source_id": "fr202523912",
+          "start": 2652,
+          "text": "in pursuit of its semiconductor industry targeting objectives, \n"
+        },
+        {
+          "end": 2788,
+          "id": "fr202523912:para47",
+          "source_id": "fr202523912",
+          "start": 2716,
+          "text": "including political guidance, directives, and control within state and \n"
+        },
+        {
+          "end": 2856,
+          "id": "fr202523912:para48",
+          "source_id": "fr202523912",
+          "start": 2788,
+          "text": "private enterprises, activities of state-owned or state-controlled \n"
+        },
+        {
+          "end": 2928,
+          "id": "fr202523912:para49",
+          "source_id": "fr202523912",
+          "start": 2856,
+          "text": "enterprises, market access restrictions, opaque regulatory preferences \n"
+        },
+        {
+          "end": 2997,
+          "id": "fr202523912:para50",
+          "source_id": "fr202523912",
+          "start": 2928,
+          "text": "and discrimination, wage-suppressing labor practices, massive state \n"
+        },
+        {
+          "end": 3068,
+          "id": "fr202523912:para51",
+          "source_id": "fr202523912",
+          "start": 2997,
+          "text": "support of industry (including government guidance funds), and forced \n"
+        },
+        {
+          "end": 3136,
+          "id": "fr202523912:para52",
+          "source_id": "fr202523912",
+          "start": 3068,
+          "text": "technology transfer (including state-directed cyber intrusions and \n"
+        },
+        {
+          "end": 3174,
+          "id": "fr202523912:para53",
+          "source_id": "fr202523912",
+          "start": 3136,
+          "text": "cybertheft of intellectual property).\n"
+        },
+        {
+          "end": 3230,
+          "id": "fr202523912:para54",
+          "source_id": "fr202523912",
+          "start": 3174,
+          "text": "     Whether China's acts, policies, and practices are \n"
+        },
+        {
+          "end": 3262,
+          "id": "fr202523912:para55",
+          "source_id": "fr202523912",
+          "start": 3230,
+          "text": "unreasonable or discriminatory.\n"
+        },
+        {
+          "end": 3324,
+          "id": "fr202523912:para56",
+          "source_id": "fr202523912",
+          "start": 3262,
+          "text": "     Whether China's acts, policies, and practices burden or \n"
+        },
+        {
+          "end": 3395,
+          "id": "fr202523912:para57",
+          "source_id": "fr202523912",
+          "start": 3324,
+          "text": "restrict U.S. commerce, and if so, the nature and level of the burden \n"
+        },
+        {
+          "end": 3466,
+          "id": "fr202523912:para58",
+          "source_id": "fr202523912",
+          "start": 3395,
+          "text": "or restriction. This would include economic assessments of the burden \n"
+        },
+        {
+          "end": 3539,
+          "id": "fr202523912:para59",
+          "source_id": "fr202523912",
+          "start": 3466,
+          "text": "or restriction on semiconductors, semiconductor manufacturing including \n"
+        },
+        {
+          "end": 3610,
+          "id": "fr202523912:para60",
+          "source_id": "fr202523912",
+          "start": 3539,
+          "text": "foundries, silicon carbide substrates or other wafers, and downstream \n"
+        },
+        {
+          "end": 3677,
+          "id": "fr202523912:para61",
+          "source_id": "fr202523912",
+          "start": 3610,
+          "text": "products, with a particular focus on critical industries, such as \n"
+        },
+        {
+          "end": 3747,
+          "id": "fr202523912:para62",
+          "source_id": "fr202523912",
+          "start": 3677,
+          "text": "defense, automotive, medical devices, aerospace, telecommunications, \n"
+        },
+        {
+          "end": 3793,
+          "id": "fr202523912:para63",
+          "source_id": "fr202523912",
+          "start": 3747,
+          "text": "and power generation and the electrical grid.\n"
+        },
+        {
+          "end": 3849,
+          "id": "fr202523912:para64",
+          "source_id": "fr202523912",
+          "start": 3793,
+          "text": "     Whether China's acts, policies, and practices are \n"
+        },
+        {
+          "end": 3920,
+          "id": "fr202523912:para65",
+          "source_id": "fr202523912",
+          "start": 3849,
+          "text": "actionable under section 301(b) of the Trade Act, and what action, if \n"
+        },
+        {
+          "end": 3983,
+          "id": "fr202523912:para66",
+          "source_id": "fr202523912",
+          "start": 3920,
+          "text": "any, should be taken, including tariff and non-tariff actions.\n"
+        },
+        {
+          "end": 4052,
+          "id": "fr202523912:para67",
+          "source_id": "fr202523912",
+          "start": 3983,
+          "text": "    Interested persons filed 26 comments. In addition, USTR and the \n"
+        },
+        {
+          "end": 4120,
+          "id": "fr202523912:para68",
+          "source_id": "fr202523912",
+          "start": 4052,
+          "text": "Section 301 Committee convened a public hearing on March 11, 2025, \n"
+        },
+        {
+          "end": 4191,
+          "id": "fr202523912:para69",
+          "source_id": "fr202523912",
+          "start": 4120,
+          "text": "during which witnesses provided testimony and responded to questions. \n"
+        },
+        {
+          "end": 4262,
+          "id": "fr202523912:para70",
+          "source_id": "fr202523912",
+          "start": 4191,
+          "text": "The public submissions are available at: https://comments.ustr.gov/s/ \n"
+        },
+        {
+          "end": 4331,
+          "id": "fr202523912:para71",
+          "source_id": "fr202523912",
+          "start": 4262,
+          "text": "in docket number USTR-2024-0024, and a transcript of the hearing is \n"
+        },
+        {
+          "end": 4361,
+          "id": "fr202523912:para72",
+          "source_id": "fr202523912",
+          "start": 4331,
+          "text": "available on USTR's website.\n\n"
+        },
+        {
+          "end": 4397,
+          "id": "fr202523912:para73",
+          "source_id": "fr202523912",
+          "start": 4361,
+          "text": "II. Determination of Actionability\n\n"
+        },
+        {
+          "end": 4465,
+          "id": "fr202523912:para74",
+          "source_id": "fr202523912",
+          "start": 4397,
+          "text": "    Based on information obtained during the investigation, and in \n"
+        },
+        {
+          "end": 4536,
+          "id": "fr202523912:para75",
+          "source_id": "fr202523912",
+          "start": 4465,
+          "text": "consultation with the Section 301 Committee, China's targeting of the \n"
+        },
+        {
+          "end": 4605,
+          "id": "fr202523912:para76",
+          "source_id": "fr202523912",
+          "start": 4536,
+          "text": "semiconductor industry for dominance is unreasonable and burdens or \n"
+        },
+        {
+          "end": 4653,
+          "id": "fr202523912:para77",
+          "source_id": "fr202523912",
+          "start": 4605,
+          "text": "restricts U.S. commerce and thus is actionable.\n"
+        },
+        {
+          "end": 4721,
+          "id": "fr202523912:para78",
+          "source_id": "fr202523912",
+          "start": 4653,
+          "text": "    For decades, China has targeted the semiconductor industry for \n"
+        },
+        {
+          "end": 4790,
+          "id": "fr202523912:para79",
+          "source_id": "fr202523912",
+          "start": 4721,
+          "text": "dominance and has employed increasingly aggressive and sweeping non-\n"
+        },
+        {
+          "end": 4858,
+          "id": "fr202523912:para80",
+          "source_id": "fr202523912",
+          "start": 4790,
+          "text": "market policies and practices in pursuing dominance of the sector. \n"
+        },
+        {
+          "end": 4930,
+          "id": "fr202523912:para81",
+          "source_id": "fr202523912",
+          "start": 4858,
+          "text": "China's pursuit of its dominance goals has severely disadvantaged U.S. \n"
+        },
+        {
+          "end": 4999,
+          "id": "fr202523912:para82",
+          "source_id": "fr202523912",
+          "start": 4930,
+          "text": "companies, workers, and the U.S. economy generally through lessened \n"
+        },
+        {
+          "end": 5069,
+          "id": "fr202523912:para83",
+          "source_id": "fr202523912",
+          "start": 4999,
+          "text": "competition and commercial opportunities and through the creation of \n"
+        },
+        {
+          "end": 5132,
+          "id": "fr202523912:para84",
+          "source_id": "fr202523912",
+          "start": 5069,
+          "text": "economic security risks from dependencies and vulnerabilities.\n"
+        },
+        {
+          "end": 5199,
+          "id": "fr202523912:para85",
+          "source_id": "fr202523912",
+          "start": 5132,
+          "text": "    Top-down industrial planning is a critical feature of China's \n"
+        },
+        {
+          "end": 5271,
+          "id": "fr202523912:para86",
+          "source_id": "fr202523912",
+          "start": 5199,
+          "text": "state-led, non-market economic system. China organizes the development \n"
+        },
+        {
+          "end": 5340,
+          "id": "fr202523912:para87",
+          "source_id": "fr202523912",
+          "start": 5271,
+          "text": "of its economy through broad, national-level five-year economic and \n"
+        },
+        {
+          "end": 5411,
+          "id": "fr202523912:para88",
+          "source_id": "fr202523912",
+          "start": 5340,
+          "text": "social development plans. It then employs industry-specific plans and \n"
+        },
+        {
+          "end": 5477,
+          "id": "fr202523912:para89",
+          "source_id": "fr202523912",
+          "start": 5411,
+          "text": "local plans at central and sub-central levels of government that \n"
+        },
+        {
+          "end": 5545,
+          "id": "fr202523912:para90",
+          "source_id": "fr202523912",
+          "start": 5477,
+          "text": "typically align chronologically with the national five-year plans. \n"
+        },
+        {
+          "end": 5610,
+          "id": "fr202523912:para91",
+          "source_id": "fr202523912",
+          "start": 5545,
+          "text": "These plans often contain detailed quantitative and qualitative \n"
+        },
+        {
+          "end": 5677,
+          "id": "fr202523912:para92",
+          "source_id": "fr202523912",
+          "start": 5610,
+          "text": "targets, including for production, domestic content, domestic and \n"
+        },
+        {
+          "end": 5747,
+          "id": "fr202523912:para93",
+          "source_id": "fr202523912",
+          "start": 5677,
+          "text": "international market shares, and outline the non-market policies and \n"
+        },
+        {
+          "end": 5800,
+          "id": "fr202523912:para94",
+          "source_id": "fr202523912",
+          "start": 5747,
+          "text": "practices China should use to achieve these targets.\n"
+        },
+        {
+          "end": 5872,
+          "id": "fr202523912:para95",
+          "source_id": "fr202523912",
+          "start": 5800,
+          "text": "    Over the last 25 years, China has promulgated over 100 central and \n"
+        },
+        {
+          "end": 5943,
+          "id": "fr202523912:para96",
+          "source_id": "fr202523912",
+          "start": 5872,
+          "text": "sub-central industrial plans that address the semiconductor industry, \n"
+        },
+        {
+          "end": 6012,
+          "id": "fr202523912:para97",
+          "source_id": "fr202523912",
+          "start": 5943,
+          "text": "articulating over 300 qualitative and 170 quantitative targets that \n"
+        },
+        {
+          "end": 6084,
+          "id": "fr202523912:para98",
+          "source_id": "fr202523912",
+          "start": 6012,
+          "text": "seek to capture global and domestic market share, transfer technology, \n"
+        },
+        {
+          "end": 6155,
+          "id": "fr202523912:para99",
+          "source_id": "fr202523912",
+          "start": 6084,
+          "text": "and indigenize the equipment needed to manufacture semiconductors. In \n"
+        },
+        {
+          "end": 6225,
+          "id": "fr202523912:para100",
+          "source_id": "fr202523912",
+          "start": 6155,
+          "text": "its last publicly-released market share target for the semiconductor \n"
+        },
+        {
+          "end": 6298,
+          "id": "fr202523912:para101",
+          "source_id": "fr202523912",
+          "start": 6225,
+          "text": "sector, China aimed to capture 56 percent of sales in the international \n"
+        },
+        {
+          "end": 6369,
+          "id": "fr202523912:para102",
+          "source_id": "fr202523912",
+          "start": 6298,
+          "text": "market and 80 percent in the domestic market, according to industrial \n"
+        },
+        {
+          "end": 6434,
+          "id": "fr202523912:para103",
+          "source_id": "fr202523912",
+          "start": 6369,
+          "text": "plans. Market share targets necessitate substitution by Chinese \n"
+        },
+        {
+          "end": 6506,
+          "id": "fr202523912:para104",
+          "source_id": "fr202523912",
+          "start": 6434,
+          "text": "companies at the expense of foreign competitors--for Chinese companies \n"
+        },
+        {
+          "end": 6578,
+          "id": "fr202523912:para105",
+          "source_id": "fr202523912",
+          "start": 6506,
+          "text": "to gain market share, they must displace foreign companies in existing \n"
+        },
+        {
+          "end": 6651,
+          "id": "fr202523912:para106",
+          "source_id": "fr202523912",
+          "start": 6578,
+          "text": "markets and take new markets as they develop in the future. Across both \n"
+        },
+        {
+          "end": 6722,
+          "id": "fr202523912:para107",
+          "source_id": "fr202523912",
+          "start": 6651,
+          "text": "qualitative and quantitative targets, China's industrial plans target \n"
+        },
+        {
+          "end": 6788,
+          "id": "fr202523912:para108",
+          "source_id": "fr202523912",
+          "start": 6722,
+          "text": "every major segment of the semiconductor supply chain, including \n"
+        },
+        {
+          "end": 6854,
+          "id": "fr202523912:para109",
+          "source_id": "fr202523912",
+          "start": 6788,
+          "text": "fabrication; design; assembly, testing, and packaging (ATP); and \n"
+        },
+        {
+          "end": 6878,
+          "id": "fr202523912:para110",
+          "source_id": "fr202523912",
+          "start": 6854,
+          "text": "materials & equipment.\n\n"
+        },
+        {
+          "end": 6922,
+          "id": "fr202523912:para111",
+          "source_id": "fr202523912",
+          "start": 6878,
+          "text": "Unreasonable Acts, Policies, and Practices\n\n"
+        },
+        {
+          "end": 6992,
+          "id": "fr202523912:para112",
+          "source_id": "fr202523912",
+          "start": 6922,
+          "text": "    In particular, the U.S. Trade Representative has determined that \n"
+        },
+        {
+          "end": 7058,
+          "id": "fr202523912:para113",
+          "source_id": "fr202523912",
+          "start": 6992,
+          "text": "China's targeting of the semiconductor industry for dominance is \n"
+        },
+        {
+          "end": 7109,
+          "id": "fr202523912:para114",
+          "source_id": "fr202523912",
+          "start": 7058,
+          "text": "unreasonable, including for the following reasons:\n"
+        },
+        {
+          "end": 7172,
+          "id": "fr202523912:para115",
+          "source_id": "fr202523912",
+          "start": 7109,
+          "text": "    First, China's targeting of the semiconductor industry is \n"
+        },
+        {
+          "end": 7238,
+          "id": "fr202523912:para116",
+          "source_id": "fr202523912",
+          "start": 7172,
+          "text": "unreasonable because China exerts extraordinary control over the \n"
+        },
+        {
+          "end": 7310,
+          "id": "fr202523912:para117",
+          "source_id": "fr202523912",
+          "start": 7238,
+          "text": "semiconductor industry, and other economic actors, in order to achieve \n"
+        },
+        {
+          "end": 7373,
+          "id": "fr202523912:para118",
+          "source_id": "fr202523912",
+          "start": 7310,
+          "text": "its targeted dominance, including through political guidance, \n"
+        },
+        {
+          "end": 7436,
+          "id": "fr202523912:para119",
+          "source_id": "fr202523912",
+          "start": 7373,
+          "text": "directives, and control within state and private enterprises, \n"
+        },
+        {
+          "end": 7509,
+          "id": "fr202523912:para120",
+          "source_id": "fr202523912",
+          "start": 7436,
+          "text": "activities of state-owned or state-controlled enterprises. Adherence to \n"
+        },
+        {
+          "end": 7579,
+          "id": "fr202523912:para121",
+          "source_id": "fr202523912",
+          "start": 7509,
+          "text": "the objectives of China's industrial plans is effectively mandatory. \n"
+        },
+        {
+          "end": 7649,
+          "id": "fr202523912:para122",
+          "source_id": "fr202523912",
+          "start": 7579,
+          "text": "Both state actors and Chinese companies move toward the goals set by \n"
+        },
+        {
+          "end": 7718,
+          "id": "fr202523912:para123",
+          "source_id": "fr202523912",
+          "start": 7649,
+          "text": "the central government and have little discretion to ignore China's\n\n"
+        },
+        {
+          "end": 7734,
+          "id": "fr202523912:para124",
+          "source_id": "fr202523912",
+          "start": 7718,
+          "text": "[[Page 60849]]\n\n"
+        },
+        {
+          "end": 7803,
+          "id": "fr202523912:para125",
+          "source_id": "fr202523912",
+          "start": 7734,
+          "text": "industrial targets. The Chinese Communist Party also exerts control \n"
+        },
+        {
+          "end": 7870,
+          "id": "fr202523912:para126",
+          "source_id": "fr202523912",
+          "start": 7803,
+          "text": "through personnel and enterprise structures. China's control over \n"
+        },
+        {
+          "end": 7942,
+          "id": "fr202523912:para127",
+          "source_id": "fr202523912",
+          "start": 7870,
+          "text": "economic actors enables China to direct and influence their commercial \n"
+        },
+        {
+          "end": 8015,
+          "id": "fr202523912:para128",
+          "source_id": "fr202523912",
+          "start": 7942,
+          "text": "behavior in pursuit of its targeted dominance, in ways that run counter \n"
+        },
+        {
+          "end": 8067,
+          "id": "fr202523912:para129",
+          "source_id": "fr202523912",
+          "start": 8015,
+          "text": "to fair competition and market-oriented principles.\n"
+        },
+        {
+          "end": 8138,
+          "id": "fr202523912:para130",
+          "source_id": "fr202523912",
+          "start": 8067,
+          "text": "    Through its control of economic actors and sectors, China directs \n"
+        },
+        {
+          "end": 8208,
+          "id": "fr202523912:para131",
+          "source_id": "fr202523912",
+          "start": 8138,
+          "text": "non-market advantages to China's semiconductor industry across every \n"
+        },
+        {
+          "end": 8281,
+          "id": "fr202523912:para132",
+          "source_id": "fr202523912",
+          "start": 8208,
+          "text": "major segment of the semiconductor supply chain, including fabrication, \n"
+        },
+        {
+          "end": 8354,
+          "id": "fr202523912:para133",
+          "source_id": "fr202523912",
+          "start": 8281,
+          "text": "design, ATP, materials, critical minerals, chemicals, photoresists, and \n"
+        },
+        {
+          "end": 8424,
+          "id": "fr202523912:para134",
+          "source_id": "fr202523912",
+          "start": 8354,
+          "text": "manufacturing equipment. These non-market advantages include massive \n"
+        },
+        {
+          "end": 8494,
+          "id": "fr202523912:para135",
+          "source_id": "fr202523912",
+          "start": 8424,
+          "text": "and persistent state financial support of industry, including market \n"
+        },
+        {
+          "end": 8564,
+          "id": "fr202523912:para136",
+          "source_id": "fr202523912",
+          "start": 8494,
+          "text": "access restrictions and direction; government guidance funds; forced \n"
+        },
+        {
+          "end": 8636,
+          "id": "fr202523912:para137",
+          "source_id": "fr202523912",
+          "start": 8564,
+          "text": "technology transfer and intellectual property theft; opaque regulatory \n"
+        },
+        {
+          "end": 8707,
+          "id": "fr202523912:para138",
+          "source_id": "fr202523912",
+          "start": 8636,
+          "text": "preferences and discrimination; and wage-suppressing labor practices. \n"
+        },
+        {
+          "end": 8779,
+          "id": "fr202523912:para139",
+          "source_id": "fr202523912",
+          "start": 8707,
+          "text": "Thus, China's targeting of the semiconductor industry for dominance is \n"
+        },
+        {
+          "end": 8852,
+          "id": "fr202523912:para140",
+          "source_id": "fr202523912",
+          "start": 8779,
+          "text": "unreasonable because of China's extraordinary control over its economic \n"
+        },
+        {
+          "end": 8925,
+          "id": "fr202523912:para141",
+          "source_id": "fr202523912",
+          "start": 8852,
+          "text": "actors and ability to direct non-market advantages to its semiconductor \n"
+        },
+        {
+          "end": 8935,
+          "id": "fr202523912:para142",
+          "source_id": "fr202523912",
+          "start": 8925,
+          "text": "industry.\n"
+        },
+        {
+          "end": 9000,
+          "id": "fr202523912:para143",
+          "source_id": "fr202523912",
+          "start": 8935,
+          "text": "    Second, China's targeting of the semiconductor industry for \n"
+        },
+        {
+          "end": 9065,
+          "id": "fr202523912:para144",
+          "source_id": "fr202523912",
+          "start": 9000,
+          "text": "dominance is unreasonable because it is does not reflect market \n"
+        },
+        {
+          "end": 9136,
+          "id": "fr202523912:para145",
+          "source_id": "fr202523912",
+          "start": 9065,
+          "text": "competition and is unconstrained by market forces. China's targeting, \n"
+        },
+        {
+          "end": 9208,
+          "id": "fr202523912:para146",
+          "source_id": "fr202523912",
+          "start": 9136,
+          "text": "both by design and in effect, displaces foreign firms, deprives market-\n"
+        },
+        {
+          "end": 9280,
+          "id": "fr202523912:para147",
+          "source_id": "fr202523912",
+          "start": 9208,
+          "text": "oriented businesses and their workers of commercial opportunities, and \n"
+        },
+        {
+          "end": 9346,
+          "id": "fr202523912:para148",
+          "source_id": "fr202523912",
+          "start": 9280,
+          "text": "lessens competition. China's plans, including as demonstrated by \n"
+        },
+        {
+          "end": 9414,
+          "id": "fr202523912:para149",
+          "source_id": "fr202523912",
+          "start": 9346,
+          "text": "specific market share targets, are to achieve a long-term dominant \n"
+        },
+        {
+          "end": 9485,
+          "id": "fr202523912:para150",
+          "source_id": "fr202523912",
+          "start": 9414,
+          "text": "position in these economic sectors. Its targeting of the industry for \n"
+        },
+        {
+          "end": 9553,
+          "id": "fr202523912:para151",
+          "source_id": "fr202523912",
+          "start": 9485,
+          "text": "dominance necessarily means displacing foreign firms from existing \n"
+        },
+        {
+          "end": 9626,
+          "id": "fr202523912:para152",
+          "source_id": "fr202523912",
+          "start": 9553,
+          "text": "markets, and taking new markets as they arise, diminishing competition. \n"
+        },
+        {
+          "end": 9698,
+          "id": "fr202523912:para153",
+          "source_id": "fr202523912",
+          "start": 9626,
+          "text": "Foreign firms are increasingly unable to compete with the resources of \n"
+        },
+        {
+          "end": 9763,
+          "id": "fr202523912:para154",
+          "source_id": "fr202523912",
+          "start": 9698,
+          "text": "the Chinese state, resulting in lost sales, under-investment in \n"
+        },
+        {
+          "end": 9833,
+          "id": "fr202523912:para155",
+          "source_id": "fr202523912",
+          "start": 9763,
+          "text": "capacity, diminished ability to attract financing, and lost jobs and \n"
+        },
+        {
+          "end": 9900,
+          "id": "fr202523912:para156",
+          "source_id": "fr202523912",
+          "start": 9833,
+          "text": "lower wages. The dominant positions China seeks, and increasingly \n"
+        },
+        {
+          "end": 9970,
+          "id": "fr202523912:para157",
+          "source_id": "fr202523912",
+          "start": 9900,
+          "text": "achieves, in numerous segments of the semiconductor industry give it \n"
+        },
+        {
+          "end": 10024,
+          "id": "fr202523912:para158",
+          "source_id": "fr202523912",
+          "start": 9970,
+          "text": "market power over global supply, pricing, and access.\n"
+        },
+        {
+          "end": 10088,
+          "id": "fr202523912:para159",
+          "source_id": "fr202523912",
+          "start": 10024,
+          "text": "    Third, China's targeting of the semiconductor industry for \n"
+        },
+        {
+          "end": 10156,
+          "id": "fr202523912:para160",
+          "source_id": "fr202523912",
+          "start": 10088,
+          "text": "dominance harms foreign competitors and purchasers by creating and \n"
+        },
+        {
+          "end": 10226,
+          "id": "fr202523912:para161",
+          "source_id": "fr202523912",
+          "start": 10156,
+          "text": "exploiting dependencies. China's objective is to ultimately displace \n"
+        },
+        {
+          "end": 10291,
+          "id": "fr202523912:para162",
+          "source_id": "fr202523912",
+          "start": 10226,
+          "text": "foreign competitors throughout the semiconductor value chain in \n"
+        },
+        {
+          "end": 10364,
+          "id": "fr202523912:para163",
+          "source_id": "fr202523912",
+          "start": 10291,
+          "text": "domestic and foreign markets, which increases the world's dependence on \n"
+        },
+        {
+          "end": 10432,
+          "id": "fr202523912:para164",
+          "source_id": "fr202523912",
+          "start": 10364,
+          "text": "its companies, products, services, and technology. The creation of \n"
+        },
+        {
+          "end": 10497,
+          "id": "fr202523912:para165",
+          "source_id": "fr202523912",
+          "start": 10432,
+          "text": "dependencies also increases risk for individual firms and their \n"
+        },
+        {
+          "end": 10570,
+          "id": "fr202523912:para166",
+          "source_id": "fr202523912",
+          "start": 10497,
+          "text": "workers, for economic sectors (including workers' communities), and for \n"
+        },
+        {
+          "end": 10635,
+          "id": "fr202523912:para167",
+          "source_id": "fr202523912",
+          "start": 10570,
+          "text": "supply chain resilience. China has demonstrated in the past its \n"
+        },
+        {
+          "end": 10699,
+          "id": "fr202523912:para168",
+          "source_id": "fr202523912",
+          "start": 10635,
+          "text": "willingness to weaponize dependencies for purposes of economic \n"
+        },
+        {
+          "end": 10766,
+          "id": "fr202523912:para169",
+          "source_id": "fr202523912",
+          "start": 10699,
+          "text": "coercion, including in this sector through export restrictions on \n"
+        },
+        {
+          "end": 10836,
+          "id": "fr202523912:para170",
+          "source_id": "fr202523912",
+          "start": 10766,
+          "text": "gallium, germanium, antimony, and other critical minerals. China has \n"
+        },
+        {
+          "end": 10908,
+          "id": "fr202523912:para171",
+          "source_id": "fr202523912",
+          "start": 10836,
+          "text": "applied these export restrictions broadly without regard to end-use or \n"
+        },
+        {
+          "end": 10980,
+          "id": "fr202523912:para172",
+          "source_id": "fr202523912",
+          "start": 10908,
+          "text": "end-users. China's targeting of this sector for dominance is therefore \n"
+        },
+        {
+          "end": 11049,
+          "id": "fr202523912:para173",
+          "source_id": "fr202523912",
+          "start": 10980,
+          "text": "unreasonable also due to the creation of dependencies and resulting \n"
+        },
+        {
+          "end": 11077,
+          "id": "fr202523912:para174",
+          "source_id": "fr202523912",
+          "start": 11049,
+          "text": "vulnerabilities and risks.\n\n"
+        },
+        {
+          "end": 11117,
+          "id": "fr202523912:para175",
+          "source_id": "fr202523912",
+          "start": 11077,
+          "text": "Burden or Restriction on U.S. Commerce\n\n"
+        },
+        {
+          "end": 11189,
+          "id": "fr202523912:para176",
+          "source_id": "fr202523912",
+          "start": 11117,
+          "text": "    Furthermore, the U.S. Trade Representative determined that China's \n"
+        },
+        {
+          "end": 11255,
+          "id": "fr202523912:para177",
+          "source_id": "fr202523912",
+          "start": 11189,
+          "text": "targeting of the semiconductor industry for dominance burdens or \n"
+        },
+        {
+          "end": 11317,
+          "id": "fr202523912:para178",
+          "source_id": "fr202523912",
+          "start": 11255,
+          "text": "restricts U.S. commerce, including for the following reasons:\n"
+        },
+        {
+          "end": 11382,
+          "id": "fr202523912:para179",
+          "source_id": "fr202523912",
+          "start": 11317,
+          "text": "    First, China's targeted dominance burdens or restricts U.S. \n"
+        },
+        {
+          "end": 11444,
+          "id": "fr202523912:para180",
+          "source_id": "fr202523912",
+          "start": 11382,
+          "text": "commerce because it undercuts business opportunities for and \n"
+        },
+        {
+          "end": 11516,
+          "id": "fr202523912:para181",
+          "source_id": "fr202523912",
+          "start": 11444,
+          "text": "investments in the U.S. semiconductor industry. China has targeted the \n"
+        },
+        {
+          "end": 11583,
+          "id": "fr202523912:para182",
+          "source_id": "fr202523912",
+          "start": 11516,
+          "text": "semiconductor industry for dominance for decades and increasingly \n"
+        },
+        {
+          "end": 11651,
+          "id": "fr202523912:para183",
+          "source_id": "fr202523912",
+          "start": 11583,
+          "text": "dominates segments of the semiconductor value chain. Indeed, China \n"
+        },
+        {
+          "end": 11719,
+          "id": "fr202523912:para184",
+          "source_id": "fr202523912",
+          "start": 11651,
+          "text": "continues to build upon its dominance and seeks to expand into new \n"
+        },
+        {
+          "end": 11781,
+          "id": "fr202523912:para185",
+          "source_id": "fr202523912",
+          "start": 11719,
+          "text": "segments of the value chain. China's targeting for dominance \n"
+        },
+        {
+          "end": 11845,
+          "id": "fr202523912:para186",
+          "source_id": "fr202523912",
+          "start": 11781,
+          "text": "contributes to lost sales, chronic underinvestment in numerous \n"
+        },
+        {
+          "end": 11914,
+          "id": "fr202523912:para187",
+          "source_id": "fr202523912",
+          "start": 11845,
+          "text": "segments, and a diminished U.S. industry, constituting a burden and \n"
+        },
+        {
+          "end": 11944,
+          "id": "fr202523912:para188",
+          "source_id": "fr202523912",
+          "start": 11914,
+          "text": "restriction on U.S. commerce.\n"
+        },
+        {
+          "end": 12015,
+          "id": "fr202523912:para189",
+          "source_id": "fr202523912",
+          "start": 11944,
+          "text": "    Second, China's targeting for dominance burdens or restricts U.S. \n"
+        },
+        {
+          "end": 12088,
+          "id": "fr202523912:para190",
+          "source_id": "fr202523912",
+          "start": 12015,
+          "text": "commerce because it creates economic security risks from dependence and \n"
+        },
+        {
+          "end": 12156,
+          "id": "fr202523912:para191",
+          "source_id": "fr202523912",
+          "start": 12088,
+          "text": "vulnerabilities in sectors critical to the functioning of the U.S. \n"
+        },
+        {
+          "end": 12229,
+          "id": "fr202523912:para192",
+          "source_id": "fr202523912",
+          "start": 12156,
+          "text": "economy. China's targeting for dominance has created, and will continue \n"
+        },
+        {
+          "end": 12302,
+          "id": "fr202523912:para193",
+          "source_id": "fr202523912",
+          "start": 12229,
+          "text": "to accelerate, dependencies for the U.S. semiconductor industry and for \n"
+        },
+        {
+          "end": 12374,
+          "id": "fr202523912:para194",
+          "source_id": "fr202523912",
+          "start": 12302,
+          "text": "purchasers of semiconductors, creating vulnerabilities across the U.S. \n"
+        },
+        {
+          "end": 12440,
+          "id": "fr202523912:para195",
+          "source_id": "fr202523912",
+          "start": 12374,
+          "text": "economy. China has also revealed the capacity and willingness to \n"
+        },
+        {
+          "end": 12511,
+          "id": "fr202523912:para196",
+          "source_id": "fr202523912",
+          "start": 12440,
+          "text": "weaponize dependencies and vulnerabilities through economic coercion. \n"
+        },
+        {
+          "end": 12577,
+          "id": "fr202523912:para197",
+          "source_id": "fr202523912",
+          "start": 12511,
+          "text": "Over-reliance on a single economy for semiconductors and related \n"
+        },
+        {
+          "end": 12643,
+          "id": "fr202523912:para198",
+          "source_id": "fr202523912",
+          "start": 12577,
+          "text": "technology or products increases the cost of any disruption. The \n"
+        },
+        {
+          "end": 12716,
+          "id": "fr202523912:para199",
+          "source_id": "fr202523912",
+          "start": 12643,
+          "text": "economic security risks U.S. firms and the U.S. economy bear from these \n"
+        },
+        {
+          "end": 12779,
+          "id": "fr202523912:para200",
+          "source_id": "fr202523912",
+          "start": 12716,
+          "text": "dependencies and vulnerabilities, through their potential for \n"
+        },
+        {
+          "end": 12839,
+          "id": "fr202523912:para201",
+          "source_id": "fr202523912",
+          "start": 12779,
+          "text": "disruption and coercion, burden or restrict U.S. commerce.\n\n"
+        },
+        {
+          "end": 12881,
+          "id": "fr202523912:para202",
+          "source_id": "fr202523912",
+          "start": 12839,
+          "text": "III. Determination of Appropriate Action\n\n"
+        },
+        {
+          "end": 12947,
+          "id": "fr202523912:para203",
+          "source_id": "fr202523912",
+          "start": 12881,
+          "text": "    Section 301(b) provides that upon determining that the acts, \n"
+        },
+        {
+          "end": 13016,
+          "id": "fr202523912:para204",
+          "source_id": "fr202523912",
+          "start": 12947,
+          "text": "policies, and practices under investigation are actionable and that \n"
+        },
+        {
+          "end": 13085,
+          "id": "fr202523912:para205",
+          "source_id": "fr202523912",
+          "start": 13016,
+          "text": "action is appropriate, the U.S. Trade Representative shall take all \n"
+        },
+        {
+          "end": 13151,
+          "id": "fr202523912:para206",
+          "source_id": "fr202523912",
+          "start": 13085,
+          "text": "appropriate and feasible action authorized under Section 301(c), \n"
+        },
+        {
+          "end": 13222,
+          "id": "fr202523912:para207",
+          "source_id": "fr202523912",
+          "start": 13151,
+          "text": "subject to the specific direction, if any, of the President regarding \n"
+        },
+        {
+          "end": 13293,
+          "id": "fr202523912:para208",
+          "source_id": "fr202523912",
+          "start": 13222,
+          "text": "such action, and all other appropriate and feasible action within the \n"
+        },
+        {
+          "end": 13362,
+          "id": "fr202523912:para209",
+          "source_id": "fr202523912",
+          "start": 13293,
+          "text": "power of the President that the President may direct the U.S. Trade \n"
+        },
+        {
+          "end": 13434,
+          "id": "fr202523912:para210",
+          "source_id": "fr202523912",
+          "start": 13362,
+          "text": "Representative to take under Section 301(b), to obtain the elimination \n"
+        },
+        {
+          "end": 13501,
+          "id": "fr202523912:para211",
+          "source_id": "fr202523912",
+          "start": 13434,
+          "text": "of that act, policy, or practice. Section 301(c) of the Trade Act \n"
+        },
+        {
+          "end": 13571,
+          "id": "fr202523912:para212",
+          "source_id": "fr202523912",
+          "start": 13501,
+          "text": "authorizes the U.S. Trade Representative to take certain actions for \n"
+        },
+        {
+          "end": 13644,
+          "id": "fr202523912:para213",
+          "source_id": "fr202523912",
+          "start": 13571,
+          "text": "purposes of carrying out the provisions of Section 301(b). For example, \n"
+        },
+        {
+          "end": 13710,
+          "id": "fr202523912:para214",
+          "source_id": "fr202523912",
+          "start": 13644,
+          "text": "Section 301(c)(1)(B) authorizes the U.S. Trade Representative to \n"
+        },
+        {
+          "end": 13777,
+          "id": "fr202523912:para215",
+          "source_id": "fr202523912",
+          "start": 13710,
+          "text": "``impose duties or other import restrictions on the goods of [the \n"
+        },
+        {
+          "end": 13849,
+          "id": "fr202523912:para216",
+          "source_id": "fr202523912",
+          "start": 13777,
+          "text": "foreign country subject to the investigation] and, notwithstanding any \n"
+        },
+        {
+          "end": 13920,
+          "id": "fr202523912:para217",
+          "source_id": "fr202523912",
+          "start": 13849,
+          "text": "other provision of law, fees or restrictions on the services of, such \n"
+        },
+        {
+          "end": 13990,
+          "id": "fr202523912:para218",
+          "source_id": "fr202523912",
+          "start": 13920,
+          "text": "foreign country for such time as the Trade Representative determines \n"
+        },
+        {
+          "end": 14063,
+          "id": "fr202523912:para219",
+          "source_id": "fr202523912",
+          "start": 13990,
+          "text": "appropriate.'' Section 301(c)(3)(A) provides that actions that the U.S. \n"
+        },
+        {
+          "end": 14132,
+          "id": "fr202523912:para220",
+          "source_id": "fr202523912",
+          "start": 14063,
+          "text": "Trade Representative is authorized to take may be taken against any \n"
+        },
+        {
+          "end": 14205,
+          "id": "fr202523912:para221",
+          "source_id": "fr202523912",
+          "start": 14132,
+          "text": "good or economic sector on a non-discriminatory basis or solely against \n"
+        },
+        {
+          "end": 14236,
+          "id": "fr202523912:para222",
+          "source_id": "fr202523912",
+          "start": 14205,
+          "text": "the foreign country concerned.\n"
+        },
+        {
+          "end": 14308,
+          "id": "fr202523912:para223",
+          "source_id": "fr202523912",
+          "start": 14236,
+          "text": "    Pursuant to Sections 301(b) and (c), the U.S. Trade Representative \n"
+        },
+        {
+          "end": 14371,
+          "id": "fr202523912:para224",
+          "source_id": "fr202523912",
+          "start": 14308,
+          "text": "has determined that responsive action is appropriate and that \n"
+        },
+        {
+          "end": 14439,
+          "id": "fr202523912:para225",
+          "source_id": "fr202523912",
+          "start": 14371,
+          "text": "appropriate responsive action includes taking tariff action now on \n"
+        },
+        {
+          "end": 14510,
+          "id": "fr202523912:para226",
+          "source_id": "fr202523912",
+          "start": 14439,
+          "text": "semiconductors from China, with an initial tariff level of 0 percent, \n"
+        },
+        {
+          "end": 14583,
+          "id": "fr202523912:para227",
+          "source_id": "fr202523912",
+          "start": 14510,
+          "text": "increasing in 18 months on June 23, 2027, to a rate to be announced not \n"
+        },
+        {
+          "end": 14653,
+          "id": "fr202523912:para228",
+          "source_id": "fr202523912",
+          "start": 14583,
+          "text": "fewer than 30 days prior to that date. These new Section 301 tariffs \n"
+        },
+        {
+          "end": 14723,
+          "id": "fr202523912:para229",
+          "source_id": "fr202523912",
+          "start": 14653,
+          "text": "would be additional to the existing 50 percent Section 301 tariff on \n"
+        },
+        {
+          "end": 14786,
+          "id": "fr202523912:para230",
+          "source_id": "fr202523912",
+          "start": 14723,
+          "text": "semiconductors from China imposed pursuant to the Section 301 \n"
+        },
+        {
+          "end": 14855,
+          "id": "fr202523912:para231",
+          "source_id": "fr202523912",
+          "start": 14786,
+          "text": "investigation related to forced technology transfer. The U.S. Trade \n"
+        },
+        {
+          "end": 14925,
+          "id": "fr202523912:para232",
+          "source_id": "fr202523912",
+          "start": 14855,
+          "text": "Representative will continue to monitor the efficacy of this action, \n"
+        },
+        {
+          "end": 14995,
+          "id": "fr202523912:para233",
+          "source_id": "fr202523912",
+          "start": 14925,
+          "text": "the progress made toward resolution of this matter, and the need for \n"
+        },
+        {
+          "end": 15018,
+          "id": "fr202523912:para234",
+          "source_id": "fr202523912",
+          "start": 14995,
+          "text": "any additional action.\n"
+        },
+        {
+          "end": 15081,
+          "id": "fr202523912:para235",
+          "source_id": "fr202523912",
+          "start": 15018,
+          "text": "    This action applies to the following 8-digit subheadings:\n\n"
+        },
+        {
+          "end": 15099,
+          "id": "fr202523912:para236",
+          "source_id": "fr202523912",
+          "start": 15081,
+          "text": "[[Page 60850]]\n\n\n\n"
+        },
+        {
+          "end": 15172,
+          "id": "fr202523912:para237",
+          "source_id": "fr202523912",
+          "start": 15099,
+          "text": "------------------------------------------------------------------------\n"
+        },
+        {
+          "end": 15236,
+          "id": "fr202523912:para238",
+          "source_id": "fr202523912",
+          "start": 15172,
+          "text": "             Tariff code                         HS description\n"
+        },
+        {
+          "end": 15309,
+          "id": "fr202523912:para239",
+          "source_id": "fr202523912",
+          "start": 15236,
+          "text": "------------------------------------------------------------------------\n"
+        },
+        {
+          "end": 15381,
+          "id": "fr202523912:para240",
+          "source_id": "fr202523912",
+          "start": 15309,
+          "text": "28046100.............................  Silicon containing by weight not\n"
+        },
+        {
+          "end": 15448,
+          "id": "fr202523912:para241",
+          "source_id": "fr202523912",
+          "start": 15381,
+          "text": "                                        less than 99.99 percent of\n"
+        },
+        {
+          "end": 15497,
+          "id": "fr202523912:para242",
+          "source_id": "fr202523912",
+          "start": 15448,
+          "text": "                                        silicon.\n"
+        },
+        {
+          "end": 15568,
+          "id": "fr202523912:para243",
+          "source_id": "fr202523912",
+          "start": 15497,
+          "text": "38180000.............................  Chemical elements doped for use\n"
+        },
+        {
+          "end": 15639,
+          "id": "fr202523912:para244",
+          "source_id": "fr202523912",
+          "start": 15568,
+          "text": "                                        in electronics, in the form of\n"
+        },
+        {
+          "end": 15708,
+          "id": "fr202523912:para245",
+          "source_id": "fr202523912",
+          "start": 15639,
+          "text": "                                        discs, wafers etc., chemical\n"
+        },
+        {
+          "end": 15779,
+          "id": "fr202523912:para246",
+          "source_id": "fr202523912",
+          "start": 15708,
+          "text": "                                        compounds doped for electronic\n"
+        },
+        {
+          "end": 15824,
+          "id": "fr202523912:para247",
+          "source_id": "fr202523912",
+          "start": 15779,
+          "text": "                                        use.\n"
+        },
+        {
+          "end": 15897,
+          "id": "fr202523912:para248",
+          "source_id": "fr202523912",
+          "start": 15824,
+          "text": "85411000.............................  Diodes, other than photosensitive\n"
+        },
+        {
+          "end": 15963,
+          "id": "fr202523912:para249",
+          "source_id": "fr202523912",
+          "start": 15897,
+          "text": "                                        or light-emitting diodes.\n"
+        },
+        {
+          "end": 16026,
+          "id": "fr202523912:para250",
+          "source_id": "fr202523912",
+          "start": 15963,
+          "text": "85412100.............................  Transistors, other than\n"
+        },
+        {
+          "end": 16099,
+          "id": "fr202523912:para251",
+          "source_id": "fr202523912",
+          "start": 16026,
+          "text": "                                        photosensitive transistors, with\n"
+        },
+        {
+          "end": 16168,
+          "id": "fr202523912:para252",
+          "source_id": "fr202523912",
+          "start": 16099,
+          "text": "                                        a dissipation rating of less\n"
+        },
+        {
+          "end": 16218,
+          "id": "fr202523912:para253",
+          "source_id": "fr202523912",
+          "start": 16168,
+          "text": "                                        than 1 W.\n"
+        },
+        {
+          "end": 16281,
+          "id": "fr202523912:para254",
+          "source_id": "fr202523912",
+          "start": 16218,
+          "text": "85412900.............................  Transistors, other than\n"
+        },
+        {
+          "end": 16354,
+          "id": "fr202523912:para255",
+          "source_id": "fr202523912",
+          "start": 16281,
+          "text": "                                        photosensitive transistors, with\n"
+        },
+        {
+          "end": 16425,
+          "id": "fr202523912:para256",
+          "source_id": "fr202523912",
+          "start": 16354,
+          "text": "                                        a dissipation rating of 1 W or\n"
+        },
+        {
+          "end": 16471,
+          "id": "fr202523912:para257",
+          "source_id": "fr202523912",
+          "start": 16425,
+          "text": "                                        more.\n"
+        },
+        {
+          "end": 16540,
+          "id": "fr202523912:para258",
+          "source_id": "fr202523912",
+          "start": 16471,
+          "text": "85413000.............................  Thyristors, diacs and triacs,\n"
+        },
+        {
+          "end": 16606,
+          "id": "fr202523912:para259",
+          "source_id": "fr202523912",
+          "start": 16540,
+          "text": "                                        other than photosensitive\n"
+        },
+        {
+          "end": 16655,
+          "id": "fr202523912:para260",
+          "source_id": "fr202523912",
+          "start": 16606,
+          "text": "                                        devices.\n"
+        },
+        {
+          "end": 16715,
+          "id": "fr202523912:para261",
+          "source_id": "fr202523912",
+          "start": 16655,
+          "text": "85414910.............................  Other photosensitive\n"
+        },
+        {
+          "end": 16788,
+          "id": "fr202523912:para262",
+          "source_id": "fr202523912",
+          "start": 16715,
+          "text": "                                        semiconductor diodes, other than\n"
+        },
+        {
+          "end": 16844,
+          "id": "fr202523912:para263",
+          "source_id": "fr202523912",
+          "start": 16788,
+          "text": "                                        light-emitting.\n"
+        },
+        {
+          "end": 16911,
+          "id": "fr202523912:para264",
+          "source_id": "fr202523912",
+          "start": 16844,
+          "text": "85414970.............................  Photosensitive transistors.\n"
+        },
+        {
+          "end": 16979,
+          "id": "fr202523912:para265",
+          "source_id": "fr202523912",
+          "start": 16911,
+          "text": "85414980.............................  Photosensitive semiconductor\n"
+        },
+        {
+          "end": 17050,
+          "id": "fr202523912:para266",
+          "source_id": "fr202523912",
+          "start": 16979,
+          "text": "                                        devices nesoi, optical coupled\n"
+        },
+        {
+          "end": 17101,
+          "id": "fr202523912:para267",
+          "source_id": "fr202523912",
+          "start": 17050,
+          "text": "                                        isolators.\n"
+        },
+        {
+          "end": 17161,
+          "id": "fr202523912:para268",
+          "source_id": "fr202523912",
+          "start": 17101,
+          "text": "85414995.............................  Other photosensitive\n"
+        },
+        {
+          "end": 17230,
+          "id": "fr202523912:para269",
+          "source_id": "fr202523912",
+          "start": 17161,
+          "text": "                                        semiconductor devices, other\n"
+        },
+        {
+          "end": 17298,
+          "id": "fr202523912:para270",
+          "source_id": "fr202523912",
+          "start": 17230,
+          "text": "                                        than diodes or transistors,\n"
+        },
+        {
+          "end": 17345,
+          "id": "fr202523912:para271",
+          "source_id": "fr202523912",
+          "start": 17298,
+          "text": "                                        nesoi.\n"
+        },
+        {
+          "end": 17410,
+          "id": "fr202523912:para272",
+          "source_id": "fr202523912",
+          "start": 17345,
+          "text": "85415100.............................  Other semiconductor-based\n"
+        },
+        {
+          "end": 17474,
+          "id": "fr202523912:para273",
+          "source_id": "fr202523912",
+          "start": 17410,
+          "text": "                                        transducers, other than\n"
+        },
+        {
+          "end": 17542,
+          "id": "fr202523912:para274",
+          "source_id": "fr202523912",
+          "start": 17474,
+          "text": "                                        photosensitive transducers.\n"
+        },
+        {
+          "end": 17610,
+          "id": "fr202523912:para275",
+          "source_id": "fr202523912",
+          "start": 17542,
+          "text": "85415900.............................  Other semiconductor devices,\n"
+        },
+        {
+          "end": 17681,
+          "id": "fr202523912:para276",
+          "source_id": "fr202523912",
+          "start": 17610,
+          "text": "                                        other than semiconductor-based\n"
+        },
+        {
+          "end": 17745,
+          "id": "fr202523912:para277",
+          "source_id": "fr202523912",
+          "start": 17681,
+          "text": "                                        transducers, other than\n"
+        },
+        {
+          "end": 17816,
+          "id": "fr202523912:para278",
+          "source_id": "fr202523912",
+          "start": 17745,
+          "text": "                                        photosensitive devices, nesoi.\n"
+        },
+        {
+          "end": 17885,
+          "id": "fr202523912:para279",
+          "source_id": "fr202523912",
+          "start": 17816,
+          "text": "85419000.............................  Parts of diodes, transistors,\n"
+        },
+        {
+          "end": 17956,
+          "id": "fr202523912:para280",
+          "source_id": "fr202523912",
+          "start": 17885,
+          "text": "                                        similar semiconductor devices,\n"
+        },
+        {
+          "end": 18025,
+          "id": "fr202523912:para281",
+          "source_id": "fr202523912",
+          "start": 17956,
+          "text": "                                        photosensitive semiconductor\n"
+        },
+        {
+          "end": 18092,
+          "id": "fr202523912:para282",
+          "source_id": "fr202523912",
+          "start": 18025,
+          "text": "                                        devices, LED's and mounted\n"
+        },
+        {
+          "end": 18156,
+          "id": "fr202523912:para283",
+          "source_id": "fr202523912",
+          "start": 18092,
+          "text": "                                        piezoelectric crystals.\n"
+        },
+        {
+          "end": 18227,
+          "id": "fr202523912:para284",
+          "source_id": "fr202523912",
+          "start": 18156,
+          "text": "85423100.............................  Electronic integrated circuits:\n"
+        },
+        {
+          "end": 18295,
+          "id": "fr202523912:para285",
+          "source_id": "fr202523912",
+          "start": 18227,
+          "text": "                                        processors and controllers.\n"
+        },
+        {
+          "end": 18366,
+          "id": "fr202523912:para286",
+          "source_id": "fr202523912",
+          "start": 18295,
+          "text": "85423200.............................  Electronic integrated circuits:\n"
+        },
+        {
+          "end": 18416,
+          "id": "fr202523912:para287",
+          "source_id": "fr202523912",
+          "start": 18366,
+          "text": "                                        memories.\n"
+        },
+        {
+          "end": 18487,
+          "id": "fr202523912:para288",
+          "source_id": "fr202523912",
+          "start": 18416,
+          "text": "85423300.............................  Electronic integrated circuits:\n"
+        },
+        {
+          "end": 18540,
+          "id": "fr202523912:para289",
+          "source_id": "fr202523912",
+          "start": 18487,
+          "text": "                                        amplifiers..\n"
+        },
+        {
+          "end": 18611,
+          "id": "fr202523912:para290",
+          "source_id": "fr202523912",
+          "start": 18540,
+          "text": "85423900.............................  Electronic integrated circuits:\n"
+        },
+        {
+          "end": 18658,
+          "id": "fr202523912:para291",
+          "source_id": "fr202523912",
+          "start": 18611,
+          "text": "                                        other.\n"
+        },
+        {
+          "end": 18728,
+          "id": "fr202523912:para292",
+          "source_id": "fr202523912",
+          "start": 18658,
+          "text": "85429000.............................  Parts of electronic integrated\n"
+        },
+        {
+          "end": 18798,
+          "id": "fr202523912:para293",
+          "source_id": "fr202523912",
+          "start": 18728,
+          "text": "                                        circuits and microassemblies.\n"
+        },
+        {
+          "end": 18872,
+          "id": "fr202523912:para294",
+          "source_id": "fr202523912",
+          "start": 18798,
+          "text": "------------------------------------------------------------------------\n\n"
+        },
+        {
+          "end": 18941,
+          "id": "fr202523912:para295",
+          "source_id": "fr202523912",
+          "start": 18872,
+          "text": "    In order to implement the Trade Representative's determination, \n"
+        },
+        {
+          "end": 19012,
+          "id": "fr202523912:para296",
+          "source_id": "fr202523912",
+          "start": 18941,
+          "text": "subchapter III of chapter 99 of the Harmonized Tariff Schedule of the \n"
+        },
+        {
+          "end": 19076,
+          "id": "fr202523912:para297",
+          "source_id": "fr202523912",
+          "start": 19012,
+          "text": "United States (HTSUS) is modified by the Annex of this notice, \n"
+        },
+        {
+          "end": 19105,
+          "id": "fr202523912:para298",
+          "source_id": "fr202523912",
+          "start": 19076,
+          "text": "effective December 23, 2025.\n"
+        },
+        {
+          "end": 19178,
+          "id": "fr202523912:para299",
+          "source_id": "fr202523912",
+          "start": 19105,
+          "text": "    Products of China that are provided for in HTSUS heading 9903.91.05 \n"
+        },
+        {
+          "end": 19248,
+          "id": "fr202523912:para300",
+          "source_id": "fr202523912",
+          "start": 19178,
+          "text": "and described in subdivision (f)(ii) of note 31 to subchapter III of \n"
+        },
+        {
+          "end": 19318,
+          "id": "fr202523912:para301",
+          "source_id": "fr202523912",
+          "start": 19248,
+          "text": "chapter 99 of the HTSUS, as established by the Annex of this notice, \n"
+        },
+        {
+          "end": 19389,
+          "id": "fr202523912:para302",
+          "source_id": "fr202523912",
+          "start": 19318,
+          "text": "shall continue to be subject to antidumping, countervailing, or other \n"
+        },
+        {
+          "end": 19459,
+          "id": "fr202523912:para303",
+          "source_id": "fr202523912",
+          "start": 19389,
+          "text": "duties, fees, exactions and charges that apply to such products. Any \n"
+        },
+        {
+          "end": 19532,
+          "id": "fr202523912:para304",
+          "source_id": "fr202523912",
+          "start": 19459,
+          "text": "product covered by the Annex to this notice, except any product that is \n"
+        },
+        {
+          "end": 19601,
+          "id": "fr202523912:para305",
+          "source_id": "fr202523912",
+          "start": 19532,
+          "text": "eligible for admission under `domestic status' as defined in 19 CFR \n"
+        },
+        {
+          "end": 19666,
+          "id": "fr202523912:para306",
+          "source_id": "fr202523912",
+          "start": 19601,
+          "text": "146.43, which is subject to the additional duty imposed by this \n"
+        },
+        {
+          "end": 19735,
+          "id": "fr202523912:para307",
+          "source_id": "fr202523912",
+          "start": 19666,
+          "text": "determination, and is admitted into a U.S. foreign trade zone on or \n"
+        },
+        {
+          "end": 19807,
+          "id": "fr202523912:para308",
+          "source_id": "fr202523912",
+          "start": 19735,
+          "text": "after the effective date of the additional duties only may be admitted \n"
+        },
+        {
+          "end": 19873,
+          "id": "fr202523912:para309",
+          "source_id": "fr202523912",
+          "start": 19807,
+          "text": "as `privileged foreign status' as defined in 19 CFR 146.41. Such \n"
+        },
+        {
+          "end": 19944,
+          "id": "fr202523912:para310",
+          "source_id": "fr202523912",
+          "start": 19873,
+          "text": "products will be subject upon entry for consumption to any ad valorem \n"
+        },
+        {
+          "end": 20017,
+          "id": "fr202523912:para311",
+          "source_id": "fr202523912",
+          "start": 19944,
+          "text": "rates of duty or quantitative limitations related to the classification \n"
+        },
+        {
+          "end": 20057,
+          "id": "fr202523912:para312",
+          "source_id": "fr202523912",
+          "start": 20017,
+          "text": "under the applicable HTSUS subheading.\n\n"
+        },
+        {
+          "end": 20064,
+          "id": "fr202523912:para313",
+          "source_id": "fr202523912",
+          "start": 20057,
+          "text": "Annex\n\n"
+        },
+        {
+          "end": 20136,
+          "id": "fr202523912:para314",
+          "source_id": "fr202523912",
+          "start": 20064,
+          "text": "    Subdivision (f) of U.S. note 31 to subchapter III of chapter 99 of \n"
+        },
+        {
+          "end": 20200,
+          "id": "fr202523912:para315",
+          "source_id": "fr202523912",
+          "start": 20136,
+          "text": "the Harmonized Tariff Schedule of the United States is amended:\n"
+        },
+        {
+          "end": 20266,
+          "id": "fr202523912:para316",
+          "source_id": "fr202523912",
+          "start": 20200,
+          "text": "    1. by deleting ``Heading 9903.91.05'' and by inserting ``(i) \n"
+        },
+        {
+          "end": 20308,
+          "id": "fr202523912:para317",
+          "source_id": "fr202523912",
+          "start": 20266,
+          "text": "Heading 9903.91.05'' in lieu thereof; and\n"
+        },
+        {
+          "end": 20362,
+          "id": "fr202523912:para318",
+          "source_id": "fr202523912",
+          "start": 20308,
+          "text": "    2. by inserting the following in numerical order:\n"
+        },
+        {
+          "end": 20433,
+          "id": "fr202523912:para319",
+          "source_id": "fr202523912",
+          "start": 20362,
+          "text": "    ``(ii) The additional rate of duty under heading 9903.91.05 shall \n"
+        },
+        {
+          "end": 20500,
+          "id": "fr202523912:para320",
+          "source_id": "fr202523912",
+          "start": 20433,
+          "text": "be increased on June 23, 2027. The U.S. Trade Representative will \n"
+        },
+        {
+          "end": 20571,
+          "id": "fr202523912:para321",
+          "source_id": "fr202523912",
+          "start": 20500,
+          "text": "announce the amount of the increase in a Federal Register notice that \n"
+        },
+        {
+          "end": 20621,
+          "id": "fr202523912:para322",
+          "source_id": "fr202523912",
+          "start": 20571,
+          "text": "is issued at least 30 days prior to that date.''\n\n"
+        },
+        {
+          "end": 20639,
+          "id": "fr202523912:para323",
+          "source_id": "fr202523912",
+          "start": 20621,
+          "text": "Jennifer Thornton\n"
+        },
+        {
+          "end": 20706,
+          "id": "fr202523912:para324",
+          "source_id": "fr202523912",
+          "start": 20639,
+          "text": "General Counsel, Office of the United States Trade Representative.\n"
+        },
+        {
+          "end": 20751,
+          "id": "fr202523912:para325",
+          "source_id": "fr202523912",
+          "start": 20706,
+          "text": "[FR Doc. 2025-23912 Filed 12-23-25; 8:45 am]\n"
+        },
+        {
+          "end": 20776,
+          "id": "fr202523912:para326",
+          "source_id": "fr202523912",
+          "start": 20751,
+          "text": "BILLING CODE 3390-F4-P\n\n\n"
+        }
+      ],
+      "sources": [
+        {
+          "document_sha256": "a2b8d9ddeada1a7e0a97926a70da545eb40e883ec547c02e5d52221bf2b6ed78",
+          "page": "1",
+          "source_id": "fr202523912",
+          "text_sha256": "0aacb46d4a8bae938b367f059cf9098338ed5bda4c03ce5f297c8813358e8d0d",
+          "url": "https://www.govinfo.gov/content/pkg/FR-2025-12-29/html/2025-23912.htm"
+        }
+      ],
+      "status": "disabled",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2025-12-29/html/2025-23912.htm"
+    }
+  ],
+  "limitations": [
+    "文档存储只包含已登记公告的正文段落，不是完整法规库。",
+    "publication_time 未知时，检索不得声称该文档在给定时间点已可得。"
+  ],
+  "policy_id": "r2_semiconductor_2025",
+  "schema_version": "policy-document-store-v1"
+}

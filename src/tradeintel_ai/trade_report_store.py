@@ -25,6 +25,8 @@ from .trade_explanation_v4 import (PROTOCOL as V4_PROTOCOL, build_snapshot,
 SCHEMA = "trade-report-record-v1"
 LEGACY_PROTOCOLS = {"trade-data-explanation-v1", "trade-data-explanation-v2"}
 NO_EXPLANATION_PROTOCOL = "none"
+NO_EXPLANATION_KINDS = {"announcement-statistics-report-v1",
+                        "announcement-context-report-v1"}
 _ID = re.compile(r"[0-9a-f]{32}\Z")
 _LOCAL_LOCK = threading.RLock()
 
@@ -105,7 +107,7 @@ def _verify(record: dict[str, Any], report_id: str) -> None:
     if not isinstance(explanation, dict) or not isinstance(explanation.get("status"), str):
         raise ValueError("解释记录无效")
     if protocol == NO_EXPLANATION_PROTOCOL:
-        if (report.get("kind") != "announcement-statistics-report-v1"
+        if (report.get("kind") not in NO_EXPLANATION_KINDS
                 or explanation.get("status") != "not_requested"
                 or explanation.get("raw_text") is not None
                 or explanation.get("parsed") is not None):
@@ -165,14 +167,14 @@ def _locked(root: Path, report_id: str) -> Iterator[Path]:
 def create_record(root: Path, report: dict[str, Any], *,
                   explanation_protocol: str = V3_PROTOCOL) -> dict[str, Any]:
     digest = report_sha256(report)
-    if (report.get("kind") == "announcement-statistics-report-v1"
+    if (report.get("kind") in NO_EXPLANATION_KINDS
             and explanation_protocol != NO_EXPLANATION_PROTOCOL):
         raise ValueError("公告统计报告必须使用无模型解释协议")
     if explanation_protocol not in {V3_PROTOCOL, V4_PROTOCOL, NO_EXPLANATION_PROTOCOL}:
         raise ValueError("报告解释协议无效")
     if explanation_protocol == NO_EXPLANATION_PROTOCOL:
-        if report.get("kind") != "announcement-statistics-report-v1":
-            raise ValueError("无模型报告协议只允许用于公告统计报告")
+        if report.get("kind") not in NO_EXPLANATION_KINDS:
+            raise ValueError("无模型报告协议只允许用于公告统计或贸易背景报告")
         snapshot = None
     elif explanation_protocol == V3_PROTOCOL:
         observation_catalog(report)

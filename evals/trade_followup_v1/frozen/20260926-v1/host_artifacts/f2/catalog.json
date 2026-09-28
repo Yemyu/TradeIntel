@@ -1,0 +1,373 @@
+{
+  "facts": [
+    {
+      "fact": "出口逐月数据的口径是出口FAS金额，金额不能单独说明数量或单价。",
+      "id": "export.basis",
+      "months": [],
+      "sources": []
+    },
+    {
+      "fact": "2025-08的出口金额为1,424,168,963美元。",
+      "id": "export.month.2025-08",
+      "months": [
+        "2025-08"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2508.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-09的出口金额为1,518,810,048美元。",
+      "id": "export.month.2025-09",
+      "months": [
+        "2025-09"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2509.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-10的出口金额为1,468,164,593美元。",
+      "id": "export.month.2025-10",
+      "months": [
+        "2025-10"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2510.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-11的出口金额为1,730,452,418美元。",
+      "id": "export.month.2025-11",
+      "months": [
+        "2025-11"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2511.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-12的出口金额为1,614,817,777美元。",
+      "id": "export.month.2025-12",
+      "months": [
+        "2025-12"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2512.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-01的出口金额为1,544,320,516美元。",
+      "id": "export.month.2026-01",
+      "months": [
+        "2026-01"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2601.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-02的出口金额为1,591,226,325美元。",
+      "id": "export.month.2026-02",
+      "months": [
+        "2026-02"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2602.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-03的出口金额为1,846,089,547美元。",
+      "id": "export.month.2026-03",
+      "months": [
+        "2026-03"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2603.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-04的出口金额为1,735,520,450美元。",
+      "id": "export.month.2026-04",
+      "months": [
+        "2026-04"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2604.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-05的出口金额为1,661,906,114美元。",
+      "id": "export.month.2026-05",
+      "months": [
+        "2026-05"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2605.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-06的出口金额为1,802,080,337美元。",
+      "id": "export.month.2026-06",
+      "months": [
+        "2026-06"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2606.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-07的出口金额为1,637,235,741美元。",
+      "id": "export.month.2026-07",
+      "months": [
+        "2026-07"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2607.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-08至2025-09的出口金额增加94,641,085美元。",
+      "id": "export.change.2025-09",
+      "months": [
+        "2025-08",
+        "2025-09"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2508.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2509.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-09至2025-10的出口金额减少50,645,455美元。",
+      "id": "export.change.2025-10",
+      "months": [
+        "2025-09",
+        "2025-10"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2509.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2510.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-10至2025-11的出口金额增加262,287,825美元。",
+      "id": "export.change.2025-11",
+      "months": [
+        "2025-10",
+        "2025-11"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2510.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2511.ZIP"
+      ]
+    },
+    {
+      "fact": "2025-11至2025-12的出口金额减少115,634,641美元。",
+      "id": "export.change.2025-12",
+      "months": [
+        "2025-11",
+        "2025-12"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2511.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2512.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-01至2026-02的出口金额增加46,905,809美元。",
+      "id": "export.change.2026-02",
+      "months": [
+        "2026-01",
+        "2026-02"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2601.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2602.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-02至2026-03的出口金额增加254,863,222美元。",
+      "id": "export.change.2026-03",
+      "months": [
+        "2026-02",
+        "2026-03"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2602.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2603.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-03至2026-04的出口金额减少110,569,097美元。",
+      "id": "export.change.2026-04",
+      "months": [
+        "2026-03",
+        "2026-04"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2603.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2604.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-04至2026-05的出口金额减少73,614,336美元。",
+      "id": "export.change.2026-05",
+      "months": [
+        "2026-04",
+        "2026-05"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2604.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2605.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-05至2026-06的出口金额增加140,174,223美元。",
+      "id": "export.change.2026-06",
+      "months": [
+        "2026-05",
+        "2026-06"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2605.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2606.ZIP"
+      ]
+    },
+    {
+      "fact": "2026-06至2026-07的出口金额减少164,844,596美元。",
+      "id": "export.change.2026-07",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2606.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2607.ZIP"
+      ]
+    },
+    {
+      "fact": "2025年已观察的4次同年相邻月出口金额变化中，截至2025-09的这次变化按绝对金额排第3；最大变化截至2025-11。",
+      "id": "export.rank.2025-09",
+      "months": [
+        "2025-09"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2508.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2509.ZIP"
+      ]
+    },
+    {
+      "fact": "2025年已观察的4次同年相邻月出口金额变化中，截至2025-10的这次变化按绝对金额排第4；最大变化截至2025-11。",
+      "id": "export.rank.2025-10",
+      "months": [
+        "2025-10"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2509.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2510.ZIP"
+      ]
+    },
+    {
+      "fact": "2025年已观察的4次同年相邻月出口金额变化中，截至2025-11的这次变化按绝对金额排第1；最大变化截至2025-11。",
+      "id": "export.rank.2025-11",
+      "months": [
+        "2025-11"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2510.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2511.ZIP"
+      ]
+    },
+    {
+      "fact": "2025年已观察的4次同年相邻月出口金额变化中，截至2025-12的这次变化按绝对金额排第2；最大变化截至2025-11。",
+      "id": "export.rank.2025-12",
+      "months": [
+        "2025-12"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2511.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/ex_m/EXDB2512.ZIP"
+      ]
+    },
+    {
+      "fact": "2026年已观察的6次同年相邻月出口金额变化中，截至2026-02的这次变化按绝对金额排第6；最大变化截至2026-03。",
+      "id": "export.rank.2026-02",
+      "months": [
+        "2026-02"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2601.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2602.ZIP"
+      ]
+    },
+    {
+      "fact": "2026年已观察的6次同年相邻月出口金额变化中，截至2026-03的这次变化按绝对金额排第1；最大变化截至2026-03。",
+      "id": "export.rank.2026-03",
+      "months": [
+        "2026-03"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2602.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2603.ZIP"
+      ]
+    },
+    {
+      "fact": "2026年已观察的6次同年相邻月出口金额变化中，截至2026-04的这次变化按绝对金额排第4；最大变化截至2026-03。",
+      "id": "export.rank.2026-04",
+      "months": [
+        "2026-04"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2603.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2604.ZIP"
+      ]
+    },
+    {
+      "fact": "2026年已观察的6次同年相邻月出口金额变化中，截至2026-05的这次变化按绝对金额排第5；最大变化截至2026-03。",
+      "id": "export.rank.2026-05",
+      "months": [
+        "2026-05"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2604.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2605.ZIP"
+      ]
+    },
+    {
+      "fact": "2026年已观察的6次同年相邻月出口金额变化中，截至2026-06的这次变化按绝对金额排第3；最大变化截至2026-03。",
+      "id": "export.rank.2026-06",
+      "months": [
+        "2026-06"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2605.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2606.ZIP"
+      ]
+    },
+    {
+      "fact": "2026年已观察的6次同年相邻月出口金额变化中，截至2026-07的这次变化按绝对金额排第2；最大变化截至2026-03。",
+      "id": "export.rank.2026-07",
+      "months": [
+        "2026-07"
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2606.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/ex_m/EXDB2607.ZIP"
+      ]
+    }
+  ],
+  "report_sha256": "e03fe0ed40ceda1fdbfedc2f61874e18937a37e7dd5336e83ef7b19fbe9109f5",
+  "schema_version": "trade-report-followup-v1",
+  "scopes": [
+    {
+      "end_month": "2026-07",
+      "flow": "export",
+      "metric": "total_export_fas_usd",
+      "partner": "ALL_DESTINATIONS",
+      "product_code": "1005",
+      "product_label": "玉米",
+      "start_month": "2025-08"
+    }
+  ]
+}

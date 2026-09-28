@@ -110,7 +110,8 @@ if (location.pathname.startsWith('/preview')) {
   addEventListener('hashchange', () => setReportMode(liveVisible));
   const setStatus = message => {
     status.textContent = message;
-    if(flow.tradeReport?.kind!=='announcement-statistics-report-v1')reportStatus.textContent=message;
+    if(!['announcement-statistics-report-v1','announcement-context-report-v1'].includes(flow.tradeReport?.kind))
+      reportStatus.textContent=message;
   };
   settingsForm.addEventListener('submit',async event=>{
     event.preventDefault();saveButton.disabled=true;
@@ -157,6 +158,14 @@ if (location.pathname.startsWith('/preview')) {
     if(officialTitle)report.append(make('p',tr('公告原题：','Official notice: ')+officialTitle,'official-notice-title'));
     addParagraph(report,tr(`${scope.start_month} 至 ${scope.end_month} · 中国来源的美国消费进口。图中只汇总当月有观测的 HTS10 细码。`,
       `${scope.start_month} to ${scope.end_month} · U.S. imports for consumption from China. Charts sum only HTS10 lines observed that month.`));
+    const applicability=make('aside',undefined,'announcement-applicability-note');
+    applicability.append(make('strong',tr('税率说明','About the rate shown in this notice')));
+    addParagraph(applicability,tr('下面是这份公告发布时写的税率，不等于图表月份或今天实际适用的税率。后来的调整和排除，我们还没有核对。',
+      'The rates below are what this notice said when published. We have not checked later amendments or exclusions, so do not treat them as rates for the charted months or today.'));
+    if(scope.notice_time_relation==='before_recorded_effective_month')
+      addParagraph(applicability,tr('所选贸易月份都早于这份公告原文记载的生效月份；这些数字只提供更早时期的商品贸易背景，不是政策实施后的结果。',
+        'All selected trade months precede the effective month recorded in this notice. These figures are earlier trade context, not post-policy results.'));
+    report.append(applicability);
     if(scope.unselected_whole_codes?.length||scope.excluded_partial_entries?.length)
       addParagraph(report,tr(`本次只查所选商品；另有 ${scope.unselected_whole_codes?.length||0} 个完整税号未选，${scope.excluded_partial_entries?.length||0} 个部分编码不纳入统计。`,
         `This report covers only the selected products; ${scope.unselected_whole_codes?.length||0} complete codes were not selected and ${scope.excluded_partial_entries?.length||0} partial codes are excluded.`));
@@ -196,10 +205,10 @@ if (location.pathname.startsWith('/preview')) {
       addParagraph(missing,`${item.hts8}：${absent.length?tr('未出现在数据中','absent from data')+' '+absent.join(', '):''}${absent.length&&unobserved.length?'；':''}${unobserved.length?tr('存在记录但无中国来源观测','present but without a China observation')+' '+unobserved.join(', '):''}${item.classification_available?'':tr('；该月官方商品目录不可用','; official classification is unavailable for this month')}`);
     }
     if(latest?.rows?.some(item=>!item.complete)){tableDetails.append(missing);}
-    const policySection=make('section',undefined,'live-section');policySection.append(make('h2',tr('公告内容','Notice details')));
-    const labels={title:['标题','Title'],publication_date:['公布日期','Publication date'],effective_date:['生效日期','Effective date'],origin:['原产地','Origin'],hts_codes:['商品范围','Product scope'],rates:['附加税率','Additional rates'],rate_meaning:['税率含义','Rate meaning'],conditions:['条件','Conditions'],exceptions:['例外','Exceptions'],revisions:['修订','Revisions'],clock_24h:['时间','Time'],timezone:['时区','Time zone'],entry_events:['适用事件','Entry events']};
+    const policySection=make('section',undefined,'live-section');policySection.append(make('h2',tr('这份公告原文写了什么','What this notice says')));
+    const labels={title:['标题','Title'],publication_date:['公布日期','Publication date'],effective_date:['原文记载的生效日期','Effective date stated in the notice'],origin:['原产地','Origin'],hts_codes:['商品范围','Product scope'],rates:['原文记载的附加税率','Additional rates stated in the notice'],rate_meaning:['税率含义','Rate meaning'],conditions:['条件','Conditions'],exceptions:['例外','Exceptions'],revisions:['修订','Revisions'],clock_24h:['时间','Time'],timezone:['时区','Time zone'],entry_events:['适用事件','Entry events']};
     const policyValueDetails=make('details',undefined,'monthly-data announcement-policy-details');
-    policyValueDetails.append(make('summary',tr('查看商品税号与附加税率明细','View product codes and additional rates')));
+    policyValueDetails.append(make('summary',tr('查看商品税号与公告原文税率明细','View product codes and rates in this notice')));
     const legalTextDetails=make('details',undefined,'monthly-data announcement-legal-details');
     legalTextDetails.append(make('summary',tr('查看完整条件、例外和修订条款','Read full conditions, exceptions and revisions')));
     for(const field of policy.fields||[]){const [zh,en]=labels[field.field]||[field.field,field.field];
@@ -215,10 +224,10 @@ if (location.pathname.startsWith('/preview')) {
         for(const [code,rate] of Object.entries(field.value)){
           const key=String(rate);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(code);
         }
-        addParagraph(policySection,`${tr('附加税率','Additional rates')}：${groups.size===1
+        addParagraph(policySection,`${tr('公告原文记载的附加税率','Additional rates stated in this notice')}：${groups.size===1
           ?tr(`${[...groups.keys()][0]}%（${Object.keys(field.value).length} 个税号）`,`${[...groups.keys()][0]}% (${Object.keys(field.value).length} product codes)`)
           :tr(`共 ${groups.size} 档，税号明细可展开查看。`,`${groups.size} rate levels; expand to view the product-code details.`)}`);
-        for(const [rate,codes] of groups)addParagraph(policyValueDetails,`${tr('附加税率','Additional rate')} ${rate}%：${codes.join('、')}`);
+        for(const [rate,codes] of groups)addParagraph(policyValueDetails,`${tr('公告原文记载的附加税率','Additional rate stated in this notice')} ${rate}%：${codes.join('、')}`);
       }else if(['conditions','exceptions','revisions'].includes(field.field)){
         addParagraph(policySection,`${tr(zh,en)}：${tr('已登记，完整条款可展开查看。','Recorded; expand to read the full text.')}`);
         const values=Array.isArray(field.value)?field.value:[field.value];
@@ -248,12 +257,159 @@ if (location.pathname.startsWith('/preview')) {
     const notes=make('section',undefined,'live-section');notes.append(make('h2',tr('数据说明','Data notes')));
     const noteTranslations={
       '图表金额为该月已观测的中国来源消费进口额；缺失细分行不补零。':'Chart values sum observed U.S. imports for consumption from China; missing detailed lines are not treated as zero.',
+      '公告原文的税率不代表所选月份的实际适用税率；后续修订与排除尚未核对。':'Rates in the source notice are not verified as applicable in the selected months; later amendments and exclusions have not been checked.',
       '它不是逐笔适用税额、政策造成的贸易变化或因果效果。':'These figures are not transaction-level duties, policy-caused trade changes, or causal effects.',
       '跨年商品编码可比性尚未核验；报告不计算跨年增幅。':'Cross-year product-code comparability has not been verified; no year-over-year growth is calculated.'};
     for(const note of result.notes||[])addParagraph(notes,english()?(noteTranslations[note]||note):note);report.append(notes);
     setReportMode(true);
     if(navigate)location.hash='report';
     return true;
+  }
+  function showAnnouncementContextReport(result,{navigate=true}={}){
+    if(result?.kind!=='announcement-context-report-v1'||
+       !['parent','country','source_only'].includes(result.context_type)||
+       !Array.isArray(result.monthly)||!result.policy||!result.scope)return false;
+    flow.tradeReport=result;flow.tradeProposal=null;flow.tradeChoices=null;flow.directionChoice=null;
+    report.replaceChildren();report.append(reportStatus);
+    const policy=result.policy,scope=result.scope,sourceOnly=result.context_type==='source_only';
+    reportStatus.textContent=sourceOnly?
+      tr('这张事实卡只整理已确认的公告原文，不查询贸易数据或调用模型。',
+        'This fact card uses confirmed notice text only. It does not query trade data or call a model.'):
+      tr('这份报告来自已确认的公告原文及本地数据，不调用模型。',
+        'This report uses confirmed notice text and local data. It does not call a model.');
+    const title=sourceOnly?tr('公告原文事实卡','Notice facts'):
+      result.context_type==='parent'?tr('公告与上层商品进口背景','Notice and broader product imports'):
+        tr('公告与中国大陆进口背景','Notice and China-origin import background');
+    window.tradeintelLiveReportTitle=title;
+    document.title=`${title} · TradeIntel`;
+    try{localStorage.setItem('tradeintel_live_trade_report',JSON.stringify(result));
+      if(result.report_id)localStorage.setItem('tradeintel_live_trade_report_id',result.report_id);
+      localStorage.setItem('tradeintel_last_report_type','trade');}catch(_){}
+    report.append(make('p',sourceOnly?tr('公告原文','Notice text'):
+      tr('公告原文与贸易数据','Notice text and trade data'),'eyebrow'),make('h1',title));
+    const policySection=make('section',undefined,'live-section');
+    policySection.append(make('h2',tr('公告说的是什么','What the notice says')));
+    addParagraph(policySection,policy.policy_population||tr('公告对象尚未说明。','Notice scope was not recorded.'));
+    const fieldLabels={title:['标题','Title'],publication_date:['公布日期','Publication date'],
+      effective_date:['原文生效日期','Effective date in the notice'],origin:['原产地','Origin'],
+      hts_codes:['商品范围','Products'],rates:['原文税率','Rates in the notice'],
+      rate_meaning:['税率性质','Rate type'],conditions:['适用条件','Conditions'],
+      exceptions:['例外','Exceptions'],revisions:['修订','Amendments'],
+      entry_events:['入境事件','Entry events'],clock_24h:['时刻','Time'],timezone:['时区','Time zone']};
+    const factDetails=make('details',undefined,'monthly-data');
+    factDetails.append(make('summary',tr('查看已确认字段与原文引文','Confirmed fields and source quotes')));
+    const visibleFields=new Set(['title','effective_date','origin','conditions','exceptions','rates']);
+    for(const field of policy.confirmed_fields||[]){
+      const labels=fieldLabels[field.field]||[field.field,field.field];
+      const label=tr(labels[0],labels[1]);
+      const value=field.status==='known'?(typeof field.value==='string'?field.value:
+        Array.isArray(field.value)?field.value.join('；'):JSON.stringify(field.value)):field.status==='conflict'?
+        tr('原文存在冲突，需复核。','Source text conflicts; review is needed.'):
+        tr('尚未确认。','Not confirmed.');
+      if(visibleFields.has(field.field)){
+        if(Array.isArray(field.value)&&field.status==='known'){
+          addParagraph(policySection,`${label}：`);
+          const list=make('ul');for(const item of field.value)list.append(make('li',String(item)));
+          policySection.append(list);
+        }else addParagraph(policySection,`${label}：${value}`);
+      }
+      if(Array.isArray(field.value)&&field.status==='known'){
+        addParagraph(factDetails,`${label} · ${field.status}：`);
+        const list=make('ul');for(const item of field.value)list.append(make('li',String(item)));
+        factDetails.append(list);
+      }else addParagraph(factDetails,`${label} · ${field.status}：${value}${field.reason?`（${field.reason}）`:''}`);
+      for(const evidence of field.evidence||[])
+        addParagraph(factDetails,`${evidence.section_id}：${evidence.quote}`);
+    }
+    for(const evidence of policy.evidence||[])
+      addParagraph(factDetails,`${tr('关联判断引文','Linkage quote')} · ${evidence.section_id}：${evidence.quote}`);
+    policySection.append(factDetails);
+    if(english()&&(policy.confirmed_fields||[]).some(field=>
+      /[\u3400-\u9fff]/.test(JSON.stringify(field.value)||'')))
+      addParagraph(policySection,'The confirmed field content remains in the language in which it was entered; switching the interface does not translate it.');
+    if(policy.source_provenance!=='verified_official')
+      addParagraph(policySection,tr('原文和网址由使用者提供或尚未独立核验，请对照官方文件。',
+        'The pasted source text or URL has not been independently verified. Check the official document.'));
+    report.append(policySection);
+    const boundary=make('aside',undefined,'announcement-applicability-note');
+    boundary.append(make('strong',sourceOnly?tr('税率适用仍需核对','Rate applicability still needs checking'):
+      tr('税率和金额的边界','What these rates and values mean')));
+    addParagraph(boundary,sourceOnly?
+      tr('原公告记载的税率，不等于今天实际适用的税率。这张卡没有可对应的贸易金额。',
+        'A rate in the source notice is not verified as applicable today. This card has no linked trade value.'):
+      tr('原公告记载的税率，不等于这些月份或今天实际适用的税率。下面的贸易金额也不是政策覆盖额或政策效果。',
+        'A rate in the source notice is not verified as applicable in these months or today. Trade values below are not policy coverage or policy effects.'));
+    report.append(boundary);
+    const context=make('section',undefined,'live-section');
+    context.append(make('h2',tr('能查到什么贸易数据','What the trade data can show')));
+    addParagraph(context,scope.statistical_population||tr('现有月度商品表不能可靠对应这份公告的对象。',
+      'The monthly product table cannot reliably represent the population in this notice.'));
+    for(const item of scope.unobserved_eligibility||[])
+      addParagraph(context,`${tr('月表不能核对','Not observable in the monthly table')}：${item.description}`);
+    if(scope.origin_alignment==='mainland_subset_of_china_hk')
+      addParagraph(context,tr('公告涉及中国和香港；本图只显示中国大陆来源，不含香港。',
+        'The notice covers China and Hong Kong; the chart shows only the China country code, not Hong Kong.'));
+    report.append(context);
+    if(sourceOnly){
+      const noChart=make('section',undefined,'live-section');
+      noChart.append(make('h2',tr('这里不画贸易图','No trade chart for this notice')));
+      addParagraph(noChart,tr('现有月度商品表不能完整识别这份公告所指的对象，因此不绘制贸易金额图。',
+        'The monthly product table cannot identify the full population covered by this notice, so this card does not draw a trade value chart.'));
+      report.append(noChart);
+    }else{
+      const months=result.monthly;
+      const numberFor=item=>result.context_type==='parent'?item.whole_parent_value_usd:
+        item.china_mainland_import_value_usd;
+      const label=result.context_type==='parent'?
+        tr(`整个 ${scope.context_code} 商品组的中国大陆来源进口额`,
+          `China-origin imports for the whole ${scope.context_code} product group`):
+        tr('已发布月包中的中国大陆来源进口额','China-origin imports in the published monthly files');
+      const chart=make('section',undefined,'live-section');
+      chart.append(make('h2',label));
+      addParagraph(chart,result.context_type==='parent'?
+        tr('这是更宽的商品组，包含公告没有覆盖的货品；缺少细码的月份不显示金额。',
+          'This broader product group includes goods outside the notice. Months with incomplete detailed codes have no value.'):
+        tr('金额由官方原始月包逐商品复算；香港单列来源没有并入。',
+          'Values were reconciled product by product to the retained source files. Hong Kong is not included.'));
+      const max=Math.max(1,...months.map(item=>numberFor(item)||0));
+      const bars=make('div',undefined,'trade-bars');
+      for(const item of months){
+        const value=numberFor(item);const line=make('div',undefined,'trade-bar-row');
+        line.append(make('span',item.month));
+        const track=make('div',undefined,'trade-bar-track');
+        const fill=make('div',undefined,'trade-bar-fill');
+        fill.style.width=value===null||value===undefined?'0%':`${Math.max(0,value/max*100)}%`;
+        track.append(fill);line.append(track,make('span',value===null||value===undefined?
+          tr('细码不完整，未显示金额','Incomplete detailed codes; no value shown'):
+          `${fmt(value)} ${tr('美元','USD')}`));bars.append(line);
+      }
+      chart.append(bars);report.append(chart);
+    }
+    const sources=make('details',undefined,'live-section monthly-data');
+    sources.append(make('summary',tr('来源与核对方法','Sources and checks')));
+    if(policy.source_url&&/^https:\/\//.test(policy.source_url)){
+      const link=make('a',tr('查看公告来源','Open notice source'));
+      link.href=policy.source_url;link.target='_blank';link.rel='noopener noreferrer';sources.append(link);
+    }
+    for(const source of sourceOnly?[]:(result.sources||[])){
+      if(source.url&&/^https:\/\//.test(source.url)){
+        const link=make('a',`${source.month||''} ${tr('贸易数据原包','trade source file')}`);
+        link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';sources.append(link);
+      }
+    }
+    addParagraph(sources,sourceOnly?
+      tr('本卡逐字段保存原公告文字和引文；没有查询贸易数据，也没有生成数据版本或复算金额。',
+        'This card preserves confirmed notice fields and their quotations. It did not query trade data or calculate trade values.'):
+      tr('本报告绑定原公告和数据版本；上层商品按官方子码核对，国家背景与留存原始月包逐商品复算。',
+        'This report is bound to a notice and data version. Product groups are checked against official detailed codes; country context is reconciled with retained source files.'));
+    const sourceNoteTranslations={
+      '这是一张公告原文事实卡，不是贸易金额报告。':'This is a notice fact card, not a trade value report.',
+      '已确认字段只反映原公告文字，不代表现行税率或当前适用状态。':'Confirmed fields describe the source notice, not current rates or applicability.',
+      '未知字段及无法从贸易表观察的资格条件保留原样，不补零也不推断政策效果。':'Unknown fields and conditions absent from the trade table remain unresolved; no zeroes or policy effects are inferred.'};
+    for(const note of result.notes||[])addParagraph(sources,
+      english()?(sourceNoteTranslations[note]||note):note);
+    report.append(sources);
+    setReportMode(true);if(navigate)location.hash='report';return true;
   }
   const englishTrend = series => {
     const measured=series.filter(row=>row.status==='observed'&&Number.isFinite(row.value_usd));
@@ -289,6 +445,23 @@ if (location.pathname.startsWith('/preview')) {
     if(card.id.endsWith('.recent_run'))return `By ${card.months.at(-1)}, ${flow.toLowerCase()} had ${card.direction==='增加'?'increased':'decreased'} month over month for ${card.consecutive_changes} consecutive changes. This does not describe the entire selected period.`;
     if(card.id.endsWith('.recent_turn'))return `The ${flow.toLowerCase()} moved from ${card.previous_direction==='增加'?'up':'down'} in ${card.months[1]} to ${card.direction==='增加'?'up':'down'} in ${card.months[2]}. This describes only the latest three observed months.`;
     return card.fact;
+  }
+  function englishYearPeak(card){
+    const flow=card.flow==='export'?'exports':'imports';
+    const peakMonths=(card.high_months||[]).join(', ');
+    if(card.gap_usd===0)
+      return `Among observed ${card.year} months, ${peakMonths} was the ${flow} high at ${fmt(card.high_usd)} USD; ${card.latest_month} was at the same level.`;
+    return `Among observed ${card.year} months, ${peakMonths} was the ${flow} high at ${fmt(card.high_usd)} USD; ${card.latest_month} was ${fmt(card.latest_usd)} USD, ${fmt(card.gap_usd)} USD below that high.`;
+  }
+  function appendYearPeakCard(target,observations,flow){
+    const card=observations.find(item=>item.id===flow+'.same_year_peak_gap'&&item.status==='available');
+    if(!card)return;
+    const section=make('section',undefined,'live-section trade-year-peak');
+    section.append(make('h3',tr('按同年已观察月份比较','Compare observed months within the year')));
+    const item=make('article',undefined,'trade-relation-card');
+    item.append(make('h4',tr('同年峰值与最新已观察月','Year peak and latest observed month')));
+    addParagraph(item,english()?englishYearPeak(card):card.fact);
+    section.append(item);target.append(section);
   }
   function appendRelationCards(target, cards, flow){
     const eligible=cards.filter(card=>card.status==='available'&&card.eligible_for_ai&&card.flow===flow);
@@ -339,6 +512,7 @@ if (location.pathname.startsWith('/preview')) {
       addParagraph(trend,english()?englishTrend(series):trendFact.fact);
       target.append(trend);
     }
+    appendYearPeakCard(target,observations,scope.flow);
     appendRelationCards(target,observations,scope.flow);
     const chart=make('section',undefined,'live-section');chart.append(make('h3',tr('逐月金额','Monthly values')));
     addParagraph(chart,tr(`每条横线表示该月的${metric}，不代表商品数量。`,
@@ -382,6 +556,7 @@ if (location.pathname.startsWith('/preview')) {
   }
   function showTradeReport(result, {navigate=true}={}) {
     if(result?.kind==='announcement-statistics-report-v1')return showAnnouncementStatisticsReport(result,{navigate});
+    if(result?.kind==='announcement-context-report-v1')return showAnnouncementContextReport(result,{navigate});
     if(!['trade-query-v1','trade-query-both-v1'].includes(result?.kind)||!result.scope)return;
     if(result.kind==='trade-query-v1'&&!Array.isArray(result.series))return;
     flow.tradeReport=result;flow.tradeProposal=null;flow.tradeChoices=null;flow.directionChoice=null;

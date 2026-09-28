@@ -1,0 +1,16 @@
+{
+  "catalog_version": "a758a0236d12bea52cae670b99b05997a1b1c14d8442bcda7ea05bb3b436a632",
+  "child_codes": 28,
+  "code": "8471",
+  "description_kind": "official",
+  "flow": "both",
+  "id": "both:8471",
+  "level": "HS4",
+  "month": "2026-07",
+  "official_en": "AUTOMATIC DATA PROCESSING MACHINES AND UNITS THEREOF; MAGNETIC OR OPTICAL READERS, MACHINES FOR TRANSCRIBING AND PROCESSING CODED DATA, NESOI",
+  "source_url": "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP",
+  "zh_label": "自动数据处理设备及其部件；其他税目未列名的磁性或光学阅读机、将数据以代码形式转录到数据记录媒体的机器及处理这些数据的机器",
+  "zh_pdf_page": 1169,
+  "zh_review_status": "machine_extracted",
+  "zh_source_url": "https://gss.mof.gov.cn/gzdt/zhengcefabu/202512/t20251231_3981044.htm"
+}

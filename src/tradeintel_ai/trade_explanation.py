@@ -33,7 +33,8 @@ def _json_bytes(value: object) -> bytes:
 def report_sha256(report: Mapping[str, Any]) -> str:
     """Hash the immutable program report, never a browser-supplied decoration."""
     if not isinstance(report, Mapping) or report.get("kind") not in {
-        "trade-query-v1", "trade-query-both-v1", "announcement-statistics-report-v1"
+        "trade-query-v1", "trade-query-both-v1", "announcement-statistics-report-v1",
+        "announcement-context-report-v1"
     }:
         raise ValueError("通用贸易报告类型无效")
     return hashlib.sha256(_json_bytes(report)).hexdigest()

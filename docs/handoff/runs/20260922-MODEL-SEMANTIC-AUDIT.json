@@ -1,0 +1,219 @@
+{
+  "schema_version": "public-brief-astra-audit-v1",
+  "date": "2026-09-22",
+  "reviewer": "Astra AI-assisted review",
+  "blinded": false,
+  "review_context": "审阅会话已见模型身份和历史记录，不声称盲评。",
+  "status": "retrospective_audit_not_api_certification",
+  "api_calls": 0,
+  "scoring_interpretation": "按原SCORING：程序事实与模型解释组成报告；不扣禁止模型重复的日期、税率或服务器维护的版本。不得用程序正确数据抵消模型错误陈述。",
+  "configuration_provenance": "Codex渠道型号及强度由操作者声明；Sol high经操作者纠正记录。未读取平台运行遥测，不能独立证明实际推理档位。",
+  "limitations": [
+    "同一已开发案例四场景，不是泛化准确率。",
+    "手工新会话未逐题隔离且统一生成后才审阅，不能冒充API逐题停止协议。",
+    "manual run无生成时输入哈希绑定；当前材料29文件摘要通过，不等于能追溯证明当时全部读取行为。",
+    "Luna/Sol不是API实测；token和耗时不可作厂商成本对比。"
+  ],
+  "rows": [
+    {
+      "group": "luna-highest",
+      "question_id": "q1",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/luna-highest-q1/raw-response.txt",
+      "raw_sha256": "68448ea6bdf718a12a3140399d39d3bb5e16b8c812cb67981573eba9540580c8",
+      "verdict": "major_error",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": false,
+          "reason": "把未锻造钨的主要来源写成马来西亚、越南；原材料该商品前三为越南、奥地利、加拿大，马来西亚属于高纯硅主要来源。另外把美元金额写成贸易量。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "具体解释了规模、来源与环比，但来源混淆会误导读者。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "luna-highest",
+      "question_id": "q2",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/luna-highest-q2/raw-response.txt",
+      "raw_sha256": "fc21973d7a3af76151a8782fe2c406a033b7426000cd2f2eb400310e2df9de1f",
+      "verdict": "minor_error",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": false,
+          "reason": "环比方向和同比限制正确，但将USD金额称为贸易量，容易误读为实物数量；序列高低的文字也应明确原始金额口径。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "回应单商品、环比、同比限制，未把单月变化断言为长期趋势。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "luna-highest",
+      "question_id": "q3",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/luna-highest-q3/raw-response.txt",
+      "raw_sha256": "22a28f39d2927b22a32b5cf14ff1d93cd9ff359d64f50b17d5e5a6612c8b3750",
+      "verdict": "minor_error",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": false,
+          "reason": "额外征收、条件及非因果界限正确；已审阅比较的指标是金额，原答使用贸易量，术语需修订。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "解释了政策分组、适用条件和具体变化；日期和完整税则边界由同题程序报告提供。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "luna-highest",
+      "question_id": "q4",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/luna-highest-q4/raw-response.txt",
+      "raw_sha256": "ba2e326e599becc35d3dd161d2c2c9ddceac0b36c2ae54fa09aecc302bfba0ac",
+      "verdict": "minor_error",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": false,
+          "reason": "正确保留价格未知及传导假设，但又将金额变化称为贸易量；这不证明实物进口量同方向变化。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "说明缺少价格、合同传导、库存信息，给出有条件的成本传导机制。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "sol-highest",
+      "question_id": "q1",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/sol-highest-q1/raw-response.txt",
+      "raw_sha256": "8fb419a970f304906050bde822eb4d2893c0442ee189ec3d19bbde7de097578a",
+      "verdict": "pass",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": true,
+          "reason": "金额方向、商品主要来源与材料一致；未作因果、价格或替代能力断言。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "有具体商品观察及后续统计观察；月份、分母和范围由程序报告呈现。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "sol-highest",
+      "question_id": "q2",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/sol-highest-q2/raw-response.txt",
+      "raw_sha256": "5310911706170b9e97837fd481104036a727ff502fd07b5d6002528c9dcf4483",
+      "verdict": "pass",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": true,
+          "reason": "环比总额回落、中国来源金额及份额上升正确；同比未核验明确保留。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "仅解释所选商品，沿用题包范围和时期；不用在解释里再次打印版本哈希。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "sol-highest",
+      "question_id": "q3",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/sol-highest-q3/raw-response.txt",
+      "raw_sha256": "59caccc7454a149006b17cac8776a1ebc4d1b8f636c10bb9a79edc6c1a1c8d22",
+      "verdict": "pass",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": true,
+          "reason": "中国原产、附加关税、条件和例外未知与材料一致，未把其他商品未核验比较补成趋势。"
+        },
+        "relevance": {
+          "passed": true,
+          "reason": "已有政策解释和具体已核验变化；生效时间及附加税率不等于完整税则由同题程序报告呈现。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    },
+    {
+      "group": "sol-highest",
+      "question_id": "q4",
+      "raw_path": "tmp/public-brief-eval-v1/manual-runs-20260922/sol-highest-q4/raw-response.txt",
+      "raw_sha256": "4ff3309d952d215a59cc1cf1114313aa58548a9eecfc830d04b7af5e48d44cd8",
+      "verdict": "minor_error",
+      "checks": {
+        "structure": {
+          "passed": true,
+          "reason": "实际原答重跑生产parse与已保存validation完全一致，正文估算不超过2000，SHA与run/manifest一致。"
+        },
+        "facts": {
+          "passed": true,
+          "reason": "没有价格预测或投资指令，来源及金额解释准确。"
+        },
+        "relevance": {
+          "passed": false,
+          "reason": "虽说明金额不等于价格，但没有回答条件性的成本传导机制，也没有具体指出价格、合同或库存等所需补充资料及作用；官方统计观察仍有用。"
+        },
+        "usefulness": {
+          "passed": true,
+          "reason": "含具体事实解读或有依据的后续观察；局限与修订项见其他维度。"
+        }
+      }
+    }
+  ]
+}

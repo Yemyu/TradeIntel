@@ -109,6 +109,9 @@ SESSION_POST_PATHS = ("/api/session/create", "/api/session/message", "/api/sessi
                       "/api/announcements/enable", "/api/announcements/coverage/check",
                       "/api/announcements/statistics/prepare",
                       "/api/announcements/statistics/report",
+                      "/api/announcements/linkage/confirm",
+                      "/api/announcements/linkage/prepare",
+                      "/api/announcements/linkage/report",
                       "/api/model/config", "/api/model/test", "/api/product/scope",
                       "/api/trade/query", "/api/trade/prepare", "/api/trade/report",
                       "/api/trade/explanation/call", "/api/trade/explanation/review")
@@ -1862,6 +1865,26 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                 result = {"status": "template", **candidate_template(store, query["doc_version"][0])}
                 self._send_json(HTTPStatus.OK, result)
                 return
+            if parsed.path == "/api/announcements/linkage/assessment":
+                query = parse_qs(parsed.query, keep_blank_values=True)
+                if (set(query) != {"policy_id", "doc_version"}
+                        or any(len(query[key]) != 1 or not query[key][0]
+                               for key in ("policy_id", "doc_version"))):
+                    raise WebRequestError("公告关联判断查询参数无效")
+                from .announcement_linkage import load_linkage_assessment
+                self._send_json(HTTPStatus.OK, load_linkage_assessment(
+                    self.repository.paths.root, query["policy_id"][0], query["doc_version"][0]))
+                return
+            if parsed.path == "/api/announcements/linkage/setup":
+                query = parse_qs(parsed.query, keep_blank_values=True)
+                if (set(query) != {"policy_id", "doc_version"}
+                        or any(len(query[key]) != 1 or not query[key][0]
+                               for key in ("policy_id", "doc_version"))):
+                    raise WebRequestError("公告关联设置查询参数无效")
+                from .announcement_linkage import load_linkage_setup
+                self._send_json(HTTPStatus.OK, load_linkage_setup(
+                    self.repository.paths.root, query["policy_id"][0], query["doc_version"][0]))
+                return
             if parsed.path == "/api/session":
                 query = parse_qs(parsed.query, keep_blank_values=True)
                 if set(query) != {"session_id"} or len(query["session_id"]) != 1:
@@ -2007,6 +2030,7 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
             body_limit = 262_144 if parsed.path in {
                 "/api/announcements/import", "/api/announcements/submit",
                 "/api/announcements/candidates", "/api/announcements/enable",
+                "/api/announcements/linkage/confirm", "/api/announcements/linkage/report",
             } else 16_384
             if length < 0 or length > body_limit:
                 raise WebRequestError("请求体过大")
@@ -2225,6 +2249,57 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     result = generate_announcement_statistics_record(self.repository.paths.root,
                                                                        payload["prepared"],
                                                                        trade_root=self.trade_data_root)
+                    self._send_json(HTTPStatus.OK, result)
+                    return
+                if parsed.path == "/api/announcements/linkage/confirm":
+                    if (set(payload) != {"policy_id", "doc_version", "proposal",
+                                         "confirmed_by", "candidate_digest"}
+                            or not isinstance(payload.get("proposal"), dict)):
+                        raise WebRequestError("关联判断确认字段无效")
+                    from .announcement_linkage import confirm_linkage_assessment
+                    result = confirm_linkage_assessment(
+                        self.repository.paths.root, payload["policy_id"], payload["doc_version"],
+                        payload["proposal"], confirmed_by=payload["confirmed_by"],
+                        expected_candidate_digest=payload["candidate_digest"])
+                    self._send_json(HTTPStatus.OK, result)
+                    return
+                if parsed.path == "/api/announcements/linkage/prepare":
+                    if (not {"policy_id", "doc_version"}.issubset(payload)
+                            or not set(payload).issubset({"policy_id", "doc_version",
+                                                            "start_month", "end_month"})):
+                        raise WebRequestError("关联范围准备字段无效")
+                    from .announcement_linkage import prepare_linkage_scope
+                    result = prepare_linkage_scope(
+                        self.repository.paths.root, payload["policy_id"], payload["doc_version"],
+                        start_month=payload.get("start_month"), end_month=payload.get("end_month"),
+                        trade_root=self.trade_data_root)
+                    self._send_json(HTTPStatus.OK, result)
+                    return
+                if parsed.path == "/api/announcements/linkage/report":
+                    if set(payload) != {"prepared"} or not isinstance(payload.get("prepared"), dict):
+                        raise WebRequestError("请提交服务器返回的完整关联范围")
+                    from .announcement_linkage import validate_prepared_linkage_scope
+                    prepared = validate_prepared_linkage_scope(
+                        self.repository.paths.root, payload["prepared"],
+                        trade_root=self.trade_data_root)
+                    if prepared["route"] == "announcement-statistics-report-v1":
+                        from .announcement_statistics_report import generate_announcement_statistics_record
+                        result = generate_announcement_statistics_record(
+                            self.repository.paths.root, prepared["strict_scope"],
+                            trade_root=self.trade_data_root)
+                    elif prepared["route"] == "announcement-context-report-v1:parent":
+                        from .announcement_context_report import generate_parent_context_record
+                        result = generate_parent_context_record(
+                            self.repository.paths.root, prepared, trade_root=self.trade_data_root)
+                    elif prepared["route"] == "announcement-context-report-v1:country":
+                        from .announcement_country_context import generate_country_context_record
+                        result = generate_country_context_record(
+                            self.repository.paths.root, prepared, trade_root=self.trade_data_root)
+                    elif prepared["route"] == "source_fact_card_only":
+                        from .announcement_source_card import generate_source_fact_record
+                        result = generate_source_fact_record(self.repository.paths.root, prepared)
+                    else:
+                        raise WebRequestError("关联范围路线无效")
                     self._send_json(HTTPStatus.OK, result)
                     return
                 if parsed.path == "/api/announcements/coverage/check":

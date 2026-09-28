@@ -115,3 +115,9 @@ class BusinessWorkflowTests(unittest.TestCase):
         plan=dict(kind='trade',month='2025-01',hts8=None,sort='china_usd',limit=3)
         for question in ['2025-01全部商品中国金额从大到小列前1项','2025-01全部商品列前3项']:
             with self.assertRaises(ValueError): validate_plan(plan,question)
+
+    def test_negative_causal_boundary_is_not_treated_as_causal_request(self):
+        plan={'kind':'brief','month':'2025-01','hts8':None}
+        validate_plan(plan, '2025-01全部登记商品的研究简报，不做因果分析或预测。')
+        with self.assertRaises(ValueError):
+            validate_plan(plan, '2025-01全部登记商品的研究简报，预测政策会造成什么结果。')

@@ -1,0 +1,156 @@
+{
+  "schema_version": "policy-linkage-case-reference-v1",
+  "case_id": "eo14259-source-scope-20260927",
+  "reference_status": "astra_source_review_not_independent_human_gold",
+  "question": "这份关于中国进口关税的公告改了什么？能结合贸易数据解释一下吗？",
+  "policy_id": "unseen-eo14259-20260927",
+  "source_id": "eo14259:official",
+  "source_url": "https://www.govinfo.gov/content/pkg/DCPD-202500444/html/DCPD-202500444.htm",
+  "source_file_sha256": "37ad6bc562a5b9fc9f35e82827297bc307b37a73ad7554a519a0d7540838b1ca",
+  "source_file_bytes": 12195,
+  "fields": [
+    {
+      "field": "title",
+      "status": "known",
+      "value": "Executive Order 14259—Amendment to Reciprocal Tariffs and Updated Duties as Applied to Low-Value Imports From the People's Republic of China",
+      "quotes": ["Executive Order 14259—Amendment to Reciprocal Tariffs and Updated Duties as Applied to Low-Value Imports From the People's Republic of China"]
+    },
+    {
+      "field": "publication_date",
+      "status": "known",
+      "value": "2025-04-14",
+      "quotes": ["The White House, April 8, 2025.", "This Executive order was published in the Federal Register on April 14."]
+    },
+    {
+      "field": "effective_date",
+      "status": "known",
+      "value": "原文有多个日期：第2节税率修改自2025-04-09 00:01 EDT适用于消费入境或从保税仓提取供消费的货品；第3节按件税分为2025-05-02起至2025-06-01前、2025-06-01起两段。第3(a)款90%从价税的完整实施条件须结合被引用的EO14256，不把4月9日套到整份公告。",
+      "quotes": [
+        "Effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern daylight time on April 9, 2025:",
+        "increase the per postal item containing goods duty in section 2(c)(ii) of Executive Order 14256 that is in effect on or after 12:01 a.m. eastern daylight time on May 2, 2025, and before 12:01 a.m. eastern daylight time on June 1, 2025, from 25 dollars to 75 dollars; and",
+        "increase the per postal item containing goods duty in section 2(c)(ii) of Executive Order 14256 that is in effect on or after 12:01 a.m. eastern daylight time on June 1, 2025, from 50 dollars to 150 dollars."
+      ]
+    },
+    {
+      "field": "clock_24h",
+      "status": "known",
+      "value": "00:01（原文明确列出的各日期节点）",
+      "quotes": ["on or after 12:01 a.m. eastern daylight time on April 9, 2025:"]
+    },
+    {
+      "field": "timezone",
+      "status": "known",
+      "value": "eastern daylight time（EDT）",
+      "quotes": ["on or after 12:01 a.m. eastern daylight time on April 9, 2025:"]
+    },
+    {
+      "field": "entry_events",
+      "status": "known",
+      "value": "第2节明确为消费入境，或从保税仓提取供消费；第3节援引EO14256的低值进口及邮政单件计税条款，不能据第2节一句话认定两个分支条件完全相同。",
+      "quotes": [
+        "Effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern daylight time on April 9, 2025:",
+        "increase the ad valorem rate of duty set forth in section 2(c)(i) of Executive Order 14256 from 30 percent to 90 percent;"
+      ]
+    },
+    {
+      "field": "origin",
+      "status": "unknown",
+      "value": null,
+      "reason": "本令针对中国相关关税，但通过既有HTS第99章条目和EO14256界定货品；完整原产地、发货地及香港适用规则未在本份原文重述。现有单文档参考不将其补猜为仅中国大陆。",
+      "quotes": []
+    },
+    {
+      "field": "hts_codes",
+      "status": "unknown",
+      "value": null,
+      "reason": "原文列的是第99章特殊税率申报条目9903.01.63及其注释修订，没有列出可直接查询月度商品贸易的普通HTS8清单；不得把99030163作为普通商品编码。",
+      "quotes": []
+    },
+    {
+      "field": "rates",
+      "status": "known",
+      "value": [
+        "第2节：HTS 9903.01.63及相应注释中的34%改为84%；这是该条目的修改，不是综合应缴税率。",
+        "第3(a)款：EO14256第2(c)(i)款从价税由30%改为90%。",
+        "第3(b)款：2025-05-02 00:01 EDT起至2025-06-01 00:01 EDT前，邮政货品每件税由25美元改为75美元。",
+        "第3(c)款：2025-06-01 00:01 EDT起，邮政货品每件税由50美元改为150美元。",
+        "以上均为这份2025年原文的修改内容；后续修订和现行适用状态未核对。"
+      ],
+      "quotes": [
+        "heading 9903.01.63 of the HTSUS shall be amended by deleting \"34%\" each place that it appears and by inserting \"84%\" in lieu thereof; and",
+        "increase the ad valorem rate of duty set forth in section 2(c)(i) of Executive Order 14256 from 30 percent to 90 percent;",
+        "increase the per postal item containing goods duty in section 2(c)(ii) of Executive Order 14256 that is in effect on or after 12:01 a.m. eastern daylight time on May 2, 2025, and before 12:01 a.m. eastern daylight time on June 1, 2025, from 25 dollars to 75 dollars; and",
+        "increase the per postal item containing goods duty in section 2(c)(ii) of Executive Order 14256 that is in effect on or after 12:01 a.m. eastern daylight time on June 1, 2025, from 50 dollars to 150 dollars."
+      ]
+    },
+    {
+      "field": "rate_meaning",
+      "status": "known",
+      "value": "两类修改须分开：第2节修改既有HTS第99章对等关税条目；第3节修改EO14256低值进口的从价税和邮政单件税。84%、90%和每件75/150美元不可相加成统一综合税率。",
+      "quotes": [
+        "heading 9903.01.63 of the HTSUS shall be amended by deleting \"34%\" each place that it appears and by inserting \"84%\" in lieu thereof; and",
+        "increase the ad valorem rate of duty set forth in section 2(c)(i) of Executive Order 14256 from 30 percent to 90 percent;",
+        "from 25 dollars to 75 dollars; and",
+        "from 50 dollars to 150 dollars."
+      ]
+    },
+    {
+      "field": "conditions",
+      "status": "known",
+      "value": "第2节列出消费入境/保税仓提取消费和4月9日时点；第3节按EO14256规定的低值进口、邮政单件和5月2日/6月1日分段修改。本份没有重述被引用条款的完整资格、豁免和货品范围；月度商品表也没有单件邮政包裹记录。",
+      "quotes": [
+        "Effective with respect to goods entered for consumption, or withdrawn from warehouse for consumption, on or after 12:01 a.m. eastern daylight time on April 9, 2025:",
+        "increase the per postal item containing goods duty in section 2(c)(ii) of Executive Order 14256 that is in effect on or after 12:01 a.m. eastern daylight time on May 2, 2025, and before 12:01 a.m. eastern daylight time on June 1, 2025, from 25 dollars to 75 dollars; and"
+      ]
+    },
+    {
+      "field": "exceptions",
+      "status": "unknown",
+      "value": null,
+      "reason": "本份修订令未重述EO14257、EO14256及HTS第99章注释中的完整排除和例外；不能把未重述解释成不存在。",
+      "quotes": []
+    },
+    {
+      "field": "revisions",
+      "status": "unknown",
+      "value": null,
+      "reason": "本参考只登记EO14259原文；它发布之后的修订链、暂停或失效情况未核验，不能从原文推出今天应适用的税率。",
+      "quotes": []
+    }
+  ],
+  "linkage": {
+    "relation": "no_statistical_link",
+    "origin_alignment": "unknown",
+    "context_code": null,
+    "policy_scope_summary": "这份修订令同时修改第99章一般关税条目和低值邮政税费，两个分支的日期与条件不同。当前只登记此份原文，未补齐被引用条款的完整对象；不能把全中国商品金额或某个普通商品组当作整份公告的对象。",
+    "unobserved_eligibility": [
+      {"dimension": "shipping_method", "defines_population": true, "description": "第3节的邮政单件分支依赖邮寄和单件记录，月度商品表没有这些字段。"},
+      {"dimension": "other", "defines_population": true, "description": "第2节通过9903.01.63及注释界定对象；本份没有普通商品清单及完整引用规则，原产地和例外仍有未确认项。"}
+    ],
+    "quotes": [
+      "heading 9903.01.63 of the HTSUS shall be amended by deleting \"34%\" each place that it appears and by inserting \"84%\" in lieu thereof; and",
+      "increase the per postal item containing goods duty in section 2(c)(ii) of Executive Order 14256 that is in effect on or after 12:01 a.m. eastern daylight time on May 2, 2025, and before 12:01 a.m. eastern daylight time on June 1, 2025, from 25 dollars to 75 dollars; and"
+    ]
+  },
+  "expected": {
+    "route": "source_fact_card_only",
+    "kind": "announcement-context-report-v1",
+    "context_type": "source_only",
+    "monthly": [],
+    "chart_status": "not_available",
+    "policy_amount_status": "not_determined",
+    "model_calls": 0,
+    "trade_queries": 0,
+    "source_document_only": true,
+    "current_applicability_status": "not_verified",
+    "critical_checks": [
+      "全部13字段和值/未知原因均保存，全部引文逐字匹配且可读回",
+      "两个税费分支和多个日期分别保留，不能把4月9日当作整令统一生效日",
+      "9903.01.63不成为普通商品代码，不产生贸易金额或图表",
+      "第1节所述中国对美国商品34%是背景，不混作美国本令新增税率",
+      "84%、90%、75美元及150美元分属对应条款，不能合并计算综合税率",
+      "不添加本份未重述的800美元资格或香港适用规则，不声称现行有效",
+      "报告刷新/重启后原文引用、字段和摘要保持一致"
+    ]
+  }
+}

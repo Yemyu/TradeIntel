@@ -1,0 +1,59 @@
+{
+  "schema_version": "trade-followup-four-questions-v1",
+  "status": "frozen_for_review",
+  "window": {
+    "start_month": "2025-08",
+    "end_month": "2026-07",
+    "interpretation": "追问中的七月指 2026-07；今年指这份报告中已发布的 2026 年月份。"
+  },
+  "scenarios": [
+    {
+      "id": "f1",
+      "initial_question": "最近美国咖啡进口有什么变化？",
+      "followup_question": "七月比六月少了，是不是最近一直在降？",
+      "flow": "import",
+      "selected_product_id": "import:0901",
+      "expected_changes_usd": {
+        "2026-06": 12567909,
+        "2026-07": -7220274
+      },
+      "must_not_claim": ["最近一直下降", "整个十二个月一直下降"]
+    },
+    {
+      "id": "f2",
+      "initial_question": "最近美国玉米出口有什么变化？",
+      "followup_question": "今年这几个月里，哪次变化最大？七月的回落算不算特别大？",
+      "flow": "export",
+      "selected_product_id": "export:1005",
+      "comparison_window": ["2026-01", "2026-07"],
+      "expected_changes_usd": {
+        "2026-03": 254863222,
+        "2026-07": -164844596
+      },
+      "must_not_claim": ["超出 2026-01 至 2026-07 的比较范围", "原因或政策效果"]
+    },
+    {
+      "id": "f3",
+      "initial_question": "最近美国电脑进出口怎么样？",
+      "followup_question": "进口和出口最近都增加了，是不是说明贸易差额改善了？",
+      "flow": "both",
+      "selected_product_id": "both:8471",
+      "expected_changes_usd": {
+        "import:2026-07": 9375340146,
+        "export:2026-07": 537962962
+      },
+      "must_not_claim": ["由两种不同统计口径直接相减得到已核实贸易差额", "仅凭两方向同升即可判断差额改善"]
+    },
+    {
+      "id": "f4",
+      "initial_question": "最近美国稻米进口有什么变化？",
+      "followup_question": "进口金额比上月高，是不是美国买得更多，或者单价涨了？",
+      "flow": "import",
+      "selected_product_id": "import:1006",
+      "expected_changes_usd": {
+        "2026-07": 3401390
+      },
+      "must_not_claim": ["金额上涨等于数量增加", "金额上涨等于单价上涨", "没有数量、单位价值或构成资料也作确定判断"]
+    }
+  ]
+}
