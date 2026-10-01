@@ -5,7 +5,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-const script = fs.readFileSync(path.join(__dirname, '../web/design-preview/live.js'), 'utf8');
+const script = fs.readFileSync(path.join(__dirname, '../web/design-preview/report-view.js'), 'utf8') + '\n' +
+  fs.readFileSync(path.join(__dirname, '../web/design-preview/live.js'), 'utf8');
 
 function node(tag = 'div') {
   const value = {
@@ -17,6 +18,7 @@ function node(tag = 'div') {
     setAttribute(key, item) { this.attrs[key] = item; },
     addEventListener(name, handler) { this.listeners[name] = handler; },
     after() {}, before() {}, scrollIntoView() {},
+    showModal() { this.open=true; }, close() { this.open=false; this.listeners.close?.(); },
     querySelector(selector) {
       if (this.id === 'report' && selector === '.report-layout') return this.layout;
       if (selector === 'button[type=submit]') return this.submitButton;
@@ -70,7 +72,7 @@ test('printing opens supporting tables and restores the screen view', async () =
   assert.ok(env.created.some(item => String(item.className).includes('print-exclude')));
 });
 
-function makeEnv(reportState) {
+function makeEnv(reportState, agentState = null) {
   const ids = new Map();
   const created = [];
   const events = {};
@@ -86,18 +88,24 @@ function makeEnv(reportState) {
   ids.set('question', question);
   ids.set('scope-preview', scope);
   ids.set('report', report);
+  for(const id of ['chat-messages','chat-empty','conversation-scroll','conversation-title',
+    'workspace-mode','conversation-list','new-conversation','open-model-settings','model-status-button',
+    'return-to-conversation']){const element=node();element.id=id;ids.set(id,element);}
   const storage = {
     tradeintel_last_report_type: 'trade',
     tradeintel_live_trade_report_id: 'report-1',
+    tradeintel_query_mode: 'data',
+    tradeintel_agent_session: agentState?.session_id || '',
     getItem(key) { return this[key] || ''; },
     setItem(key, value) { this[key] = value; },
+    removeItem(key) { delete this[key]; },
   };
   const context = vm.createContext({
     location: {pathname: '/preview/', hash: ''},
     localStorage: storage,
     window: {location: {pathname: '/preview/', search: '', hash: ''}, localStorage: storage},
     document: {
-      title: '', documentElement: {lang: 'zh-CN'},
+      title: '', documentElement: {lang: 'zh-CN', dataset: {runtime: 'local'}},
       getElementById(id) { return ids.get(id); },
       querySelector() { return homeNote; },
       createElement: tag => { const createdNode = node(tag); created.push(createdNode); return createdNode; },
@@ -108,15 +116,64 @@ function makeEnv(reportState) {
       ok: true,
       json: async () => url.startsWith('/api/model/status')
         ? {configured: false, models: {}}
-        : reportState,
+        : url.startsWith('/api/trade/agent/state') ? agentState : reportState,
     }),
   });
   return {context, report: () => created.find(item => item.id === 'live-result'), ids, created, events};
 }
 
+test('first visit without a configured model starts in data-only mode', async () => {
+  const env=makeEnv({});
+  delete env.context.localStorage.tradeintel_query_mode;
+  vm.runInContext(script,env.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  const mode=env.created.find(item=>item.tag==='select'&&item.attrs['aria-label']==='查询方式');
+  assert.equal(mode.value,'data');
+  assert.equal(env.context.localStorage.getItem('tradeintel_query_mode'),'');
+});
+
+test('a configured model is offered on first visit but an explicit data choice stays', async () => {
+  const first=makeEnv({});
+  delete first.context.localStorage.tradeintel_query_mode;
+  first.context.fetch=async url=>({ok:true,json:async()=>
+    url==='/api/model/status'?{configured:true,model:'deepseek-flash',models:{}}:{}});
+  vm.runInContext(script,first.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(first.created.find(item=>item.tag==='select'&&item.attrs['aria-label']==='查询方式').value,'agent');
+
+  const chosen=makeEnv({});
+  chosen.context.localStorage.tradeintel_query_mode='data';
+  chosen.context.fetch=first.context.fetch;
+  vm.runInContext(script,chosen.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(chosen.created.find(item=>item.tag==='select'&&item.attrs['aria-label']==='查询方式').value,'data');
+});
+
+test('agent report labels the safe program summary and not a model draft', async () => {
+  const record = {kind: 'trade-query-v1', question: '美国大豆进口',
+    scope: {flow: 'import', product_label: '大豆', product_code: '1201',
+      partner: 'ALL_ORIGINS', start_month: '2026-06', end_month: '2026-07'},
+    summary: {latest_month: '2026-07', latest_value_usd: 46041287,
+      previous_month: '2026-06', month_change_usd: 13163460, period_total_usd: 78919114},
+    series: [{month: '2026-06', status: 'observed', value_usd: 32877827},
+      {month: '2026-07', status: 'observed', value_usd: 46041287}],
+    observations: [], notes: [], sources: [], explanation: {status: 'not_requested'}};
+  const state = {session_id: 'a'.repeat(32), scope: record.scope,
+    turns: [{question: '最近美国大豆进口有什么变化？', status: 'completed',
+      report_ids: ['b'.repeat(32)], message_kind: 'program_summary_v1',
+      message: '2026-07进口消费额为 46,041,287 美元。仅凭金额变化不能判断政策效果。'}]};
+  const env = makeEnv(record, state);
+  vm.runInContext(script, env.context);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.ok(env.report().textContent.includes('数据摘要'));
+  assert.ok(env.report().textContent.includes('46,041,287'));
+  assert.ok(!env.report().textContent.includes('助手根据本次工具查询写的草稿'));
+  assert.ok(!env.report().textContent.includes('模型解读（试用）'));
+});
+
 test('language switch rerenders a saved trade report without changing data or calling a model', async () => {
   const record = {
-    kind: 'trade-query-v1', question: 'How have U.S. rice imports changed recently?',
+    kind: 'trade-query-v1', question: '最近美国大米进口有什么变化？',
     scope: {flow: 'import', product_label: '大米', official_product_en: 'RICE', product_code: '1006',
       partner: 'ALL_ORIGINS', start_month: '2026-06', end_month: '2026-07'},
     summary: {latest_month: '2026-07', latest_value_usd: 114725468,
@@ -142,7 +199,63 @@ test('language switch rerenders a saved trade report without changing data or ca
   assert.ok(env.report().textContent.includes('114,725,468 USD'));
   assert.ok(env.report().textContent.includes('Official U.S. product description: RICE'));
   assert.ok(!env.report().textContent.includes('先看数字'));
+  assert.equal(env.context.window.tradeintelLiveReportTitle, 'U.S. imports · RICE');
+  assert.ok(!env.report().textContent.includes(record.question));
   assert.deepEqual(calls, ['/api/model/status', '/api/trade/report-state?report_id=report-1']);
+});
+
+test('agent English summary and title switch without translating stored answers or making requests', async () => {
+  const record = {kind:'trade-query-v1', question:'美国大豆出口',
+    scope:{flow:'export',product_label:'大豆',official_product_en:'SOYBEANS',product_code:'1201',
+      partner:'ALL_DESTINATIONS',start_month:'2026-06',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:889379312,previous_month:'2026-06',
+      month_change_usd:-3500150,period_total_usd:1782258774},
+    series:[{month:'2026-06',status:'observed',value_usd:892879462},
+      {month:'2026-07',status:'observed',value_usd:889379312}],
+    observations:[],sources:[],notes:[],explanation:{status:'not_requested'}};
+  const turn={question:'出口呢？',status:'completed',message_kind:'program_summary_v1',
+    message:'中文程序摘要，全部目的地889,379,312美元。',
+    message_en:'Total exports (FAS) to all destinations were 889,379,312 USD.',report_ids:['r1']};
+  const state={session_id:'a'.repeat(32),turns:[turn]};
+  const before=JSON.stringify({record,state}),env=makeEnv(record,state),calls=[];
+  env.context.localStorage.tradeintel_query_mode='agent';
+  env.context.fetch=async url=>{calls.push(url);return {ok:true,json:async()=>
+    url==='/api/model/status'?{configured:false,models:{}}:
+      url.startsWith('/api/trade/agent/state')?state:record};};
+  vm.runInContext(script,env.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  const initialCalls=calls.length;
+  env.context.location.hash='#report';
+  env.context.document.documentElement.lang='en';env.events['tradeintel:language']();
+  assert.equal(env.context.document.title,'U.S. exports · SOYBEANS · TradeIntel');
+  assert.ok(env.report().textContent.includes(turn.message_en));
+  assert.ok(!env.report().textContent.includes(turn.message));
+  assert.ok(env.ids.get('chat-messages').textContent.includes(turn.message_en));
+  assert.ok(!env.ids.get('chat-messages').textContent.includes(turn.message));
+  assert.ok(env.ids.get('chat-messages').textContent.includes(turn.question)); // user text is not translated
+  env.context.document.documentElement.lang='zh-CN';env.events['tradeintel:language']();
+  assert.ok(env.report().textContent.includes(turn.message));
+  assert.equal(env.context.document.title,'美国大豆出口 · TradeIntel');
+  assert.equal(calls.length,initialCalls);
+  assert.equal(JSON.stringify({record,state}),before);
+});
+
+test('English report without an official English label or projected summary uses a safe fallback', async () => {
+  const record={kind:'trade-query-v1',question:'中文问题',
+    scope:{flow:'import',product_label:'中文商品',product_code:'1201',partner:'ALL_ORIGINS',
+      start_month:'2026-07',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:null,previous_month:null,
+      month_change_usd:null,period_total_usd:null},
+    series:[{month:'2026-07',status:'unavailable',value_usd:null}],
+    observations:[],sources:[],notes:[],explanation:{status:'not_requested'}};
+  const env=makeEnv(record,{session_id:'b'.repeat(32),turns:[{status:'completed',
+    question:'中文问题',report_ids:['r1'],message_kind:'program_summary_v1',message:'中文摘要'}]});
+  env.context.document.documentElement.lang='en';
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(env.context.window.tradeintelLiveReportTitle,'U.S. imports · product group 1201');
+  assert.ok(env.report().textContent.includes('No published value'));
+  assert.ok(!env.report().textContent.includes('中文摘要'));
+  assert.ok(!env.report().textContent.includes('中文商品'));
 });
 
 test('v4 report without an additional relation keeps the data report and hides model call', async () => {
@@ -555,4 +668,276 @@ test('partial notice shows broader-product chart, while source-only notice never
   const details = sourceOnly.report().querySelectorAll('details:not([open])');
   sourceOnly.events.beforeprint();
   assert.ok(details.every(item => item.open));
+});
+
+test('assistant mode sends a natural question, renders its saved report, and keeps the session for follow-up', async () => {
+  const importReport = {
+    kind:'trade-query-v1', question:'美国大豆进口', report_id:'agent-report-1',
+    scope:{flow:'import',product_label:'大豆',product_code:'1201',partner:'ALL_ORIGINS',
+      start_month:'2026-06',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:46041287,previous_month:'2026-06',
+      month_change_usd:1,period_total_usd:46041288},
+    series:[{month:'2026-06',status:'observed',value_usd:1},
+      {month:'2026-07',status:'observed',value_usd:46041287}],sources:[],notes:[],
+    explanation:{status:'not_requested',available:false,observations:[]},
+  };
+  const exportReport = {...importReport, question:'美国大豆出口',report_id:'agent-report-2',
+    scope:{...importReport.scope,flow:'export',partner:'ALL_DESTINATIONS'},
+    summary:{...importReport.summary,latest_value_usd:889379312},
+    series:[...importReport.series.slice(0,1),
+      {month:'2026-07',status:'observed',value_usd:889379312}]};
+  const env=makeEnv({});
+  env.context.localStorage.tradeintel_query_mode='agent';
+  env.context.localStorage.tradeintel_last_report_type='';
+  env.context.localStorage.tradeintel_live_trade_report_id='';
+  env.context.crypto={randomUUID:()=> '00000000-0000-4000-8000-000000000001'};
+  const calls=[];
+  env.context.fetch=async (url,options)=>{
+    calls.push({url,body:options?.body?JSON.parse(options.body):null});
+    const turns=calls.filter(call=>call.url==='/api/trade/agent/turn').length;
+    const makeTurn=(question,rid)=>({question,status:'completed',message:'已根据本次查询整理。',
+      message_kind:'program_summary_v1',
+      report_ids:[rid],tool_calls:[{tool:'search_products',status:'ok'},
+        {tool:'query_trade',status:'ok'}]});
+    const state={session_id:'a'.repeat(32),turns:[makeTurn('最近美国大豆进口有什么变化？','agent-report-1'),
+      ...(turns>1?[makeTurn('出口呢？','agent-report-2')]:[])]};
+    const body=url==='/api/model/status'?{configured:true,models:{}}:
+      url==='/api/trade/agent/turn'?state:
+      url.includes('agent-report-2')?exportReport:importReport;
+    return {ok:true,json:async()=>body};
+  };
+  vm.runInContext(script,env.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  env.ids.get('question').value='最近美国大豆进口有什么变化？';
+  await env.ids.get('question-form').listeners.submit({preventDefault(){}});
+  assert.ok(env.report().textContent.includes('46,041,287'),
+    JSON.stringify({calls,text:env.report().textContent}));
+  assert.ok(env.report().textContent.includes('已根据本次查询整理'));
+  assert.ok(!calls.some(call=>call.url==='/api/trade/prepare'));
+  env.ids.get('question').value='出口呢？';
+  await env.ids.get('question-form').listeners.submit({preventDefault(){}});
+  const turns=calls.filter(call=>call.url==='/api/trade/agent/turn');
+  assert.equal(turns.length,2);
+  assert.equal(turns[1].body.session_id,'a'.repeat(32));
+  assert.ok(env.report().textContent.includes('889,379,312'));
+  const restart=env.ids.get('new-conversation');
+  assert.ok(restart);
+  await restart.listeners.click();
+  assert.equal(env.context.localStorage.getItem('tradeintel_agent_session'),'');
+  assert.ok(env.report().textContent.includes('889,379,312'));
+});
+
+test('reader view survives saved-page loading and treats policy text as plain text', async () => {
+  const sid='d'.repeat(32);
+  const record={kind:'trade-query-v1',report_id:'reader-report',
+    scope:{flow:'import',product_label:'大豆',product_code:'1201',partner:'ALL_ORIGINS',start_month:'2026-06',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:100,month_change_usd:5},
+    series:[{month:'2026-06',status:'observed',value_usd:95},{month:'2026-07',status:'observed',value_usd:100}],
+    sources:[],notes:[],explanation:{status:'not_requested'}};
+  const reader={schema:'trade-reader-view-v1',facts:[{text:'直接回答100美元。',text_en:'Direct answer: 100 USD.'}],
+    policy:{status:'partial',evidence_bundles:[{hit:{citation_id:'v:s',text:'<script>not executable</script>'},
+      required_context:[{status:'known',dependency:'exceptions',citation_id:'v:e',text:'独立例外全文。'}]}]},
+    unanswered:[],method:{text:'已发布数据。',text_en:'Published data.'}};
+  const state={session_id:sid,turns:[{question:'政策',status:'completed',message:'OLD REPETITIVE MESSAGE',
+    message_kind:'program_summary_v1',reader_view:reader,report_ids:['reader-report']}]};
+  const env=makeEnv({});env.context.location.search=`?agent_session_id=${sid}`;
+  env.context.window.location.search=env.context.location.search;
+  const calls=[];
+  env.context.fetch=async(url,options)=>{calls.push(options?.method||'GET');return {ok:true,json:async()=>
+    url==='/api/model/status'?{configured:true,models:{}}:url.startsWith('/api/trade/agent/state?')?state:record};};
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  assert.match(env.report().textContent,/直接回答100美元/);
+  assert.match(env.report().textContent,/独立例外全文/);
+  assert.match(env.report().textContent,/政策证据不完整/);
+  assert.ok(!env.report().textContent.includes('OLD REPETITIVE MESSAGE'));
+  assert.ok(!env.created.some(item=>item.tag==='script'));
+  assert.ok(calls.every(method=>method==='GET'));
+});
+
+test('saved assistant link shows only the public summary without starting a new call', async () => {
+  const sessionId='b'.repeat(32);
+  const reportState={kind:'trade-query-v1',question:'最近美国大豆进口有什么变化',report_id:'saved-report',
+    scope:{flow:'import',product_label:'大豆',product_code:'1201',partner:'ALL_ORIGINS',
+      start_month:'2026-06',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:46041287,previous_month:'2026-06',
+      month_change_usd:13163460,period_total_usd:78919114},
+    series:[{month:'2026-06',status:'observed',value_usd:32877827},
+      {month:'2026-07',status:'observed',value_usd:46041287}],
+    sources:[],notes:['目前未运行模型解释；本页摘要和图表均由已发布数据计算。'],
+    explanation:{status:'not_requested',available:true,observations:[]}};
+  const state={session_id:sessionId,turns:[{question:reportState.question,status:'completed',
+    message:'旧版模型文字未经本规则核验，已隐藏；数据报告仍可查看。',
+    message_kind:'legacy_unreviewed_hidden',
+    report_ids:['saved-report'],tool_calls:[{tool:'query_trade',status:'ok'}]}]};
+  const env=makeEnv({});
+  env.context.location.search=`?agent_session_id=${sessionId}`;
+  env.context.window.location.search=env.context.location.search;
+  const calls=[];
+  env.context.fetch=async (url,options)=>{
+    calls.push({url,method:options?.method||'GET'});
+    return {ok:true,json:async()=>url==='/api/model/status'?{configured:true,models:{}}:
+      url.startsWith('/api/trade/agent/state?')?state:reportState};
+  };
+  vm.runInContext(script,env.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  const rendered=env.report().textContent;
+  assert.match(rendered,/46,041,287/);
+  assert.match(rendered,/旧版模型文字未经本规则核验/);
+  assert.match(rendered,/旧版解释已隐藏/);
+  assert.ok(!rendered.includes('目前未运行模型解释'));
+  assert.ok(!env.created.some(item=>item.tag==='button'&&item.textContent==='试用模型解读'));
+  assert.deepEqual(calls.map(call=>call.method),['GET','GET','GET']);
+  assert.ok(calls.some(call=>call.url===`/api/trade/agent/state?session_id=${sessionId}`));
+  assert.equal(env.context.localStorage.getItem('tradeintel_agent_session'),sessionId);
+});
+
+test('multi-report assistant restores the main all-destinations report and labels the China option', async () => {
+  const sessionId='c'.repeat(32), allId='d'.repeat(32), chinaId='e'.repeat(32);
+  const base={kind:'trade-query-v1',question:'美国大豆出口',
+    scope:{flow:'export',product_label:'大豆',product_code:'1201',partner:'ALL_DESTINATIONS',
+      start_month:'2025-08',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:889379312,previous_month:'2026-06',
+      month_change_usd:-3500150,period_total_usd:18789570646},
+    series:[{month:'2026-06',status:'observed',value_usd:892879462},
+      {month:'2026-07',status:'observed',value_usd:889379312}],
+    sources:[],notes:[],explanation:{status:'not_requested',available:false,observations:[]}};
+  const allReport={...base,report_id:allId};
+  const chinaReport={...base,report_id:chinaId,
+    scope:{...base.scope,partner:'CHINA'},
+    summary:{...base.summary,latest_value_usd:141197240},
+    series:[{month:'2026-06',status:'observed',value_usd:203922101},
+      {month:'2026-07',status:'observed',value_usd:141197240}]};
+  const state={session_id:sessionId,scope:allReport.scope,turns:[
+    {question:'出口呢？',status:'completed',message_kind:'program_summary_v1',
+      message:'2026-07（全部目的地）出口 FAS 总额为 889,379,312 美元。2026-07（中国目的地）出口 FAS 总额为 141,197,240 美元。',
+      report_ids:[allId,chinaId],primary_report_id:allId,
+      report_options:[{report_id:allId,flow:'export',partner:'ALL_DESTINATIONS'},
+        {report_id:chinaId,flow:'export',partner:'CHINA'}]}]};
+  const env=makeEnv({},state);
+  env.context.localStorage.tradeintel_last_report_type='';
+  const calls=[];
+  env.context.fetch=async url=>{calls.push(url);return {ok:true,json:async()=>
+    url==='/api/model/status'?{configured:true,models:{}}:
+      url.startsWith('/api/trade/agent/state?')?state:
+        url.includes(chinaId)?chinaReport:allReport};};
+  vm.runInContext(script,env.context);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.ok(calls.some(url=>url.includes(`report_id=${allId}`)));
+  assert.ok(calls.some(url=>url.includes(`report_id=${chinaId}`)), 'saved card scope is loaded read-only');
+  assert.ok(env.report().textContent.includes('889,379,312'));
+  assert.ok(env.ids.get('chat-messages').textContent.includes('出口 · 全部目的地（主报告）'));
+  const chinaButton=env.created.find(item=>item.tag==='button'&&item.textContent.startsWith('出口 · 中国'));
+  assert.ok(chinaButton);
+  await chinaButton.listeners.click();
+  assert.ok(calls.some(url=>url.includes(`report_id=${chinaId}`)));
+  assert.ok(env.report().textContent.includes('141,197,240'));
+  assert.ok(env.report().textContent.includes('数据摘要'));
+  assert.ok(!env.report().textContent.includes('模型解读（试用）'));
+});
+
+test('showcase runtime never initializes the local API, even under /preview/', async()=>{
+  const env=makeEnv({});env.context.document.documentElement.dataset.runtime='showcase';
+  let requests=0;env.context.fetch=async()=>{requests++;throw Error('must stay static');};
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(requests,0);assert.equal(env.created.length,0);
+});
+
+test('local marker alone does not enable the API on a repository subpath', async()=>{
+  const env=makeEnv({});env.context.location.pathname='/TradeIntel/preview/';
+  let requests=0;env.context.fetch=async()=>{requests++;throw Error('not the local route');};
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(requests,0);
+});
+
+test('settings are a labelled dialog, hide duplicate model input and never probe on opening', async()=>{
+  const env=makeEnv({});const calls=[];
+  env.context.localStorage.tradeintel_last_report_type='';
+  env.context.fetch=async(url,options)=>{calls.push({url,method:options?.method||'GET'});
+    return {ok:true,json:async()=>({configured:true,provider:'deepseek',model:'deepseek-flash',models:{deepseek:['deepseek-flash']}})};};
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  const dialog=env.created.find(item=>item.tag==='dialog');
+  assert.equal(dialog.attrs['aria-labelledby'],'model-settings-title');
+  env.ids.get('open-model-settings').listeners.click();assert.equal(dialog.open,true);
+  const input=env.created.find(item=>item.tag==='input'&&item.attrs['aria-label']==='Model ID');
+  assert.equal(input.parentNode.hidden,true);
+  const preset=env.created.find(item=>item.tag==='select'&&item.attrs['aria-label']==='常用型号');
+  preset.value='custom';preset.listeners.change();assert.equal(input.parentNode.hidden,false);
+  const secret=env.created.find(item=>item.type==='password');secret.value='temporary-test-value';
+  const close=env.created.find(item=>item.className==='dialog-close');close.listeners.click();
+  assert.equal(dialog.open,false);assert.equal(secret.value,'');
+  assert.ok(calls.every(call=>call.method==='GET'));
+});
+
+test('Enter sends, Shift+Enter and IME composition never submit', async()=>{
+  const env=makeEnv({});let submitted=0;
+  env.ids.get('question-form').requestSubmit=()=>submitted++;
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  const handler=env.ids.get('question').listeners.keydown;
+  handler({key:'Enter',shiftKey:true,preventDefault(){throw Error('newline prevented');}});
+  handler({key:'Enter',isComposing:true,preventDefault(){throw Error('IME prevented');}});
+  handler({key:'Enter',keyCode:229,preventDefault(){throw Error('IME prevented');}});
+  handler({key:'Enter',preventDefault(){}});assert.equal(submitted,1);
+  env.ids.get('question-form').submitButton.disabled=true;
+  handler({key:'Enter',preventDefault(){}});assert.equal(submitted,1);
+});
+
+test('data-mode language change does not overwrite range cards with an old chat', async()=>{
+  const env=makeEnv({}, {session_id:'a'.repeat(32),turns:[{question:'old chat',status:'needs_clarification',message:'clarify'}]});
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  const scope=env.ids.get('scope-preview');scope.textContent='kept data range';scope.hidden=false;
+  env.context.document.documentElement.lang='en';env.events['tradeintel:language']();
+  assert.equal(scope.textContent,'kept data range');assert.equal(scope.hidden,false);
+  assert.equal(env.ids.get('chat-messages').hidden,true);
+});
+
+test('new conversation retains an unconfirmed pending request and creates no POST', async()=>{
+  const env=makeEnv({});const sid='a'.repeat(32),pending=JSON.stringify({session_id:sid,request_id:'b'.repeat(32),question:'still running'});
+  env.context.localStorage.tradeintel_agent_pending=pending;
+  env.context.localStorage.tradeintel_agent_session=sid;
+  const calls=[];env.context.fetch=async(url,options)=>{calls.push(options?.method||'GET');return {ok:true,json:async()=>
+    url==='/api/model/status'?{configured:false,models:{}}:{session_id:sid,turns:[{question:'still running',status:'in_progress'}]}};};
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  await env.ids.get('new-conversation').listeners.click();
+  assert.equal(env.context.localStorage.getItem('tradeintel_agent_pending'),pending);
+  assert.equal(env.context.localStorage.getItem('tradeintel_agent_session'),sid);
+  assert.ok(calls.every(method=>method==='GET'));
+});
+
+test('a selected older report survives refresh rather than being replaced by the last turn', async()=>{
+  const report=(id,flow,value)=>({kind:'trade-query-v1',report_id:id,question:flow,
+    scope:{product_code:'1201',product_label:'大豆',flow,partner:'ALL',start_month:'2026-06',end_month:'2026-07'},
+    summary:{latest_month:'2026-07',latest_value_usd:value,month_change_usd:1},
+    series:[{month:'2026-06',status:'observed',value_usd:value-1},{month:'2026-07',status:'observed',value_usd:value}],
+    sources:[],notes:[],observations:[],explanation:{status:'not_requested'}});
+  const first=report('first-report','import',100),last=report('last-report','export',200);
+  const state={session_id:'a'.repeat(32),turns:[
+    {question:'进口',status:'completed',report_ids:['first-report'],message_kind:'program_summary_v1',message:'进口100'},
+    {question:'出口呢',status:'completed',report_ids:['last-report'],message_kind:'program_summary_v1',message:'出口200'}]};
+  const env=makeEnv(first,state);env.context.location.hash='#report';
+  env.context.localStorage.tradeintel_query_mode='agent';
+  env.context.localStorage.tradeintel_active_report=JSON.stringify({origin:'local',id:'first-report'});
+  const methods=[];env.context.fetch=async(url,options)=>{methods.push(options?.method||'GET');return {ok:true,json:async()=>
+    url==='/api/model/status'?{configured:true,models:{}}:url.startsWith('/api/trade/agent/state')?state:
+      url.includes('last-report')?last:first};};
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  assert.match(env.report().textContent,/100/);assert.equal(env.context.localStorage.tradeintel_live_trade_report_id,'first-report');
+  assert.match(env.ids.get('chat-messages').textContent,/出口呢/);assert.ok(methods.every(method=>method==='GET'));
+});
+
+test('concurrent duplicate submits send one POST and completion stays in the conversation', async()=>{
+  const env=makeEnv({});env.context.location.hash='#workspace';env.context.localStorage.tradeintel_last_report_type='';
+  env.context.localStorage.tradeintel_query_mode='agent';env.context.crypto={randomUUID:()=> 'a'.repeat(32)};
+  let complete;const pending=new Promise(resolve=>complete=resolve),posts=[];
+  env.context.fetch=async(url,options)=>{
+    if(options?.method==='POST'){posts.push(url);return pending;}
+    return {ok:true,json:async()=>({configured:true,models:{}})};
+  };
+  vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
+  env.ids.get('question').value='请选择商品';
+  const first=env.ids.get('question-form').listeners.submit({preventDefault(){}});
+  const duplicate=env.ids.get('question-form').listeners.submit({preventDefault(){}});
+  assert.deepEqual(posts,['/api/trade/agent/turn']);
+  complete({ok:true,json:async()=>({session_id:'a'.repeat(32),turns:[{question:'请选择商品',status:'needs_clarification',message:'哪个商品？'}]})});
+  await Promise.all([first,duplicate]);
+  assert.equal(env.context.location.hash,'#workspace');assert.match(env.ids.get('chat-messages').textContent,/哪个商品/);
 });

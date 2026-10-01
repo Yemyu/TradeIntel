@@ -1,0 +1,202 @@
+{
+  "evidence_meta": {
+    "data_versions": [
+      "dd9801492e80268e51480b08c2edcbf495aba3ce01b7ee64739566f67a151ef8"
+    ],
+    "official_urls": [
+      "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2508.ZIP",
+      "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2509.ZIP",
+      "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2510.ZIP",
+      "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2511.ZIP",
+      "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2601.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2602.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2603.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2604.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2605.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2606.ZIP",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP"
+    ],
+    "original_sha256": [
+      "e37491923b69b2ce0178375a53171089e1843a510504aaca779ae5d68a029852",
+      "ed23f8a62e8f3944341cc9476368246ba35e379d9fa5ca4b4dcc20d3058c60e5"
+    ]
+  },
+  "guard": null,
+  "id": "soybean-oil",
+  "kind": "real_agent_run",
+  "reader_view": {
+    "facts": [
+      {
+        "report_id": "r1",
+        "text": "2026-07（全部来源地）进口消费额为 27,503,913 美元。较前月减少 3,340,380 美元。",
+        "text_en": "In 2026-07, imports for consumption from all origins were 27,503,913 USD. Decreased by 3,340,380 USD from the previous month."
+      }
+    ],
+    "method": {
+      "text": "金额和图表来自本次查询的已发布数据；统计范围和截至月份见各图表。",
+      "text_en": "Values and charts use published data queried for this turn. Each chart identifies its statistical scope and cutoff month."
+    },
+    "unanswered": []
+  },
+  "reports": [
+    {
+      "kind": "trade-query-v1",
+      "notes": [
+        "本报告只使用美国消费进口额，不包含出口。",
+        "金额变化可能来自进口数量或价格；仅凭金额不能判断政策效果。",
+        "目前未运行模型解释；本页摘要和图表均由已发布数据计算。"
+      ],
+      "question": "美国豆油及其分离品，不论是否精制，但未经化学改性进口",
+      "report_id": "r1",
+      "scope": {
+        "end_month": "2026-07",
+        "flow": "import",
+        "metric": "import_value_consumption_usd",
+        "official_product_en": "SOYBEAN OIL AND ITS FRACTIONS, WHETHER OR NOT REFINED, BUT NOT CHEMICALLY MODIFIED",
+        "partner": "ALL_ORIGINS",
+        "product_code": "1507",
+        "product_label": "豆油及其分离品，不论是否精制，但未经化学改性",
+        "start_month": "2025-08"
+      },
+      "series": [
+        {
+          "month": "2025-08",
+          "status": "observed",
+          "value_usd": 9436814
+        },
+        {
+          "month": "2025-09",
+          "status": "observed",
+          "value_usd": 12356994
+        },
+        {
+          "month": "2025-10",
+          "status": "observed",
+          "value_usd": 8388794
+        },
+        {
+          "month": "2025-11",
+          "status": "observed",
+          "value_usd": 14932857
+        },
+        {
+          "month": "2025-12",
+          "status": "observed",
+          "value_usd": 13455728
+        },
+        {
+          "month": "2026-01",
+          "status": "observed",
+          "value_usd": 15514351
+        },
+        {
+          "month": "2026-02",
+          "status": "observed",
+          "value_usd": 13905515
+        },
+        {
+          "month": "2026-03",
+          "status": "observed",
+          "value_usd": 19803380
+        },
+        {
+          "month": "2026-04",
+          "status": "observed",
+          "value_usd": 19518574
+        },
+        {
+          "month": "2026-05",
+          "status": "observed",
+          "value_usd": 19008378
+        },
+        {
+          "month": "2026-06",
+          "status": "observed",
+          "value_usd": 30844293
+        },
+        {
+          "month": "2026-07",
+          "status": "observed",
+          "value_usd": 27503913
+        }
+      ],
+      "sources": [
+        "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2508.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2509.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2510.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2511.ZIP",
+        "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2601.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2602.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2603.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2604.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2605.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2606.ZIP",
+        "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP"
+      ],
+      "summary": {
+        "complete_window": true,
+        "latest_month": "2026-07",
+        "latest_value_usd": 27503913,
+        "month_change_usd": -3340380,
+        "period_total_usd": 204669591,
+        "previous_month": "2026-06"
+      }
+    }
+  ],
+  "schema": "tradeintel-public-case-v1",
+  "turns": [
+    {
+      "primary_report": null,
+      "reports": [],
+      "role": "user",
+      "steps": [],
+      "text": {
+        "en": "How are recent U.S. soybean oil imports?",
+        "zh": "美国豆油进口最近怎样？"
+      }
+    },
+    {
+      "primary_report": "r1",
+      "reports": [
+        "r1"
+      ],
+      "role": "assistant",
+      "steps": [
+        {
+          "label": {
+            "en": "Check available months",
+            "zh": "检查可用月份"
+          },
+          "status": "ok"
+        },
+        {
+          "label": {
+            "en": "Find product scope",
+            "zh": "查找商品范围"
+          },
+          "status": "ok"
+        },
+        {
+          "label": {
+            "en": "Query trade values",
+            "zh": "查询贸易金额"
+          },
+          "status": "ok"
+        },
+        {
+          "label": {
+            "en": "Save the result",
+            "zh": "保存查询结果"
+          },
+          "status": "completed"
+        }
+      ],
+      "text": {
+        "en": "In 2026-07, imports for consumption from all origins were 27,503,913 USD. Decreased by 3,340,380 USD from the previous month. Trade values alone cannot establish policy effects; see the reports for charts and sources.",
+        "zh": "已查询美国豆油及其分离品，不论是否精制，但未经化学改性（1507）2025-08 至 2026-07的已发布进口数据。2026-07（全部来源地）进口消费额为 27,503,913 美元。仅凭这些贸易金额不能判断政策效果；图表与来源见报告。"
+      }
+    }
+  ]
+}

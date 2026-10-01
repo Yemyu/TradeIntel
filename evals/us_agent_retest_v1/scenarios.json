@@ -1,0 +1,24 @@
+{
+  "schema": "us-agent-retest-design-v1",
+  "status": "design_only_not_live_ready",
+  "as_of": "2026-10-01",
+  "data_latest_month": "2026-07",
+  "scope": "US reporter; all/china partners; finite portfolio retest",
+  "leakage_boundary": "Expected fields are evaluator-only and must not enter model messages, tools, or feedback.",
+  "model": {"provider": "deepseek", "requested_model": "deepseek-flash", "thinking": {"type": "enabled"}, "reasoning_effort": "high"},
+  "limits": {"user_turns": 12, "max_rounds_per_turn": 6, "max_tools_per_turn": 12, "max_requests_total": 48, "max_tokens_per_request": 8192, "max_wire_body_bytes": 65536, "timeout_ceiling_seconds": 90, "batch_wall_clock_seconds": 7200, "proposed_budget_usd": 2, "live_authorized": false},
+  "cases": [
+    {"id": "R01", "session": "A", "group": "seen_regression", "kind": "normal", "question": "最近美国大豆进口有什么变化？", "expected_product": "1201", "flow": "import", "partner": "all", "period_rule": "recent_with_previous_month"},
+    {"id": "R02", "session": "A", "requires": "R01", "group": "seen_regression", "kind": "normal", "question": "出口呢？", "expected_product": "1201", "flow": "export", "partner": "all", "period_rule": "recent_with_previous_month"},
+    {"id": "R03", "session": "A", "requires": "R02", "group": "seen_regression", "kind": "normal", "question": "改看豆油进口，最近怎么样？", "expected_product": "1507", "flow": "import", "partner": "all", "period_rule": "recent_with_previous_month"},
+    {"id": "R04", "session": "B", "group": "seen_regression", "kind": "normal", "question": "最近美国大豆的进口和出口分别怎么样？能说明政策奏效吗？", "expected_product": "1201", "flow": "both", "partner": "all", "period_rule": "recent_with_previous_month", "causal_warning_origin": "program_not_model_reasoning"},
+    {"id": "R05", "session": "C", "group": "seen_boundary_family", "kind": "boundary", "question": "上个月美国大豆进口额是多少？", "expected_product": "1201", "requested_month": "2026-09", "required_result": "unavailable_month_no_substitution"},
+    {"id": "R06", "session": "D", "group": "seen_boundary_family", "kind": "boundary", "question": "最近美国向巴西出口的大豆有多少？", "required_result": "unsupported_partner_no_substitution", "expected_origin": "program_precheck", "model_score_if_no_response": "not_applicable"},
+    {"id": "T01", "session": "E", "group": "new_agent_scenario_not_blind", "kind": "normal", "question": "最近半年美国天然橡胶进口有什么变化？", "expected_product": "4001", "flow": "import", "partner": "all", "start": "2026-02", "end": "2026-07"},
+    {"id": "T02", "session": "E", "requires": "T01", "group": "new_agent_scenario_not_blind", "kind": "normal", "question": "那最近半年出口到中国呢？", "expected_product": "4001", "flow": "export", "partner": "china", "start": "2026-02", "end": "2026-07"},
+    {"id": "T03", "session": "F", "group": "new_agent_scenario_not_blind", "kind": "normal", "question": "最近美国从中国进口的可可豆有多少？", "expected_product": "1801", "flow": "import", "partner": "china", "period_rule": "recent_latest_month_present", "latest_value_expectation": "unknown_not_zero"},
+    {"id": "T04", "session": "F", "requires": "T03", "group": "new_agent_scenario_not_blind", "kind": "normal", "question": "换成葡萄酒进口，全部来源，看看最近三个月。", "expected_product": "2204", "flow": "import", "partner": "all", "start": "2026-05", "end": "2026-07"},
+    {"id": "P01", "session": "G", "group": "seen_official_policy_linkage", "kind": "normal", "question": "美国钨及其制品的进口最近有什么变化？本地资料里那份加税公告说了什么？", "expected_product": "8101", "flow": "import", "partner": "all", "period_rule": "recent_with_previous_month", "policy_prerequisite": "verified_registered_cbp63577329", "policy_scope": "candidate_evidence_not_applicability", "required_policy_hts8": ["81019400", "81019910", "81019980"]},
+    {"id": "P02", "session": "G", "requires": "P01", "group": "seen_official_policy_linkage", "kind": "boundary", "question": "那份公告里的25%，就是现在的全部进口税率吗？", "required_result": "archived_additional_not_current_total_rate"}
+  ]
+}

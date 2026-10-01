@@ -1,0 +1,63 @@
+{
+  "evidence_meta": {
+    "data_versions": [],
+    "official_urls": [],
+    "original_sha256": [
+      "94677a4df770d68ce1be7c2c8d71f8b219a1e63c27ab6cf333d2475004775183"
+    ]
+  },
+  "guard": {
+    "latest_available_month": "2026-07",
+    "model_month_selection": "rejected",
+    "requested_month": "2026-08"
+  },
+  "id": "missing-month",
+  "kind": "guarded_run",
+  "reader_view": null,
+  "reports": [],
+  "schema": "tradeintel-public-case-v1",
+  "turns": [
+    {
+      "primary_report": null,
+      "reports": [],
+      "role": "user",
+      "steps": [],
+      "text": {
+        "en": "What was the value of U.S. soybean imports last month?",
+        "zh": "上个月美国大豆进口额是多少？"
+      }
+    },
+    {
+      "primary_report": null,
+      "reports": [],
+      "role": "assistant",
+      "steps": [
+        {
+          "label": {
+            "en": "Check available months",
+            "zh": "检查可用月份"
+          },
+          "status": "ok"
+        },
+        {
+          "label": {
+            "en": "Find product scope",
+            "zh": "查找商品范围"
+          },
+          "status": "ok"
+        },
+        {
+          "label": {
+            "en": "Query trade values",
+            "zh": "查询贸易金额"
+          },
+          "status": "unavailable"
+        }
+      ],
+      "text": {
+        "en": "The requested calendar month is August 2026, but verified data is available only through July 2026. Please explicitly ask to use the latest available month if that is what you want.",
+        "zh": "用户指定的是日历上月；缺少 2026-08 的已核验可查询数据。最新可用月为 2026-07。如需改查最新可用月，请明确提出。"
+      }
+    }
+  ]
+}
