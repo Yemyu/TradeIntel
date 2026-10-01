@@ -1,0 +1,18 @@
+{
+  "schema":"us-agent-chat-questions-v1",
+  "as_of":"2026-10-01",
+  "cases":[
+    {"id":"R01","session":"A","question":"最近美国大豆进口有什么变化？"},
+    {"id":"R02","session":"A","requires":"R01","question":"出口呢？"},
+    {"id":"R03","session":"A","requires":"R02","question":"改看豆油进口，最近怎么样？"},
+    {"id":"R04","session":"B","question":"最近美国大豆的进口和出口分别怎么样？能说明政策奏效吗？"},
+    {"id":"R05","session":"C","question":"上个月美国大豆进口额是多少？"},
+    {"id":"R06","session":"D","question":"最近美国向巴西出口的大豆有多少？"},
+    {"id":"T01","session":"E","question":"最近半年美国天然橡胶进口有什么变化？"},
+    {"id":"T02","session":"E","requires":"T01","question":"那最近半年出口到中国呢？"},
+    {"id":"T03","session":"F","question":"最近美国从中国进口的可可豆有多少？"},
+    {"id":"T04","session":"F","requires":"T03","question":"换成葡萄酒进口，全部来源，看看最近三个月。"},
+    {"id":"P01","session":"G","question":"美国钨及其制品的进口最近有什么变化？本地资料里那份加税公告说了什么？"},
+    {"id":"P02","session":"G","requires":"P01","question":"那份公告里的25%，就是现在的全部进口税率吗？"}
+  ]
+}

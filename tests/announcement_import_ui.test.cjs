@@ -258,6 +258,122 @@ test('offline reading notes show sourced claims but never fill or submit the for
   assert.equal(nodes.get('reading-preview').hidden, true);
 });
 
+test('v3 offline checks render read-only and reject incomplete or mismatched notes', async () => {
+  const {context, nodes, requested} = makeEnv();
+  vm.runInContext(script, context);
+  await nodes.get('import').onclick();
+  await nodes.get('template').onclick();
+  const source = nodes.get('source-text').value;
+  const digest = text => createHash('sha256').update(text).digest('hex');
+  const fields = {
+    rate_meaning: ['policy_action', 'measure_nature', 'assessment_effect'],
+    conditions: ['origin_by_measure', 'product_scope', 'effective_date', 'retroactive_starts', 'entry_event'],
+    exceptions: ['exclusion_conditions', 'code_description'],
+  };
+  let sequence = 0;
+  const items = Object.entries(fields).map(([field, ids]) => ({
+    field,
+    claims: ids.map(id => ({claim_id: `C${++sequence}`, text: `合成要点 ${id}`,
+      check_ids: [id], anchors: ['P1'], source_passages: [{passage_id: 'P1',
+        start: 0, end: source.length, offset_unit: 'character',
+        text: source, text_sha256: digest(source)}]})),
+    checks: ids.map((id, offset) => ({check_id: id, label: `核查 ${id}`,
+      status: 'addressed', claim_ids: [`C${sequence - ids.length + offset + 1}`], note: ''})),
+  }));
+  const notes = {schema_version: 'announcement-reading-suggestions-v3',
+    status: 'review_only', ready_for_review: true,
+    doc_version: 'docver-synthetic-k3', source_sha256: digest(source), items};
+  await context.renderReadingPreview(notes);
+  assert.equal(nodes.get('reading-preview').hidden, false);
+  assert.equal(nodes.get('reading-preview-items').children.length, 3);
+  assert.equal(nodes.get('reading-preview-items').children[1].children.length, 6);
+  assert.equal(context.document.getElementById('value-9').value, '');
+  assert.equal(nodes.get('enable').disabled, true);
+  assert.equal(requested.filter(item => item.url === '/api/announcements/submit').length, 0);
+  const detail = nodes.get('reading-preview-items').children[0].children[1].children[1];
+  detail.children[1].click();
+  assert.equal(nodes.get('document-details').open, true);
+  notes.items[1].checks[0].status = 'incomplete';
+  notes.items[1].checks[0].claim_ids = [];
+  notes.items[1].checks[0].note = '未完成';
+  notes.items[1].claims.shift();
+  notes.status = 'incomplete_not_ready';
+  notes.ready_for_review = false;
+  await assert.rejects(context.renderReadingPreview(notes), /尚未完成/);
+  assert.equal(nodes.get('reading-preview').hidden, true);
+});
+
+test('v3 passage offsets use Unicode characters rather than JS UTF-16 units', async () => {
+  const {context, nodes} = makeEnv();
+  vm.runInContext(script, context);
+  vm.runInContext("savedSections = [{text: 'A😀B'}]", context);
+  nodes.get('doc-version').value = 'docver-synthetic-k3';
+  nodes.get('doc-version').textContent = 'docver-synthetic-k3';
+  const digest = text => createHash('sha256').update(text).digest('hex');
+  const fields = {
+    rate_meaning: ['policy_action', 'measure_nature', 'assessment_effect'],
+    conditions: ['origin_by_measure', 'product_scope', 'effective_date', 'retroactive_starts', 'entry_event'],
+    exceptions: ['exclusion_conditions', 'code_description'],
+  };
+  const items = Object.entries(fields).map(([field, ids]) => ({
+    field,
+    claims: field === 'rate_meaning' ? [{claim_id: 'C1', text: '测试补充字符位置',
+      anchors: ['P1'], check_ids: ['policy_action'], source_passages: [{passage_id: 'P1',
+        start: 1, end: 2, offset_unit: 'character', text: '😀', text_sha256: digest('😀')}]}] : [],
+    checks: ids.map(id => ({check_id: id, label: id,
+      status: id === 'policy_action' ? 'addressed' : 'not_stated',
+      claim_ids: id === 'policy_action' ? ['C1'] : [],
+      note: id === 'policy_action' ? '' : '合成文本未说明'})),
+  }));
+  await context.renderReadingPreview({schema_version: 'announcement-reading-suggestions-v3',
+    status: 'review_only', ready_for_review: true,
+    doc_version: 'docver-synthetic-k3', source_sha256: digest('A😀B'), items});
+  assert.equal(nodes.get('reading-preview').hidden, false);
+});
+
+test('v4 normalized reading is read-only, shows addressed notes and rejects incomplete', async () => {
+  const {context, nodes, requested} = makeEnv();
+  vm.runInContext(script, context);
+  vm.runInContext("savedSections = [{text: 'A😀B'}]", context);
+  nodes.get('doc-version').value = 'docver-synthetic-k3';
+  nodes.get('doc-version').textContent = 'docver-synthetic-k3';
+  const digest = text => createHash('sha256').update(text).digest('hex');
+  const fields = {
+    rate_meaning: ['policy_action', 'measure_nature', 'assessment_effect'],
+    conditions: ['origin_by_measure', 'product_scope', 'effective_date', 'retroactive_starts', 'entry_event'],
+    exceptions: ['exclusion_conditions', 'code_description'],
+  };
+  const items = Object.entries(fields).map(([field, ids]) => ({
+    field,
+    claims: field === 'rate_meaning' ? [{claim_id: 'C1', text: '合成公告动作',
+      anchors: ['P1'], check_ids: ['policy_action'], source_passages: [{passage_id: 'P1',
+        start: 1, end: 2, offset_unit: 'character', text: '😀', text_sha256: digest('😀')}]}] : [],
+    checks: ids.map(id => ({check_id: id, label: id,
+      status: id === 'policy_action' ? 'addressed' : 'not_stated',
+      claim_ids: id === 'policy_action' ? ['C1'] : [],
+      note: id === 'policy_action' ? '人工核对时间线' : '合成文本未说明'})),
+  }));
+  const notes = {schema_version: 'announcement-reading-suggestions-v4',
+    status: 'review_only', ready_for_review: true,
+    doc_version: 'docver-synthetic-k3', source_sha256: digest('A😀B'), items};
+  await context.renderReadingPreview(notes);
+  assert.equal(nodes.get('reading-preview').hidden, false);
+  assert.equal(nodes.get('reading-preview-items').children.length, 3);
+  assert.match(nodes.get('reading-preview-items').children[0].children[1].children[1].textContent,
+    /人工核对时间线/);
+  const detail = nodes.get('reading-preview-items').children[0].children[1].children[2];
+  detail.children[1].click();
+  assert.equal(nodes.get('document-details').open, true);
+  assert.equal(nodes.get('enable').disabled, true);
+  assert.equal(requested.filter(item => item.url === '/api/announcements/submit').length, 0);
+  notes.status = 'incomplete_not_ready'; notes.ready_for_review = false;
+  await assert.rejects(context.renderReadingPreview(notes), /尚未完成/);
+  assert.equal(nodes.get('reading-preview').hidden, true);
+  notes.status = 'review_only'; notes.ready_for_review = true;
+  notes.items[0].claims[0].source_passages[0].text = 'wrong';
+  await assert.rejects(context.renderReadingPreview(notes), /原文位置不匹配/);
+});
+
 test('confirmed partial notice shows policy and wider data populations before report', async () => {
   const {context, nodes, requested} = makeEnv();
   vm.runInContext(script, context);

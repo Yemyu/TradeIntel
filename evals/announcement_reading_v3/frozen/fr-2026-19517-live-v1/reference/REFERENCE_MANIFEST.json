@@ -1,0 +1,32 @@
+{
+  "schema": "announcement-reading-v3-pre-answer-reference-v1",
+  "created_at": "2026-09-29T05:56:58Z",
+  "case": "FR2026-19517",
+  "doc_version": "docver-e95b289ffe15d6cc",
+  "reference_kind": "codex_developer_reference_not_independent_legal_gold",
+  "critical_fact_ids": ["F01", "F02", "F03", "F04", "F05", "F06", "F07", "F08", "F09", "F10", "F11"],
+  "check_ids": ["policy_action", "measure_nature", "assessment_effect", "origin_by_measure", "product_scope", "effective_date", "retroactive_starts", "entry_event", "exclusion_conditions", "code_description"],
+  "request_sha256": "616593581ed7bf1661c4ae35d7ddf303f3db59840cd3c02e27ea65fbaaa1dc28",
+  "request_bytes": 7438,
+  "source_sha256": "50ed2786ae6044f2f6bba64c10551b753eae671c2ef8dd3da0fb3facec13ce64",
+  "git_head": "b639f2bc04b7a65270512a08190a632d8d58d60a",
+  "working_tree": "dirty_existing_changes_preserved",
+  "model_answer_status": "not_generated_for_this_case",
+  "human_effort": "not_measured",
+  "api_calls_this_phase": 0,
+  "provider_authorized": false,
+  "files": {
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/reference.zh-CN.md": "ce23802a70a364ba30df63838b7e5ca670574c499c588958debfdd387df55bdf",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/metadata.federalregister.json": "7dd36159b6ae53ab22e6ae20fbc329b962d62581f7d58d80862e730517028190",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/source.federalregister.txt": "b6d7dc8d6ed4f10d102962495c5d502fc4ebe8dce35a57365a8600be98457050",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/source.govinfo.pdf": "998eac7cd03c3ca133cd454beabf019a26e09f4fd5512e1435de693391651ac3",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/source.reading.txt": "50ed2786ae6044f2f6bba64c10551b753eae671c2ef8dd3da0fb3facec13ce64",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/source-store.json": "2e33448cb5ff1c0f7d426e4a97d1842b2faebc3b5d0e8c0ccaef80b0f42f5f0a",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/offline-pack/request.json": "ea5ee9942da48d668788ef8835106b2eacde530c03d7409bf6ad43fe311a441f",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/offline-pack/anchor-map.json": "cba3341005af8e539692a76979abb78fc64bf1367689451b0d0878e9e48f003d",
+    "evals/announcement_reading_v3/unseen-20260929-screen/2026-19517/offline-pack/MANIFEST.json": "dbacfc25c5a90b2b08365409757bcd419367e88118676ac70887f354fcd609e4",
+    "src/tradeintel_ai/announcement_reading_v3.py": "947c54c78718f331b42efa8a83b5ba0cc394643e18cdb52571700d6bdbaaf05b",
+    "scripts/prepare_announcement_reading_v3_offline.py": "2b51cc9e0a115714e37c6f052b03fb1be8bb20d2860d4890393795554ae8b702",
+    "scripts/prepare_announcement_reading_v3_source.py": "2661354e4d2cb480481d595dd446ec64c80516f13ddaac5e7480e97b4458afd5"
+  }
+}

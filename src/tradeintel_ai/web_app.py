@@ -113,6 +113,7 @@ SESSION_POST_PATHS = ("/api/session/create", "/api/session/message", "/api/sessi
                       "/api/announcements/linkage/prepare",
                       "/api/announcements/linkage/report",
                       "/api/model/config", "/api/model/test", "/api/product/scope",
+                      "/api/trade/agent/turn",
                       "/api/trade/query", "/api/trade/prepare", "/api/trade/report",
                       "/api/trade/explanation/call", "/api/trade/explanation/review")
 
@@ -1808,17 +1809,42 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                 self._send_json(HTTPStatus.OK,
                                 get_state(self.repository.paths.root, query["report_id"][0]))
                 return
-            if parsed.path in {"/preview", "/preview/", "/preview/index.html",
+            if parsed.path == "/api/trade/agent/state":
+                from .trade_agent import read_public_session
+                query = parse_qs(parsed.query, keep_blank_values=True)
+                if set(query) != {"session_id"} or len(query["session_id"]) != 1:
+                    raise WebRequestError("会话编号无效")
+                self._send_json(HTTPStatus.OK, read_public_session(
+                    self.repository.paths.root, query["session_id"][0]))
+                return
+            if parsed.path == "/preview":
+                self.send_response(HTTPStatus.PERMANENT_REDIRECT)
+                self.send_header("Location", "/preview/" + ("?" + parsed.query if parsed.query else ""))
+                self.send_header("Content-Length", "0")
+                self.send_header("Cache-Control", "no-store")
+                self.end_headers()
+                return
+            if parsed.path in {"/preview/", "/preview/index.html",
                                "/preview/app.js", "/preview/live.js", "/preview/style.css",
-                               "/preview/data.json", "/preview/vendor/cobe.mjs"}:
+                               "/preview/data.json", "/preview/vendor/cobe.mjs",
+                               "/preview/report-view.js", "/preview/cases.js",
+                               "/preview/cases/index.json", "/preview/cases/soybean-trade.json",
+                               "/preview/cases/soybean-oil.json", "/preview/cases/policy-materials.json",
+                               "/preview/cases/missing-month.json"}:
                 relative = ("index.html" if parsed.path in
-                            {"/preview", "/preview/"} else parsed.path[len("/preview/"):])
+                            {"/preview/"} else parsed.path[len("/preview/"):])
                 asset = self.static_root / "design-preview" / relative
                 mime = ("text/html" if relative.endswith(".html") else
                         "text/css" if relative.endswith(".css") else
                         "application/javascript" if relative.endswith((".js", ".mjs")) else
                         "application/json")
-                self._send_text(HTTPStatus.OK, asset.read_text(encoding="utf-8"),
+                content = asset.read_text(encoding="utf-8")
+                if relative == "index.html":
+                    marker = 'data-runtime="showcase"'
+                    if content.count(marker) != 1:
+                        raise WebRequestError("页面运行标记无效")
+                    content = content.replace(marker, 'data-runtime="local"', 1)
+                self._send_text(HTTPStatus.OK, content,
                                 mime + "; charset=utf-8")
                 return
             if parsed.path == "/api/policy":
@@ -2041,6 +2067,28 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     raise WebRequestError('只允许本地页面调用会话接口')
                 if self.headers.get('Content-Type', '').split(';')[0] != 'application/json':
                     raise WebRequestError('请求必须为application/json')
+                if parsed.path == "/api/trade/agent/turn":
+                    if (not {"question", "request_id"} <= set(payload) or
+                            set(payload) - {"question", "request_id", "session_id"}):
+                        raise WebRequestError("助手请求字段无效")
+                    from .trade_agent import TradeResearchAgent
+                    from .local_provider_config import PRODUCT_CONFIG_PATH, product_request_params
+                    from .trade_agent_deepseek import create_trade_agent_model
+                    factory = type(self).trade_model_factory
+                    if factory is None:
+                        if not PRODUCT_CONFIG_PATH.is_file() or PRODUCT_CONFIG_PATH.is_symlink():
+                            raise WebRequestError("请先在模型设置中保存产品模型，再提问")
+                        config = load_product_config()
+                        if not config.api_key:
+                            raise WebRequestError("本机尚未配置产品模型密钥")
+                        model = create_trade_agent_model(config, product_request_params())
+                    else:
+                        model = factory(None, {})
+                    result = TradeResearchAgent(self.trade_data_root, self.repository.paths.root,
+                                                model).turn(payload["question"], payload["request_id"],
+                                                            payload.get("session_id"))
+                    self._send_json(HTTPStatus.OK, result)
+                    return
                 if parsed.path == "/api/model/config":
                     if set(payload) not in ({"provider", "model", "api_key"},
                                             {"provider", "model", "api_key", "reasoning"}):
@@ -2136,7 +2184,7 @@ class TradeIntelHandler(BaseHTTPRequestHandler):
                     protocol = record.get("explanation_protocol")
                     if protocol == "none" or record["report"].get("kind") == "announcement-statistics-report-v1":
                         raise WebRequestError("这类公告数据报告没有模型解读入口")
-                    from .local_provider_config import (PRODUCT_CONFIG_PATH, load_product_config,
+                    from .local_provider_config import (PRODUCT_CONFIG_PATH,
                                                         product_config_identity, product_request_params)
                     from .model_adapter import OpenAICompatibleModel
                     if not PRODUCT_CONFIG_PATH.is_file() or PRODUCT_CONFIG_PATH.is_symlink():

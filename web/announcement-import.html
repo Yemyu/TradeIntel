@@ -56,7 +56,7 @@
     <span class="muted">刷新页面后，填政策 ID 和公告版本，再点这里继续。</span></p>
   <p class="muted">先选择原文段落，再点“填入整段原文”；也可以删减为该段里的准确原句。已知字段至少一条引文，有冲突的字段至少两条；查不到时说明原因。系统只核对引文是否来自原文，内容含义仍由你确认。商品税号和税率要填 JSON，例如 <code>[{"code":"28046100","precision":"whole_hts8"}]</code>、<code>{"28046100":50}</code>。</p>
   <details id="document-details"><summary>查看已保存原文与段落编号</summary><p id="source-provenance" class="warn"></p><div id="saved-sections"></div></details>
-  <p><label>离线阅读笔记（JSON，仅供核对） <input id="reading-preview-file" type="file" accept=".json,application/json" disabled></label>
+  <p><label>离线阅读笔记（v2/v3/v4 JSON，仅供核对） <input id="reading-preview-file" type="file" accept=".json,application/json" disabled></label>
     <span id="reading-preview-note" class="muted">先生成确认模板；此处不会调用模型或自动填写字段。</span></p>
   <div id="reading-preview" hidden><p class="warn">阅读笔记仅提示原文位置，不能证明解释正确；请自行核对后填写下表。</p>
     <div id="reading-preview-items"></div></div>
@@ -153,6 +153,17 @@ const linkageConditions = [];
 const linkageCitations = [];
 const readingFields = ['rate_meaning', 'conditions', 'exceptions'];
 const readingSchema = 'announcement-reading-suggestions-v2';
+const readingSchemaV3 = 'announcement-reading-suggestions-v3';
+const readingSchemaV4 = 'announcement-reading-suggestions-v4';
+const readingChecksV3 = {
+  rate_meaning: ['policy_action', 'measure_nature', 'assessment_effect'],
+  conditions: ['origin_by_measure', 'product_scope', 'effective_date', 'retroactive_starts', 'entry_event'],
+  exceptions: ['exclusion_conditions', 'code_description'],
+};
+const readingCheckStatusesV3 = {
+  addressed: '已列要点', partial: '部分有据', not_stated: '原文未说明',
+  not_applicable: '不适用', conflict: '原文冲突', incomplete: '未完成',
+};
 const fieldLabels = {title:'公告标题', publication_date:'发布日期', effective_date:'生效日期',
   clock_24h:'生效时刻', timezone:'时区', entry_events:'适用入境事件', origin:'原产地',
   hts_codes:'商品税号', rates:'额外税率', rate_meaning:'税率性质', conditions:'适用条件',
@@ -312,6 +323,9 @@ function sourceLocation(start, end) {
   return -1;
 }
 async function renderReadingPreview(notes) {
+  if ([readingSchemaV3, readingSchemaV4].includes(notes?.schema_version)) {
+    return renderStructuredReadingPreview(notes);
+  }
   clearReadingPreview();
   const source = savedSections.map(section => section.text).join('');
   if (!source || !notes || notes.schema_version !== readingSchema || notes.status !== 'review_only' ||
@@ -383,10 +397,140 @@ async function renderReadingPreview(notes) {
   document.getElementById('reading-preview').hidden = false;
   setNote('reading-preview-note', '笔记已核对版本和原文；仍需人工判断条款含义。', true);
 }
+async function renderStructuredReadingPreview(notes) {
+  clearReadingPreview();
+  const isV4 = notes?.schema_version === readingSchemaV4;
+  const version = isV4 ? 'v4' : 'v3';
+  const source = savedSections.map(section => section.text).join('');
+  // Python source offsets count Unicode code points; JS string.length counts UTF-16 units.
+  const sourcePoints = Array.from(source);
+  const sourceLocationPoints = (start, end) => {
+    let offset = 0;
+    for (let index = 0; index < savedSections.length; index++) {
+      const next = offset + Array.from(savedSections[index].text).length;
+      if (offset < end && next > start) return index;
+      offset = next;
+    }
+    return -1;
+  };
+  if (!source || !notes || notes.status !== 'review_only' || notes.ready_for_review !== true ||
+      notes.doc_version !== value('doc-version') || notes.source_sha256 !== await sha256Text(source) ||
+      !Array.isArray(notes.items) || notes.items.length !== 3) {
+    throw new Error(version + ' 阅读笔记与当前公告不一致或尚未完成；不能显示为已核对笔记。');
+  }
+  const items = new Map();
+  const globalClaims = new Set();
+  for (const item of notes.items) {
+    if (!item || !readingFields.includes(item.field) || items.has(item.field) ||
+        !Array.isArray(item.claims) || !Array.isArray(item.checks) ||
+        item.checks.length !== readingChecksV3[item.field].length) {
+      throw new Error('v3 阅读笔记字段或检查点无效。');
+    }
+    const claims = new Map();
+    for (const claim of item.claims) {
+      if (!claim || typeof claim.claim_id !== 'string' || !/^C[1-9]\d*$/.test(claim.claim_id) ||
+          globalClaims.has(claim.claim_id) || typeof claim.text !== 'string' || !claim.text.trim() ||
+          !Array.isArray(claim.check_ids) || !claim.check_ids.length ||
+          new Set(claim.check_ids).size !== claim.check_ids.length ||
+          claim.check_ids.some(id => !readingChecksV3[item.field].includes(id)) ||
+          !Array.isArray(claim.source_passages) || !claim.source_passages.length) {
+        throw new Error('v3 阅读要点或检查点链接无效。');
+      }
+      globalClaims.add(claim.claim_id); claims.set(claim.claim_id, claim);
+      const positions = new Set();
+      for (const passage of claim.source_passages) {
+        if (!passage || typeof passage.passage_id !== 'string' ||
+            !/^P[1-9]\d*$/.test(passage.passage_id) || positions.has(passage.passage_id) ||
+            passage.offset_unit !== 'character' ||
+            !Number.isInteger(passage.start) || !Number.isInteger(passage.end) ||
+            passage.start < 0 || passage.end <= passage.start || passage.end > sourcePoints.length ||
+            passage.text !== sourcePoints.slice(passage.start, passage.end).join('') ||
+            passage.text_sha256 !== await sha256Text(passage.text) ||
+            sourceLocationPoints(passage.start, passage.end) < 0) {
+          throw new Error('v3 阅读笔记引用的原文位置不匹配。');
+        }
+        positions.add(passage.passage_id);
+      }
+    }
+    const checks = new Map();
+    for (const check of item.checks) {
+      if (!check || !readingChecksV3[item.field].includes(check.check_id) ||
+          checks.has(check.check_id) ||
+          !Object.prototype.hasOwnProperty.call(readingCheckStatusesV3, check.status) ||
+          typeof check.label !== 'string' || !check.label.trim() ||
+          typeof check.note !== 'string' || !Array.isArray(check.claim_ids) ||
+          new Set(check.claim_ids).size !== check.claim_ids.length ||
+          check.claim_ids.some(id => !claims.has(id))) {
+        throw new Error('v3 阅读检查点无效。');
+      }
+      const expected = [...claims.values()].filter(claim =>
+        claim.check_ids.includes(check.check_id)).map(claim => claim.claim_id);
+      if (expected.length !== check.claim_ids.length ||
+          expected.some(id => !check.claim_ids.includes(id)) ||
+          (check.status === 'addressed' && (!expected.length || (!isV4 && check.note))) ||
+          (check.status === 'partial' && (!expected.length || !check.note.trim())) ||
+          (check.status === 'conflict' && (expected.length < 2 || !check.note.trim())) ||
+          (['not_stated', 'not_applicable', 'incomplete'].includes(check.status) &&
+            (expected.length || !check.note.trim()))) {
+        throw new Error('v3 检查点状态与要点不一致。');
+      }
+      checks.set(check.check_id, check);
+    }
+    if (readingChecksV3[item.field].some(id => !checks.has(id)) ||
+        [...checks.values()].some(check => check.status === 'incomplete')) {
+      throw new Error('v3 阅读笔记缺少检查点或仍未完成。');
+    }
+    items.set(item.field, {claims, checks});
+  }
+  if (items.size !== readingFields.length) throw new Error('v3 阅读笔记缺少字段。');
+  const container = document.getElementById('reading-preview-items');
+  for (const field of readingFields) {
+    const article = document.createElement('article');
+    const heading = document.createElement('strong'); heading.textContent = fieldLabels[field];
+    article.appendChild(heading);
+    const {claims, checks} = items.get(field);
+    for (const id of readingChecksV3[field]) {
+      const check = checks.get(id);
+      const section = document.createElement('section');
+      const title = document.createElement('strong');
+      title.textContent = `${check.label} · ${readingCheckStatusesV3[check.status]}`;
+      section.appendChild(title);
+      if (check.note) {
+        const note = document.createElement('p'); note.textContent = check.note;
+        section.appendChild(note);
+      }
+      for (const claimId of check.claim_ids) {
+        const claim = claims.get(claimId);
+        const detail = document.createElement('details');
+        const summary = document.createElement('summary'); summary.textContent = claim.text;
+        detail.appendChild(summary);
+        for (const passage of claim.source_passages) {
+          const jump = document.createElement('button'); jump.type = 'button';
+          jump.textContent = '定位到已保存原文 ' + passage.passage_id;
+          jump.addEventListener('click', () => {
+            document.getElementById('document-details').open = true;
+            const target = document.getElementById('saved-source-' +
+              sourceLocationPoints(passage.start, passage.end));
+            if (target?.scrollIntoView) target.scrollIntoView({block: 'center'});
+          });
+          detail.appendChild(jump);
+          const excerpt = document.createElement('pre'); excerpt.textContent = passage.text;
+          detail.appendChild(excerpt);
+        }
+        section.appendChild(detail);
+      }
+      article.appendChild(section);
+    }
+    container.appendChild(article);
+  }
+  document.getElementById('reading-preview').hidden = false;
+  setNote('reading-preview-note', version + ' 笔记位置已核对；条款含义仍需逐项人工判断。', true);
+}
 async function onReadingPreviewFile(event) {
   try {
     const file = event.target.files?.[0];
     if (!file) return;
+    if (file.size > 2_000_000) throw new Error('阅读笔记文件过大；请先核对离线产物。');
     await renderReadingPreview(JSON.parse(await file.text()));
   } catch (error) {
     clearReadingPreview();

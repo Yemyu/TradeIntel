@@ -37,7 +37,7 @@ def main(argv: list[str] | None = None) -> int:
     server = create_server(root=ROOT, host=args.host, port=args.port,
                            output_root=args.output_root, trade_data_root=args.trade_data_root)
     print(f"TradeShock AI 页面：http://{args.host}:{args.port}")
-    print("确定性查询不调用模型；AI 演示仅在页面明确点击后运行。按 Ctrl-C 停止。")
+    print("启动和数据查询不调用模型；研究助手会在提交问题后调用已配置的模型。按 Ctrl-C 停止。")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

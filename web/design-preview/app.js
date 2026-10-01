@@ -1,12 +1,14 @@
 import createGlobe from './vendor/cobe.mjs';
 
 const $ = id => document.getElementById(id);
-if (location.pathname.startsWith('/preview')) {
+const localRuntime = document.documentElement.dataset.runtime === 'local' &&
+  ['/preview/', '/preview/index.html'].includes(location.pathname);
+if (localRuntime) {
   const updates = [
     ['.hero-note','可查询已发布的美国进出口数据，出口数据目前连续到2026年7月。政策案例另附公告背景。','Published US imports and exports are queryable. Export data currently runs through July 2026. The policy case also includes notice context.'],
     ['#home .section-heading > p','本地服务可查询已接入的商品数据；下方案例仍是示例。','The local service can query supported trade data; the case below remains a sample.'],
     ['#workspace .eyebrow','本地研究工作台','LOCAL WORKSPACE'],
-    ['#workspace .composer>p:not(.eyebrow)','输入商品名称或编码；确认范围后，查看已发布的数据与图表。部分日常名称可能需要补充编码。','Enter a product name or code, confirm its scope, then view published data and charts. Some everyday names may need a product code.'],
+    ['#chat-empty > p:not(.eyebrow)','输入商品名称或编码；确认范围后，查看已发布的数据与图表。部分日常名称可能需要补充编码。','Enter a product name or code, confirm its scope, then view published data and charts. Some everyday names may need a product code.'],
     ['.compose-bottom>span','数据报告不用模型；模型解读是试用功能，回答请核对，调用可能产生费用。','The data report works without a model. Model explanations are experimental; check them before use. Calls may incur charges.'],
     ['#question-form button[type=submit]','查询可用范围 ↗','Check the available scope ↗'],
     ['.suggestions button[data-question]','最近美国大豆出口有什么变化？','How have recent U.S. soybean exports changed?'],
@@ -38,8 +40,8 @@ function applyLanguage() {
   document.documentElement.lang=language==='en'?'en':'zh-CN';
   $('language-toggle').textContent=tr('English','中文');
   $('language-toggle').setAttribute('aria-label',tr('Switch to English','切换到中文'));
-  $('question').placeholder=tr('例如：最近美国大豆出口有什么变化？','For example: How have recent U.S. soybean exports changed?');
-  $('question-feedback').textContent='';
+  if($('question'))$('question').placeholder=tr('例如：最近美国大豆出口有什么变化？','For example: How have recent U.S. soybean exports changed?');
+  if($('question-feedback'))$('question-feedback').textContent='';
   motionLabel(); route(); if(rows.length)render(rows);
   window.dispatchEvent(new Event('tradeintel:language'));
 }
@@ -48,14 +50,14 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 let paused = reduced.matches;
 let page = 'home';
 function route() {
-  page = ['home', 'workspace', 'report'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home';
+  page = ['home', 'workspace', 'cases', 'report'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home';
   document.querySelectorAll('.page').forEach(node => { node.hidden = node.id !== page; });
   document.querySelectorAll('.nav nav a').forEach(a => {
     if(a.hash === '#' + page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
   document.title = `${page==='report' && window.tradeintelLiveReportTitle
     ? window.tradeintelLiveReportTitle
-    : {home:tr('贸易政策与数据','Trade policy and data'),workspace:tr('工作台','Workspace'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
+    : {home:tr('贸易政策与数据','Trade policy and data'),workspace:tr('工作台','Workspace'),cases:tr('案例记录','Case records'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
   window.scrollTo({top:0,left:0,behavior:'instant'});
 }
 addEventListener('hashchange', route); route();
@@ -63,14 +65,13 @@ document.querySelectorAll('[data-scroll]').forEach(a => a.addEventListener('clic
   e.preventDefault(); $(a.dataset.scroll).scrollIntoView({behavior:reduced.matches?'instant':'smooth'});
 }));
 document.querySelectorAll('[data-question]').forEach(button => button.addEventListener('click', () => {
-  $('question').value = tr(button.dataset.question,'How are US imports of tungsten and solar materials doing?'); $('question').focus();
+  $('question').value = tr(button.dataset.question,button.dataset.questionEn || button.dataset.question); $('question').focus();
 }));
-$('question-form').addEventListener('submit', event => {
+$('question-form')?.addEventListener('submit', event => {
   event.preventDefault();
-  if (location.pathname.startsWith('/preview')) return;
-  if (!$('question').value.trim()) { $('question-feedback').textContent = tr('请先输入问题，或选择示例。','Enter a question or choose the example.'); return; }
-  $('question-feedback').textContent = tr('下面显示已有示例，不是对这个问题的新回答。','The saved example below is not a new answer to your question.');
-  $('scope-preview').hidden = false; $('scope-preview').scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'});
+  if (localRuntime) return;
+  // The public site is a case reader, never a simulated free-form assistant.
+  location.hash='cases';
 });
 $('print-report').addEventListener('click', () => window.print());
 

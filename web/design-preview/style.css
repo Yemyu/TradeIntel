@@ -38,3 +38,83 @@
   body{font-size:10pt}
   @page{size:A4;margin:14mm}
 }
+
+.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.case-tile{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;gap:8px;min-height:220px}
+.case-tile:hover{border-color:var(--green)}.case-tile small,.case-tile span{font-size:11px;color:var(--green)}.case-tile h3{font-weight:550;margin:8px 0;font-size:23px}.case-tile p{color:var(--muted);margin:0;font-size:14px}.case-tile span{margin-top:auto;padding-top:16px}
+.case-shell{max-width:1100px;padding-top:54px;padding-bottom:90px}.case-heading h1{font-size:36px;font-weight:500;margin:8px 0}.case-heading>p:last-child{color:var(--muted)}.case-picker{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0}.case-tab{border:1px solid var(--line);padding:10px 16px;border-radius:9px;background:white;font-size:12px;min-height:44px}.case-tab[aria-current]{border-color:var(--green);background:#e9eddf}.case-record{max-width:760px;margin:38px auto}.case-record>h2{font-size:28px;font-weight:500}.case-meta{font-size:11px;color:var(--muted);overflow-wrap:anywhere}.case-limit{color:var(--muted);font-size:13px;padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:32px}.case-record ol{padding-left:20px}.local-install{border-top:1px solid var(--line)}.local-install p{max-width:850px;color:var(--muted)}.local-install a{margin-right:24px}
+html[data-runtime=showcase] #workspace{display:none!important}
+@media(max-width:700px){.case-grid{grid-template-columns:1fr}.case-tile{padding:22px;min-height:190px}.case-shell{padding-top:28px}.case-heading h1{font-size:28px}.case-record>h2{font-size:23px}}
+@media print{#home,#workspace,#cases{display:none!important}#report{display:block!important}.report-layout[hidden],#case-result[hidden],#live-result[hidden]{display:none!important}}
+
+/* Conversation workspace. Report and home styles stay independent. */
+#workspace .workspace-shell{grid-template-columns:220px minmax(0,1fr);height:calc(100vh - 88px);height:calc(100dvh - 88px);min-height:0}
+#workspace .sidebar{display:flex;flex-direction:column;padding:24px 16px;overflow-y:auto;background:#eeefe8}
+#workspace .sidebar>.button{width:100%;min-height:44px;justify-content:center}
+#workspace .sidebar-label{margin:28px 10px 12px}
+#workspace .sidebar-bottom{margin-top:auto;padding-top:24px;display:grid;gap:16px;font-size:13px}
+#workspace .sidebar-bottom>a{padding:8px 10px}
+#workspace .workspace-main{display:flex;flex-direction:column;padding:0;min-height:0}
+#workspace .workspace-top{flex:none;min-height:66px;padding:12px 24px;border-bottom:1px solid var(--line);align-items:center;gap:12px;flex-wrap:wrap}
+#conversation-title{font-size:14px;font-weight:550;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:240px}
+#workspace-mode{margin-left:auto}
+.agent-mode{display:flex;gap:3px;padding:3px;background:#e8ebdf;border-radius:9px;font-size:12px}
+.mode-tab{border:0;border-radius:6px;background:none;min-height:38px;padding:5px 12px;color:var(--muted)}
+.mode-tab[aria-pressed=true]{background:white;color:var(--ink);box-shadow:0 1px 4px #172d2b0b}
+.model-status-button{border:0;background:none;color:var(--muted);font-size:11px;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-height:44px}
+#sidebar-toggle{display:none}
+.conversation-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:28px 32px}
+#chat-messages,.chat-empty{max-width:760px;margin:auto}
+.chat-empty{padding:clamp(16px,8vh,70px) 0}
+.chat-empty h1{font-weight:500;font-size:32px;letter-spacing:-1px;margin:10px 0}
+.chat-empty>p:not(.eyebrow){font-size:14px;color:var(--muted)}
+.chat-message{margin:0 0 22px;overflow-wrap:anywhere;font-size:14px;line-height:1.9}
+.chat-message>small{font-size:11px;color:var(--muted)}
+.chat-message p{margin:8px 0}
+.user-message{background:#e9eddf;margin-left:auto;padding:12px 18px;border-radius:14px 14px 3px 14px;width:fit-content;max-width:85%}
+.assistant-message{padding:6px 0 14px}
+.assistant-message details{border:0;margin-top:14px;padding:0;color:var(--muted);font-size:11px}
+.report-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:18px}
+.report-card{padding:14px 16px;text-align:left;border:1px solid var(--line);background:white;border-radius:10px;font-size:13px;color:var(--ink);min-height:72px}
+.report-card:hover{border-color:var(--green);background:#fbfcf7}
+.report-card>span{display:block;font-size:11px;margin-top:5px;color:var(--muted)}
+#workspace .composer{flex:none;width:100%;max-width:824px;margin:0 auto;padding:8px 32px max(12px,env(safe-area-inset-bottom))}
+#workspace .composer form{margin:0;padding:12px 14px;border-radius:14px;box-shadow:none;gap:8px}
+#workspace textarea{min-height:54px;max-height:160px;resize:vertical;padding:4px;line-height:1.6}
+#workspace .compose-bottom{padding-top:6px;border:0;flex-wrap:nowrap}
+#workspace .compose-bottom>span{max-width:none;font-size:10px;line-height:1.5}
+#workspace .compose-bottom .button{min-height:44px;padding:9px 20px;white-space:nowrap}
+#workspace .live-status,#question-feedback{font-size:11px;margin:4px 0;line-height:1.5;min-height:0}
+#workspace .scope-card{margin:0 auto 20px;padding:22px;max-width:760px}
+.history-item{display:block;width:100%;border:0;text-align:left;background:none;padding:11px 10px;border-radius:7px;min-height:44px;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item[aria-current=true],.history-item:hover{background:#e0e5d6;color:var(--ink)}
+dialog.model-settings{position:fixed;margin:auto;width:min(560px,calc(100% - 32px));max-width:560px;max-height:calc(100dvh - 32px);overflow:auto;padding:28px;border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 80px #172d2b24}
+dialog.model-settings::backdrop{background:#172d2b66}
+dialog.model-settings h2{font-size:21px;margin:0 0 20px;font-weight:550}
+.dialog-close{position:absolute;right:18px;top:18px;background:none;border:0;color:var(--muted);font-size:12px;min-height:44px;min-width:44px}
+dialog.model-settings form{display:grid;gap:16px;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent}
+.model-field{display:grid;gap:6px;font-size:12px}
+.model-field>span{color:var(--muted)}
+dialog.model-settings input,dialog.model-settings select{width:100%;min-height:44px;padding:9px 12px;background:#fbfcf8;color:var(--ink)}
+.settings-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:8px}
+.settings-actions .button{min-height:44px;font-size:12px}
+html[data-runtime=showcase] #workspace-mode,html[data-runtime=showcase] #model-status-button,html[data-runtime=showcase] #open-model-settings,html[data-runtime=showcase] #new-conversation{display:none}
+@media(max-width:800px){
+  #workspace .workspace-shell{display:block;position:relative;height:calc(100vh - 120px);height:calc(100dvh - 120px)}
+  #workspace .workspace-main{height:100%}
+  #workspace .sidebar{display:none;position:absolute;top:0;bottom:0;left:0;width:220px;z-index:10;border-right:1px solid var(--line);box-shadow:16px 0 35px #172d2b10}
+  #workspace .sidebar.is-open{display:flex}
+  #sidebar-toggle{display:block;background:none;border:0;padding:8px;min-height:44px;font-size:12px;color:var(--green)}
+  #workspace .workspace-top{padding:8px 12px;gap:6px}
+  #conversation-title{max-width:140px}
+  .model-status-button{max-width:140px}
+  .conversation-scroll{padding:18px}
+  #workspace .composer{padding:6px 14px max(10px,env(safe-area-inset-bottom))}
+  #workspace .compose-bottom>span{font-size:9px}
+  #workspace .compose-bottom .button{padding:9px 14px}
+  .chat-empty h1{font-size:26px}
+  .mode-tab{min-height:44px;padding:6px 9px}
+}
+@media(max-width:420px){#conversation-title{max-width:100px}.model-status-button{max-width:110px;font-size:10px}#workspace-mode{margin-left:0}.report-cards{grid-template-columns:1fr}.user-message{max-width:94%}}
+@media print{.model-settings,.workspace-shell{display:none!important}}
+body:has(#workspace:not([hidden])) .footer{display:none}

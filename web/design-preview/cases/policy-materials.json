@@ -1,0 +1,22 @@
+{
+  "evidence_meta": {
+    "data_versions": [
+      "91c2ed45f937392ea4473cd156ca05d3c7566e333ff9d50be90f5cbeccba4e1b"
+    ],
+    "official_urls": [
+      "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ca1cf1",
+      "https://www.census.gov/trade/downloads/2026/Merch/im_m/IMDB2607.ZIP"
+    ],
+    "original_sha256": [
+      "4291186f75db2ce7a08dfaf2b1055314465240b3dd880a4bb010c55d5b7e4e27",
+      "94da1167297b108288fb329a5f5c460d17972fe2613e608c44520d5d251094fa"
+    ]
+  },
+  "guard": null,
+  "id": "policy-materials",
+  "kind": "edited_evidence_report",
+  "reader_view": null,
+  "reports": [],
+  "schema": "tradeintel-public-case-v1",
+  "turns": []
+}

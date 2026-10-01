@@ -51,6 +51,56 @@ ZH_SEARCH_SYNONYMS = {
     "原油": ("2709",),
 }
 
+# Reviewed against the complete Census headings, not against measured values.
+# Longer processed names are consumed before their shorter everyday names.
+REVIEWED_HEADINGS = {
+    "1801": (r"可可豆|\bcocoa\s+beans?\b", "可可豆整组，包括生豆、焙炒豆及破碎豆。", "The whole cocoa-bean heading includes raw, roasted and broken beans."),
+    "2204": (r"葡萄酒|\bwine\b", "葡萄酒整组，包括加强酒和本税目所列葡萄汁。", "The whole wine heading includes fortified wines and grape must covered by this heading."),
+    "4001": (r"天然橡胶|\bnatural\s+rubber\b", "按4001整组统计，除天然橡胶外还包括巴拉塔胶、古塔波胶等其他天然胶；不是仅天然橡胶的金额。", "Heading 4001 includes natural rubber and other natural gums such as balata and gutta-percha; these values are not a natural-rubber-only subtotal."),
+    "8101": (r"钨及其制品|钨制品|\btungsten\s+articles\b", "按8101整组统计，包括钨及其制品、废碎料；不包括2611钨矿砂。", "Heading 8101 covers tungsten and articles thereof, including waste and scrap; it excludes heading 2611 tungsten ores."),
+    "2611": (r"钨矿砂|钨矿石|\btungsten\s+ores?(?:\s+and\s+concentrates)?\b", "钨矿砂及其精矿整组，不是钨金属制品。", "The whole tungsten-ores-and-concentrates heading, not tungsten metal articles."),
+    "2307": (r"葡萄酒渣|\bwine\s+lees\b", "葡萄酒渣及粗酒石整组，不是葡萄酒。", "The whole wine-lees-and-argol heading, not wine."),
+}
+_PROCESSED_RUBBER = re.compile(r"天然橡胶(?:轮胎|化学衍生物)|\bnatural\s+rubber\s+(?:tyres?|tires?|derivatives?)\b", re.I)
+_PROCESSED_BEANS = re.compile(r"可可豆(?:油|粉|提取物)|\bcocoa\s+beans?\s+(?:oil|powder|extracts?)\b", re.I)
+_PROCESSED_WINE = re.compile(r"葡萄酒(?:醋|瓶)|\bwine\s+(?:vinegar|bottles?)\b", re.I)
+
+
+def reviewed_heading_matches(text: str) -> set[str]:
+    """Match reviewed phrases consistently for discovery and request guards."""
+    remaining = text
+    for processed in (_PROCESSED_RUBBER, _PROCESSED_BEANS, _PROCESSED_WINE):
+        remaining = processed.sub(" ", remaining)
+    matches = []
+    for code, (pattern, _, _) in REVIEWED_HEADINGS.items():
+        matches.extend((m.start(), m.end(), code) for m in re.finditer(pattern, remaining, re.I))
+    occupied: list[tuple[int, int]] = []
+    codes = set()
+    for start, end, code in sorted(matches, key=lambda m: (-(m[1] - m[0]), m[0])):
+        if not any(start < b and end > a for a, b in occupied):
+            occupied.append((start, end)); codes.add(code)
+    return codes
+
+
+def validate_reviewed_heading_scope(question: str, code: str) -> None:
+    """Do not let a shortened model search erase explicit processing/subsets."""
+    explicit = bool(re.search(rf"(?:hs\s*\d*|税号|编码)\s*[:：]?\s*{code}(?!\d)", question, re.I))
+    matches = reviewed_heading_matches(question)
+    if ((code == "1801" and _PROCESSED_BEANS.search(question)) or
+            (code == "2204" and _PROCESSED_WINE.search(question))):
+        raise TradeDataError("加工品不能用原料整组金额代替，请查询实际商品或澄清。")
+    if code in {"2611", "8101"} and re.search(r"钨|\btungsten\b", question, re.I) and not matches & {"2611", "8101"} and not explicit:
+        raise TradeDataError("钨可能指矿砂或钨及其制品，请先澄清商品范围。")
+    if code == "4001":
+        if _PROCESSED_RUBBER.search(question):
+            raise TradeDataError("加工品不能用4001天然胶整组金额代替，请查询相应加工品或澄清。")
+        if re.search(r"橡胶|\brubber\b", question, re.I) and "4001" not in matches and not explicit:
+            raise TradeDataError("橡胶范围不明确，不能默认只查天然胶整组。")
+        if re.search(r"排除其他(?:天然)?胶|不含其他(?:天然)?胶|[仅只](?:统计|看|查)?天然橡胶|natural\s+rubber\s+only|only\s+natural\s+rubber|excluding\s+other\s+(?:natural\s+)?gums", question, re.I):
+            raise TradeDataError("4001包含其他天然胶，不能代替仅天然橡胶的子集。")
+    if code == "8101" and re.search(r"不含(?:钨)?废(?:碎)?料|排除(?:钨)?废(?:碎)?料|excluding\s+(?:waste|scrap)|without\s+(?:waste|scrap)", question, re.I):
+        raise TradeDataError("8101包含废碎料，不能代替排除废料的子集。")
+
 
 def _canonical(value: object) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True,
@@ -253,6 +303,9 @@ class ClassificationCatalog:
         month = self.latest_month(primary)
         content = self.month(primary, month)
         found: dict[str, int] = {}
+        for code in reviewed_heading_matches(question):
+            if code in content["groups"]:
+                found[code] = 200
         for code, (_, _, aliases) in ZH_HS4.items():
             if code in content["groups"] and any(alias in question for alias in aliases):
                 found[code] = 100 + max(len(alias) for alias in aliases if alias in question)
