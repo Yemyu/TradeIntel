@@ -33,17 +33,17 @@
   }
   bindCaseLink($('return-to-conversation'),()=>$('return-to-conversation').getAttribute('href'));
   document.querySelectorAll(local?'#home a[href="#report"]':'#home a[href="#report"], .nav a[href="#report"]').forEach(a=>{
-    a.href='?case=policy-materials&report=r1#report';
-    bindCaseLink(a,'?case=policy-materials&report=r1#report');
+    a.href=`?case=policy-materials&report=r1&lang=${english()?'en':'zh'}#report`;
+    bindCaseLink(a,()=>`?case=policy-materials&report=r1&lang=${english()?'en':'zh'}#report`);
   });
   let manifest=null,selected=null,version=0;const cache=new Map();let opened=[];
-  const href=(id,alias,hash='cases')=>`?case=${id}${alias?'&report='+alias:''}#${hash}`;
+  const href=(id,alias,hash='cases')=>`?case=${id}${alias?'&report='+alias:''}&lang=${english()?'en':'zh'}#${hash}`;
   const link=(label,url,className)=>{const node=make('a',label,className);node.href=url;bindCaseLink(node,url);return node;};
   const unavailable=()=>{
     editedNote.hidden=true;
     window.tradeintelCaseActive=true;window.tradeintelLiveReportTitle=tr('案例暂不可用','Case unavailable');
     document.title=`${window.tradeintelLiveReportTitle} · TradeIntel`;
-    $('return-to-conversation').href=location.pathname+'#cases';
+    $('return-to-conversation').href=location.pathname+`?lang=${english()?'en':'zh'}#cases`;
     $('return-to-conversation').textContent=tr('← 返回案例列表','← Back to cases');
     record.replaceChildren(make('h2',tr('案例暂不可用','Case unavailable')),make('p',tr('没有找到这份存档。请从四个案例中选择；不会改查其他商品。','This archive could not be found. Choose one of the four cases; no other product is substituted.')));
     caseReport.replaceChildren(make('h1',tr('案例暂不可用','Case unavailable')));caseReport.hidden=location.hash!=='#report';
@@ -58,14 +58,19 @@
     return cache.get(id);
   }
   function labels(){
+    document.querySelectorAll('#home a[href*="case=policy-materials"], .nav a[href*="case=policy-materials"]').forEach(a=>{
+      a.href=href('policy-materials','r1','report');
+    });
     heading.replaceChildren(make('p',tr('案例记录','CASE RECORDS'),'eyebrow'),make('h1',tr('看看它怎么回答','See how it responds')),
       make('p',tr('选择一个案例，查看当时的提问、查询过程和报告。','Choose a case to read the question, query steps, and saved report.')));
     homeHead.replaceChildren(make('h2',tr('四个案例','Four cases')),make('p',tr('看看助手如何追问、区分商品、查阅政策，以及处理缺少月份。','Explore follow-ups, product lookup, policy reading, and unavailable data.')));
     install.replaceChildren(make('h2',tr('在自己的电脑上使用','Run it on your computer')),
       make('p',tr('公开网站不用 API，只能阅读案例。要自己提问，请启动本地服务，再填自己的模型 API。数据查询本身不需要模型或 MySQL。','The public site needs no API and only reads saved cases. To ask your own questions, run the local service and configure your own model API. Data-only queries need neither a model nor MySQL.')),
-      make('p',tr('数据包尚未公开；普通克隆还不能直接查询。源码及安装说明已提供，数据下载地址须在正式发布时补齐。当前安装验证限 macOS；Windows 尚未验证。','The data bundle is not public yet; cloning alone does not enable queries. Source and setup instructions are available. A data link is still required before public release. Installation was verified on macOS; Windows is unverified.')),
-      link(tr('源码 ↗','Source ↗'),'https://github.com/Yemyu/TradeIntel/tree/codex/local-release-candidate','text-link'),
-      link(tr('安装说明 ↗','Setup guide ↗'),'https://github.com/Yemyu/TradeIntel/blob/codex/local-release-candidate/docs/LOCAL_RUN.zh-CN.md','text-link'));
+      make('p',tr('本地查询还需要下载贸易数据包，解压并核验后再启动。数据包约64 MiB，安装步骤见快速开始；macOS已验证，Windows尚未验证。','Local queries also need the trade-data bundle. Download, extract and verify it before starting. The bundle is about 64 MiB; see Quickstart for installation. macOS was verified; Windows is unverified.')),
+      link(tr('源码 ↗','Source ↗'),'https://github.com/Yemyu/TradeIntel/tree/main','text-link'),
+      link(tr('快速开始 ↗','Quickstart ↗'),`https://github.com/Yemyu/TradeIntel/blob/main/docs/LOCAL_RUN${english()?'':'.zh-CN'}.md`,'text-link'),
+      link(tr('下载数据 ↗','Download data ↗'),'https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002','text-link'));
+    cards.setAttribute('aria-label',tr('案例','Cases'));
     cards.replaceChildren();homeCards.replaceChildren();
     for(const entry of manifest?.cases||[]){
       const small=link(text(entry.title),href(entry.id), 'case-tab');if(entry.id===selected)small.setAttribute('aria-current','page');cards.append(small);

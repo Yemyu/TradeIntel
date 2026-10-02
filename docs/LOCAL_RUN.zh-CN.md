@@ -1,23 +1,27 @@
 # 本地运行
 
+[English](LOCAL_RUN.md) | **简体中文**
+
 [项目介绍](../README.zh-CN.md) · [当前功能](CURRENT_PRODUCT.zh-CN.md) · [模型测试](MODEL_SELECTION.zh-CN.md)
 
 看案例不需要安装。要自己提问，需要运行本地服务，并使用自己的模型 API Key；只查数据时不需要模型。使用当前仓库源码即可，不需要重复下载旧源码 ZIP。
 
 ## 准备源码和数据
 
-需要Python和独立贸易数据包。普通Git克隆不含这个包：124个已处理文件，解压后约579 MB，ZIP约64 MiB。包内有 `BUNDLE_MANIFEST.json` 和 `data/`，没有API密钥、MySQL数据库或原始Census压缩包。**目前没有公开下载地址**，首次使用前需要另行取得。
+需要Python 3.12和独立贸易数据包。普通Git克隆不含这个包：124个已处理文件，解压后约579 MB，ZIP约64 MiB，可在 [Release](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002) 下载。包内有 `BUNDLE_MANIFEST.json` 和 `data/`，另外附一份中文说明；没有API密钥、MySQL数据库、政策文档数据库或原始Census压缩包。附带说明中的TradeShock是本项目的旧名称。
 
 数据包v2的SHA-256为 `1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6`。安装已在macOS验证；当前报告存储使用POSIX文件接口，Windows尚未验证。
 
 在项目根目录使用已有虚拟环境，或首次安装：
 
 ```bash
+git clone https://github.com/Yemyu/TradeIntel.git
+cd TradeIntel
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
-不要装到系统Python，也不要覆盖自己已有的环境。将数据解到新的独立目录，不要解到源码根目录覆盖已有数据：
+不要装到系统Python，也不要覆盖自己已有的环境。macOS可用 `shasum -a 256 /实际路径/trade-demo-data-20260927-isolated-v2.zip` 核对摘要。将数据解到新的独立目录，不要解到源码根目录覆盖已有数据：
 
 ```bash
 mkdir -p .local
@@ -73,5 +77,6 @@ PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --roo
 - **启动失败？** 检查数据目录、清单核验和端口。不要删除原数据或重写清单跳过核验。
 - **模型请求失败？** 检查服务地址、型号和密钥；未知结果不会自动重复请求，避免重复费用。
 - **要更新数据包吗？** 新版解到新目录，先核验，再调整启动参数；旧版保留，不自动删除。
+- **为什么没有政策检索结果？** 只有已登记并启用的公告能检索，贸易数据包不提供完整政策库。展示页的编辑报告不等于新登记的政策文档。
 
 [macOS安装核验记录](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md) · [展示页说明](PUBLIC_SHOWCASE.zh-CN.md)

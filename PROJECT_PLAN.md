@@ -2,11 +2,11 @@
 
 ## 当前目标（2026-10-02）
 
-按用户要求完成仓库检查、整理并提交推送。模型测试和公开介绍已经完成；本次不增加功能、不调用模型API，也不重新评分。提交源码、页面、使用说明和测试记录，不提交本地密钥、数据补充包、生成报告或课程参考代码，原文件保留。
+用户要求将现有仓库公开、发布GitHub Pages、填写About/网站/Topics，并统一README和前端的中英文。方案见 [GitHub发布方案](docs/handoff/GITHUB_PUBLICATION_PLAN_20261002.zh-CN.md)，GPT-6 Sol Max已设计，下一阶段GPT-6 Luna Max实施。正式入口为main，候选分支暂留备份；当前main尚未快进，公网和Release尚未发布。
 
-产品仍是美国商品贸易研究助手：模型选择查询工具，程序核对数据并生成图表报告；公开展示四个保存案例。不扩展为全球数据库、自动日更或在线托管后端。数据包分发和网站托管尚未执行，推送源码不等于上线服务。
+仍是美国商品贸易研究助手：模型选择查询工具，程序核对数据并生成图表报告。公开网站只读四个案例，本地用户自配API提问；不扩全球、日更或云端后端，不重做模型测试。现有独立数据ZIP经核验，可作为首次Release资产；不进Git源码历史。密钥、私有会话、课程原件和原始数据不公开。
 
-本次验收与提交结果见 [仓库检查记录](docs/handoff/runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)。使用方法见 [中文介绍](README.zh-CN.md)，最新模型结果见 [测试页](docs/MODEL_SELECTION.zh-CN.md)。
+可推送历史扫描未发现真实密钥或上述私有目录；最初怀疑的课程代码只属于Codex本机检查点，不需清理提交历史。此前 [仓库检查](docs/handoff/runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)结果保留，模型成绩见 [测试页](docs/MODEL_SELECTION.zh-CN.md)。发布须以远端main、Actions部署、匿名网页和Release下载实际核验为准。
 
 ## 历史记录
 

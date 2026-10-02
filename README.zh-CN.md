@@ -1,21 +1,32 @@
 # TradeIntel
 
-[English](README.md) · [模型测试](docs/MODEL_SELECTION.zh-CN.md) · [本地安装](docs/LOCAL_RUN.zh-CN.md)
+[English](README.md) | **简体中文**
 
-TradeIntel 是一个美国商品贸易研究助手。你可以问“最近美国大豆进口有什么变化？”，再追问“出口呢？”或“对中国呢？”。助手会检索商品、查询已收录的数据，并整理成带图表的报告；商品范围不明确或缺少数据时，会说明原因。
+[案例演示](https://yemyu.github.io/TradeIntel/?lang=zh) · [快速开始](#快速开始) · [模型测试](docs/MODEL_SELECTION.zh-CN.md) · [下载数据](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)
 
-可以先看四个已保存的案例，了解问答和报告是什么样子；也可以在自己的电脑上运行项目，配置模型后自己提问。不配置模型时，仍能手动选择商品和月份，生成数据报告。
+TradeIntel 是一个美国商品贸易 AI 研究助手。用商品名称或编码提问，可以查询进出口、比较不同月份，也可以接着追问或查阅相关政策。模型负责选择查询工具，程序读取贸易数据、计算金额，并生成带图表和出处的报告。
 
-## 四个案例
+公开网站提供四个已保存的案例。要自己提问，可以在本机运行项目，配置自己的模型 API；不配置模型时，也能手动选定范围，生成数据报告。本地使用不需要购买云服务器，也不要求连接 MySQL。
+
+## 功能
+
+- **找商品**：按名称或官方编码检索商品目录。确有歧义时会询问，不把相近商品自动当成同一种。
+- **查进出口**：分别查看进口和出口，比较已有月份，查询全部贸易伙伴汇总或中国。
+- **继续追问**：在同一对话中换方向、商品、伙伴或时间。
+- **查政策资料**：检索本地登记的公告，保留适用条件和出处。
+- **读报告**：查看图表、计算摘要和逐月金额表，打印或保存 PDF。
+- **不用模型也能查数**：自己确认查询范围后生成报告，不需要 API Key。
+
+## 案例演示
 
 | 案例 | 可以看到什么 |
 |---|---|
-| [大豆进出口](web/design-preview/cases/soybean-trade.json) | 先问进口，再追问出口；两种方向各有报告 |
-| [豆油进口](web/design-preview/cases/soybean-oil.json) | 将豆油与原料大豆区分，查询对应商品 |
-| [钨与光伏材料](web/design-preview/cases/policy-materials.json) | 一份整理好的关税公告与相关商品进口报告 |
-| [缺少月份](web/design-preview/cases/missing-month.json) | 所问月份没有收录时，说明缺口，不换成其他月份交差 |
+| [大豆进出口](https://yemyu.github.io/TradeIntel/?lang=zh&case=soybean-trade#cases) | 先问进口，再追问出口；两种方向各有报告 |
+| [豆油进口](https://yemyu.github.io/TradeIntel/?lang=zh&case=soybean-oil#cases) | 将豆油与原料大豆区分，查询对应商品 |
+| [钨与光伏材料](https://yemyu.github.io/TradeIntel/?lang=zh&case=policy-materials#cases) | 一份整理好的关税公告与相关商品进口报告 |
+| [缺少月份](https://yemyu.github.io/TradeIntel/?lang=zh&case=missing-month#cases) | 所问月份没有收录时，说明缺口，不换成其他月份交差 |
 
-以上链接是案例数据文件。在仓库根目录运行：
+这些链接可以直接打开案例对话和图表。公开网站不调用模型，也不是在线聊天服务。下载源码后，可以这样阅读同样的案例：
 
 ```bash
 python3 -m http.server 8000 --bind 127.0.0.1 --directory web/design-preview
@@ -25,37 +36,32 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory web/design-preview
 
 实际使用时，你可以先问“最近美国大豆进口有什么变化？”。助手查找商品、确认数据可用时间，查询后显示摘要和报告卡片。继续问“出口呢？”，不必重新输入商品。打开报告能看逐月图表、金额和来源，返回后可以接着聊。
 
-## 能做什么
+## 快速开始
 
-- **找商品**：按名称或官方编码检索商品目录。确有歧义时会询问，不把相近商品自动当成同一种。
-- **查进出口**：分别查看进口和出口，比较已有月份，查询全部贸易伙伴汇总或中国。
-- **继续追问**：在同一对话中换方向、商品、伙伴或时间。
-- **查政策资料**：检索本地登记的公告，保留适用条件和出处。
-- **读报告**：查看图表、计算摘要和逐月金额表，打印或保存 PDF。
-- **不用模型也能查数**：自己确认查询范围后生成报告，不需要 API Key。
-
-## AI、程序和数据库分别做什么
-
-模型负责决定下一步：找哪个商品、查询哪个方向和时间、是否需要查政策，以及返回哪些报告。工具会检查商品编码、月份、伙伴和引用是否有效。
-
-金额不是模型凭记忆填写的。程序读取处理后的美国人口普查局贸易数据，计算总额、月份变化并绘制图表；目前公开报告的摘要也由这些计算结果生成。政策资料使用关键词/BM25检索，范围是本地登记并启用的文档，不是自动搜索整个互联网。
-
-对话和报告保存在本地，可以重新打开。MySQL 用于数据工程和核对，日常网页读取已核验的数据文件，不要求使用者再连接 MySQL。仓库保留早期因果研究和报告写作实验，但它们不是当前助手使用的前提。
-
-## 本地运行
-
-需要项目源码、Python，以及单独的贸易数据补充包。**普通 Git 克隆不包含这个包**：共124个文件，解压后约579 MB，目前没有公开下载地址。首次使用前需要取得数据包。本地安装已在 macOS 检查，Windows 尚未验证。
+需要 Python 3.12、项目源码和独立的[贸易数据包](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)。包内有124份数据文件，解压后约579 MB，ZIP约64 MiB。**克隆仓库不会同时下载这个包。** 本地安装已在 macOS 验证，Windows 尚未验证。
 
 在仓库根目录使用已有虚拟环境，或新建环境安装依赖：
 
 ```bash
+git clone https://github.com/Yemyu/TradeIntel.git
+cd TradeIntel
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
+在 Release 下载 `trade-demo-data-20260927-isolated-v2.zip`，核对 SHA-256：
+
+```text
+1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6
+```
+
+将下面的 `/path/to/` 换成下载文件所在目录。数据核验返回 `"status": "verified"` 后再启动。
+
 把数据包解到一个新的、被 Git 忽略的目录，例如 `.local/trade-data-bundle-1/`。下面的目录必须同时包含 `BUNDLE_MANIFEST.json` 和 `data/`：
 
 ```bash
+mkdir -p .local
+unzip /path/to/trade-demo-data-20260927-isolated-v2.zip -d .local/trade-data-bundle-1
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-bundle-1
 .venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-bundle-1
 ```
@@ -64,7 +70,7 @@ PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --roo
 
 在“模型设置”选择服务商，填写它支持的型号和自己的 API Key 后保存。保存本身不发请求；“测试连接”会发一个短请求，可能收费。随后在聊天框提问。没有密钥时选择“数据查询”，自己确认商品和月份即可。密钥由本地服务保存，不会发布到展示网站。
 
-完整步骤见[本地安装说明](docs/LOCAL_RUN.zh-CN.md)。GitHub Pages 可以展示案例，但不能运行这个 Python 后端，也不会替访客支付模型费用。
+完整步骤见[本地使用指南](docs/LOCAL_RUN.zh-CN.md)。GitHub Pages 可以展示案例，但不能运行这个 Python 后端，也不会替访客支付模型费用。
 
 ## 模型测试
 
@@ -91,7 +97,17 @@ PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --roo
 
 最新收录月是2026年7月。“最近”按已有数据理解，指定缺失月份则提示缺数据。进口采用消费进口额，出口采用FAS口径的总出口额，两者分别展示，不相减冒充贸易差额。金额变化也不能直接当成数量、价格变化或政策效果。
 
-## 文档与项目目录
+## 工作流程
+
+模型负责决定下一步：找哪个商品、查询哪个方向和时间、是否需要查政策，以及返回哪些报告。工具会检查商品编码、月份、伙伴和引用是否有效。
+
+金额不是模型凭记忆填写的。程序读取处理后的美国人口普查局贸易数据，计算总额、月份变化并绘制图表；目前公开报告的摘要也由这些计算结果生成。政策资料使用关键词/BM25检索，范围是本地登记并启用的文档，不是自动搜索整个互联网。
+
+对话和报告保存在本地，可以重新打开。MySQL 用于数据工程和核对，日常网页读取已核验的数据文件，不要求使用者再连接 MySQL。仓库保留早期因果研究和报告写作实验，但它们不是当前助手使用的前提。
+
+缺失值不按零处理；要改查缺少数据之外的其他月份，需要明确确认。
+
+## 文档
 
 | 目录 | 内容 |
 |---|---|

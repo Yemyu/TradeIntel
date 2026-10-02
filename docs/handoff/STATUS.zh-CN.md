@@ -2,9 +2,11 @@
 
 ## 当前任务（2026-10-02）
 
-用户要求检查、整理并推送仓库。检查和整理已完成：当前Python135项、网页接口12项、Node56项通过；全仓1739项有10失败／118错误，具体分类见 [本轮记录](runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)。不将全仓称为全绿。公开文案与模型表已更新；本地目录只加入忽略规则，不删除原件。
+当前任务为 [GitHub发布方案](GITHUB_PUBLICATION_PLAN_20261002.zh-CN.md)：GPT-6 Sol Max设计完成，等切换GPT-6 Luna Max后实施双语README/指南、前端语言链接、便携Pages构建、main快进和公开发布。用户已要求公开仓库、Pages和About/网站/Topics；不反复询问既有授权。当前仍在候选5340d0c，main落后22提交，GitHub设置未改，网站和Release尚未发布。
 
-产品定位见 [当前功能](../CURRENT_PRODUCT.zh-CN.md)，最新成绩见 [模型测试](../MODEL_SELECTION.zh-CN.md)。本次只提交推送现有 `codex/local-release-candidate` 分支，完成状态以Git历史与远端引用为准，不代表GitHub Pages或数据包已经上线。该收尾之后没有默认新任务，不重启历史实验或模型调用。
+可推送64提交/2219blob已扫描，仅测试假密钥；私有路径不在提交历史。全量--all扫描的课程/PDF属于本机Codex tree检查点，不需改写历史或删除引用。四公开case标准库校验、312模型冻结及124数据文件核验通过；原ZIP可作为Release资产，不进源码提交。
+
+前一阶段Python135项、网页接口12项、Node56项通过；全仓1739项有10失败／118错误，分类见 [此前记录](runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)。不称全绿，不为发布重测模型或刷历史冻结。实施只按新方案有限验收，完成即结束。定位见 [当前功能](../CURRENT_PRODUCT.zh-CN.md)，原成绩见 [模型测试](../MODEL_SELECTION.zh-CN.md)。
 
 ## 历史记录
 

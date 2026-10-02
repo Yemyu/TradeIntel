@@ -1,29 +1,12 @@
 # TradeIntel
 
-[中文](README.zh-CN.md) · [Examples](web/design-preview/cases/index.json) · [Model tests](docs/MODEL_SELECTION.md) · [Local setup](docs/LOCAL_RUN.zh-CN.md)
+**English** | [简体中文](README.zh-CN.md)
 
-TradeIntel is a research assistant for U.S. goods trade. Ask about a product's imports or exports, compare monthly figures, and look up related policy notices. The model selects the tools; Python retrieves trade records, calculates comparisons, and builds reports with charts and source references.
+[Demo](https://yemyu.github.io/TradeIntel/?lang=en) · [Quickstart](#quickstart) · [Model tests](docs/MODEL_SELECTION.md) · [Data download](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)
 
-There are two ways to explore the project: browse the four saved examples, or run the application locally and ask your own questions. The showcase does not require an API key. The local assistant uses your model provider's API; a separate data-only mode works without a model.
+TradeIntel is an AI research assistant for U.S. goods trade. Ask about a product's imports or exports, compare available months, and read related policy notices. The model selects query tools; Python retrieves trade records, calculates comparisons, and builds reports with charts and source references.
 
-## Examples
-
-| Example | What it shows |
-|---|---|
-| [Soybean trade](web/design-preview/cases/soybean-trade.json) | An import question followed by “What about exports?”, with reports for each direction |
-| [Soybean oil](web/design-preview/cases/soybean-oil.json) | Distinguishing a processed product from raw soybeans |
-| [Tungsten and solar materials](web/design-preview/cases/policy-materials.json) | An edited report combining a saved tariff notice and monthly import figures |
-| [Missing month](web/design-preview/cases/missing-month.json) | Explaining unavailable data rather than substituting a different month |
-
-The files above contain the saved examples. From the repository root, open them as conversations and charts with:
-
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1 --directory web/design-preview
-```
-
-Visit `http://127.0.0.1:8000/`. No trade-data bundle or API key is needed to read these saved examples. The first two contain model-assisted queries; the policy report is an edited explanation, and the missing-month example shows a program safeguard.
-
-A typical local conversation starts with “How have recent U.S. soybean imports changed?” The assistant looks up the product, checks available dates, and queries the monthly data. You can then ask “What about exports?” without entering the product again. Report cards open charts, monthly amounts, and source notes; returning to the conversation keeps the context.
+The public website contains four saved examples. To ask your own questions, run the application locally and configure your model provider's API. A data-only mode lets you choose a scope and read the same trade figures without a model. Local use needs neither a cloud server nor a MySQL connection.
 
 ## Features
 
@@ -34,28 +17,51 @@ A typical local conversation starts with “How have recent U.S. soybean imports
 - **Reports:** read charts alongside calculated summaries, expand the monthly table, and print or save a PDF.
 - **Data-only mode:** choose a scope manually and generate the same trade figures without an API key.
 
-## How it works
+## Demo
 
-The assistant uses a single tool-calling loop. A model searches the catalog, requests data, retrieves policy material when relevant, and selects the reports to return. Tools check product identifiers, dates, partners, and references before accepting a request.
+| Example | What it shows |
+|---|---|
+| [Soybean trade](https://yemyu.github.io/TradeIntel/?lang=en&case=soybean-trade#cases) | An import question followed by “What about exports?”, with reports for each direction |
+| [Soybean oil](https://yemyu.github.io/TradeIntel/?lang=en&case=soybean-oil#cases) | Distinguishing a processed product from raw soybeans |
+| [Tungsten and solar materials](https://yemyu.github.io/TradeIntel/?lang=en&case=policy-materials#cases) | An edited report combining a saved tariff notice and monthly import figures |
+| [Missing month](https://yemyu.github.io/TradeIntel/?lang=en&case=missing-month#cases) | Explaining unavailable data rather than substituting a different month |
 
-Trade figures are not taken from model memory. Python reads prepared Census tables and calculates totals and changes. The current public report summaries also come from those calculations. Policy search uses lexical/BM25 retrieval over registered documents, including related conditions; it is not an unrestricted web search.
+The links open saved conversations and charts. The public website makes no model request and is not an online chat service. To read these examples from a clone:
 
-Reports and conversations are saved locally so they can be reopened. The model can decide what to query, but it cannot make missing values become zero or replace an unavailable month without the required confirmation. Historical causal research and earlier report-writing experiments remain in the repository; neither is a requirement of the current application.
+```bash
+python3 -m http.server 8000 --bind 127.0.0.1 --directory web/design-preview
+```
 
-## Run locally
+Visit `http://127.0.0.1:8000/`. No trade-data bundle or API key is needed to read these saved examples. The first two contain model-assisted queries; the policy report is an edited explanation, and the missing-month example shows a program safeguard.
 
-You need the source code, Python, and the separate processed trade-data bundle. **A Git clone alone does not include that bundle.** It contains 124 files, approximately 579 MB uncompressed, and currently has no public download link. Obtain the bundle before attempting a trade query. Installation has been checked on macOS; Windows support has not been verified.
+A typical local conversation starts with “How have recent U.S. soybean imports changed?” The assistant looks up the product, checks available dates, and queries the monthly data. You can then ask “What about exports?” without entering the product again. Report cards open charts, monthly amounts, and source notes; returning to the conversation keeps the context.
+
+## Quickstart
+
+You need Python 3.12, the source code, and the separate [processed trade-data bundle](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002). The bundle contains 124 data files, about 579 MB uncompressed; the ZIP is about 64 MiB. **Cloning the repository does not download it.** Local installation has been checked on macOS; Windows has not been verified.
 
 From the repository root, use the existing project environment or create one:
 
 ```bash
+git clone https://github.com/Yemyu/TradeIntel.git
+cd TradeIntel
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
+Download `trade-demo-data-20260927-isolated-v2.zip` from the Release and check its SHA-256:
+
+```text
+1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6
+```
+
+Replace `/path/to/` in the command below with the download location. Continue only if bundle verification returns `"status": "verified"`.
+
 Unpack the data bundle into a new ignored directory, such as `.local/trade-data-bundle-1/`. The directory supplied below must contain both `BUNDLE_MANIFEST.json` and `data/`:
 
 ```bash
+mkdir -p .local
+unzip /path/to/trade-demo-data-20260927-isolated-v2.zip -d .local/trade-data-bundle-1
 PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-bundle-1
 .venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-bundle-1
 ```
@@ -64,7 +70,7 @@ Open `http://127.0.0.1:8765/preview/`. Keep the terminal running; Ctrl-C stops t
 
 In **Model settings**, select your provider, enter its supported model name and your API key, then save. Saving does not send a model request; **Test connection** does and may incur charges. Submit a question in the chat to use the assistant. Without a key, select **Data only** and confirm the product and dates yourself. Keys are stored by the local service, not embedded in the public showcase. MySQL is not needed for everyday web queries.
 
-See the [detailed local guide](docs/LOCAL_RUN.zh-CN.md) for bundle verification, model settings, and operation. GitHub Pages can host the saved showcase, but cannot run this Python backend.
+See the [local guide](docs/LOCAL_RUN.md) for bundle verification, model settings, and operation. GitHub Pages can host the saved showcase, but cannot run this Python backend.
 
 ## Model tests
 
@@ -91,7 +97,17 @@ These results use the current v3 tool protocol. Both Sol chat runs completed the
 
 The latest included month is July 2026. “Recent” refers to available data; a requested missing month is reported as unavailable. Import values use the imports-for-consumption measure, while exports use total exports on an FAS basis. They are displayed separately, not subtracted to claim a trade balance. Value changes do not by themselves establish changes in quantity, prices, or the effect of a policy.
 
-## Documentation and project layout
+## How it works
+
+The assistant uses a single tool-calling loop. A model searches the catalog, requests data, retrieves policy material when relevant, and selects the reports to return. Tools check product identifiers, dates, partners, and references before accepting a request.
+
+Trade figures are not taken from model memory. Python reads prepared Census tables and calculates totals and changes. The current public report summaries also come from those calculations. Policy search uses lexical/BM25 retrieval over registered documents, including related conditions; it is not an unrestricted web search.
+
+Reports and conversations are saved locally so they can be reopened. The model can decide what to query, but it cannot make missing values become zero or replace an unavailable month without the required confirmation. Historical causal research and earlier report-writing experiments remain in the repository; neither is a requirement of the current application.
+
+MySQL is used in data engineering and verification; everyday web queries read verified data files and need no database server.
+
+## Documentation
 
 | Location | Contents |
 |---|---|

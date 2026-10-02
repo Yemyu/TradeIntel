@@ -32,6 +32,8 @@ caption.textContent = '示例中的贸易方向：中国出口，美国进口。
 caption.dataset.en = 'The example follows exports from China to the United States.';
 let language = 'zh';
 try { language = localStorage.getItem('tradeintel-preview-language') === 'en' ? 'en' : 'zh'; } catch {}
+const requestedLanguage = new URLSearchParams(location.search).get('lang');
+if (['zh', 'en'].includes(requestedLanguage)) language = requestedLanguage;
 let rows = [];
 const tr = (zh,en) => language === 'en' ? en : zh;
 const translations = [...document.querySelectorAll('[data-en]')].map(el=>({el,zh:el.innerHTML,en:el.dataset.en}));
@@ -45,7 +47,13 @@ function applyLanguage() {
   motionLabel(); route(); if(rows.length)render(rows);
   window.dispatchEvent(new Event('tradeintel:language'));
 }
-$('language-toggle').addEventListener('click',()=>{language=language==='zh'?'en':'zh';try{localStorage.setItem('tradeintel-preview-language',language);}catch{} applyLanguage();});
+$('language-toggle').addEventListener('click',()=>{
+  language=language==='zh'?'en':'zh';
+  try { localStorage.setItem('tradeintel-preview-language',language); } catch {}
+  const query=new URLSearchParams(location.search);query.set('lang',language);
+  history.replaceState(null,'',`${location.pathname}?${query}${location.hash}`);
+  applyLanguage();
+});
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 let paused = reduced.matches;
 let page = 'home';
