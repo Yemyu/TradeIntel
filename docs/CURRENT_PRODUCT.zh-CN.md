@@ -34,8 +34,8 @@ TradeIntel 是本地运行的美国商品贸易研究助手。模型选择商品
 
 ## 安装与版本
 
-正式版本使用仓库 `main`。普通Git克隆不含124个通用贸易数据文件，需要下载[数据补充包](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)，按安装说明解压、核验后启动。旧v4 ZIP仅是历史交付记录，不包含后续更新。
+使用仓库 `main` 分支。普通Git克隆不含124个通用贸易数据文件，需要下载[数据补充包](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)，按安装说明解压、核验后启动。
 
-工具协议目前为v3，商品别名、双方向、政策证据合并和引用反馈已修复，并完成修复后测试。Sol Low与Medium两组正常任务9/9、边界3/3；Luna Max为7/9和2/3，DeepSeek Flash高推理为8/9和2/3（其中一题依赖跳过）。具体渠道、问题和旧v2成绩见模型测试页，不将对话桥接当成网页GPT API验证。界面有中英切换，本地安装在macOS验证，Windows尚未验证。
+已使用四组模型配置进行12题测试。Sol Low与Medium两组正常任务9/9、边界3/3；Luna Max为7/9和2/3，DeepSeek Flash高推理为8/9和2/3（其中一题跳过）。完整结果、主要问题和配置见模型测试页。界面有中英切换，本地安装在macOS验证，Windows尚未验证。
 
-[展示版说明](PUBLIC_SHOWCASE.zh-CN.md) · [旧版功能与验收记录](history/CURRENT_PRODUCT.before-public-edit-20261001.zh-CN.md)
+[展示版说明](PUBLIC_SHOWCASE.zh-CN.md) · [示例报告](https://yemyu.github.io/TradeIntel/?case=policy-materials&report=r1&lang=zh#report)
