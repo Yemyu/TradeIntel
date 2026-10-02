@@ -12,6 +12,12 @@ tmp/
 output/
 vendor/
 
+# Personal learning notes and course review records stay local.
+docs/learning/
+LEARNING_PROFILE.md
+docs/handoff/COURSE_*.md
+docs/handoff/runs/*course-adapter*.md
+
 # Raw data may be large or have redistribution restrictions.
 data/raw/*
 !data/raw/.gitkeep
