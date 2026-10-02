@@ -1,6 +1,13 @@
 /* Saved case reader. No model endpoints, config, free-form submission or storage. */
 (() => {
   const ids=['soybean-trade','soybean-oil','policy-materials','missing-month'];
+  // Keep navigation visible while the saved-case catalog is loading.
+  const previews=[
+    {id:ids[0],kind:'real_agent_run',title:{zh:'大豆进口，接着问出口',en:'Soybean imports, then exports'},description:{zh:'查看连续追问，以及进口和出口的图表报告。',en:'Follow the conversation and read import and export charts.'}},
+    {id:ids[1],kind:'real_agent_run',title:{zh:'豆油不是原料大豆',en:'Soybean oil is not raw soybeans'},description:{zh:'按商品名称查找豆油，查看十二个月的进口变化。',en:'Look up soybean oil and view twelve months of imports.'}},
+    {id:ids[2],kind:'edited_evidence_report',title:{zh:'钨和光伏材料：政策与进口',en:'Tungsten and solar materials'},description:{zh:'阅读公告背景、进口金额和中国来源份额。',en:'Read notice context, import values, and China-origin shares.'}},
+    {id:ids[3],kind:'guarded_run',title:{zh:'所问月份还没有数据',en:'The requested month is not available'},description:{zh:'查看没有对应月份数据时，助手如何说明缺口。',en:'See the response when the requested month is unavailable.'}}
+  ];
   const $=id=>document.getElementById(id);
   const local=document.documentElement.dataset.runtime==='local'&&['/preview/','/preview/index.html'].includes(location.pathname);
   const english=()=>document.documentElement.lang==='en';
@@ -12,10 +19,12 @@
   const heading=make('header',undefined,'case-heading');
   const cards=make('nav',undefined,'case-picker');cards.setAttribute('aria-label','案例');
   const record=make('div',undefined,'case-record');shell.append(heading,cards,record);
+  const catalogStatus=make('div',undefined,'case-catalog-status');catalogStatus.setAttribute('role','status');shell.append(catalogStatus);
   if($('workspace'))$('workspace').after(page);else document.querySelector('main').append(page);
   const home=make('section',undefined,'section wrap case-gallery');home.id='case-gallery';
   const homeHead=make('div',undefined,'section-heading');const homeCards=make('div',undefined,'case-grid');
-  home.append(homeHead,homeCards);$('home').append(home);
+  const homeStatus=make('div',undefined,'case-catalog-status');homeStatus.setAttribute('role','status');
+  home.append(homeHead,homeCards,homeStatus);$('home').append(home);
   const install=make('section',undefined,'section wrap local-install');install.id='local-install';$('home').append(install);
   const caseReport=make('article',undefined,'live-result wrap');caseReport.id='case-result';caseReport.hidden=true;
   $('report').querySelector('.report-layout').before(caseReport);
@@ -36,7 +45,7 @@
     a.href=`?case=policy-materials&report=r1&lang=${english()?'en':'zh'}#report`;
     bindCaseLink(a,()=>`?case=policy-materials&report=r1&lang=${english()?'en':'zh'}#report`);
   });
-  let manifest=null,selected=null,version=0;const cache=new Map();let opened=[];
+  let manifest=null,selected=null,version=0,catalogState='loading';const cache=new Map();let opened=[];
   const href=(id,alias,hash='cases')=>`?case=${id}${alias?'&report='+alias:''}&lang=${english()?'en':'zh'}#${hash}`;
   const link=(label,url,className)=>{const node=make('a',label,className);node.href=url;bindCaseLink(node,url);return node;};
   const unavailable=()=>{
@@ -72,10 +81,18 @@
       link(tr('下载数据 ↗','Download data ↗'),'https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002','text-link'));
     cards.setAttribute('aria-label',tr('案例','Cases'));
     cards.replaceChildren();homeCards.replaceChildren();
-    for(const entry of manifest?.cases||[]){
+    for(const entry of manifest?.cases||previews){
       const small=link(text(entry.title),href(entry.id), 'case-tab');if(entry.id===selected)small.setAttribute('aria-current','page');cards.append(small);
       const card=link('',href(entry.id),'case-tile');card.append(make('small',tr(entry.kind==='real_agent_run'?'真实运行':entry.kind==='guarded_run'?'程序拦截':'资料编辑稿',entry.kind==='real_agent_run'?'REAL RUN':entry.kind==='guarded_run'?'PROGRAM GUARD':'EDITED REPORT')),
         make('h3',text(entry.title)),make('p',text(entry.description)),make('span',tr('查看记录 →','Open record →')));homeCards.append(card);
+    }
+    for(const status of [homeStatus,catalogStatus]){
+      status.replaceChildren();status.hidden=catalogState==='ready';
+      if(catalogState==='loading')status.append(make('p',tr('正在读取案例目录…','Loading the case catalog…')));
+      if(catalogState==='error'){
+        status.append(make('p',tr('案例目录未能加载。请重试；如果直接打开了本地文件，请按快速开始启动网页服务。','The case catalog could not be loaded. Retry, or start the web server from Quickstart if you opened a local file directly.')));
+        const retry=make('button',tr('重新加载','Retry'),'button outline');retry.type='button';retry.addEventListener('click',loadCatalog);status.append(retry);
+      }
     }
     if(!local){
       if($('workspace'))$('workspace').hidden=true;
@@ -152,7 +169,19 @@
   addEventListener('hashchange',route);addEventListener('popstate',route);addEventListener('tradeintel:language',route);
   addEventListener('beforeprint',()=>{opened=[...$('report').querySelectorAll('details:not([open])')];for(const d of opened)d.open=true;});
   addEventListener('afterprint',()=>{for(const d of opened)d.open=false;opened=[];});
-  fetch('cases/index.json').then(r=>{if(!r.ok)throw Error('Missing manifest');return r.json();}).then(index=>{
-    if(index.schema!=='tradeintel-public-cases-v1'||index.cases.map(c=>c.id).join(',')!==ids.join(','))throw Error('Invalid manifest');manifest=index;route();
-  }).catch(()=>{labels();unavailable();});
+  async function loadCatalog(){
+    catalogState='loading';labels();
+    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),12000);
+    try{
+      const response=await fetch('cases/index.json',{signal:controller.signal});
+      if(!response.ok)throw Error('Missing manifest');
+      const index=await response.json();
+      if(index.schema!=='tradeintel-public-cases-v1'||!Array.isArray(index.cases)||index.cases.map(c=>c.id).join(',')!==ids.join(','))throw Error('Invalid manifest');
+      manifest=index;catalogState='ready';await route();
+    }catch(_){
+      catalogState='error';labels();
+      if(new URLSearchParams(location.search).has('case'))unavailable();
+    }finally{clearTimeout(timer);}
+  }
+  loadCatalog();
 })();
