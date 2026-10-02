@@ -2,11 +2,13 @@
 
 ## 当前任务（2026-10-02）
 
-当前任务为 [GitHub发布方案](GITHUB_PUBLICATION_PLAN_20261002.zh-CN.md)：GPT-6 Sol Max设计完成，等切换GPT-6 Luna Max后实施双语README/指南、前端语言链接、便携Pages构建、main快进和公开发布。用户已要求公开仓库、Pages和About/网站/Topics；不反复询问既有授权。当前仍在候选5340d0c，main落后22提交，GitHub设置未改，网站和Release尚未发布。
+当前作品发布已完成：[网站](https://yemyu.github.io/TradeIntel/?lang=zh)和[数据Release](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)已公开，正式源码main，候选远端暂留备份。按 [GitHub发布方案](GITHUB_PUBLICATION_PLAN_20261002.zh-CN.md)完成双语README/指南、前端语言链接、便携Pages构建与About/网站/Topics；没有付费云端后端。
+
+发布证据及浏览器网络局限见 [本次记录](runs/20261002-GITHUB-PUBLICATION.zh-CN.md)：公网首页与大豆案例显示正常，后续报告请求出现连接中断，不能称公网浏览器全路径验收通过；本地报告与14公网文件摘要核验分别已通过。
 
 可推送64提交/2219blob已扫描，仅测试假密钥；私有路径不在提交历史。全量--all扫描的课程/PDF属于本机Codex tree检查点，不需改写历史或删除引用。四公开case标准库校验、312模型冻结及124数据文件核验通过；原ZIP可作为Release资产，不进源码提交。
 
-前一阶段Python135项、网页接口12项、Node56项通过；全仓1739项有10失败／118错误，分类见 [此前记录](runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)。不称全绿，不为发布重测模型或刷历史冻结。实施只按新方案有限验收，完成即结束。定位见 [当前功能](../CURRENT_PRODUCT.zh-CN.md)，原成绩见 [模型测试](../MODEL_SELECTION.zh-CN.md)。
+本次Python24项、Node59项通过，14份原导出/便携构建/公网资源SHA一致，公网数据下载核对通过。前一阶段Python135项、网页接口12项通过；全仓1739项有10失败／118错误，分类见 [此前记录](runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)。不称全绿，不重测模型或刷历史冻结。定位见 [当前功能](../CURRENT_PRODUCT.zh-CN.md)，成绩见 [模型测试](../MODEL_SELECTION.zh-CN.md)，最终评价见 [项目评价](../PROJECT_REVIEW_20261002.zh-CN.md)。当前目标结束，下一步无；下方历史任务不重新启动。
 
 ## 历史记录
 

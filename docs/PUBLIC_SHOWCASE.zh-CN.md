@@ -19,7 +19,21 @@
 
 用静态网页服务打开 `web/design-preview/`，可阅读四个案例；不要把静态页面中的提问入口当成本地服务。正式公开构建会移除提问和模型设置。
 
-仓库已有页面源码，公网展示尚未部署。本地地址不等于公开网址。
+公开网站：[中文](https://yemyu.github.io/TradeIntel/?lang=zh) · [English](https://yemyu.github.io/TradeIntel/?lang=en)。语言切换保留当前案例和报告，刷新后仍使用链接指定的语言。
+
+正式源码使用 `main`。`codex/local-release-candidate` 保留为此前候选版本，不是另一套使用入口。
+
+## GitHub Pages构建
+
+Actions从已提交的公开案例构建网站，不需要发布者的私有会话、数据补充包或API Key。下面的命令只需Python3.12标准库，输出目录必须不存在：
+
+```bash
+PYTHONPATH=src:.:tests python3 -S -m unittest test_github_pages_build
+PYTHONPATH=src:. python3 -S scripts/build_github_pages.py --output tmp/pages-build/site
+PYTHONPATH=src:. python3 -S scripts/build_github_pages.py --verify tmp/pages-build/site
+```
+
+`.github/workflows/pages.yml` 只发布这14个静态文件。它检查公开记录的结构和金额自洽，不代替下方发布者对原始存档的核对。2026-10-02发布时，两种构建的14份文件SHA逐一一致；公网文件也已与核验产物比较。
 
 ## 发布者构建和核验
 
@@ -35,6 +49,6 @@ PYTHONPATH=src:. .venv/bin/python scripts/serve_public_showcase_qa.py --site tmp
 
 ## 交付状态
 
-目前可提供源码和案例。完整本地查询还需要独立的124文件数据包，尚无公开下载地址；不放空的下载按钮，不将普通克隆说成可直接查询。
+完整本地查询需要[Release中的数据补充包](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)，包含124个数据文件、清单和说明。ZIP约64 MiB，已核对公网下载与原包SHA一致；安装步骤见本地运行指南。普通Git克隆仍不含这些数据文件。
 
-已有案例PDF检查见[打印记录](handoff/runs/20261001-U2-PRINT-PDF.zh-CN.md)。实际输入法、原生200%缩放和其他系统安装应分别记录，不用自动测试代替。页面或数据正式发布另行确认，不需要购买云服务器才能展示案例。
+已有案例PDF检查见[打印记录](handoff/runs/20261001-U2-PRINT-PDF.zh-CN.md)。本次发布没有重做PDF打印或其他系统安装；手机390px布局、语言切换和公网案例另做浏览器核对。展示页由GitHub Pages托管，没有付费云端后端。
