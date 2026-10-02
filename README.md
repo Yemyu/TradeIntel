@@ -6,7 +6,7 @@
 
 TradeIntel is an AI research assistant for U.S. goods trade. Ask about a product's imports or exports, compare available months, and read related policy notices. The model selects query tools; Python retrieves trade records, calculates comparisons, and builds reports with charts and source references.
 
-The public website contains four saved examples. To ask your own questions, run the application locally and configure your model provider's API. A data-only mode lets you choose a scope and read the same trade figures without a model. Local use needs neither a cloud server nor a MySQL connection.
+The public website contains four saved examples. To ask your own questions, run the application locally and configure your model provider's API. A data-only mode lets you choose a scope and read the same trade figures without a model.
 
 ## Features
 
@@ -81,9 +81,10 @@ The tests check whether a model uses the tools to complete a task, handles unsup
 | GPT-6.1 Sol / Low | 9/9 | 3/3 | 9/9 |
 | GPT-6.1 Sol / Medium | 9/9 | 3/3 | 10/10 |
 | DeepSeek-V4.1 Flash / high | 8/9 | 2/3; one skipped | 14/14 |
+| GLM-5.3-Flash / High | 8/9 | 2/3; R06 program precheck, P02 skipped | 10/10 |
 | GPT-6 Luna / Max | 7/9 | 2/3 | 8/8 |
 
-Each model was tested on nine normal tasks and three boundary cases. Both Sol configurations completed the set. DeepSeek did not complete the tungsten policy question; Luna stopped at clarification for natural rubber and did not include the tariff explanation in its answer. A task can produce more than one report, so report counts differ. See [Model tests](docs/MODEL_SELECTION.md) for the questions, scoring criteria, settings, and issues.
+Each run planned nine normal tasks and three boundary cases. Both Sol configurations completed the set. DeepSeek and GLM did not deliver the tungsten policy report; GLM's dependent tariff follow-up was skipped. Luna stopped for clarification on natural rubber and omitted the tariff explanation. A task can produce more than one report, so report counts differ. Skipped tasks are not counted as either model failures or successes. See [Model tests](docs/MODEL_SELECTION.md) for the questions, scoring criteria, settings, and issues.
 
 ## Data coverage
 
