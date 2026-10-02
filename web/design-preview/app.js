@@ -5,12 +5,12 @@ const localRuntime = document.documentElement.dataset.runtime === 'local' &&
   ['/preview/', '/preview/index.html'].includes(location.pathname);
 if (localRuntime) {
   const updates = [
-    ['.hero-note','可查询已发布的美国进出口数据，出口数据目前连续到2026年7月。政策案例另附公告背景。','Published US imports and exports are queryable. Export data currently runs through July 2026. The policy case also includes notice context.'],
-    ['#home .section-heading > p','本地服务可查询已接入的商品数据；下方案例仍是示例。','The local service can query supported trade data; the case below remains a sample.'],
+    ['.hero-note','已收录数据截至2026年7月。查看案例不调用模型；使用助手提问可能产生服务商费用。','Data is available through July 2026. Browsing examples makes no model request; assistant questions may incur provider charges.'],
+    ['#home .section-heading > p','用商品名称或编码提问，助手查找数据并返回报告；范围不明确时会先询问。','Ask about a product by name or code. The assistant finds available data and returns a report, asking for clarification when needed.'],
     ['#workspace .eyebrow','本地研究工作台','LOCAL WORKSPACE'],
-    ['#chat-empty > p:not(.eyebrow)','输入商品名称或编码；确认范围后，查看已发布的数据与图表。部分日常名称可能需要补充编码。','Enter a product name or code, confirm its scope, then view published data and charts. Some everyday names may need a product code.'],
-    ['.compose-bottom>span','数据报告不用模型；模型解读是试用功能，回答请核对，调用可能产生费用。','The data report works without a model. Model explanations are experimental; check them before use. Calls may incur charges.'],
-    ['#question-form button[type=submit]','查询可用范围 ↗','Check the available scope ↗'],
+    ['#chat-empty > p:not(.eyebrow)','用商品名称或编码提问，例如“最近美国大豆出口怎么样？”。助手会查询已有数据，并在需要时询问范围。','Ask about a product by name or code. The assistant checks available data and asks for clarification when needed.'],
+    ['.compose-bottom>span','数据查询不调用模型；使用助手会请求你配置的服务商，可能收费。','Data-only queries make no model request. Assistant questions use your configured provider and may incur charges.'],
+    ['#question-form button[type=submit]','发送','Send'],
     ['.suggestions button[data-question]','最近美国大豆出口有什么变化？','How have recent U.S. soybean exports changed?'],
     ['.nav nav a[href="#report"]','报告','Report'],
     ['.footer small','本地运行 · 2026','Local service · 2026']
@@ -22,14 +22,14 @@ if (localRuntime) {
 }
 // Keep the case direction legible even when globe markers rotate out of view.
 const lead = document.querySelector('.hero .lead');
-lead.textContent = '查询美国商品贸易数据；涉及已登记政策时，再查看公告背景。';
-lead.dataset.en = 'Explore US merchandise trade data and, where available, related policy notices.';
+lead.textContent = '查询美国商品进出口，比较不同月份，查阅相关政策。先看案例，或在本地运行后自己提问。';
+lead.dataset.en = 'Ask about U.S. imports and exports, compare monthly figures, and read related policy notices. Browse examples or run locally to ask your own questions.';
 const direction = document.querySelector('.tag-one');
 direction.innerHTML = '<span class="route-point"></span>中国 <span aria-hidden="true">⟶</span> 美国<span class="route-point"></span>';
 direction.dataset.en = '<span class="route-point"></span>China <span aria-hidden="true">⟶</span> United States<span class="route-point"></span>';
 const caption = document.querySelector('.globe-caption');
-caption.textContent = '案例方向示意：中国出口，美国进口。非实时货运。';
-caption.dataset.en = 'Case direction: exports from China to the US. Not live shipping.';
+caption.textContent = '示例中的贸易方向：中国出口，美国进口。';
+caption.dataset.en = 'The example follows exports from China to the United States.';
 let language = 'zh';
 try { language = localStorage.getItem('tradeintel-preview-language') === 'en' ? 'en' : 'zh'; } catch {}
 let rows = [];
@@ -57,7 +57,7 @@ function route() {
   });
   document.title = `${page==='report' && window.tradeintelLiveReportTitle
     ? window.tradeintelLiveReportTitle
-    : {home:tr('贸易政策与数据','Trade policy and data'),workspace:tr('工作台','Workspace'),cases:tr('案例记录','Case records'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
+    : {home:tr('美国贸易研究助手','U.S. trade research assistant'),workspace:tr('工作台','Workspace'),cases:tr('案例记录','Case records'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
   window.scrollTo({top:0,left:0,behavior:'instant'});
 }
 addEventListener('hashchange', route); route();

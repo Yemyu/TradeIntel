@@ -394,6 +394,32 @@ class FinalFlowTests(unittest.TestCase):
 
 
 class ReferenceRevisionTests(unittest.TestCase):
+    def test_new_complete_package_covers_registered_months_without_gold_in_turns(self):
+        from scripts.run_us_agent_retest import prepare_final
+        from tests.test_trade_agent_mainline import DATA_ROOT
+        if not DATA_ROOT.is_dir():
+            self.skipTest("local verified data not installed")
+        project = Path(__file__).resolve().parents[1]
+        scenarios = project / "evals/us_agent_retest_v1/scenarios.json"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "fresh-complete"
+            prepare_final(root, project, scenarios, DATA_ROOT)
+            reference = json.loads((root / "reference/trade.json").read_text())
+            self.assertEqual(reference["coverage_profile"], "manifest_available")
+            for flow in ("import", "export"):
+                self.assertEqual({m for m, data in reference["months"].items() if flow in data},
+                                 set(reference["registered_months"][flow]))
+            self.assertIsNone(reference["months"]["2026-07"]["import"]["values"]["1801"]["china"]["value_usd"])
+            turns = json.loads((root / "runtime/turns.json").read_text())
+            plan = json.loads(scenarios.read_text())
+            self.assertEqual([t["question"] for t in turns], [c["question"] for c in plan["cases"]])
+            self.assertEqual(len({t["session_id"] for t in turns}), 7)
+            self.assertTrue(all(set(t) == {"case_id", "request_id", "session_id", "question", "requires"}
+                                for t in turns))
+            self.assertFalse((root / "runtime/trade.json").exists())
+            self.assertFalse((root / "FROZEN_MANIFEST.json").exists())
+            self.assertEqual(json.loads((root / "STATUS.json").read_text())["api_calls"], 0)
+
     def test_real_r01_old_reference_is_unverified_and_full_reference_verifies(self):
         project = Path(__file__).resolve().parents[1]
         old = project / "tmp/handoff-runs/us-agent-retest-20261001-v4"
@@ -464,14 +490,68 @@ class ContinuationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.project = Path(__file__).resolve().parents[1]
-        cls.package = cls.project / "tmp/handoff-runs/us-agent-retest-20261001-v5"
-        if not cls.package.is_dir():
-            raise unittest.SkipTest("local continuation preparation not installed")
+        from tests.test_trade_agent_mainline import DATA_ROOT
+        from scripts.build_us_agent_retest_reference import build_reference
+        if not DATA_ROOT.is_dir():
+            raise unittest.SkipTest("local verified data not installed")
+        cls.reference = build_reference(DATA_ROOT, coverage_profile="manifest_available")
 
     def clone(self, directory):
+        """Build a fresh offline seed, never re-seal a historical live run.
+
+        These synthetic fixture hashes bind only temporary files. The separate
+        historical test below still requires old v5 to reject current sources.
+        """
+        from scripts.run_us_agent_retest import file_hash, write_new
+        from tests.test_trade_agent_mainline import DATA_ROOT, ScriptedModel
+        parent = Path(directory) / "fixture-parent"
         target = Path(directory) / "child"
-        shutil.copytree(self.package, target)
+        plan = json.loads((self.project / "evals/us_agent_retest_v1/scenarios.json").read_text())
+        sessions, turns = {}, []
+        for case in plan["cases"]:
+            rid = uuid.uuid4().hex
+            sessions.setdefault(case["session"], rid)
+            turns.append({"case_id": case["id"], "request_id": rid,
+                          "session_id": sessions[case["session"]],
+                          "question": case["question"], "requires": case.get("requires")})
+        executor = AgentCaseExecutor(plan, self.reference, DATA_ROOT, parent / "runtime",
+                                     parent / "results/evidence", lambda _: ScriptedModel())
+        seed = executor(turns[0])
+        self.assertTrue(seed["continuation_ready"], seed)
+        write_new(parent / "results/batch/R01.json", {**seed, "origin": "offline_fixture"})
+        write_new(parent / "fixture-origin.json", {"origin": "offline_fixture", "api_calls": 0})
+        write_new(parent / "FROZEN_MANIFEST.json", {"origin": "offline_fixture", "live_ready": False})
+        write_new(target / "inputs/plan.json", plan)
+        write_new(target / "reference/trade.json", self.reference)
+        write_new(target / "runtime/turns.json", turns)
+        bootstrap = []
+        for source in (parent / "runtime").rglob("*.json"):
+            relative = str(source.relative_to(parent / "runtime"))
+            for destination in (target / "runtime" / relative, target / "bootstrap/runtime" / relative):
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, destination)
+            bootstrap.append({"relative": relative, "sha256": file_hash(source)})
+        diagnostic = target / "bootstrap/R01-posthoc.json"
+        write_new(diagnostic, {"case_id": "R01", "origin": "offline_fixture", "api_calls": 0})
+        write_new(target / "inputs/continuation.json", {
+            "schema": "us-retest-continuation-v1", "parent": str(parent),
+            "parent_freeze_sha256": file_hash(parent / "FROZEN_MANIFEST.json"),
+            "parent_files": {str(p): file_hash(p) for p in parent.rglob("*.json")},
+            "consumed_requests": 0, "consumed_cost": "0", "bootstrap": bootstrap,
+            "allowlist": [c["id"] for c in plan["cases"][1:]],
+            "anchor": {"case_id": "R01", "continuation_ready": True,
+                       "diagnostic_sha256": file_hash(diagnostic)}})
         return target
+
+    def test_historical_v5_rejects_changed_sources_without_resealing(self):
+        from scripts.run_us_agent_retest import verify_continuation, file_hash
+        package = self.project / "tmp/handoff-runs/us-agent-retest-20261001-v5"
+        if not package.is_dir():
+            self.skipTest("historical v5 not installed")
+        before = file_hash(package / "FROZEN_MANIFEST.json")
+        with self.assertRaisesRegex(GateError, "Ancestor evidence changed"):
+            verify_continuation(package, initial=True)
+        self.assertEqual(file_hash(package / "FROZEN_MANIFEST.json"), before)
 
     def test_bootstrap_ancestor_hash_allowlist_and_initial_seed(self):
         from scripts.run_us_agent_retest import verify_continuation

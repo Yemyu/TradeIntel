@@ -492,6 +492,7 @@ def execute_cases(plan, turns, output, execute, *, verify_inputs=lambda: None, r
 
 
 ACCEPTANCE_TESTS = ("tests.test_us_agent_retest", "tests.test_us_retest_final",
+    "tests.test_trade_agent_catalog_contract", "tests.test_trade_agent_policy_merge_contract",
     "tests.test_trade_agent_mainline", "tests.test_trade_agent_boundaries",
     "tests.test_trade_agent_request", "tests.test_trade_agent_language",
     "tests.test_trade_agent_report_view", "tests.test_trade_agent_metrics",
@@ -504,7 +505,9 @@ def prepare_final(root, project, scenarios, data_root):
     from tradeintel_ai.announcement_flow import load_announcement_store
     if root.exists():
         raise GateError("Final package exists; no overwrite")
-    reference = build_reference(data_root)
+    # Follow-up queries may return an earlier registered month as an additional
+    # report. Keep that reference evaluator-only, but cover the full manifest.
+    reference = build_reference(data_root, coverage_profile="manifest_available")
     # Build outside the package only in memory, then publish new inputs.
     root.mkdir(parents=True)
     for name in ("inputs", "runtime", "ledgers", "results", "reference"):

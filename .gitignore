@@ -7,6 +7,11 @@ __pycache__/
 .ipynb_checkpoints/
 tmp/
 
+# Local assistant state, generated exports, and downloaded course references.
+.workbuddy/
+output/
+vendor/
+
 # Raw data may be large or have redistribution restrictions.
 data/raw/*
 !data/raw/.gitkeep

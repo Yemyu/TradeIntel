@@ -320,11 +320,11 @@ test('same-year peak gap appears as a deterministic page fact without enabling a
   const env=makeEnv(record);
   vm.runInContext(script,env.context);
   await new Promise(resolve=>setImmediate(resolve));
-  assert.ok(env.report().textContent.includes('按同年已观察月份比较'));
+  assert.ok(env.report().textContent.includes('与同年已收录月份比较'));
   assert.ok(env.report().textContent.includes('2026-07为75美元'));
   env.context.document.documentElement.lang='en';
   env.events['tradeintel:language']();
-  assert.ok(env.report().textContent.includes('Compare observed months within the year'));
+  assert.ok(env.report().textContent.includes('Compare available months within the year'));
   assert.ok(env.report().textContent.includes('6 USD below that high'));
 });
 
