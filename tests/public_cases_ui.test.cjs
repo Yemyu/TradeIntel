@@ -67,7 +67,7 @@ test('invalid identity, missing JSON and wrong alias show unavailable instead of
   for(const [search,missing] of [['?case=unknown',false],['?case=soybean-trade&report=r99',false],['?case=soybean-trade&report=r1',true]]){
     const e=env(search,'#report',false,missing);await e.flush();assert.equal(e.ids.get('case-result').textContent,'案例暂不可用');assert.equal(e.layout.hidden,true);
     assert.equal(e.doc.title,'案例暂不可用 · TradeIntel');
-    assert.equal(e.ids.get('return-to-conversation').href,'/TradeIntel/preview/#cases');
+    assert.equal(e.ids.get('return-to-conversation').href,'/TradeIntel/preview/?lang=zh#cases');
   }
 });
 test('returning from a local case emits a GET-restoration signal and preserves the session store',async()=>{
@@ -79,14 +79,14 @@ test('returning from a local case emits a GET-restoration signal and preserves t
 });
 test('local case links use in-page navigation so conversation memory and unsent drafts survive',async()=>{
   const e=env('','#home',true);await e.flush();e.context.unsentDraft='not sent';let prevented=0;
-  const card=e.created.find(n=>n.tag==='a'&&n.href==='?case=soybean-oil#cases');
+  const card=e.created.find(n=>n.tag==='a'&&n.href==='?case=soybean-oil&lang=zh#cases');
   assert.ok(card.listeners?.click);card.listeners.click({preventDefault(){prevented++;}});await e.flush();
   assert.equal(prevented,1);assert.equal(e.context.unsentDraft,'not sent');
-  assert.equal(e.context.location.search,'?case=soybean-oil');assert.equal(e.context.location.hash,'#cases');
+  assert.equal(e.context.location.search,'?case=soybean-oil&lang=zh');assert.equal(e.context.location.hash,'#cases');
   assert.match(e.ids.get('cases').textContent,/27,503,913/);
   assert.deepEqual(e.calls,['cases/index.json','cases/soybean-oil.json']);
   card.listeners.click({metaKey:true,preventDefault(){throw Error('Modified click must retain normal browser behaviour');}});
-  const report=e.created.find(n=>n.tag==='a'&&n.href==='?case=soybean-oil&report=r1#report');
+  const report=e.created.find(n=>n.tag==='a'&&n.href==='?case=soybean-oil&report=r1&lang=zh#report');
   report.listeners.click({preventDefault(){}});await e.flush();assert.equal(e.context.location.hash,'#report');
   e.ids.get('return-to-conversation').listeners.click({preventDefault(){}});await e.flush();
   assert.equal(e.context.location.hash,'#cases');assert.equal(e.context.unsentDraft,'not sent');
