@@ -1,8 +1,8 @@
 # TradeIntel
 
-**English** | [简体中文](README.zh-CN.md)
+**🌐 English** | [🇨🇳 简体中文](README.zh-CN.md)
 
-[Demo](https://yemyu.github.io/TradeIntel/?lang=en) · [Quickstart](#quickstart) · [Model tests](docs/MODEL_SELECTION.md) · [Data download](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)
+[Demo](https://yemyu.github.io/TradeIntel/?lang=en) · [📊 Sample report](https://yemyu.github.io/TradeIntel/?case=policy-materials&report=r1&lang=en#report) · [Quickstart](#quickstart) · [Model tests](docs/MODEL_SELECTION.md) · [Data download](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)
 
 TradeIntel is an AI research assistant for U.S. goods trade. Ask about a product's imports or exports, compare available months, and read related policy notices. The model selects query tools; Python retrieves trade records, calculates comparisons, and builds reports with charts and source references.
 
@@ -76,14 +76,14 @@ See the [local guide](docs/LOCAL_RUN.md) for bundle verification, model settings
 
 The tests check whether a model uses the tools to complete a task, handles unsupported requests correctly, and returns reports whose figures can be verified.
 
-| Model / reasoning | Test channel | Normal tasks completed | Boundary cases handled | Saved reports verified |
-|---|---|---:|---:|---:|
-| GPT-6.1 Sol / Low | Codex chat bridge | 9/9 | 3/3 | 9/9 |
-| GPT-6.1 Sol / Medium | Codex chat bridge | 9/9 | 3/3 | 10/10 |
-| DeepSeek-V4.1 Flash / high | API | 8/9 | 2/3; one skipped | 14/14 |
-| GPT-6 Luna / Max | Recovered Codex chat run | 7/9 | 2/3 | 8/8 |
+| Model / reasoning | Normal tasks completed | Boundary cases handled | Saved reports verified |
+|---|---:|---:|---:|
+| GPT-6.1 Sol / Low | 9/9 | 3/3 | 9/9 |
+| GPT-6.1 Sol / Medium | 9/9 | 3/3 | 10/10 |
+| DeepSeek-V4.1 Flash / high | 8/9 | 2/3; one skipped | 14/14 |
+| GPT-6 Luna / Max | 7/9 | 2/3 | 8/8 |
 
-These results use the current v3 tool protocol. Both Sol chat runs completed the task set; DeepSeek's policy task was incomplete. Luna's recovered run stopped at rubber clarification and did not deliver its tariff explanation in the public answer. Low saved both trade directions in one report; Medium saved two reports, so their report counts differ. The [test page](docs/MODEL_SELECTION.md) includes settings, checks, interruptions, and earlier GLM/DeepSeek/GPT results. GPT chat runs do not verify GPT API integration in this application.
+Each model was tested on nine normal tasks and three boundary cases. Both Sol configurations completed the set. DeepSeek did not complete the tungsten policy question; Luna stopped at clarification for natural rubber and did not include the tariff explanation in its answer. A task can produce more than one report, so report counts differ. See [Model tests](docs/MODEL_SELECTION.md) for the questions, scoring criteria, settings, and issues.
 
 ## Data coverage
 
@@ -103,7 +103,7 @@ The assistant uses a single tool-calling loop. A model searches the catalog, req
 
 Trade figures are not taken from model memory. Python reads prepared Census tables and calculates totals and changes. The current public report summaries also come from those calculations. Policy search uses lexical/BM25 retrieval over registered documents, including related conditions; it is not an unrestricted web search.
 
-Reports and conversations are saved locally so they can be reopened. The model can decide what to query, but it cannot make missing values become zero or replace an unavailable month without the required confirmation. Historical causal research and earlier report-writing experiments remain in the repository; neither is a requirement of the current application.
+Reports and conversations are saved locally so they can be reopened. The model can decide what to query, but it cannot make missing values become zero or replace an unavailable month without the required confirmation.
 
 MySQL is used in data engineering and verification; everyday web queries read verified data files and need no database server.
 
@@ -117,9 +117,9 @@ MySQL is used in data engineering and verification; everyday web queries read ve
 | `tests/` | Python and browser-DOM regression tests |
 | `evals/` | Evaluation questions, contracts, and frozen reference material |
 | `data/` | Source metadata and prepared data; large datasets are supplied separately |
-| `docs/` | Setup, test results, data notes, and development history |
+| `docs/` | Setup, test results, and data notes |
 
-[Current functionality](docs/CURRENT_PRODUCT.zh-CN.md) · [Showcase guide](docs/PUBLIC_SHOWCASE.zh-CN.md) · [Model tests](docs/MODEL_SELECTION.md) · [Development records](docs/handoff/STATUS.zh-CN.md)
+[Current functionality](docs/CURRENT_PRODUCT.zh-CN.md) · [Showcase guide](docs/PUBLIC_SHOWCASE.zh-CN.md) · [Model tests](docs/MODEL_SELECTION.md)
 
 For targeted page and report tests (some Python tests need the publisher's local data and saved source records):
 
@@ -128,6 +128,4 @@ node --test tests/report_view.test.cjs tests/public_cases_ui.test.cjs tests/trad
 PYTHONPATH=src:.:tests .venv/bin/python -m unittest test_chat_workspace_assets test_public_showcase test_trade_agent_report_view
 ```
 
-Earlier README content is preserved in [the documentation archive](docs/history/README.before-public-edit-20261001.md).
-
-See [Tests](docs/TESTING.md) for the current regression commands, local prerequisites, and known failures in the historical suite.
+See [Tests](docs/TESTING.md) for regression commands and local prerequisites.

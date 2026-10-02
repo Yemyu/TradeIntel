@@ -56,4 +56,4 @@ The full suite is **not green**. The October 2 run executed 1,739 tests and reco
 
 ## Model runs
 
-Running the commands above does not authorize a paid model experiment. A new experiment needs its own fixed questions, source versions, configuration, reference checks, and budget. Existing answers and failed or interrupted runs remain unchanged. Results and the distinction between API runs and Codex chat-bridge runs are explained on the [model test page](MODEL_SELECTION.md).
+Running the commands above does not send model requests. A model experiment uses fixed questions, source versions, configuration, reference checks, and a budget. Results and settings are described on the [model test page](MODEL_SELECTION.md).
