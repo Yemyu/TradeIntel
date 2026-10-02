@@ -33,6 +33,17 @@ PYTHONPATH=src:.:tests .venv/bin/python -m unittest \
 
 The October 2 check passed all 135 tests in that command and all 56 Node tests. The additional web-route suite passed separately; see the [repository review](handoff/runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md) for the complete check record.
 
+## Public website build
+
+The portable Pages build reads only the checked-in public examples. It runs with Python 3.12's standard library, without private sessions or the trade-data bundle:
+
+```bash
+PYTHONPATH=src:.:tests python3 -S -m unittest test_github_pages_build
+PYTHONPATH=src:. python3 -S scripts/build_github_pages.py --output tmp/pages-build/site
+```
+
+The October 2 publication check passed 24 Python interface/export tests and all 59 Node tests. The original-session export, portable build and deployed site matched across all 14 public assets. This is a website check, not a new model test.
+
 ## Historical suite
 
 To include earlier experiments and causal research:
