@@ -59,13 +59,13 @@
   }
   function labels(){
     heading.replaceChildren(make('p',tr('案例记录','CASE RECORDS'),'eyebrow'),make('h1',tr('看看它怎么回答','See how it responds')),
-      make('p',tr('这里是已保存的运行记录和报告，不是在线提问。','Saved runs and reports, not a live assistant.')));
-    homeHead.replaceChildren(make('h2',tr('四个案例','Four cases')),make('p',tr('两次真实查询、一份政策资料报告，以及一次缺数拦截。','Real queries, an edited policy report, and a blocked missing-month request.')));
+      make('p',tr('选择一个案例，查看当时的提问、查询过程和报告。','Choose a case to read the question, query steps, and saved report.')));
+    homeHead.replaceChildren(make('h2',tr('四个案例','Four cases')),make('p',tr('看看助手如何追问、区分商品、查阅政策，以及处理缺少月份。','Explore follow-ups, product lookup, policy reading, and unavailable data.')));
     install.replaceChildren(make('h2',tr('在自己的电脑上使用','Run it on your computer')),
       make('p',tr('公开网站不用 API，只能阅读案例。要自己提问，请启动本地服务，再填自己的模型 API。数据查询本身不需要模型或 MySQL。','The public site needs no API and only reads saved cases. To ask your own questions, run the local service and configure your own model API. Data-only queries need neither a model nor MySQL.')),
       make('p',tr('数据包尚未公开；普通克隆还不能直接查询。源码及安装说明已提供，数据下载地址须在正式发布时补齐。当前安装验证限 macOS；Windows 尚未验证。','The data bundle is not public yet; cloning alone does not enable queries. Source and setup instructions are available. A data link is still required before public release. Installation was verified on macOS; Windows is unverified.')),
-      link(tr('源码 ↗','Source ↗'),'https://github.com/Yemyu/TradeIntel','text-link'),
-      link(tr('安装说明 ↗','Setup guide ↗'),'https://github.com/Yemyu/TradeIntel/blob/main/docs/LOCAL_RUN.zh-CN.md','text-link'));
+      link(tr('源码 ↗','Source ↗'),'https://github.com/Yemyu/TradeIntel/tree/codex/local-release-candidate','text-link'),
+      link(tr('安装说明 ↗','Setup guide ↗'),'https://github.com/Yemyu/TradeIntel/blob/codex/local-release-candidate/docs/LOCAL_RUN.zh-CN.md','text-link'));
     cards.replaceChildren();homeCards.replaceChildren();
     for(const entry of manifest?.cases||[]){
       const small=link(text(entry.title),href(entry.id), 'case-tab');if(entry.id===selected)small.setAttribute('aria-current','page');cards.append(small);

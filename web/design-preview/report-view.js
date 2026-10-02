@@ -59,9 +59,9 @@
     const card=observations.find(item=>item.id===flow+'.same_year_peak_gap'&&item.status==='available');
     if(!card)return;
     const section=make('section',undefined,'live-section trade-year-peak');
-    section.append(make('h3',tr('按同年已观察月份比较','Compare observed months within the year')));
+    section.append(make('h3',tr('与同年已收录月份比较','Compare available months within the year')));
     const item=make('article',undefined,'trade-relation-card');
-    item.append(make('h4',tr('同年峰值与最新已观察月','Year peak and latest observed month')));
+    item.append(make('h4',tr('已收录月份中的峰值与最新值','Peak and latest value among available months')));
     addParagraph(item,english()?englishYearPeak(card):card.fact);
     section.append(item);target.append(section);
   }
@@ -134,11 +134,11 @@
     const scroll=make('div',undefined,'table-scroll');const table=make('table');
     const head=make('thead');const headings=make('tr');
     [tr('月份','Month'),tr(`美国${metric} / 美元`,`${exportFlow?'U.S. total exports (FAS)':'U.S. imports for consumption'} / USD`),
-      tr('记录状态','Record status')].forEach(label=>headings.append(make('th',label)));
+      tr('数据状态','Record status')].forEach(label=>headings.append(make('th',label)));
     head.append(headings);table.append(head);const body=make('tbody');
     for(const row of series){const line=make('tr');
       [row.month,row.status==='observed'?fmt(row.value_usd):'—',
-       row.status==='observed'?tr('有记录','Published'):row.status==='not_processed'?tr('月份未加工','Not processed'):tr('无可用金额','No published value')]
+       row.status==='observed'?tr('有记录','Published'):row.status==='not_processed'?tr('月份未收录','Not included'):tr('无可用金额','No published value')]
         .forEach(value=>line.append(make('td',value)));
       body.append(line);
     }table.append(body);scroll.append(table);numbers.append(scroll);chart.append(numbers);target.append(chart);
@@ -154,7 +154,7 @@
     for(const url of [...new Set([...(scope.classification_source_urls||[]),...(result.sources||[])])].filter(url=>
       typeof url==='string' && /^https:\/\/(www\.usitc\.gov|www\.census\.gov)\//.test(url) &&
       (!url.includes('/ex_m/')||exportFlow) && (!url.includes('/im_m/')||!exportFlow))){
-      const link=make('a',url);link.href=url;link.target='_blank';link.rel='noopener';detail.append(link,make('br'));
+      const link=make('a',tr(url.includes('usitc.gov')?'美国国际贸易委员会：商品编码目录':'美国人口普查局：贸易数据',url.includes('usitc.gov')?'USITC commodity classification':'U.S. Census trade data'));link.href=url;link.target='_blank';link.rel='noopener';detail.append(link,make('br'));
     }
     for(const note of result.notes||[])if(!note.startsWith('目前未运行模型解释'))addParagraph(detail,english()?englishNote(note):note);
     target.append(detail);

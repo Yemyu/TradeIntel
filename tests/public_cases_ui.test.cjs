@@ -52,7 +52,7 @@ test('language and refresh retain the case alias without local storage or API re
 });
 test('missing-month case has a real controlled explanation and no invented report/chart',async()=>{
   const e=env('?case=missing-month','#cases');await e.flush();
-  assert.match(e.ids.get('cases').textContent,/缺少 2026-08/);assert.match(e.ids.get('cases').textContent,/模型曾改查7月/);
+  assert.match(e.ids.get('cases').textContent,/缺少 2026-08/);assert.match(e.ids.get('cases').textContent,/模型尝试改查7月，被程序拦截/);
   assert.equal(e.ids.get('case-result').hidden,true);assert.equal(e.ids.get('case-result').textContent,'');
   assert.ok(!e.created.some(n=>n.tag==='a'&&n.href?.includes('&report=')));
 });

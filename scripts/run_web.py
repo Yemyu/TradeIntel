@@ -1,4 +1,4 @@
-"""Start the local Chinese TradeShock AI page.
+"""Run the TradeIntel web application locally.
 
 The server binds to localhost by default.  It does not open a browser and it
 does not expose the project-local model key.  Stop it with Ctrl-C.
@@ -19,11 +19,11 @@ from tradeintel_ai.web_app import DEFAULT_WEB_HOST, DEFAULT_WEB_PORT, create_ser
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="启动 TradeShock AI 本地中文页面")
+    parser = argparse.ArgumentParser(description="启动 TradeIntel 本地服务")
     parser.add_argument("--host", default=DEFAULT_WEB_HOST, help="监听地址，默认只允许本机访问")
     parser.add_argument("--port", type=int, default=DEFAULT_WEB_PORT)
     parser.add_argument("--output-root", type=Path, default=ROOT / "tmp/unified-research",
-                        help="AI 演示运行记录目录")
+                        help="会话与报告目录")
     parser.add_argument("--trade-data-root", type=Path,
                         help="独立贸易数据包目录（包含 BUNDLE_MANIFEST.json 和 data/）")
     args = parser.parse_args(argv)
@@ -36,12 +36,12 @@ def main(argv: list[str] | None = None) -> int:
             parser.error(f"独立贸易数据包核验失败：{exc}")
     server = create_server(root=ROOT, host=args.host, port=args.port,
                            output_root=args.output_root, trade_data_root=args.trade_data_root)
-    print(f"TradeShock AI 页面：http://{args.host}:{args.port}")
+    print(f"TradeIntel：http://{args.host}:{args.port}")
     print("启动和数据查询不调用模型；研究助手会在提交问题后调用已配置的模型。按 Ctrl-C 停止。")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\n已停止 TradeShock AI 页面。")
+        print("\nTradeIntel 已停止。")
     finally:
         server.server_close()
     return 0
