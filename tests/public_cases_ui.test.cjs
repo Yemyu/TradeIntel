@@ -53,11 +53,19 @@ test('case navigation groups conversations, report and missing data in both lang
   assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['对话示例','报告示例','缺数据处理']);
   assert.deepEqual(picker.children.map(group=>group.children[1].children.length),[2,1,1]);
   assert.match(picker.children[0].textContent,/连续追问/);assert.match(picker.children[0].textContent,/商品区分/);
-  assert.equal(picker.children[1].children[1].children[0].attrs['aria-current'],'page');
+  const policyRow=()=>picker.children[1].children[1].children[0];
+  assert.equal(policyRow().children[0].attrs['aria-current'],'page');
+  assert.match(policyRow().children[1].textContent,/这一例不是对话记录/);
+  for(const group of picker.children)for(const row of group.children[1].children){
+    assert.equal(row.children.length,2);
+    assert.equal(row.children[0].attrs['aria-describedby'],row.children[1].id);
+    assert.ok(row.children[1].textContent.length>20);
+  }
   e.doc.documentElement.lang='en';e.context.dispatchEvent(new Event('tradeintel:language'));await e.flush();
   assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['Conversations','Report example','Missing data']);
-  assert.match(picker.children[1].children[1].children[0].href,/case=policy-materials&lang=en#cases/);
-  assert.equal(picker.children[1].children[1].children[0].attrs['aria-current'],'page');
+  assert.match(policyRow().children[0].href,/case=policy-materials&lang=en#cases/);
+  assert.equal(policyRow().children[0].attrs['aria-current'],'page');
+  assert.match(policyRow().children[1].textContent,/not a conversation/);
 });
 test('catalog network failure keeps home navigable with a translated retry and can recover',async()=>{
   const e=env('','#home',false,false,true);await e.flush();
