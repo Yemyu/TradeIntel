@@ -71,7 +71,7 @@
       a.href=href('policy-materials','r1','report');
     });
     heading.replaceChildren(make('p',tr('TRADEINTEL / 案例','TRADEINTEL / EXAMPLES'),'eyebrow'),make('h1',tr('案例与报告','Conversations and reports')),
-      make('p',tr('前两个案例展示提问和追问；第三个是一份政策报告，第四个展示缺少数据时的处理。','The first two examples show conversations. The third is a policy report; the fourth shows how missing data is handled.')));
+      make('p',tr('对话示例展示提问和追问；报告示例展示整理后的图表与政策资料；缺数据案例展示无法查询时的回答。','Browse saved conversations, a policy report with charts, and an example of handling unavailable data.')));
     homeHead.replaceChildren(make('h2',tr('四个案例','Four cases')),make('p',tr('看看助手如何追问、区分商品、查阅政策，以及处理缺少月份。','Explore follow-ups, product lookup, policy reading, and unavailable data.')));
     install.replaceChildren(make('h2',tr('在自己的电脑上使用','Run it on your computer')),
       make('p',tr('公开网站不用 API，只能阅读案例。要自己提问，请启动本地服务，再填自己的模型 API。数据查询本身不需要模型或 MySQL。','The public site needs no API and only reads saved cases. To ask your own questions, run the local service and configure your own model API. Data-only queries need neither a model nor MySQL.')),
@@ -81,9 +81,34 @@
       link(tr('下载数据 ↗','Download data ↗'),'https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002','text-link'));
     cards.setAttribute('aria-label',tr('案例','Cases'));
     cards.replaceChildren();homeCards.replaceChildren();
+    const groups=[
+      {label:tr('对话示例','Conversations'),ids:['soybean-trade','soybean-oil']},
+      {label:tr('报告示例','Report example'),ids:['policy-materials']},
+      {label:tr('缺数据处理','Missing data'),ids:['missing-month']}
+    ];
+    const purposes={
+      'soybean-trade':tr('连续追问','Follow-up questions'),
+      'soybean-oil':tr('商品区分','Product lookup'),
+      'policy-materials':tr('政策与进口图表','Policy and import charts'),
+      'missing-month':tr('月份不可用','Unavailable month')
+    };
+    const entries=manifest?.cases||previews;
+    for(const group of groups){
+      const section=make('section',undefined,'case-picker-group');
+      section.append(make('h2',group.label));
+      const choices=make('div',undefined,'case-picker-options');
+      for(const id of group.ids){
+        const entry=entries.find(item=>item.id===id);if(!entry)continue;
+        const small=link('',href(id),'case-tab');
+        small.append(make('small',purposes[id]),make('span',text(entry.title)));
+        if(id===selected)small.setAttribute('aria-current','page');
+        choices.append(small);
+      }
+      section.append(choices);cards.append(section);
+    }
     for(const entry of manifest?.cases||previews){
-      const small=link(entry.id==='policy-materials'?tr('钨与光伏材料 · 报告示例','Tungsten and solar materials · Report'):text(entry.title),href(entry.id), 'case-tab');if(entry.id===selected)small.setAttribute('aria-current','page');cards.append(small);
-      const card=link('',href(entry.id),'case-tile');card.append(make('small',tr(entry.kind==='real_agent_run'?'真实运行':entry.kind==='guarded_run'?'程序拦截':'政策报告示例',entry.kind==='real_agent_run'?'REAL RUN':entry.kind==='guarded_run'?'PROGRAM GUARD':'POLICY REPORT EXAMPLE')),
+      const category=groups.find(group=>group.ids.includes(entry.id)).label;
+      const card=link('',href(entry.id),'case-tile');card.append(make('small',`${category} · ${purposes[entry.id]}`),
         make('h3',text(entry.title)),make('p',text(entry.description)),make('span',tr('查看记录 →','Open record →')));homeCards.append(card);
     }
     for(const status of [homeStatus,catalogStatus]){
