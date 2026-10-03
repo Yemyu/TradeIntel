@@ -4,15 +4,14 @@ const $ = id => document.getElementById(id);
 const localRuntime = document.documentElement.dataset.runtime === 'local' &&
   ['/preview/', '/preview/index.html'].includes(location.pathname);
 if (localRuntime) {
+  document.querySelectorAll('[data-local-only]').forEach(element=>{element.hidden=false;});
   const updates = [
     ['.hero-note','已收录数据截至2026年7月。查看案例不调用模型；使用助手提问可能产生服务商费用。','Data is available through July 2026. Browsing examples makes no model request; assistant questions may incur provider charges.'],
-    ['#home .section-heading > p','用商品名称或编码提问，助手查找数据并返回报告；范围不明确时会先询问。','Ask about a product by name or code. The assistant finds available data and returns a report, asking for clarification when needed.'],
     ['#workspace .eyebrow','本地研究工作台','LOCAL WORKSPACE'],
     ['#chat-empty > p:not(.eyebrow)','用商品名称或编码提问，例如“最近美国大豆出口怎么样？”。助手会查询已有数据，并在需要时询问范围。','Ask about a product by name or code. The assistant checks available data and asks for clarification when needed.'],
     ['.compose-bottom>span','数据查询不调用模型；使用助手会请求你配置的服务商，可能收费。','Data-only queries make no model request. Assistant questions use your configured provider and may incur charges.'],
     ['#question-form button[type=submit]','发送','Send'],
     ['.suggestions button[data-question]','最近美国大豆出口有什么变化？','How have recent U.S. soybean exports changed?'],
-    ['.nav nav a[href="#report"]','报告','Report'],
     ['.footer small','本地运行 · 2026','Local service · 2026']
   ];
   for (const [selector,zh,en] of updates) {
@@ -20,16 +19,6 @@ if (localRuntime) {
     if(element){element.textContent=zh;element.dataset.en=en;}
   }
 }
-// Keep the case direction legible even when globe markers rotate out of view.
-const lead = document.querySelector('.hero .lead');
-lead.textContent = '查询美国商品进出口，比较不同月份，查阅相关政策。先看案例，或在本地运行后自己提问。';
-lead.dataset.en = 'Ask about U.S. imports and exports, compare monthly figures, and read related policy notices. Browse examples or run locally to ask your own questions.';
-const direction = document.querySelector('.tag-one');
-direction.innerHTML = '<span class="route-point"></span>中国 <span aria-hidden="true">⟶</span> 美国<span class="route-point"></span>';
-direction.dataset.en = '<span class="route-point"></span>China <span aria-hidden="true">⟶</span> United States<span class="route-point"></span>';
-const caption = document.querySelector('.globe-caption');
-caption.textContent = '示例中的贸易方向：中国出口，美国进口。';
-caption.dataset.en = 'The example follows exports from China to the United States.';
 let language = 'zh';
 try { language = localStorage.getItem('tradeintel-preview-language') === 'en' ? 'en' : 'zh'; } catch {}
 const requestedLanguage = new URLSearchParams(location.search).get('lang');
@@ -37,8 +26,10 @@ if (['zh', 'en'].includes(requestedLanguage)) language = requestedLanguage;
 let rows = [];
 const tr = (zh,en) => language === 'en' ? en : zh;
 const translations = [...document.querySelectorAll('[data-en]')].map(el=>({el,zh:el.innerHTML,en:el.dataset.en}));
+const translatedLinks = [...document.querySelectorAll('[data-href-en]')].map(el=>({el,zh:el.getAttribute('href'),en:el.dataset.hrefEn}));
 function applyLanguage() {
   translations.forEach(({el,zh,en})=>{el.innerHTML=language==='en'?en:zh;});
+  translatedLinks.forEach(({el,zh,en})=>{el.href=language==='en'?en:zh;});
   document.documentElement.lang=language==='en'?'en':'zh-CN';
   $('language-toggle').textContent=tr('English','中文');
   $('language-toggle').setAttribute('aria-label',tr('Switch to English','切换到中文'));
@@ -65,7 +56,7 @@ function route() {
   });
   document.title = `${page==='report' && window.tradeintelLiveReportTitle
     ? window.tradeintelLiveReportTitle
-    : {home:tr('美国贸易研究助手','U.S. trade research assistant'),workspace:tr('工作台','Workspace'),cases:tr('案例记录','Case records'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
+    : {home:tr('国际贸易研究助手','International trade research assistant'),workspace:tr('工作台','Workspace'),cases:tr('案例记录','Case records'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
   window.scrollTo({top:0,left:0,behavior:'instant'});
 }
 addEventListener('hashchange', route); route();

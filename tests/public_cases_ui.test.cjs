@@ -39,18 +39,19 @@ function env(search='?case=soybean-trade&report=r2',hash='#report',local=false,m
   context.window=context;vm.runInContext(scripts,context);
   return {context,doc,ids,calls,layout,events,localLink,created,recoverCatalog(){catalogFailure=false;},async flush(){await new Promise(resolve=>setImmediate(resolve));}};
 }
-test('home has four case links before the catalog request completes',async()=>{
+test('case controller leaves the project homepage intact while loading the catalog',async()=>{
   const e=env('','#home');
-  const gallery=e.ids.get('case-gallery');
-  assert.equal(gallery.children[1].children.length,4);
-  assert.match(gallery.textContent,/正在读取案例目录/);
-  await e.flush();assert.equal(gallery.children[2].hidden,true);
+  assert.equal(e.ids.get('home').children.length,0);
+  assert.equal(e.ids.has('case-gallery'),false);
+  const picker=e.created.find(n=>n.className==='case-picker');
+  assert.equal(picker.children.length,3);
+  await e.flush();assert.equal(e.ids.get('home').children.length,0);
 });
-test('case navigation groups conversations, report and missing data in both languages',async()=>{
+test('case navigation groups tasks with an explanation beside every link in both languages',async()=>{
   const e=env('?case=policy-materials','#cases');await e.flush();
   const picker=e.created.filter(n=>n.className==='case-picker').at(-1);
   assert.equal(picker.children.length,3);
-  assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['对话示例','报告示例','缺数据处理']);
+  assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['商品查询与追问','政策与贸易','缺数据处理']);
   assert.deepEqual(picker.children.map(group=>group.children[1].children.length),[2,1,1]);
   assert.match(picker.children[0].textContent,/连续追问/);assert.match(picker.children[0].textContent,/商品区分/);
   const policyRow=()=>picker.children[1].children[1].children[0];
@@ -62,21 +63,21 @@ test('case navigation groups conversations, report and missing data in both lang
     assert.ok(row.children[1].textContent.length>20);
   }
   e.doc.documentElement.lang='en';e.context.dispatchEvent(new Event('tradeintel:language'));await e.flush();
-  assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['Conversations','Report example','Missing data']);
+  assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['Product queries and follow-ups','Policy and trade','Missing data']);
   assert.match(policyRow().children[0].href,/case=policy-materials&lang=en#cases/);
   assert.equal(policyRow().children[0].attrs['aria-current'],'page');
   assert.match(policyRow().children[1].textContent,/not a conversation/);
 });
 test('catalog network failure keeps home navigable with a translated retry and can recover',async()=>{
   const e=env('','#home',false,false,true);await e.flush();
-  const gallery=e.ids.get('case-gallery');
-  assert.equal(gallery.children[1].children.length,4);
-  assert.match(gallery.textContent,/案例目录未能加载/);
+  const status=e.created.find(n=>n.className==='case-catalog-status');
+  assert.equal(e.ids.get('home').children.length,0);
+  assert.match(status.textContent,/案例目录未能加载/);
   assert.equal(e.context.tradeintelCaseActive,undefined);
   e.doc.documentElement.lang='en';e.context.dispatchEvent(new Event('tradeintel:language'));await e.flush();
-  assert.match(gallery.textContent,/catalog could not be loaded/);
-  e.recoverCatalog();gallery.children[2].children[1].listeners.click();await e.flush();
-  assert.equal(gallery.children[2].hidden,true);assert.equal(gallery.children[1].children.length,4);
+  assert.match(status.textContent,/catalog could not be loaded/);
+  e.recoverCatalog();status.children[1].listeners.click();await e.flush();
+  assert.equal(status.hidden,true);assert.equal(e.ids.get('home').children.length,0);
   assert.deepEqual(e.calls,['cases/index.json','cases/index.json']);
 });
 test('static subpath loads only whitelisted case resources and shows the selected export',async()=>{
@@ -105,7 +106,7 @@ test('policy archive uses its fixed report and never fabricates a model dialogue
 });
 test('policy example explains its background and contents before linking to the report in both languages',async()=>{
   const e=env('?case=policy-materials','#cases');await e.flush();
-  const page=e.ids.get('cases');assert.match(page.textContent,/案例与报告/);
+  const page=e.ids.get('cases');assert.match(page.textContent,/使用案例/);
   for(const phrase of ['公告涉及什么','进口数据怎么看','报告里有什么','2026年2月至7月'])assert.ok(page.textContent.includes(phrase));
   assert.ok(!e.created.some(n=>n.className==='chat-message user-message'));
   assert.ok(e.created.some(n=>n.href==='?case=policy-materials&report=r1&lang=zh#report'));

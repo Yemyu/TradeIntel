@@ -165,7 +165,7 @@ test('agent report labels the safe program summary and not a model draft', async
   const env = makeEnv(record, state);
   vm.runInContext(script, env.context);
   await new Promise(resolve => setImmediate(resolve));
-  assert.ok(env.report().textContent.includes('数据摘要'));
+  assert.ok(env.report().textContent.includes('数据概览'));
   assert.ok(env.report().textContent.includes('46,041,287'));
   assert.ok(!env.report().textContent.includes('助手根据本次工具查询写的草稿'));
   assert.ok(!env.report().textContent.includes('模型解读（试用）'));
@@ -192,13 +192,13 @@ test('language switch rerenders a saved trade report without changing data or ca
   };
   vm.runInContext(script, env.context);
   await new Promise(resolve => setImmediate(resolve));
-  assert.ok(env.report().textContent.includes('先看数字'));
+  assert.ok(env.report().textContent.includes('数据概览'));
   env.context.document.documentElement.lang = 'en';
   env.events['tradeintel:language']();
-  assert.ok(env.report().textContent.includes('Key figures'));
+  assert.ok(env.report().textContent.includes('Overview'));
   assert.ok(env.report().textContent.includes('114,725,468 USD'));
   assert.ok(env.report().textContent.includes('Official U.S. product description: RICE'));
-  assert.ok(!env.report().textContent.includes('先看数字'));
+  assert.ok(!env.report().textContent.includes('数据概览'));
   assert.equal(env.context.window.tradeintelLiveReportTitle, 'U.S. imports · RICE');
   assert.ok(!env.report().textContent.includes(record.question));
   assert.deepEqual(calls, ['/api/model/status', '/api/trade/report-state?report_id=report-1']);
@@ -228,14 +228,15 @@ test('agent English summary and title switch without translating stored answers 
   env.context.location.hash='#report';
   env.context.document.documentElement.lang='en';env.events['tradeintel:language']();
   assert.equal(env.context.document.title,'U.S. exports · SOYBEANS · TradeIntel');
-  assert.ok(env.report().textContent.includes(turn.message_en));
+  assert.ok(env.report().textContent.includes('889,379,312'));
+  assert.ok(!env.report().textContent.includes(turn.message_en),'turn-wide summary is not duplicated in a selected report');
   assert.ok(!env.report().textContent.includes(turn.message));
   assert.ok(env.ids.get('chat-messages').textContent.includes(turn.message_en));
   assert.ok(!env.ids.get('chat-messages').textContent.includes(turn.message));
   assert.ok(env.ids.get('chat-messages').textContent.includes(turn.question)); // user text is not translated
   env.context.document.documentElement.lang='zh-CN';env.events['tradeintel:language']();
-  assert.ok(env.report().textContent.includes(turn.message));
-  assert.equal(env.context.document.title,'美国大豆出口 · TradeIntel');
+  assert.ok(!env.report().textContent.includes(turn.message));
+  assert.equal(env.context.document.title,'美国大豆出口情况 · TradeIntel');
   assert.equal(calls.length,initialCalls);
   assert.equal(JSON.stringify({record,state}),before);
 });
@@ -287,10 +288,10 @@ test('v4 relation card appears beside the monthly report in Chinese and English'
     fact:'出口金额先在2026-06较上月减少，再在2026-07较上月增加；仅表示最近三个月的转向。'};
   const record = {kind:'trade-query-v1', question:'最近美国小麦出口有什么变化', report_id:'report-1',
     report_sha256:'a'.repeat(64), scope:{flow:'export', product_label:'小麦及混合麦', product_code:'1001',
-      partner:'ALL_DESTINATIONS', start_month:'2025-08', end_month:'2026-07'},
+      partner:'ALL_DESTINATIONS', start_month:'2026-05', end_month:'2026-07'},
     summary:{latest_month:'2026-07', latest_value_usd:25, previous_month:'2026-06',
-      month_change_usd:5, period_total_usd:100},
-    series:[{month:'2026-06',status:'observed',value_usd:20},{month:'2026-07',status:'observed',value_usd:25}],
+      month_change_usd:5, period_total_usd:100, complete_window:true},
+    series:[{month:'2026-05',status:'observed',value_usd:55},{month:'2026-06',status:'observed',value_usd:20},{month:'2026-07',status:'observed',value_usd:25}],
     sources:[],notes:[],explanation:{status:'not_requested', protocol:'trade-data-explanation-v4',
       available:true,observations:[card]}};
   const env = makeEnv(record);
@@ -298,12 +299,10 @@ test('v4 relation card appears beside the monthly report in Chinese and English'
     ? {configured:false,models:{}} : record});
   vm.runInContext(script,env.context);
   await new Promise(resolve=>setImmediate(resolve));
-  assert.ok(env.report().textContent.includes('出口金额先在2026-06'));
-  assert.ok(env.report().textContent.includes('最近出现转向'));
+  assert.ok(env.report().textContent.includes('最近三个连续月份（2026-05、2026-06、2026-07）先降后升'));
   env.context.document.documentElement.lang='en';
   env.events['tradeintel:language']();
-  assert.ok(env.report().textContent.includes('Recent direction change'));
-  assert.ok(env.report().textContent.includes('moved from down in 2026-06 to up in 2026-07'));
+  assert.ok(env.report().textContent.includes('fell, then rose'));
 });
 
 test('same-year peak gap appears as a deterministic page fact without enabling a model call', async () => {
@@ -312,20 +311,19 @@ test('same-year peak gap appears as a deterministic page fact without enabling a
     fact:'2026年已观察月份中，最高为2026-05的81美元；2026-07为75美元，低于该峰值6美元。'};
   const record = {kind:'trade-query-v1', question:'最近美国自行车进口有什么变化', report_id:'report-1',
     report_sha256:'a'.repeat(64), scope:{flow:'import', product_label:'自行车', product_code:'8712',
-      partner:'ALL_ORIGINS', start_month:'2025-08', end_month:'2026-07'},
+      partner:'ALL_ORIGINS', start_month:'2026-06', end_month:'2026-07'},
     summary:{latest_month:'2026-07', latest_value_usd:75, previous_month:'2026-06', month_change_usd:-6,
-      period_total_usd:100}, series:[{month:'2026-06',status:'observed',value_usd:81},
+      period_total_usd:156,complete_window:true}, series:[{month:'2026-06',status:'observed',value_usd:81},
       {month:'2026-07',status:'observed',value_usd:75}], sources:[], notes:[],
     explanation:{status:'not_requested', protocol:'trade-data-explanation-v4', available:false, observations:[card]}};
   const env=makeEnv(record);
   vm.runInContext(script,env.context);
   await new Promise(resolve=>setImmediate(resolve));
-  assert.ok(env.report().textContent.includes('与同年已收录月份比较'));
-  assert.ok(env.report().textContent.includes('2026-07为75美元'));
+  assert.ok(env.report().textContent.includes('2026-07 比 2026 年已收录月份的峰值低 6 美元'));
+  assert.ok(env.report().textContent.includes('该峰值出现在 2026-06'));
   env.context.document.documentElement.lang='en';
   env.events['tradeintel:language']();
-  assert.ok(env.report().textContent.includes('Compare available months within the year'));
-  assert.ok(env.report().textContent.includes('6 USD below that high'));
+  assert.ok(env.report().textContent.includes('6 USD below the highest observed value in 2026'));
 });
 
 test('v4 combined import-export relation appears after both direction sections', async () => {
@@ -359,7 +357,7 @@ test('v4 combined import-export relation appears after both direction sections',
   const content=env.report().textContent;
   assert.ok(content.includes('美国进口 · 1201 商品组'));
   assert.ok(content.includes('美国出口 · 1201 商品组'));
-  assert.ok(content.includes('进口和出口放在一起看'));
+  assert.ok(content.includes('进口与出口采用不同口径'));
   assert.ok(content.includes('不相减'));
 });
 
@@ -386,7 +384,7 @@ test('reload renders v3 multi-fact entries and their deterministic trend card', 
   });
   vm.runInContext(script, context);
   await new Promise(resolve => setImmediate(resolve));
-  assert.ok(report().textContent.includes('这段时间的走势'));
+  assert.ok(report().textContent.includes('保存的摘要与月份数据未能核对一致'));
   assert.ok(report().textContent.includes(facts[1].fact));
   assert.ok(report().textContent.includes('对应数据：'));
   assert.ok(report().textContent.includes('近期出口金额持续减少'));
@@ -497,7 +495,7 @@ test('question to report, one model draft, review and readable final output stay
   const confirm = created.find(item => item.tag === 'button' &&
     item.textContent === '确认范围，生成数据报告');
   await confirm.listeners.click();
-  assert.ok(report().textContent.includes(observations[1].fact));
+  assert.ok(!report().textContent.includes(observations[1].fact),'unrequested observation prose does not replace validated monthly facts');
   assert.ok(report().textContent.includes('模型解读（试用）'));
   assert.ok(report().textContent.includes('模型可能重复报告内容或说错'));
   const generate = created.find(item => item.tag === 'button' && item.textContent === '试用模型解读');
@@ -510,8 +508,8 @@ test('question to report, one model draft, review and readable final output stay
   const save = created.find(item => item.tag === 'button' && item.textContent === '保存审阅结果');
   await save.listeners.click();
   assert.ok(report().textContent.includes('人工核对后采纳'));
-  assert.equal(report().textContent.split(observations[1].fact).length - 1, 1,
-    'the final reader view shows the trend fact once, not repeated under the prose');
+  assert.equal(report().textContent.split(observations[1].fact).length - 1, 0,
+    'reviewed prose does not silently restore an unsupported six-month claim to the two-month base report');
   assert.deepEqual(calls.map(item => item.url), [
     '/api/model/status', '/api/trade/prepare', '/api/trade/report',
     '/api/trade/explanation/call', '/api/trade/explanation/review',
@@ -712,7 +710,8 @@ test('assistant mode sends a natural question, renders its saved report, and kee
   await env.ids.get('question-form').listeners.submit({preventDefault(){}});
   assert.ok(env.report().textContent.includes('46,041,287'),
     JSON.stringify({calls,text:env.report().textContent}));
-  assert.ok(env.report().textContent.includes('已根据本次查询整理'));
+  assert.ok(env.report().textContent.includes('数据概览'));
+  assert.ok(!env.report().textContent.includes('已根据本次查询整理'),'generic turn summary is not appended to the report');
   assert.ok(!calls.some(call=>call.url==='/api/trade/prepare'));
   env.ids.get('question').value='出口呢？';
   await env.ids.get('question-form').listeners.submit({preventDefault(){}});
@@ -731,10 +730,10 @@ test('reader view survives saved-page loading and treats policy text as plain te
   const sid='d'.repeat(32);
   const record={kind:'trade-query-v1',report_id:'reader-report',
     scope:{flow:'import',product_label:'大豆',product_code:'1201',partner:'ALL_ORIGINS',start_month:'2026-06',end_month:'2026-07'},
-    summary:{latest_month:'2026-07',latest_value_usd:100,month_change_usd:5},
+    summary:{latest_month:'2026-07',latest_value_usd:100,previous_month:'2026-06',month_change_usd:5},
     series:[{month:'2026-06',status:'observed',value_usd:95},{month:'2026-07',status:'observed',value_usd:100}],
     sources:[],notes:[],explanation:{status:'not_requested'}};
-  const reader={schema:'trade-reader-view-v1',facts:[{text:'直接回答100美元。',text_en:'Direct answer: 100 USD.'}],
+  const reader={schema:'trade-reader-view-v1',facts:[{report_id:'reader-report',text:'直接回答100美元。',text_en:'Direct answer: 100 USD.'}],
     policy:{status:'partial',evidence_bundles:[{hit:{citation_id:'v:s',text:'<script>not executable</script>'},
       required_context:[{status:'known',dependency:'exceptions',citation_id:'v:e',text:'独立例外全文。'}]}]},
     unanswered:[],method:{text:'已发布数据。',text_en:'Published data.'}};
@@ -746,7 +745,8 @@ test('reader view survives saved-page loading and treats policy text as plain te
   env.context.fetch=async(url,options)=>{calls.push(options?.method||'GET');return {ok:true,json:async()=>
     url==='/api/model/status'?{configured:true,models:{}}:url.startsWith('/api/trade/agent/state?')?state:record};};
   vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
-  assert.match(env.report().textContent,/直接回答100美元/);
+  assert.match(env.report().textContent,/为 100 美元/);
+  assert.ok(!env.report().textContent.includes('直接回答100美元'),'the same latest value is not restated in a second summary');
   assert.match(env.report().textContent,/独立例外全文/);
   assert.match(env.report().textContent,/政策证据不完整/);
   assert.ok(!env.report().textContent.includes('OLD REPETITIVE MESSAGE'));
@@ -782,8 +782,8 @@ test('saved assistant link shows only the public summary without starting a new 
   await new Promise(resolve=>setImmediate(resolve));
   const rendered=env.report().textContent;
   assert.match(rendered,/46,041,287/);
-  assert.match(rendered,/旧版模型文字未经本规则核验/);
-  assert.match(rendered,/旧版解释已隐藏/);
+  assert.ok(!rendered.includes('旧版模型文字未经本规则核验'));
+  assert.match(rendered,/旧记录的未审模型文字不作为报告正文/);
   assert.ok(!rendered.includes('目前未运行模型解释'));
   assert.ok(!env.created.some(item=>item.tag==='button'&&item.textContent==='试用模型解读'));
   assert.deepEqual(calls.map(call=>call.method),['GET','GET','GET']);
@@ -831,7 +831,7 @@ test('multi-report assistant restores the main all-destinations report and label
   await chinaButton.listeners.click();
   assert.ok(calls.some(url=>url.includes(`report_id=${chinaId}`)));
   assert.ok(env.report().textContent.includes('141,197,240'));
-  assert.ok(env.report().textContent.includes('数据摘要'));
+  assert.ok(env.report().textContent.includes('数据概览'));
   assert.ok(!env.report().textContent.includes('模型解读（试用）'));
 });
 

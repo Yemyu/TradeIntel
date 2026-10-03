@@ -559,48 +559,18 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
     try {localStorage.setItem('tradeintel_live_trade_report',JSON.stringify(result));
       if(result.report_id)localStorage.setItem('tradeintel_live_trade_report_id',result.report_id);
       localStorage.setItem('tradeintel_last_report_type','trade');} catch (_) {}
-    globalThis.TradeIntelReportView.renderTradeReport(report,result,{language:english()?'en':'zh'});
+    const reader=agentTurn?.reader_view?.schema==='trade-reader-view-v1'?agentTurn.reader_view:null;
+    window.tradeintelLiveReportTitle=globalThis.TradeIntelReportView.renderTradeReport(report,result,{language:english()?'en':'zh',readerView:reader});
+    if(navigate||location.hash==='#report')document.title=`${window.tradeintelLiveReportTitle} · TradeIntel`;
     const agentProgramSummary=agentTurn?.message_kind==='program_summary_v1';
     const ai=make('section',undefined,'live-section');ai.append(make('h2',
-      agentTurn?(agentProgramSummary?tr('数据摘要','Data summary'):tr('旧版解释已隐藏','Legacy explanation hidden')):
+      agentTurn?tr('运行记录','Execution record'):
         tr('模型解读（试用）','Model explanation (trial)')));
     const explanation=result.explanation||{status:'not_requested'};
     const aiStatus=explanation.status||'not_requested';
     if(aiStatus!=='reviewed'&&!agentTurn)ai.className+=' print-exclude';
     if(agentTurn){
-      const reader=agentTurn.reader_view?.schema==='trade-reader-view-v1'?agentTurn.reader_view:null;
-      if(reader){
-        for(const fact of reader.facts||[])addParagraph(ai,tr(fact.text,fact.text_en));
-        if(reader.policy){
-          const policy=make('section');policy.append(make('h3',tr('本地政策资料','Local policy evidence')));
-          const status=reader.policy.status;
-          const labels={not_recorded:['旧记录未保存完整检索状态，无法补称已核验。','The legacy record lacks complete search status; verification cannot be inferred.'],
-            not_searched:['本轮未检索政策资料。','Policy evidence was not searched in this turn.'],
-            no_evidence:['本地资料未找到匹配原文，不代表不存在相关政策。','No matching passage was found locally; this does not establish that no relevant policy exists.'],
-            partial:['政策证据不完整，不能视为已完成适用性核查。','Policy evidence is partial; applicability has not been established.'],
-            limited:['检索达到范围或预算上限，部分资料未纳入。','Search reached a scope or budget limit; some evidence was not included.'],
-            scope_refused:['存档资料不能回答当前请求的税率或适用性。','Archived evidence cannot answer the requested current rate or applicability.'],
-            incomplete_required_context:['已找到相关段落，但共同条件尚未补齐。','Relevant passages were found, but required common clauses remain incomplete.'],
-            candidate_evidence:['找到候选相关原文；命中不等于已经确认适用。','Candidate passages were found; a match does not establish applicability.']};
-          const label=labels[status]||labels.partial;addParagraph(policy,tr(...label));
-          const refs=make('details');refs.append(make('summary',tr('原文与共同条件','Passages and common clauses')));
-          const sourceLink=(url)=>{if(typeof url==='string'&&url.startsWith('https://')){
-            const link=make('a',url);link.href=url;link.target='_blank';link.rel='noopener';refs.append(link);
-          }};
-          for(const bundle of reader.policy.evidence_bundles||[]){
-            addParagraph(refs,`${bundle.hit.citation_id}: ${bundle.hit.text||''}`);
-            sourceLink(bundle.hit.url);
-            for(const clause of bundle.required_context||[]){addParagraph(refs,
-              clause.status==='verified_absent'?tr(clause.boundary,'Absence was verified only within this registered document, not across other documents.'):
-              `${clause.dependency} · ${clause.citation_id}: ${clause.text||''}`);
-              sourceLink(clause.url);
-            }
-          }policy.append(refs);ai.append(policy);
-        }
-        for(const missing of reader.unanswered||[])addParagraph(ai,tr(missing.text,missing.text_en));
-        const method=make('details');method.append(make('summary',tr('来源与方法','Sources and method')));
-        addParagraph(method,tr(reader.method.text,reader.method.text_en));ai.append(method);
-      }
+      ai.className+=' print-exclude';
       if(agentTurn.execution_metrics){
         const metrics=agentTurn.execution_metrics;
         const detail=make('details');detail.append(make('summary',tr('调用详情','Execution details')));
@@ -612,12 +582,7 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
             `Provider-reported total tokens: ${total.reported_sum}, covering ${total.reporting_responses} responses.`));
         ai.append(detail);
       }
-      if(!reader&&agentProgramSummary)addParagraph(ai,tr('以下摘要根据本次查询的已发布数据生成；不能据此判断政策效果。',
-        'This summary is generated from the published data queried above; it cannot establish a policy effect.'));
-      if(!reader)addParagraph(ai,english()?(agentProgramSummary?
-        agentTurn.message_en||'See the figures above for the published data queried in this turn. These values alone cannot establish a policy effect.':
-        'Legacy unreviewed model text is hidden; the data report remains available.'):
-        agentTurn.message||'本轮没有可展示的摘要。');
+      if(!agentProgramSummary)addParagraph(ai,tr('旧记录的未审模型文字不作为报告正文。','Unreviewed model text from the legacy record is not included in the report.'));
       if(!reader&&agentTurn.policy_sources?.length){const refs=make('details');refs.append(make('summary',
         tr('查看政策原文','View policy sources')));
         for(const item of agentTurn.policy_sources){
