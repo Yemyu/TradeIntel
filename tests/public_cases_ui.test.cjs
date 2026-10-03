@@ -77,10 +77,19 @@ test('missing-month case has a real controlled explanation and no invented repor
 });
 test('policy archive uses its fixed report and never fabricates a model dialogue',async()=>{
   const e=env('?case=policy-materials&report=r1');await e.flush();assert.equal(e.layout.hidden,false);
-  assert.equal(e.ids.get('case-result').hidden,true);assert.match(e.ids.get('cases').textContent,/没有对话记录/);
+  assert.equal(e.ids.get('case-result').hidden,true);assert.match(e.ids.get('cases').textContent,/没有对应的模型对话记录/);
   assert.equal(e.ids.get('case-edited-note').hidden,false);
   assert.match(e.ids.get('case-edited-note').textContent,/存档资料编辑稿 · 2026-10-01/);
   assert.match(e.ids.get('case-edited-note').textContent,/不是当前 Agent/);
+});
+test('policy example explains its background and contents before linking to the report in both languages',async()=>{
+  const e=env('?case=policy-materials','#cases');await e.flush();
+  const page=e.ids.get('cases');assert.match(page.textContent,/案例与报告/);
+  for(const phrase of ['公告涉及什么','进口数据怎么看','报告里有什么','2026年2月至7月'])assert.ok(page.textContent.includes(phrase));
+  assert.ok(!e.created.some(n=>n.className==='chat-message user-message'));
+  assert.ok(e.created.some(n=>n.href==='?case=policy-materials&report=r1&lang=zh#report'));
+  e.doc.documentElement.lang='en';e.context.dispatchEvent(new Event('tradeintel:language'));await e.flush();
+  assert.match(page.textContent,/What the notice covers/);assert.match(page.textContent,/Inside the report/);
 });
 test('invalid identity, missing JSON and wrong alias show unavailable instead of another report',async()=>{
   for(const [search,missing] of [['?case=unknown',false],['?case=soybean-trade&report=r99',false],['?case=soybean-trade&report=r1',true]]){
