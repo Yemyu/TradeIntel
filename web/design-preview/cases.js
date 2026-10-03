@@ -70,8 +70,8 @@
     document.querySelectorAll('#home a[href*="case=policy-materials"], .nav a[href*="case=policy-materials"]').forEach(a=>{
       a.href=href('policy-materials','r1','report');
     });
-    heading.replaceChildren(make('p',tr('案例记录','CASE RECORDS'),'eyebrow'),make('h1',tr('看看它怎么回答','See how it responds')),
-      make('p',tr('选择一个案例，查看当时的提问、查询过程和报告。','Choose a case to read the question, query steps, and saved report.')));
+    heading.replaceChildren(make('p',tr('TRADEINTEL / 案例','TRADEINTEL / EXAMPLES'),'eyebrow'),make('h1',tr('案例与报告','Conversations and reports')),
+      make('p',tr('前两个案例展示提问和追问；第三个是一份政策报告，第四个展示缺少数据时的处理。','The first two examples show conversations. The third is a policy report; the fourth shows how missing data is handled.')));
     homeHead.replaceChildren(make('h2',tr('四个案例','Four cases')),make('p',tr('看看助手如何追问、区分商品、查阅政策，以及处理缺少月份。','Explore follow-ups, product lookup, policy reading, and unavailable data.')));
     install.replaceChildren(make('h2',tr('在自己的电脑上使用','Run it on your computer')),
       make('p',tr('公开网站不用 API，只能阅读案例。要自己提问，请启动本地服务，再填自己的模型 API。数据查询本身不需要模型或 MySQL。','The public site needs no API and only reads saved cases. To ask your own questions, run the local service and configure your own model API. Data-only queries need neither a model nor MySQL.')),
@@ -82,8 +82,8 @@
     cards.setAttribute('aria-label',tr('案例','Cases'));
     cards.replaceChildren();homeCards.replaceChildren();
     for(const entry of manifest?.cases||previews){
-      const small=link(text(entry.title),href(entry.id), 'case-tab');if(entry.id===selected)small.setAttribute('aria-current','page');cards.append(small);
-      const card=link('',href(entry.id),'case-tile');card.append(make('small',tr(entry.kind==='real_agent_run'?'真实运行':entry.kind==='guarded_run'?'程序拦截':'资料编辑稿',entry.kind==='real_agent_run'?'REAL RUN':entry.kind==='guarded_run'?'PROGRAM GUARD':'EDITED REPORT')),
+      const small=link(entry.id==='policy-materials'?tr('钨与光伏材料 · 报告示例','Tungsten and solar materials · Report'):text(entry.title),href(entry.id), 'case-tab');if(entry.id===selected)small.setAttribute('aria-current','page');cards.append(small);
+      const card=link('',href(entry.id),'case-tile');card.append(make('small',tr(entry.kind==='real_agent_run'?'真实运行':entry.kind==='guarded_run'?'程序拦截':'政策报告示例',entry.kind==='real_agent_run'?'REAL RUN':entry.kind==='guarded_run'?'PROGRAM GUARD':'POLICY REPORT EXAMPLE')),
         make('h3',text(entry.title)),make('p',text(entry.description)),make('span',tr('查看记录 →','Open record →')));homeCards.append(card);
     }
     for(const status of [homeStatus,catalogStatus]){
@@ -100,6 +100,22 @@
     }
   }
   function showRecord(caseData,entry){
+    if(entry.id==='policy-materials'){
+      record.replaceChildren(make('p',tr('政策报告示例','POLICY REPORT EXAMPLE'),'eyebrow'),
+        make('h2',text(entry.title)),
+        make('p',tr('美国对部分中国原产的钨和光伏材料调整了附加关税。这份报告把公告规定和相关商品的进口数据放在一起，方便查阅。','The United States changed additional duties on certain tungsten and solar materials of Chinese origin. This report brings the notice and import data together for reference.'),'policy-intro'));
+      const topics=make('div',undefined,'policy-case-topics');
+      for(const [zhTitle,enTitle,zhBody,enBody] of [
+        ['公告涉及什么','What the notice covers','列明的商品、附加税率和生效时间，以及适用时需要核对的条件。','Listed products, additional duties, effective dates, and conditions to check.'],
+        ['进口数据怎么看','What the import data shows','按五类商品分别查看2026年2月至7月的进口金额，以及其中来自中国的份额。','Import values for five product codes from February to July 2026, with the share sourced from China.'],
+        ['报告里有什么','Inside the report','商品切换、逐月图表、完整数值表，以及公告和数据出处；可以打印或保存为PDF。','Product selection, monthly charts, exact-value tables, and notice and data sources. Print it or save it as a PDF.']
+      ]){const topic=make('section');topic.append(make('h3',tr(zhTitle,enTitle)),make('p',tr(zhBody,enBody)));topics.append(topic);}
+      record.append(topics,link(tr('阅读报告 →','Read the report →'),href(entry.id,'r1','report'),'button primary'),
+        make('p',tr('这是一份根据已保存资料整理的报告，没有对应的模型对话记录。','This report was compiled from saved material; there is no associated model conversation.'),'case-meta'));
+      const notes=make('details',undefined,'policy-case-notes');notes.append(make('summary',tr('资料日期与口径','Dates and scope')),
+        make('p',tr(`整理日期：${entry.recorded_on}。贸易数据截至 ${entry.data_cutoff}。公告中的附加税率不代表现行全部税率；进口金额图表不用于认定政策效果。`,`Compiled on ${entry.recorded_on}. Trade data through ${entry.data_cutoff}. The notice specifies additional rather than total current duties; import charts do not establish policy effects.`)));
+      record.append(notes);return;
+    }
     record.replaceChildren(make('p',tr(`存档 ${entry.recorded_on} · 数据截至 ${entry.data_cutoff}`,`Recorded ${entry.recorded_on} · Data through ${entry.data_cutoff}`),'case-meta'),
       make('h2',text(entry.title)),make('p',text(entry.limitations),'case-limit'));
     if(entry.model)record.append(make('p',`${entry.model.request_name} · ${entry.model.reasoning}`,'case-meta'));
@@ -117,8 +133,6 @@
         const list=make('ol');for(const step of turn.steps)list.append(make('li',text(step.label)+(step.status==='unavailable'?tr('：没有可用数据',' — unavailable'):'')));steps.append(list);message.append(steps);}
       record.append(message);
     }
-    if(entry.id==='policy-materials')record.append(make('p',tr('这份资料报告没有对话记录。可切换五个商品，查看图表和公告背景。','This edited report has no dialogue. View charts and notice context for five product codes.')),
-      link(tr('阅读政策与进口报告 →','Read the policy and import report →'),href(entry.id,'r1','report'),'button primary'));
     if(caseData.guard)record.append(make('p',tr('本次没有生成报告或图表。需要另行明确是否改查7月；存档不会替你重新查询。','No report or chart was generated. A new request would need explicit permission to use July; this archive does not run a replacement query.')));
     record.append(link(tr('本地运行说明 ↗','Local setup ↗'),'#home','text-link'));
   }
