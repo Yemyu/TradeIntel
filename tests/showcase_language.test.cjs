@@ -8,7 +8,8 @@ const source=fs.readFileSync(path.join(__dirname,'../web/design-preview/app.js')
 const languageCode=source.slice(source.indexOf("let language = 'zh';"),source.indexOf('const reduced ='));
 function environment(search,stored='zh',storageBlocked=false){
   const toggle={textContent:'',attrs:{},setAttribute(k,v){this.attrs[k]=v;},addEventListener(_event,fn){this.click=fn;}};
-  const doc={documentElement:{lang:'zh-CN'},querySelectorAll(){return [];}};
+  const link={href:'README.zh-CN.md',dataset:{hrefEn:'README.md'},getAttribute(){return this.href;},setAttribute(_name,value){this.href=value;}};
+  const doc={documentElement:{lang:'zh-CN'},querySelectorAll(selector){return selector==='[data-href-en]'?[link]:[];}};
   const location={pathname:'/TradeIntel/',search,hash:'#report'};
   const storage={value:stored,getItem(){if(storageBlocked)throw Error('blocked');return this.value;},setItem(_k,v){if(storageBlocked)throw Error('blocked');this.value=v;}};
   const context=vm.createContext({document:doc,location,localStorage:storage,URLSearchParams,Event,
@@ -16,7 +17,7 @@ function environment(search,stored='zh',storageBlocked=false){
     history:{replaceState(_state,_title,url){const u=new URL(url,'https://example.test');location.search=u.search;location.hash=u.hash;}},
     dispatchEvent(){}});
   context.window=context;vm.runInContext(languageCode+'\napplyLanguage();',context);
-  return {doc,location,toggle,storage};
+  return {doc,location,toggle,storage,link};
 }
 test('URL language overrides the saved preference',()=>{
   assert.equal(environment('?lang=en','zh').doc.documentElement.lang,'en');
@@ -35,4 +36,9 @@ test('switching language preserves the selected case, report and hash',()=>{
   assert.equal(q.get('lang'),'zh');assert.equal(e.location.hash,'#report');
   assert.equal(e.doc.documentElement.lang,'zh-CN');assert.equal(e.storage.value,'zh');
   const fresh=environment(e.location.search,'en');assert.equal(fresh.doc.documentElement.lang,'zh-CN');
+});
+test('documentation links follow the selected language and restore Chinese targets',()=>{
+  const e=environment('?lang=en');
+  assert.equal(e.link.href,'README.md');
+  e.toggle.click();assert.equal(e.link.href,'README.zh-CN.md');
 });

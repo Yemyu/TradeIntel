@@ -1,10 +1,14 @@
-# TradeIntel
+# TradeIntel — International trade research assistant
 
 **🌐 English** | [🇨🇳 简体中文](README.zh-CN.md)
 
 [Demo](https://yemyu.github.io/TradeIntel/?lang=en) · [📊 Sample report](https://yemyu.github.io/TradeIntel/?case=policy-materials&report=r1&lang=en#report) · [Quickstart](#quickstart) · [Model tests](docs/MODEL_SELECTION.md) · [Data download](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)
 
-TradeIntel is an AI research assistant for U.S. goods trade. Ask about a product's imports or exports, compare available months, and read related policy notices. The model selects query tools; Python retrieves trade records, calculates comparisons, and builds reports with charts and source references.
+TradeIntel is an open-source agent for trade research. Ask about a product by name or code, look up trade data and related policy documents, and follow up about a different direction, partner, or period.
+
+The current release includes U.S. import and export data, with all-partner totals and China-specific queries. The latest included month is July 2026; the coverage table below lists the date ranges.
+
+The model interprets questions, carries context into follow-ups, and uses tool results to decide what to query next. Python validates the query scope and data, calculates the figures, and generates reports with charts and sources.
 
 The public website contains four saved examples. To ask your own questions, run the application locally and configure your model provider's API. A data-only mode lets you choose a scope and read the same trade figures without a model.
 
@@ -98,9 +102,18 @@ Each run planned nine normal tasks and three boundary cases. Both Sol configurat
 
 The latest included month is July 2026. “Recent” refers to available data; a requested missing month is reported as unavailable. Import values use the imports-for-consumption measure, while exports use total exports on an FAS basis. They are displayed separately, not subtracted to claim a trade balance. Value changes do not by themselves establish changes in quantity, prices, or the effect of a policy.
 
+The current version starts with U.S. import and export data. Future work may add datasets from China and other countries, after collecting the data and checking product classifications and statistical definitions.
+
 ## How it works
 
-The assistant uses a single tool-calling loop. A model searches the catalog, requests data, retrieves policy material when relevant, and selects the reports to return. Tools check product identifiers, dates, partners, and references before accepting a request.
+The assistant uses a single tool-calling loop rather than a fixed query form:
+
+1. The model interprets the product, direction, partner, and dates, using the previous turn when answering a follow-up.
+2. It checks the catalog and available dates, then calls trade or policy tools. The tools retrieve records, validate the scope, and calculate the figures.
+3. The model reads the returned results and decides whether to query further, ask about genuine ambiguity, or finish with reports and references from this turn.
+4. The program validates the report references, saves the result, and displays charts, summaries, exact values, and sources.
+
+Step 3 can return to step 2. For example, an import query may be followed by an export query or a search for a related policy notice. The model selects which reports to return; the program determines the primary report for display.
 
 Trade figures are not taken from model memory. Python reads prepared Census tables and calculates totals and changes. The current public report summaries also come from those calculations. Policy search uses lexical/BM25 retrieval over registered documents, including related conditions; it is not an unrestricted web search.
 

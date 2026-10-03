@@ -1,190 +1,139 @@
-/* Read-only report rendering shared by saved cases and the local workspace. */
+/* Pure reading view of saved facts. No model calls or storage writes. */
 (() => {
-  function renderTradeReport(target, result, {language='zh', readerView=null}={}) {
-    if (!['trade-query-v1','trade-query-both-v1'].includes(result?.kind)||!result.scope)
-      throw new Error('Unsupported saved report');
-    const english = () => language === 'en';
-    const tr = (zh,en) => english()?en:zh;
-    const fmt = value => Number(value).toLocaleString(english()?'en-US':'zh-CN');
-    const make = (tag,text,className) => {
-      const el=(target.ownerDocument||document).createElement(tag);
-      if(text!==undefined)el.textContent=text;
-      if(className)el.className=className;
-      return el;
-    };
-    const addParagraph = (parent,text) => parent.append(make('p',text));
-  const englishTrend = series => {
-    const measured=series.filter(row=>row.status==='observed'&&Number.isFinite(row.value_usd));
-    if(!measured.length)return 'No published monthly value is available for this range.';
-    if(measured.length===1)return `Only ${measured[0].month} has a published value; one month does not establish a trend.`;
-    const first=measured[0],last=measured.at(-1);
-    const high=Math.max(...measured.map(row=>row.value_usd));
-    const low=Math.min(...measured.map(row=>row.value_usd));
-    const highs=measured.filter(row=>row.value_usd===high).map(row=>row.month).join(', ');
-    const lows=measured.filter(row=>row.value_usd===low).map(row=>row.month).join(', ');
-    const change=last.value_usd-first.value_usd;
-    return `Across ${measured.length} published months, ${last.month} is ${fmt(Math.abs(change))} USD ${change>=0?'above':'below'} ${first.month}. `+
-      `The highest value was ${fmt(high)} USD (${highs}); the lowest was ${fmt(low)} USD (${lows}). These values alone do not establish a cause.`;
-  };
-  const englishNote = note => ({
-    '本报告只使用美国商品总出口额（国产出口与再出口之和，FAS），不包含进口。':
-      'This report uses U.S. total exports (domestic exports plus re-exports, FAS); it does not include imports.',
-    '本报告只使用美国消费进口额，不包含出口。':
-      'This report uses U.S. imports for consumption; it does not include exports.',
-    '金额变化可能来自数量或价格，不能仅凭金额判断政策效果。':
-      'Value changes may reflect quantity or price. These values alone cannot establish a policy effect.',
-    '金额变化可能来自进口数量或价格；仅凭金额不能判断政策效果。':
-      'Value changes may reflect import quantity or price. These values alone cannot establish a policy effect.',
-    '金额变化不等于商品数量变化，也不能单凭本报告归因于某项政策。':
-      'A change in value is not necessarily a change in quantity and cannot, by itself, be attributed to a policy.'
-  })[note] || `Data note (original Chinese): ${note}`;
-  const directionEnglish = value => ({'增加':'increased','减少':'decreased','持平':'was unchanged'})[value]||'changed';
-  function englishRelation(card){
-    const flow=card.flow==='export'?'Export value':'Import value';
-    if(card.id==='both.latest_relation'){
-      return `In ${card.months.at(-1)}, import value ${directionEnglish(card.import_direction)} and export value ${directionEnglish(card.export_direction)} from the previous month. The two directions moved ${card.relation==='同向'?'in the same direction':'in different directions'}; these measures are shown separately, not subtracted.`;
+  const amount=v=>Number.isSafeInteger(v)&&v>=0;
+  const month=v=>typeof v==='string'&&/^\d{4}-(0[1-9]|1[0-2])$/.test(v);
+  const index=v=>Number(v.slice(0,4))*12+Number(v.slice(5));
+  const adjacent=(a,b)=>month(a)&&month(b)&&index(b)-index(a)===1;
+  const pair=(a,b)=>adjacent(a.month,b.month)&&a.month.slice(0,4)===b.month.slice(0,4)
+    &&a.status==='observed'&&b.status==='observed'&&amount(a.value_usd)&&amount(b.value_usd);
+  function projectDirection(report){
+    const {scope,summary={},series=[]}=report,issues=[];
+    const valid=Array.isArray(series)&&series.every((r,i)=>month(r.month)&&(i===0||index(r.month)>index(series[i-1].month))
+      &&(r.status==='observed'?amount(r.value_usd):['missing','unavailable','not_processed'].includes(r.status)&&r.value_usd===null));
+    if(!valid)issues.push('rows');
+    const rows=valid?series.map(r=>({...r})):[],observed=rows.filter(r=>r.status==='observed'),last=rows.at(-1),previous=rows.at(-2);
+    const scopeValid=month(scope.start_month)&&month(scope.end_month)&&index(scope.start_month)<=index(scope.end_month)
+      &&rows.every(r=>index(r.month)>=index(scope.start_month)&&index(r.month)<=index(scope.end_month));
+    if(!scopeValid)issues.push('scope');
+    const latestValid=scopeValid&&last?.month===scope.end_month&&summary.latest_month===last.month
+      &&summary.latest_value_usd===(last.status==='observed'?last.value_usd:null);
+    if(!latestValid)issues.push('latest');
+    const delta=latestValid&&previous&&pair(previous,last)?last.value_usd-previous.value_usd:null;
+    if(delta!==null&&(summary.month_change_usd!==delta||summary.previous_month!==previous.month))issues.push('change');
+    const complete=scopeValid&&rows.length>0&&rows[0].month===scope.start_month&&last.month===scope.end_month
+      &&rows.every((r,i)=>r.status==='observed'&&(i===0||adjacent(rows[i-1].month,r.month)));
+    const sum=complete?rows.reduce((v,r)=>v+r.value_usd,0):null;
+    const total=complete&&Number.isSafeInteger(sum)&&summary.complete_window===true&&summary.period_total_usd===sum?sum:null;
+    if(summary.period_total_usd!=null&&total===null)issues.push('total');
+    const safe=issues.length===0,high=safe&&observed.length?Math.max(...observed.map(r=>r.value_usd)):null,
+      low=safe&&observed.length?Math.min(...observed.map(r=>r.value_usd)):null;
+    let run=null,turn=null,yearPeak=null;
+    if(safe&&delta!==null&&delta!==0){const sign=Math.sign(delta);let changes=0;
+      for(let i=rows.length-1;i>0;i--){if(!pair(rows[i-1],rows[i])||Math.sign(rows[i].value_usd-rows[i-1].value_usd)!==sign)break;changes++;}
+      if(changes>=2)run={changes,sign,start:rows[rows.length-1-changes].month,end:last.month};
+      const earlier=rows.at(-3);
+      if(earlier&&pair(earlier,previous)){const old=Math.sign(previous.value_usd-earlier.value_usd);
+        if(old!==0&&old!==sign)turn={months:[earlier.month,previous.month,last.month],sign};}
     }
-    if(card.id.endsWith('.recent_run'))return `By ${card.months.at(-1)}, ${flow.toLowerCase()} had ${card.direction==='增加'?'increased':'decreased'} month over month for ${card.consecutive_changes} consecutive changes. This does not describe the entire selected period.`;
-    if(card.id.endsWith('.recent_turn'))return `The ${flow.toLowerCase()} moved from ${card.previous_direction==='增加'?'up':'down'} in ${card.months[1]} to ${card.direction==='增加'?'up':'down'} in ${card.months[2]}. This describes only the latest three observed months.`;
-    return card.fact;
+    if(safe&&last?.status==='observed'){const year=last.month.slice(0,4),sameYear=observed.filter(r=>r.month.startsWith(year+'-'));
+      if(sameYear.length>=2){const peak=Math.max(...sameYear.map(r=>r.value_usd));
+        yearPeak={year,months:sameYear.filter(r=>r.value_usd===peak).map(r=>r.month),gap:peak-last.value_usd};}}
+    return {scope:{...scope},rows,issues,latestMonth:summary.latest_month,latest:safe&&latestValid?summary.latest_value_usd:null,
+      delta:safe?delta:null,previousMonth:previous?.month,total:safe?total:null,high,low,
+      highMonths:observed.filter(r=>r.value_usd===high).map(r=>r.month),lowMonths:observed.filter(r=>r.value_usd===low).map(r=>r.month),run,turn,yearPeak};
   }
-  function englishYearPeak(card){
-    const flow=card.flow==='export'?'exports':'imports';
-    const peakMonths=(card.high_months||[]).join(', ');
-    if(card.gap_usd===0)
-      return `Among observed ${card.year} months, ${peakMonths} was the ${flow} high at ${fmt(card.high_usd)} USD; ${card.latest_month} was at the same level.`;
-    return `Among observed ${card.year} months, ${peakMonths} was the ${flow} high at ${fmt(card.high_usd)} USD; ${card.latest_month} was ${fmt(card.latest_usd)} USD, ${fmt(card.gap_usd)} USD below that high.`;
+  function buildTradeReportDocument(result,{readerView=null}={}){
+    if(!['trade-query-v1','trade-query-both-v1'].includes(result?.kind)||!result.scope)throw Error('Unsupported saved report');
+    const parts=result.kind==='trade-query-both-v1'?[result.import_report,result.export_report]:[result];
+    if(parts.some(p=>!p?.scope))throw Error('Unsupported saved report');
+    const selectedFacts=(readerView?.facts||[]).filter(f=>result.report_id&&f.report_id===result.report_id);
+    return {directions:parts.map(projectDirection),selectedFacts,policy:selectedFacts.length?readerView?.policy:null,
+      unanswered:selectedFacts.length?(readerView?.unanswered||[]):[]};
   }
-  function appendYearPeakCard(target,observations,flow){
-    const card=observations.find(item=>item.id===flow+'.same_year_peak_gap'&&item.status==='available');
-    if(!card)return;
-    const section=make('section',undefined,'live-section trade-year-peak');
-    section.append(make('h3',tr('与同年已收录月份比较','Compare available months within the year')));
-    const item=make('article',undefined,'trade-relation-card');
-    item.append(make('h4',tr('已收录月份中的峰值与最新值','Peak and latest value among available months')));
-    addParagraph(item,english()?englishYearPeak(card):card.fact);
-    section.append(item);target.append(section);
+  function renderTradeReport(target,result,{language='zh',readerView=null}={}){
+    const doc=buildTradeReportDocument(result,{readerView}),english=language==='en',tr=(zh,en)=>english?en:zh,
+      fmt=v=>v.toLocaleString(english?'en-US':'zh-CN');
+    const make=(tag,text,className)=>{const el=(target.ownerDocument||document).createElement(tag);
+      if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;};
+    const p=(parent,text)=>parent.append(make('p',text)),scope=result.scope;
+    const direction=scope.flow==='both'?tr('进出口','imports and exports'):scope.flow==='export'?tr('出口','exports'):tr('进口','imports');
+    const product=english?(scope.official_product_en||`product group ${scope.product_code}`):(scope.product_label||scope.product_code);
+    const title=tr(`美国${product}${direction}情况`,`U.S. ${direction} · ${product}`);
+    target.append(make('p',tr('美国贸易数据','U.S. trade data'),'eyebrow'),make('h1',title));
+    if(result.question&&!english)p(target,`提问：${result.question}`);
+    p(target,tr(`${scope.start_month} 至 ${scope.end_month} · ${scope.product_code} 商品组`,`${scope.start_month} to ${scope.end_month} · product group ${scope.product_code}`));
+    if(result.kind==='trade-query-both-v1')p(target,tr('进口与出口采用不同口径，分别展示，不相减计算贸易差额。',
+      'Imports and exports use different statistical bases and are shown separately. Do not subtract these values and call the difference a trade balance.'));
+    doc.directions.forEach((d,i)=>{
+      const part=result.kind==='trade-query-both-v1'?[result.import_report,result.export_report][i]:result,s=d.scope,ex=s.flow==='export';
+      const metric=tr(ex?'商品总出口额（FAS）':'消费进口额',ex?'total exports (FAS)':'imports for consumption');
+      const partner=tr(s.partner==='CHINA'?(ex?'向中国':'从中国'):(ex?'向全部目的地':'从全部来源'),
+        s.partner==='CHINA'?(ex?'to China':'from China'):(ex?'to all destinations':'from all origins'));
+      const block=make('section',undefined,'trade-report-direction');
+      block.append(make('h2',tr(`美国${ex?'出口':'进口'} · ${s.product_code} 商品组`,`U.S. ${ex?'exports':'imports'} · product group ${s.product_code}`)));
+      const intro=make('section',undefined,'live-section trade-overview');intro.append(make('h3',tr('数据概览','Overview')));
+      if(d.issues.length)p(intro,tr('保存的摘要与月份数据未能核对一致，暂不生成比较结论。请核对下方记录。',
+        'The saved summary could not be reconciled with the monthly records. Comparisons are withheld; check the records below.'));
+      else p(intro,d.latest===null?tr(`${d.latestMonth} 没有可用金额，没有改用其他月份。`,`No published value is available for ${d.latestMonth}; another month has not been substituted.`):
+        tr(`${d.latestMonth}，美国${partner}的${metric}为 ${fmt(d.latest)} 美元。`,`In ${d.latestMonth}, U.S. ${metric} ${partner} were ${fmt(d.latest)} USD.`));
+      if(d.rows.length===1)p(intro,tr('这份报告只有一个月的数据，不能据此判断走势。','This report covers one month only; it does not establish a trend.'));
+      if(s.coverage_note)p(intro,tr(s.coverage_note,s.coverage_note_en||s.coverage_note));block.append(intro);
+      const metrics=make('div',undefined,'metric-grid trade-key-figures');
+      const card=(label,value,detail)=>{const el=make('div');el.append(make('small',label),make('strong',value),make('span',detail));metrics.append(el);};
+      if(d.latest!==null)card(tr('最新月金额 / 美元','Latest month / USD'),fmt(d.latest),d.latestMonth);
+      if(d.delta!==null)card(tr('比前月变化 / 美元','Change from previous month / USD'),`${d.delta>0?'+':d.delta<0?'−':''}${fmt(Math.abs(d.delta))}`,`${d.previousMonth} → ${d.latestMonth}`);
+      if(d.total!==null&&d.rows.length>1)card(tr('期间合计 / 美元','Period total / USD'),fmt(d.total),`${s.start_month} – ${s.end_month}`);
+      if(metrics.children.length)block.append(metrics);
+      const chart=make('section',undefined,'live-section chart-panel trade-monthly');chart.append(make('h3',tr('逐月金额','Monthly values')));
+      p(chart,tr(`图中展示${metric}，不是商品数量。`,`The chart shows ${metric}, not the quantity of goods.`));
+      const max=Math.max(1,...d.rows.filter(r=>r.status==='observed').map(r=>r.value_usd)),bars=make('div',undefined,'trade-bars');
+      for(const row of d.rows){const line=make('div',undefined,'trade-bar-row');line.append(make('span',row.month));const track=make('div',undefined,'trade-bar-track');
+        if(row.status==='observed'){const fill=make('div',undefined,'trade-bar-fill');fill.style.width=`${row.value_usd/max*100}%`;track.append(fill);}
+        line.append(track,make('span',row.status==='observed'?tr(`${fmt(row.value_usd)} 美元`,`${fmt(row.value_usd)} USD`):tr('无可用金额','No published value')));bars.append(line);}chart.append(bars);
+      if(d.high!==null&&d.rows.length>1){const observations=make('div',undefined,'trade-observations');
+        p(observations,d.high===d.low?tr(`已收录月份的金额相同，均为 ${fmt(d.high)} 美元。`,`All observed months have the same value: ${fmt(d.high)} USD.`):
+          tr(`已收录月份中，最高为 ${d.highMonths.join('、')} 的 ${fmt(d.high)} 美元；最低为 ${d.lowMonths.join('、')} 的 ${fmt(d.low)} 美元。`,
+            `Among observed months, the highest value was ${fmt(d.high)} USD (${d.highMonths.join(', ')}); the lowest was ${fmt(d.low)} USD (${d.lowMonths.join(', ')}).`));
+        if(d.yearPeak?.gap>0)p(observations,tr(`${d.latestMonth} 比 ${d.yearPeak.year} 年已收录月份的峰值低 ${fmt(d.yearPeak.gap)} 美元。该峰值出现在 ${d.yearPeak.months.join('、')}。`,
+          `${d.latestMonth} was ${fmt(d.yearPeak.gap)} USD below the highest observed value in ${d.yearPeak.year}, recorded in ${d.yearPeak.months.join(', ')}.`));
+        if(d.run)p(observations,tr(`${d.run.start} 至 ${d.run.end}，相邻月份金额连续${d.run.changes}次${d.run.sign>0?'增加':'减少'}。这只描述最近一段，不代表整个查询期间。`,
+          `From ${d.run.start} through ${d.run.end}, value ${d.run.sign>0?'increased':'decreased'} for ${d.run.changes} consecutive monthly changes. This describes the recent sequence, not the whole period.`));
+        else if(d.turn)p(observations,tr(`最近三个连续月份（${d.turn.months.join('、')}）先${d.turn.sign>0?'降后升':'升后降'}。`,
+          `Across the latest three consecutive months (${d.turn.months.join(', ')}), value ${d.turn.sign>0?'fell, then rose':'rose, then fell'}.`));chart.append(observations);}
+      const numbers=make('details',undefined,'monthly-data');numbers.append(make('summary',tr('逐月金额表','Monthly values table')));
+      const scroll=make('div',undefined,'table-scroll'),table=make('table'),head=make('thead'),heading=make('tr');
+      [tr('月份','Month'),`${metric} / ${tr('美元','USD')}`,tr('数据状态','Record status')].forEach(label=>heading.append(make('th',label)));head.append(heading);table.append(head);const body=make('tbody');
+      for(const row of Array.isArray(part.series)?part.series:[]){const line=make('tr');
+        [row.month,row.status==='observed'?(amount(row.value_usd)?fmt(row.value_usd):String(row.value_usd)):'—',
+          row.status==='observed'?tr('有记录','Published'):row.status==='not_processed'?tr('月份未收录','Not included'):tr('无可用金额','No published value')].forEach(v=>line.append(make('td',v)));body.append(line);}
+      table.append(body);scroll.append(table);numbers.append(scroll);chart.append(numbers);block.append(chart);
+      const detail=make('details',undefined,'live-section');detail.append(make('summary',tr('商品范围、来源与计算说明','Product scope, sources and calculations')));
+      p(detail,tr(`商品：${s.product_label}（${ex?'Schedule B':'HTS'} ${s.product_code}）；美国${partner}${ex?'出口':'进口'}；指标：${metric}。`,
+        `Product: ${s.official_product_en||s.product_code} (${ex?'Schedule B':'HTS'} ${s.product_code}). U.S. ${metric} ${partner}.`));
+      if(s.official_product_en)p(detail,tr(`美国官方商品定义：${s.official_product_en}`,`Official U.S. product description: ${s.official_product_en}`));
+      p(detail,tr(ex?'来源为美国人口普查局商品出口明细。总出口包含国产出口与再出口，采用 FAS 口径。':'来源为美国人口普查局商品进口明细，采用消费进口额口径。',
+        ex?'Source: U.S. Census monthly export detail. Total exports include domestic exports and re-exports and use the FAS basis.':'Source: U.S. Census monthly import detail, using imports-for-consumption values.'));
+      p(detail,tr('金额可能受数量或价格变化影响，单凭这些数据不能确定变化原因或政策效果。','Values may change with quantity or price. These data alone do not establish causes or policy effects.'));
+      for(const url of [...new Set([...(s.classification_source_urls||[]),...(part.sources||[])])].filter(url=>typeof url==='string'&&/^https:\/\/(www\.usitc\.gov|www\.census\.gov)\//.test(url)&&(!url.includes('/ex_m/')||ex)&&(!url.includes('/im_m/')||!ex))){
+        const link=make('a',tr(url.includes('usitc.gov')?'美国国际贸易委员会：商品目录':'美国人口普查局：贸易数据',url.includes('usitc.gov')?'USITC commodity classification':'U.S. Census trade data'));
+        link.href=url;link.target='_blank';link.rel='noopener';detail.append(link);}block.append(detail);target.append(block);
+    });
+    if(doc.policy){const section=make('section',undefined,'live-section trade-policy');section.append(make('h2',tr('本次检索的政策资料','Policy evidence from this search')));
+      const labels={not_recorded:['该记录没有保存完整的政策检索状态。','This record does not retain complete policy search status.'],
+        not_searched:['本轮未检索政策资料。','Policy evidence was not searched in this turn.'],
+        no_evidence:['本地资料未找到匹配原文，不代表不存在相关政策。','No matching passage was found locally; this does not establish that no relevant policy exists.'],
+        partial:['政策证据不完整，不能视为已完成适用性核查。','Policy evidence is partial; applicability has not been established.'],
+        limited:['检索达到范围或预算上限，部分资料未纳入。','Search reached a scope or budget limit; some evidence was not included.'],
+        scope_refused:['存档资料不能回答当前请求的税率或适用性。','Archived evidence cannot answer the requested current rate or applicability.'],
+        incomplete_required_context:['已找到相关段落，但共同条件尚未补齐。','Relevant passages were found, but required common clauses remain incomplete.'],
+        candidate_evidence:['找到候选相关原文；命中不等于已经确认适用。','Candidate passages were found; a match does not establish applicability.']};
+      p(section,tr(...(labels[doc.policy.status]||labels.partial)));const refs=make('details');refs.append(make('summary',tr('原文、出处与共同条件','Passages, sources and common clauses')));
+      for(const bundle of doc.policy.evidence_bundles||[])for(const item of [bundle.hit,...(bundle.required_context||[])]){if(!item)continue;
+        p(refs,item.status==='verified_absent'?tr(item.boundary,'Absence was verified within this registered document only.'):`${item.citation_id||item.dependency||''}: ${item.text||''}`);
+        if(typeof item.url==='string'&&/^https:\/\/(www\.)?(ustr\.gov|federalregister\.gov|govinfo\.gov|usitc\.gov|census\.gov)\//.test(item.url)){
+          const a=make('a',item.url);a.href=item.url;a.target='_blank';a.rel='noopener';refs.append(a);}}
+      section.append(refs);target.append(section);}
+    for(const item of doc.unanswered)p(target,tr(item.text,item.text_en));return title;
   }
-  function appendRelationCards(target, cards, flow){
-    const eligible=cards.filter(card=>card.status==='available'&&card.eligible_for_ai&&card.flow===flow);
-    if(!eligible.length)return;
-    const section=make('section',undefined,'live-section trade-relations');
-    section.append(make('h3',tr(flow==='both'?'进口和出口放在一起看':'最近几个月的变化',
-      flow==='both'?'Imports and exports together':'Recent monthly movement')));
-    for(const card of eligible){
-      const item=make('article',undefined,'trade-relation-card');
-      const title=card.id.endsWith('.recent_turn')?tr('最近出现转向','Recent direction change'):
-        card.id.endsWith('.recent_run')?tr('连续几个月同向变化','Consecutive monthly changes'):
-          tr('进出口方向对照','Import and export comparison');
-      item.append(make('h4',title));
-      addParagraph(item,english()?englishRelation(card):card.fact);
-      section.append(item);
-    }
-    target.append(section);
-  }
-  function appendTradeDirection(target, result, observations=[]) {
-    const {scope,summary,series}=result;
-    const exportFlow=scope.flow==='export';
-    const direction=exportFlow?'出口':'进口';
-    const metric=exportFlow?'商品总出口额（FAS）':'消费进口额';
-    target.append(make('h2',tr(`美国${direction} · ${scope.product_code} 商品组`,
-      `U.S. ${exportFlow?'exports':'imports'} · product group ${scope.product_code}`)));
-    const intro=make('section',undefined,'live-section');intro.append(make('h3',tr('先看数字','Key figures')));
-    const latest=summary.latest_value_usd;
-    const counterpart=scope.partner==='CHINA'?(exportFlow?'向中国':'从中国'):(exportFlow?'向全部目的地':'从全部来源');
-    addParagraph(intro,latest===null?tr(`${summary.latest_month} 没有可用金额。`,
-      `No published value is available for ${summary.latest_month}.`):
-      tr(`${summary.latest_month}，美国${counterpart}的${metric}为 ${fmt(latest)} 美元。`,
-        `In ${summary.latest_month}, U.S. ${exportFlow?'total exports (FAS)':'imports for consumption'} ${scope.partner==='CHINA'?(exportFlow?'to China':'from China'):(exportFlow?'to all destinations':'from all origins')} were ${fmt(latest)} USD.`));
-    if(summary.month_change_usd!==null)addParagraph(intro,
-      tr(`比 ${summary.previous_month} ${summary.month_change_usd>=0?'增加':'减少'} ${fmt(Math.abs(summary.month_change_usd))} 美元；仅凭金额不能判断原因。`,
-        `That is ${fmt(Math.abs(summary.month_change_usd))} USD ${summary.month_change_usd>=0?'higher':'lower'} than ${summary.previous_month}. The value change alone does not tell us why.`));
-    else if(series.length===1)addParagraph(intro,tr(`这份报告只含一个月，不能据此判断${direction}走势。`,
-      'This report covers only one month, so it cannot establish a trend.'));
-    if(summary.period_total_usd!==null && series.length>1)addParagraph(intro,
-      tr(`${scope.start_month} 至 ${scope.end_month} 的合计为 ${fmt(summary.period_total_usd)} 美元。`,
-        `The sum from ${scope.start_month} through ${scope.end_month} was ${fmt(summary.period_total_usd)} USD.`));
-    if(scope.coverage_note)addParagraph(intro,tr(scope.coverage_note,
-      scope.coverage_note_en || (exportFlow
-        ? `Only ${series.length} export months are available for this query; fewer than 12 months cannot establish a long-term trend.`
-        : scope.coverage_note)));
-    target.append(intro);
-    const trendFact=observations.find(item=>item.id===scope.flow+'.trend');
-    if(trendFact){
-      const trend=make('section',undefined,'live-section trade-trend-fact');
-      trend.append(make('h3',tr('这段时间的走势','Over this period')));
-      addParagraph(trend,english()?englishTrend(series):trendFact.fact);
-      target.append(trend);
-    }
-    appendYearPeakCard(target,observations,scope.flow);
-    appendRelationCards(target,observations,scope.flow);
-    const chart=make('section',undefined,'live-section');chart.append(make('h3',tr('逐月金额','Monthly values')));
-    addParagraph(chart,tr(`每条横线表示该月的${metric}，不代表商品数量。`,
-      `Each bar shows ${exportFlow?'total exports (FAS)':'imports for consumption'} in that month, not the quantity of goods.`));
-    const max=Math.max(1,...series.map(row=>row.value_usd||0));
-    const bars=make('div',undefined,'trade-bars');
-    for(const row of series){const line=make('div',undefined,'trade-bar-row');
-      line.append(make('span',row.month));const track=make('div',undefined,'trade-bar-track');
-      const fill=make('div',undefined,'trade-bar-fill');
-      fill.style.width=`${Math.max(0,(row.value_usd||0)/max*100)}%`;track.append(fill);line.append(track,
-        make('span',row.status==='observed'?tr(`${fmt(row.value_usd)} 美元`,`${fmt(row.value_usd)} USD`):
-          tr('无可用金额','No published value')));bars.append(line);}
-    chart.append(bars);
-    const numbers=make('details',undefined,'monthly-data');numbers.append(make('summary',tr('逐月金额表','Monthly values table')));
-    const scroll=make('div',undefined,'table-scroll');const table=make('table');
-    const head=make('thead');const headings=make('tr');
-    [tr('月份','Month'),tr(`美国${metric} / 美元`,`${exportFlow?'U.S. total exports (FAS)':'U.S. imports for consumption'} / USD`),
-      tr('数据状态','Record status')].forEach(label=>headings.append(make('th',label)));
-    head.append(headings);table.append(head);const body=make('tbody');
-    for(const row of series){const line=make('tr');
-      [row.month,row.status==='observed'?fmt(row.value_usd):'—',
-       row.status==='observed'?tr('有记录','Published'):row.status==='not_processed'?tr('月份未收录','Not included'):tr('无可用金额','No published value')]
-        .forEach(value=>line.append(make('td',value)));
-      body.append(line);
-    }table.append(body);scroll.append(table);numbers.append(scroll);chart.append(numbers);target.append(chart);
-    const detail=make('details',undefined,'live-section');detail.append(make('summary',tr('商品范围、来源与计算说明','Product scope, sources and calculations')));
-    if(scope.coverage_note)addParagraph(detail,tr(scope.coverage_note,scope.coverage_note_en||scope.coverage_note));
-    addParagraph(detail,tr(`商品：${scope.product_label}，${exportFlow?'Schedule B':'HTS'} ${scope.product_code}。方向：美国${direction}；指标：${metric}；${exportFlow?'目的地':'来源地'}：${scope.partner==='CHINA'?'中国':'全部'}。`,
-      `Product: ${scope.official_product_en||scope.product_code}, ${exportFlow?'Schedule B':'HTS'} ${scope.product_code}. Direction: U.S. ${exportFlow?'exports':'imports'}. Measure: ${exportFlow?'total exports (FAS)':'imports for consumption'}. ${exportFlow?'Destination':'Origin'}: ${scope.partner==='CHINA'?'China':'all'}.`));
-    if(scope.official_product_en)addParagraph(detail,tr(`美国官方英文商品范围：${scope.official_product_en}。`,
-      `Official U.S. product description: ${scope.official_product_en}.`));
-    addParagraph(detail,tr(exportFlow?'金额来自美国人口普查局逐月商品出口明细；总出口是本国产品出口与再出口之和，采用 FAS 口径。':'金额来自美国人口普查局逐月商品进口明细，采用消费进口额口径。',
-      exportFlow?'Values come from U.S. Census monthly export detail. Total exports include domestic exports and re-exports and use the FAS basis.':
-        'Values come from U.S. Census monthly import detail and use imports-for-consumption values.'));
-    for(const url of [...new Set([...(scope.classification_source_urls||[]),...(result.sources||[])])].filter(url=>
-      typeof url==='string' && /^https:\/\/(www\.usitc\.gov|www\.census\.gov)\//.test(url) &&
-      (!url.includes('/ex_m/')||exportFlow) && (!url.includes('/im_m/')||!exportFlow))){
-      const link=make('a',tr(url.includes('usitc.gov')?'美国国际贸易委员会：商品编码目录':'美国人口普查局：贸易数据',url.includes('usitc.gov')?'USITC commodity classification':'U.S. Census trade data'));link.href=url;link.target='_blank';link.rel='noopener';detail.append(link,make('br'));
-    }
-    for(const note of result.notes||[])if(!note.startsWith('目前未运行模型解释'))addParagraph(detail,english()?englishNote(note):note);
-    target.append(detail);
-  }
-    const scope=result.scope;
-    const title=scope.flow==='both'?'进出口':scope.flow==='export'?'出口':'进口';
-    const englishDirection=scope.flow==='both'?'imports and exports':scope.flow==='export'?'exports':'imports';
-    const reportTitle=tr(result.question||`美国${scope.product_code}${title}情况`,
-      `U.S. ${englishDirection} · ${scope.official_product_en||`product group ${scope.product_code}`}`);
-    target.append(make('p',tr('美国贸易数据','U.S. trade data'),'eyebrow'),make('h1',reportTitle));
-    addParagraph(target,tr(`${scope.start_month} 至 ${scope.end_month} · ${scope.product_code} 商品组。完整商品范围见报告末尾。`,
-      `${scope.start_month} to ${scope.end_month} · product group ${scope.product_code}. The full product scope appears below.`));
-    if(result.kind==='trade-query-both-v1'){
-      addParagraph(target,tr('进口与出口来自不同统计口径，下面分别展示；两项金额不能直接相减称为贸易差额。',
-        'Imports and exports use different statistical bases and are shown separately. Do not subtract these values and call the difference a trade balance.'));
-      const observations=result.explanation?.observations||result.observations||[];
-      appendTradeDirection(target,result.import_report,observations);
-      appendTradeDirection(target,result.export_report,observations);
-      appendRelationCards(target,observations,'both');
-    }else appendTradeDirection(target,result,result.explanation?.observations||result.observations||[]);
-    if(readerView){
-      const section=make('section',undefined,'live-section');
-      section.append(make('h2',tr('数据摘要','Data summary')));
-      for(const fact of readerView.facts||[])addParagraph(section,tr(fact.text,fact.text_en));
-      for(const missing of readerView.unanswered||[])addParagraph(section,tr(missing.text,missing.text_en));
-      const method=make('details');method.append(make('summary',tr('来源与方法','Sources and method')));
-      addParagraph(method,tr(readerView.method.text,readerView.method.text_en));section.append(method);
-      target.append(section);
-    }
-    return reportTitle;
-  }
-  globalThis.TradeIntelReportView=Object.freeze({renderTradeReport});
+  globalThis.TradeIntelReportView=Object.freeze({buildTradeReportDocument,renderTradeReport});
 })();

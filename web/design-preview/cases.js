@@ -1,7 +1,7 @@
 /* Saved case reader. No model endpoints, config, free-form submission or storage. */
 (() => {
   const ids=['soybean-trade','soybean-oil','policy-materials','missing-month'];
-  // Keep navigation visible while the saved-case catalog is loading.
+  // The case list remains navigable while its catalog is loading.
   const previews=[
     {id:ids[0],kind:'real_agent_run',title:{zh:'大豆进口，接着问出口',en:'Soybean imports, then exports'},description:{zh:'查看连续追问，以及进口和出口的图表报告。',en:'Follow the conversation and read import and export charts.'}},
     {id:ids[1],kind:'real_agent_run',title:{zh:'豆油不是原料大豆',en:'Soybean oil is not raw soybeans'},description:{zh:'按商品名称查找豆油，查看十二个月的进口变化。',en:'Look up soybean oil and view twelve months of imports.'}},
@@ -21,11 +21,6 @@
   const record=make('div',undefined,'case-record');shell.append(heading,cards,record);
   const catalogStatus=make('div',undefined,'case-catalog-status');catalogStatus.setAttribute('role','status');shell.append(catalogStatus);
   if($('workspace'))$('workspace').after(page);else document.querySelector('main').append(page);
-  const home=make('section',undefined,'section wrap case-gallery');home.id='case-gallery';
-  const homeHead=make('div',undefined,'section-heading');const homeCards=make('div',undefined,'case-grid');
-  const homeStatus=make('div',undefined,'case-catalog-status');homeStatus.setAttribute('role','status');
-  home.append(homeHead,homeCards,homeStatus);$('home').append(home);
-  const install=make('section',undefined,'section wrap local-install');install.id='local-install';$('home').append(install);
   const caseReport=make('article',undefined,'live-result wrap');caseReport.id='case-result';caseReport.hidden=true;
   $('report').querySelector('.report-layout').before(caseReport);
   const editedNote=make('p',undefined,'case-meta');editedNote.id='case-edited-note';editedNote.hidden=true;
@@ -41,10 +36,6 @@
     });
   }
   bindCaseLink($('return-to-conversation'),()=>$('return-to-conversation').getAttribute('href'));
-  document.querySelectorAll(local?'#home a[href="#report"]':'#home a[href="#report"], .nav a[href="#report"]').forEach(a=>{
-    a.href=`?case=policy-materials&report=r1&lang=${english()?'en':'zh'}#report`;
-    bindCaseLink(a,()=>`?case=policy-materials&report=r1&lang=${english()?'en':'zh'}#report`);
-  });
   let manifest=null,selected=null,version=0,catalogState='loading';const cache=new Map();let opened=[];
   const href=(id,alias,hash='cases')=>`?case=${id}${alias?'&report='+alias:''}&lang=${english()?'en':'zh'}#${hash}`;
   const link=(label,url,className)=>{const node=make('a',label,className);node.href=url;bindCaseLink(node,url);return node;};
@@ -67,23 +58,13 @@
     return cache.get(id);
   }
   function labels(){
-    document.querySelectorAll('#home a[href*="case=policy-materials"], .nav a[href*="case=policy-materials"]').forEach(a=>{
-      a.href=href('policy-materials','r1','report');
-    });
-    heading.replaceChildren(make('p',tr('TRADEINTEL / 案例','TRADEINTEL / EXAMPLES'),'eyebrow'),make('h1',tr('案例与报告','Conversations and reports')),
-      make('p',tr('选择一个案例，查看问答、报告或缺数据时的处理。','Choose an example to explore a conversation, a report, or how unavailable data is handled.')));
-    homeHead.replaceChildren(make('h2',tr('四个案例','Four cases')),make('p',tr('看看助手如何追问、区分商品、查阅政策，以及处理缺少月份。','Explore follow-ups, product lookup, policy reading, and unavailable data.')));
-    install.replaceChildren(make('h2',tr('在自己的电脑上使用','Run it on your computer')),
-      make('p',tr('公开网站不用 API，只能阅读案例。要自己提问，请启动本地服务，再填自己的模型 API。数据查询本身不需要模型或 MySQL。','The public site needs no API and only reads saved cases. To ask your own questions, run the local service and configure your own model API. Data-only queries need neither a model nor MySQL.')),
-      make('p',tr('本地查询还需要下载贸易数据包，解压并核验后再启动。数据包约64 MiB，安装步骤见快速开始；macOS已验证，Windows尚未验证。','Local queries also need the trade-data bundle. Download, extract and verify it before starting. The bundle is about 64 MiB; see Quickstart for installation. macOS was verified; Windows is unverified.')),
-      link(tr('源码 ↗','Source ↗'),'https://github.com/Yemyu/TradeIntel/tree/main','text-link'),
-      link(tr('快速开始 ↗','Quickstart ↗'),`https://github.com/Yemyu/TradeIntel/blob/main/docs/LOCAL_RUN${english()?'':'.zh-CN'}.md`,'text-link'),
-      link(tr('下载数据 ↗','Download data ↗'),'https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002','text-link'));
+    heading.replaceChildren(make('p',tr('TRADEINTEL / 案例','TRADEINTEL / EXAMPLES'),'eyebrow'),make('h1',tr('使用案例','Use cases')),
+      make('p',tr('查看提问、处理过程和结果报告。部分案例展示缺少数据时的处理。','Explore questions, the steps taken, and the resulting reports, including requests with unavailable data.')));
     cards.setAttribute('aria-label',tr('案例','Cases'));
-    cards.replaceChildren();homeCards.replaceChildren();
+    cards.replaceChildren();
     const groups=[
-      {label:tr('对话示例','Conversations'),ids:['soybean-trade','soybean-oil']},
-      {label:tr('报告示例','Report example'),ids:['policy-materials']},
+      {label:tr('商品查询与追问','Product queries and follow-ups'),ids:['soybean-trade','soybean-oil']},
+      {label:tr('政策与贸易','Policy and trade'),ids:['policy-materials']},
       {label:tr('缺数据处理','Missing data'),ids:['missing-month']}
     ];
     const purposes={
@@ -94,7 +75,7 @@
     };
     const explanations={
       'soybean-trade':tr('先问大豆进口，再接着问出口。查看助手如何接续前一个问题，并给出对应报告。','Ask about soybean imports, then follow up about exports. See how the assistant carries the conversation forward and returns the relevant reports.'),
-      'soybean-oil':tr('问的是豆油，不是原料大豆。查看助手如何区分名称相近、统计分类不同的商品。','Soybean oil is not raw soybeans. See how the assistant distinguishes similar names that belong to different product classifications.'),
+      'soybean-oil':tr('问的是豆油，不是原料大豆。查看商品识别的问答，以及对应的进口图表报告。','Soybean oil is not raw soybeans. Follow the product lookup and read the resulting import report.'),
       'policy-materials':tr('直接阅读一份完整报告，包含关税公告、进口图表和数据出处。这一例不是对话记录。','Read a complete report with a tariff notice, import charts, and sources. This example is a report, not a conversation.'),
       'missing-month':tr('用户问的月份还没有数据。查看系统如何提示缺口，并拦截未经确认的月份替换。','The requested month has no available data. See how the system reports the gap and blocks an unconfirmed month substitution.')
     };
@@ -115,12 +96,7 @@
       }
       section.append(choices);cards.append(section);
     }
-    for(const entry of manifest?.cases||previews){
-      const category=groups.find(group=>group.ids.includes(entry.id)).label;
-      const card=link('',href(entry.id),'case-tile');card.append(make('small',`${category} · ${purposes[entry.id]}`),
-        make('h3',text(entry.title)),make('p',text(entry.description)),make('span',tr('查看记录 →','Open record →')));homeCards.append(card);
-    }
-    for(const status of [homeStatus,catalogStatus]){
+    for(const status of [catalogStatus]){
       status.replaceChildren();status.hidden=catalogState==='ready';
       if(catalogState==='loading')status.append(make('p',tr('正在读取案例目录…','Loading the case catalog…')));
       if(catalogState==='error'){
@@ -130,14 +106,14 @@
     }
     if(!local){
       if($('workspace'))$('workspace').hidden=true;
-      document.querySelectorAll('.nav a[href="#workspace"],#home a[href="#workspace"],.nav a[href="#cases"],#home a[href="#cases"]').forEach(a=>{a.href='#cases';a.textContent=tr('查看案例','View cases');});
+      document.querySelectorAll('.nav a[href="#workspace"]').forEach(a=>{a.hidden=true;});
     }
   }
   function showRecord(caseData,entry){
     if(entry.id==='policy-materials'){
       record.replaceChildren(make('p',tr('政策报告示例','POLICY REPORT EXAMPLE'),'eyebrow'),
         make('h2',text(entry.title)),
-        make('p',tr('美国对部分中国原产的钨和光伏材料调整了附加关税。这份报告把公告规定和相关商品的进口数据放在一起，方便查阅。','The United States changed additional duties on certain tungsten and solar materials of Chinese origin. This report brings the notice and import data together for reference.'),'policy-intro'));
+        make('p',tr('这份资料编辑稿展示政策公告和贸易数据如何放在同一份报告中阅读。它整理了美国钨与光伏材料的附加关税背景、五类商品的进口金额，以及中国来源份额。','This edited report shows how a policy notice and trade data can be read together. It presents additional-duty context for tungsten and solar materials, import values for five product codes, and the share sourced from China.'),'policy-intro'));
       const topics=make('div',undefined,'policy-case-topics');
       for(const [zhTitle,enTitle,zhBody,enBody] of [
         ['公告涉及什么','What the notice covers','列明的商品、附加税率和生效时间，以及适用时需要核对的条件。','Listed products, additional duties, effective dates, and conditions to check.'],
@@ -198,7 +174,7 @@
         }else{
           const report=data.reports.find(r=>r.report_id===alias);if(!report)throw Error('Unknown report');
           caseReport.replaceChildren();
-          const view=data.reader_view?{...data.reader_view,facts:data.reader_view.facts.filter(f=>f.report_id===alias)}:null;
+          const view=data.reader_view||null;
           window.tradeintelLiveReportTitle=globalThis.TradeIntelReportView.renderTradeReport(caseReport,report,{language:english()?'en':'zh',readerView:view});
           caseReport.prepend(make('p',tr(`案例存档 · ${entry.recorded_on} · 非实时数据`,`Saved case · ${entry.recorded_on} · Not live data`),'case-meta'));caseReport.hidden=false;
         }
