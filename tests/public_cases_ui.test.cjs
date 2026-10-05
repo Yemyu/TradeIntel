@@ -56,7 +56,7 @@ test('case navigation groups tasks with an explanation beside every link in both
   assert.match(picker.children[0].textContent,/连续追问/);assert.match(picker.children[0].textContent,/商品区分/);
   const policyRow=()=>picker.children[1].children[1].children[0];
   assert.equal(policyRow().children[0].attrs['aria-current'],'page');
-  assert.match(policyRow().children[1].textContent,/这一例不是对话记录/);
+  assert.match(policyRow().children[1].textContent,/关税公告背景、五类商品的进口图表/);
   for(const group of picker.children)for(const row of group.children[1].children){
     assert.equal(row.children.length,2);
     assert.equal(row.children[0].attrs['aria-describedby'],row.children[1].id);
@@ -66,7 +66,7 @@ test('case navigation groups tasks with an explanation beside every link in both
   assert.deepEqual(picker.children.map(group=>group.children[0].textContent),['Product queries and follow-ups','Policy and trade','Missing data']);
   assert.match(policyRow().children[0].href,/case=policy-materials&lang=en#cases/);
   assert.equal(policyRow().children[0].attrs['aria-current'],'page');
-  assert.match(policyRow().children[1].textContent,/not a conversation/);
+  assert.match(policyRow().children[1].textContent,/tariff-notice context, import charts for five product codes/);
 });
 test('catalog network failure keeps home navigable with a translated retry and can recover',async()=>{
   const e=env('','#home',false,false,true);await e.flush();
@@ -93,16 +93,20 @@ test('language and refresh retain the case alias without local storage or API re
 });
 test('missing-month case has a real controlled explanation and no invented report/chart',async()=>{
   const e=env('?case=missing-month','#cases');await e.flush();
-  assert.match(e.ids.get('cases').textContent,/缺少 2026-08/);assert.match(e.ids.get('cases').textContent,/模型尝试改查7月，被程序拦截/);
+  assert.match(e.ids.get('cases').textContent,/缺少 2026-08/);assert.match(e.ids.get('cases').textContent,/改查7月需要另行确认/);
+  assert.equal(cases['missing-month'].guard.model_month_selection,'rejected');
   assert.equal(e.ids.get('case-result').hidden,true);assert.equal(e.ids.get('case-result').textContent,'');
   assert.ok(!e.created.some(n=>n.tag==='a'&&n.href?.includes('&report=')));
 });
 test('policy archive uses its fixed report and never fabricates a model dialogue',async()=>{
   const e=env('?case=policy-materials&report=r1');await e.flush();assert.equal(e.layout.hidden,false);
-  assert.equal(e.ids.get('case-result').hidden,true);assert.match(e.ids.get('cases').textContent,/没有对应的模型对话记录/);
+  assert.equal(e.ids.get('case-result').hidden,true);assert.match(e.ids.get('cases').textContent,/资料编辑报告/);
+  assert.equal(cases['policy-materials'].turns.length,0);
+  assert.equal(index.cases.find(item=>item.id==='policy-materials').model,null);
+  assert.ok(!e.created.some(item=>item.className==='chat-message user-message'));
   assert.equal(e.ids.get('case-edited-note').hidden,false);
-  assert.match(e.ids.get('case-edited-note').textContent,/存档资料编辑稿 · 2026-10-01/);
-  assert.match(e.ids.get('case-edited-note').textContent,/不是当前 Agent/);
+  assert.match(e.ids.get('case-edited-note').textContent,/资料编辑报告 · 2026-10-01/);
+  assert.match(e.ids.get('case-edited-note').textContent,/数据截至 2026-07/);
 });
 test('policy example explains its background and contents before linking to the report in both languages',async()=>{
   const e=env('?case=policy-materials','#cases');await e.flush();

@@ -304,7 +304,7 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
     if(latest?.observed_value_usd===null||latest?.observed_value_usd===undefined)
       addParagraph(summary,tr(`${latest?.month||scope.end_month} 没有可用的贸易金额。`,`No trade value is available for ${latest?.month||scope.end_month}.`));
     else addParagraph(summary,tr(`${latest.month} 已观测金额合计 ${fmt(latest.observed_value_usd)} 美元；${latest.complete_codes}/${latest.selected_codes} 个商品范围的细码完整。金额不代表政策适用金额。`,
-      `${latest.month}: observed values sum to ${fmt(latest.observed_value_usd)} USD; detailed codes are complete for ${latest.complete_codes} of ${latest.selected_codes} products. This is not a policy liability.`));
+      `${latest.month}: observed values sum to ${fmt(latest.observed_value_usd)} USD; detailed codes are complete for ${latest.complete_codes} of ${latest.selected_codes} products. This does not measure imports covered by the policy.`));
     report.append(summary);
     const chart=make('section',undefined,'live-section');chart.append(make('h2',tr('逐月进口金额','Monthly import values')));
     addParagraph(chart,tr('柱形显示当月已观测金额之和。若商品细码不完整，金额可能低于实际总额；空白月份表示没有可用记录，不按零处理。',
@@ -498,7 +498,7 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
       chart.append(make('h2',label));
       addParagraph(chart,result.context_type==='parent'?
         tr('这是更宽的商品组，包含公告没有覆盖的货品；缺少细码的月份不显示金额。',
-          'This broader product group includes goods outside the notice. Months with incomplete detailed codes have no value.'):
+          'This broader product group includes goods outside the notice. Values are not shown for months with incomplete detailed codes.'):
         tr('金额由官方原始月包逐商品复算；香港单列来源没有并入。',
           'Values were reconciled product by product to the retained source files. Hong Kong is not included.'));
       const max=Math.max(1,...months.map(item=>numberFor(item)||0));
@@ -528,8 +528,8 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
       }
     }
     addParagraph(sources,sourceOnly?
-      tr('本卡逐字段保存原公告文字和引文；没有查询贸易数据，也没有生成数据版本或复算金额。',
-        'This card preserves confirmed notice fields and their quotations. It did not query trade data or calculate trade values.'):
+      tr('本卡保存已确认的公告字段及原文引文。',
+        'This card preserves confirmed notice fields and source quotations.'):
       tr('本报告绑定原公告和数据版本；上层商品按官方子码核对，国家背景与留存原始月包逐商品复算。',
         'This report is bound to a notice and data version. Product groups are checked against official detailed codes; country context is reconciled with retained source files.'));
     const sourceNoteTranslations={
@@ -582,7 +582,10 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
             `Provider-reported total tokens: ${total.reported_sum}, covering ${total.reporting_responses} responses.`));
         ai.append(detail);
       }
-      if(!agentProgramSummary)addParagraph(ai,tr('旧记录的未审模型文字不作为报告正文。','Unreviewed model text from the legacy record is not included in the report.'));
+      if(!agentProgramSummary){const legacy=make('details');legacy.append(
+        make('summary',tr('历史回答状态','Legacy response status')),
+        make('p',tr('此记录的模型文字尚未审阅，报告展示已保存的查询数据。',
+          'The model text in this record has not been reviewed. The report shows the saved query data.')));ai.append(legacy);}
       if(!reader&&agentTurn.policy_sources?.length){const refs=make('details');refs.append(make('summary',
         tr('查看政策原文','View policy sources')));
         for(const item of agentTurn.policy_sources){
@@ -760,7 +763,7 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
     summary.append(make('h2','这次报告查了什么'));
     const window=task.request_snapshot?.window || {};
     addParagraph(summary,`商品税号：${products.join('、')}。主分析月份：${window.start || '未知'} 至 ${window.end || '未知'}。${periods.some(p=>p<window.start)?'表中另含用于同期对照的历史月份。':''}`);
-    addParagraph(summary,`数据包含 ${evidence.observations?.length || 0} 条程序观察。税率、生效时间及限定条件请以本报告的政策资料和公告原文为准。`);
+    addParagraph(summary,tr(`报告包含 ${evidence.observations?.length || 0} 项数据观察。税率、生效时间及限定条件见政策资料与公告原文。`, `The report contains ${evidence.observations?.length || 0} data observations. See the policy documents and notice text for tariffs, effective dates, and conditions.`));
     report.append(summary);
     const policy=response.report?.policy_context || response.policy_context || {};
     if(Array.isArray(policy.product_rates) && policy.product_rates.length){
@@ -1007,7 +1010,7 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
       }else if(turn.message)addParagraph(item,english()&&turn.status==='completed'?
         turn.message_en||(turn.message_kind==='program_summary_v1'?
           'The queried data are available in the report. These values alone cannot establish a policy effect.':
-          'Legacy unreviewed model text is hidden; the data report remains available.'):turn.message);
+          'The saved query data are available in the report.'):turn.message);
       if(turn.report_ids?.length){
         const options=make('div',undefined,'report-cards');
         const records=turn.report_options?.length?turn.report_options:turn.report_ids.map(report_id=>
@@ -1229,8 +1232,8 @@ if (document.documentElement?.dataset?.runtime === 'local' &&
     syncMode();
     if(info.reasoning&&provider.value==='deepseek')reasoning.value=info.reasoning;
     const modelStatus=info.configured?
-      tr(`已保存 ${info.model}；${info.connection==='connected'?'短请求曾连通，完整报告尚需验收。':'连接尚未确认，请到“模型设置”测试。'}`,
-        `Saved ${info.model}; ${info.connection==='connected'?'a short connection test succeeded, but a full report still needs validation.':'connection not confirmed. Use “Model settings” to test it.'}`):
+      tr(`已保存 ${info.model}；${info.connection==='connected'?'连接测试成功（短请求）。':'连接尚未确认，请到“模型设置”测试。'}`,
+        `Saved ${info.model}; ${info.connection==='connected'?'connection test succeeded with a short request.':'connection not confirmed. Use “Model settings” to test it.'}`):
       tr('本地服务尚未配置模型，仍可生成数据报告。',
         'No model is configured for this local service; data reports are still available.');
     status.textContent=modelStatus;

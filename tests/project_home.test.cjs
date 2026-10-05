@@ -8,7 +8,7 @@ test('homepage explains capabilities, responsibility, data, implementation, test
   for(const id of ['project-capabilities','project-workflow','project-data','project-stack','project-tests','project-start']){
     assert.ok(home.includes('id="'+id+'"'),id);
   }
-  for(const phrase of ['贸易研究 Agent','Python','CSV + JSON','MySQL','BM25','48个','连续12个月','不是另一个中国海关数据源']){
+  for(const phrase of ['贸易研究 Agent','Python','CSV + JSON','MySQL','BM25','48个','连续12个月','中国来源与目的地数据采用美国统计口径']){
     assert.ok(home.includes(phrase),phrase);
   }
   assert.equal((home.match(/<dt/g)||[]).length,6);
@@ -27,10 +27,12 @@ test('international project identity separates current US coverage from future e
 });
 test('workflow explains model feedback decisions separately from program calculation',()=>{
   const workflow=home.slice(home.indexOf('id="project-workflow"'),home.indexOf('id="project-data"'));
-  for(const phrase of ['读取工具返回的结果','根据结果继续','本轮报告与引用','第3步会回到第2步','不是模型自由撰写的经济分析','Read the results and decide whether','step 3 returns to step 2']){
+  for(const phrase of ['读取工具返回的结果','根据结果继续','本轮报告与引用','第3步会回到第2步','报告摘要与图表按已核对的数据生成','Read the results and decide whether','step 3 returns to step 2','Report summaries and charts use checked data']){
     assert.ok(workflow.includes(phrase),phrase);
   }
   assert.match(workflow,/<small data-en="Model">模型<\/small><h3 data-en="Decide the next step">/);
+  assert.match(workflow,/Python 核对范围、计算金额并保存报告/);
+  assert.match(workflow,/缺失月份保留为缺口，改查其他月份需确认/);
   for(const [file,title,coverage] of [
     ['README.md','International trade research assistant','The current release includes U.S. import and export data'],
     ['README.zh-CN.md','国际贸易研究助手','当前版本收录美国进出口数据']
@@ -45,6 +47,9 @@ test('homepage routes readers to cases without duplicating case cards or report 
   assert.match(home,/href="#workspace" data-local-only hidden/);
   assert.match(home,/data-href-en="[^"]*README.md#quickstart"/);
   assert.match(home,/data-href-en="[^"]*MODEL_SELECTION.md"/);
+  assert.match(html,/<a href="#cases" data-en="View examples">查看案例<\/a>/);
+  assert.match(home,/本地安装已在 Python 3\.13\.3 下验证/);
+  assert.match(home,/Local setup has been verified with Python 3\.13\.3/);
 });
 test('homepage preserves the five published model configurations and their report counts',()=>{
   const results=home.slice(home.indexOf('class="project-table model-results"'),home.indexOf('</table>',home.indexOf('class="project-table model-results"')));
@@ -56,5 +61,10 @@ test('case categories share the same default style; only selection changes the b
   const css=fs.readFileSync(path.join(__dirname,'../web/design-preview/style.css'),'utf8');
   assert.doesNotMatch(css,/\.case-picker-group:nth-child\([^)]*\) \.case-tab/);
   assert.match(css,/\.case-tab\[aria-current\]\{[^}]*background:#e9eddf/);
-  assert.doesNotMatch(home,/全部伙伴汇总及中国|汇总，以及中国|All-partner totals and China|combined, and China/);
+});
+test('coverage includes aggregate totals and China within the U.S. statistical scope',()=>{
+  assert.match(home,/全部来源与目的地汇总，以及中国伙伴/);
+  assert.match(home,/All-origin and all-destination totals, plus China as a partner/);
+  assert.match(home,/China-origin and China-destination figures use U.S. statistics/);
+  assert.match(home,/进口采用消费进口额，出口采用 FAS 总出口额，两者分开展示/);
 });

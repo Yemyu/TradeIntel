@@ -27,8 +27,8 @@
     {
       "id": "soybean-oil",
       "title": {
-        "zh": "豆油不是原料大豆",
-        "en": "Soybean oil is not raw soybeans"
+        "zh": "豆油进口查询",
+        "en": "Soybean oil imports"
       },
       "description": {
         "zh": "按“豆油”查找对应商品，查看十二个月的进口变化。",

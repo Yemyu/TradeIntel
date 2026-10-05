@@ -42,6 +42,24 @@ EXPECTED = {"soybean-trade": [46041287, 889379312, 152115], "soybean-oil": [2750
 SCOPE_KEYS = {"product_code", "product_label", "official_product_en", "flow", "partner", "start_month", "end_month", "metric"}
 SUMMARY_KEYS = {"complete_window", "latest_month", "latest_value_usd", "previous_month", "month_change_usd", "period_total_usd"}
 OFFICIAL_HOSTS = {"www.census.gov", "www.usitc.gov", "content.govdelivery.com"}
+# Translate the frozen saved replies themselves. Report facts may contain
+# additional comparisons and must not be inserted into the saved conversation.
+SAVED_ANSWER_TRANSLATIONS = {
+    "已查询美国大豆，不论是否破碎（1201）2025-08 至 2026-07的已发布进口数据。2026-07（全部来源地）进口消费额为 46,041,287 美元。已查询美国大豆，不论是否破碎（1201）2025-08 至 2026-07的已发布进口数据。2026-07（中国来源地）进口消费额为 152,115 美元。仅凭这些贸易金额不能判断政策效果；图表与来源见报告。":
+        "Published U.S. import data for soybeans, whether or not broken (1201), were queried for 2025-08 to 2026-07. In 2026-07, imports for consumption from all origins were 46,041,287 USD. Published U.S. import data for soybeans, whether or not broken (1201), were queried for 2025-08 to 2026-07. In 2026-07, imports for consumption from China were 152,115 USD. Trade values alone cannot establish policy effects; see the reports for charts and sources.",
+    "已查询美国大豆，不论是否破碎（1201）2025-08 至 2026-07的已发布出口数据。2026-07（全部目的地）出口 FAS 总额为 889,379,312 美元。仅凭这些贸易金额不能判断政策效果；图表与来源见报告。":
+        "Published U.S. export data for soybeans, whether or not broken (1201), were queried for 2025-08 to 2026-07. In 2026-07, total exports (FAS) to all destinations were 889,379,312 USD. Trade values alone cannot establish policy effects; see the reports for charts and sources.",
+    "已查询美国豆油及其分离品，不论是否精制，但未经化学改性（1507）2025-08 至 2026-07的已发布进口数据。2026-07（全部来源地）进口消费额为 27,503,913 美元。仅凭这些贸易金额不能判断政策效果；图表与来源见报告。":
+        "Published U.S. import data for soybean oil and its fractions, whether or not refined, but not chemically modified (1507), were queried for 2025-08 to 2026-07. In 2026-07, imports for consumption from all origins were 27,503,913 USD. Trade values alone cannot establish policy effects; see the reports for charts and sources.",
+    "用户指定的是日历上月；缺少 2026-08 的已核验可查询数据。最新可用月为 2026-07。如需改查最新可用月，请明确提出。":
+        "The requested calendar month is August 2026, but verified data is available only through July 2026. Please explicitly ask to use the latest available month if that is what you want.",
+}
+
+
+def translate_saved_answer(message):
+    if type(message) is not str or message not in SAVED_ANSWER_TRANSLATIONS:
+        raise ValueError("Saved answer has no verified English translation")
+    return SAVED_ANSWER_TRANSLATIONS[message]
 
 
 def sha(path):
@@ -177,6 +195,8 @@ def validate_case(case):
             raise ValueError("Invalid turn alias type")
         if turn["role"] not in {"user", "assistant"} or not set(turn["reports"]) <= aliases or turn["primary_report"] not in aliases | {None}:
             raise ValueError("Invalid turn/report binding")
+        if turn["role"] == "assistant" and turn["text"]["en"] != translate_saved_answer(turn["text"]["zh"]):
+            raise ValueError("Saved answer translation mismatch")
         for step in turn["steps"]:
             keys(step, {"label", "status"}); bilingual(step["label"])
             sentence(step["status"])
@@ -219,7 +239,7 @@ def validate_case(case):
 def catalog():
     definitions = [
         ("大豆进口，接着问出口", "Soybean imports, then exports", "先问大豆进口，再追问出口，查看两个方向的图表和金额。", "An import question followed by an export question, with separate charts and figures.", "real_agent_run", "2026-09-30", "模型选择查询工具，程序计算金额与摘要。以下保留当时的问答和报告。", "The model selected query tools; the program calculated figures and summaries. The saved exchange and reports are shown below."),
-        ("豆油不是原料大豆", "Soybean oil is not raw soybeans", "按“豆油”查找对应商品，查看十二个月的进口变化。", "Look up soybean oil by name and view twelve months of import values.", "real_agent_run", "2026-09-30", "该案例查询豆油（1507），不是原料大豆（1201）。", "This case queries soybean oil (1507), not raw soybeans (1201)."),
+        ("豆油进口查询", "Soybean oil imports", "按“豆油”查找对应商品，查看十二个月的进口变化。", "Look up soybean oil by name and view twelve months of import values.", "real_agent_run", "2026-09-30", "该案例查询豆油（1507），不是原料大豆（1201）。", "This case queries soybean oil (1507), not raw soybeans (1201)."),
         ("钨和光伏材料：政策与进口", "Tungsten and solar materials", "五类商品分别展示公告背景、进口金额和中国来源份额。", "An archived notice alongside import values and China-origin shares for five product codes.", "edited_evidence_report", "2026-10-01", "这是一份资料编辑报告。公告中的附加税率与现行全部税率不同；图表展示进口金额，不计算政策效果。", "An edited report. The notice gives additional duties, not current total duties; the charts show import values rather than policy effects."),
         ("所问月份还没有数据", "The requested month is not available", "所问月份未收录，说明缺口而不是改查另一月份。", "Explain a missing month rather than substitute another one.", "guarded_run", "2026-09-30", "提问日期为2026-09-29。模型尝试改查7月，被程序拦截；本次没有生成报告。", "The question was asked on 29 September 2026. The model tried July instead; the program blocked that request and no report was generated."),
     ]
@@ -296,14 +316,10 @@ def make_cases(root):
                                        "steps": [], "reports": [], "primary_report": None})
                 if cid != IDS[3] and (turn["status"] != "completed" or turn.get("message_kind") != "program_summary_v1"):
                     raise ValueError("Unreviewed case text")
-                turn_reports = [r for r in case["reports"] if r["report_id"] in {aliases[rid] for rid in turn["report_ids"]}]
                 if cid == IDS[3]:
                     if turn["status"] != "needs_clarification" or turn["report_ids"]:
                         raise ValueError("Missing-month case changed")
-                    en = "The requested calendar month is August 2026, but verified data is available only through July 2026. Please explicitly ask to use the latest available month if that is what you want."
-                else:
-                    en = " ".join(f["text_en"] for f in build_reader_view(question, turn_reports)["facts"])
-                    en += " Trade values alone cannot establish policy effects; see the reports for charts and sources."
+                en = translate_saved_answer(turn["message"])
                 case["turns"].append({"role": "assistant", "text": {"zh": turn["message"], "en": en},
                                        "steps": [{"label": dict(zip(("zh", "en"), labels[c["tool"]])), "status": c["status"]} for c in turn["tool_calls"]],
                                        "reports": [aliases[rid] for rid in turn["report_ids"]],

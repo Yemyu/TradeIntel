@@ -31,6 +31,28 @@ class PublicShowcaseTests(unittest.TestCase):
         self.assertEqual(guard["guard"]["requested_month"], "2026-08")
         self.assertEqual(guard["turns"][1]["steps"][-1]["status"], "unavailable")
 
+    def test_saved_reply_translation_excludes_comparisons_present_only_in_report_facts(self):
+        for case, deltas in ((self.cases[0], ("13,163,460", "19,416", "3,500,150")),
+                             (self.cases[1], ("3,340,380",))):
+            source = s.read_json(s.ROOT / f".local/trade-agent-sessions/{s.SESSIONS[case['id']]}.json")
+            replies = [turn["text"] for turn in case["turns"] if turn["role"] == "assistant"]
+            facts = " ".join(fact["text_en"] for fact in case["reader_view"]["facts"])
+            for delta in deltas:
+                self.assertIn(delta, facts)
+                self.assertTrue(all(delta not in reply["en"] for reply in replies))
+            for reply, original in zip(replies, source["turns"]):
+                self.assertEqual(reply["zh"], original["message"])
+                self.assertIn("2025-08 to 2026-07", reply["en"])
+                self.assertEqual(reply["en"], s.translate_saved_answer(original["message"]))
+
+    def test_unknown_saved_replies_and_extra_english_facts_are_refused(self):
+        with self.assertRaisesRegex(ValueError, "no verified English translation"):
+            s.translate_saved_answer("Unknown saved reply")
+        changed = copy.deepcopy(self.cases[0])
+        changed["turns"][1]["text"]["en"] += " Increased by 13,163,460 USD."
+        with self.assertRaisesRegex(ValueError, "translation mismatch"):
+            s.validate_case(changed)
+
     def test_private_fields_at_each_contract_level_are_rejected(self):
         for layer in ("case", "report", "scope", "row", "fact", "method", "evidence", "step"):
             with self.subTest(layer=layer):

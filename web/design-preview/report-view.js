@@ -74,7 +74,7 @@
       const intro=make('section',undefined,'live-section trade-overview');intro.append(make('h3',tr('数据概览','Overview')));
       if(d.issues.length)p(intro,tr('保存的摘要与月份数据未能核对一致，暂不生成比较结论。请核对下方记录。',
         'The saved summary could not be reconciled with the monthly records. Comparisons are withheld; check the records below.'));
-      else p(intro,d.latest===null?tr(`${d.latestMonth} 没有可用金额，没有改用其他月份。`,`No published value is available for ${d.latestMonth}; another month has not been substituted.`):
+      else p(intro,d.latest===null?tr(`${d.latestMonth} 没有可用金额。`,`No available value for ${d.latestMonth}.`):
         tr(`${d.latestMonth}，美国${partner}的${metric}为 ${fmt(d.latest)} 美元。`,`In ${d.latestMonth}, U.S. ${metric} ${partner} were ${fmt(d.latest)} USD.`));
       if(d.rows.length===1)p(intro,tr('这份报告只有一个月的数据，不能据此判断走势。','This report covers one month only; it does not establish a trend.'));
       if(s.coverage_note)p(intro,tr(s.coverage_note,s.coverage_note_en||s.coverage_note));block.append(intro);
@@ -89,7 +89,7 @@
       const max=Math.max(1,...d.rows.filter(r=>r.status==='observed').map(r=>r.value_usd)),bars=make('div',undefined,'trade-bars');
       for(const row of d.rows){const line=make('div',undefined,'trade-bar-row');line.append(make('span',row.month));const track=make('div',undefined,'trade-bar-track');
         if(row.status==='observed'){const fill=make('div',undefined,'trade-bar-fill');fill.style.width=`${row.value_usd/max*100}%`;track.append(fill);}
-        line.append(track,make('span',row.status==='observed'?tr(`${fmt(row.value_usd)} 美元`,`${fmt(row.value_usd)} USD`):tr('无可用金额','No published value')));bars.append(line);}chart.append(bars);
+        line.append(track,make('span',row.status==='observed'?tr(`${fmt(row.value_usd)} 美元`,`${fmt(row.value_usd)} USD`):tr('无可用金额','No available value')));bars.append(line);}chart.append(bars);
       if(d.high!==null&&d.rows.length>1){const observations=make('div',undefined,'trade-observations');
         p(observations,d.high===d.low?tr(`已收录月份的金额相同，均为 ${fmt(d.high)} 美元。`,`All observed months have the same value: ${fmt(d.high)} USD.`):
           tr(`已收录月份中，最高为 ${d.highMonths.join('、')} 的 ${fmt(d.high)} 美元；最低为 ${d.lowMonths.join('、')} 的 ${fmt(d.low)} 美元。`,
@@ -105,7 +105,7 @@
       [tr('月份','Month'),`${metric} / ${tr('美元','USD')}`,tr('数据状态','Record status')].forEach(label=>heading.append(make('th',label)));head.append(heading);table.append(head);const body=make('tbody');
       for(const row of Array.isArray(part.series)?part.series:[]){const line=make('tr');
         [row.month,row.status==='observed'?(amount(row.value_usd)?fmt(row.value_usd):String(row.value_usd)):'—',
-          row.status==='observed'?tr('有记录','Published'):row.status==='not_processed'?tr('月份未收录','Not included'):tr('无可用金额','No published value')].forEach(v=>line.append(make('td',v)));body.append(line);}
+          row.status==='observed'?tr('有记录','Recorded'):row.status==='not_processed'?tr('月份未收录','Not included'):tr('无可用金额','No available value')].forEach(v=>line.append(make('td',v)));body.append(line);}
       table.append(body);scroll.append(table);numbers.append(scroll);chart.append(numbers);block.append(chart);
       const detail=make('details',undefined,'live-section');detail.append(make('summary',tr('商品范围、来源与计算说明','Product scope, sources and calculations')));
       p(detail,tr(`商品：${s.product_label}（${ex?'Schedule B':'HTS'} ${s.product_code}）；美国${partner}${ex?'出口':'进口'}；指标：${metric}。`,
@@ -125,9 +125,9 @@
         partial:['政策证据不完整，不能视为已完成适用性核查。','Policy evidence is partial; applicability has not been established.'],
         limited:['检索达到范围或预算上限，部分资料未纳入。','Search reached a scope or budget limit; some evidence was not included.'],
         scope_refused:['存档资料不能回答当前请求的税率或适用性。','Archived evidence cannot answer the requested current rate or applicability.'],
-        incomplete_required_context:['已找到相关段落，但共同条件尚未补齐。','Relevant passages were found, but required common clauses remain incomplete.'],
+        incomplete_required_context:['已找到相关段落，仍需补充相关条件。','Relevant passages were found; related conditions still need to be retrieved.'],
         candidate_evidence:['找到候选相关原文；命中不等于已经确认适用。','Candidate passages were found; a match does not establish applicability.']};
-      p(section,tr(...(labels[doc.policy.status]||labels.partial)));const refs=make('details');refs.append(make('summary',tr('原文、出处与共同条件','Passages, sources and common clauses')));
+      p(section,tr(...(labels[doc.policy.status]||labels.partial)));const refs=make('details');refs.append(make('summary',tr('原文、出处与相关条件','Passages, sources and related conditions')));
       for(const bundle of doc.policy.evidence_bundles||[])for(const item of [bundle.hit,...(bundle.required_context||[])]){if(!item)continue;
         p(refs,item.status==='verified_absent'?tr(item.boundary,'Absence was verified within this registered document only.'):`${item.citation_id||item.dependency||''}: ${item.text||''}`);
         if(typeof item.url==='string'&&/^https:\/\/(www\.)?(ustr\.gov|federalregister\.gov|govinfo\.gov|usitc\.gov|census\.gov)\//.test(item.url)){
