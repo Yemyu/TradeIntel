@@ -1,6 +1,6 @@
 # 贸易 Agent 补充题真实检查
 
-2026-09-30，按 [已定方案](../TRADE_AGENT_AFTER_THIRD_DECISION_20260930.zh-CN.md)完成两题各一次尝试。协议 `trade-agent-tools-v2`，配置 `deepseek-flash`／high；[官方当前映射](https://api-docs.deepseek.com/quick_start/pricing/)为 DeepSeek-V4.1-Flash。两题各新会话，使用已锁定数据、固定时钟2026-09-29、4轮／8工具上限，不重试。发送前核当日价格及只读账户状态HTTP200／is_available=true，未保存余额或凭证。实际费用未知。
+2026-09-30，完成两题各一次尝试。协议 `trade-agent-tools-v2`，配置 `deepseek-flash`／high；[官方当前映射](https://api-docs.deepseek.com/quick_start/pricing/)为 DeepSeek-V4.1-Flash。两题各新会话，使用已锁定数据、固定时钟2026-09-29、4轮／8工具上限，不重试。发送前核当日价格及只读账户状态HTTP200／is_available=true，未保存余额或凭证。实际费用未知。
 
 ## 分开评价程序结果与模型选择
 

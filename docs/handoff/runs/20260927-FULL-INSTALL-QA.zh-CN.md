@@ -4,7 +4,7 @@
 
 在 macOS 上从本地分支 `codex/local-release-candidate` @ `95ef22d` 新克隆，使用 Python 3.13.3 新建项目 `.venv`。`requirements.txt` 四个固定版本均从官方 PyPI 安装成功：`pypdf==6.16.2`、`xlrd==2.0.2`、`numpy==2.2.6`、`scipy==1.15.3`；`.venv/bin/python -m pip check` 返回 `No broken requirements found`。
 
-[第一次失败记录](20260927-FULL-INSTALL-ATTEMPT.zh-CN.md)保留：终端直连 PyPI 和默认镜像时有 TLS/证书错误。只读诊断发现 macOS 配有本机代理 `127.0.0.1:7897`；`curl` 显式使用代理及系统 `/etc/ssl/cert.pem` 能验证 PyPI。此次 `pip` 只在命令行显式指定官方索引、本机代理和该系统证书文件，没有关闭证书校验，没有更改系统或全局 pip 配置：
+首次安装时，终端直连 PyPI 和默认镜像曾有 TLS/证书错误。此次 `pip` 使用测试环境已有代理与系统证书，未关闭证书校验，也未更改系统或全局 pip 配置。以下命令记录该测试环境的设置，不是通用安装步骤：
 
 ```bash
 .venv/bin/python -m pip install --disable-pip-version-check --no-cache-dir \

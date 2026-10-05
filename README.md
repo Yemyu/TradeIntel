@@ -14,7 +14,7 @@ The public website contains four saved examples. To ask your own questions, run 
 
 ## Features
 
-- **Product lookup:** search the official commodity catalog by name or code. Ambiguous names prompt a clarification rather than silently selecting a different product.
+- **Product lookup:** search the official commodity catalog by name or code. Ambiguous names prompt a clarification.
 - **Trade queries:** view imports and exports separately, compare available months, and inspect all-partner totals or trade with China.
 - **Follow-up questions:** change direction, product, partner, or date range in the same conversation.
 - **Policy retrieval:** search registered local notices and retain their conditions and source references.
@@ -30,55 +30,62 @@ The public website contains four saved examples. To ask your own questions, run 
 | [Tungsten and solar materials](https://yemyu.github.io/TradeIntel/?lang=en&case=policy-materials#cases) | An edited report combining a saved tariff notice and monthly import figures |
 | [Missing month](https://yemyu.github.io/TradeIntel/?lang=en&case=missing-month#cases) | Explaining unavailable data rather than substituting a different month |
 
-The links open saved conversations and charts. The public website makes no model request and is not an online chat service. To read these examples from a clone:
-
-```bash
-python3 -m http.server 8000 --bind 127.0.0.1 --directory web/design-preview
-```
-
-Visit `http://127.0.0.1:8000/`. No trade-data bundle or API key is needed to read these saved examples. The first two contain model-assisted queries; the policy report is an edited explanation, and the missing-month example shows a program safeguard.
+These links open saved conversations and charts without installation, a data bundle, or an API key. The public website makes no model request and is not an online chat service. The first two examples contain model-assisted queries; the policy report is an edited explanation, and the missing-month example shows a program safeguard. To view them from a clone, see the [local guide](docs/LOCAL_RUN.md#view-saved-examples).
 
 A typical local conversation starts with “How have recent U.S. soybean imports changed?” The assistant looks up the product, checks available dates, and queries the monthly data. You can then ask “What about exports?” without entering the product again. Report cards open charts, monthly amounts, and source notes; returning to the conversation keeps the context.
 
 ## Quickstart
 
-You need Python 3.12, the source code, and the separate [processed trade-data bundle](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002). The bundle contains 124 data files, about 579 MB uncompressed; the ZIP is about 64 MiB. **Cloning the repository does not download it.** Local installation has been checked on macOS; Windows has not been verified.
+You need the source code and the separate [processed trade-data bundle](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002). The bundle contains 124 data files, about 579 MB uncompressed; the ZIP is about 64 MiB. **Cloning the repository does not download it.** Python 3.13 is recommended; the full installation record used macOS and Python 3.13.3. Session and report storage requires the POSIX `fcntl` module, so native Windows is not supported.
 
-From the repository root, use the existing project environment or create one:
+For a first installation, clone the source and create a project environment. The version checks below should show Python 3.13.x:
 
 ```bash
 git clone https://github.com/Yemyu/TradeIntel.git
 cd TradeIntel
-python3 -m venv .venv
+python3.13 --version
+python3.13 -m venv .venv
+.venv/bin/python --version
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
-Download `trade-demo-data-20260927-isolated-v2.zip` from the Release and check its SHA-256:
+Download `trade-demo-data-20260927-isolated-v2.zip` from the Release. Replace `/path/to/` with the download location and check its SHA-256 on macOS:
+
+```bash
+shasum -a 256 "/path/to/trade-demo-data-20260927-isolated-v2.zip"
+```
+
+The digest must match:
 
 ```text
 1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6
 ```
 
-Replace `/path/to/` in the command below with the download location. Continue only if bundle verification returns `"status": "verified"`.
-
-Unpack the data bundle into a new ignored directory, such as `.local/trade-data-bundle-1/`. The directory supplied below must contain both `BUNDLE_MANIFEST.json` and `data/`:
+Unpack into a new directory under `.local/`, which Git ignores. The data-root directory must contain both `BUNDLE_MANIFEST.json` and `data/`:
 
 ```bash
 mkdir -p .local
-unzip /path/to/trade-demo-data-20260927-isolated-v2.zip -d .local/trade-data-bundle-1
-PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-bundle-1
-.venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-bundle-1
+unzip "/path/to/trade-demo-data-20260927-isolated-v2.zip" -d ".local/trade-data-bundle-1"
+PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root ".local/trade-data-bundle-1"
 ```
 
-Open `http://127.0.0.1:8765/preview/`. Keep the terminal running; Ctrl-C stops the server. If that port is occupied, pass a free port with `--port` rather than stopping another application.
+After verification returns `"status": "verified"`, start the application:
 
-In **Model settings**, select your provider, enter its supported model name and your API key, then save. Saving does not send a model request; **Test connection** does and may incur charges. Submit a question in the chat to use the assistant. Without a key, select **Data only** and confirm the product and dates yourself. Keys are stored by the local service, not embedded in the public showcase. MySQL is not needed for everyday web queries.
+```bash
+.venv/bin/python scripts/run_web.py --trade-data-root ".local/trade-data-bundle-1"
+```
+
+Open `http://127.0.0.1:8765/preview/`. Keep the terminal running; Ctrl-C stops the server. If that port is occupied, select a free port with `--port`.
+
+In **Model settings**, choose Zhipu GLM, DeepSeek, or Qianwen, enter a model ID supported by that platform and your API key, then save. Saving does not send a model request; **Test connection** does and may incur charges. Submit a question in the chat to use the assistant. Without a key, select **Data only** and confirm the product, direction, and dates yourself. Keys are stored by the local service.
 
 See the [local guide](docs/LOCAL_RUN.md) for bundle verification, model settings, and operation. GitHub Pages can host the saved showcase, but cannot run this Python backend.
 
 ## Model tests
 
 The tests check whether a model uses the tools to complete a task, handles unsupported requests correctly, and returns reports whose figures can be verified.
+
+GPT models were tested in Codex chats; DeepSeek and GLM used the application's API. The GPT results do not establish GPT API support in the local application.
 
 | Model / reasoning | Normal tasks completed | Boundary cases handled | Saved reports verified |
 |---|---:|---:|---:|
@@ -96,17 +103,17 @@ Each run planned nine normal tasks and three boundary cases. Both Sol configurat
 |---|---|
 | U.S. imports | 48 processed months: January 2016–May 2018 and January 2025–July 2026 |
 | U.S. exports | August 2025–July 2026, 12 consecutive months |
-| Products | Published commodity catalogs; not limited to the five policy-demo products |
+| Products | Published official commodity catalogs for the included data |
 | Partners | All origins/destinations combined, or China |
 | Policies | Registered and enabled local documents |
 
-The latest included month is July 2026. “Recent” refers to available data; a requested missing month is reported as unavailable. Import values use the imports-for-consumption measure, while exports use total exports on an FAS basis. They are displayed separately, not subtracted to claim a trade balance. Value changes do not by themselves establish changes in quantity, prices, or the effect of a policy.
+The latest included month is July 2026. “Recent” refers to available data; a requested missing month is reported as unavailable. Import values use the imports-for-consumption measure, while exports use total exports on an FAS basis. These measures are displayed separately and do not form a directly comparable trade balance. Value changes do not by themselves establish changes in quantity, prices, or the effect of a policy.
 
 The current version starts with U.S. import and export data. Future work may add datasets from China and other countries, after collecting the data and checking product classifications and statistical definitions.
 
 ## How it works
 
-The assistant uses a single tool-calling loop rather than a fixed query form:
+The assistant uses a tool-calling loop:
 
 1. The model interprets the product, direction, partner, and dates, using the previous turn when answering a follow-up.
 2. It checks the catalog and available dates, then calls trade or policy tools. The tools retrieve records, validate the scope, and calculate the figures.
@@ -115,9 +122,9 @@ The assistant uses a single tool-calling loop rather than a fixed query form:
 
 Step 3 can return to step 2. For example, an import query may be followed by an export query or a search for a related policy notice. The model selects which reports to return; the program determines the primary report for display.
 
-Trade figures are not taken from model memory. Python reads prepared Census tables and calculates totals and changes. The current public report summaries also come from those calculations. Policy search uses lexical/BM25 retrieval over registered documents, including related conditions; it is not an unrestricted web search.
+Python reads prepared Census tables and calculates totals and changes, which also supply the current public report summaries. Policy search uses lexical/BM25 retrieval over registered local documents, including related conditions.
 
-Reports and conversations are saved locally so they can be reopened. The model can decide what to query, but it cannot make missing values become zero or replace an unavailable month without the required confirmation.
+Reports and conversations are saved locally so they can be reopened. Missing data is not counted as zero; changing to a different month requires explicit confirmation.
 
 MySQL is used in data engineering and verification; everyday web queries read verified data files and need no database server.
 
@@ -133,7 +140,7 @@ MySQL is used in data engineering and verification; everyday web queries read ve
 | `data/` | Source metadata and prepared data; large datasets are supplied separately |
 | `docs/` | Setup, test results, and data notes |
 
-[Current functionality](docs/CURRENT_PRODUCT.zh-CN.md) · [Showcase guide](docs/PUBLIC_SHOWCASE.zh-CN.md) · [Model tests](docs/MODEL_SELECTION.md)
+[Documentation](docs/README.md) · [Features and coverage](docs/CURRENT_PRODUCT.md) · [Showcase guide](docs/PUBLIC_SHOWCASE.md) · [Model tests](docs/MODEL_SELECTION.md)
 
 For targeted page and report tests (some Python tests need the publisher's local data and saved source records):
 

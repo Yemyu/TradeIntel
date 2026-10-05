@@ -49,7 +49,10 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 let paused = reduced.matches;
 let page = 'home';
 function route() {
-  page = ['home', 'workspace', 'cases', 'report'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home';
+  const fragment = location.hash.slice(1);
+  page = ['home', 'workspace', 'cases', 'report'].includes(fragment) ? fragment : 'home';
+  const homeSection = ['project-capabilities', 'project-workflow', 'project-data', 'project-stack', 'project-tests', 'project-start'].includes(fragment)
+    ? $(fragment) : null;
   document.querySelectorAll('.page').forEach(node => { node.hidden = node.id !== page; });
   document.querySelectorAll('.nav nav a').forEach(a => {
     if(a.hash === '#' + page) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
@@ -57,7 +60,8 @@ function route() {
   document.title = `${page==='report' && window.tradeintelLiveReportTitle
     ? window.tradeintelLiveReportTitle
     : {home:tr('国际贸易研究助手','International trade research assistant'),workspace:tr('工作台','Workspace'),cases:tr('案例记录','Case records'),report:tr('美国钨与光伏材料进口情况','US imports of tungsten and solar materials')}[page]} · TradeIntel`;
-  window.scrollTo({top:0,left:0,behavior:'instant'});
+  if (homeSection) homeSection.scrollIntoView({block:'start',behavior:'instant'});
+  else window.scrollTo({top:0,left:0,behavior:'instant'});
 }
 addEventListener('hashchange', route); route();
 document.querySelectorAll('[data-scroll]').forEach(a => a.addEventListener('click', e => {

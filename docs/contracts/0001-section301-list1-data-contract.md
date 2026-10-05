@@ -1,6 +1,6 @@
 # Data Contract 0001: Section 301 List 1
 
-中文学习版：[`0001-section301-list1-data-contract.zh-CN.md`](0001-section301-list1-data-contract.zh-CN.md)
+**English** | [简体中文](0001-section301-list1-data-contract.zh-CN.md)
 
 - Status: Draft for implementation
 - Date: 2026-08-28

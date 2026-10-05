@@ -74,9 +74,18 @@ test('saved real reports derive the same facts with or without optional explanat
 test('zero is observed, missing stays missing and latest missing never falls back',()=>{
   const e=environment(),r=fixture([12,0,null]),d=e.build(r).directions[0];
   assert.equal(d.issues.length,0);assert.equal(d.latest,null);assert.equal(d.total,null);assert.equal(d.delta,null);
-  e.render(e.target,r,{language:'en'});assert.match(e.target.textContent,/No published value is available for 2026-03/);
+  e.render(e.target,r,{language:'en'});assert.match(e.target.textContent,/No available value for 2026-03/);
+  assert.match(e.target.textContent,/Recorded/);assert.doesNotMatch(e.target.textContent,/No published value/);
   assert.match(e.target.textContent,/0 USD/);assert.equal(e.created.filter(n=>n.className==='trade-bar-fill').length,2);
   assert.ok(e.created.filter(n=>n.className==='trade-bar-fill').every(n=>!n.style.width.includes('NaN')));
+});
+test('an unincluded month is labelled separately from an unavailable recorded value',()=>{
+  const e=environment(),r=fixture([12,null]);r.series[1].status='not_processed';
+  const d=e.build(r).directions[0];assert.equal(d.latest,null);assert.equal(d.delta,null);assert.equal(d.total,null);
+  e.render(e.target,r,{language:'en'});
+  assert.match(e.target.textContent,/2026-02—Not included/);
+  assert.doesNotMatch(e.target.textContent,/Published/);
+  assert.equal(e.created.filter(n=>n.className==='trade-bar-fill').length,1);
 });
 test('single month and flat series do not invent movement',()=>{
   const e=environment(),one=e.build(fixture([0])).directions[0],flat=e.build(fixture([7,7,7])).directions[0];

@@ -1,6 +1,6 @@
 # 0126：严格流程的可复现离线演示包
 
-日期：2026-09-13。模型建议为 Luna 最高；本阶段不调用外部 API、不训练模型，也不改变 0121—0125 已锁定的验收协议。
+日期：2026-09-13。本阶段不调用外部 API、不训练模型，也不改变 0121—0125 已锁定的验收协议。
 
 ## 本轮交付
 
@@ -46,5 +46,4 @@ python scripts/run_strict_offline_demo.py --output /tmp/tradeintel-offline-demo-
 
 - 演示目录索引：[`phase-0126-offline-demo/README.zh-CN.md`](../experiments/phase-0126-offline-demo/README.zh-CN.md)
 - 固定预期摘要：[`expected-summary.json`](../experiments/phase-0126-offline-demo/expected-summary.json)
-- 中文学习说明：[`Phase 58`](../learning/phase-58-offline-demo.zh-CN.md)
 - 自动回归：[`tests/test_offline_demo_0126.py`](../../tests/test_offline_demo_0126.py)

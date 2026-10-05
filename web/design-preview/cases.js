@@ -4,7 +4,7 @@
   // The case list remains navigable while its catalog is loading.
   const previews=[
     {id:ids[0],kind:'real_agent_run',title:{zh:'大豆进口，接着问出口',en:'Soybean imports, then exports'},description:{zh:'查看连续追问，以及进口和出口的图表报告。',en:'Follow the conversation and read import and export charts.'}},
-    {id:ids[1],kind:'real_agent_run',title:{zh:'豆油不是原料大豆',en:'Soybean oil is not raw soybeans'},description:{zh:'按商品名称查找豆油，查看十二个月的进口变化。',en:'Look up soybean oil and view twelve months of imports.'}},
+    {id:ids[1],kind:'real_agent_run',title:{zh:'豆油进口查询',en:'Soybean oil imports'},description:{zh:'按商品名称查找豆油，查看十二个月的进口变化。',en:'Look up soybean oil and view twelve months of imports.'}},
     {id:ids[2],kind:'edited_evidence_report',title:{zh:'钨和光伏材料：政策与进口',en:'Tungsten and solar materials'},description:{zh:'阅读公告背景、进口金额和中国来源份额。',en:'Read notice context, import values, and China-origin shares.'}},
     {id:ids[3],kind:'guarded_run',title:{zh:'所问月份还没有数据',en:'The requested month is not available'},description:{zh:'查看没有对应月份数据时，助手如何说明缺口。',en:'See the response when the requested month is unavailable.'}}
   ];
@@ -45,7 +45,7 @@
     document.title=`${window.tradeintelLiveReportTitle} · TradeIntel`;
     $('return-to-conversation').href=location.pathname+`?lang=${english()?'en':'zh'}#cases`;
     $('return-to-conversation').textContent=tr('← 返回案例列表','← Back to cases');
-    record.replaceChildren(make('h2',tr('案例暂不可用','Case unavailable')),make('p',tr('没有找到这份存档。请从四个案例中选择；不会改查其他商品。','This archive could not be found. Choose one of the four cases; no other product is substituted.')));
+    record.replaceChildren(make('h2',tr('案例暂不可用','Case unavailable')),make('p',tr('没有找到这份存档，请返回案例列表选择。','This archive could not be found. Return to the case list to choose another.')));
     caseReport.replaceChildren(make('h1',tr('案例暂不可用','Case unavailable')));caseReport.hidden=location.hash!=='#report';
     $('report').querySelector('.report-layout').hidden=true;
     window.dispatchEvent(new Event('tradeintel:case-report'));
@@ -75,9 +75,9 @@
     };
     const explanations={
       'soybean-trade':tr('先问大豆进口，再接着问出口。查看助手如何接续前一个问题，并给出对应报告。','Ask about soybean imports, then follow up about exports. See how the assistant carries the conversation forward and returns the relevant reports.'),
-      'soybean-oil':tr('问的是豆油，不是原料大豆。查看商品识别的问答，以及对应的进口图表报告。','Soybean oil is not raw soybeans. Follow the product lookup and read the resulting import report.'),
-      'policy-materials':tr('直接阅读一份完整报告，包含关税公告、进口图表和数据出处。这一例不是对话记录。','Read a complete report with a tariff notice, import charts, and sources. This example is a report, not a conversation.'),
-      'missing-month':tr('用户问的月份还没有数据。查看系统如何提示缺口，并拦截未经确认的月份替换。','The requested month has no available data. See how the system reports the gap and blocks an unconfirmed month substitution.')
+      'soybean-oil':tr('按商品名称查找豆油的官方商品范围，阅读对应的十二个月进口图表报告。','Look up the official product scope for soybean oil and read its twelve-month import report.'),
+      'policy-materials':tr('阅读关税公告背景、五类商品的进口图表，以及相关数据出处。','Read tariff-notice context, import charts for five product codes, and the data sources.'),
+      'missing-month':tr('查看所问月份尚未收录时，助手如何说明数据缺口。','See how the assistant explains a gap when the requested month has not been included.')
     };
     const entries=manifest?.cases||previews;
     for(const group of groups){
@@ -113,7 +113,7 @@
     if(entry.id==='policy-materials'){
       record.replaceChildren(make('p',tr('政策报告示例','POLICY REPORT EXAMPLE'),'eyebrow'),
         make('h2',text(entry.title)),
-        make('p',tr('这份资料编辑稿展示政策公告和贸易数据如何放在同一份报告中阅读。它整理了美国钨与光伏材料的附加关税背景、五类商品的进口金额，以及中国来源份额。','This edited report shows how a policy notice and trade data can be read together. It presents additional-duty context for tungsten and solar materials, import values for five product codes, and the share sourced from China.'),'policy-intro'));
+        make('p',tr('报告汇集美国钨与光伏材料的附加关税公告、五类商品的进口金额和中国来源份额。','The report brings together an additional-duty notice for tungsten and solar materials, import values for five product codes, and China-origin shares.'),'policy-intro'));
       const topics=make('div',undefined,'policy-case-topics');
       for(const [zhTitle,enTitle,zhBody,enBody] of [
         ['公告涉及什么','What the notice covers','列明的商品、附加税率和生效时间，以及适用时需要核对的条件。','Listed products, additional duties, effective dates, and conditions to check.'],
@@ -121,15 +121,15 @@
         ['报告里有什么','Inside the report','商品切换、逐月图表、完整数值表，以及公告和数据出处；可以打印或保存为PDF。','Product selection, monthly charts, exact-value tables, and notice and data sources. Print it or save it as a PDF.']
       ]){const topic=make('section');topic.append(make('h3',tr(zhTitle,enTitle)),make('p',tr(zhBody,enBody)));topics.append(topic);}
       record.append(topics,link(tr('阅读报告 →','Read the report →'),href(entry.id,'r1','report'),'button primary'),
-        make('p',tr('这是一份根据已保存资料整理的报告，没有对应的模型对话记录。','This report was compiled from saved material; there is no associated model conversation.'),'case-meta'));
+        make('p',tr(`资料编辑报告 · ${entry.recorded_on} · 数据截至 ${entry.data_cutoff}`,`Compiled report · ${entry.recorded_on} · Data through ${entry.data_cutoff}`),'case-meta'));
       const notes=make('details',undefined,'policy-case-notes');notes.append(make('summary',tr('资料日期与口径','Dates and scope')),
-        make('p',tr(`整理日期：${entry.recorded_on}。贸易数据截至 ${entry.data_cutoff}。公告中的附加税率不代表现行全部税率；进口金额图表不用于认定政策效果。`,`Compiled on ${entry.recorded_on}. Trade data through ${entry.data_cutoff}. The notice specifies additional rather than total current duties; import charts do not establish policy effects.`)));
+        make('p',tr('公告列出的是附加税率；现行全部税率与适用条件需另行核对。贸易图表呈现进口金额，政策效果需要其他证据支持。','The notice lists additional duties. Current total duties and applicability require further checks; policy effects require evidence beyond the import values shown.')));
       record.append(notes);return;
     }
     record.replaceChildren(make('p',tr(`存档 ${entry.recorded_on} · 数据截至 ${entry.data_cutoff}`,`Recorded ${entry.recorded_on} · Data through ${entry.data_cutoff}`),'case-meta'),
       make('h2',text(entry.title)),make('p',text(entry.limitations),'case-limit'));
     if(entry.model)record.append(make('p',`${entry.model.request_name} · ${entry.model.reasoning}`,'case-meta'));
-    if(english()&&caseData.turns.length)record.append(make('p','English is a reading translation of the saved Chinese exchange, not a new model run.','case-meta'));
+    if(english()&&caseData.turns.length)record.append(make('p','English translation of the saved Chinese exchange.','case-meta'));
     for(const turn of caseData.turns){
       const message=make('section',undefined,`chat-message ${turn.role==='user'?'user-message':'assistant-message'}`);
       message.append(make('small',turn.role==='user'?tr('你','You'):tr('研究助手','Research assistant')),make('p',text(turn.text)));
@@ -143,8 +143,8 @@
         const list=make('ol');for(const step of turn.steps)list.append(make('li',text(step.label)+(step.status==='unavailable'?tr('：没有可用数据',' — unavailable'):'')));steps.append(list);message.append(steps);}
       record.append(message);
     }
-    if(caseData.guard)record.append(make('p',tr('本次没有生成报告或图表。需要另行明确是否改查7月；存档不会替你重新查询。','No report or chart was generated. A new request would need explicit permission to use July; this archive does not run a replacement query.')));
-    record.append(link(tr('本地运行说明 ↗','Local setup ↗'),'#home','text-link'));
+    if(caseData.guard)record.append(make('p',tr('2026年8月尚未收录，本次未生成报告或图表。改查7月需要另行确认。','August 2026 had not been included, so no report or chart was generated. Using July instead requires confirmation.')));
+    record.append(link(tr('本地运行说明 ↗','Local setup ↗'),'#project-start','text-link'));
   }
   async function route(){
     page.hidden=location.hash!=='#cases';
@@ -167,8 +167,8 @@
       $('return-to-conversation').href=href(id);$('return-to-conversation').textContent=tr('← 返回案例','← Back to case');
       if(location.hash==='#report'){
         if(id==='policy-materials'&&alias==='r1'){
-          editedNote.textContent=tr(`存档资料编辑稿 · ${entry.recorded_on} · 数据截至 ${entry.data_cutoff} · 不是当前 Agent 生成的回答`,
-            `Edited archive · ${entry.recorded_on} · Data through ${entry.data_cutoff} · Not a current Agent response`);
+          editedNote.textContent=tr(`资料编辑报告 · ${entry.recorded_on} · 数据截至 ${entry.data_cutoff}`,
+            `Compiled report · ${entry.recorded_on} · Data through ${entry.data_cutoff}`);
           editedNote.hidden=false;
           layout.hidden=false;window.tradeintelLiveReportTitle=text(entry.title);
         }else{

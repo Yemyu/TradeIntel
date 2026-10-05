@@ -254,7 +254,7 @@ test('English report without an official English label or projected summary uses
   env.context.document.documentElement.lang='en';
   vm.runInContext(script,env.context);await new Promise(resolve=>setImmediate(resolve));
   assert.equal(env.context.window.tradeintelLiveReportTitle,'U.S. imports · product group 1201');
-  assert.ok(env.report().textContent.includes('No published value'));
+  assert.ok(env.report().textContent.includes('No available value'));
   assert.ok(!env.report().textContent.includes('中文摘要'));
   assert.ok(!env.report().textContent.includes('中文商品'));
 });
@@ -659,7 +659,8 @@ test('partial notice shows broader-product chart, while source-only notice never
   assert.ok(!sourceOnly.report().textContent.includes('300 美元'));
   assert.ok(!sourceOnly.report().textContent.includes('贸易数据原包'));
   assert.ok(!sourceOnly.report().textContent.includes('上层商品按官方子码核对'));
-  assert.match(sourceOnly.report().textContent, /没有查询贸易数据/);
+  assert.match(sourceOnly.report().textContent, /不查询贸易数据或调用模型/);
+  assert.match(sourceOnly.report().textContent, /本卡保存已确认的公告字段及原文引文/);
   assert.equal(sourceOnly.created.filter(item => item.tag === 'a' && item.href === base.policy.source_url).length, 1);
   assert.ok(sourceOnly.created.some(item => item.tag === 'li' && item.textContent === '84% 第99章条目'));
   assert.ok(!sourceOnly.report().textContent.includes('["84%'));
@@ -783,7 +784,9 @@ test('saved assistant link shows only the public summary without starting a new 
   const rendered=env.report().textContent;
   assert.match(rendered,/46,041,287/);
   assert.ok(!rendered.includes('旧版模型文字未经本规则核验'));
-  assert.match(rendered,/旧记录的未审模型文字不作为报告正文/);
+  assert.match(rendered,/此记录的模型文字尚未审阅，报告展示已保存的查询数据/);
+  const legacyStatus=env.created.find(item=>item.tag==='details'&&item.textContent.includes('历史回答状态'));
+  assert.ok(legacyStatus);assert.ok(!legacyStatus.open);
   assert.ok(!rendered.includes('目前未运行模型解释'));
   assert.ok(!env.created.some(item=>item.tag==='button'&&item.textContent==='试用模型解读'));
   assert.deepEqual(calls.map(call=>call.method),['GET','GET','GET']);

@@ -1,6 +1,6 @@
 # Decision 0001: Initial Policy Case
 
-中文学习版：[`0001-initial-policy-case.zh-CN.md`](0001-initial-policy-case.zh-CN.md)
+**English** | [简体中文](0001-initial-policy-case.zh-CN.md)
 
 - Status: Accepted
 - Date: 2026-08-28
@@ -30,7 +30,7 @@ Primary policy sources:
 | Candidate | Strength | Main weakness | Decision |
 |---|---|---|---|
 | U.S. Section 301 List 1, 2018 | Exact effective date, explicit tariff-line list, long pre/post period, many alternative suppliers | Later tariff lists and product exclusions must be modelled carefully | Selected |
-| EU duties on Chinese BEVs, 2024 | Recent, one clear product family, high public interest | Existing portfolio is already automobile-heavy; provisional and definitive stages complicate timing; shorter post-period | Later monitoring case |
+| EU duties on Chinese BEVs, 2024 | Recent, one clear product family, high public interest | Provisional and definitive stages complicate timing; shorter post-period | Later monitoring case |
 | U.S. washing-machine safeguard, 2018 | Clear product and visible supplier relocation | Too narrow for the main platform and tariff-rate quota design is specialised | Method demonstration only if useful |
 | Recent U.S. tariff increases, 2024–2026 | Very current and suitable for live monitoring | Staggered effective dates and short post-period make validation weaker | Add after historical validation |
 

@@ -1,49 +1,54 @@
-# 本地网页：项目介绍、提问与报告
+# Web interface
 
-## 本地试用入口
+**English** | [简体中文](README.zh-CN.md)
 
-项目服务运行时访问 http://127.0.0.1:8765/preview/#workspace 。普通商品问题会先从已发布的美国进出口商品目录找候选，展示完整范围；你选定一种商品后，才能生成月度数据报告。小麦、咖啡、手机、汽车等不再要求你先知道税号。另有已登记的钨/光伏政策案例，沿用原有证据与审阅流程。进口有48个不连续月份；出口当前覆盖 2025-08 至 2026-07 的连续12个月。报告刷新后可找回；页面不会自动搜索并导入任意新公告。中文目录由2026年税则标题提取，只用于搜索，不代替美国官方商品定义；同义词仍有未覆盖。
+This directory contains the shared HTML, CSS, and JavaScript for the bilingual project showcase, local chat workspace, and chart reports. The public website reads four saved examples; the local service enables questions with a user-configured model or data-only queries. See the [local guide](../../docs/LOCAL_RUN.md) for installation and model settings.
 
-工作台的“模型设置”可在本机保存智谱、DeepSeek 或千问平台的服务密钥和模型 ID，可读取当前服务商/型号并单独测试连接。密钥由网页提交给本机服务，不在状态接口中回显，也不会写到仓库；产品设置与历史模型实验设置分开。保存不调用模型；点击“测试连接”才发送一条不含报告资料的短请求，服务商可能计费。一次任务只尝试调用模型一次，明确拒绝与结果未知会分开显示，不自动重试。AI 解释需逐项人工核对，未经审阅不会标成最终报告。
+## Files
 
-P1 修正了旧的 DeepSeek 型号 `flash`，保存为 `deepseek-flash` 后，一次短连接测试真实返回。此前 GLM 请求的 HTTP 401 和旧任务仍保留为历史失败记录。短连接测试不等于完整报告通过。现在通用大豆/玉米报告先由程序计算并保存；用户可在报告页另行点击“生成模型解释”。服务端将回答原文绑定到这份报告、保存并校验，逐条人工核对后才会显示为已采纳；刷新后仍能恢复。离线替身已走通全流程；DeepSeek `deepseek-flash` 也完成一份大豆出口报告的真实调用，结构校验通过，但回答较模板化、尚未人工采纳。网页不会拿钨的数据冒充大豆答案。大豆贸易未说明方向时须先选。
+| File | Purpose |
+|---|---|
+| `index.html`, `style.css` | Page structure and styling |
+| `app.js` | Navigation, language switching, globe, and the fixed policy chart |
+| `live.js` | Local workspace, model settings, and backend requests |
+| `report-view.js` | Shared report rendering and printing |
+| `cases.js`, `cases/index.json`, `cases/*.json` | Four exported examples and their catalog |
+| `data.json` | Saved import figures for five policy-example products, February–July 2026 |
+| `vendor/` | Bundled globe dependency and license notices |
 
-新生成的模型请求已改用 v2 解释合同：问月度变化时，程序给出明确的增加、减少或持平，并要求模型解释说清方向。此修订已离线核对，尚未进行第二次真实模型调用；之前的 v1 原答仍可按原记录审阅。
+## Preview the public build
 
-启动项目服务（项目根目录）：
+From the repository root, using Python 3.12:
 
-```sh
-.venv/bin/python scripts/run_web.py
+```bash
+PYTHONPATH=src:. python3 -S scripts/build_github_pages.py --output tmp/pages-preview/site
+PYTHONPATH=src:. python3 -S scripts/build_github_pages.py --verify tmp/pages-preview/site
+python3 -m http.server 8790 --bind 127.0.0.1 --directory tmp/pages-preview/site
 ```
 
-下文关于 `8790` 的命令仅供无后端的静态排版预览使用。网页的项目介绍与示例支持中英文切换；当前新生成的报告以中文呈现。
+Open [http://127.0.0.1:8790/](http://127.0.0.1:8790/). Choose a new output directory if the previous one already exists. The portable builder uses the standard library and checked-in examples, validates the public asset allowlist, and removes the local workspace and `live.js` from the output. It does not need private sessions, a trade-data bundle, or model credentials. The [Pages workflow](../../.github/workflows/pages.yml) uses this same builder.
 
-2026-09-23 修订：改用直接说明用途的文案；加入中英文切换与语言记忆；报告随商品切换显示金额/份额解释；参考资料移至文末。地球只标中国、美国，表示案例涉及的国家，不表示真实货物流。浏览器已检查提问、确认范围、真实数据报告、刷新恢复和模型失败提示。
+To check the build and interface:
 
-项目展示、研究工作台、报告阅读共用同一套页面和导航。`8765` 入口复用项目服务中的 API 与审阅门；`8790` 入口只显示静态示例。
-
-## 只看静态排版
-
-在项目根目录运行：
-
-```sh
-.venv/bin/python -m http.server 8790 --bind 127.0.0.1 --directory web/design-preview
+```bash
+PYTHONPATH=src:.:tests python3 -S -m unittest test_github_pages_build
+node --test tests/*.test.cjs
 ```
 
-访问 http://127.0.0.1:8790/ 。三个入口为 `#home`、`#workspace`、`#report`。
+The Node checks use DOM fixtures; see [testing](../../docs/TESTING.md) for the scope and prerequisites.
 
-## 数据与边界
+## Run the local workspace
 
-- `data.json` 是固定案例中五个商品、2026 年 2—7 月的 30 行真实指标，记录源文件摘要。重建命令：`.venv/bin/python scripts/build_design_preview.py`。源文件位于本地 tmp，其他机器没有该产物时可直接使用已导出的 JSON。
-- 金额、商品切换和完整数值表可用；份额在原型中由金额计算。生产接入应复用后端已校验指标，不另立一套业务计算。
-- 在 `8790` 静态入口，工作台只展示固定案例的范围预览，不生成新报告，也不调用 API。在 `8765` 服务入口，通用进口/出口问题可生成数据报告；模型解释需在报告页另行点击，可能计费。模型失败时数据报告仍可阅读，结果未知时不会自动重复请求。工作台“测试连接”只发短消息，不能代替完整报告验收。
-- 首页地球及报告封面柱形是视觉示意，不表示真实贸易流或统计趋势。报告内月度图才使用案例数据。
-- 打印按钮调用浏览器打印。真实小麦出口与乘用车进出口报告已导出并逐页检查：打印会展开逐月表、商品范围和来源；未审阅的模型草稿不会进入 PDF。两份验收样张见 `output/pdf/`。
+After preparing and verifying the trade-data bundle as described in the local guide:
 
-## 免费组件
+```bash
+.venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-bundle-1
+```
 
-地球使用 COBE 0.6.5，本地固定 bundle 来自 https://esm.sh/cobe@0.6.5/es2022/cobe.bundle.mjs 。MIT 许可及依赖 Phenomenon 许可保存在 vendor。页面运行无需访问 CDN；其余布局及 SVG 图表由本项目实现。不使用 ThreeUI Pro，不新增 React 或数据库。
+Open [http://127.0.0.1:8765/preview/](http://127.0.0.1:8765/preview/). The local backend serves this interface and executes queries. Saved-example views do not submit new questions; assistant questions use the configured provider. Data-only mode works without a model key or MySQL.
 
-## 检查记录
+## Components and data
 
-浏览器验证：三页导航、输入新问题、确认范围、生成真实数据报告、商品切换、刷新恢复、模型 HTTP 401 提示和首页地球标记。P5 的离线替身已实测大豆出口报告→解释草稿→逐项审阅→刷新恢复；真实接口对同一数据版本的 v1、v2 各调用 DeepSeek `deepseek-flash` 一次。v2 明确说出月度金额“减少”，但表达仍待用户审阅，不是准确率或发布验收。v2这次真实调用通过本地 HTTP 服务端直接完成，没有用浏览器操作。动态贸易报告打印已按两份真实样张逐页验收；完整无障碍验收仍未完成。
+The globe uses the bundled [COBE 0.6.5 module](https://esm.sh/cobe@0.6.5/es2022/cobe.bundle.mjs). Preserve [COBE's license](vendor/COBE-LICENSE) and [Phenomenon's license](vendor/PHENOMENON-LICENSE) when distributing the assets. The page loads the module locally. Layouts and SVG report charts are implemented in this project; the globe is a visual illustration, not a measured trade-flow map.
+
+The checked-in case files and `data.json` are already exported. Rebuilding the original exports requires their saved source records; it is separate from the portable Pages build. See the [data guide](../../data/README.md) for current coverage, sources, and download instructions.

@@ -1,33 +1,51 @@
-# TradeIntel 研究助手本地试用候选
+# TradeIntel 本地运行
 
-这是**本机试用包**，不是已公开发布的在线服务。需要两份分开的文件：本源码 ZIP 和贸易数据 ZIP。已核验环境为 macOS、Python 3.13；尚未验收 Windows 或其他电脑。普通数据报告不需要 MySQL，也不需要模型密钥。
+本说明随源码包提供。本地应用通过浏览器使用；贸易数据需从 [Release](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)单独下载。完整安装指南：[中文](https://github.com/Yemyu/TradeIntel/blob/main/docs/LOCAL_RUN.zh-CN.md) · [English](https://github.com/Yemyu/TradeIntel/blob/main/docs/LOCAL_RUN.md)。
 
-1. 将本源码 ZIP 解到新的目录，在该目录创建虚拟环境：
+## 安装
 
-   ```bash
-   python3 -m venv .venv
-   ```
+建议使用Python3.13；完整安装记录使用macOS和Python3.13.3。会话与报告存储依赖POSIX的`fcntl`模块，原生Windows不能直接运行。
 
-2. 把另附的 `trade-demo-data-20260927-isolated-v2.zip` 解到新的 `.local/trade-data-1` 目录。不要解到源码根目录，也不要覆盖旧数据：
+在源码目录执行：
 
-   ```bash
-   mkdir -p .local
-   unzip "/绝对路径/trade-demo-data-20260927-isolated-v2.zip" -d .local/trade-data-1
-   PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root .local/trade-data-1
-   ```
+```bash
+python3.13 --version
+python3.13 -m venv .venv
+.venv/bin/python --version
+.venv/bin/python -m pip install -r requirements.txt
+```
 
-   只有核验返回 `"status": "verified"` 才继续。数据 ZIP 的 SHA-256 应为 `1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6`。
+下载`trade-demo-data-20260927-isolated-v2.zip`，核对SHA-256：
 
-3. 在本机启动服务：
+```bash
+shasum -a 256 "/path/to/trade-demo-data-20260927-isolated-v2.zip"
+```
 
-   ```bash
-   .venv/bin/python scripts/run_web.py --trade-data-root .local/trade-data-1
-   ```
+预期摘要：
 
-   打开 `http://127.0.0.1:8765/preview/`。不配模型时，首次打开默认“仅查询数据（不使用模型）”。输入“最近美国大豆进口有什么变化？”，核对商品候选和月份后生成报告；也可试玉米出口、大豆进出口。页面支持图表、来源与刷新后读取报告。要停止服务，在运行窗口按 `Ctrl-C`。
+```text
+1ec80a664972fe8e1d3da212d975aa760bd62319b87ff00caaa0cb8ed90433e6
+```
 
-如需体验“研究助手（使用模型）”，请在页面“模型设置”中自行配置支持的模型，并切换“查询方式”。模型会选择受限查询工具，同一会话可追问，例如大豆进口后问“出口呢？”。**提问会把必要上下文发送给模型服务商，可能收费。**目前只有有限开发题的真实模型记录；不能把离线脚本模型的通过视为真实模型准确率。公开数据摘要由程序计算，模型自由解释不直接发布。请不要把个人密钥或 `.local/` 会话目录打包发给别人。
+解压到新的数据目录，核验后启动：
 
-这份候选使用已发布到项目数据包中的历史月份，末月是 2026-07，不会自动获得今天的新数据或新政策。缺少指定月份时应说明缺数，不把“上月”偷换为最新可用月。贸易金额的变化不能直接证明政策效果；本项目不提供投资建议。源码和数据的对外发送方式及许可尚未决定。
+```bash
+mkdir -p .local
+unzip "/path/to/trade-demo-data-20260927-isolated-v2.zip" -d ".local/trade-data-bundle-1"
+PYTHONPATH=src:. .venv/bin/python scripts/trade_demo_data_bundle.py verify --root ".local/trade-data-bundle-1"
+.venv/bin/python scripts/run_web.py --trade-data-root ".local/trade-data-bundle-1"
+```
 
-有限真实检查中，DeepSeek Flash高推理能自动查询豆油并返回正确报告；缺月份问题曾错误选择7月，由服务器拦截后提示缺8月。模型仍会选错范围，不能据这两次检查推断所有问题都正确。本版已包含原料大豆英文别名修复，完成工具只提交报告和来源引用，公开摘要根据数据生成。
+核验应返回`"status": "verified"`。打开`http://127.0.0.1:8765/preview/`。终端保持运行；Ctrl-C停止服务。
+
+## 提问与报告
+
+在模型设置中选择智谱GLM、DeepSeek或千问，填写平台支持的模型ID和自己的API Key。保存不发送模型请求；测试连接和助手提问会请求所选服务商，可能收费。
+
+可以先问“最近美国大豆进口有什么变化？”，再问“出口呢？”。回复中的报告卡片提供图表、逐月金额和出处，也可打印或保存PDF。不配置模型时，用数据查询模式手动确认商品和月份。
+
+数据最新月为2026年7月；指定未收录月份时提示缺口。进口消费额与出口FAS分开展示，金额变化不能直接认定政策效果。已登记政策资料才能被检索，数据ZIP不包含完整政策库。
+
+密钥、对话和报告保存在本地的`.local/`。共享项目源码时不包含该目录。
+
+[模型测试](https://github.com/Yemyu/TradeIntel/blob/main/docs/MODEL_SELECTION.zh-CN.md) · [公开案例](https://yemyu.github.io/TradeIntel/?lang=zh#cases)
