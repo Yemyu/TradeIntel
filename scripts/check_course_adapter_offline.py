@@ -40,8 +40,8 @@ def main() -> int:
             check()
         except AdapterContractError:
             continue
-        raise AssertionError("unsafe course adapter case was accepted")
-    print("course adapter offline checks: 7 passed")
+        raise AssertionError("invalid query or evidence contract case was accepted")
+    print("query and evidence contract offline checks: 7 passed")
     return 0
 
 

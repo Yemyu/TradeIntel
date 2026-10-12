@@ -32,6 +32,12 @@ def submission(p):
 
 
 class ChecklistTests(unittest.TestCase):
+    def require_historical_material(self, relative_path):
+        path = Path(__file__).resolve().parents[1] / relative_path
+        if not path.is_file():
+            self.skipTest(f'Private historical prerequisite absent: {relative_path}')
+        return path
+
     def test_complete_shared_claim_can_support_separate_review_rows(self):
         p = packet()
         r = validate_review(p, submission(p), 'fixture')
@@ -114,6 +120,7 @@ class ChecklistTests(unittest.TestCase):
             self.assertFalse(unchanged(hashes))
 
     def test_new_preflight_freezes_checklists_without_network(self):
+        self.require_historical_material('docs/experiments/phase13k-results.zh-CN.md')
         with patch('tradeintel_ai.model_adapter.OpenAICompatibleModel.complete', side_effect=AssertionError('network')):
             state = preflight(config(), checklist_review=True)
         self.assertEqual(state['manifest']['version'], 'development-smoke-0093')
@@ -122,8 +129,8 @@ class ChecklistTests(unittest.TestCase):
 
     def test_trade_checklist_matches_actual_summary_contract(self):
         from tradeintel_ai.research_brief import summary_with_comparison
-        root = Path(__file__).resolve().parents[1]
-        saved = json.loads((root / 'docs/experiments/phase13k-delivery/saved-live-result.json').read_text())
+        saved_path = self.require_historical_material('docs/experiments/phase13k-delivery/saved-live-result.json')
+        saved = json.loads(saved_path.read_text())
         data = next(r['data'] for r in saved['trade']['tool_results'] if r['tool_name'] == 'get_trade_series')
         for case_id, comparison in [('D89-2', {'kind': 'sequence'}),
                                     ('D89-3', {'kind': 'endpoint', 'reference_month': '2018-09', 'current_month': '2018-10'})]:
@@ -136,6 +143,7 @@ class ChecklistTests(unittest.TestCase):
             self.assertTrue(validate_review(p, v, 'fixture')['approved'])
 
     def test_actual_delivery_can_be_reviewed_and_missing_answer_stops_next_case(self):
+        self.require_historical_material('docs/experiments/phase13k-results.zh-CN.md')
         candidate = policy_plan()
         candidate.update(comparison=None, policy_search_query='Section 301 effective date rate', request_units=[
             {'quote': '第一批关税何时生效，额外税率是多少？', 'kind': 'request', 'target': 'policy'},
@@ -168,6 +176,7 @@ class ChecklistTests(unittest.TestCase):
             self.assertFalse(json.loads((out / 'D89-1-answer-review.json').read_text())['approved'])
 
     def test_live_style_workflow_saves_negative_review_without_execution_or_reference_leak(self):
+        self.require_historical_material('docs/experiments/phase13k-results.zh-CN.md')
         candidate = policy_plan()
         candidate.update(comparison=None, policy_search_query='Section 301 effective date rate', request_units=[
             {'quote': '第一批关税何时生效，额外税率是多少？', 'kind': 'request', 'target': 'policy'},

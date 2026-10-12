@@ -8,7 +8,7 @@
 
 ## 首次安装
 
-建议使用 Python 3.13。[完整安装记录](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md)使用 macOS 和 Python 3.13.3。会话与报告存储依赖 POSIX 的 `fcntl` 模块，当前不支持原生 Windows。
+建议使用 Python 3.13。已在 macOS 和 Python 3.13.3 上验证安装。会话与报告存储依赖 POSIX 的 `fcntl` 模块，当前不支持原生 Windows。
 
 克隆当前 main 分支并创建项目环境。下面两次版本检查应输出 Python 3.13.x：
 
@@ -96,7 +96,7 @@ python3.13 -m http.server 8000 --bind 127.0.0.1 --directory web/design-preview
 
 更新数据包时，解到新目录并核验，再将 `--trade-data-root` 指向新目录重启服务。保留上一版数据包用于回退。
 
-GitHub Pages CI 使用 Python 3.12 和标准库构建静态展示页；这项检查与 Python 3.13.3 的完整本地安装记录不同。
+GitHub Pages CI 使用 Python 3.12 和标准库构建静态展示页；这项检查与 Python 3.13.3 的本地安装核验不同。
 
 ## 数据与常见问题
 
@@ -107,4 +107,4 @@ GitHub Pages CI 使用 Python 3.12 和标准库构建静态展示页；这项检
 - **模型请求失败？** 检查服务地址、型号和密钥；未知结果不会自动重复请求，避免重复费用。
 - **为什么没有政策检索结果？** 只有已登记并启用的公告能检索，贸易数据包不提供完整政策库。展示页的编辑报告不等于新登记的政策文档。
 
-[macOS 安装核验记录](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md) · [展示页说明](PUBLIC_SHOWCASE.zh-CN.md) · [公开网站](https://yemyu.github.io/TradeIntel/?lang=zh)
+[展示页说明](PUBLIC_SHOWCASE.zh-CN.md) · [测试说明](TESTING.zh-CN.md) · [公开网站](https://yemyu.github.io/TradeIntel/?lang=zh)

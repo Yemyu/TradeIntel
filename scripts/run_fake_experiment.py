@@ -178,7 +178,7 @@ def _run_view_package(package: Path, output: Path, fake_text: str) -> int:
     }
     if int(actual_estimate.get("tokens", 0)) > INPUT_HARD_TOKENS:
         run["status"] = "blocked_hard_budget"
-        run["return_to_astra"] = "R1"
+        run["review_required"] = "input_budget"
         run["boundary"] += " 超过输入硬门时保留全部法律条件，停止并等待输入预算审查。"
         output.mkdir(parents=True, exist_ok=False)
         (output / "run-manifest.json").write_text(

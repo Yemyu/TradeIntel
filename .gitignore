@@ -11,6 +11,11 @@ tmp/
 .workbuddy/
 output/
 vendor/
+!/web/design-preview/vendor/
+/web/design-preview/vendor/*
+!/web/design-preview/vendor/cobe.mjs
+!/web/design-preview/vendor/COBE-LICENSE
+!/web/design-preview/vendor/PHENOMENON-LICENSE
 
 # Personal learning notes and course review records stay local.
 docs/learning/
@@ -43,52 +48,34 @@ data/processed/policy_exposure/monthly/
 
 # Local project planning and personal portfolio notes.
 /PROJECT_PLAN.md
-/docs/ASTRA_PLANNING_BRIEF_20260915.zh-CN.md
-/docs/ASTRA_TO_LUNA_HANDOFF_20260915.zh-CN.md
-/docs/ASTRA_XHIGH_HANDOFF_20260915.zh-CN.md
-/docs/COMPETITIVE_POSITIONING.zh-CN.md
-/docs/DELIVERY.zh-CN.md
-/docs/FINAL_LOCAL_ACCEPTANCE.zh-CN.md
-/docs/HIGH_REASONING_REVIEW_BRIEF.zh-CN.md
-/docs/LOCAL_DELIVERY_CHECKLIST.zh-CN.md
-/docs/PROJECT_CONTEXT_HISTORY.zh-CN.md
-/docs/PROJECT_CONTEXT_PRE_REALIGNMENT_20260913.zh-CN.md
-/docs/PROJECT_CONTEXT_REFERENCE.zh-CN.md
-/docs/PROJECT_CONTEXT_SNAPSHOT_20260915_BEFORE_V2.zh-CN.md
-/docs/PROJECT_CONTEXT_SNAPSHOT_20260920_BEFORE_R2_REVIEW.zh-CN.md
-/docs/PROJECT_REVIEW_20261002.zh-CN.md
-/docs/RELEASE_REVIEW.zh-CN.md
-/docs/REVIEWER_QUICKSTART.zh-CN.md
-/docs/decisions/0005-evidence-grounded-ai-application.zh-CN.md
-/docs/decisions/0032-ai-capability-upgrade.zh-CN.md
-/docs/decisions/0091-first-live-development-review.zh-CN.md
-/docs/decisions/0096-policy-json-instruction.zh-CN.md
-/docs/diagnostics/project-readiness-review-20260915.zh-CN.md
 
-# Keep only referenced evaluation protocols and verification evidence public.
-/docs/handoff/*
-!/docs/handoff/runs/
-/docs/handoff/runs/*
-!/docs/handoff/ANNOUNCEMENT_READING_UNSEEN_PILOT_20260928.zh-CN.md
-!/docs/handoff/POLICY_ACCEPTANCE_DESIGN_20260926.zh-CN.md
-!/docs/handoff/POLICY_EXTRACTION_PILOT_20260926.zh-CN.md
-!/docs/handoff/UNSEEN_LINKAGE_CASE2_PREREG_20260927.zh-CN.md
-!/docs/handoff/UNSEEN_LINKAGE_CASE_PREREG_20260927.zh-CN.md
-!/docs/handoff/US_AGENT_CHAT_QUESTIONS_20261001.json
-!/docs/handoff/US_AGENT_RETEST_DESIGN_20261001.zh-CN.md
-!/docs/handoff/US_RETEST_FINAL_EXECUTION_PLAN_20261001.zh-CN.md
-!/docs/handoff/US_RETEST_REFERENCE_AND_CONTINUATION_20261001.zh-CN.md
-!/docs/handoff/runs/20260922-FLASH-V3-Q2-checks.json
-!/docs/handoff/runs/20260922-FLASH-V3-Q3-checks.json
-!/docs/handoff/runs/20260922-MODEL-SEMANTIC-AUDIT.json
-!/docs/handoff/runs/20260926-POLICY-EXTRACTION-E2-REPAIR.zh-CN.md
-!/docs/handoff/runs/20260926-TRADE-FOLLOWUP-VALUE-GATE.zh-CN.md
-!/docs/handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md
-!/docs/handoff/runs/20260930-REAL-WEB-TWO-TURN-ACCEPTANCE.zh-CN.md
-!/docs/handoff/runs/20260930-TRADE-AGENT-SUPPLEMENTAL-LIVE.zh-CN.md
-!/docs/handoff/runs/20261001-U2-PRINT-PDF.zh-CN.md
-!/docs/handoff/runs/20261002-CHAT-V3-COMPARISON-REVIEW.zh-CN.md
-!/docs/handoff/runs/20261002-GLM-FLASH-REVIEW.zh-CN.md
-!/docs/handoff/runs/20261002-LUNA-V3-FINAL-REVIEW.zh-CN.md
-!/docs/handoff/runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md
-!/docs/handoff/runs/20261002-US-FINAL-REGRESSION-LIVE.zh-CN.md
+# Publish only the current documentation. Working notes stay on this machine.
+/docs/*
+!/docs/README.md
+!/docs/README.zh-CN.md
+!/docs/LOCAL_RUN.md
+!/docs/LOCAL_RUN.zh-CN.md
+!/docs/CURRENT_PRODUCT.md
+!/docs/CURRENT_PRODUCT.zh-CN.md
+!/docs/PUBLIC_SHOWCASE.md
+!/docs/PUBLIC_SHOWCASE.zh-CN.md
+!/docs/TESTING.md
+!/docs/TESTING.zh-CN.md
+!/docs/MODEL_SELECTION.md
+!/docs/MODEL_SELECTION.zh-CN.md
+!/docs/USAGE.zh-CN.md
+!/docs/AGENT_REVIEWER_QUICKSTART.zh-CN.md
+!/docs/releases/
+/docs/releases/*
+!/docs/releases/showcase-20261002.md
+!/docs/releases/SHA256SUMS-20261002.txt
+
+# Historical evaluation packages containing private execution records.
+/evals/announcement_reading_v2/
+/evals/announcement_reading_v3/
+/evals/trade_followup_v1/
+/evals/trade_model_v3/frozen/
+/evals/policy_extraction_v1/development_reference.zh-CN.md
+/evals/policy_extraction_v1/r2_reading_reference_v2.zh-CN.md
+/evals/public_brief_v1/SCORING_V3.zh-CN.md
+/data/processed/causal/mapping_report.md

@@ -12,7 +12,7 @@ from tradeintel_ai.trade_agent_deepseek import DeepSeekThinkingToolModel
 from tradeintel_ai.trade_agent_metrics import request_configuration
 from scripts.score_us_agent_retest import check_report, count_results
 from scripts.score_us_agent_retest import audit_query_actions
-from scripts.run_us_agent_retest import snapshot_files, verify_snapshot
+from scripts.run_us_agent_retest import snapshot_files, verify_snapshot, collect_snapshot_inputs
 from scripts.score_us_agent_retest import check_saved_report
 from tradeintel_ai.trade_report_store import create_record
 from scripts.run_us_agent_retest import execute_cases
@@ -95,6 +95,20 @@ class BatchPolicyTests(unittest.TestCase):
 
 
 class SnapshotReadbackTests(unittest.TestCase):
+    def test_snapshot_inputs_do_not_require_private_handoff_notes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project, package, data = root / "project", root / "package", root / "data"
+            store = package / "runtime/.local/announcement-docs"
+            store.mkdir(parents=True)
+            (store / "policy.json").write_text("{}")
+            data.mkdir()
+            (data / "BUNDLE_MANIFEST.json").write_text(json.dumps({"files": []}))
+            inputs = collect_snapshot_inputs(project, package, data)
+            self.assertIn(project / "evals/us_agent_retest_v1/scenarios.json", inputs)
+            self.assertIn(store / "policy.json", inputs)
+            self.assertFalse(any(path.is_relative_to(project / "docs") for path in inputs))
+
     def test_new_file_atomic_no_overwrite_or_nan(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "result.json"

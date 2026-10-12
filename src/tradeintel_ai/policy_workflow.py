@@ -12,6 +12,10 @@ from .policy_response_format import normalize_policy_response
 from .policy_retrieval import draft_answer
 
 
+POLICY_CORPUS_RELATIVE = Path('data/policy/section301-list1/corpus.json')
+POLICY_CORPUS_MANIFEST_RELATIVE = Path('data/policy/section301-list1/development_results.json')
+
+
 class BoundedPolicyModel(OpenAICompatibleModel):
     def _payload(self, *, messages, tools):
         payload=super()._payload(messages=messages,tools=tools)
@@ -96,9 +100,9 @@ def load_frozen_corpus(root):
     Historical experiment runners must additionally validate their own code
     manifests. Loading unchanged evidence does not reproduce historical scores.
     """
-    path=root/'docs/experiments/phase13a-policy-retrieval/corpus.json'
+    path=root/POLICY_CORPUS_RELATIVE
     corpus=json.loads(path.read_text())
-    manifest=json.loads(path.with_name('development_results.json').read_text())
+    manifest=json.loads((root/POLICY_CORPUS_MANIFEST_RELATIVE).read_text())
     digest=hashlib.sha256(json.dumps(corpus,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
     if digest!=manifest['corpus_sha256']: raise ValueError('Frozen corpus fingerprint mismatch')
     for name,digest in {(c['local_path'], c['sha256']) for c in corpus['chunks']}:

@@ -40,8 +40,7 @@ Raw tool decisions were separately scored for the earlier four groups: 11/11 for
 
 Use the exact model name supported by your provider rather than inferring its version from a display label. Data-only mode needs no model if you only want charts and figures.
 
-<details>
-<summary>Test setup and scoring</summary>
+## Test setup and scoring
 
 The October 2, 2026 tests used the same twelve questions and fixed task requirements. Unrun dependent cases remain in the planned denominator; they are not counted as model failures or successes. The Brazil-partner question was handled by a program precheck, not counted as a model tool decision. GLM ran the 12-case plan, but P02 was skipped because P01 did not complete.
 
@@ -49,12 +48,8 @@ GPT groups answered tool requests in Codex chats; DeepSeek and GLM ran through t
 
 Completion is based on the answer and reports delivered to the user, not just whether the runner finished. Unexecuted follow-ups remain in the planned task count rather than being removed to raise completion rates.
 
-</details>
+## Evaluation materials
 
-## Questions and review records
-
-- [Twelve questions](../evals/us_agent_retest_v1/scenarios.json)
-- [Sol Low and Medium review](handoff/runs/20261002-CHAT-V3-COMPARISON-REVIEW.zh-CN.md)
-- [Luna Max review](handoff/runs/20261002-LUNA-V3-FINAL-REVIEW.zh-CN.md)
-- [DeepSeek run and review](handoff/runs/20261002-US-FINAL-REGRESSION-LIVE.zh-CN.md)
-- [GLM-5.3-Flash High review (Chinese)](handoff/runs/20261002-GLM-FLASH-REVIEW.zh-CN.md)
+- [Results](#results): task completion, boundary cases, and verified reports.
+- [Test setup and scoring](#test-setup-and-scoring): execution method and limits of comparison.
+- [Twelve questions](../evals/us_agent_retest_v1/scenarios.json): the fixed scenario set used for these tests.

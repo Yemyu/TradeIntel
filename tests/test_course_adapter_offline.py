@@ -41,7 +41,7 @@ class CourseAdapterOfflineTests(unittest.TestCase):
     def test_page_has_adapter_status_renderer(self):
         page = Path(__file__).resolve().parents[1] / "web" / "index.html"
         self.assertIn("appendCourseAdapter", page.read_text(encoding="utf-8"))
-        self.assertIn("工具适配已通过", page.read_text(encoding="utf-8"))
+        self.assertIn("查询范围已确认", page.read_text(encoding="utf-8"))
 
     def test_review_page_exposes_separate_download_and_view_actions(self):
         page = Path(__file__).resolve().parents[1] / "web" / "interpretation-review.html"

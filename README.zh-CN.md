@@ -28,7 +28,7 @@ AI 理解问题、接续追问，并根据工具返回的结果决定继续查�
 | [大豆进出口](https://yemyu.github.io/TradeIntel/?lang=zh&case=soybean-trade#cases) | 先问进口，再追问出口；两种方向各有报告 |
 | [豆油进口](https://yemyu.github.io/TradeIntel/?lang=zh&case=soybean-oil#cases) | 将豆油与原料大豆区分，查询对应商品 |
 | [钨与光伏材料](https://yemyu.github.io/TradeIntel/?lang=zh&case=policy-materials#cases) | 一份整理好的关税公告与相关商品进口报告 |
-| [缺少月份](https://yemyu.github.io/TradeIntel/?lang=zh&case=missing-month#cases) | 所问月份没有收录时，说明缺口，不换成其他月份交差 |
+| [缺少月份](https://yemyu.github.io/TradeIntel/?lang=zh&case=missing-month#cases) | 所问月份未收录时，说明缺口并保留原查询月份 |
 
 这些链接可以直接打开案例对话和图表，不需要安装、贸易数据包或 API Key。公开网站不调用模型，也不是在线聊天服务。前两个案例来自模型参与的查询；政策案例是资料编辑报告；缺月案例展示程序保护。从源码副本阅读案例的步骤见[本地使用指南](docs/LOCAL_RUN.zh-CN.md#查看已保存案例)。
 
@@ -36,7 +36,7 @@ AI 理解问题、接续追问，并根据工具返回的结果决定继续查�
 
 ## 快速开始
 
-需要项目源码和独立的[贸易数据包](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)。包内有124份数据文件，解压后约579 MB，ZIP约64 MiB。**克隆仓库不会同时下载这个包。** 建议使用 Python 3.13，完整安装记录使用 macOS 和 Python 3.13.3。会话与报告存储依赖 POSIX 的 `fcntl` 模块，当前不支持原生 Windows。
+需要项目源码和独立的[贸易数据包](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002)。包内有124份数据文件，解压后约579 MB，ZIP约64 MiB。**克隆仓库不会同时下载这个包。** 建议使用 Python 3.13，已在 macOS 和 Python 3.13.3 上验证安装。会话与报告存储依赖 POSIX 的 `fcntl` 模块，当前不支持原生 Windows。
 
 首次安装时，克隆源码并创建项目环境。下面两次版本检查应输出 Python 3.13.x：
 
@@ -138,7 +138,7 @@ MySQL 用于数据工程和核对，日常网页读取已核验的数据文件�
 | `tests/` | Python与页面回归测试 |
 | `evals/` | 测试题、输出要求和冻结参考 |
 | `data/` | 来源信息与处理结果，大数据另行提供 |
-| `docs/` | 使用说明、评测和数据说明 |
+| `docs/` | 使用指南、模型成绩和发布信息 |
 
 [文档导航](docs/README.zh-CN.md) · [功能与数据范围](docs/CURRENT_PRODUCT.zh-CN.md) · [展示版](docs/PUBLIC_SHOWCASE.zh-CN.md) · [模型测试](docs/MODEL_SELECTION.zh-CN.md)
 

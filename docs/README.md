@@ -14,12 +14,9 @@
 | [Data notes](../data/README.md) | Data bundle, statistical measures, and source files |
 | [Frontend](../web/design-preview/README.md) | Page assets, report rendering, and build commands |
 
-## Technical references
+## Release and evaluation materials
 
-- `contracts/`: output formats and validation rules.
-- `evaluation/` and `../evals/`: evaluation criteria, questions, and reference material.
-- `releases/`: published data-bundle metadata and file checksums.
-- `decisions/`, `diagnostics/`, and `experiments/`: technical records for individual implementations and experiments. Their dates and results refer to those runs, not to current installation steps.
-- Retained files in `handoff/` are source protocols and verification records referenced by evaluation scripts or published results. They are not a setup guide.
-
-Start with the guides above for the current application. Some experimental files are read by code or tests and remain at their existing paths to preserve source references and frozen evidence.
+- [Current release](releases/showcase-20261002.md): source and data downloads.
+- [Release checksums](releases/SHA256SUMS-20261002.txt): published file digests.
+- [Twelve model-test questions](../evals/us_agent_retest_v1/scenarios.json): product lookup, follow-ups, policy retrieval, and boundary cases.
+- [Evaluation materials](../evals/README.md): scenario sets, scoring criteria, and version references.

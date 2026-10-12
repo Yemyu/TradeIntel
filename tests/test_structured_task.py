@@ -7,6 +7,11 @@ from tradeintel_ai.agent import ModelResponse
 from scripts.run_solar_brief_pilot import run
 
 class StructuredTaskTests(unittest.TestCase):
+    def require_pilot_protocol(self):
+        protocol = 'docs/experiments/solar-brief-pilot-v1.zh-CN.md'
+        if not (Path(__file__).resolve().parents[1] / protocol).is_file():
+            self.skipTest(f'Private historical prerequisite absent: {protocol}')
+
     def task(self,month='2026-07'):
         return dict(policy_id='us_301_solar2024',month=month,product='all',task='source_and_investigation')
     def test_invalid_parameters(self):
@@ -15,6 +20,7 @@ class StructuredTaskTests(unittest.TestCase):
             with self.assertRaises(ValueError): compile_task(item)
         with self.assertRaises(ValueError): compile_task({**self.task(),'sql':'SELECT 1'})
     def test_single_explanation_no_model_plan(self):
+        self.require_pilot_protocol()
         seen=[]
         class Fixture:
             def complete(self,**kwargs):
@@ -38,6 +44,7 @@ class StructuredTaskTests(unittest.TestCase):
             packet=(root/'run/source-packet.zh-CN.md').read_text()
             self.assertIn('360,659,187',packet)
     def test_outside_window_calls_no_model(self):
+        self.require_pilot_protocol()
         class Never:
             def complete(self,**kwargs): raise AssertionError('must not call')
         with tempfile.TemporaryDirectory() as folder:

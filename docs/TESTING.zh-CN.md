@@ -17,7 +17,7 @@ Node测试使用DOM模拟环境，不是完整浏览器。页面导航、手机�
 
 ## 数据与Agent回归
 
-部分Python测试需要已核验的贸易数据包或保存的评测记录，这些文件不随Git提交。缺少数据时，相关测试可能跳过；原始案例导出测试还需要对应会话。解释测试结果时，应先核对前置文件，不把跳过项当作通过。
+部分Python测试需要已核验的贸易数据包，或本机保存的原始会话与模型运行结果，这些文件不随Git提交。缺少数据时，相关测试可能跳过；原始案例导出测试还需要对应会话。解释测试结果时，应先核对前置文件，不把跳过项当作通过。
 
 本地文件齐全时执行：
 
@@ -31,7 +31,7 @@ PYTHONPATH=src:.:tests .venv/bin/python -m unittest \
   test_chat_workspace_assets test_public_showcase
 ```
 
-10月2日检查中，这组135项Python测试通过，网页路由测试另行执行。[仓库检查记录](handoff/runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md)记载该次运行及环境。
+2026年10月2日检查中，这组135项Python测试通过，网页路由测试另行执行。这是对应日期的结果，检查其他版本和本地文件时应重新运行上述命令。
 
 ## 独立静态网站构建
 
@@ -53,9 +53,9 @@ PYTHONPATH=src:. python3 -S scripts/build_github_pages.py --verify tmp/pages-bui
 PYTHONPATH=src:.:tests .venv/bin/python -m unittest discover -s tests
 ```
 
-完整测试集尚未全部通过。10月2日运行了1,739项测试，记录10项失败和118项错误，包含子测试。已记录的问题包括冻结实验输入、日期相关授权测试资料，以及该环境中的四项SciPy导入错误，详情见仓库检查记录。
+完整测试集尚未全部通过。2026年10月2日运行了1,739项测试，记录10项失败和118项错误，包含子测试。已记录的问题包括冻结实验输入、日期相关授权测试资料，以及该环境中的四项SciPy导入错误。
 
-当前Agent回归是单独的一组检查，不表示上述问题已修复。测试和冻结证据继续保留。
+当前Agent回归是单独的一组检查，不表示上述问题已修复。历史实验输入和部分冻结证据保存在本地，未随源码完整提供；公开克隆不能复现全部早期完整测试运行。
 
 ## 模型评测
 
@@ -67,4 +67,4 @@ PYTHONPATH=src:.:tests .venv/bin/python -m unittest discover -s tests
 PYTHONPATH=src:.:tests .venv/bin/python -m unittest test_public_documentation
 ```
 
-检查现行公开指南的本地链接、语言对应文件，以及私人计划文件是否退出跟踪。
+检查现行公开指南的本地链接、语言对应文件和公开文档白名单。

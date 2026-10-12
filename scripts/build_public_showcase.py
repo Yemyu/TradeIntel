@@ -410,7 +410,7 @@ def build(root, site):
         raise ValueError("Sources changed during export")
     audit = {"sources_before": before, "sources_after": after,
              "assets": {str(p.relative_to(site)): sha(p) for p in site.rglob("*") if p.is_file()},
-             "model_configuration_evidence": ["docs/handoff/runs/20260930-REAL-WEB-TWO-TURN-ACCEPTANCE.zh-CN.md", "docs/handoff/runs/20260930-TRADE-AGENT-SUPPLEMENTAL-LIVE.zh-CN.md"]}
+             "model_configuration_documentation": ["docs/MODEL_SELECTION.md", "docs/MODEL_SELECTION.zh-CN.md"]}
     save_json(site.parent / "audit/manifest.json", audit)
     return verify(site)
 

@@ -17,7 +17,7 @@ Node tests use DOM fixtures rather than a full browser. Browser navigation, resp
 
 ## Data and Agent regression
 
-Some Python tests require the verified trade-data bundle or saved evaluation records. These are excluded from Git. Bundle-dependent tests may skip without the data; tests that export the original showcase also need its source sessions. Check prerequisites before interpreting a skipped test as a pass.
+Some Python tests require the verified trade-data bundle or locally saved source sessions and model-run outputs, which are excluded from Git. Bundle-dependent tests may skip without the data; tests that export the original showcase also need its source sessions. Check prerequisites before interpreting a skipped test as a pass.
 
 With the required local records available:
 
@@ -31,7 +31,7 @@ PYTHONPATH=src:.:tests .venv/bin/python -m unittest \
   test_chat_workspace_assets test_public_showcase
 ```
 
-The October 2 check passed 135 Python tests in this group; web-route tests were checked separately. The [repository check record (Chinese)](handoff/runs/20261002-REPOSITORY-REVIEW-AND-PUSH.zh-CN.md) describes that run and its environment.
+The October 2, 2026 check passed 135 Python tests in this group; web-route tests were checked separately. This is a dated result, so rerun the commands for the version and local files you are testing.
 
 ## Portable website build
 
@@ -53,9 +53,9 @@ To include earlier experiments and causal research:
 PYTHONPATH=src:.:tests .venv/bin/python -m unittest discover -s tests
 ```
 
-The full suite is not passing. The October 2 run executed 1,739 tests and recorded 10 failures and 118 errors, including subtests. Reported issues included frozen experimental inputs, dated authorization fixtures, and four SciPy import failures in that environment. The repository check record contains the details.
+The full suite is not passing. The October 2, 2026 run executed 1,739 tests and recorded 10 failures and 118 errors, including subtests. Reported issues included frozen experimental inputs, dated authorization fixtures, and four SciPy import failures in that environment.
 
-The current Agent regression is a separate test group, not evidence that those full-suite failures have been fixed. Tests and frozen evidence are retained.
+The current Agent regression is a separate test group, not evidence that those full-suite failures have been fixed. Historical experimental inputs and some frozen evidence are stored locally and are not fully distributed with the source. A public clone alone does not reproduce every earlier full-suite run.
 
 ## Model evaluation
 
@@ -67,4 +67,4 @@ The test commands above do not call model APIs. Model evaluations use fixed ques
 PYTHONPATH=src:.:tests .venv/bin/python -m unittest test_public_documentation
 ```
 
-These checks cover local links in the current public guides, language counterparts, and private planning files excluded from the tracked tree.
+These checks cover local links in the current public guides, language counterparts, and the public-document allowlist.

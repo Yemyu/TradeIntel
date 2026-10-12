@@ -106,9 +106,9 @@
   <main class="shell">
     <header class="hero">
       <h1>TradeShock AI</h1>
-      <p>贸易政策研究助手：把官方政策范围、真实贸易数据和受约束的 AI 调查步骤连在一起，生成可核查的中文研究初稿。</p>
+      <p>查询已登记政策和贸易数据，生成带金额、来源及模型辅助解释的中文研究资料。</p>
       <div class="hero-meta">
-        <span class="badge">受约束原型</span>
+        <span class="badge">本地研究原型</span>
         <span class="badge" id="health-badge">正在检查模型配置…</span>
         <span class="badge">不做因果结论 · 不等于实时税则</span>
       </div>
@@ -116,9 +116,9 @@
 
     <div class="grid">
       <section class="card">
-        <h2>先看清楚：这个页面能做什么</h2>
+        <h2>功能与数据范围</h2>
         <div class="tip"><b>当前登记案例：</b>2025 年生效的美国 Section 301 钨、硅片和多晶硅政策，精确覆盖 5 个 HTS8 税号；贸易数据窗口为 2025-01 至 2026-07。</div>
-        <p class="muted">查询按钮只读取已经验收的本地数据并重新计算金额，不调用大模型。研究入口由程序负责数字和来源，AI 解释数据观察并提出待核查问题；下方旧演示则只让模型选择后续调查方向。AI 内容均须审阅，不会自动成为事实。</p>
+        <p class="muted">数据查询读取已核验的本地数据，由程序计算金额，无需模型请求。研究资料包含模型辅助解释和待核查问题，解释需审阅后采纳。固定案例演示展示模型如何选择后续调查方向。</p>
         <p class="notice"><b>重要边界：</b>页面展示的是美国消费进口“暴露规模”，不是损失额、中国出口依赖率，也不能证明关税导致了变化。没有国内产量、库存、价格和交货期证据时，不能声称供应是否紧张。</p>
       </section>
 
@@ -131,7 +131,7 @@
       <section class="card half">
         <h2>政策原文与编码来源</h2>
         <div id="sources" class="source-list" aria-live="polite"></div>
-        <p class="muted">完整政策段落证据保存在 <code class="path">data/processed/policy_exposure/policy_corpus.json</code>；页面只展示可公开访问的来源链接。</p>
+        <p class="muted">页面提供可公开访问的 <code class="path">政策原文与编码来源</code> 链接，供核对具体规定。</p>
       </section>
 
       <section class="card">
@@ -146,7 +146,7 @@
             <div id="update-details"></div>
           </div>
           <div class="update-box">
-            <h3>这块是做什么的？</h3>
+            <h3>如何使用数据版本</h3>
             <p>查询使用独立保存的数据副本。新候选校验失败时，仍可读取上一版；发布副本自身损坏时会停止查询。</p>
             <p class="muted">当前页面只读取本地已登记版本；不会自行联网下载，也不会把新增月份自动解释成政策效果。</p>
           </div>
@@ -175,26 +175,26 @@
 
       <section class="card">
         <h2>提出研究问题</h2>
-        <p><a href="/review/interpretation">人工审阅固定存档建议（保存决定，不发布案例、不调用模型）</a></p>
+        <p><a href="/review/interpretation">审阅已保存的解释（保存审阅决定，不发布案例，无需模型请求）</a></p>
         <details class="box" open><summary>选择月份和商品，生成研究资料</summary>
-          <p class="muted">程序读取所选范围的贸易数据与政策条款，先计算金额和来源占比，再让 AI 解释两种关注角度。结果仍需逐条审阅，采纳后导出研究稿。</p>
+          <p class="muted">按所选范围计算贸易金额和来源占比，并结合政策条款生成两种关注角度的解释。逐条审阅并采纳后，可导出研究稿。</p>
           <div class="controls">
             <label>案例<select id="task-case"><option value="us_301_review2025_tungsten_solar">2025钨／硅片／多晶硅</option></select></label>
             <label>月份<input id="task-month" type="month" min="2025-01" max="2026-07" value="2026-07"></label>
             <label>商品<select id="task-product"><option value="all">全部五类商品</option><option value="28046100">28046100 · 多晶硅</option><option value="38180000">38180000 · 硅片等</option><option value="81019400">81019400 · 未锻造钨</option><option value="81019910">81019910 · 钨条杆等</option><option value="81019980">81019980 · 其他钨制品</option></select></label>
           </div>
           <button id="task-submit" class="secondary">生成数据观察与待审阅解释（一次模型请求）</button>
-          <div id="task-result" role="status">尚未提交。下方可先查看固定真实结果。</div>
-          <details class="box" style="margin-top:14px"><summary>自然语言 v2：先预览，再确认执行</summary>
-            <p class="muted">本入口只支持明确的单月、单个税号或全部登记税号。多月、排除条件或“最新月份”等要求会先澄清，不调用模型。其他问题最多调用一次模型生成范围预览；你确认后，才读取固定版本并调用一次解释模型。不会默认猜案例或改月份。</p>
+          <div id="task-result" role="status">尚未提交。下方可先查看已保存的查询结果。</div>
+          <details class="box" style="margin-top:14px"><summary>单月问题：先预览范围，再确认执行</summary>
+            <p class="muted">支持明确的单月、单个税号或全部登记税号。多月、排除条件或“最新月份”等要求会先询问具体范围，无需模型请求。其他问题最多请求一次模型生成范围预览；确认后，再读取所选数据版本并请求一次模型解释。案例和月份以确认的范围为准。</p>
             <label>研究问题<textarea id="natural-v2-question" rows="3" maxlength="2000" style="width:100%;font:inherit;padding:10px" placeholder="例如：请分析 2026 年 7 月 2025 钨政策全部登记税号，中国原产金额和中国来源占比有什么区别？"></textarea></label>
-            <div style="margin-top:10px"><button id="natural-v2-preview" class="secondary">先生成任务预览（最多一次解析请求）</button> <button id="natural-v2-confirm" disabled>确认并执行</button></div>
+            <div style="margin-top:10px"><button id="natural-v2-preview" class="secondary">预览查询范围（最多一次模型请求）</button> <button id="natural-v2-confirm" disabled>确认并执行</button></div>
             <div id="natural-v2-result" class="demo-result" role="status">尚未生成预览；确认前不会读取数据。</div>
           </details>
         </details>
-        <p><a href="/demo/research-review" target="_blank" rel="noopener">查看最新真实结果：两类光伏商品的数据、AI原话与审阅意见（只读，不调用API）</a></p>
+        <p><a href="/demo/research-review" target="_blank" rel="noopener">查看已保存结果：两类光伏商品的数据、模型解释与审阅意见（只读，无需模型请求）</a></p>
         <p><a href="/demo/solar" target="_blank" rel="noopener">查看早期流程演示：光伏组件简报（只读、不调用API、仍待补核）</a></p>
-        <p class="muted">下方是保留的旧版研究入口，不是上方单月 v2 流程。旧版支持登记政策的单月查询、排序及单月/多月资料整理；这不代表 v2 已支持多月解释。请明确起止月份和税号。没有对应可比性核查时只展示金额，不自动给变化率。每次提交最多两次模型请求，结果仍需审阅。</p>
+        <p class="muted">下方可查询和排序登记政策的单月数据，也可整理单月或多月资料。请明确起止月份和税号；上方的范围预览入口仅用于单月解释。未经可比性核对的金额不计算变化率。每次提交最多两次模型请求，结果需审阅。</p>
         <label>你的问题<textarea id="research-question" rows="4" maxlength="2000" style="width:100%;font:inherit;padding:10px" placeholder="例如：列出登记政策全部税号在2026年4月的中国金额和份额。"></textarea></label>
         <label for="research-case">本次问题的政策案例</label>
         <select id="research-case" disabled>
@@ -207,18 +207,18 @@
       </section>
 
       <section class="card">
-        <h2>历史固定演示：让模型选择“下一步查什么”</h2>
-        <p class="muted">这不是一个自由聊天框。每个按钮都是已登记的固定案例；点击后最多执行 3 次模型请求，失败也会保留本地记录。程序不会把模型生成的数字直接放进报告。</p>
+        <h2>固定案例演示：选择后续调查方向</h2>
+        <p class="muted">每个按钮对应已登记的固定案例；点击后最多发出 3 次模型请求，运行结果与失败记录保存在本地。报告金额由程序计算。</p>
         <div class="demo-buttons">
           <button class="secondary demo-button" data-case="may-tungsten">运行 2026-05 单税号</button>
           <button class="secondary demo-button" data-case="june-tungsten">运行 2026-06 保留失败案例</button>
           <button class="warning demo-button" data-case="july-scope">运行 2026-07 五税号整体</button>
         </div>
-        <div id="demo-result" class="demo-result" role="status">尚未调用模型。你可以先使用上面的确定性查询。</div>
+        <div id="demo-result" class="demo-result" role="status">尚未调用模型。可先使用上方的数据查询。</div>
         <p class="muted">密钥只在后端的项目本地配置中使用，浏览器不会接触密钥。</p>
       </section>
     </div>
-    <footer>TradeShock AI · 本地页面 · 事实和边界由程序生成，报告仍需人工审阅</footer>
+    <footer>TradeShock AI · 本地页面 · 金额由程序计算，报告需人工审阅</footer>
   </main>
 
   <script>
@@ -241,7 +241,7 @@
       note.className = 'muted';
       const count = Array.isArray(adapter.hts8) ? adapter.hts8.length : 0;
       const version = adapter.data_version ? String(adapter.data_version).slice(0, 12) + '…' : '未知';
-      setText(note, '工具适配已通过：固定贸易指标查询，' + count + ' 个登记 HTS8；数据版本 ' + version + '。');
+      setText(note, '查询范围已确认：' + count + ' 个登记 HTS8；数据版本 ' + version + '。');
       box.appendChild(note);
     }
     $("task-submit").addEventListener("click", async () => {
@@ -372,7 +372,7 @@
       }
       if (update.status !== "ready" || !update.active_version) {
         setText(status, "尚未登记活动版本");
-        addUpdateParagraph(summary, "当前页面仍可做确定性查询，但还没有可回溯的活动版本指针。", "muted");
+        addUpdateParagraph(summary, "当前页面可查询现有数据，尚未登记可回溯的数据版本。", "muted");
         return;
       }
       status.classList.add("ready");
@@ -428,13 +428,13 @@
     async function queryData() {
       const button = $("query-button"); button.disabled = true; setText($("query-status"), "正在读取并校验本地数据…"); $("query-output").hidden = true;
       const params = new URLSearchParams({ start: $("start").value, end: $("end").value, origin: $("origin").value }); if ($("hts8").value) params.set("hts8", $("hts8").value);
-      try { const result = await getJSON("/api/exposure?" + params.toString()); renderExposure(result); setText($("query-status"), "查询完成：数字由确定性工具计算，可回查来源。" + (result.data_version ? " 本次版本：" + shortVersion(result.data_version) : " 尚未登记数据版本。")); }
+      try { const result = await getJSON("/api/exposure?" + params.toString()); renderExposure(result); setText($("query-status"), "查询完成：金额由程序计算，可查看来源。" + (result.data_version ? " 本次版本：" + shortVersion(result.data_version) : " 尚未登记数据版本。")); }
       catch (error) { $("query-output").hidden = true; setText($("query-status"), "查询未完成：" + error.message); }
       finally { button.disabled = false; }
     }
 
     async function loadInitial() {
-      try { const health = await getJSON("/api/health"); const badge = $("health-badge"); setText(badge, health.status === "ready" ? "模型已配置 · " + health.model : "确定性查询可用 · " + (health.message || "模型未配置")); if (health.status === "ready") badge.style.background = "#ffffff35"; }
+      try { const health = await getJSON("/api/health"); const badge = $("health-badge"); setText(badge, health.status === "ready" ? "模型已配置 · " + health.model : "数据查询可用 · " + (health.message || "模型未配置")); if (health.status === "ready") badge.style.background = "#ffffff35"; }
       catch (error) { setText($("health-badge"), "模型状态读取失败"); }
       try { renderUpdate(await getJSON("/api/update")); }
       catch (error) { renderUpdate({ status: "error", message: error.message }); }
@@ -444,7 +444,7 @@
 
     async function runDemo(button) {
       const caseName = button.dataset.case; if (!window.confirm("这会调用本地配置的模型并产生最多 3 次请求。确定运行“" + button.textContent + "”吗？")) return;
-      document.querySelectorAll(".demo-button").forEach((item) => { item.disabled = true; }); const box = $("demo-result"); box.className = "demo-result"; setText(box, "正在运行受约束 AI 演示；模型响应不会直接成为事实…");
+      document.querySelectorAll(".demo-button").forEach((item) => { item.disabled = true; }); const box = $("demo-result"); box.className = "demo-result"; setText(box, "正在运行模型演示…");
       try { const result = await getJSON("/api/ai-demo", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ case: caseName }) }); box.className = result.report_available ? "demo-result ok" : "demo-result fail"; box.replaceChildren(); const text = document.createElement("span"); setText(text, result.message + "（" + result.model_calls + " 次模型请求）"); box.appendChild(text); if (result.report_url) { const link = document.createElement("a"); link.href = result.report_url; link.target = "_blank"; link.rel = "noopener"; setText(link, " 打开报告"); box.appendChild(link); } }
       catch (error) { box.className = "demo-result fail"; setText(box, "AI 演示未完成：" + error.message); }
       finally { document.querySelectorAll(".demo-button").forEach((item) => { item.disabled = false; }); }

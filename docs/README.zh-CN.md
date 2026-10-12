@@ -14,12 +14,9 @@
 | [数据说明](../data/README.zh-CN.md) | 数据包、统计口径与来源 |
 | [前端说明](../web/design-preview/README.zh-CN.md) | 页面资源、报告渲染与构建命令 |
 
-## 技术资料
+## 发布与评测材料
 
-- `contracts/`：输出格式与校验规则。
-- `evaluation/`和`../evals/`：评分规则、题目与参考材料。
-- `releases/`：已发布数据包的信息和文件摘要。
-- `decisions/`、`diagnostics/`和`experiments/`：具体实现与实验的技术记录；日期和结果属于对应运行，不是现行安装步骤。
-- `handoff/`保留评测脚本或公开结果引用的原始协议与核验记录，不作为使用指南。
-
-当前应用从上方指南开始阅读。部分实验文件仍由代码或测试读取，保留原路径以维持来源引用和冻结证据。
+- [当前发布版](releases/showcase-20261002.md)：源码与数据下载。
+- [发布文件摘要](releases/SHA256SUMS-20261002.txt)：已发布文件的校验值。
+- [12个模型测试问题](../evals/us_agent_retest_v1/scenarios.json)：商品查找、追问、政策检索与边界题。
+- [评测材料](../evals/README.zh-CN.md)：场景集、评分规则与版本参考。

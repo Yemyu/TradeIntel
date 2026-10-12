@@ -274,10 +274,8 @@ def collect_snapshot_inputs(project, package, data_root):
         "run_us_agent_retest.py", "score_us_agent_retest.py",
         "build_us_agent_retest_reference.py", "prepare_us_retest_policy.py", "us_retest_transport.py"))
     paths.extend([project / "evals/us_agent_retest_v1/scenarios.json",
-                  project / "docs/handoff/US_AGENT_RETEST_DESIGN_20261001.zh-CN.md",
                   project / "tests/test_us_agent_retest.py",
                   project / "tests/test_us_retest_final.py",
-                  project / "docs/handoff/US_RETEST_FINAL_EXECUTION_PLAN_20261001.zh-CN.md",
                   project / "data/raw/policy/review2025/cbp-63577329.html",
                   project / "data/raw/policy/review2025/cbp-63577329.source.json",
                   project / "data/processed/policy_exposure/policy_corpus.json",
@@ -290,7 +288,6 @@ def collect_snapshot_inputs(project, package, data_root):
         paths.append(continuation)
         paths.extend((package / "bootstrap").rglob("*.json"))
         paths.extend(Path(name) for name in json.loads(continuation.read_text())["parent_files"])
-        paths.append(project / "docs/handoff/US_RETEST_REFERENCE_AND_CONTINUATION_20261001.zh-CN.md")
     paths.extend((project / "tests").glob("test_trade_agent*.py"))
     paths.append(project / "tests/test_tradeintel_ai_model_adapter.py")
     for name in ("requirements.txt", "requirements.lock", "pyproject.toml", "uv.lock", "poetry.lock"):

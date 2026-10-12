@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from .quote_gap_audit import digest_audit, validate_gap_review
 
-CHECKLIST_PATH = Path(__file__).resolve().parents[2] / 'docs/evaluation/development-checklist-0093.json'
+CHECKLIST_PATH = Path(__file__).resolve().parents[2] / 'tests/fixtures/evaluation/development-checklist-0093.json'
 
 
 def digest(value):

@@ -4,7 +4,7 @@
 
 ## 安装
 
-建议使用Python3.13；完整安装记录使用macOS和Python3.13.3。会话与报告存储依赖POSIX的`fcntl`模块，原生Windows不能直接运行。
+建议使用Python3.13；已在macOS和Python3.13.3上验证安装。会话与报告存储依赖POSIX的`fcntl`模块，原生Windows不能直接运行。
 
 在源码目录执行：
 

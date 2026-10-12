@@ -23,7 +23,8 @@ from .structured_workflow import execute_request
 from .policy_evidence_access import expand_context, PolicyRetriever
 from .policy_focus import FocusedPolicyModel, presentation_flags
 from .policy_retrieval import validate_search_query
-from .policy_workflow import run_generation, safe_diagnostic, safe_metadata
+from .policy_workflow import (POLICY_CORPUS_RELATIVE, POLICY_CORPUS_MANIFEST_RELATIVE,
+                              run_generation, safe_diagnostic, safe_metadata)
 from .capability_contract import assess_trade_request
 from .execution_journal import ExecutionJournal
 from .tools import ALLOWED_COMPARISONS
@@ -412,8 +413,8 @@ class UnifiedResearchWorkflow:
         corpus_hash = hashlib.sha256(
             json.dumps(self.brief.corpus, sort_keys=True, ensure_ascii=False).encode()
         ).hexdigest()
-        corpus_files = [root / 'docs/experiments/phase13a-policy-retrieval/corpus.json',
-                        root / 'docs/experiments/phase13a-policy-retrieval/development_results.json']
+        corpus_files = [root / POLICY_CORPUS_RELATIVE,
+                        root / POLICY_CORPUS_MANIFEST_RELATIVE]
         corpus_files += [root / name for name in sorted({
             chunk['local_path'] for chunk in self.brief.corpus['chunks']})]
         corpus_sources = {str(path.relative_to(root)): _file_hash(path) for path in corpus_files}

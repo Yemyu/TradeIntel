@@ -1035,7 +1035,7 @@ def _handle_session_post(root: Path, path: str, payload: Mapping[str, Any],
                 raise WebRequestError("API来源只能由服务端provider适配器写入，客户端不能自报")
             if channel not in {"chat_simulation", "stub"}:
                 raise WebRequestError("开发解释来源只能是chat_simulation或stub")
-            model = str(payload.get("model") or "Luna最高")[:120]
+            model = str(payload.get("model") or "unspecified-model")[:120]
             # Preserve the exact provider text before parsing.  A malformed
             # answer must remain auditable and must never be mistaken for a
             # second chance to call the provider.

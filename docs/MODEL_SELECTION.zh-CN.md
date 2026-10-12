@@ -40,8 +40,7 @@
 
 日常使用请填写服务商实际支持的型号，不要仅根据显示名称猜测版本。只需要图表与金额时，可使用数据查询模式，无需模型。
 
-<details>
-<summary>测试设置与评分说明</summary>
+## 测试设置与评分说明
 
 测试日期为2026年10月2日，使用相同的12个问题和固定任务要求。未运行的依赖题保留在计划分母中，不当作模型答错或答对。巴西伙伴题由程序预检处理，不计作模型的工具决策。GLM组运行12题计划，但P02因P01未完成而跳过。
 
@@ -49,12 +48,8 @@ GPT组在Codex对话中根据工具请求作答，DeepSeek与GLM通过项目API�
 
 任务是否完成以用户实际收到的回答和报告为准，不仅看运行器是否结束。未执行的后续题保留在计划题数中，不因跳过而提高完成比例。
 
-</details>
+## 评测材料
 
-## 题目与核验记录
-
-- [12个测试问题](../evals/us_agent_retest_v1/scenarios.json)
-- [Sol Low与Medium核验](handoff/runs/20261002-CHAT-V3-COMPARISON-REVIEW.zh-CN.md)
-- [Luna Max核验](handoff/runs/20261002-LUNA-V3-FINAL-REVIEW.zh-CN.md)
-- [DeepSeek执行与核验](handoff/runs/20261002-US-FINAL-REGRESSION-LIVE.zh-CN.md)
-- [GLM-5.3-Flash High逐题结果](handoff/runs/20261002-GLM-FLASH-REVIEW.zh-CN.md)
+- [测试结果](#测试结果)：任务完成、边界题与报告核数。
+- [测试设置与评分说明](#测试设置与评分说明)：执行方式与比较限制。
+- [12个测试问题](../evals/us_agent_retest_v1/scenarios.json)：本次测试使用的固定场景集。

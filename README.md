@@ -28,7 +28,7 @@ The public website contains four saved examples. To ask your own questions, run 
 | [Soybean trade](https://yemyu.github.io/TradeIntel/?lang=en&case=soybean-trade#cases) | An import question followed by “What about exports?”, with reports for each direction |
 | [Soybean oil](https://yemyu.github.io/TradeIntel/?lang=en&case=soybean-oil#cases) | Distinguishing a processed product from raw soybeans |
 | [Tungsten and solar materials](https://yemyu.github.io/TradeIntel/?lang=en&case=policy-materials#cases) | An edited report combining a saved tariff notice and monthly import figures |
-| [Missing month](https://yemyu.github.io/TradeIntel/?lang=en&case=missing-month#cases) | Explaining unavailable data rather than substituting a different month |
+| [Missing month](https://yemyu.github.io/TradeIntel/?lang=en&case=missing-month#cases) | Reporting unavailable data while preserving the requested month |
 
 These links open saved conversations and charts without installation, a data bundle, or an API key. The public website makes no model request and is not an online chat service. The first two examples contain model-assisted queries; the policy report is an edited explanation, and the missing-month example shows a program safeguard. To view them from a clone, see the [local guide](docs/LOCAL_RUN.md#view-saved-examples).
 
@@ -36,7 +36,7 @@ A typical local conversation starts with “How have recent U.S. soybean imports
 
 ## Quickstart
 
-You need the source code and the separate [processed trade-data bundle](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002). The bundle contains 124 data files, about 579 MB uncompressed; the ZIP is about 64 MiB. **Cloning the repository does not download it.** Python 3.13 is recommended; the full installation record used macOS and Python 3.13.3. Session and report storage requires the POSIX `fcntl` module, so native Windows is not supported.
+You need the source code and the separate [processed trade-data bundle](https://github.com/Yemyu/TradeIntel/releases/tag/showcase-20261002). The bundle contains 124 data files, about 579 MB uncompressed; the ZIP is about 64 MiB. **Cloning the repository does not download it.** Python 3.13 is recommended; installation has been verified on macOS with Python 3.13.3. Session and report storage requires the POSIX `fcntl` module, so native Windows is not supported.
 
 For a first installation, clone the source and create a project environment. The version checks below should show Python 3.13.x:
 
@@ -138,7 +138,7 @@ MySQL is used in data engineering and verification; everyday web queries read ve
 | `tests/` | Python and browser-DOM regression tests |
 | `evals/` | Evaluation questions, contracts, and frozen reference material |
 | `data/` | Source metadata and prepared data; large datasets are supplied separately |
-| `docs/` | Setup, test results, and data notes |
+| `docs/` | Usage guides, model results, and release metadata |
 
 [Documentation](docs/README.md) · [Features and coverage](docs/CURRENT_PRODUCT.md) · [Showcase guide](docs/PUBLIC_SHOWCASE.md) · [Model tests](docs/MODEL_SELECTION.md)
 

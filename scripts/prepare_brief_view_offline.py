@@ -118,7 +118,7 @@ def main() -> int:
         "output_contract": "C响应为v3 JSON（短ID），经 adapt_answer 转回长ID后走原catalog校验。",
     }
     if blocked:
-        manifest["return_to_astra"] = "R1"
+        manifest["review_required"] = "input_budget"
         manifest["boundary"] += " 超过输入硬门时保留全部法律条件，停止并等待输入预算审查。"
     manifest_path = args.output / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",

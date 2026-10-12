@@ -49,4 +49,4 @@ PYTHONPATH=src:. .venv/bin/python scripts/serve_public_showcase_qa.py --site tmp
 
 Use `http://127.0.0.1:8897/TradeIntel/preview/` to check pages and assets under the repository subpath. Audit files are saved beside the output directory and are not published. The exporter refuses to overwrite an existing output directory.
 
-PDFs are generated with the browser's print function. The existing [print check record (Chinese)](handoff/runs/20261001-U2-PRINT-PDF.zh-CN.md) and [test guide](TESTING.md) describe checks that have been performed.
+PDFs are generated with the browser's print function. Check that the selected report prints with its charts, monthly values, and source notes; see the [test guide](TESTING.md) for interface and build checks.

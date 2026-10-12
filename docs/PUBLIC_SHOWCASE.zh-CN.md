@@ -49,4 +49,4 @@ PYTHONPATH=src:. .venv/bin/python scripts/serve_public_showcase_qa.py --site tmp
 
 检查地址为 `http://127.0.0.1:8897/TradeIntel/preview/`，用于确认仓库子路径下的页面与资源链接。审计文件保存在输出目录旁，不发布到网站。输出目录已存在时，导出脚本拒绝覆盖。
 
-报告的 PDF 使用浏览器打印生成。既有[打印检查记录](handoff/runs/20261001-U2-PRINT-PDF.zh-CN.md)和[测试说明](TESTING.zh-CN.md)列出已执行的检查。
+报告的 PDF 使用浏览器打印生成。检查所选报告的图表、逐月金额和来源说明是否完整；页面与构建检查见[测试说明](TESTING.zh-CN.md)。

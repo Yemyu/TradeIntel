@@ -8,7 +8,7 @@ Reading the public examples needs no installation. To ask your own questions, st
 
 ## First installation
 
-Python 3.13 is recommended. The [full installation record](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md) used macOS and Python 3.13.3. Session and report storage requires the POSIX `fcntl` module, so native Windows is not supported.
+Python 3.13 is recommended. Installation has been verified on macOS with Python 3.13.3. Session and report storage requires the POSIX `fcntl` module, so native Windows is not supported.
 
 Clone the current main branch and create a project environment. Both version checks should show Python 3.13.x:
 
@@ -96,7 +96,7 @@ Reuse the project's `.venv` and check its interpreter with `.venv/bin/python --v
 
 For a new data bundle, extract to a new directory, verify it, then restart with `--trade-data-root` pointing to that directory. Keep the previous bundle for rollback.
 
-The GitHub Pages CI uses Python 3.12 for a static build with the standard library. That check is separate from the full local installation record using Python 3.13.3.
+The GitHub Pages CI uses Python 3.12 for a static build with the standard library. That check is separate from local installation verification using Python 3.13.3.
 
 ## Data and troubleshooting
 
@@ -107,4 +107,4 @@ The GitHub Pages CI uses Python 3.12 for a static build with the standard librar
 - **A model request failed.** Check the endpoint, model name and key. Unknown outcomes are not automatically retried, to avoid duplicate charges.
 - **Why is there no policy result?** Only registered and enabled notices are searchable. The trade bundle does not supply a complete policy corpus; an edited showcase report is not a newly registered document.
 
-[macOS installation record (Chinese)](handoff/runs/20260927-FULL-INSTALL-QA.zh-CN.md) · [Showcase guide](PUBLIC_SHOWCASE.md) · [Public website](https://yemyu.github.io/TradeIntel/?lang=en)
+[Showcase guide](PUBLIC_SHOWCASE.md) · [Test guide](TESTING.md) · [Public website](https://yemyu.github.io/TradeIntel/?lang=en)

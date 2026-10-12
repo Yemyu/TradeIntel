@@ -17,8 +17,11 @@ import re
 from pathlib import Path
 from typing import Any, Mapping
 
+from .policy_workflow import POLICY_CORPUS_RELATIVE
+
 
 REFERENCE_RELATIVE = Path("data/processed/policy/section301_list1_facts.json")
+_LEGACY_CORPUS_RELATIVE = "docs/experiments/phase13a-policy-retrieval/corpus.json"
 
 
 def _sha256(path: Path) -> str:
@@ -69,6 +72,10 @@ def load_frozen_policy_reference(root: str | Path) -> dict[str, Any]:
     corpus_relative = reference.get("corpus_path")
     if not isinstance(corpus_relative, str) or not corpus_relative.strip():
         raise ValueError("独立政策facts缺少语料路径")
+    # Preserve the frozen reference bytes while resolving its one historical
+    # corpus location to the published data resource. Never fall back to notes.
+    if corpus_relative == _LEGACY_CORPUS_RELATIVE:
+        corpus_relative = POLICY_CORPUS_RELATIVE.as_posix()
     corpus_path = (project_root / corpus_relative).resolve()
     if not corpus_path.is_file() or not corpus_path.is_relative_to(project_root):
         raise ValueError("独立政策facts语料路径不安全")

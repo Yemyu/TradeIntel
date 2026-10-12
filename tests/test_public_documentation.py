@@ -19,6 +19,7 @@ PAIRS = (
     ("docs/MODEL_SELECTION.md", "docs/MODEL_SELECTION.zh-CN.md"),
     ("data/README.md", "data/README.zh-CN.md"),
     ("web/design-preview/README.md", "web/design-preview/README.zh-CN.md"),
+    ("evals/README.md", "evals/README.zh-CN.md"),
 )
 GUIDES = tuple(name for pair in PAIRS for name in pair) + (
     "docs/USAGE.zh-CN.md", "docs/AGENT_REVIEWER_QUICKSTART.zh-CN.md",
@@ -34,6 +35,12 @@ PRIVATE_FILES = (
     "docs/handoff/STATUS.zh-CN.md",
     "docs/handoff/MASTER_PLAN.zh-CN.md",
 )
+PUBLIC_DOCS = {
+    name for pair in PAIRS for name in pair if name.startswith("docs/")
+} | {
+    "docs/USAGE.zh-CN.md", "docs/AGENT_REVIEWER_QUICKSTART.zh-CN.md",
+    "docs/releases/showcase-20261002.md", "docs/releases/SHA256SUMS-20261002.txt",
+}
 
 
 def tracked_files():
@@ -80,6 +87,18 @@ class PublicDocumentationTests(unittest.TestCase):
             self.assertFalse(name.startswith("docs/PROJECT_CONTEXT"), name)
             self.assertFalse(name.startswith("docs/ASTRA_"), name)
 
+    def test_docs_contains_only_current_public_guides(self):
+        files = tracked_files()
+        self.assertEqual({name for name in files if name.startswith("docs/")}, PUBLIC_DOCS)
+        # New working notes are ignored by default, not just the old filenames.
+        result = subprocess.run(
+            ["git", "check-ignore", "--stdin"], cwd=ROOT,
+            input="docs/handoff/new-note.md\ndocs/decisions/new-note.md\ndocs/push-record.md\n",
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(len(result.stdout.splitlines()), 3)
+
     def test_tracked_markdown_does_not_link_to_ignored_notes(self):
         links = []
         for name in tracked_files():
@@ -108,14 +127,29 @@ class PublicDocumentationTests(unittest.TestCase):
     def test_required_evaluation_sources_remain_tracked(self):
         files = tracked_files()
         for name in (
-            "docs/handoff/US_AGENT_RETEST_DESIGN_20261001.zh-CN.md",
-            "docs/handoff/US_RETEST_FINAL_EXECUTION_PLAN_20261001.zh-CN.md",
-            "docs/handoff/US_RETEST_REFERENCE_AND_CONTINUATION_20261001.zh-CN.md",
-            "docs/experiments/phase13a-policy-retrieval/corpus.json",
-            "docs/handoff/runs/20261002-GLM-FLASH-REVIEW.zh-CN.md",
+            "evals/us_agent_retest_v1/scenarios.json",
+            "docs/MODEL_SELECTION.md", "docs/MODEL_SELECTION.zh-CN.md",
+            "data/policy/section301-list1/corpus.json",
+            "data/policy/section301-list1/development_results.json",
+            "tests/fixtures/evaluation/development-checklist-0093.json",
         ):
             with self.subTest(file=name):
                 self.assertIn(name, files)
+
+    def test_private_evaluation_runs_are_not_tracked(self):
+        for name in tracked_files():
+            for prefix in (
+                "evals/announcement_reading_v2/", "evals/announcement_reading_v3/",
+                "evals/trade_followup_v1/", "evals/trade_model_v3/frozen/",
+            ):
+                self.assertFalse(name.startswith(prefix), name)
+        files = tracked_files()
+        for name in (
+            "evals/policy_extraction_v1/development_reference.zh-CN.md",
+            "evals/policy_extraction_v1/r2_reading_reference_v2.zh-CN.md",
+            "evals/public_brief_v1/SCORING_V3.zh-CN.md",
+        ):
+            self.assertNotIn(name, files)
 
     def test_installation_and_api_scope_are_explicit(self):
         for name in ("README.md", "README.zh-CN.md", "docs/LOCAL_RUN.md", "docs/LOCAL_RUN.zh-CN.md"):
@@ -134,6 +168,24 @@ class PublicDocumentationTests(unittest.TestCase):
                            "不会替访客支付", "不限于早期五种"):
                 with self.subTest(file=name, phrase=phrase):
                     self.assertNotIn(phrase, text)
+
+    def test_public_text_has_no_private_development_handoff_language(self):
+        private_phrases = (
+            "本步结果：", "下一步模型：", "用户确认收尾", "用户已切换",
+            "隔壁对话框", "减少AI痕迹", "减少 AI 痕迹", "/Users/ye/",
+        )
+        for name in tracked_files():
+            # Tests intentionally contain forbidden text as rejection fixtures.
+            if name.startswith(("tests/", "web/design-preview/vendor/")):
+                continue
+            path = ROOT / name
+            if path.suffix not in {".md", ".txt", ".py", ".js", ".html", ".json", ".jsonl", ".yml", ".yaml"}:
+                continue
+            text = path.read_text(encoding="utf-8")
+            for phrase in private_phrases:
+                with self.subTest(file=name, phrase=phrase):
+                    self.assertNotIn(phrase, text)
+            self.assertIsNone(re.search(r"请先切换到\s*GPT", text), name)
 
 
 if __name__ == "__main__":

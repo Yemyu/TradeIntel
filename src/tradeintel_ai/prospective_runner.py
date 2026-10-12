@@ -54,7 +54,8 @@ from .answer_checklist import (
     digest as checklist_digest,
     validate_review as validate_legacy_checklist_review,
 )
-from .policy_workflow import safe_metadata
+from .policy_workflow import (POLICY_CORPUS_RELATIVE, POLICY_CORPUS_MANIFEST_RELATIVE,
+                             safe_metadata)
 from .request_capture import complete_with_capture
 from .policy_facts import REFERENCE_RELATIVE, load_frozen_policy_reference, reference_evidence
 
@@ -1167,8 +1168,8 @@ class ProspectiveSyntheticRunner:
                  root / "data/processed/analysis/policy_case_monthly.csv",
                  root / "data/processed/policy/section301_list1_event.csv",
                  root / "data/processed/analysis/registered_comparison_windows.json",
-                 root / "docs/experiments/phase13a-policy-retrieval/corpus.json",
-                 root / "docs/experiments/phase13a-policy-retrieval/development_results.json"]
+                 root / POLICY_CORPUS_RELATIVE,
+                 root / POLICY_CORPUS_MANIFEST_RELATIVE]
         # The repository exposes a finite set of read-only evidence paths.
         # Include every one in the snapshot instead of relying on whichever
         # subset a particular fixture happened to touch.
@@ -1179,7 +1180,7 @@ class ProspectiveSyntheticRunner:
         # All project Python modules participate in the executable contract;
         # this also covers a helper imported indirectly by the workflow.
         paths.extend(sorted((root / "src/tradeintel_ai").glob("*.py")))
-        corpus_path = root / "docs/experiments/phase13a-policy-retrieval/corpus.json"
+        corpus_path = root / POLICY_CORPUS_RELATIVE
         if corpus_path.is_file():
             try:
                 corpus = json.loads(corpus_path.read_text(encoding="utf-8"))
